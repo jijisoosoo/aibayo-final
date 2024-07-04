@@ -1,4 +1,4 @@
-package com.aibayo.aibayo;
+package com.aico.aibayo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
