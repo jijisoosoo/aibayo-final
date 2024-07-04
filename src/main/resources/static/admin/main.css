@@ -1,0 +1,379 @@
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.text-compact {
+    word-wrap: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.container {
+    width: 1280px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* 바로가기 배너 */
+.class_54 {
+    width: 1280px;
+    height: 325px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.class_55 {
+    width: 600px;
+    height: 325px;
+    border-radius: 5px;
+    border: 1px rgba(0, 0, 0, 0.30) solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.class_59 {
+    width: 320px;
+    height: 325px;
+    float: right;
+    display: flex;
+    margin-left: 30px;
+}
+
+.class_90 {
+    width: 320px;
+    height: 225px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    justify-content: space-between;
+}
+
+.class_91 {
+    display: flex;
+}
+
+.class_61 {
+    opacity: 0.80;
+    color: black;
+    font-size: 35px;
+    font-weight: 500;
+    word-wrap: break-word
+}
+.class_62 {
+    width: 61px;
+    height: 53px;
+}
+
+
+.class_60 {
+    opacity: 0.80;
+    color: black;
+    font-size: 35px;
+    font-weight: 500;
+    line-height: 55px;
+    word-wrap: break-word;
+}
+
+
+.class_56 {
+    width: 185px;
+    height: 200px;
+    float: right;
+    margin-right: 15px;
+    align-self: flex-end;
+    margin-top: 50px;
+    text-align: end;
+}
+
+/* 현황 테이블 */
+.class_26 {
+    width: 1280px;
+    height: 470px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.class_27 {
+    width: 600px;
+    height: 463px;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px rgba(0, 0, 0, 0.30) solid
+}
+
+.class_92 {
+    width: 540px;
+    height: 403px;
+    margin: 30px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.class_37 {
+    color: black;
+    font-size: 40px;
+    font-weight: 500;
+    word-wrap: break-word
+}
+
+.class_93  {
+    width: 540px;
+    display: flex;
+    border-bottom: 1px black solid;
+}
+
+.class_33 {
+    width: 160px;
+    height: 161px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.class_29 {
+    width: 412px;
+    height: 80px;
+    border-bottom: 1px black solid;
+    display: flex;
+    justify-content: space-between;
+}
+
+.class_30 {
+    color: black;
+    font-size: 25px;
+    font-weight: 500;
+    word-wrap: break-word;
+    align-self: center;
+    padding-left: 10px;
+}
+
+.class_31 {
+    color: black;
+    font-size: 25px;
+    font-weight: 500;
+    word-wrap: break-word;
+    align-self: center;
+    padding-right: 10px;
+}
+
+.class_32 {
+    width: 412px;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.class_36 {
+    color: black;
+    font-size: 25px;
+    font-weight: 500;
+    word-wrap: break-word
+}
+
+.class_35 {
+    width: 412px;
+    height: 160px;
+}
+
+
+/* 출석부 */
+.class_94 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.class_38 {
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.class_52 {
+    width: 25px;
+    height: 25px;
+}
+
+.class_95 {
+    display: flex;
+    align-items: center;
+}
+
+.class_39 {
+    width: 540px;
+    height: 328px;
+}
+
+.class_40 {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 6px;
+    display: inline-flex
+}
+
+.class_41 {
+    width: 539px;
+    height: 78px;
+    border-bottom: 1px black solid;
+}
+
+.class_42 {
+    width: 539px;
+    height: 78px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+}
+
+.class_43 {
+    width: 108px;
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.class_44 {
+    width: 108px;
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+    word-wrap: break-word
+}
+
+.class_45 {
+    width: 108px;
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+    word-wrap: break-word
+}
+
+.class_46 {
+    width: 108px;
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+    word-wrap: break-word
+}
+
+.class_47 {
+    width: 108px;
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+    word-wrap: break-word
+}
+
+/* 날씨, 미세먼지, 초미세먼지 */
+.class_12 {
+    width: 1280px;
+    height: 240px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.class_13 {
+    width: 600px;
+    height: 240px;
+    border-radius: 5px;
+    border: 1px rgba(0, 0, 0, 0.30) solid;
+    display: flex;
+    justify-content: space-between;
+}
+
+.class_96 {
+    width: 330px;
+    height: 220px;
+    margin: 10px 0px 10px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.class_17 {
+    color: black;
+    font-size: 40px;
+    font-weight: 500;
+    word-wrap: break-word
+}
+
+.class_14 {
+    width: 330px;
+    height: 120px;
+    display: flex;
+}
+
+.class_16 {
+    color: black;
+    font-size: 100px;
+    font-weight: 300;
+    line-height: 90px;
+    word-wrap: break-word
+}
+
+.class_15 {
+    color: black;
+    font-size: 40px;
+    font-weight: 500;
+    word-wrap: break-word;
+    align-self: center;
+    width: 100px;
+    text-align: end;
+}
+
+.class_18 {
+    width: 200px;
+    height: 200px;
+    align-self: center;
+    margin-right: 20px;
+}
+
+.class_97 {
+    width: 600px;
+    height: 240px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.class_21 {
+    width: 290px;
+    height: 240px;
+    border-radius: 5px;
+    border: 1px rgba(0, 0, 0, 0.30) solid;
+}
+
+.class_22 {
+    width: 270px;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.class_24 {
+    color: black;
+    font-size: 40px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.class_23 {
+    height: 110px;
+    color: black;
+    font-size: 100px;
+    font-weight: 300;
+    line-height: 90px;
+    word-wrap: break-word;
+    text-align: center;
+}
