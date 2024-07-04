@@ -36,9 +36,4 @@
   - **Front-End**: 원생 관리, 출석부
   - **Back-End**: 공지사항, 댓글, 사이트 관리
 
-## 프로젝트 설정 및 실행 방법
 
-### 1. 리포지토리 클론
-```bash
-git clone https://github.com/AlexMJY/aibayo-final.git
-cd aibayo-final
