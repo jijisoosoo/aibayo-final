@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
     @GetMapping("/admin")
     public String adminMain() {
-        return "/admin/main";
+        return "/main/admin/main";
     }
 
     @GetMapping("/user")
     public String userMain() {
-        return "/user/main";
+        return "/main/user/main";
     }
 }
