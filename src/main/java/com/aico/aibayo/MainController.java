@@ -1,4 +1,4 @@
-package com.aibayo.aibayo;
+package com.aico.aibayo.control;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
     @GetMapping("/admin")
     public String adminMain() {
-        return "/admin/main";
+        return "/main/admin/main";
     }
 
     @GetMapping("/user")
     public String userMain() {
-        return "/user/main";
+        return "/main/user/main";
     }
 }
