@@ -10,11 +10,15 @@ body {
     text-overflow: ellipsis;
 }
 
+.btn {
+    border-radius: 10px;
+}
+
 .btn-ab-primary {
     color: black;
     background: #FFDB21;
     border-color: #FFDB21;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .btn-ab-primary:hover {
