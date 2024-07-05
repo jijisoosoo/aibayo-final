@@ -1,20 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>메인페이지</title>
-    <link href="/vendor/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/vendor/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-          rel="stylesheet">
-    <link rel="stylesheet" href="/admin/main.css"/>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout}">
 
-</head>
-<body>
+<title layout:fragment="title">메인페이지</title>
 
-<th:block th:replace="~{/admin/layout :: layout}">
+<th:block layout:fragment="css">
+<link rel="stylesheet" href="/main/admin/main.css" />
+</th:block>
 
-<div class="container" th:fragment="section">
+<div class="container" layout:fragment="content">
 
 
     <div class="class_54">
@@ -289,8 +284,3 @@
 
 
 </div>
-
-</th:block>
-
-</body>
-</html>
