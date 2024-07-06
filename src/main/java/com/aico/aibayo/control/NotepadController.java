@@ -24,8 +24,14 @@ public class NotepadController {
         return "/notepad/admin/detail";
     }
 
-    @GetMapping("user/detail")
+    @GetMapping("/user/detail")
     public String userDetail() {
-        return "notepad/user/detail";
+        return "/notepad/user/detail";
+    }
+
+    // 나중에는 post(put)로
+    @GetMapping("/admin/modify")
+    public String modifyForm() {
+        return "/notepad/admin/modifyForm";
     }
 }
