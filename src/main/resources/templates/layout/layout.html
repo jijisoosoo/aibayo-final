@@ -4,7 +4,13 @@
 <th:block th:replace="~{inc/config :: configFragment}"/>
 <body>
 
+    <th:block th:if="${session.role} == 'admin'">
     <header th:replace="~{inc/admin_header :: header}"></header>
+    </th:block>
+
+    <th:block th:if="${session.role} == 'user'">
+        <header th:replace="~{inc/user_header :: header}"></header>
+    </th:block>
 
     <th:block layout:fragment="content"></th:block>
 

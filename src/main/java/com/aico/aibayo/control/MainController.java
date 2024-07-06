@@ -1,5 +1,7 @@
 package com.aico.aibayo.control;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,12 +10,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/main")
 public class MainController {
     @GetMapping("/admin")
-    public String adminMain() {
+    public String adminMain(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.setAttribute("role", "admin");
+
         return "/main/admin/main";
     }
 
     @GetMapping("/user")
-    public String userMain() {
+    public String userMain(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.setAttribute("role", "user");
+
         return "/main/user/main";
     }
 }
