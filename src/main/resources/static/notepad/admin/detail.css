@@ -178,6 +178,12 @@
     word-wrap: break-word;
 }
 
+.btn-check:disabled+.btn, .btn-check[disabled]+.btn {
+    pointer-events: none;
+    filter: none;
+    opacity: 1;
+}
+
 /* .class_33 { width: 265px; height: 14px; left: 0px; top: 11px; position: absolute; text-align: center; color: black; font-size: 18px; font-family: NanumSquare; font-weight: 700; word-wrap: break-word } */
 .liferecord_item_text {
     text-align: center;
