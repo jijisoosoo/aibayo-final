@@ -23,4 +23,9 @@ public class NotepadController {
     public String adminDetail() {
         return "/notepad/admin/detail";
     }
+
+    @GetMapping("user/detail")
+    public String userDetail() {
+        return "notepad/user/detail";
+    }
 }
