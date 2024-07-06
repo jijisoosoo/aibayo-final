@@ -2,8 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="/login/loginStyle.css"/>
-    <link rel="stylesheet" href="/login/loginStyleGuide.css"/>
+<!--    <link rel="stylesheet" href="/login/signIn.css"/>-->
+<!--    <link rel="stylesheet" href="/login/signInGuide.css"/>-->
+    <link rel="stylesheet" th:href="@{/login/signIn.css}" />
+    <link rel="stylesheet" th:href="@{/login/signInGuide.css}" />
+
 
     <title>LoginPage</title>
 </head>
@@ -54,9 +57,10 @@
             <div class="text-wrapper-9">OR</div>
             <img class="SNS-kakaotalk" src="img/kakaotalk.svg" />
         </div>
-        <div class="text-wrapper-10">aibayo</div>
-        <div class="text-wrapper-2">회원가입</div>
-        <div class="text-wrapper-5">비밀번호 찾기</div>
+        <a th:href="@{/main/admin}" class="text-wrapper-10">aibayo</a>
+        <a th:href="@{/login/signUp}" class="text-wrapper-2">회원가입</a>
+        <a th:href="@{/login/signInFindPw}" class="text-wrapper-5">비밀번호 찾기</a>
+
     </div>
 </div>
 </body>

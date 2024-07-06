@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" th:href="@{/login/signUpKid.css}" />
+    <link rel="stylesheet" th:href="@{/login/signInGuide.css}" />
+</head>
+<body>
+<div class="screen">
+    <div class="div">
+        <div class="overlap">
+            <div class="group">
+                <div class="overlap-group">
+                    <!-- <div class="div-wrapper">
+                    </div> -->
+                    <div class="text-wrapper-2">원아등록</div>
+
+                    <form th:action="@{/registerKid}" method="post">
+                        <div class="group-2">
+                            <div class="group-3">
+                                <!-- <div class="overlap-group-3"><div class="text-wrapper-4">Username or email address</div></div> -->
+                                <!-- <div class="enter-your-username">원아 생일</div>
+                                <input class="overlap-group-3" type="email" name="email" id="email-input"> -->
+                                <label for="birth-input">원아 생일
+                                    <input type="date" class="overlap-group-3" name="birth" id="birth-input" max="2024-12-31" min="2000-01-01" value="2024-01-01">
+                                </label>
+                            </div>
+                            <div class="group-4">
+                                <!-- <div class="enter-your-username">원아 성별</div> -->
+                                <!-- <div class="overlap-group-3"><div class="text-wrapper-4">password</div></div> -->
+                                <!-- <input class="overlap-group-3" type="password" name="password" id="password-input"> -->
+                                <label for="gender-input" class="text-wrapper-5">원아 성별</label>
+                                <select class="overlap-group-3" name="gender" id="gender-input" onchange="toggleRelationshipField()">
+                                    <option value="">성별을 선택하세요</option>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                    <option value="3">Non-Binary</option>
+                                </select>
+                            </div>
+                            <div class="group-5">
+                                <!-- <div class="enter-your-username">소속된 반</div> -->
+                                <!-- <div class="overlap-group-3"><div class="text-wrapper-4">phone number</div></div> -->
+                                <!-- <input type="text" class="overlap-group-3" name="phone" id="phone-input"> -->
+                                <label for="class-input" class="text-wrapper-5">소속된 반
+                                    <select class="overlap-group-3" name="class" id="class-input">
+                                        <option value="">반을 선택하세요</option>
+                                        <option value="1">1반~~</option>
+                                    </select>
+                                </label>
+                            </div>
+                            <div class="group-6">
+                                <div class="group-7">
+                                    <div class="overlap-group-4">
+                                        <div class="text-wrapper-5">원아 이름</div>
+                                        <!-- <div class="rectangle"></div>
+                                        <div class="text-wrapper-6">User name</div> -->
+                                        <input class="text-wrapper-6" type="text" name="name" id="name-input">
+                                    </div>
+                                </div>
+                                <div class="overlap-wrapper">
+                                    <div class="overlap-group-4">
+                                        <div class="text-wrapper-5">원아와의 관계</div>
+                                        <input class="text-wrapper-6" type="text" name="relationship" id="relationship-input">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="overlap-group-wrapper">
+                            <!-- <div class="overlap-group-2"><div class="text-wrapper-3">Sign up</div></div> -->
+                            <input class="overlap-group-2" type="submit" value="회원가입">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="text-wrapper-7">Welcome to aibayo</div>
+        </div>
+        <a th:href="@{/main/admin}" class="text-wrapper-10">aibayo</a>
+        <a th:href="@{/login/signIn}" class="span">로그인 페이지</a>
+    </div>
+</div>
+</body>
+</html>
