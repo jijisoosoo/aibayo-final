@@ -2,8 +2,12 @@ package com.aico.aibayo.control;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Slf4j
 @Controller
@@ -16,17 +20,28 @@ public class AttendanceController {
     }
 
     @GetMapping("/admin/detailToday")
-    public void detailToday() {
-        log.info("detailToday");
+    public String detailToday(Model model) {
+        String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
+        model.addAttribute("date", date);
+        log.info("day : detailToday");
+        return "attendance/admin/detailToday";
     }
 
     @GetMapping("/admin/detailBefore")
-    public void detailBefore() {
-        log.info("detailBefore");
+    public String detailBefore(Model model) {
+        String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
+        model.addAttribute("date", date);
+        log.info("day : detailBefore");
+        return "attendance/admin/detailBefore";
     }
 
     @GetMapping("/admin/detailAfter")
-    public void detailAfter() {
-        log.info("detailAfter");
+    public String detailAfter(Model model) {
+        // 현재 날짜와 시간 가져오기 -> 날짜 출력 포맷 -> 포매팅
+        String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
+        model.addAttribute("date", date);
+
+        log.info("day : detailAfter");
+        return "attendance/admin/detailAfter";
     }
 }

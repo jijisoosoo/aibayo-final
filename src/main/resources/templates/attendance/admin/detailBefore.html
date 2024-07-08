@@ -1,10 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout}">
 
-</body>
+<title layout:fragment="title">detailBefore</title>
+
+<th:block layout:fragment="css">
+    <link th:href="@{/attendance/admin/detailBefore.css}">
+</th:block>
+
+<th:block layout:fragment="javascript">
+    <script th:src="@{/attendance/admin/detailBefore.js}" src="/attendance/admin/detailToday.js"></script>
+</th:block>
+
+
+<div class="container" layout:fragment="content">
+    <h1>일별 출석부</h1>
+    <form action="attendance.do" if="detailForm">
+        <input type="hidden" name="cmd" value="modify">
+        <input type="hidden" name="date" value="${dateDetail}">
+        <input type="hidden" name="classNo" value="${classNo }">
+
+
+        <div class="d-flex justify-content-between mb-3">
+            <div>
+                <select class="form-select" aria-label="Select Class" name="classDetail" id="classSelect">
+                    <option selected>전체 반</option>
+                    <!-- for statement 반 목록 띄우기 -->
+                    <th:block th:each="class : ${classList}">
+                        <option th:value="${class.class_no}" th:text="${class.class_name}"></option>
+                    </th:block>
+                </select>
+            </div>
+
+            <div>
+                <a th:href="@{/attendance/admin/main}" class="btn btn-info">홈으로</a>
+            </div>
+        </div>
+
+    </form>
+
+    <div class="text-center mb-3">
+        <h4>오늘날짜 - [[${date}]]</h4>
+    </div>
+
+
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>이름</th>
+            <th>출결 상태</th>
+            <th>인정 결석</th>
+            <th>등원 시간</th>
+            <th>하원 시간</th>
+            <th>비고</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <th:block th:each="attendance : ${attendanceListOK}">
+            <tr>
+                <td th:text="${attendance.kid_name}"></td>
+                <td th:text="${attendance.attendance_status}"></td> <!-- 출결 상태 -->
+                <td th:text="${attendance.excused_absence}"></td> <!-- 인정 결석 -->
+                <td th:text="${attendance.kid_drop}"></td> <!-- 등원 시간 -->
+                <td th:text="${attendance.kid_pickup}"></td> <!-- 하원 시간 -->
+                <td th:text="${attendance.note}"></td> <!-- 비고 -->
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+
+</div>
+
 </html>
