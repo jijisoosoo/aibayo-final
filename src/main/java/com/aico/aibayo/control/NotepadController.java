@@ -34,4 +34,9 @@ public class NotepadController {
     public String modifyForm() {
         return "/notepad/admin/modifyForm";
     }
+
+    @GetMapping("/admin/write")
+    public String writeForm() {
+        return "/notepad/admin/writeForm";
+    }
 }
