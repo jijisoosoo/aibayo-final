@@ -11,4 +11,9 @@ public class KidController {
     public String list() {
         return "/kid/list";
     }
+
+    @GetMapping("detail")
+    public String detail() {
+        return "/kid/detail";
+    }
 }
