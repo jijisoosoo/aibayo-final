@@ -15,6 +15,13 @@
     justify-content: space-around;
 }
 
+.notepad_top_box {
+    width: 274px;
+    height: 55px;
+    display: flex;
+    margin-left: 10px;
+}
+
 /* .class_60 { width: 55px; height: 55px; left: 0px; top: 0px; position: absolute } */
 .notepad_detail_top_svg {
     width: 55px;
