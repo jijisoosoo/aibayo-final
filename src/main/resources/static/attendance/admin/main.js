@@ -6,17 +6,19 @@ document.addEventListener('DOMContentLoaded', function() {
         dateClick: function (info) {
         var today = new Date();
         var clickedDate = new Date(info.dateStr);
-        var cmd = '';
+
+        var command = '';
 
         if (clickedDate.toDateString() === today.toDateString()) {
-            cmd = 'detailToday';
+            command = 'detailToday';
         } else if (clickedDate < today) {
-            cmd = 'detailBefore';
+            command = 'detailBefore';
         } else {
-            cmd = 'detailAfter';
+            command = 'detailAfter';
         }
 
-        window.location.href = 'attendance.do?cmd=' + cmd + '&date=' + info.dateStr + '&classNo=1&attendanceInsertStatus=0';
+        // window.location.href = 'attendance.do?cmd=' + cmd + '&date=' + info.dateStr + '&classNo=1&attendanceInsertStatus=0';
+        window.location.href = '/attendance/admin/' + command;
     }
     });
     calendar.render();
