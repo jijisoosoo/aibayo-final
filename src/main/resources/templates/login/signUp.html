@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+<!--    <link rel="stylesheet" href="/login/signUp.css" />-->
+    <link rel="stylesheet" th:href="@{/login/signUp.css}" />
+    <link rel="stylesheet" th:href="@{/login/signInGuide.css}" />
+
+</head>
+<body>
+<div class="screen">
+    <div class="div">
+        <div class="overlap">
+            <div class="group">
+                <div class="overlap-group">
+                    <!-- <div class="div-wrapper">
+                    </div> -->
+                    <div class="text-wrapper-2">회원가입</div>
+
+                    <form action="#" method="post">
+                        <div class="group-2">
+                            <div class="group-3">
+                                <div class="enter-your-username">이메일</div>
+                                <!-- <div class="overlap-group-3"><div class="text-wrapper-4">Username or email address</div></div> -->
+                                <input class="overlap-group-3" type="email" name="email" id="email-input">
+                            </div>
+                            <div class="group-4">
+                                <div class="enter-your-username">비밀번호</div>
+                                <!-- <div class="overlap-group-3"><div class="text-wrapper-4">password</div></div> -->
+                                <input class="overlap-group-3" type="password" name="password" id="password-input">
+                            </div>
+                            <div class="group-5">
+                                <div class="enter-your-username">전화번호</div>
+                                <!-- <div class="overlap-group-3"><div class="text-wrapper-4">phone number</div></div> -->
+                                <input type="text" class="overlap-group-3" name="phone" id="phone-input">
+                            </div>
+                            <div class="group-6">
+                                <div class="group-7">
+                                    <div class="overlap-group-4">
+                                        <div class="text-wrapper-5">이름</div>
+                                        <!-- <div class="rectangle"></div>
+                                        <div class="text-wrapper-6">User name</div> -->
+                                        <input class="text-wrapper-6" type="text" name="name" id="name-input">
+                                    </div>
+                                </div>
+                                <div class="overlap-wrapper">
+                                    <div class="overlap-group-4">
+                                        <!-- <div class="text-wrapper-5">역할 선택</div> -->
+                                        <!-- <div class="rectangle"></div> -->
+                                        <!-- <div class="text-wrapper-6">드롭박스로</div> -->
+                                        <!-- <input class="text-wrapper-6" type="text" name="roll" id="roll-input"> -->
+
+                                        <label for="role" class="text-wrapper-5">역할 선택</label>
+                                        <select class="text-wrapper-9" name="role" id="role-input" onchange="toggleRelationshipField()">
+                                            <option value="">역할을 선택하세요</option>
+                                            <option value="1">원장</option>
+                                            <option value="2">교사</option>
+                                            <option value="3">학부모</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="overlap-group-wrapper">
+                            <!-- <div class="overlap-group-2"><div class="text-wrapper-3">Sign up</div></div> -->
+                            <input class="overlap-group-2" type="submit" value="회원가입">
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+            <div class="text-wrapper-7">Welcome to aibayo</div>
+        </div>
+        <a th:href="@{/main/admin}" class="text-wrapper-10">aibayo</a>
+        <a th:href="@{/login/signIn}" class="span">로그인 페이지</a>
+    </div>
+</div>
+</body>
+</html>
