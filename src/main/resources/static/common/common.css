@@ -1,0 +1,115 @@
+/* 공통 */
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.text-compact {
+    word-wrap: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn {
+    border-radius: 10px;
+}
+
+.btn-ab {
+    color: black;
+    background: #FFDB21;
+    border-color: #FFDB21;
+}
+
+.btn-ab:hover {
+    color: white;
+    background: #ffc23a;
+    border-color: #ffc23a;
+}
+
+.btn-ab:active {
+    color: white;
+    background: #ffc23a;
+    border-color: #ffc23a;
+}
+
+.btn-ab:focus {
+    color: white;
+    background: #ffc23a;
+    border-color: #fec123;
+    box-shadow: 0 0 0 .25rem rgba(243, 199, 56, 0.5);
+}
+
+.btn-outline-ab {
+    color: black;
+    border-color: rgba(0, 0, 0, 0.30);
+}
+
+.btn-outline-ab:hover {
+    color: #000;
+    background: #FFDB21;
+    border-color: #FFDB21;
+}
+
+.btn-outline-ab:active {
+    color: #000;
+    background: #FFDB21;
+    border-color: #FFDB21;
+}
+
+.btn-outline-ab:focus {
+    border-color: #FFDB21;
+    box-shadow: 0 0 0 .25rem rgba(244, 211, 134, 0.717);
+}
+
+.btn-check:checked+.btn-outline-ab:focus,
+.btn-check:checked+.btn-outline-ab:active {
+    box-shadow: 0 0 0 .25rem rgba(244, 211, 134, 0.717);
+}
+
+.btn-check:focus+.btn-outline-ab,
+.btn-outline-ab:focus {
+    box-shadow: 0 0 0 .25rem rgba(244, 211, 134, 0.717);
+}
+
+.btn-check:active+.btn-outline-ab,
+.btn-check:checked+.btn-outline-ab,
+.btn-outline-ab.active,
+.btn-outline-ab.dropdown-toggle.show,
+.btn-outline-ab:active {
+    color: #000;
+    background-color: #FFDB21;
+    border-color: #FFDB21;
+}
+
+.page-link-ab {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-link-ab:hover {
+    background: #FFDB21;
+    color: black;
+}
+
+.page-link-ab:focus {
+    background: #FFDB21;
+    color: black;
+}
+
+.page-text-ab {
+    color: black;
+    font-size: 25px;
+    font-weight: 500;
+    word-wrap: break-word
+}
+
+.container {
+    width: 1280px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
