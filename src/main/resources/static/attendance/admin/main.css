@@ -14,7 +14,9 @@ h1 {
 
 #calendar {
     /* max-width: 800px; */
-    margin: auto;
+    /*margin: auto;*/
+    margin-left: 150px;
+    margin-right: 150px;
 }
 
 a {

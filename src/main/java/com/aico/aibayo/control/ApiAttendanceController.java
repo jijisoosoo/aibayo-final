@@ -8,6 +8,6 @@ public class ApiAttendanceController {
 
     @GetMapping("/at")
     public void at() {
-        
+
     }
 }
