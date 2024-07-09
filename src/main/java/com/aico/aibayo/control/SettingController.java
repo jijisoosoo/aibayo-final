@@ -7,8 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/setting")
 public class SettingController {
-    @GetMapping("/setting/menu")
-    public String settingMenu(){
+    @GetMapping("/menu")
+    public String menu(){
         return "/setting/menu";
+    }
+    @GetMapping("/function")
+    public String function(){
+        return "/setting/function";
     }
 }

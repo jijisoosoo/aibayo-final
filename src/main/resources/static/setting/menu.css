@@ -24,10 +24,6 @@
 }
 .setting .frame {
   align-items: center; /* 추가: 수직 중앙 정렬 */
-  background-color: #ffffff;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-color: #d3d4d4;
   display: flex;
   flex: 0 0 auto;
   justify-content: space-between;
@@ -38,7 +34,7 @@
 
 .setting .text-wrapper {
   color: #000000;
-  font-family: "Inter-Medium", Helvetica;
+  /*font-family: "Inter-Medium", Helvetica;*/
   font-size: 30px;
   font-weight: 500;
   height: auto; /* 수정: 높이 자동 조정 */
@@ -66,12 +62,12 @@
 
 .setting .div {
   color: #000000;
-  font-family: var(--small-text-font-family);
-  font-size: var(--small-text-font-size);
-  font-style: var(--small-text-font-style);
-  font-weight: var(--small-text-font-weight);
-  letter-spacing: var(--small-text-letter-spacing);
-  line-height: var(--small-text-line-height);
+  /*font-family: var(--small-text-font-family);*/
+  /*font-size: var(--small-text-font-size);*/
+  /*font-style: var(--small-text-font-style);*/
+  /*font-weight: var(--small-text-font-weight);*/
+  /*letter-spacing: var(--small-text-letter-spacing);*/
+  /*line-height: var(--small-text-line-height);*/
   position: relative;
   white-space: nowrap;
   width: fit-content;
@@ -89,9 +85,9 @@
   gap: 10px;
   justify-content: center;
   overflow: hidden;
-  padding: 38px 0px;
   position: relative;
   width: 1280px;
+  padding: 15px 0px;
 }
 
 .setting .frame-wrapper {
@@ -109,12 +105,12 @@
   border-bottom-width: 1px;
   border-color: #b3b3b3;
   border-top-style: solid;
-  border-top-width: 1px;
+  border-top-width: 0px;
   display: flex;
   justify-content: space-between;
   padding: 10px;
   position: relative;
-  width: 1240px;
+  width: 1064px;
 }
 
 .setting .frame-4 {
@@ -141,9 +137,9 @@
 
 .setting .text-wrapper-2 {
   color: #000000;
-  font-family: "Inter-Bold", Helvetica;
-  font-size: 20px;
-  font-weight: 700;
+  /*font-family: "Inter-Bold", Helvetica;*/
+  /*font-size: 20px;*/
+  /*font-weight: 700;*/
   letter-spacing: 0;
   line-height: normal;
   margin-top: -1px;
@@ -165,9 +161,9 @@
 
 .setting .p {
   color: #000000;
-  font-family: "Inter-Medium", Helvetica;
-  font-size: 15px;
-  font-weight: 500;
+  /*font-family: "Inter-Medium", Helvetica;*/
+  /*font-size: 15px;*/
+  /*font-weight: 500;*/
   letter-spacing: 0;
   line-height: 22.5px;
   margin-top: 0px;
@@ -193,7 +189,15 @@
   justify-content: space-between;
   padding: 10px;
   position: relative;
-  width: 1240px;
+  width: 1064px;
+}
+.setting .frame-77 {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  position: relative;
+  width: 1064px;
 }
 
 .setting .img {
@@ -228,6 +232,6 @@
   width: 1240px;
 }
 .form-check.form-switch .form-check-input {
-  width: 68px;
-  height: 32px;
+  width: 60px;
+  height: 27px;
 }

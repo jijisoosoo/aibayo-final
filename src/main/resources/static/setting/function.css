@@ -4,9 +4,6 @@
     display: flex;
     gap: 10px;
     justify-content: center;
-    min-height: 1243px;
-    min-width: 1920px;
-    padding: 0px 208px;
     position: relative;
     width: 100%;
   }
@@ -17,7 +14,7 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
-    height: 1243px;
+    height: 100%;
     overflow: hidden;
     padding: 20px 0px;
     position: relative;
@@ -26,10 +23,6 @@
   
   .setting .frame {
     align-items: center; /* 추가: 수직 중앙 정렬 */
-    background-color: #ffffff;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-color: #d3d4d4;
     display: flex;
     flex: 0 0 auto;
     justify-content: space-between;
@@ -40,7 +33,7 @@
   
   .setting .text-wrapper {
     color: #000000;
-    font-family: "Inter-Medium", Helvetica;
+    /*font-family: "Inter-Medium", Helvetica;*/
     font-size: 30px;
     font-weight: 500;
     height: auto; /* 수정: 높이 자동 조정 */
@@ -67,12 +60,12 @@
   
   .setting .div {
     color: #000000;
-    font-family: var(--small-text-font-family);
-    font-size: var(--small-text-font-size);
-    font-style: var(--small-text-font-style);
-    font-weight: var(--small-text-font-weight);
-    letter-spacing: var(--small-text-letter-spacing);
-    line-height: var(--small-text-line-height);
+    /*font-family: var(--small-text-font-family);*/
+    /*font-size: var(--small-text-font-size);*/
+    /*font-style: var(--small-text-font-style);*/
+    /*font-weight: var(--small-text-font-weight);*/
+    /*letter-spacing: var(--small-text-letter-spacing);*/
+    /*line-height: var(--small-text-line-height);*/
     position: relative;
     white-space: nowrap;
     width: fit-content;
@@ -83,8 +76,7 @@
     border: 1px solid;
     border-color: #d3d4d4;
     border-radius: 30px;
-    height: 1118px;
-    margin-bottom: -20px;
+    height: 500px;
     overflow: hidden;
     position: relative;
     width: 1280px;
@@ -105,9 +97,9 @@
   
   .setting .p {
     color: #000000;
-    font-family: "Inter-Medium", Helvetica;
-    font-size: 18px;
-    font-weight: 500;
+    /*font-family: "Inter-Medium", Helvetica;*/
+    /*font-size: 18px;*/
+    /*font-weight: 500;*/
     letter-spacing: 0;
     line-height: 27px;
     position: relative;
@@ -146,9 +138,9 @@
   
   .setting .text-wrapper-2 {
     color: #000000;
-    font-family: "Inter-Medium", Helvetica;
-    font-size: 18px;
-    font-weight: 500;
+    /*font-family: "Inter-Medium", Helvetica;*/
+    /*font-size: 18px;*/
+    /*font-weight: 500;*/
     letter-spacing: 0;
     line-height: 27px;
     margin-left: -8px;
@@ -174,9 +166,9 @@
   
   .setting .text-wrapper-3 {
     color: #000000;
-    font-family: "Inter-Medium", Helvetica;
-    font-size: 18px;
-    font-weight: 500;
+    /*font-family: "Inter-Medium", Helvetica;*/
+    /*font-size: 18px;*/
+    /*font-weight: 500;*/
     letter-spacing: 0;
     line-height: 27px;
     margin-left: -3.5px;
@@ -207,9 +199,9 @@
   
   .setting .text-wrapper-4 {
     color: #000000;
-    font-family: "Inter-Medium", Helvetica;
-    font-size: 18px;
-    font-weight: 500;
+    /*font-family: "Inter-Medium", Helvetica;*/
+    /*font-size: 18px;*/
+    /*font-weight: 500;*/
     height: 51px;
     letter-spacing: 0;
     line-height: 27px;
@@ -219,6 +211,6 @@
   }
   
   .form-check.form-switch .form-check-input {
-    width: 68px;
-    height: 32px;
+    width: 60px;
+    height: 27px;
   }
