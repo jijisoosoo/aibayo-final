@@ -8,10 +8,8 @@
 <th:block layout:fragment="css">
     <link rel="stylesheet" href="/announce/list.css" />
 </th:block>
-
-
-
-    <div class="ann-list" layout:fragment="content">
+<div class="ann-list" layout:fragment="content">
+    <form action="">
         <div class="list">
             <div class="frame">
                 <div class="view">
@@ -49,11 +47,12 @@
                         <div class="text-wrapper-3">취소</div>
                     </div>
                 </a>
-                <form action="">
+
                   <div class="element-secondary-button-wrapper">
-                    <input type="submit" class="element-secondary-button-2" value="작성">
+<!--                    <input type="submit" class="element-secondary-button-2" value="작성">-->
+                      <a th:href="" class="element-secondary-button-2">작성</a>
                 </div>
-                </form>
+
             </div>
 
             <div class="card-list">
@@ -459,7 +458,7 @@
                   </p>
               </div>
           </a>
-          
             </div>
         </div>
+    </form>
 </div>

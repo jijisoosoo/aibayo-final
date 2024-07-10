@@ -11,8 +11,9 @@ public class SettingController {
     public String menu(){
         return "/setting/menu";
     }
-    @GetMapping("/function")
-    public String function(){
-        return "/setting/function";
-    }
+//    @GetMapping("/function")
+//    public String function(){
+//        return "/setting/function";
+//    }
+    //펑션은 안하기로 했음요 !
 }

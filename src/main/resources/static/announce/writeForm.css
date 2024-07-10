@@ -1,0 +1,261 @@
+.ann-write {
+    align-items: center;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    padding: 10px;
+    position: relative;
+  }
+  
+  .ann-write .frame {
+    align-items: flex-start;
+    background-color: #ffffff;
+    display: inline-flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 17px;
+    padding: 20px 0px;
+    position: relative;
+  }
+  
+  .ann-write .div {
+    align-items: center;
+    background-color: #ffffff;
+    display: flex;
+    flex: 0 0 auto;
+    gap: 10px;
+    justify-content: flex-end;
+    padding: 0px 20px;
+    position: relative;
+    width: 1280px;
+  }
+  
+  .ann-write .element-secondary-button {
+    align-items: center;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    display: flex;
+    gap: 8px;
+    height: 51px;
+    justify-content: center;
+    padding: 0px 16px;
+    position: relative;
+    width: 92px;
+    text-decoration-line : none;
+  }
+
+
+
+  
+  .ann-write .text-wrapper {
+    color: #000000;
+    font-family: var(--small-text-font-family);
+    font-size: var(--small-text-font-size);
+    font-style: var(--small-text-font-style);
+    font-weight: var(--small-text-font-weight);
+    letter-spacing: var(--small-text-letter-spacing);
+    line-height: var(--small-text-line-height);
+    margin-left: -18px;
+    margin-right: -18px;
+    position: relative;
+    text-align: center;
+    width: 96px;
+    
+  }
+  
+  .ann-write .div-wrapper {
+    align-items: center;
+    background-color: #ffe668;
+    border-radius: 8px;
+    display: flex;
+    gap: 8px;
+    height: 51px;
+    justify-content: center;
+    padding: 0px 16px;
+    position: relative;
+    width: 92px;
+    border: none;
+  }
+  
+  .ann-write .frame-2 {
+    align-items: center;
+    background-color: #ffffff;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px 0px;
+    position: relative;
+  }
+  
+  .ann-write .element-dropdown {
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #e0e0e0;
+    border-radius: 8px;
+    display: flex;
+    gap: 16px;
+    height: 73px;
+    padding: 8px 16px;
+    position: relative;
+    width: 224px;
+  }
+  
+  .ann-write .label {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    color: #828282;
+    display: -webkit-box;
+    flex: 1;
+    font-family: var(--presets-body2-font-family);
+    font-size: var(--presets-body2-font-size);
+    font-style: var(--presets-body2-font-style);
+    font-weight: var(--presets-body2-font-weight);
+    letter-spacing: var(--presets-body2-letter-spacing);
+    line-height: var(--presets-body2-line-height);
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+    width: 90%;
+    height: 90%;
+    border: none;
+  }
+  
+  .ann-write .chevron-down {
+    height: 24px;
+    position: relative;
+    width: 24px;
+  }
+  
+  .ann-write .element-input-field {
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #e0e0e0;
+    border-radius: 8px;
+    display: flex;
+    gap: 16px;
+    height: 73px;
+    padding: 8px 16px;
+    position: relative;
+    width: 1032px;
+  }
+  
+  .ann-write .label-2 {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    color: #828282;
+    display: -webkit-box;
+    flex: 1;
+    font-family: var(--body-text-font-family);
+    font-size: var(--body-text-font-size);
+    font-style: var(--body-text-font-style);
+    font-weight: var(--body-text-font-weight);
+    letter-spacing: var(--body-text-letter-spacing);
+    line-height: var(--body-text-line-height);
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+    width: 90%;
+    height: 90%;
+    border: none;
+  }
+  
+  .ann-write .element-input-field-wrapper {
+    align-items: center;
+    background-color: #ffffff;
+    display: inline-flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+  }
+  
+  .ann-write .label-wrapper {
+    align-items: center;
+    background-color: #ffffff;
+    border: none;
+    /* border-color: #e0e0e0; */
+    /* border-radius: 20px; */
+    /* display: flex; */
+    gap: 16px;
+    /* height: 1386px; */
+    padding: 0px;
+    position: relative;
+    width: 1280px;
+  }
+  
+  .ann-write .label-3 {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 44;
+    color: #828282;
+    display: -webkit-box;
+    font-family: var(--body-text-font-family);
+    font-size: var(--body-text-font-size);
+    font-style: var(--body-text-font-style);
+    font-weight: var(--body-text-font-weight);
+    height: 1344px;
+    letter-spacing: var(--body-text-letter-spacing);
+    line-height: var(--body-text-line-height);
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+    width: 1246px;
+  }
+  
+  .ann-write .frame-3 {
+    align-items: flex-end;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    height: 148px;
+    padding: 10px 20px;
+    position: relative;
+    width: 1280px;
+  }
+  
+  .ann-write .frame-wrapper {
+    align-items: flex-end;
+    background-color: #ffffff;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 23px;
+    padding: 0px 6px;
+    position: relative;
+  }
+  
+  .ann-write .frame-4 {
+    align-items: center;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: 23px;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .ann-write .text-wrapper-2 {
+    color: #000000;
+    font-family: var(--body-text-font-family);
+    font-size: var(--body-text-font-size);
+    font-style: var(--body-text-font-style);
+    font-weight: var(--body-text-font-weight);
+    height: 44px;
+    letter-spacing: var(--body-text-letter-spacing);
+    line-height: var(--body-text-line-height);
+    position: relative;
+    text-align: center;
+    width: 92px;
+    display: flex;
+    align-items: center; /* 수직 가운데 정렬 */
+    justify-content: center; /* 수평 가운데 정렬 (선택 사항) */
+}
+  
+  .ann-write .img {
+    height: 41px;
+    position: relative;
+    width: 91px;
+  }
+  
