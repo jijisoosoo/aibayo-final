@@ -57,12 +57,6 @@
   white-space: nowrap;
 }
 
-.modal-dialog .button-x {
-  position: relative;
-  width: 35px;
-  height: 35px;
-}
-
 .modal-dialog .row-input {
   display: flex;
   flex-direction: column;
@@ -197,7 +191,7 @@
   border: none;
 }
 
-.container .button-x {
+.modal-dialog .button-x {
   position: relative;
   width: 30px;
   height: 30px;
@@ -205,7 +199,13 @@
   background-size: cover;
   background-position: 50% 50%;
   overflow: hidden;
+  border: none
 }
+
+.modal-dialog .button-x:focus {
+  outline: none;
+}
+
 
 .button-x img {
   position: absolute;
@@ -220,6 +220,9 @@
 
 .modal-dialog .modalform {
   width: -webkit-fill-available;
+  display: inline-flex;
+  gap: 20px;
+  flex-direction: column;
 }
 
 

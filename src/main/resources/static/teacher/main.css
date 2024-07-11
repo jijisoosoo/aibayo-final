@@ -197,6 +197,10 @@
   border-color: #e0e0e0;
 }
 
+.dropdown-class:focus {
+  outline: none;
+}
+
 .container .selected-class {
   position: relative;
   width: 136px;
@@ -261,6 +265,10 @@
   flex: 0 0 auto;
   background-color: #f7f7f7;
   border-radius: 10px;
+}
+
+.container .view-1:link {
+  outline: none;
 }
 
 .container .view-1 {
@@ -333,34 +341,6 @@
   overflow: hidden;
   box-shadow: var(--button-shadow);
   text-decoration-line : none
-}
-
-.container .text-wrapper-8 {
-  position: relative;
-  width: fit-content;
-  font-family: var(--tab-status-unselected-font-family);
-  font-weight: var(--tab-status-unselected-font-weight);
-  color: #000000;
-  font-size: var(--tab-status-unselected-font-size);
-  text-align: right;
-  letter-spacing: var(--tab-status-unselected-letter-spacing);
-  line-height: var(--tab-status-unselected-line-height);
-  white-space: nowrap;
-  font-style: var(--tab-status-unselected-font-style);
-}
-
-.container .text-wrapper-9 {
-  position: relative;
-  width: fit-content;
-  /*font-family: var(--small-text-font-family);*/
-  font-weight: var(--small-text-font-weight);
-  color: #000000;
-  font-size: var(--small-text-font-size);
-  text-align: right;
-  letter-spacing: var(--small-text-letter-spacing);
-  line-height: var(--small-text-line-height);
-  white-space: nowrap;
-  font-style: var(--small-text-font-style);
 }
 
 .container .row-selected-teacher {
@@ -454,14 +434,19 @@
   white-space: nowrap;
 }
 
+.container .carousel-container {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+}
+
 .container .carousel {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   gap: 80px 80px;
   position: relative;
   align-self: stretch;
-  width: 100%;
+  width: fit-content;
   flex: 0 0 auto;
 }
 
@@ -499,15 +484,13 @@
   display: flex;
   flex-direction: column;
   width: 100px;
-  align-items: flex-start;
+  align-items: center;
   position: relative;
   flex: 0 0 auto;
 }
 
 .container .text-wrapper-11 {
   position: relative;
-  width: 100px;
-  margin-top: -1px;
   /*font-family: "Inter-Medium", Helvetica;*/
   font-weight: 500;
   color: #000000;
@@ -522,4 +505,19 @@
   -webkit-box-orient: vertical;
 }
 
+.container .text-wrapper-12 {
+  position: relative;
+  /*font-family: "Inter-Medium", Helvetica;*/
+  font-weight: 500;
+  color: #000000;
+  font-size: 13px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 22.4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
 
