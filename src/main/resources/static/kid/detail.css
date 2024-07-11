@@ -103,7 +103,7 @@
     color: black;
     font-size: 24px;
     font-weight: 400;
-    line-height: 28.80px;
+    line-height: 35px;
     word-wrap: break-word;
 }
 
@@ -129,6 +129,7 @@
 
 /* .class_21 { align-self: stretch; height: 182px; padding-left: 29px; padding-right: 29px; padding-top: 17px; padding-bottom: 17px; background: #F7F7F7; border-radius: 15px; overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: center; gap: 14px; display: flex } */
 .parent_info_box {
+    width: 1256px;
     align-self: stretch;
     padding: 17px 29px;
     background: #F7F7F7;
@@ -196,8 +197,10 @@
     overflow: hidden;
     justify-content: flex-start;
     align-items: center;
-    gap: 106px;
+    gap: 20px 109px;
     display: inline-flex;
+    flex-wrap: wrap;
+    margin: 0px 115px;
 }
 
 /* .class_29 { width: 250px; height: 90px; background: white; border-radius: 12px; overflow: hidden; justify-content: center; align-items: center; gap: 20px; display: flex } */
@@ -211,6 +214,7 @@
     align-items: center;
     gap: 10px;
     display: flex;
+    padding: 0px 20px;
 }
 
 /* .class_30 { width: 60px; height: 60px; position: relative } */
@@ -222,7 +226,7 @@
 
 /* .class_34 { width: 89px; height: 34px; position: relative } */
 .item_text_box {
-    width: 150px;
+    width: 140px;
     height: 60px;
     position: relative;
     display: flex;
@@ -243,6 +247,7 @@
 
 /* .class_36 { align-self: stretch; height: 357px; padding-left: 29px; padding-right: 29px; background: #F7F7F7; border-radius: 15px; overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: center; display: flex } */
 .classes_info_box {
+    width: 1256px;
     align-self: stretch;
     padding: 17px 29px;
     background: #F7F7F7;
@@ -292,8 +297,14 @@
     word-wrap: break-word;
 }
 
-.class_delete_btn_box {
+/* .class_delete_btn_box {
     border-radius: 15px;
+} */
+
+.close_box {
+    width: 50px;
+    display: flex;
+    justify-content: center;
 }
 
 /* .class_46 { color: white; font-size: 20px; font-family: Inter; font-weight: 500; line-height: 30px; word-wrap: break-word } */
@@ -304,3 +315,175 @@
     word-wrap: break-word;
 }
 
+/* 모달 css */
+.fixed-width-modal .modal-dialog {
+    max-width: 870px;
+    width: 870px;
+}
+
+.modal-header, .modal-footer {
+    border: 0px;
+}
+
+/* .class_1 { width: 870px; height: 539px; padding-left: 40px; padding-right: 40px; padding-top: 50px; padding-bottom: 50px; background: white; border-radius: 20px; overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 30px; display: inline-flex } */
+.modal_box {
+    width: 870px;
+    height: 539px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 30px;
+    display: inline-flex
+}
+
+/* .class_2 { align-self: stretch; padding-left: 30px; justify-content: space-between; align-items: center; display: inline-flex } */
+.modal_header_box {
+    align-self: stretch;
+    padding-left: 30px;
+    justify-content: space-between;
+    align-items: center;
+    display: inline-flex
+}
+
+/* .class_5 { text-align: center; color: black; font-size: 24px; font-family: Inter; font-weight: 600; line-height: 28.80px; word-wrap: break-word } */
+.modal_header_title {
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 29px;
+    word-wrap: break-word;
+}
+
+/* .class_8 { align-self: stretch; height: 294px; padding-left: 44px; padding-right: 44px; padding-top: 30px; padding-bottom: 30px; background: #F7F7F7; border-radius: 15px; overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 30px; display: flex } */
+.modal_body {
+    align-self: stretch;
+    padding-left: 44px;
+    padding-right: 44px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background: #F7F7F7;
+    border-radius: 15px;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 30px;
+    display: flex;
+    margin: 0 10px;
+}
+
+/* .class_9 { justify-content: flex-start; align-items: center; gap: 3px; display: inline-flex } */
+.modal_body_title_box {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 3px;
+    display: inline-flex
+}
+
+/* .class_10 { text-align: center; color: black; font-size: 24px; font-family: Inter; font-weight: 500; line-height: 33.60px; word-wrap: break-word } */
+.modal_body_text {
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 34px;
+    word-wrap: break-word;
+}
+
+.modal_body_classes_box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* .class_12 { align-self: stretch; justify-content: flex-start; align-items: center; gap: 30px; display: inline-flex } */
+.modal_body_classes_row {
+    align-self: stretch;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin: 0px 50px;
+}
+
+/* .class_13 { height: 70px; padding-left: 20px; padding-right: 20px; padding-top: 15px; padding-bottom: 15px; background: white; border-radius: 12px; overflow: hidden; justify-content: flex-start; align-items: center; gap: 20px; display: flex } */
+.modal_class_item {
+    width: 200px;
+    height: 70px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.modal_class_item .modal_body_text {
+    width: 100px;
+}
+
+.checkbox_label {
+    display: flex;
+    border: 0px;
+    width: 200px;
+    height: 70px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* .class_14 { width: 40px; height: 40px; padding-top: 4px; padding-bottom: 4px; background: #FFDB21; border-radius: 90px; overflow: hidden; flex-direction: column; justify-content: center; align-items: center; gap: 10px; display: inline-flex } */
+.modal_class_svg_box {
+    width: 40px;
+    height: 40px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    background: #FFDB21;
+    border-radius: 90px;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    display: inline-flex;
+}
+
+/* .class_16 { width: 100px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex } */
+.modal_class_text_box {
+    width: 100px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+}
+
+/* .class_18 { width: 130px; height: 50px; padding-left: 16px; padding-right: 16px; background: #FFDB21; border-radius: 8px; justify-content: center; align-items: center; gap: 8px; display: flex } */
+.modal_add_btn_box {
+    width: 130px;
+    height: 50px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    display: flex
+}
+
+/* .class_19 { color: black; font-size: 20px; font-family: Inter; font-weight: 500; line-height: 30px; word-wrap: break-word } */
+.modal_add_btn_text {
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    word-wrap: break-word
+}
