@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout}">
+
+<title layout:fragment="title">기능 설정</title>
+
+<th:block layout:fragment="css">
+  <link rel="stylesheet" href="/setting/function.css" />
+</th:block>
+
+<div class="setting" layout:fragment="content">
+  <div class="menu">
+    <div class="frame">
+      <div class="text-wrapper">기능 설정</div>
+      <form action="">
+        <div class="element-secondary-button-wrapper">
+          <input type="submit" class="element-secondary-button" value="저장">
+        </div>
+      </form>
+    </div>
+    <div class="frame-2">
+      <div class="div-wrapper">
+        <p class="p">
+          기능 설정은 메뉴 관리에서 해당 메뉴를 &#39;사용&#39; 상태로 변경한 후 이용할 수 있습니다.
+        </p>
+      </div>
+      <div class="frame-3">
+        <div class="frame-4">
+          <div class="text-wrapper-2">알림장 상세 기능 설정</div>
+        </div>
+        <div class="frame-5">
+          <div class="text-wrapper-3">알림장 댓글 기능 설정</div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="comment" checked>
+            <label class="form-check-label" for="comment"></label>
+          </div>
+        </div>
+        <div class="frame-6">
+          <p class="text-wrapper-4">
+            알림장 &gt; 방과후 과정
+            <br />
+            알림장에서 교육 프로그램 수업자료를 자동으로 첨부하여 부모님께 발송할 수 있습니다.
+          </p>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="afterschool" checked>
+            <label class="form-check-label" for="afterschool"></label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

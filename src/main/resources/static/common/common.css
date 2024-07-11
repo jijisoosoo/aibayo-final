@@ -113,3 +113,7 @@ body {
     flex-direction: column;
     gap: 30px;
 }
+
+.container.main_container {
+    width: 1080px;
+}

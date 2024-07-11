@@ -1,0 +1,236 @@
+.modal-dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-dialog .modal-content {
+  width: 870px !important;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+  padding: 50px 40px;
+  position: relative;
+  border: none;
+}
+
+.modal-dialog .title {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  position: relative;
+  align-self: stretch;
+  flex: 0 0 auto;
+}
+
+.modal-dialog .textarea-wrapper {
+  display: inline-flex;
+  justify-content: space-between;
+  gap: 15px;
+  align-items: center;
+  position: relative;
+  align-self: stretch;
+  flex: 0 0 auto;
+}
+
+.modal-dialog .textarea {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.modal-dialog .text-wrapper {
+  position: relative;
+  width: fit-content;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-weight: 600;
+  color: #000000;
+  font-size: 24px;
+  text-align: center;
+  line-height: 28.8px;
+  white-space: nowrap;
+}
+
+.modal-dialog .row-input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 50px;
+  padding: 50px 44px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+  background-color: #f7f7f7;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.modal-dialog .div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+.modal-dialog .div-2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.modal-dialog .icon {
+  position: relative;
+  width: 30px;
+  height: 30px;
+}
+
+.modal-dialog .text-wrapper-2 {
+  position: relative;
+  width: fit-content;
+  font-family: "Inter-Medium", Helvetica;
+  font-weight: 500;
+  color: #000000;
+  font-size: 20px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 28px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.modal-dialog .form-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.modal-dialog .default {
+  position: relative;
+  width: fit-content;
+  font-family: "Inter-Medium", Helvetica;
+  font-weight: 500;
+  color: #828282;
+  font-size: 20px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 28px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.modal-dialog .button {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+}
+
+
+
+.modal-dialog .buttonarea{
+  width: 100%;
+  display: inline-flex;
+  justify-content: center;
+}
+
+
+.modal-dialog .button-send {
+  display: flex;
+  width: 180px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0px 16px;
+  position: relative;
+  background-color: #ffe668;
+  border-radius: 8px;
+  font-family: "Inter-Medium", Helvetica;
+  font-weight: 500;
+  color: #000000;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 30px;
+  white-space: nowrap;
+  border: none;
+}
+
+.modal-dialog .button-x {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border-radius: 70%;
+  background-size: cover;
+  background-position: 50% 50%;
+  overflow: hidden;
+  border: none
+}
+
+.modal-dialog .button-x:focus {
+  outline: none;
+}
+
+
+.button-x img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(50, 50);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: auto;
+}
+
+.modal-dialog .modalform {
+  width: -webkit-fill-available;
+  display: inline-flex;
+  gap: 20px;
+  flex-direction: column;
+}
+
+
+/* .modal-dialog .text-wrapper-3 {
+  position: relative;
+  width: fit-content;
+  font-family: "Inter-Medium", Helvetica;
+  font-weight: 500;
+  color: #000000;
+  font-size: 20px;
+  letter-spacing: 0;
+  line-height: 30px;
+  white-space: nowrap;
+} */

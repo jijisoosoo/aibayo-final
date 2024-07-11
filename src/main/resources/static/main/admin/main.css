@@ -19,37 +19,29 @@ body {
 
 /* 바로가기 배너 */
 .class_54 {
-    width: 1280px;
-    height: 325px;
+    width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .class_55 {
-    width: 600px;
-    height: 325px;
-    border-radius: 5px;
-    border: 1px rgba(0, 0, 0, 0.30) solid;
+    width: 500px;
+    height: 225px;
+    border-radius: 15px;
+    border: 1px rgb(195 195 195 / 30%) solid;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .class_59 {
-    width: 320px;
-    height: 325px;
     float: right;
     display: flex;
-    margin-left: 30px;
 }
 
 .class_90 {
-    width: 320px;
-    height: 225px;
     display: flex;
     flex-direction: column;
-    margin-top: 50px;
-    margin-bottom: 50px;
     justify-content: space-between;
 }
 
@@ -81,34 +73,25 @@ body {
 
 
 .class_56 {
-    width: 185px;
-    height: 200px;
     float: right;
-    margin-right: 15px;
     align-self: flex-end;
-    margin-top: 50px;
     text-align: end;
 }
 
 /* 현황 테이블 */
 .class_26 {
-    width: 1280px;
-    height: 470px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .class_27 {
-    width: 600px;
-    height: 463px;
-    border-radius: 5px;
+    width: 500px;
+    border-radius: 15px;
     overflow: hidden;
-    border: 1px rgba(0, 0, 0, 0.30) solid
+    border: 1px rgb(195 195 195 / 30%) solid;
 }
 
 .class_92 {
-    width: 540px;
-    height: 403px;
     margin: 30px 30px;
     display: flex;
     flex-direction: column;
@@ -123,21 +106,17 @@ body {
 }
 
 .class_93  {
-    width: 540px;
     display: flex;
     border-bottom: 1px black solid;
 }
 
 .class_33 {
-    width: 160px;
-    height: 161px;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 }
 
 .class_29 {
-    width: 412px;
     height: 80px;
     border-bottom: 1px black solid;
     display: flex;
@@ -163,21 +142,22 @@ body {
 }
 
 .class_32 {
-    width: 412px;
     height: 80px;
     display: flex;
     justify-content: space-between;
 }
 
 .class_36 {
+    width: 100px;
     color: black;
     font-size: 25px;
     font-weight: 500;
-    word-wrap: break-word
+    word-wrap: break-word;
+    text-align: center;
 }
 
 .class_35 {
-    width: 412px;
+    width: 100%;
     height: 160px;
 }
 
@@ -207,7 +187,6 @@ body {
 }
 
 .class_39 {
-    width: 540px;
     height: 328px;
 }
 
@@ -220,13 +199,11 @@ body {
 }
 
 .class_41 {
-    width: 539px;
     height: 78px;
     border-bottom: 1px black solid;
 }
 
 .class_42 {
-    width: 539px;
     height: 78px;
     display: flex;
     justify-content: space-around;
@@ -235,7 +212,7 @@ body {
 }
 
 .class_43 {
-    width: 108px;
+    width: 88px;
     color: black;
     font-size: 20px;
     font-weight: 500;
@@ -276,25 +253,22 @@ body {
 
 /* 날씨, 미세먼지, 초미세먼지 */
 .class_12 {
-    width: 1280px;
     height: 240px;
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.class_13 {
-    width: 600px;
-    height: 240px;
-    border-radius: 5px;
-    border: 1px rgba(0, 0, 0, 0.30) solid;
     display: flex;
     justify-content: space-between;
 }
 
+.class_13 {
+    width: 500px;
+    height: 240px;
+    border-radius: 15px;
+    border: 1px rgb(195 195 195 / 30%) solid;
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+}
+
 .class_96 {
-    width: 330px;
-    height: 220px;
-    margin: 10px 0px 10px 30px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -308,72 +282,68 @@ body {
 }
 
 .class_14 {
-    width: 330px;
-    height: 120px;
+    height: 110px;
     display: flex;
+    align-items: flex-end;
 }
 
 .class_16 {
     color: black;
-    font-size: 100px;
-    font-weight: 300;
+    font-size: 70px;
+    font-weight: 400;
     line-height: 90px;
-    word-wrap: break-word
+    word-wrap: break-word;
 }
 
 .class_15 {
     color: black;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 500;
     word-wrap: break-word;
-    align-self: center;
-    width: 100px;
-    text-align: end;
+    width: max-content;
+    padding-bottom: 5px;
 }
 
 .class_18 {
-    width: 200px;
-    height: 200px;
     align-self: center;
-    margin-right: 20px;
 }
 
 .class_97 {
-    width: 600px;
+    width: 500px;
     height: 240px;
     display: flex;
     justify-content: space-between;
 }
 
 .class_21 {
-    width: 290px;
+    width: 230px;
     height: 240px;
-    border-radius: 5px;
-    border: 1px rgba(0, 0, 0, 0.30) solid;
+    border-radius: 15px;
+    border: 1px rgb(195 195 195 / 30%) solid;
 }
 
 .class_22 {
-    width: 270px;
     height: 220px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     margin: 10px;
 }
 
 .class_24 {
     color: black;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 500;
     word-wrap: break-word;
 }
 
 .class_23 {
-    height: 110px;
+    height: 100%;
     color: black;
-    font-size: 100px;
-    font-weight: 300;
-    line-height: 90px;
+    font-size: 60px;
+    font-weight: 400;
     word-wrap: break-word;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

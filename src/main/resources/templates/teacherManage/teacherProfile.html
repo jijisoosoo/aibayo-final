@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout}">
+
+<title layout:fragment="title">teacherMain</title>
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/teacher/profile.css}" />
+    <link rel="stylesheet" th:href="@{/teacher/profileguide.css}" />
+    <link rel="stylesheet" th:href="@{/teacher/mainHover.css}" />
+    <link rel="stylesheet" th:href="@{/teacher/mainHoverguide.css}" />
+    <link rel="stylesheet" th:href="@{/common/SMJCommonContainer.css}" />
+    <link rel="stylesheet" th:href="@{/common/SMJCommonHover.css}" />
+</th:block>
+
+<th:block layout:fragment="javascript">
+</th:block>
+
+<div class="container main_container" layout:fragment="content">
+    <div class="title-flow2">
+        <a class="icon-back" href="/page_teacher_done/index.html">
+            <img src="/teacher/img/back.png" alt=""/>
+        </a>
+        <div class="div-wrapper"><div class="text-wrapper-title">교사 정보</div></div>
+    </div>
+    <div class="profile">
+        <div class="blank"></div>
+        <div class="div-profile">
+            <div class="img-2">
+                <img src="/teacher/img/teacher.png" alt=""/>
+            </div>
+            <div class="id"><div class="text-wrapper-5">김가나</div></div>
+        </div>
+
+        <a  class="btn btn-ab" href="/page_teacher_profile_modify/index.html">
+            <div>
+                <div class="text-modify">퇴사</div>
+            </div>
+        </a>
+    </div>
+    <div class="info">
+        <div class="div-1">
+            <div class="div-wrapper-2"><div class="text-wrapper-7">휴대폰 번호</div></div>
+            <div class="inputarea"><div class="text-wrapper-8">01012345678</div></div>
+        </div>
+        <div class="div-1">
+            <div class="div-wrapper-2"><div class="text-wrapper-7">이메일</div></div>
+            <div class="inputarea"><div class="text-wrapper-8">teacher1@aibayo.co.kr</div></div>
+        </div>
+        <div class="div-1">
+            <div class="select-class">
+                <div class="title-class">
+                    <div class="text-wrapper-9">소속 반 정보</div>
+                    <div class="n">
+                        <div class="text-wrapper-10">(</div>
+                        <div class="text-wrapper-10">3</div>
+                        <div class="text-wrapper-10">개)</div>
+                    </div>
+                </div>
+                <a class="btn btn-ab" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <div class="text-wrapper-class">소속 반 수정</div>
+                </a>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="title">
+                                <div class="textarea">
+                                    <div class="text-wrapper">소속 반 수정</div>
+                                </div>
+                                <button class="button-x" href="" data-bs-dismiss="modal" aria-label="Close">
+                                    <img src="/teacher/img/x.png" alt=""/>
+                                </button>
+                            </div>
+                            <form class="modalform" th:action="@{/teacher/admin/mainDone}" th:method="post">
+                                <div class="row-input">
+                                    <div class="div">
+                                        <div class="div-2">
+                                            <img class="icon" src="/teacher/img/default-yellow.png" />
+                                            <div class="text-wrapper-2">선생님 이름</div>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="초대할 교사의 이름을 입력해주세요.">
+                                    </div>
+                                    <div class="div">
+                                        <div class="div-2">
+                                            <img class="icon" src="/teacher/img/default-yellow.png" />
+                                            <div class="text-wrapper-2">선생님 Email</div>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="초대할 교사의 Email을 입력해주세요.">
+                                    </div>
+                                </div>
+                                <div class="buttonarea">
+                                    <input type="submit" class="button-send" value="인증번호 발송" data-bs-dismiss="modal">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal end -->
+
+
+            </div>
+            <div class="selectedclass">
+                <div class="class">
+                    <div class="text-class">브로콜리반</div>
+                </div>
+                <div class="class">
+                    <div class="text-class">토마토반</div>
+                </div>
+                <div class="class">
+                    <div class="text-class">오이반</div>
+                </div>
+            </div>
+        </div>
+        <div class="input-startdate">
+            <div class="div-wrapper-2"><div class="text-wrapper-7">입사일</div></div>
+            <div class="textarea-wrapper">
+                <div class="textarea">
+                    <div class="div-3">
+                        <div class="text-wrapper-11">2024</div>
+                        <div class="text-wrapper-11">.</div>
+                    </div>
+                    <div class="div-3">
+                        <div class="text-wrapper-11">06</div>
+                        <div class="text-wrapper-11">.</div>
+                    </div>
+                    <div class="div-3">
+                        <div class="text-wrapper-11">28</div>
+                        <div class="text-wrapper-11">.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

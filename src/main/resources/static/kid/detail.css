@@ -1,0 +1,488 @@
+/* .class_1 { width: 1280px; height: 1165px; position: relative } */
+
+/* .class_48 { left: 0px; top: 0px; position: absolute; justify-content: flex-start; align-items: center; gap: 13px; display: inline-flex } */
+.kid_detail_top_box {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 13px;
+    display: inline-flex;
+}
+
+/* .class_49 { width: 55px; height: 55px; position: relative } */
+.kid_detail_top_svg {
+    width: 55px;
+    height: 55px;
+    position: relative;
+}
+
+/* .class_51 { width: 206px; color: black; font-size: 40px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
+.kid_detail_top_text {
+    width: 206px;
+    color: black;
+    font-size: 48px;
+    font-weight: 500;
+    word-wrap: break-word;
+    padding-bottom: 7px;
+}
+
+/* .class_2 { height: 979px; left: 0px; top: 76px; position: absolute; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 27px; display: inline-flex } */
+.kid_detail_content {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 30px;
+    display: inline-flex
+}
+
+/* .class_3 { width: 1280px; justify-content: center; align-items: flex-start; gap: 370px; display: inline-flex } */
+.kid_content_top_box {
+    width: 100%;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 306px;
+    display: inline-flex;
+}
+
+/* .class_4 { width: 100px; height: 100px; position: relative } */
+.space {
+    width: 100px;
+    height: 100px;
+    position: relative;
+}
+
+/* .class_5 { justify-content: flex-start; align-items: center; gap: 10px; display: flex } */
+.kid_profile_box {
+    width: 300px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.kid_profile_svg {
+    text-align: center;
+}
+
+.kid_info_box {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* .class_11 { width: 300px; height: 86px; left: 0px; top: 300px; position: absolute } */
+.kid_name_box {
+    width: 300px;
+}
+
+/* .class_12 { width: 100px; left: 100px; top: -7px; position: absolute; text-align: center; color: black; font-size: 25px; font-family: Noto Sans TC; font-weight: 500; word-wrap: break-word } */
+.kid_name_text {
+    text-align: center;
+    color: black;
+    font-size: 25px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+/* .class_7 { width: 277px; height: 30px; left: 14px; top: 335px; position: absolute } */
+.kid_birth_box {
+    width: 300px;
+    display: flex;
+    justify-content: center;
+}
+
+/* .class_9 { width: 30px; height: 30px; left: 0px; top: 0px; position: absolute } */
+.kid_birth_svg {
+    width: 30px;
+    height: 30px;
+}
+
+
+/* .class_8 { left: 30px; top: 1px; position: absolute; color: black; font-size: 24px; font-family: Inter; font-weight: 400; line-height: 28.80px; word-wrap: break-word } */
+.kid_birth_text {
+    color: black;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 35px;
+    word-wrap: break-word;
+}
+
+/* .class_17 { width: 144px; height: 47px; position: relative } */
+.discharge_btn_box, .discharge_btn {
+    width: 144px;
+    height: 47px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+/* .class_20 { width: 144px; height: 47px; left: 0px; top: 0px; position: absolute; text-align: center; color: #F5F5F5; font-size: 25px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
+.discharge_btn_text {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 500;
+    word-wrap: break-word;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+/* .class_21 { align-self: stretch; height: 182px; padding-left: 29px; padding-right: 29px; padding-top: 17px; padding-bottom: 17px; background: #F7F7F7; border-radius: 15px; overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: center; gap: 14px; display: flex } */
+.parent_info_box {
+    width: 100%;
+    align-self: stretch;
+    padding: 17px 29px;
+    background: #F7F7F7;
+    border-radius: 15px;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 14px;
+    display: flex;
+}
+
+/* .class_22 { width: 1222px; height: 44px; position: relative } */
+.parent_info_title_box {
+    height: 50px;
+    position: relative;
+    display: flex;
+    gap: 10px;
+}
+
+/* .class_24 { width: 50px; height: 50px; padding-top: 4px; padding-bottom: 4px; left: 0px; top: 0px; position: absolute; background: #FFDB21; border-radius: 90px; overflow: hidden; flex-direction: column; justify-content: center; align-items: center; gap: 10px; display: inline-flex } */
+.info_title_svg {
+    width: 50px;
+    height: 50px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    background: #FFDB21;
+    border-radius: 90px;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex
+}
+
+/* .class_26 { left: 65px; top: 10.50px; position: absolute; justify-content: flex-start; align-items: center; gap: 2px; display: inline-flex } */
+.info_text_box {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2px;
+    display: inline-flex;
+}
+
+/* .class_27 { color: black; font-size: 24px; font-family: Inter; font-weight: 400; line-height: 28.80px; word-wrap: break-word } */
+.info_text {
+    color: black;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28.80px;
+    word-wrap: break-word
+}
+
+/* .class_28 { background: #F7F7F7; border-radius: 15px; overflow: hidden; justify-content: flex-start; align-items: center; gap: 106px; display: inline-flex } */
+.info_content_box {
+    background: #F7F7F7;
+    border-radius: 15px;
+    overflow: hidden;
+    justify-content: flex-start;
+    gap: 20px;
+    display: inline-flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.info_row {
+    overflow: hidden;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px 69px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin: 0 55px;
+}
+
+/* .class_29 { width: 250px; height: 90px; background: white; border-radius: 12px; overflow: hidden; justify-content: center; align-items: center; gap: 20px; display: flex } */
+.info_item {
+    width: 250px;
+    height: 65px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 10px;
+    display: flex;
+    padding: 0px 20px;
+}
+
+/* .class_30 { width: 60px; height: 60px; position: relative } */
+.parent_item_svg {
+    width: 60px;
+    height: 60px;
+    position: relative
+}
+
+/* .class_34 { width: 89px; height: 34px; position: relative } */
+.item_text_box {
+    width: 140px;
+    height: 60px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+
+/* .class_35 { left: 0px; top: 0px; position: absolute; color: black; font-size: 24px; font-family: Inter; font-weight: 500; line-height: 33.60px; word-wrap: break-word } */
+.item_text {
+    width: auto;
+    color: black;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 34px;
+    word-wrap: break-word;
+}
+
+/* .class_36 { align-self: stretch; height: 357px; padding-left: 29px; padding-right: 29px; background: #F7F7F7; border-radius: 15px; overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: center; display: flex } */
+.classes_info_box {
+    width: 100%;
+    align-self: stretch;
+    padding: 17px 29px;
+    background: #F7F7F7;
+    border-radius: 15px;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 14px;
+    display: flex;
+}
+
+/* .class_37 { align-self: stretch; padding-top: 20px; padding-bottom: 20px; justify-content: space-between; align-items: center; display: inline-flex } */
+.classes_info_top_box {
+    align-self: stretch;
+    justify-content: space-between;
+    align-items: center;
+    display: inline-flex;
+}
+
+/* .class_38 { width: 187px; height: 50px; position: relative } */
+.classes_info_title_box {
+    width: 187px;
+    height: 50px;
+    position: relative;
+    display: inline-flex;
+    gap: 10px;
+}
+
+/* .class_39 { width: 180px; height: 50px; position: relative; background: #FFDB21; border-radius: 8px } */
+.add_class_btn {
+    width: 180px;
+    height: 50px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+/* .class_40 { left: 29px; top: 10px; position: absolute; color: black; font-size: 20px; font-family: Inter; font-weight: 500; line-height: 30px; word-wrap: break-word } */
+.add_class_btn_text {
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    word-wrap: break-word;
+}
+
+/* .class_delete_btn_box {
+    border-radius: 15px;
+} */
+
+.close_box {
+    width: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+/* .class_46 { color: white; font-size: 20px; font-family: Inter; font-weight: 500; line-height: 30px; word-wrap: break-word } */
+.class_delete_btn_text {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 30px;
+    word-wrap: break-word;
+}
+
+/* 모달 css */
+.fixed-width-modal .modal-dialog {
+    max-width: 870px;
+    width: 870px;
+}
+
+.modal-header, .modal-footer {
+    border: 0px;
+}
+
+/* .class_1 { width: 870px; height: 539px; padding-left: 40px; padding-right: 40px; padding-top: 50px; padding-bottom: 50px; background: white; border-radius: 20px; overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 30px; display: inline-flex } */
+.modal_box {
+    width: 870px;
+    height: 539px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 30px;
+    display: inline-flex
+}
+
+/* .class_2 { align-self: stretch; padding-left: 30px; justify-content: space-between; align-items: center; display: inline-flex } */
+.modal_header_box {
+    align-self: stretch;
+    padding-left: 30px;
+    justify-content: space-between;
+    align-items: center;
+    display: inline-flex
+}
+
+/* .class_5 { text-align: center; color: black; font-size: 24px; font-family: Inter; font-weight: 600; line-height: 28.80px; word-wrap: break-word } */
+.modal_header_title {
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 29px;
+    word-wrap: break-word;
+}
+
+/* .class_8 { align-self: stretch; height: 294px; padding-left: 44px; padding-right: 44px; padding-top: 30px; padding-bottom: 30px; background: #F7F7F7; border-radius: 15px; overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 30px; display: flex } */
+.modal_body {
+    align-self: stretch;
+    padding-left: 44px;
+    padding-right: 44px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background: #F7F7F7;
+    border-radius: 15px;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 30px;
+    display: flex;
+    margin: 0 10px;
+}
+
+/* .class_9 { justify-content: flex-start; align-items: center; gap: 3px; display: inline-flex } */
+.modal_body_title_box {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 3px;
+    display: inline-flex
+}
+
+/* .class_10 { text-align: center; color: black; font-size: 24px; font-family: Inter; font-weight: 500; line-height: 33.60px; word-wrap: break-word } */
+.modal_body_text {
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 34px;
+    word-wrap: break-word;
+}
+
+.modal_body_classes_box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* .class_12 { align-self: stretch; justify-content: flex-start; align-items: center; gap: 30px; display: inline-flex } */
+.modal_body_classes_row {
+    align-self: stretch;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin: 0px 50px;
+}
+
+/* .class_13 { height: 70px; padding-left: 20px; padding-right: 20px; padding-top: 15px; padding-bottom: 15px; background: white; border-radius: 12px; overflow: hidden; justify-content: flex-start; align-items: center; gap: 20px; display: flex } */
+.modal_class_item {
+    width: 200px;
+    height: 70px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.modal_class_item .modal_body_text {
+    width: 100px;
+}
+
+.checkbox_label {
+    display: flex;
+    border: 0px;
+    width: 200px;
+    height: 70px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* .class_14 { width: 40px; height: 40px; padding-top: 4px; padding-bottom: 4px; background: #FFDB21; border-radius: 90px; overflow: hidden; flex-direction: column; justify-content: center; align-items: center; gap: 10px; display: inline-flex } */
+.modal_class_svg_box {
+    width: 40px;
+    height: 40px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    background: #FFDB21;
+    border-radius: 90px;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    display: inline-flex;
+}
+
+/* .class_16 { width: 100px; flex-direction: column; justify-content: center; align-items: center; display: inline-flex } */
+.modal_class_text_box {
+    width: 100px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+}
+
+/* .class_18 { width: 130px; height: 50px; padding-left: 16px; padding-right: 16px; background: #FFDB21; border-radius: 8px; justify-content: center; align-items: center; gap: 8px; display: flex } */
+.modal_add_btn_box {
+    width: 130px;
+    height: 50px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    display: flex
+}
+
+/* .class_19 { color: black; font-size: 20px; font-family: Inter; font-weight: 500; line-height: 30px; word-wrap: break-word } */
+.modal_add_btn_text {
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+    word-wrap: break-word
+}
