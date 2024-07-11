@@ -46,13 +46,11 @@
 .modal-dialog .text-wrapper {
   position: relative;
   width: fit-content;
-  margin-top: -1px;
   font-family: "Inter-SemiBold", Helvetica;
   font-weight: 600;
   color: #000000;
   font-size: 24px;
   text-align: center;
-  letter-spacing: -0.48px;
   line-height: 28.8px;
   white-space: nowrap;
 }
@@ -132,7 +130,6 @@
 .modal-dialog .default {
   position: relative;
   width: fit-content;
-  margin-top: -1px;
   font-family: "Inter-Medium", Helvetica;
   font-weight: 500;
   color: #828282;
