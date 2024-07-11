@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
+        googleCalendarApiKey: "AIzaSyDmARKhz1ID0UKoEVehnqnMa-C9NTFt8Sg",
         initialView: 'dayGridMonth',
         navLinks: false,
         dateClick: function (info) {
@@ -16,6 +17,15 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             command = 'detailAfter';
         }
+
+
+        eventSources :[
+            {
+                googleCalendarId : 'ko.south_korea#holiday@group.v.calendar.google.com'
+                , color: 'white'   // an option!
+                , textColor: 'red' // an option!
+            }
+        ],
 
         // window.location.href = 'attendance.do?cmd=' + cmd + '&date=' + info.dateStr + '&classNo=1&attendanceInsertStatus=0';
         window.location.href = '/attendance/admin/' + command;
