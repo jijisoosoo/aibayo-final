@@ -6,16 +6,18 @@
 <title layout:fragment="title">teacherMain</title>
 
 <th:block layout:fragment="css">
-    <link rel="stylesheet" th:href="@{/teacher/globals.css}" />
+<!--    <link rel="stylesheet" th:href="@{/teacher/globals.css}" />-->
     <link rel="stylesheet" th:href="@{/teacher/profile.css}" />
     <link rel="stylesheet" th:href="@{/teacher/profileguide.css}" />
     <link rel="stylesheet" th:href="@{/teacher/mainHover.css}" />
     <link rel="stylesheet" th:href="@{/teacher/mainHoverguide.css}" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/common/SMJCommonContainer.css}" />
+    <link rel="stylesheet" th:href="@{/common/SMJCommonHover.css}" />
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">-->
 </th:block>
 
 <th:block layout:fragment="javascript">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>-->
 </th:block>
 
 <div class="container" layout:fragment="content">
@@ -34,11 +36,12 @@
                 </div>
                 <div class="id"><div class="text-wrapper-5">김가나</div></div>
             </div>
-            <div class="buttons">
-                <a class="button-modify" href="/page_teacher_profile_modify/index.html">
-                    <div class="text-wrapper-6">퇴사</div>
-                </a>
-            </div>
+
+            <a  class="btn btn-ab" href="/page_teacher_profile_modify/index.html">
+                <div>
+                    <div class="text-modify">퇴사</div>
+                </div>
+            </a>
         </div>
         <div class="info">
             <div class="div-2">

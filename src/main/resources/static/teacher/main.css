@@ -1,12 +1,12 @@
-.container {
-  /*display: inline-flex;*/
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  position: relative;
-  background-color: #ffffff;
-  width: 100%;
-}
+/*.container {*/
+/*  !*display: inline-flex;*!*/
+/*  flex-direction: column;*/
+/*  align-items: center;*/
+/*  gap: 10px;*/
+/*  position: relative;*/
+/*  background-color: #ffffff;*/
+/*  width: 100%;*/
+/*}*/
 
 /*.container .header {*/
 /*  position: relative;*/
