@@ -1,13 +1,13 @@
 .ann-list {
-  align-items: flex-start;
+  align-items: center;
   background-color: #ffffff;
   display: flex;
-  gap: 10px;
-  min-height: 1759px;
   position: relative;
   width: 100%;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: center;
+  flex-wrap: wrap;
 }
 
 .ann-list .list {
@@ -49,8 +49,8 @@
 .ann-list .text-wrapper {
   color: #000000;
   /*font-family: "Noto Sans-Bold", Helvetica;*/
-  /*font-size: 25px;*/
-  /*font-weight: 700;*/
+  font-size: 25px;
+  font-weight: 700;
   letter-spacing: 0;
   line-height: normal;
   margin-top: -1px;
@@ -223,6 +223,8 @@
   justify-content: flex-start;
   position: relative;
   width: 1280px;
+  min-height: 1480px;
+  align-content: flex-start;
 }
 
 .ann-list .card {
@@ -479,4 +481,72 @@
 }
 .frame-12{
   display: flex;
+}
+.frame-13{
+  width: 1280px;
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding-right: 10px;
+}
+.bi-list {
+  width:30px;
+  height: 30px;
+  fill: #828282; /* fill 속성을 사용 */
+}
+
+.bi-view-stacked {
+  width: 23px;
+  height: 20px;
+  fill: #828282; /* fill 속성을 사용 */
+}
+
+.cardver {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 76px ;
+  gap: 3px;
+  color: #828282;
+}
+
+.listver {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 76px ;
+  color: #828282;
+}
+.text{
+  margin:0px;
+  text:#828282;
+}
+/*호버시 css*/
+.cardver:hover,
+  .listver:hover {
+    background-color: #e0e0e0; /* 호버 시 배경색 변경 */
+    color: #505050; /* 호버 시 텍스트 색상 변경 */
+  }
+
+.cardver:hover .text,
+.listver:hover .text {
+  color: #505050; /* 호버 시 텍스트 색상 변경 */
+}
+
+.cardver:hover svg,
+.listver:hover svg {
+  fill: #505050; /* 호버 시 SVG 색상 변경 */
+}
+/*호버시 css*/
+.frame-15{
+  display: flex;
+  width: 1280px;
+  justify-content: center;
 }
