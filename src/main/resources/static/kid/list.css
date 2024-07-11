@@ -21,7 +21,7 @@
 /* .class_3 { width: 268px; height: 58px; color: black; font-size: 48px; font-family: Inter; font-weight: 600; word-wrap: break-word } */
 .title_text {
     color: black;
-    font-size: 40px;
+    font-size: 48px;
     font-weight: 500;
     word-wrap: break-word;
     line-height: 50px;
@@ -43,9 +43,10 @@
 /* .class_5 { width: 200px; height: 50px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; background: white; border-radius: 8px; border: 1px #E0E0E0 solid; justify-content: center; align-items: center; gap: 16px; display: flex } */
 .class_text {
     width: 200px;
+    height: 50px;
     color: black;
-    font-size: 20px;
-    word-wrap: break-word
+    font-size: inherit;
+    word-wrap: break-word;
 }
 
 /* .class_9 { width: 156px; height: 50px; padding-left: 16px; padding-right: 16px; background: #FFE768; border-radius: 8px; justify-content: center; align-items: center; gap: 8px; display: flex } */
@@ -87,6 +88,15 @@
     align-content: center;
 }
 
+.kid_radio_text {
+    width: fit-content;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 24px;
+    white-space: nowrap;
+}
+
 .btn-group>.btn-group:not(:last-child)>.btn, 
 .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
     border-top-right-radius: 10px;
@@ -104,10 +114,7 @@
 .kids_list_box {
     align-self: stretch;
     /* height: 870px; */
-    padding-left: 92px;
-    padding-right: 92px;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding: 40px 85px;
     background: #F7F7F7;
     border-radius: 15px;
     overflow: hidden;
@@ -115,7 +122,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     gap: 50px;
-    display: flex
+    display: flex;
 }
 
 /* .class_17 { align-self: stretch; justify-content: flex-start; align-items: center; gap: 15px; display: inline-flex } */
@@ -145,6 +152,7 @@
 }
 
 .kids_list_content_box {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 50px;
@@ -155,8 +163,8 @@
     align-self: stretch;
     justify-content: flex-start;
     align-items: center;
-    gap: 80px;
-    display: inline-flex
+    display: inline-flex;
+    gap: 40px;
 }
 
 /* .class_24 { flex-direction: column; justify-content: flex-start; align-items: center; gap: 8px; display: inline-flex } */
@@ -182,7 +190,7 @@
     width: 100px;
     text-align: center;
     color: black;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     line-height: 22.40px;
     word-wrap: break-word;
