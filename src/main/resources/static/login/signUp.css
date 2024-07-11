@@ -106,6 +106,7 @@
     line-height: normal;
 }
 
+
 .screen .text-wrapper-3 {
     position: absolute;
     width: 74px;
@@ -300,16 +301,27 @@
 }
 
 .screen .text-wrapper-8 {
+    /*position: absolute;*/
+    /*top: 30px;*/
+    /*left: 48px;*/
+    /*font-family: "Noto Sans-Medium", Helvetica;*/
+    /*font-weight: 500;*/
+    /*color: #ffdb20;*/
+    /*font-size: 64px;*/
+    /*letter-spacing: -3.2px;*/
+    /*line-height: 57.6px;*/
+    /*white-space: nowrap;*/
     position: absolute;
-    top: 30px;
-    left: 48px;
-    font-family: "Noto Sans-Medium", Helvetica;
-    font-weight: 500;
-    color: #ffdb20;
-    font-size: 64px;
-    letter-spacing: -3.2px;
-    line-height: 57.6px;
-    white-space: nowrap;
+    width: 229px;
+    top: 15px;
+    left: 120px;
+    font-family: "Poppins-Regular", Helvetica;
+    font-weight: 400;
+    color: #b87514;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
 }
 
 .screen .text-wrapper-9 {
