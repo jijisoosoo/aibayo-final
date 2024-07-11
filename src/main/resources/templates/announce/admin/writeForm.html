@@ -9,11 +9,14 @@
 <th:block layout:fragment="css">
     <link rel="stylesheet" href="/announce/writeForm.css" /></th:block>
 
+<th:block layout:fragment="javascript">
+    <script src="/announce/writeForm.js"></script></th:block>
+
 <div class="ann-write" layout:fragment="content">
     <form action="#">
         <div class="frame">
             <div class="div">
-                <a href="#" class="element-secondary-button">
+                <a href="/announce/admin/list" class="element-secondary-button">
                     <div class="text-wrapper">취소</div>
                 </a>
                     <input type="submit" value="작성" class="div-wrapper">

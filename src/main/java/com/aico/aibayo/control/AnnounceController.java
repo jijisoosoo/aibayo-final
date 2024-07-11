@@ -11,4 +11,13 @@ public class AnnounceController {
     public String adminList(){
         return "/announce/admin/list";
     }
+
+
+    @GetMapping("/admin/writeForm")
+    public String writeForm(){
+        return "/announce/admin/writeForm";
+    }
+
+
 }
+
