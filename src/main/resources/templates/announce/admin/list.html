@@ -3,6 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{/layout/layout}">
 
+<link rel="stylesheet" href="../../../static/announce/list.css">
 <title layout:fragment="title">공지사항 메인</title>
 
 <th:block layout:fragment="css">
@@ -10,7 +11,7 @@
 </th:block>
 <div class="ann-list" layout:fragment="content">
     <form action="">
-        <div class="list">
+        <div class="List">
             <div class="frame">
                 <div class="view">
                     <div class="text-wrapper">공지 사항</div>
@@ -47,7 +48,7 @@
             </div>
             <div class="frame-13">
                 <div>
-                    <a href="#" class="cardver">
+                    <a href="/announce/admin/card" class="cardver">
                         <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-view-stacked" viewBox="0 0 16 16">
                             <path d="M3 0h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2m0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm0 8h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2m0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/>
                         </svg>
@@ -55,7 +56,7 @@
                     </a>
                 </div>
                 <div>
-                    <a href="#" class="listver">
+                    <a href="/announce/admin/list" class="listver">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
                         </svg>
@@ -63,261 +64,70 @@
                     </a>
                 </div>
             </div>
-            <div class="card-list">
-              <a href="#" class="card">
-                <div class="frame-3">
-                    <p class="p">[보육료] 2024년 2분기 보육료 안내</p>
-                </div>
-                <div class="frame-wrapper">
-                    <div class="frame-4">
-                        <div class="frame-5">
-                            <div class="frame-6">
-                                <div class="frame-7">
-                                    <div class="avatar-wrapper">
-                                        <div class="avatar">
-                                            <img class="rectangle" alt="Rectangle" src="rectangle-1.png" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="frame-8">
-                            <div class="text-wrapper-4">김원장 원장선생님</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="frame-9">
-                    <div class="text-wrapper-5">2024년 06월 22일</div>
-                </div>
-                <div class="frame-10">
-                    <p class="text-wrapper-6">
-                       내용 미리보기 출력
-                    </p>
-                </div>
-            </a>
-                <a href="#" class="card">
-                    <div class="frame-3">
-                        <p class="p">[보육료] 2024년 2분기 보육료 안내</p>
-                    </div>
-                    <div class="frame-wrapper">
-                        <div class="frame-4">
-                            <div class="frame-5">
-                                <div class="frame-6">
-                                    <div class="frame-7">
-                                        <div class="avatar-wrapper">
-                                            <div class="avatar">
-                                                <img class="rectangle" alt="Rectangle" src="rectangle-1.png" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="frame-8">
-                                <div class="text-wrapper-4">김원장 원장선생님</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="frame-9">
-                        <div class="text-wrapper-5">2024년 06월 22일</div>
-                    </div>
-                    <div class="frame-10">
-                        <p class="text-wrapper-6">
-                            내용 미리보기 출력
-                        </p>
-                    </div>
-                </a>
-                <a href="#" class="card">
-                    <div class="frame-3">
-                        <p class="p">[보육료] 2024년 2분기 보육료 안내</p>
-                    </div>
-                    <div class="frame-wrapper">
-                        <div class="frame-4">
-                            <div class="frame-5">
-                                <div class="frame-6">
-                                    <div class="frame-7">
-                                        <div class="avatar-wrapper">
-                                            <div class="avatar">
-                                                <img class="rectangle" alt="Rectangle" src="rectangle-1.png" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="frame-8">
-                                <div class="text-wrapper-4">김원장 원장선생님</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="frame-9">
-                        <div class="text-wrapper-5">2024년 06월 22일</div>
-                    </div>
-                    <div class="frame-10">
-                        <p class="text-wrapper-6">
-                            내용 미리보기 출력
-                        </p>
-                    </div>
-                </a>
-                <a href="#" class="card">
-                    <div class="frame-3">
-                        <p class="p">[보육료] 2024년 2분기 보육료 안내</p>
-                    </div>
-                    <div class="frame-wrapper">
-                        <div class="frame-4">
-                            <div class="frame-5">
-                                <div class="frame-6">
-                                    <div class="frame-7">
-                                        <div class="avatar-wrapper">
-                                            <div class="avatar">
-                                                <img class="rectangle" alt="Rectangle" src="rectangle-1.png" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="frame-8">
-                                <div class="text-wrapper-4">김원장 원장선생님</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="frame-9">
-                        <div class="text-wrapper-5">2024년 06월 22일</div>
-                    </div>
-                    <div class="frame-10">
-                        <p class="text-wrapper-6">
-                            내용 미리보기 출력
-                        </p>
-                    </div>
-                </a>
-                <a href="#" class="card">
-                    <div class="frame-3">
-                        <p class="p">[보육료] 2024년 2분기 보육료 안내</p>
-                    </div>
-                    <div class="frame-wrapper">
-                        <div class="frame-4">
-                            <div class="frame-5">
-                                <div class="frame-6">
-                                    <div class="frame-7">
-                                        <div class="avatar-wrapper">
-                                            <div class="avatar">
-                                                <img class="rectangle" alt="Rectangle" src="rectangle-1.png" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="frame-8">
-                                <div class="text-wrapper-4">김원장 원장선생님</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="frame-9">
-                        <div class="text-wrapper-5">2024년 06월 22일</div>
-                    </div>
-                    <div class="frame-10">
-                        <p class="text-wrapper-6">
-                            내용 미리보기 출력
-                        </p>
-                    </div>
-                </a>
-                <a href="#" class="card">
-                    <div class="frame-3">
-                        <p class="p">[보육료] 2024년 2분기 보육료 안내</p>
-                    </div>
-                    <div class="frame-wrapper">
-                        <div class="frame-4">
-                            <div class="frame-5">
-                                <div class="frame-6">
-                                    <div class="frame-7">
-                                        <div class="avatar-wrapper">
-                                            <div class="avatar">
-                                                <img class="rectangle" alt="Rectangle" src="rectangle-1.png" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="frame-8">
-                                <div class="text-wrapper-4">김원장 원장선생님</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="frame-9">
-                        <div class="text-wrapper-5">2024년 06월 22일</div>
-                    </div>
-                    <div class="frame-10">
-                        <p class="text-wrapper-6">
-                            내용 미리보기 출력
-                        </p>
-                    </div>
-                </a>
-                <a href="#" class="card">
-                    <div class="frame-3">
-                        <p class="p">[보육료] 2024년 2분기 보육료 안내</p>
-                    </div>
-                    <div class="frame-wrapper">
-                        <div class="frame-4">
-                            <div class="frame-5">
-                                <div class="frame-6">
-                                    <div class="frame-7">
-                                        <div class="avatar-wrapper">
-                                            <div class="avatar">
-                                                <img class="rectangle" alt="Rectangle" src="rectangle-1.png" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="frame-8">
-                                <div class="text-wrapper-4">김원장 원장선생님</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="frame-9">
-                        <div class="text-wrapper-5">2024년 06월 22일</div>
-                    </div>
-                    <div class="frame-10">
-                        <p class="text-wrapper-6">
-                            내용 미리보기 출력
-                        </p>
-                    </div>
-                </a>
-                <a href="#" class="card">
-                    <div class="frame-3">
-                        <p class="p">[보육료] 2024년 2분기 보육료 안내</p>
-                    </div>
-                    <div class="frame-wrapper">
-                        <div class="frame-4">
-                            <div class="frame-5">
-                                <div class="frame-6">
-                                    <div class="frame-7">
-                                        <div class="avatar-wrapper">
-                                            <div class="avatar">
-                                                <img class="rectangle" alt="Rectangle" src="rectangle-1.png" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="frame-8">
-                                <div class="text-wrapper-4">김원장 원장선생님</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="frame-9">
-                        <div class="text-wrapper-5">2024년 06월 22일</div>
-                    </div>
-                    <div class="frame-10">
-                        <p class="text-wrapper-6">
-                            내용 미리보기 출력
-                        </p>
-                    </div>
-                </a>
+            <div class="cardlist">
+                <table class="table" id="table">
+                    <tr>
+                        <th>글 번호</th>
+                        <th>말머리</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>작성일</th>
+                        <th>조회수</th>
+                        <th>댓글</th>
+                    </tr>
+                    <tr class="announce" onclick="location.href='/announce/admin/detail';">
+                        <td>1</td>
+                        <td>보육료 안내</td>
+                        <td>[상반기] 2024년 교통비 납입 요청</td>
+                        <td>김원장 원장선생님</td>
+                        <td>2024.07.11.</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+
+                    <tr class="announce" onclick="location.href='/announce/admin/detail';">
+                        <td>2</td>
+                        <td>부모 교육</td>
+                        <td>[상반기] 온라인 부모 교육 안내</td>
+                        <td>김원장 원장선생님</td>
+                        <td>2024.07.11.</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+
+                    <tr class="announce" onclick="location.href='/announce/admin/detail';">
+                        <td>3</td>
+                        <td>선생님만</td>
+                        <td>여름 휴가 안내</td>
+                        <td>김원장 원장선생님</td>
+                        <td>2024.07.11.</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+
+                    <tr class="announce" onclick="location.href='/announce/admin/detail';">
+                        <td>4</td>
+                        <td>공지</td>
+                        <td>여름방학 안내</td>
+                        <td>김원장 원장선생님</td>
+                        <td>2024.07.11.</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+
+                    <tr class="announce" onclick="location.href='/announce/admin/detail';">
+                        <td>4</td>
+                        <td>부모 교육</td>
+                        <td>[하반기] 온라인 부모 교육 안내</td>
+                        <td>김원장 원장선생님</td>
+                        <td>2024.07.11.</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
 
 
 
-
-
-
+                </table>
             </div>
         </div>
     </form>
