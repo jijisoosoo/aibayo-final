@@ -37,11 +37,11 @@
 
 /* .class_3 { width: 1280px; justify-content: center; align-items: flex-start; gap: 370px; display: inline-flex } */
 .kid_content_top_box {
-    width: 1280px;
+    width: 100%;
     justify-content: center;
     align-items: flex-start;
-    gap: 370px;
-    display: inline-flex
+    gap: 306px;
+    display: inline-flex;
 }
 
 /* .class_4 { width: 100px; height: 100px; position: relative } */
@@ -129,7 +129,7 @@
 
 /* .class_21 { align-self: stretch; height: 182px; padding-left: 29px; padding-right: 29px; padding-top: 17px; padding-bottom: 17px; background: #F7F7F7; border-radius: 15px; overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: center; gap: 14px; display: flex } */
 .parent_info_box {
-    width: 1256px;
+    width: 100%;
     align-self: stretch;
     padding: 17px 29px;
     background: #F7F7F7;
@@ -197,10 +197,10 @@
     overflow: hidden;
     justify-content: flex-start;
     align-items: center;
-    gap: 20px 109px;
+    gap: 20px 69px;
     display: inline-flex;
     flex-wrap: wrap;
-    margin: 0px 115px;
+    margin: 0 55px;
 }
 
 /* .class_29 { width: 250px; height: 90px; background: white; border-radius: 12px; overflow: hidden; justify-content: center; align-items: center; gap: 20px; display: flex } */
@@ -247,7 +247,7 @@
 
 /* .class_36 { align-self: stretch; height: 357px; padding-left: 29px; padding-right: 29px; background: #F7F7F7; border-radius: 15px; overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: center; display: flex } */
 .classes_info_box {
-    width: 1256px;
+    width: 100%;
     align-self: stretch;
     padding: 17px 29px;
     background: #F7F7F7;
