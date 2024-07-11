@@ -21,7 +21,7 @@
 /* .class_3 { width: 268px; height: 58px; color: black; font-size: 48px; font-family: Inter; font-weight: 600; word-wrap: break-word } */
 .title_text {
     color: black;
-    font-size: 40px;
+    font-size: 48px;
     font-weight: 500;
     word-wrap: break-word;
     line-height: 50px;
@@ -43,9 +43,10 @@
 /* .class_5 { width: 200px; height: 50px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; background: white; border-radius: 8px; border: 1px #E0E0E0 solid; justify-content: center; align-items: center; gap: 16px; display: flex } */
 .class_text {
     width: 200px;
+    height: 50px;
     color: black;
-    font-size: 20px;
-    word-wrap: break-word
+    font-size: inherit;
+    word-wrap: break-word;
 }
 
 /* .class_9 { width: 156px; height: 50px; padding-left: 16px; padding-right: 16px; background: #FFE768; border-radius: 8px; justify-content: center; align-items: center; gap: 8px; display: flex } */
@@ -85,6 +86,15 @@
     background-color: #FFF;
     border: none;
     align-content: center;
+}
+
+.kid_radio_text {
+    width: fit-content;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: 24px;
+    white-space: nowrap;
 }
 
 .btn-group>.btn-group:not(:last-child)>.btn, 
@@ -180,7 +190,7 @@
     width: 100px;
     text-align: center;
     color: black;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     line-height: 22.40px;
     word-wrap: break-word;
