@@ -8,10 +8,10 @@
 
 /* .class_58 { width: 274px; height: 58px; left: 0px; top: 0px; position: absolute } */
 .notepad_detail_top_box {
-    width: 274px;
     height: 55px;
     display: flex;
     justify-content: space-around;
+    gap: 10px;
 }
 
 .notepad_top_box {
@@ -80,7 +80,7 @@
 /* .class_50 { left: 36px; top: 27px; position: absolute; color: black; font-size: 40px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
 .notepad_detail_content_date {
     color: black;
-    font-size: 40px;
+    font-size: 24px;
     font-weight: 500;
     word-wrap: break-word;
     line-height: 100px;
@@ -122,12 +122,11 @@
     display: flex;
     align-items: center;
     border-bottom: 1px rgb(195 195 195 / 30%) solid;
+    gap: 10px;
 }
 
 /* .class_47 { width: 100px; height: 100px; left: 0px; top: 0px; position: absolute } */
 .notepad_detail_content_title_img_box {
-    width: 100px;
-    height: 100px;
     align-content: center;
 }
 
@@ -141,7 +140,7 @@
 /* .class_46 { left: 100px; top: 35px; position: absolute; color: black; font-size: 25px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
 .notepad_detail_content_title_text {
     color: black;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 500;
     word-wrap: break-word;
 }
@@ -190,7 +189,7 @@
 /* .class_43 { left: 19px; top: 26px; position: absolute; color: black; font-size: 25px; font-family: Noto Sans; font-weight: 500; line-height: 50px; word-wrap: break-word } */
 .notepad_detail_content_body_text {
     color: black;
-    font-size: 25px;
+    font-size: 16px;
     line-height: 50px;
     word-wrap: break-word;
 }
