@@ -9,7 +9,7 @@ $(document).ready(function() {
     const offset = new Date().getTimezoneOffset() * 60 * 1000;
     const today = new Date(Date.now() - offset);
 
-    $(".datepicker").val(today.toISOString().substring(0,10));
+    $(".datepicker").val(today.toISOString().substring(0,10).replaceAll('-','.'));
     console.log($(".datepicker").val());
 
     /* 기본으로 반선택/원생선택 select  숨기기 */
