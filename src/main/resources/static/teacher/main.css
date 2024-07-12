@@ -259,7 +259,7 @@
 .container .carousel {
   display: flex;
   flex-wrap: wrap;
-  gap: 80px 80px;
+  gap: 60px 60px;
   position: relative;
   align-self: stretch;
   width: fit-content;
@@ -277,8 +277,8 @@
 
 .container .img-2 {
   position: relative;
-  width: 150px;
-  height: 150px;
+  width: 126px;
+  height: 126px;
   border-radius: 70%;
   background-size: cover;
   background-position: 50% 50%;

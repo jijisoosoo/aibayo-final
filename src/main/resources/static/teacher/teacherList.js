@@ -7,15 +7,15 @@ $(document).ready(function() {
         $('#teacherStatus' + initialSelectedValue + 'Div').show();
         console.log("done");
     }
-    
+
 
     $('input[name="teacherStatusRd"]').on('change', function() {
         var selectedValue = $('input[name="teacherStatusRd"]:checked').val();
         console.log(selectedValue);
-        
+
         // 모든 상태 div 숨기기
         $('.row-selected-teacher').hide();
-        
+
         // 선택된 값에 따라 해당 div 보이기
         $('#teacherStatus' + selectedValue + 'Div').show();
     });
