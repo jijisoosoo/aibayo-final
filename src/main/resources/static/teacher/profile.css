@@ -58,7 +58,7 @@
 .container .text-wrapper-5 {
   position: relative;
   width: fit-content;
-  font-family: "Inter-SemiBold", Helvetica;
+  /*font-family: "Inter-SemiBold", Helvetica;*/
   font-weight: 600;
   color: #000000;
   font-size: 35px;
@@ -80,6 +80,12 @@
   justify-content: flex-end;
   gap: 10px;
   position: relative;
+}
+
+.container .resign {
+  align-content: center;
+  height: 50px;
+  padding : 0px 30px;
 }
 
 .container .info {
@@ -119,7 +125,7 @@
 .container .text-wrapper-7 {
   position: relative;
   width: fit-content;
-  font-family: "Inter-SemiBold", Helvetica;
+  /*font-family: "Inter-SemiBold", Helvetica;*/
   font-weight: 600;
   color: #000000;
   font-size: 20px;
@@ -151,7 +157,7 @@
 .container .text-wrapper-8 {
   position: relative;
   width: fit-content;
-  font-family: "Inter-Medium", Helvetica;
+  /*font-family: "Inter-Medium", Helvetica;*/
   font-weight: 500;
   color: #000000;
   font-size: 20px;
@@ -196,7 +202,7 @@
 .container .text-wrapper-9 {
   position: relative;
   width: fit-content;
-  font-family: "Inter-SemiBold", Helvetica;
+  /*font-family: "Inter-SemiBold", Helvetica;*/
   font-weight: 600;
   color: #000000;
   font-size: 20px;
@@ -214,7 +220,7 @@
 .container .text-wrapper-10 {
   position: relative;
   width: fit-content;
-  font-family: "Inter-SemiBold", Helvetica;
+  /*font-family: "Inter-SemiBold", Helvetica;*/
   font-weight: 600;
   color: #000000;
   font-size: 16px;
@@ -253,7 +259,7 @@
 .container .text-wrapper-class {
   position: relative;
   width: fit-content;
-  font-family: "Inter-Medium", Helvetica;
+  /*font-family: "Inter-Medium", Helvetica;*/
   font-weight: 500;
   color: #000000;
   font-size: 20px;
@@ -327,7 +333,7 @@
 .container .text-wrapper-11 {
   position: relative;
   width: fit-content;
-  font-family: "Lato-Medium", Helvetica;
+  /*font-family: "Lato-Medium", Helvetica;*/
   font-weight: 500;
   color: #000000;
   font-size: 20px;
