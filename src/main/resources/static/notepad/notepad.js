@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd',
+        format: 'yyyy.mm.dd',
         autoclose: true,
         language: 'ko',
         orientation: 'bottom'

@@ -29,7 +29,7 @@
 /* .class_59 { width: 206px; left: 68px; top: 4px; position: absolute; color: black; font_size: 40px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
 .notepad_detail_top_text {
     color: black;
-    font-size: 40px;
+    font-size: 48px;
     font-weight: 500;
     word-wrap: break-word;
     line-height: 50px;
@@ -55,7 +55,7 @@
 
 /* .class_57 { left: 49px; top: 7px; position: absolute; color: black; font-size: 25px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
 .btn_text {
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 500;
     word-wrap: break-word;
     line-height: 35px;
@@ -89,8 +89,8 @@
 
 /* .class_39 { width: 308px; height: 55px;  background: white; border-radius: 5px; border: 5px 0 0 5px rgba(0, 0, 0, 0.30) solid } */
 .date_input_box {
-    width: 225px;
-    height: 55px;
+    width: 200px;
+    height: 45px;
     background: white;
     border: 1px rgb(195 195 195 / 30%) solid;
     border-radius: 10px;
@@ -99,13 +99,11 @@
 
 /* .class_41 { width: 131px; height: 55px;  color: black; font-size: 25px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
 .date_input_text {
-    width: 225px;
-    height: 55px;
     color: black;
-    font-size: 25px;
+    font-size: 20px;
     line-height: 55px;
     text-align: center;
-    word-wrap: break-word
+    word-wrap: break-word;
 }
 
 /* .class_44 { width: 1098px; height: 100px; left: 91px; top: 100px; position: absolute; border-bottom: 1px rgba(0, 0, 0, 0.30) solid } */
@@ -157,7 +155,7 @@
 
 .item_title {
     color: black;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 500;
     word-wrap: break-word;
 }
@@ -173,9 +171,9 @@
 }
 
 .sender_text {
-    width: 190px;
+    width: 175px;
     color: black;
-    font-size: 20px;
+    font-size: 16px;
     word-wrap: break-word;
 }
 
@@ -209,7 +207,7 @@
 /* .class_42 { left: 14px; top: 0px; position: absolute; color: black; font-size: 25px; font-family: Noto Sans; font-weight: 500; line-height: 50px; word-wrap: break-word } */
 .liferecord_title {
     color: black;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 500;
     line-height: 50px;
     word-wrap: break-word;
@@ -221,20 +219,21 @@
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
 }
 
 .liferecord_item_box {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
 }
 
 /* .class_40 { width: 60px; height: 14px; left: 46px; top: 59px; position: absolute; color: black; font-size: 18px; font-family: Noto Sans; font-weight: 400; word-wrap: break-word } */
 .liferecord_item_title {
     color: black;
-    font-size: 20px;
+    font-size: 16px;
     word-wrap: break-word;
+    font-weight: 500;
 }
 
 .btn-outline-ab {
