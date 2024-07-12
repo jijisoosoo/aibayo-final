@@ -10,19 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/teacher")
 public class TeacherController {
 
-    @GetMapping("/admin/mainDone")
-    public String adminMainDone() {
-        return "/teacherManage/mainDone";
-    }
-
-    @GetMapping("/admin/mainWaiting")
-    public String adminMainWaiting() {
-        return "/teacherManage/mainWaiting";
-    }
-
-    @GetMapping("/admin/mainInvited")
-    public String adminMainInvited() {
-        return "/teacherManage/mainInvited";
+    @GetMapping("/admin/teacherMain")
+    public String adminTeacherMain() {
+        return "/teacherManage/teacherMain";
     }
 
     @GetMapping("/admin/teacherProfile")
