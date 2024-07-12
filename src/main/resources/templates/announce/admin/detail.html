@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout}">
+
+<title layout:fragment="title">공지사항 상세</title>
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" href="/announce/detail.css"/>
+</th:block>
+
+<th:block layout:fragment="javascript">
+    <script src="/announce/writeForm.js"></script></th:block>
+
+<div class="container" layout:fragment="content">
+  <form action="">
+      <div class="screen">
+          <div class="frame">
+              <div class="div">
+                  <div class="frame-2">
+                      <div class="div-wrapper">
+                          <div class="text-wrapper" >[부모 교육]</div>
+                      </div>
+                      <div class="div-wrapper">
+                          <div class="text-wrapper" >2024년 상반기 부모교육</div>
+                      </div>
+                  </div>
+                  <div class="frame-3">
+
+                      <a href="#" class="frame-4">
+                          <div class="avatar-wrapper">
+                              <div class="avatar">
+                                  <img class="rectangle" alt="Rectangle" src="rectangle-1.png" />
+                              </div>
+                          </div>
+                          <div class="frame-wrapper">
+                              <div class="frame-5">
+                                  <div class="text-wrapper-2">김원장 원장선생님</div>
+                                  <p class="p">2024년 06월 23일 오후 08:27</p>
+                              </div>
+                          </div>
+                      </a>
+
+                      <div class="element-tab-list-wrapper">
+                          <div class="btn-group" role="group" aria-label="Basic outlined example">
+                              <a href="#" class="btn btn-outline-secondary">이전글</a>
+                              <a href="#" class="btn btn-outline-secondary">목록</a>
+                              <a href="#" class="btn btn-outline-secondary">다음글</a>
+                          </div>
+                      </div>
+
+
+
+
+
+
+                  </div>
+              </div>
+          </div>
+          <div class="frame-9">
+              <div class="frame-10">
+                  <p class="text-wrapper-5">
+                      여기는 본문입니다 <br />
+                      본문 내용 <br />
+                      어쩌구 저쩌구 <br />
+                      집에 가고싶어
+                      <br />
+                      이;ㄴ이ㅏㄴㅇ
+                      <br />
+                      ㅇ나ㅣㄷ여ㅓㅐ쟈겨 ㅐㅑㅈ러치;ㄴ아ㅔㅐ냐ㅕㅓㄱㄷ에ㅐㄴ어ㅡ나
+                      <br />
+                      ㄹ어 쟈ㅐㅔ어 ㅣㅑ나ㅡㅇ치나ㅓ이ㅏ너이나ㅓ아ㅢ나어ㅣㅑㄷ너랴ㅓㅣㅏ눌ㄴㄷ
+                      <br />러 냐ㅐ여ㅗ냐ㅗㅓㄷ야ㅏ느티ㅏㄴ아ㅣㄷ에자갸ㅐㅓ라ㅣ늘ㅇ치ㅏ너ㅡ이ㅏ너이ㅏ
+                  </p>
+              </div>
+              <div class="frame-11">
+                  <div class="count-wrapper">
+                      <div class="count">
+                          <div class="frame-12">
+                              <div class="text-wrapper-6">댓글</div>
+                          </div>
+                          <div class="frame-13">
+                              <div class="text-wrapper-7">3</div>
+                          </div>
+                          <div class="frame-14">
+                              <div class="text-wrapper-6">개</div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="frame-15">
+                      <a href="#" class="element-secondary-button">
+                          수정
+                      </a>
+                      <button type="button" class="element-secondary-button-2" id="deleteButton">삭제</button>
+                  </div>
+              </div>
+          </div>
+          <div class="view">
+              <div class="frame-16">
+                  <div class="rectangle-wrapper">
+                      <img class="img" alt="Rectangle" src="image.png" />
+                  </div>
+                  <div class="frame-17">
+                      <div class="frame-18">
+                          <div class="frame-19">
+                              <div class="text-wrapper-10">짱구 아빠</div>
+                          </div>
+                          <div class="frame-19">
+                              <div class="text-wrapper-6">
+                                  <div class="dropdown">
+                                      <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                          <li><a class="dropdown-item" href="#">수정</a></li>
+                                          <li><a class="dropdown-item" href="#">삭제</a></li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="frame-20">
+                          <div class="text-wrapper-11">댓글</div>
+                      </div>
+                      <div class="frame-21">
+                          <div class="frame-22">
+                              <div class="text-wrapper-12">2024.06.29 14:00:36</div>
+                          </div>
+                          <a href="#" class="frame-19">
+                              <div class="text-wrapper-12">답글쓰기</div>
+                          </a>
+                      </div>
+                  </div>
+              </div>
+              <div class="frame-23">
+                  <div class="img-wrapper">
+                      <img class="img" alt="Rectangle" src="rectangle-1-2.png" />
+                  </div>
+                  <div class="frame-24">
+                      <div class="frame-18">
+                          <div class="frame-19">
+                              <div class="text-wrapper-10">짱구 엄마</div>
+                          </div>
+                          <div class="frame-19">
+                              <div class="text-wrapper-6">
+                                  <div class="dropdown">
+                                      <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                      </button>
+                                      <ul class="dropdown-menu">
+                                          <li><a class="dropdown-item" href="#">수정</a></li>
+                                          <li><a class="dropdown-item" href="#">삭제</a></li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="frame-20">
+                          <div class="text-wrapper-11">대댓글</div>
+                      </div>
+                      <div class="frame-25">
+                          <div class="frame-19">
+                              <div class="text-wrapper-12">2024.06.29 14:00:36</div>
+                          </div>
+                          <a href="#" class="frame-19">
+                              <div class="text-wrapper-12">답글쓰기</div>
+                          </a>
+                      </div>
+                  </div>
+              </div>
+              <div class="frame-26">
+                  <div class="frame-27">
+                      <div class="frame-28">
+                          <div class="element-secondary-button-wrapper">
+                              <input type="submit" value="등록" class="element-secondary-button-3">
+                              </div>
+                          </div>
+
+                          <div class="element-input-field" />
+                            <textarea class="element-input-field"></textarea>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="text">{""}</div>
+        </form>
+    </div>
+</html>

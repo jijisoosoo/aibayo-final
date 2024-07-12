@@ -117,3 +117,17 @@ body {
 .container.main_container {
     width: 1080px;
 }
+
+.datepicker[readonly] {
+    background-color: #fff;
+}
+
+.datepicker:hover {
+    border-color: #ced4da; /* Bootstrap 5 기본 입력 필드 테두리 색상 */
+    box-shadow: none; /* 호버 시 그림자 효과 제거 */
+    cursor: default; /* 호버 시 커서 모양 기본으로 유지 */
+}
+
+.datepicker {
+    cursor: default; /* 기본 상태에서도 커서 모양 기본으로 유지 */
+}

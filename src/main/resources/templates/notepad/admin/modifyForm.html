@@ -6,15 +6,19 @@
 <title layout:fragment="title">알림장</title>
 
 <th:block layout:fragment="css">
+<link href="/vendor/datepicker-dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
 <link rel="stylesheet" href="/notepad/form.css" />
 </th:block>
 
 <th:block layout:fragment="javascript">
-    <script src="/notepad/modifyForm.js"></script>
+<script src="/vendor/datepicker-dist/js/bootstrap-datepicker.min.js"></script>
+<script src="/vendor/datepicker-dist/js/bootstrap-datepicker.ko.min.js"></script>
+<script src="/notepad/notepad.js"></script>
+<script src="/notepad/modifyForm.js"></script>
 </th:block>
 
 
-<div class="container" layout:fragment="content">
+<div class="container main_container" layout:fragment="content">
 
     <div class="notepad_detail_top">
 
@@ -44,9 +48,9 @@
     <div class="notepad_detail_content">
 
         <div class="notepad_detail_content_date_box">
-            <input type="date"
+            <input type="text"
                    class="form-control notepad_detail_content_date date_input_box date_input_text datepicker"
-                   placeholder="날짜 검색">
+                   placeholder="연도. 월. 일" readonly>
         </div>
 
 
@@ -56,7 +60,7 @@
 
                 <div class="item_title">알림 수신자</div>
 
-                <select class="form-select item_modify_box sender_text" aria-label="Default select example">
+                <select class="form-select item_modify_box sender_text" disabled>
                     <option value="1" selected>김원생</option>
                     <option value="2">이원생</option>
                     <option value="3">박원생</option>
