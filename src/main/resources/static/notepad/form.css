@@ -1,7 +1,6 @@
 /* 페이지 상단 */
 /* .class_51 { width: 1280px; height: 58px; left: 0px; top: 0px; position: absolute } */
 .notepad_detail_top {
-    width: 1280px;
     height: 55px;
     display: flex;
     justify-content: space-between;
@@ -16,7 +15,6 @@
 }
 
 .notepad_top_box {
-    width: 274px;
     height: 55px;
     display: flex;
     margin-left: 10px;
@@ -66,16 +64,15 @@
 /* 알림장 내용-제목 */
 /* .class_2 { width: 1280px; height: 1032px; left: 0px; top: 105px; position: absolute; border-radius: 15px; border: 1px rgba(0, 0, 0, 0.30) solid } */
 .notepad_detail_content {
-    width: 1280px;
     border-radius: 15px;
-    border: 1px rgba(0, 0, 0, 0.30) solid
+    border: 1px rgb(195 195 195 / 30%) solid;
 }
 
 /* .class_49 { width: 1280px; height: 100px; left: 0px; top: 0px; position: absolute; border-bottom: 1px rgba(0, 0, 0, 0.30) solid } */
 .notepad_detail_content_date_box {
     width: 100%;
     height: 100px;
-    border-bottom: 1px rgba(0, 0, 0, 0.30) solid;
+    border-bottom: 1px rgb(195 195 195 / 30%) solid;
     display: flex;
     align-items: center;
 }
@@ -95,8 +92,7 @@
     width: 225px;
     height: 55px;
     background: white;
-    border-radius: 5px 0 0 5px;
-    border: 1px rgba(0, 0, 0, 0.30) solid;
+    border: 1px rgb(195 195 195 / 30%) solid;
     border-radius: 10px;
     text-align: center;
 }
@@ -154,19 +150,16 @@
 
 /* 수정페이지 */
 .item_group {
-    width: 1098px;
-    /* height: 98px; */
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
 .item_title {
-    width: 795.64px;
     color: black;
     font-size: 25px;
     font-weight: 500;
-    word-wrap: break-word
+    word-wrap: break-word;
 }
 
 .select_box {
@@ -175,22 +168,20 @@
 }
 
 .item_modify_box {
-    /* width: 157px; */
     border-radius: 10px;
+    border: 1px rgb(195 195 195 / 30%) solid;
 }
 
 .sender_text {
-    width: 240px;
-    /* text-align: center; */
+    width: 190px;
     color: black;
     font-size: 20px;
-    word-wrap: break-word
+    word-wrap: break-word;
 }
 
 
 /* .class_3 { width: 1098px; height: 786px; left: 91px; top: 200px; position: absolute } */
 .notepad_detail_content_body {
-    width: 1098px;
     margin: 0 auto;
     padding: 30px;
     display: flex;
@@ -209,7 +200,6 @@
 /* 생활기록 */
 /* .class_4 { width: 878px; height: 596px; left: 110px; top: 241px; position: absolute } */
 .liferecord {
-    width: 1038px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -243,6 +233,11 @@
     color: black;
     font-size: 20px;
     word-wrap: break-word;
+}
+
+.btn-outline-ab {
+    color: black;
+    border: 1px rgb(195 195 195 / 30%) solid;
 }
 
 .btn-check:disabled+.btn, .btn-check[disabled]+.btn {
