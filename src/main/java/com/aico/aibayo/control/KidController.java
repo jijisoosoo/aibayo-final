@@ -12,8 +12,13 @@ public class KidController {
         return "/kid/list";
     }
 
-    @GetMapping("detail")
+    @GetMapping("/detail")
     public String detail() {
         return "/kid/detail";
+    }
+
+    @GetMapping("/write")
+    public String writeForm() {
+        return "/kid/writeForm";
     }
 }
