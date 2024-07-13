@@ -8,6 +8,10 @@
     display: inline-flex;
 }
 
+.kid_form_top_box {
+    justify-content: space-between;
+}
+
 /* .class_49 { width: 55px; height: 55px; position: relative } */
 .kid_detail_top_svg {
     width: 55px;
@@ -17,6 +21,16 @@
 
 /* .class_51 { width: 206px; color: black; font-size: 40px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
 .kid_detail_top_text {
+    width: 206px;
+    color: black;
+    font-size: 48px;
+    font-weight: 500;
+    word-wrap: break-word;
+    padding-bottom: 7px;
+}
+
+.kid_form_top_text {
+    margin-left: 10px;
     width: 206px;
     color: black;
     font-size: 48px;
@@ -43,9 +57,18 @@
     display: inline-flex;
 }
 
+.kid_form_content_top_box {
+    gap: 85px;
+}
+
 /* .class_4 { width: 100px; height: 100px; position: relative } */
 .space {
     width: 144px;
+    height: 100px;
+}
+
+.form_space {
+    width: 288px;
     height: 100px;
 }
 
@@ -68,9 +91,19 @@
     flex-direction: column;
 }
 
+.kid_info_box_form {
+    gap: 10px;
+}
+
 /* .class_11 { width: 300px; height: 86px; left: 0px; top: 300px; position: absolute } */
 .kid_name_box {
     width: 300px;
+}
+
+.kid_item_box_form{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 /* .class_12 { width: 100px; left: 100px; top: -7px; position: absolute; text-align: center; color: black; font-size: 25px; font-family: Noto Sans TC; font-weight: 500; word-wrap: break-word } */
@@ -78,8 +111,21 @@
     text-align: center;
     color: black;
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 400;
     word-wrap: break-word;
+}
+
+.kid_info_text_input {
+    color: black;
+    font-size: 16px;
+    word-wrap: break-word;
+    width: 65%;
+    height: 38px;
+    border-radius: 10px;
+}
+
+.kid_birth_text_input {
+    text-align: center;
 }
 
 /* .class_7 { width: 277px; height: 30px; left: 14px; top: 335px; position: absolute } */
@@ -106,7 +152,15 @@
 }
 
 /* .class_17 { width: 144px; height: 47px; position: relative } */
-.discharge_btn_box, .discharge_btn {
+.discharge_btn_box {
+    height: 47px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.discharge_btn {
     width: 144px;
     height: 47px;
     position: relative;
@@ -137,6 +191,7 @@
     justify-content: flex-start;
     gap: 14px;
     display: flex;
+    min-height: 163px;
 }
 
 /* .class_22 { width: 1222px; height: 44px; position: relative } */
@@ -181,6 +236,7 @@
 
 /* .class_28 { background: #F7F7F7; border-radius: 15px; overflow: hidden; justify-content: flex-start; align-items: center; gap: 106px; display: inline-flex } */
 .info_content_box {
+    width: 100%;
     background: #F7F7F7;
     border-radius: 15px;
     overflow: hidden;
@@ -243,6 +299,10 @@
     word-wrap: break-word;
 }
 
+.parent_item_text {
+    width: 100px;
+}
+
 /* .class_36 { align-self: stretch; height: 357px; padding-left: 29px; padding-right: 29px; background: #F7F7F7; border-radius: 15px; overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: center; display: flex } */
 .classes_info_box {
     width: 100%;
@@ -256,6 +316,7 @@
     align-items: center;
     gap: 14px;
     display: flex;
+    min-height: 163px;
 }
 
 /* .class_37 { align-self: stretch; padding-top: 20px; padding-bottom: 20px; justify-content: space-between; align-items: center; display: inline-flex } */
@@ -290,7 +351,6 @@
 .add_class_btn_text {
     color: black;
     font-size: 20px;
-    font-weight: 500;
     line-height: 30px;
     word-wrap: break-word;
 }
@@ -387,6 +447,50 @@
     word-wrap: break-word;
 }
 
+/* 보호자 초대 모달 */
+.modal_parent_name_box {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    display: inline-flex
+}
+
+.modal_parent_title {
+    text-align: center;
+    color: black;
+    font-size: 20px;
+    line-height: 28px;
+    word-wrap: break-word
+}
+
+.modal_parent_input {
+    align-self: stretch;
+    padding: 10px 20px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    display: inline-flex
+}
+
+.modal_parent_box {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+}
+
+.modal_parent_body {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+    display: inline-flex
+}
+
+/* 반 초대 모달 */
 .modal_body_classes_box {
     display: flex;
     flex-direction: column;
