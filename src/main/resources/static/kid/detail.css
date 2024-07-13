@@ -378,8 +378,12 @@
     width: 870px;
 }
 
+.modal-content {
+    padding: 20px;
+}
+
 .modal-header, .modal-footer {
-    border: 0px;
+    border: 0;
 }
 
 /* .class_1 { width: 870px; height: 539px; padding-left: 40px; padding-right: 40px; padding-top: 50px; padding-bottom: 50px; background: white; border-radius: 20px; overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 30px; display: inline-flex } */
@@ -490,6 +494,22 @@
     display: inline-flex
 }
 
+.modal_footer_invite {
+    justify-content: center;
+}
+
+.modal_invite_btn_box {
+    width: 150px;
+    height: 50px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    display: flex
+}
+
 /* 반 초대 모달 */
 .modal_body_classes_box {
     display: flex;
@@ -505,12 +525,12 @@
     gap: 30px;
     display: inline-flex;
     flex-wrap: wrap;
-    margin: 0px 50px;
+    margin: 0 50px;
 }
 
 /* .class_13 { height: 70px; padding-left: 20px; padding-right: 20px; padding-top: 15px; padding-bottom: 15px; background: white; border-radius: 12px; overflow: hidden; justify-content: flex-start; align-items: center; gap: 20px; display: flex } */
 .modal_class_item {
-    width: 200px;
+    width: 185px;
     height: 70px;
     background: white;
     border-radius: 12px;
@@ -526,7 +546,7 @@
 
 .checkbox_label {
     display: flex;
-    border: 0px;
+    border: 0;
     width: 200px;
     height: 70px;
     align-items: center;
@@ -576,7 +596,6 @@
 .modal_add_btn_text {
     color: black;
     font-size: 20px;
-    font-weight: 500;
     line-height: 30px;
     word-wrap: break-word;
 }
