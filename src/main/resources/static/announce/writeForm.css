@@ -5,18 +5,20 @@
     flex-direction: column;
     gap: 10px;
     justify-content: center;
-    padding: 10px;
+    /*padding: 10px;*/
     position: relative;
   }
-  
+
+
   .ann-write .frame {
     align-items: flex-start;
     background-color: #ffffff;
     display: inline-flex;
     flex: 0 0 auto;
     flex-direction: column;
-    gap: 17px;
+    /*gap: 17px;*/
     position: relative;
+    width: 100%;
   }
   
   .ann-write .div {
@@ -26,8 +28,9 @@
     gap: 10px;
     padding: 0px;
     position: relative;
-    width: 1280px;
+    width: 100%;
     flex-direction: row-reverse;
+
   }
   
   .ann-write .element-secondary-button {
@@ -55,8 +58,6 @@
     /*font-weight: var(--small-text-font-weight);*/
     /*letter-spacing: var(--small-text-letter-spacing);*/
     /*line-height: var(--small-text-line-height);*/
-    margin-left: -18px;
-    margin-right: -18px;
     position: relative;
     text-align: center;
     width: 96px;
@@ -82,9 +83,11 @@
     background-color: #ffffff;
     display: inline-flex;
     flex: 0 0 auto;
-    gap: 20px;
+    gap: 10px;
     justify-content: center;
     position: relative;
+    padding-bottom: 10px;
+
   }
   
   .ann-write .element-dropdown {
@@ -98,7 +101,7 @@
     height: 50px;
     padding: 8px 16px;
     position: relative;
-    width: 224px;
+    width: 170px;
   }
   
   .ann-write .label {
@@ -130,15 +133,15 @@
   .ann-write .element-input-field {
     align-items: center;
     background-color: #ffffff;
-    border: 1px solid;
+    border-bottom: 1px solid;
     border-color: #e0e0e0;
-    border-radius: 8px;
     display: flex;
     gap: 16px;
     height: 50px;
     padding: 8px 16px;
     position: relative;
     width: 1032px;
+    margin-bottom: 10px;
   }
   
   .ann-write .label-2 {
@@ -168,6 +171,7 @@
     flex-direction: column;
     gap: 10px;
     position: relative;
+    width: 100%;
   }
   
   .ann-write .label-wrapper {
@@ -181,7 +185,7 @@
     /* height: 1386px; */
     padding: 0px;
     position: relative;
-    width: 1280px;
+    width: 100%;
   }
   
   .ann-write .label-3 {
@@ -207,10 +211,9 @@
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
-    height: 148px;
-    padding: 10px 20px;
+    padding: 10px 10px;
     position: relative;
-    width: 1280px;
+    width: 100%;
   }
   
   .ann-write .frame-wrapper {
@@ -254,4 +257,20 @@
     position: relative;
     width: 91px;
   }
-  
+.frame-6 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+.frame-7{
+  display: flex;
+}
+.c{
+  display: flex;
+}
+.b{
+  display: flex;
+  float: right;
+  padding-left: 489px;
+}
