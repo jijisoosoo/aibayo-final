@@ -23,6 +23,10 @@ public class MedicationController {
     public String write(){
         return "/medication/user/writeform";
     }
+    @GetMapping("/user/detail")
+    public String userdetail(){
+        return "/medication/user/detail";
+    }
 
 
 }
