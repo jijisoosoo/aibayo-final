@@ -383,6 +383,9 @@
     gap: 10px;
     flex-wrap: nowrap;
     align-items: flex-start;
+    border-radius: 15px;
+    border: 1px rgb(195 195 195 / 30%) solid;
+    padding: 30px;
 }
 
 /* .class_24 { width: 204px; height: 46px; left: 0px; top: 0px; position: absolute } */
@@ -395,9 +398,9 @@
 .recent_board_title {
     opacity: 0.80;
     color: black;
-    font-size: 40px;
+    font-size: 25px;
     font-weight: 500;
-    word-wrap: break-word
+    word-wrap: break-word;
 }
 
 .recent_board_body {
@@ -406,7 +409,7 @@
 }
 
 .ann-list .card {
-    width: 340px;
+    width: 320px;
 }
 
 /* 날씨, 미세먼지, 초미세먼지 */

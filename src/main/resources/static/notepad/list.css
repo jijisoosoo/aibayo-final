@@ -114,6 +114,7 @@
     height: 415px;
     border-radius: 15px;
     border: 1px rgb(195 195 195 / 30%) solid;
+    padding: 14px 23px;
 }
 
 .card:hover {
@@ -171,6 +172,7 @@
     font-size: 20px;
     font-weight: 500;
     white-space: normal;
+    word-break: auto-phrase;
 }
 
 /* 페이지네이션 */
