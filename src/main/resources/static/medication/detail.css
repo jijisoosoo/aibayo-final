@@ -766,3 +766,66 @@
 .table{
     text-align: center;
 }
+
+
+
+
+.date-picker {
+    display: inline-block;
+    position: relative;
+}
+
+.button-new {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button-new:hover {
+    background-color: #e0e0e0;
+}
+
+.date {
+    margin: 0;
+}
+
+/* Position the calendar icon */
+.bi-calendar {
+    margin-left: 8px;
+}
+
+/* Dropdown for date selection */
+.date-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    z-index: 1000;
+    display: none;
+}
+
+.date-dropdown.active {
+    display: block;
+}
+
+.date-dropdown ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.date-dropdown li {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.date-dropdown li:hover {
+    background-color: #f0f0f0;
+}
