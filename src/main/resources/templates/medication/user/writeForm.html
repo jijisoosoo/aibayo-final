@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout}">
+
+<title layout:fragment="title">투약 의뢰서 작성</title>
+
+<th:block layout:fragment="css">
+  <link rel="stylesheet" href="/medication/writeForm.css" />
+</th:block>
+
+<div class="container main_container" layout:fragment="content">
+  <div class="frame">
+    <form action="">
+      <div class="div">
+        <div class="div-wrapper">
+          <div class="text-wrapper">투약 의뢰서</div>
+        </div>
+        <div class="view">
+          <a href="#" class="element-secondary-button">
+            <div class="text-wrapper-2">취소</div>
+          </a>
+          <input type="submit" value="작성" class="element-secondary-button-2">
+
+        </div>
+      </div>
+      <div class="div-2">
+        <div class="div-3">
+          <div class="frame-wrapper">
+            <div class="div-4">
+              <div class="div-3">
+                <div class="frame-wrapper-2">
+                  <div class="div-5">
+                    <div class="div-6">
+                      <img class="avatar" alt="Avatar" src="avatar.svg" />
+                    </div>
+                    <div class="div-7">
+                      <div class="div-8">
+                        <div class="div-6">
+                          <div class="text-wrapper-4">하하하</div>
+                        </div>
+                        <div class="div-6">
+                          <div class="text-wrapper-4">어린이</div>
+                        </div>
+                      </div>
+                      <div class="div-6">
+                        <div class="text-wrapper-5">새싹반</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="frame-wrapper-3">
+                  <div class="btn-group" id="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="btnradio" id="day1" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary custom-style" for="day1">7월 1일</label>
+
+                    <input type="radio" class="btn-check" name="btnradio" id="day2" autocomplete="off">
+                    <label class="btn btn-outline-primary custom-style" for="day2">7월 2일</label>
+
+                    <input type="radio" class="btn-check" name="btnradio" id="day3" autocomplete="off">
+                    <label class="btn btn-outline-primary custom-style" for="day3">7월 3일</label>
+                  </div>
+                </div>
+              </div>
+              <div class="frame-wrapper-18">
+                <p id="font">증상</p>
+                <input type="text" name="" id="symton">
+              </div>
+              <div class="frame-wrapper-6">
+                <div class="element-secondary-button-wrapper-2">
+                  <input type="submit" value="약 추가하기" class="element-secondary-button-4" placeholder="증상을 간략하게 기재해주세요">
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="frame-wrapper-7">
+          <div class="frame-wrapper-88">
+            <div class="div-11">
+              <div class="div-13">
+                <div class="button">
+                  <button type="button" class="btn-close float-right" aria-label="Close" id="close"></button>
+                </div>
+                <div class="frame-wrapper-99">
+                  <div class="div-wrapper-2">
+                    <div class="text-wrapper-88">약의 종류</div>
+                  </div>
+                </div>
+                <div class="frame-wrapper-10">
+                  <div class="frame-wrapper-11">
+                    <div class="div-14">
+                      <div class="div-15">
+                        <div class="frame-wrapper-12">
+                          <div class="div-16">
+                            <div class="radio-button-wrapper">
+                              <input type="radio" name="medicine-type" class="radio-button-1" />
+                            </div>
+                            <div class="div-wrapper-3">
+                              <div class="text-wrapper-10">물약</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="frame-wrapper-12">
+                          <div class="div-16">
+                            <div class="radio-button-wrapper">
+                              <input type="radio" name="medicine-type" class="radio-button-1" />
+                            </div>
+                            <div class="div-wrapper-3">
+                              <div class="text-wrapper-10">가루약</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="frame-wrapper-12">
+                          <div class="div-16">
+                            <div class="radio-button-wrapper">
+                              <input type="radio" name="medicine-type" class="radio-button-1" />
+                            </div>
+                            <div class="div-wrapper-3">
+                              <div class="text-wrapper-10">연고</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="frame-wrapper-12">
+                          <div class="div-16">
+                            <div class="radio-button-wrapper">
+                              <input type="radio" name="medicine-type" class="radio-button-1" />
+                            </div>
+                            <div class="div-wrapper-3">
+                              <div class="text-wrapper-10">기타</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="frame-wrapper-13">
+                        <div class="element-input-field-wrapper">
+                          <input class="element-input-field-2" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="div-17">
+                <div class="frame-wrapper-9">
+                  <div class="div-wrapper-2">
+                    <div class="text-wrapper-8">투약 횟수</div>
+                  </div>
+                </div>
+                <div class="frame-wrapper-14">
+                  <div class="element-input-field-wrapper">
+                    <input class="element-input-field-3" />
+                  </div>
+                </div>
+              </div>
+              <div class="div-17">
+                <div class="frame-wrapper-9">
+                  <div class="div-wrapper-2">
+                    <div class="text-wrapper-8">투약 시간</div>
+                  </div>
+                </div>
+                <div class="frame-wrapper-14">
+                  <div class="element-input-field-wrapper">
+                    <input class="element-input-field-3" />
+                  </div>
+                </div>
+              </div>
+              <div class="div-17">
+                <div class="frame-wrapper-9">
+                  <div class="div-wrapper-2">
+                    <div class="text-wrapper-8">보관방법</div>
+                  </div>
+                </div>
+                <div class="frame-wrapper-15">
+                  <div class="btn-group" id="btn-group1" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="btnradio" id="temp" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary custom-style" for="temp">실온</label>
+
+                    <input type="radio" class="btn-check" name="btnradio" id="cold" autocomplete="off">
+                    <label class="btn btn-outline-primary custom-style" for="cold">냉장</label>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="div-17">
+                <div class="frame-wrapper-9">
+                  <div class="div-wrapper-2">
+                    <div class="text-wrapper-8">투약용량</div>
+                  </div>
+                </div>
+                <div class="frame-wrapper-14">
+                  <div class="element-input-field-wrapper">
+                    <input class="element-input-field-3" />
+                  </div>
+                </div>
+              </div>
+              <div class="div-17">
+                <div class="frame-wrapper-9">
+                  <div class="div-wrapper-2">
+                    <div class="text-wrapper-8">특이사항</div>
+                  </div>
+                </div>
+                <div class="frame-wrapper-14">
+                  <div class="element-input-field-wrapper">
+                    <input class="element-input-field-3" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
