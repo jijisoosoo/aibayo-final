@@ -1,11 +1,10 @@
 
 .list {
     width: 100%;
-    align-items: flex-start;
+    /*align-items: flex-start;*/
     background-color: #ffffff;
     display: inline-flex;
     flex-direction: column;
-    gap: 10px;
     position: relative;
 }
 
@@ -29,7 +28,7 @@
     flex-direction: column;
     gap: 10px;
     justify-content: center;
-    padding: 10px;
+    padding: 10px 20px;
     position: relative;
     width: 100%;
 }
@@ -52,9 +51,11 @@
     display: flex;
     flex: 0 0 auto;
     justify-content: space-between;
-    padding: 0px 10px;
+    padding: 0px 30px 0px 10px;
     position: relative;
     width: 100%;
+    height: 68px;
+
 }
 
 .list .frame-2 {
@@ -142,8 +143,12 @@
     box-shadow: var(--button-shadow);
     height: 59px;
     position: relative;
-    width: 200px;
+    width: 150px;
     border: none ;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .list .text-wrapper-2 {
@@ -167,7 +172,7 @@
 }
 
 .list .card-list {
-    align-items: center;
+    align-items: flex-start;
     background-color: #ffffff;
     display: flex;
     flex: 0 0 auto;
@@ -175,7 +180,8 @@
     gap: 20px 20px;
     justify-content: flex-start;
     position: relative;
-    padding: 20px 0px;
+    padding-bottom: 20px;
+    min-height: 1280px;
 }
 
 .list .card {
@@ -532,4 +538,103 @@
     display: flex;
     width: 100%;
     justify-content: center;
+}
+
+/*add*/
+.frame-a{
+    width: 100%;
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 10px 30px;
+}
+
+.bi-list {
+    width:30px;
+    height: 30px;
+    fill: #828282; /* fill 속성을 사용 */
+}
+
+.bi-view-stacked {
+    width: 23px;
+    height: 20px;
+    fill: #828282; /* fill 속성을 사용 */
+}
+
+.cardver {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 76px ;
+    gap: 3px;
+    color: #828282;
+    text-decoration-line : none;
+}
+
+.listver {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 76px ;
+    color: #828282;
+    text-decoration-line : none;
+}
+.text{
+    margin:0px;
+    text:#828282;
+}
+/*호버시 css*/
+.cardver:hover,
+.listver:hover {
+    background-color: #e0e0e0; /* 호버 시 배경색 변경 */
+    color: #505050; /* 호버 시 텍스트 색상 변경 */
+}
+
+.cardver:hover .text,
+.listver:hover .text {
+    color: #505050; /* 호버 시 텍스트 색상 변경 */
+}
+
+.cardver:hover svg,
+.listver:hover svg {
+    fill: #505050; /* 호버 시 SVG 색상 변경 */
+}
+/*호버시 css*/
+.frame-15{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+#table{
+    text-align: center;
+}
+.medication{
+    cursor: pointer;
+}
+.medication:hover{
+    background-color: #f0f0f0;
+}
+.list.cardlist{
+    align-items: center;
+    background-color: #ffffff;
+    display: flex;
+    flex: 0 0 auto;
+    flex-wrap: wrap;
+    gap: 20px 20px;
+    justify-content: flex-start;
+    position: relative;
+    width: 100%;
+    min-height: 861px;
+    align-content: flex-start;
+}
+.date{
+    padding:10px;
+    margin: 0px;
 }

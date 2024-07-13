@@ -7,8 +7,19 @@
 <title layout:fragment="title">투약동의서 메인</title>
 
 <th:block layout:fragment="css">
+    <link href="/vendor/datepicker-dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/medication/list.css" />
 </th:block>
+
+<th:block layout:fragment="javascript">
+    <script src="/vendor/datepicker-dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="/vendor/datepicker-dist/js/bootstrap-datepicker.ko.min.js"></script>
+    <script src="/medication/medication.js"></script>
+</th:block>
+
+
+
+
 <div class="container main_container" layout:fragment="content">
     <form action="#">
     <div class="list">
@@ -49,13 +60,39 @@
                         </div>
                     </div>
                 </div>
-                    <div class="button-new-wrapper">
-                        <input type="submit" class="button-new" value="날짜 선택">
-                    </div>
+                <div class="date-picker">
+                    <button class="button-new">
+                        <p class="date">날짜 선택</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+                        </svg>
+                    </button>
+                </div>
             </div>
 
+        <div class="frame-a">
+            <div>
+                <a href="/medication/admin/card" class="cardver">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-view-stacked" viewBox="0 0 16 16">
+                        <path d="M3 0h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2m0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm0 8h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2m0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/>
+                    </svg>
+                    <p class="text">카드형</p>
+                </a>
+            </div>
+            <div>
+                <a href="/medication/admin/list" class="listver">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+                    </svg>
+                    <p class="text">목록형</p>
+                </a>
+            </div>
+        </div>
+
+
+
             <div class="card-list">
-                <a href="#" class="card">
+                <a href="/medication/admin/detail" class="card">
                     <div class="frame-3">
                         <div class="frame-wrapper">
                             <div class="frame-4">
