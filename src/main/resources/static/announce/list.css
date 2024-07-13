@@ -573,7 +573,7 @@
 /*호버시 css*/
 .frame-15{
   display: flex;
-  width: 1280px;
+  width: 100%;
   justify-content: center;
 }
 #table{
