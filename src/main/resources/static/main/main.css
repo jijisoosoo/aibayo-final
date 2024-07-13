@@ -96,6 +96,19 @@
     display: inline-flex;
 }
 
+.user_login_info_box {
+    padding: 0;
+}
+
+.user_info_box {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
 /* .class_11 { width: 150px; height: 150px; position: relative } */
 .login_info_svg {
     width: 150px;
@@ -140,6 +153,73 @@
     font-size: 16px;
     font-weight: 500;
     word-wrap: break-word
+}
+
+/* 사용자 전용 원생 정보 항목 */
+/* 원생 선택 */
+/* .class_25 { width: 420px; height: 100px; left: 0px; top: 0px; position: absolute; border-radius: 5px; overflow: hidden; border: 1px rgba(0, 0, 0, 0.30) solid } */
+.kids_info_box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+/* .class_33 { width: 100px; height: 100px; left: 0px; top: 0px; position: absolute } */
+.kid_info_svg_box {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .class_28 { width: 228px; height: 80px; left: 135px; top: 13px; position: absolute } */
+.kid_info_box {
+    width: 185px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.kid_info_row {
+    display: flex;
+    height: 35px;
+    align-items: center;
+}
+
+/* .class_29 { left: 0px; top: 0px; position: absolute; color: black; font-size: 25px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
+.kid_info_text {
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+/* .class_26 { width: 50px; height: 50px; left: 370px; top: 25px; position: absolute } */
+.kids_info_toggle {
+    background-color: transparent;
+    border: 0;
+    display: flex;
+    align-items: center;
+}
+
+.kids_info_toggle::after {
+    color: transparent;
+}
+
+.kid_info_dropdown_button {
+    font-size: 25px;
+    align-self: center;
+}
+
+.kid_info_dropdown_menu {
+    width: 100%;
+    /*border-radius: 15px;*/
+    border: 1px rgb(195 195 195 / 30%) solid;
+}
+
+.dropdown-divider {
+    border-top: 1px rgb(195 195 195 / 95%) solid;
 }
 
 /* 현황 테이블 */
@@ -236,7 +316,6 @@
     width: 100%;
 }
 
-
 /* 출석부 */
 .data_attendance_title_box {
     display: flex;
@@ -294,6 +373,40 @@
     color: black;
     font-size: 16px;
     word-wrap: break-word;
+}
+
+/* 최근 글 */
+/* .class_20 { width: 1280px; height: 488px; left: 0px; top: 146px; position: absolute } */
+.recent_board_box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+}
+
+/* .class_24 { width: 204px; height: 46px; left: 0px; top: 0px; position: absolute } */
+.recent_board_title_box {
+    width: 204px;
+    height: 60px;
+}
+
+/* .class_19 { left: 0px; top: 0px; position: absolute; opacity: 0.80; color: black; font-size: 40px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
+.recent_board_title {
+    opacity: 0.80;
+    color: black;
+    font-size: 40px;
+    font-weight: 500;
+    word-wrap: break-word
+}
+
+.recent_board_body {
+    display: flex;
+    gap: 18px;
+}
+
+.ann-list .card {
+    width: 340px;
 }
 
 /* 날씨, 미세먼지, 초미세먼지 */

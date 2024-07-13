@@ -131,3 +131,9 @@ body {
 .datepicker {
     cursor: default; /* 기본 상태에서도 커서 모양 기본으로 유지 */
 }
+
+.dropdown-item.active, .dropdown-item:active {
+    color: #000;
+    text-decoration: none;
+    background-color: #FFDB21;
+}
