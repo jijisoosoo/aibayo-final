@@ -91,6 +91,11 @@
     flex-direction: column;
 }
 
+.kid_info_box_detail {
+    display: flex;
+    justify-content: center;
+}
+
 .kid_info_box_form {
     gap: 10px;
 }
@@ -115,6 +120,10 @@
     word-wrap: break-word;
 }
 
+.kid_name_input {
+    width: 79% !important;
+}
+
 .kid_info_text_input {
     color: black;
     font-size: 16px;
@@ -133,12 +142,14 @@
     width: 300px;
     display: flex;
     justify-content: center;
+    gap: 10px;
 }
 
 /* .class_9 { width: 30px; height: 30px; left: 0px; top: 0px; position: absolute } */
 .kid_birth_svg {
     width: 30px;
     height: 30px;
+    padding-top: 5px;
 }
 
 
@@ -525,12 +536,12 @@
     gap: 30px;
     display: inline-flex;
     flex-wrap: wrap;
-    margin: 0 50px;
+    margin: 0 30px;
 }
 
 /* .class_13 { height: 70px; padding-left: 20px; padding-right: 20px; padding-top: 15px; padding-bottom: 15px; background: white; border-radius: 12px; overflow: hidden; justify-content: flex-start; align-items: center; gap: 20px; display: flex } */
 .modal_class_item {
-    width: 185px;
+    width: 200px;
     height: 70px;
     background: white;
     border-radius: 12px;
@@ -539,6 +550,7 @@
     align-items: center;
     display: flex;
 }
+
 
 .modal_class_item .modal_body_text {
     width: 100px;
