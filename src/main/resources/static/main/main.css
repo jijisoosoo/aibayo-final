@@ -1,0 +1,511 @@
+/*　식단 및 로그인 프로필　*/
+/* .class_1 { width: 1280px; height: 325px; justify-content: space-between; align-items: flex-start; display: inline-flex } */
+.main_top_box {
+    height: 325px;
+    justify-content: space-between;
+    align-items: flex-start;
+    display: inline-flex
+}
+
+/* .class_2 { width: 800px; align-self: stretch; padding-left: 49px; padding-right: 49px; padding-top: 37px; padding-bottom: 37px; border-radius: 5px; border: 1px rgba(0, 0, 0, 0.30) solid; flex-direction: column; justify-content: flex-start; align-items: center; gap: 10px; display: inline-flex } */
+.meal_today {
+    width: 650px;
+    align-self: stretch;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px rgb(195 195 195 / 30%) solid;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    display: inline-flex;
+}
+
+/* .class_3 { opacity: 0.80; color: black; font-size: 32px; font-family: Noto Sans; font-weight: 600; word-wrap: break-word } */
+.meal_today_title {
+    color: black;
+    font-size: 25px;
+    font-weight: 500;
+    word-wrap: break-word
+}
+
+/* .class_4 { align-self: stretch; flex: 1 1 0; justify-content: flex-start; align-items: center; gap: 40px; display: inline-flex } */
+.meal_content_box {
+    align-self: stretch;
+    flex: 1 1 0;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 40px;
+    display: inline-flex
+}
+
+/* .class_5 { flex: 1 1 0; align-self: stretch; padding: 10px; flex-direction: column; justify-content: center; align-items: flex-start; gap: 10px; display: inline-flex } */
+.meal_item {
+    flex: 1 1 0;
+    align-self: stretch;
+    padding: 10px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+    display: inline-flex;
+    border-radius: 15px;
+    border: 1px rgb(195 195 195 / 30%) solid;
+}
+
+/* .class_6 { align-self: stretch; text-align: center; color: black; font-size: 16px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
+.meal_item_title {
+    align-self: stretch;
+    text-align: center;
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+    word-wrap: break-word
+}
+
+/* .class_7 { align-self: stretch; height: 115px; flex-direction: column; justify-content: center; align-items: flex-start; display: flex } */
+.meal_item_body {
+    align-self: stretch;
+    height: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    display: flex;
+}
+
+/* .class_8 { align-self: stretch; height: 38.33px; text-align: center; color: black; font-size: 16px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
+.meal_item_text {
+    align-self: stretch;
+    /* height: 38px; */
+    text-align: center;
+    color: black;
+    font-size: 16px;
+    /* font-weight: 500; */
+    word-wrap: break-word
+}
+
+/* .class_10 { width: 400px; align-self: stretch; padding-left: 49px; padding-right: 49px; padding-top: 37px; padding-bottom: 37px; border-radius: 5px; border: 1px rgba(0, 0, 0, 0.30) solid; flex-direction: column; justify-content: center; align-items: center; display: inline-flex } */
+.login_info_box {
+    width: 350px;
+    align-self: stretch;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px rgb(195 195 195 / 30%) solid;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+}
+
+.user_login_info_box {
+    padding: 0;
+}
+
+.user_info_box {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+/* .class_11 { width: 150px; height: 150px; position: relative } */
+.login_info_svg {
+    width: 150px;
+    height: 150px;
+    position: relative;
+}
+
+/* .class_15 { opacity: 0.80; color: black; font-size: 32px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
+.login_user_name {
+    opacity: 0.80;
+    color: black;
+    font-size: 24px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+/* .class_16 { opacity: 0.80; color: black; font-size: 24px; font-family: Noto Sans; font-weight: 500; line-height: 55px; word-wrap: break-word } */
+.login_kinder_name {
+    opacity: 0.80;
+    color: black;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 55px;
+    word-wrap: break-word
+}
+
+/* .class_17 { justify-content: center; align-items: flex-start; gap: 10px; display: inline-flex } */
+.login_setting_box {
+    color: black;
+    font-size: 25px;
+    font-weight: 500;
+    word-wrap: break-word;
+    display: flex;
+    gap: 10px;
+}
+
+/* .class_19 { opacity: 0.80; text-align: center; color: black; font-size: 16px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
+.setting_text {
+    opacity: 0.80;
+    text-align: center;
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+    word-wrap: break-word
+}
+
+/* 사용자 전용 원생 정보 항목 */
+/* 원생 선택 */
+/* .class_25 { width: 420px; height: 100px; left: 0px; top: 0px; position: absolute; border-radius: 5px; overflow: hidden; border: 1px rgba(0, 0, 0, 0.30) solid } */
+.kids_info_box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+/* .class_33 { width: 100px; height: 100px; left: 0px; top: 0px; position: absolute } */
+.kid_info_svg_box {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .class_28 { width: 228px; height: 80px; left: 135px; top: 13px; position: absolute } */
+.kid_info_box {
+    width: 185px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.kid_info_row {
+    display: flex;
+    height: 35px;
+    align-items: center;
+}
+
+/* .class_29 { left: 0px; top: 0px; position: absolute; color: black; font-size: 25px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
+.kid_info_text {
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+/* .class_26 { width: 50px; height: 50px; left: 370px; top: 25px; position: absolute } */
+.kids_info_toggle {
+    background-color: transparent;
+    border: 0;
+    display: flex;
+    align-items: center;
+}
+
+.kids_info_toggle::after {
+    color: transparent;
+}
+
+.kid_info_dropdown_button {
+    font-size: 25px;
+    align-self: center;
+}
+
+.kid_info_dropdown_menu {
+    width: 100%;
+    /*border-radius: 15px;*/
+    border: 1px rgb(195 195 195 / 30%) solid;
+}
+
+.dropdown-divider {
+    border-top: 1px rgb(195 195 195 / 95%) solid;
+}
+
+/* 현황 테이블 */
+.data_table {
+    display: flex;
+    justify-content: space-between;
+}
+
+.data_table_content_box {
+    width: 500px;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px rgb(195 195 195 / 30%) solid;
+}
+
+.data_table_content {
+    margin: 30px 30px;
+    height: 315px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.data_table_content_title {
+    color: black;
+    font-size: 25px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.data_teacher_kid_box {
+    display: flex;
+    flex-direction: column;
+}
+
+.data_teacher_kid  {
+    display: flex;
+    border-bottom: 1px rgb(195 195 195 / 30%) solid;
+}
+
+.data_teacher_kid_title_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.data_teacher_kid_waiting_box {
+    padding: 20px 0;
+    border-bottom: 1px rgb(195 195 195 / 30%) solid;
+    display: flex;
+    justify-content: space-between;
+}
+
+.data_teacher_kid_body_title {
+    color: black;
+    font-size: 16px;
+    word-wrap: break-word;
+    align-self: center;
+    padding-left: 10px;
+}
+
+.data_teacher_kid_body_count {
+    color: black;
+    font-size: 16px;
+    word-wrap: break-word;
+    align-self: center;
+    padding-right: 10px;
+}
+
+.data_teacher_kid_invite_box {
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.data_teacher_kid_title {
+    width: 100px;
+    color: black;
+    font-size: 20px;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.class_kid_text {
+    width: 100px;
+    color: black;
+    font-size: 16px;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.data_teacher_kid_body {
+    width: 100%;
+}
+
+/* 출석부 */
+.data_attendance_title_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.data_table_attendance_link_text {
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.data_table_attendance_link_svg {
+    width: 25px;
+    height: 25px;
+}
+
+.data_table_attendance_link_box {
+    display: flex;
+    align-items: center;
+}
+
+.data_attendance_content {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 6px;
+    display: inline-flex
+}
+
+.data_attendance_content_row_box {
+    border-bottom: 1px rgb(195 195 195 / 30%) solid;
+}
+
+.data_attendance_content_row {
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+}
+
+.data_attendance_content_header {
+    width: 88px;
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.data_attendance_content_text {
+    width: 88px;
+    color: black;
+    font-size: 16px;
+    word-wrap: break-word;
+}
+
+/* 최근 글 */
+/* .class_20 { width: 1280px; height: 488px; left: 0px; top: 146px; position: absolute } */
+.recent_board_box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    border-radius: 15px;
+    border: 1px rgb(195 195 195 / 30%) solid;
+    padding: 30px;
+}
+
+/* .class_24 { width: 204px; height: 46px; left: 0px; top: 0px; position: absolute } */
+.recent_board_title_box {
+    width: 204px;
+    height: 60px;
+}
+
+/* .class_19 { left: 0px; top: 0px; position: absolute; opacity: 0.80; color: black; font-size: 40px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
+.recent_board_title {
+    opacity: 0.80;
+    color: black;
+    font-size: 25px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.recent_board_body {
+    display: flex;
+    gap: 18px;
+}
+
+.ann-list .card {
+    width: 320px;
+}
+
+/* 날씨, 미세먼지, 초미세먼지 */
+.weather_dust_box {
+    height: 240px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.weather_box {
+    width: 500px;
+    height: 240px;
+    border-radius: 15px;
+    border: 1px rgb(195 195 195 / 30%) solid;
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+}
+
+.weather_text_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.weather_title {
+    color: black;
+    font-size: 25px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.weather_body {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.weather_temperature {
+    color: black;
+    font-size: 70px;
+    font-weight: 400;
+    line-height: 70px;
+    word-wrap: break-word;
+}
+
+.weather_desc {
+    color: black;
+    font-size: 25px;
+    font-weight: 500;
+    word-wrap: break-word;
+    padding-bottom: 17px;
+    align-self: flex-end;
+}
+
+.weather_svg {
+    align-self: center;
+}
+
+.dust_box {
+    width: 500px;
+    height: 240px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fine_box {
+    width: 230px;
+    height: 240px;
+    border-radius: 15px;
+    border: 1px rgb(195 195 195 / 30%) solid;
+    padding: 30px;
+}
+
+.fine_body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.fine_title {
+    color: black;
+    font-size: 25px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.fine_desc {
+    height: 100%;
+    color: black;
+    font-size: 60px;
+    font-weight: 400;
+    word-wrap: break-word;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
