@@ -16,4 +16,9 @@ public class MealController {
     public String userList() {
         return "/meal/user/list";
     }
+
+    @GetMapping("/admin/write")
+    public String writeForm() {
+        return "/meal/admin/writeForm";
+    }
 }
