@@ -50,17 +50,40 @@
                             <img src="/teacher/img/x.png" alt=""/>
                         </button>
                     </div>
-                    <form class="modalform" th:action="@{/teacher/admin/teacherMain}" th:method="post">
-                        <div>김가나 선생님을 퇴사 처리합니다.</div>
+                    <div class="modalform" th:action="@{/teacher/admin/teacherMain}" th:method="post">
+                        <div>김가나 선생님의 퇴사를 승인하시겠습니까?</div>
                         <div class="buttonarea">
-                            <input type="submit" class="button-cancel" value="취소" data-bs-dismiss="modal">
-                            <input type="submit" class="button-resign" value="퇴사" data-bs-dismiss="modal">
+                            <input type="reset" class="button-cancel" value="취소" data-bs-dismiss="modal">
+                            <input type="submit" class="button-resign" value="퇴사" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal end -->
+
+
+
+        <!-- Modal 2nd -->
+        <div class="modal fade" id="staticBackdrop2"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content modal-content-resign">
+                    <div class="title">
+                        <div class="textarea"></div>
+                        <button class="button-x" href="" data-bs-dismiss="modal" aria-label="Close">
+                            <img src="/teacher/img/x.png" alt=""/>
+                        </button>
+                    </div>
+                    <form class="modalform" th:action="@{/teacher/admin/teacherMain}" th:method="post">
+                        <div>퇴사 처리가 완료되었습니다.</div>
+                        <div class="buttonarea">
+                            <input type="submit" class="button-cancel" value="확인" data-bs-dismiss="modal">
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <!-- Modal end -->
+        <!-- Modal 2nd end -->
 
 
 
@@ -84,12 +107,12 @@
                         <div class="text-wrapper-10">개)</div>
                     </div>
                 </div>
-                <a class="btn btn-ab resign" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
+                <a class="btn btn-ab resign" data-bs-toggle="modal" data-bs-target="#staticBackdrop3">
                     <div class="text-modify">소속 반 수정</div>
                 </a>
 
                 <!-- Modal -->
-                <div class="modal fade" id="staticBackdrop1"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal fade" id="staticBackdrop3"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="title">
