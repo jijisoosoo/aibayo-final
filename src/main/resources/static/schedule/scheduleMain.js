@@ -13,16 +13,17 @@ document.addEventListener('DOMContentLoaded', function() {
         dateClick: function (info) {
             var today = new Date();
             var clickedDate = new Date(info.dateStr);
+            console.log(clickedDate);
 
             var command = '';
 
-            if (clickedDate.toDateString() === today.toDateString()) {
-                command = 'detailToday';
-            } else if (clickedDate < today) {
-                command = 'detailBefore';
-            } else {
-                command = 'detailAfter';
-            }
+            // if (clickedDate.toDateString() === today.toDateString()) {
+            //     command = 'detailToday';
+            // } else if (clickedDate < today) {
+            //     command = 'detailBefore';
+            // } else {
+            //     command = 'detailAfter';
+            // }
 
 
             eventSources :[
@@ -38,4 +39,27 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     calendar.render();
+});
+
+$(document).ready(function() {
+    $('.testdiv').hide();
+    console.log("done");
+    // 초기 로드 시 체크된 라디오 버튼에 해당하는 div를 표시
+    var initialSelectedValue = $('input[name="testRd"]:checked').val();
+    if (initialSelectedValue) {
+        $('#' + initialSelectedValue).show();
+        console.log("done");
+    }
+
+
+    $('input[name="teacherStatusRd"]').on('change', function() {
+        var selectedValue = $('input[name="testRd"]:checked').val();
+        console.log(selectedValue);
+
+        // 모든 상태 div 숨기기
+        $('.testdiv').hide();
+
+        // 선택된 값에 따라 해당 div 보이기
+        $('#' + selectedValue).show();
+    });
 });
