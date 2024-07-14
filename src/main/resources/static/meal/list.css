@@ -82,3 +82,130 @@
 .fc-dayGridMonth-button.btn.active.disabled {
     opacity: 1;
 }
+
+/* 모달 */
+.fixed-width-modal .modal-dialog {
+    max-width: 870px;
+    width: 870px;
+}
+
+.modal-content {
+    padding: 20px;
+}
+
+.modal-header, .modal-footer {
+    border: 0;
+}
+
+.modal_body {
+    align-self: stretch;
+    padding: 30px 44px;
+    background: #F7F7F7;
+    border-radius: 15px;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 30px;
+    display: flex;
+    margin: 0 10px;
+}
+
+.modal_header_title {
+    width: 100%;
+    font-size: 24px;
+    text-align: center;
+}
+
+/* 모달 식단표 내용 */
+.modal_meals_box {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    border-radius: 4px;
+    gap: 10px 16px;
+}
+
+.modal_meal_item_box {
+    align-self: stretch;
+    height: 680px;
+    background: #FFF;
+    border-radius: 15px;
+    border: 1px rgb(195 195 195 / 30%) solid;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.modal_meal_title_box {
+    width: 100%;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal_meal_title {
+    color: black;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 26px;
+    word-wrap: break-word;
+    text-align: center;
+}
+
+.modal_meal_img_box {
+    width: 350px;
+    height: 350px;
+    background: rgba(255, 255, 255, 0);
+    border-top: 1px rgb(195 195 195 / 30%) solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal_meal_img {
+    width: 330px;
+    height: 300px;
+}
+
+.modal_meal_menu_box {
+    width: 100%;
+    background: rgba(255, 255, 255, 0);
+    border-top: 1px rgb(195 195 195 / 30%) solid;
+    display: flex;
+    padding: 20px;
+}
+
+.modal_meal_menu {
+    color: black;
+    font-size: 16px;
+    font-weight: 400;
+    word-wrap: break-word;
+}
+
+.modal_meal_detail_footer {
+    justify-content: center;
+}
+
+.modal_btns_box {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 25px;
+    display: inline-flex
+}
+
+.modal_btn_box {
+    width: 144px;
+    height: 47px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal_btn_text {
+    font-size: 20px;
+    word-wrap: break-word;
+}
