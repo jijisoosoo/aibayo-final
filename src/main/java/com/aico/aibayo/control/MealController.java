@@ -21,4 +21,9 @@ public class MealController {
     public String writeForm() {
         return "/meal/admin/writeForm";
     }
+
+    @GetMapping("/admin/modify")
+    public String modifyForm() {
+        return "/meal/admin/modifyForm";
+    }
 }
