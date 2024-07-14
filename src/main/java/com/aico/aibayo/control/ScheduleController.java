@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ScheduleController {
 
     @GetMapping("/admin/scheduleMain")
-    public String adminScheduleMain(){ return "/schedule/scheduleMain"; }
+    public String adminScheduleMain(){ return "/schedule/admin/scheduleMain"; }
 
     @GetMapping("/admin/scheduleWrite")
-    public String adminScheduleWrite(){ return "/schedule/scheduleWrite"; }
+    public String adminScheduleWrite(){ return "/schedule/admin/scheduleWrite"; }
 
 }
