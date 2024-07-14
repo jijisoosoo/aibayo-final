@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout}">
+
+<title layout:fragment="title">원생관리</title>
+
+<th:block layout:fragment="css">
+    <th:block th:replace="~{common/datepicker :: css}"/>
+    <link rel="stylesheet" href="/kid/detail.css" />
+</th:block>
+
+<th:block layout:fragment="javascript">
+    <th:block th:replace="~{common/datepicker :: js}"/>
+    <script src="/common/modal.js"></script>
+</th:block>
+
+<div class="container main_container" layout:fragment="content">
+    <div class="kid_detail_top_box">
+
+        <a href="/kid/list">
+        <div class="kid_detail_top_svg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="55" height="55" viewBox="0 0 55 55" fill="none">
+                <path d="M5.15625 27.5C5.15625 39.8396 15.1604 49.8438 27.5 49.8438C39.8396 49.8438 49.8438 39.8396 49.8438 27.5C49.8438 15.1604 39.8396 5.15625 27.5 5.15625C15.1604 5.15625 5.15625 15.1604 5.15625 27.5ZM27.9995 17.6859C28.1598 17.8449 28.2872 18.0339 28.3744 18.2421C28.4616 18.4503 28.507 18.6737 28.5079 18.8994C28.5088 19.1252 28.4652 19.3489 28.3796 19.5578C28.2941 19.7667 28.1682 19.9567 28.0092 20.1169L22.3889 25.7812H36.7383C37.1941 25.7812 37.6313 25.9623 37.9536 26.2847C38.276 26.607 38.457 27.0442 38.457 27.5C38.457 27.9558 38.276 28.393 37.9536 28.7153C37.6313 29.0377 37.1941 29.2188 36.7383 29.2188H22.3889L28.0092 34.8831C28.1682 35.0435 28.294 35.2336 28.3795 35.4427C28.465 35.6517 28.5085 35.8755 28.5075 36.1013C28.5065 36.3272 28.461 36.5506 28.3737 36.7589C28.2863 36.9671 28.1588 37.1562 27.9984 37.3151C27.838 37.4741 27.6479 37.6 27.4389 37.6855C27.2299 37.771 27.006 37.8145 26.7802 37.8135C26.5544 37.8125 26.3309 37.767 26.1227 37.6796C25.9144 37.5923 25.7254 37.4648 25.5664 37.3044L17.0382 28.7106C16.7187 28.3887 16.5395 27.9535 16.5395 27.5C16.5395 27.0465 16.7187 26.6113 17.0382 26.2894L25.5664 17.6956C25.7254 17.535 25.9145 17.4073 26.1229 17.3199C26.3314 17.2325 26.555 17.187 26.781 17.1861C27.007 17.1852 27.2309 17.2289 27.44 17.3147C27.6491 17.4004 27.8392 17.5266 27.9995 17.6859Z" fill="#FFDB21"/>
+            </svg>
+        </div>
+        </a>
+
+        <div class="kid_detail_top_text">원생 정보</div>
+
+    </div>
+
+
+    <div class="kid_detail_content">
+
+        <div class="kid_content_top_box">
+
+            <div class="kid_profile_box">
+
+                <div class="kid_profile_svg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="250" height="250" viewBox="0 0 250 250" fill="none">
+                        <path d="M175 100C175 113.261 169.732 125.979 160.355 135.355C150.979 144.732 138.261 150 125 150C111.739 150 99.0215 144.732 89.6447 135.355C80.2678 125.979 75 113.261 75 100C75 86.7392 80.2678 74.0215 89.6447 64.6447C99.0215 55.2678 111.739 50 125 50C138.261 50 150.979 55.2678 160.355 64.6447C169.732 74.0215 175 86.7392 175 100Z" fill="#FFDB21"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M119.9 249.9C53.2313 247.225 0 192.325 0 125C0 55.9625 55.9625 0 125 0C194.037 0 250 55.9625 250 125C250 194.037 194.037 250 125 250H123.287C122.154 250 121.025 249.967 119.9 249.9ZM44.7875 203.875C43.8529 201.191 43.5348 198.331 43.8568 195.507C44.1787 192.684 45.1325 189.969 46.6474 187.564C48.1622 185.16 50.1991 183.127 52.607 181.617C55.0149 180.108 57.7319 179.16 60.5563 178.844C109.281 173.45 141.019 173.937 189.506 178.956C192.334 179.251 195.058 180.187 197.47 181.693C199.882 183.199 201.918 185.236 203.423 187.648C204.929 190.06 205.864 192.784 206.158 195.612C206.452 198.441 206.096 201.299 205.119 203.969C225.901 182.944 237.539 154.562 237.5 125C237.5 62.8688 187.131 12.5 125 12.5C62.8688 12.5 12.5 62.8688 12.5 125C12.5 155.725 24.8188 183.575 44.7875 203.875Z" fill="#FFDB21"/>
+                    </svg>
+                </div>
+
+                <div class="kid_info_box kid_info_box_form">
+                    <div class="kid_name_box kid_info_box_detail">
+                        <input type="text"
+                               class="form-control kid_info_box_form kid_info_text_input kid_name_text kid_name_input"
+                               name="kidName" id="kidName" value="김가나">
+                    </div>
+
+                    <div class="kid_birth_box">
+
+                        <div class="kid_birth_svg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                                <path d="M14.375 0.625C15 0.9375 16.25 3 16.25 4.375C16.25 5.75 15.4125 6.25 14.375 6.25C13.3375 6.25 12.5 6.0625 12.5 4.6875C12.5 3.3125 13.75 2.5 14.375 0.625ZM23.125 11.25C26.25 11.25 28.75 13.75 28.75 16.875C28.75 18.825 27.7625 20.5375 26.25 21.55V28.75H3.75V21.55C2.2375 20.5375 1.25 18.825 1.25 16.875C1.25 13.75 3.75 11.25 6.875 11.25H12.5V7.5H16.25V11.25H23.125ZM15 20C15.8288 20 16.6237 19.6708 17.2097 19.0847C17.7958 18.4987 18.125 17.7038 18.125 16.875H20C20 17.7038 20.3292 18.4987 20.9153 19.0847C21.5013 19.6708 22.2962 20 23.125 20C23.9538 20 24.7487 19.6708 25.3347 19.0847C25.9208 18.4987 26.25 17.7038 26.25 16.875C26.25 16.0462 25.9208 15.2513 25.3347 14.6653C24.7487 14.0792 23.9538 13.75 23.125 13.75H6.875C6.0462 13.75 5.25134 14.0792 4.66529 14.6653C4.07924 15.2513 3.75 16.0462 3.75 16.875C3.75 17.7038 4.07924 18.4987 4.66529 19.0847C5.25134 19.6708 6.0462 20 6.875 20C7.7038 20 8.49866 19.6708 9.08471 19.0847C9.67076 18.4987 10 17.7038 10 16.875H11.875C11.875 17.7038 12.2042 18.4987 12.7903 19.0847C13.3763 19.6708 14.1712 20 15 20Z" fill="#FFDB21"/>
+                            </svg>
+                        </div>
+
+                        <input type="text" class="form-control kid_info_box_form kid_info_text_input kid_name_text datepicker"
+                               name="kidBirth" id="kidBirth" value="2019.03.19" readonly>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="parent_info_box">
+
+            <div class="classes_info_top_box">
+
+                <div class="parent_info_title_box">
+
+                    <div class="info_title_svg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                            <path d="M20.6246 5.62489C20.6246 2.51831 18.1063 0 14.9997 0C11.8931 0 9.37482 2.51831 9.37482 5.62489C9.37482 8.73147 11.8931 11.2498 14.9997 11.2498C18.1063 11.2498 20.6246 8.73147 20.6246 5.62489ZM13.6866 14.1267C10.2103 11.9986 4.5796 11.4138 1.74606 11.2527C0.79393 11.1988 0 11.9242 0 12.84V25.8944C0 26.7341 0.679088 27.4342 1.55212 27.4793C4.11027 27.6135 9.28576 28.1051 12.8628 29.9068C13.4118 30.1834 14.0628 29.8066 14.0628 29.2113V14.7981C14.0622 14.5245 13.9269 14.2737 13.6866 14.1267ZM28.2534 11.2527C25.4204 11.4133 19.7891 11.9986 16.3134 14.1267C16.0731 14.2737 15.9378 14.5345 15.9378 14.8081V29.2096C15.9378 29.8066 16.5905 30.184 17.1413 29.9068C20.7178 28.1069 25.8903 27.6153 28.4479 27.4811C29.3209 27.4354 30 26.7352 30 25.8956V12.84C29.9994 11.9242 29.2055 11.1988 28.2534 11.2527Z" fill="white"/>
+                        </svg>
+                    </div>
+
+                    <div class="info_text_box">
+                        <div class="info_text">보호자 정보</div>
+                    </div>
+
+                </div>
+
+
+                <div class="add_class_btn btn btn-ab">
+                    <div class="add_class_btn_text" data-bs-toggle="modal" data-bs-target="#addParentModal">+ 학부모 초대하기</div>
+                </div>
+
+            </div>
+
+
+            <div class="info_content_box">
+
+                <div class="info_row">
+
+                    <div class="info_item text_div">
+
+                        <div class="item_text_box">
+                            <div class="item_text text-compact"
+                                 title="김보호자글자넘침확인">김보호자글자넘침확인</div>
+                        </div>
+
+                        <div class="close_box">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                    </div>
+
+                    <div class="info_item text_div">
+
+                        <div class="item_text_box">
+                            <div class="item_text text-compact"
+                                 title="박보호자">박보호자</div>
+                        </div>
+
+                        <div class="close_box">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                    </div>
+
+                    <div class="info_item text_div">
+
+                        <div class="item_text_box">
+                            <div class="item_text text-compact"
+                                 title="이보호자">이보호자</div>
+                        </div>
+
+                        <div class="close_box">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                    </div>
+
+                    <div class="info_item text_div">
+
+                        <div class="item_text_box">
+                            <div class="item_text text-compact"
+                                 title="이보호자">최보호자</div>
+                        </div>
+
+                        <div class="close_box">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="classes_info_box">
+
+            <div class="classes_info_top_box">
+
+                <div class="classes_info_title_box">
+
+                    <div class="info_title_svg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                            <path d="M20.6246 5.62489C20.6246 2.51831 18.1063 0 14.9997 0C11.8931 0 9.37482 2.51831 9.37482 5.62489C9.37482 8.73147 11.8931 11.2498 14.9997 11.2498C18.1063 11.2498 20.6246 8.73147 20.6246 5.62489ZM13.6866 14.1267C10.2103 11.9986 4.5796 11.4138 1.74606 11.2527C0.79393 11.1988 0 11.9242 0 12.84V25.8944C0 26.7341 0.679088 27.4342 1.55212 27.4793C4.11027 27.6135 9.28576 28.1051 12.8628 29.9068C13.4118 30.1834 14.0628 29.8066 14.0628 29.2113V14.7981C14.0622 14.5245 13.9269 14.2737 13.6866 14.1267ZM28.2534 11.2527C25.4204 11.4133 19.7891 11.9986 16.3134 14.1267C16.0731 14.2737 15.9378 14.5345 15.9378 14.8081V29.2096C15.9378 29.8066 16.5905 30.184 17.1413 29.9068C20.7178 28.1069 25.8903 27.6153 28.4479 27.4811C29.3209 27.4354 30 26.7352 30 25.8956V12.84C29.9994 11.9242 29.2055 11.1988 28.2534 11.2527Z" fill="white"/>
+                        </svg>
+                    </div>
+
+                    <div class="info_text_box">
+                        <div class="info_text">소속 반 정보</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="info_content_box">
+
+                <div class="info_row">
+
+                    <div class="info_item text_div">
+                        <div class="item_text_box">
+                            <div class="item_text text-compact"
+                                 title="토마토반">토마토반</div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="info_item text_div">
+                        <div class="item_text_box">
+                            <div class="item_text text-compact"
+                                 title="당근반">당근반</div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="info_item text_div">
+                        <div class="item_text_box">
+                            <div class="item_text text-compact"
+                                 title="피망반">피망반</div>
+                        </div>
+
+                    </div>
+
+                    <div class="info_item text_div">
+                        <div class="item_text_box">
+                            <div class="item_text text-compact"
+                                 title="브로콜리반">브로콜리반</div>
+                        </div>
+
+                    </div>
+
+                    <div class="info_item text_div">
+                        <div class="item_text_box">
+                            <div class="item_text text-compact"
+                                 title="도레비파반글자넘침확인용">도레비파반글자넘침확인용</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade fixed-width-modal" id="addParentModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h1 class="modal-title modal_header_title" id="addParentModalLabel">학부모 초대하기</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+
+                <div class="modal-body modal_body">
+
+                    <div class="modal_parent_box">
+                        <div class="modal_parent_body">
+
+                            <div class="modal_parent_name_box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                                    <path d="M15 0C6.71371 0 0 6.71371 0 15C0 23.2863 6.71371 30 15 30C23.2863 30 30 23.2863 30 15C30 6.71371 23.2863 0 15 0ZM15 5.80645C17.9395 5.80645 20.3226 8.18952 20.3226 11.129C20.3226 14.0685 17.9395 16.4516 15 16.4516C12.0605 16.4516 9.67742 14.0685 9.67742 11.129C9.67742 8.18952 12.0605 5.80645 15 5.80645ZM15 26.6129C11.4496 26.6129 8.26814 25.004 6.13911 22.4879C7.27621 20.3468 9.50202 18.871 12.0968 18.871C12.2419 18.871 12.3871 18.8952 12.5262 18.9375C13.3125 19.1915 14.1351 19.3548 15 19.3548C15.8649 19.3548 16.6935 19.1915 17.4738 18.9375C17.6129 18.8952 17.7581 18.871 17.9032 18.871C20.498 18.871 22.7238 20.3468 23.8609 22.4879C21.7319 25.004 18.5504 26.6129 15 26.6129Z" fill="#FFDB21"/>
+                                </svg>
+                                <div class="modal_parent_title">학부모 이름</div>
+                            </div>
+
+                            <input type="text" class="modal_parent_input form-control" name="parentName" id="parentName" placeholder="초대할 학부모의 이름을 입력해주세요.">
+
+
+                        </div>
+
+                        <div class="modal_parent_body">
+
+                            <div class="modal_parent_name_box">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                                    <path d="M15 0C6.71371 0 0 6.71371 0 15C0 23.2863 6.71371 30 15 30C23.2863 30 30 23.2863 30 15C30 6.71371 23.2863 0 15 0ZM15 5.80645C17.9395 5.80645 20.3226 8.18952 20.3226 11.129C20.3226 14.0685 17.9395 16.4516 15 16.4516C12.0605 16.4516 9.67742 14.0685 9.67742 11.129C9.67742 8.18952 12.0605 5.80645 15 5.80645ZM15 26.6129C11.4496 26.6129 8.26814 25.004 6.13911 22.4879C7.27621 20.3468 9.50202 18.871 12.0968 18.871C12.2419 18.871 12.3871 18.8952 12.5262 18.9375C13.3125 19.1915 14.1351 19.3548 15 19.3548C15.8649 19.3548 16.6935 19.1915 17.4738 18.9375C17.6129 18.8952 17.7581 18.871 17.9032 18.871C20.498 18.871 22.7238 20.3468 23.8609 22.4879C21.7319 25.004 18.5504 26.6129 15 26.6129Z" fill="#FFDB21"/>
+                                </svg>
+                                <div class="modal_parent_title">학부모 Email</div>
+                            </div>
+
+                            <input type="text" class="modal_parent_input form-control" name="parentEmail" id="parentEmail" placeholder="초대할 학부모의 Email을 입력해주세요.">
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="modal-footer modal_footer_invite">
+                    <input type="button"
+                           class="btn btn-ab modal_invite_btn_box modal_add_btn_text" value="인증번호 발송">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
