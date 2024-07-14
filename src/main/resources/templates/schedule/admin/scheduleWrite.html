@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout}">
+
+<title layout:fragment="title">scheduleWrite</title>
+
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/schedule/globals.css}" />
+  <link rel="stylesheet" th:href="@{/schedule/scheduleWrite.css}" />
+  <link rel="stylesheet" th:href="@{/schedule/scheduleWriteGuide.css}" />
+  <link rel="stylesheet" th:href="@{/schedule/scheduleModal.css}" />
+  <link rel="stylesheet" th:href="@{/schedule/scheduleModalguide.css}" />
+  <link rel="stylesheet" th:href="@{/common/SMJCommonContainer.css}" />
+  <link rel="stylesheet" th:href="@{/common/SMJCommonHover.css}" />
+</th:block>
+
+<th:block layout:fragment="javascript">
+  <script src="/teacher/scheduleWrite.js"></script>
+</th:block>
+
+<div class="container main_container" layout:fragment="content">
+
+
+</div>
+</html>
