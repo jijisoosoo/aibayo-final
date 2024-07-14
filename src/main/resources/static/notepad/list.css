@@ -121,6 +121,24 @@
     opacity: 0.6;
 }
 
+.class_17 .card {
+    align-items: flex-start;
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #d3d4d4;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px #00000040;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    height: 476px;
+    overflow: hidden;
+    padding: 14px 10px;
+    position: relative;
+    width: 338px;
+    text-decoration-line: none;
+}
+
 /* .class_19 { width: 414px; height: 276px; } */
 .class_19 {
     width: 100%;
