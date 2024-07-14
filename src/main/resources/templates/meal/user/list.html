@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout}">
+
+<title layout:fragment="title">식단표</title>
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" href="/meal/list.css" />
+</th:block>
+
+<th:block layout:fragment="javascript">
+    <th:block th:replace="~{/common/fullcalendar :: js}"/>
+    <script src="/meal/fullcalendar.js"></script>
+</th:block>
+
+<div class="container main_container" layout:fragment="content">
+<!--    <input type="hidden" id="mealList" value="<c:out value='${ mealList }'></c:out>" />-->
+
+    <div class="meal_top_box">
+
+        <div class="meal_top_title">식단표</div>
+
+    </div>
+
+
+    <div class="calendar_box">
+        <div id="calendar"></div>
+    </div>
+</div>
