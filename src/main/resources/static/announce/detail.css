@@ -5,6 +5,7 @@
   flex-direction: column;
   overflow: hidden;
   position: relative;
+  width: 100%;
 }
 
 .screen .frame {
@@ -26,7 +27,7 @@
   flex: 0 0 auto;
   flex-direction: column;
   position: relative;
-  width: 1280px;
+  width: 100%;
 }
 
 .screen .frame-2 {
@@ -74,7 +75,7 @@
   justify-content: space-between;
   padding: 10px;
   position: relative;
-  width: 100%;
+  width: 1080px;
 }
 
 .screen .frame-4 {
@@ -82,7 +83,7 @@
   background-color: #ffffff;
   display: inline-flex;
   flex: 0 0 auto;
-  gap: 10px;
+  gap: 15px;
   padding: 10px;
   position: relative;
   text-decoration-line : none;
@@ -151,6 +152,10 @@
   white-space: nowrap;
   width: fit-content;
 }
+.screen .a {
+  color: black;
+  text-decoration-line : none;
+}
 
 .screen .p {
   -webkit-box-orient: vertical;
@@ -167,6 +172,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   width: fit-content;
+  margin-bottom: 0px;
 }
 
 .screen .element-tab-list-wrapper {
@@ -264,7 +270,7 @@
   flex-direction: column;
   justify-content: center;
   position: relative;
-  width: 1280px;
+  width: 100%;
 }
 
 .screen .frame-10 {
@@ -287,10 +293,9 @@
   /*font-weight: var(--body-text-font-weight);*/
   /*letter-spacing: var(--body-text-letter-spacing);*/
   /*line-height: var(--body-text-line-height);*/
-  margin-right: -40px;
-  margin-top: -1px;
+  margin: 0px;
   position: relative;
-  width: 1220px;
+  width: 100%;
 }
 
 .screen .frame-11 {
@@ -404,6 +409,8 @@
   width: 45px;
   height: 30px;
   border: solid 1px #828282;
+  text-decoration: none;
+  color: black;
 }
 
 .screen .text-wrapper-8 {
@@ -430,6 +437,7 @@
   height: 30px;
   border: solid 1px #828282;
   border-left: none;
+  text-decoration-line : none;
 }
 
 .screen .text-wrapper-9 {
@@ -454,6 +462,7 @@
   flex-direction: column;
   justify-content: center;
   position: relative;
+  width: 1080px;
 }
 
 .screen .frame-16 {
@@ -469,7 +478,7 @@
   position: relative;
   width: 100%;
   justify-content: center;
-  padding : 10px 0px;
+  padding : 10px 20px;
 
 }
 .screen .rectangle-wrapper {
@@ -519,6 +528,7 @@
   flex-direction: column;
   justify-content: center;
   position: relative;
+  text-decoration-line : none;
 }
 
 .screen .text-wrapper-10 {
@@ -570,7 +580,7 @@
   flex: 0 0 auto;
   flex-direction: column;
   justify-content: center;
-  padding: 0px 30px 0px 0px;
+  padding: 0px;
   position: relative;
 }
 
@@ -585,7 +595,9 @@
   position: relative;
   white-space: nowrap;
   width: fit-content;
-  padding: 0px 30px 0px 0px;
+  padding-left: 20px;
+  text-decoration-line : none;
+
 }
 
 .screen .frame-23 {
@@ -602,7 +614,7 @@
   justify-content: flex-end;
   align-items: center;
   justify-content: center;
-  padding: 10px 0px;
+  padding: 10px 20px;
 
 }
 
@@ -652,7 +664,7 @@
   flex: 0 0 auto;
   flex-direction: column;
   position: relative;
-  width: 1280px;
+  width: 100%;
 }
 
 .screen .frame-28 {
@@ -676,8 +688,9 @@
   justify-content: center;
   padding: 12px 0px;
   position: relative;
-  width: 1240px;
+  width: 1056px;
   flex-wrap: wrap;
+  text-decoration-line : none;
 }
 
 .screen .element-secondary-button-3 {
@@ -723,7 +736,7 @@
   border-radius: 8px;
   height: 120px;
   position: relative;
-  width: 1240px;
+  width: 100%;
 }
 
 .screen .text {
@@ -754,4 +767,11 @@
 .dropdown-item {
   text-align: center; /* 텍스트를 가운데 정렬 */
   white-space: nowrap; /* 텍스트가 길어도 한 줄에 표시 */
+}
+.deleteBtn{
+  width: 45px;
+  height: 30px;
+  border: solid 1px #828282;
+  border-left: none;
+  background: #ffffff;
 }

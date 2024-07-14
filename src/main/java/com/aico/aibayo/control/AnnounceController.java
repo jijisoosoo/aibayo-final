@@ -23,6 +23,25 @@ public class AnnounceController {
     public String detail(){
         return "/announce/admin/detail";
     }
+    @GetMapping("/admin/modifyForm")
+    public String modifyForm(){
+        return "/announce/admin/modifyForm";
+    }
+
+
+//    user
+@GetMapping("/user/card")
+public String usercard(){
+    return "/announce/user/card";
+}
+    @GetMapping("/user/list")
+    public String userList(){
+        return "/announce/user/list";
+    }
+
+
+
+
 
 }
 
