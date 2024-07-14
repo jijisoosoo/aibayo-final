@@ -39,13 +39,11 @@
   .hover .text-wrapper {
     position: relative;
     width: fit-content;
-    margin-top: -1px;
-    font-family: "Inter-SemiBold", Helvetica;
+    /*font-family: "Inter-SemiBold", Helvetica;*/
     font-weight: 600;
     color: #000000;
     font-size: 24px;
     text-align: center;
-    letter-spacing: -0.48px;
     line-height: 28.8px;
     white-space: nowrap;
   }
@@ -101,7 +99,7 @@
   }
   
   .hover .text-wrapper-2 {
-    font-family: "Inter-SemiBold", Helvetica;
+    /*font-family: "Inter-SemiBold", Helvetica;*/
     font-weight: 600;
     text-align: center;
     line-height: 28px;
@@ -128,7 +126,7 @@
   .hover .text-wrapper-3 {
     position: relative;
     width: fit-content;
-    font-family: "Inter-SemiBold", Helvetica;
+    /*font-family: "Inter-SemiBold", Helvetica;*/
     font-weight: 600;
     color: #b3b3b3;
     font-size: 20px;
@@ -146,8 +144,7 @@
   .hover .n-2 {
     position: relative;
     width: fit-content;
-    margin-top: -1px;
-    font-family: "Inter-SemiBold", Helvetica;
+    /*font-family: "Inter-SemiBold", Helvetica;*/
     font-weight: 600;
     color: #61a3f1;
     font-size: 20px;
@@ -188,7 +185,7 @@
   }
   
   .hover .text-wrapper-4 {
-    font-family: "Inter-Medium", Helvetica;
+    /*font-family: "Inter-Medium", Helvetica;*/
     font-weight: 500;
     text-align: center;
     line-height: 28px;
@@ -244,7 +241,7 @@
     background-color: #ffe668;
     border-radius: 8px;
     border: none;
-    font-family: "Inter-Medium", Helvetica;
+    /*font-family: "Inter-Medium", Helvetica;*/
     font-weight: 500;
     line-height: 30px;
     color: #000000;
@@ -254,7 +251,7 @@
   }
   
   .hover .text-wrapper-5 {
-    font-family: "Inter-Medium", Helvetica;
+    /*font-family: "Inter-Medium", Helvetica;*/
     font-weight: 500;
     line-height: 30px;
     position: relative;

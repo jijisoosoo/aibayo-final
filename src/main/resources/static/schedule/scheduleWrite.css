@@ -44,7 +44,6 @@
 
 .container .overlap-group {
   width: 86px;
-  top: -10px;
   position: relative;
   height: 50px;
 }
@@ -53,7 +52,7 @@
   position: absolute;
   top: 10px;
   left: 0;
-  font-family: "Noto Sans-Medium", Helvetica;
+  /*font-family: "Noto Sans-Medium", Helvetica;*/
   font-weight: 500;
   color: #000000;
   font-size: 25px;
@@ -72,8 +71,7 @@
 .container .div {
   position: relative;
   width: fit-content;
-  margin-top: -1px;
-  font-family: "Noto Sans-Medium", Helvetica;
+  /*font-family: "Noto Sans-Medium", Helvetica;*/
   font-weight: 500;
   color: #000000;
   font-size: 25px;
@@ -89,7 +87,6 @@
 
 .container .overlap {
   width: 110px;
-  top: -8px;
   position: relative;
   height: 50px;
 }
@@ -98,7 +95,7 @@
   position: absolute;
   top: 8px;
   left: 0;
-  font-family: "Noto Sans-Medium", Helvetica;
+  /*font-family: "Noto Sans-Medium", Helvetica;*/
   font-weight: 500;
   color: #000000;
   font-size: 25px;
@@ -126,11 +123,10 @@
   position: absolute;
   top: 5px;
   left: 0;
-  font-family: "Noto Sans-Medium", Helvetica;
+  /*font-family: "Noto Sans-Medium", Helvetica;*/
   font-weight: 500;
   color: #ffdb20;
   font-size: 100px;
-  letter-spacing: -5px;
   line-height: 90px;
   white-space: nowrap;
 }
@@ -163,8 +159,7 @@
 .container .text-wrapper-4 {
   position: relative;
   width: fit-content;
-  margin-top: -1px;
-  font-family: var(--font-selected-menu-font-family);
+  /*font-family: var(--font-selected-menu-font-family);*/
   font-weight: var(--font-selected-menu-font-weight);
   color: #000000;
   font-size: var(--font-selected-menu-font-size);
@@ -287,8 +282,7 @@
 .container .text-wrapper-10 {
   position: relative;
   width: fit-content;
-  margin-top: -1px;
-  font-family: "Inter-Medium", Helvetica;
+  /*font-family: "Inter-Medium", Helvetica;*/
   font-weight: 600;
   color: #61a3f1;
   font-size: 16px;
@@ -306,7 +300,7 @@
 .container .text-wrapper-7 {
   position: relative;
   width: fit-content;
-  font-family: "Inter-Medium", Helvetica;
+  /*font-family: "Inter-Medium", Helvetica;*/
   font-weight: 600;
   color: #000000;
   font-size: 22px;
@@ -352,7 +346,7 @@
 .container .default {
   position: relative;
   width: fit-content;
-  font-family: "Inter-Medium", Helvetica;
+  /*font-family: "Inter-Medium", Helvetica;*/
   font-weight: 500;
   color: #828282;
   font-size: 20px;
@@ -392,7 +386,7 @@
   width: 100%;
   height: 150px;
   font-size: 20px;
-  font-family: "Inter-Medium", Helvetica;
+  /*font-family: "Inter-Medium", Helvetica;*/
   font-weight: 500;
   color: #828282;
   font-size: 20px;
@@ -440,7 +434,7 @@
 .container .text-wrapper-12 {
   position: relative;
   width: fit-content;
-  font-family: "Inter-Medium", Helvetica;
+  /*font-family: "Inter-Medium", Helvetica;*/
   font-weight: 500;
   color: #b3b3b3;
   font-size: 20px;
@@ -535,9 +529,7 @@
 .container .p {
   position: absolute;
   height: 34px;
-  top: -4px;
-  left: -131px;
-  font-family: "Noto Sans-Medium", Helvetica;
+  /*font-family: "Noto Sans-Medium", Helvetica;*/
   font-weight: 500;
   color: #000000;
   font-size: 25px;
@@ -556,9 +548,8 @@
 
 .container .text-wrapper-14 {
   position: absolute;
-  top: -1px;
   left: 0;
-  font-family: "Noto Sans-Medium", Helvetica;
+  /*font-family: "Noto Sans-Medium", Helvetica;*/
   font-weight: 500;
   color: #000000;
   font-size: 25px;
@@ -568,9 +559,8 @@
 
 .container .text-wrapper-15 {
   position: absolute;
-  top: -1px;
   left: 104px;
-  font-family: "Noto Sans-Medium", Helvetica;
+  /*font-family: "Noto Sans-Medium", Helvetica;*/
   font-weight: 500;
   color: #000000;
   font-size: 25px;
@@ -580,9 +570,8 @@
 
 .container .text-wrapper-16 {
   position: absolute;
-  top: -1px;
   left: 126px;
-  font-family: "Noto Sans-Medium", Helvetica;
+  /*font-family: "Noto Sans-Medium", Helvetica;*/
   font-weight: 500;
   color: #000000;
   font-size: 25px;
