@@ -44,4 +44,12 @@ public class AttendanceController {
         log.info("day : detailAfter");
         return "attendance/admin/detailAfter";
     }
+
+    @GetMapping("/admin/write")
+    public String detailWrite(Model model) {
+        String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
+        model.addAttribute("date", date);
+
+        return "attendance/admin/detailWrite";
+    }
 }
