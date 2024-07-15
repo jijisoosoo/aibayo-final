@@ -217,12 +217,14 @@
     display: inline-flex;
     flex: 0 0 auto;
     position: relative;
+    margin: 0px 10px;
 }
 
 .frame .avatar {
     height: 60px;
     position: relative;
     width: 60px;
+    border-radius: 1000px;
 }
 
 .frame .div-5 {
@@ -585,7 +587,7 @@
     flex: 0 0 auto;
     flex-direction: column;
     justify-content: center;
-    padding: 0px 64px;
+    padding: 10px 20px;
     position: relative;
     width: 100%;
 }
@@ -828,4 +830,12 @@
 
 .date-dropdown li:hover {
     background-color: #f0f0f0;
+}
+.drugPic{
+    max-width: 500px;
+    max-height:300px;
+}
+a {
+     color: #000000;
+     text-decoration: none;
 }
