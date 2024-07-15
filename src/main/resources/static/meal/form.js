@@ -63,7 +63,7 @@ $(document).ready(function(){
         var files = event.target.files;
         // var previewId = $(this).attr('id') + 'Preview';
         var label = $(this).closest('label');
-        label.find('img').remove(); // 이전 미리보기 제거
+        label.find('img').remove(); // 이전 미리보기 삭제
         label.find('svg').hide(); // SVG 숨기기
 
         if (files.length > 0) {
@@ -73,13 +73,17 @@ $(document).ready(function(){
             reader.onload = function(e) {
                 if (file.type.startsWith('image/')) {
                     label.append('<img src="' + e.target.result + '" alt="사진 미리보기" ' +
-                        ' style="max-width: 100%; height: auto; margin-top: 10px;">');
+                        ' class="modal_meal_img">');
                 } else {
                     label.append('<p>' + file.name + '</p>');
                 }
             };
 
             reader.readAsDataURL(file);
+        } else { // 파일을 등록하지 않았을 경우, 원래 img/svg 표시
+            label.append('<img src="' + "http://via.placeholder.com/330x300" + '" alt="사진 미리보기" ' +
+                ' class="modal_meal_img">');
+            label.find('svg').show();
         }
     });
 });

@@ -116,7 +116,6 @@
     align-items: flex-start;
     gap: 30px;
     display: flex;
-    margin: 0 10px;
 }
 
 .modal_header_title {
@@ -131,12 +130,12 @@
     align-items: center;
     flex-wrap: wrap;
     border-radius: 4px;
-    gap: 10px 16px;
+    gap: 10px 0;
+    justify-content: space-between;
 }
 
 .modal_meal_item_box {
     align-self: stretch;
-    height: 680px;
     background: #FFF;
     border-radius: 15px;
     border: 1px rgb(195 195 195 / 30%) solid;
@@ -181,6 +180,7 @@
 
 .modal_meal_menu_box {
     width: 100%;
+    min-height: 150px;
     background: rgba(255, 255, 255, 0);
     border-top: 1px rgb(195 195 195 / 30%) solid;
     display: flex;
@@ -188,6 +188,7 @@
 }
 
 .modal_meal_menu {
+    width: 100%;
     color: black;
     font-size: 16px;
     font-weight: 400;
@@ -272,11 +273,13 @@
 
 /* 식단 등록 */
 .meals_box_form {
+    min-height: 599px;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     border-radius: 4px;
     gap: 10px 0;
+    justify-content: flex-start;
 }
 
 .meal_item_box_form {
