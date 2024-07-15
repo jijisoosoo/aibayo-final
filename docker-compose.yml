@@ -24,7 +24,7 @@ services:
       - ME_CONFIG_MONGODB_SERVER=mongodb
 
   mysql:
-    image: mysql:5.7
+    image: mysql  # 최신 버전을 사용하기 위해 태그를 생략함
     container_name: mysql_db
     ports:
       - 3306:3306
@@ -32,9 +32,9 @@ services:
       - mysql:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=aibayo
-      - MYSQL_DATABASE=mydatabase
-      - MYSQL_USER=user
-      - MYSQL_PASSWORD=userpassword
+      - MYSQL_DATABASE=aicoMySQL
+      - MYSQL_USER=aico
+      - MYSQL_PASSWORD=aico1234!
 
 volumes:
   mongo: {}
