@@ -224,7 +224,7 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  padding: 10px 32px 32px;
+  padding: 30px 32px 32px;
   position: relative;
   align-self: stretch;
   background-color: #f5f5f5;
@@ -577,12 +577,43 @@
   align-self: stretch;
 }
 
-.container .single-schedule {
+.container .accordion-header {
+  width: 100%
+}
+
+.container .accordion-button{
+  width: 100%;
+  padding : 0px !important;
+  background : none;
+  display: flex;
+
+}
+
+.container .accordion-button:focus {
+  box-shadow: none;
+}
+
+.accordion-button-item{
+  width: fit-content;
+  padding : 0px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
   gap: 10px;
+}
+
+.accordion-button:not(.collapsed){
+  color: black;
+  background: none;
+  box-shadow: none;
+}
+
+.accordion-collapse{
+  padding-top: 20px;
+}
+
+.container .single-schedule {
+  justify-content: center;
   padding: 20px 25px;
   position: relative;
   align-self: stretch;
@@ -592,34 +623,36 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0px 3px 6px #0000001a;
+  border: none !important;
 }
 
 .container .scheduled-class {
-  display: flex;
-  width: 321px;
-  align-items: center;
-  gap: 6px;
-  position: relative;
-  flex: 0 0 auto;
+display: flex;
+width: fit-content;
+align-items: center;
+gap: 6px;
+position: relative;
+flex: 0 0 auto;
 }
 
 .container .ellipse {
-  position: relative;
-  width: 10px;
-  height: 10px;
-  background-color: #b4ff91;
-  border-radius: 5px;
+position: relative;
+width: 10px;
+height: 10px;
+background-color: #b4ff91;
+border-radius: 5px;
 }
 
 .container .text-wrapper-17 {
-  position: relative;
-  flex: 1;
-  /*font-family: "Lato-Medium", Helvetica;*/
+position: relative;
+flex: 1;
+/*font-family: "Lato-Medium", Helvetica;*/
   font-weight: 500;
   color: #747373;
   font-size: 16px;
   letter-spacing: 0;
   line-height: 22px;
+  width: fit-content;
 }
 
 .container .text-wrapper-18 {
@@ -631,6 +664,7 @@
   font-size: 18px;
   letter-spacing: 0;
   line-height: 22px;
+  width: fit-content;
 }
 
 .container .ellipse-2 {
