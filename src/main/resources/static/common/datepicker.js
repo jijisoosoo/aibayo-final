@@ -3,6 +3,7 @@ $(document).ready(function(){
         format: 'yyyy.mm.dd',
         autoclose: true,
         language: 'ko',
-        orientation: 'bottom'
+        orientation: 'bottom',
+        todayHighlight: true
     });
 });

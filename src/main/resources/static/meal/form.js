@@ -80,6 +80,8 @@ $(document).ready(function(){
             };
 
             reader.readAsDataURL(file);
+        } else { // 파일을 등록하지 않았을 경우, svg 표시
+            label.find('svg').show();
         }
     });
 });
