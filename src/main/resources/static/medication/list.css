@@ -51,7 +51,7 @@
     display: flex;
     flex: 0 0 auto;
     justify-content: space-between;
-    padding: 0px 30px 0px 10px;
+    padding: 0px 30px 0px 0px;
     position: relative;
     width: 100%;
     height: fit-content;
@@ -71,7 +71,7 @@
     background-color: #ffffff;
     display: inline-flex;
     flex: 0 0 auto;
-    padding: 10px 0px;
+    /*padding: 10px 0px;*/
     position: relative;
 }
 
@@ -83,7 +83,7 @@
     border-radius: 8px;
     display: flex;
     gap: 16px;
-    height: 59px;
+    height: 50px;
     padding: 0px;
     position: relative;
     width: 200px;
@@ -95,17 +95,17 @@
     color: #828282;
     display: -webkit-box;
     flex: 1;
-    font-family: var(--presets-body2-font-family);
-    font-size: var(--presets-body2-font-size);
-    font-style: var(--presets-body2-font-style);
-    font-weight: var(--presets-body2-font-weight);
-    letter-spacing: var(--presets-body2-letter-spacing);
-    line-height: var(--presets-body2-line-height);
+    /*font-family: var(--presets-body2-font-family);*/
+    /*font-size: var(--presets-body2-font-size);*/
+    /*font-style: var(--presets-body2-font-style);*/
+    /*font-weight: var(--presets-body2-font-weight);*/
+    /*letter-spacing: var(--presets-body2-letter-spacing);*/
+    /*line-height: var(--presets-body2-line-height);*/
     overflow: hidden;
     position: relative;
     text-overflow: ellipsis;
-    height: 90%;
-    width: 90%;
+    height: 100%;
+    width: 100%;
     border: none;
     margin: 10px;
 }
@@ -122,7 +122,7 @@
     display: inline-flex;
     flex: 0 0 auto;
     gap: 10px;
-    padding: 10px;
+    padding: 0px 10px;
     position: relative;
 }
 
@@ -208,9 +208,8 @@
     background-color: #ffffff;
     display: flex;
     flex: 0 0 auto;
-    margin-right: -8px;
     position: relative;
-    width: 100%;
+    justify-content: center;
 }
 
 .list .frame-wrapper {
@@ -435,16 +434,13 @@
 }
 
 .list .frame-15 {
-    align-items: center;
-    background-color: #ffffff;
-    display: flex;
-    flex: 0 0 auto;
-    justify-content: flex-end;
-    margin-right: 32px;
-    position: relative;
-    width: 100%;
-}
-
+        align-items: center;
+        background-color: #ffffff;
+        display: flex;
+        flex: 0 0 auto;
+        justify-content: center;
+        position: relative;
+    }
 .list .frame-16 {
     align-items: center;
     background-color: #ffffff;
@@ -589,6 +585,7 @@
 .text{
     margin:0px;
     text:#828282;
+    text-align: center;
 }
 /*호버시 css*/
 .cardver:hover,
@@ -607,11 +604,7 @@
     fill: #505050; /* 호버 시 SVG 색상 변경 */
 }
 /*호버시 css*/
-.frame-15{
-    display: flex;
-    width: 100%;
-    justify-content: center;
-}
+
 #table{
     text-align: center;
 }
@@ -647,7 +640,29 @@
 .medication:hover{
     background-color: #f0f0f0;
 }
+.date-picker{
+    text-align: center;
+    display: flex;
+    height:50px;
+}
+.pick{
+    display: flex;
+}
+.custom-svg {
+    width: 34px;
+    height: 34px;
+}
 
-
-
+svg.bi-calendar3 {
+    width: 59px;
+    height: 59px;
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+    color: #ffe668;
+}
+.datepicker{
+    text-align: center;
+    border-radius: 8px;
+}
 
