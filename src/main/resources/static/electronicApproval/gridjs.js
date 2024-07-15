@@ -52,23 +52,6 @@ function filterData(status) {
     return data.filter(row => row[1] === status);
 }
 
-// 최초 페이지 로딩, select 재선택 시마다 status 필터를 gridjs 헤더에 넣는 함수
-function addStatusFilter() {
-    var gridHeader = $('.gridjs-head');
-
-    // 필터가 이미 존재하는지 확인하고 중복 추가 방지
-    if ($("#statusFilter").length === 0) {
-        gridHeader.prepend('<div class="filter-container">\n' +
-            '        <select id="statusFilter" class="form-select status_box status_text custom_select">\n' +
-            '            <option value="전체상태">전체상태</option>\n' +
-            '            <option value="승인대기">승인대기</option>\n' +
-            '            <option value="승인완료">승인완료</option>\n' +
-            '            <option value="반려">반려</option>\n' +
-            '        </select>\n' +
-            '    </div>');
-    }
-}
-
 // Function to filter data based on status
 function filterData(status) {
     if (status === "전체상태") {
@@ -80,7 +63,38 @@ function filterData(status) {
 $(document).ready(function() {
     // 그리드 렌더링
     grid = new gridjs.Grid({
-        columns: ["구분", "상태", "등록일자", "갱신일자", "작성자"],
+        columns: [
+            {
+                name: "구분",
+                formatter: (cell, row) => {
+                    return gridjs.html(`<a href="/approval/detail" class="text-decoration-none text-reset">${cell}</a>`);
+                }
+            },
+            {
+                name: "상태",
+                formatter: (cell, row) => {
+                    return gridjs.html(`<a href="/approval/detail" class="text-decoration-none text-reset">${cell}</a>`);
+                }
+            },
+            {
+                name: "등록일자",
+                formatter: (cell, row) => {
+                    return gridjs.html(`<a href="/approval/detail" class="text-decoration-none text-reset">${cell}</a>`);
+                }
+            },
+            {
+                name: "갱신일자",
+                formatter: (cell, row) => {
+                    return gridjs.html(`<a href="/approval/detail" class="text-decoration-none text-reset">${cell}</a>`);
+                }
+            },
+            {
+                name: "작성자",
+                formatter: (cell, row) => {
+                    return gridjs.html(`<a href="/approval/detail" class="text-decoration-none text-reset">${cell}</a>`);
+                }
+            }
+        ],
         data: filterData("전체상태"),
         pagination: {
             enabled: true,
@@ -93,14 +107,11 @@ $(document).ready(function() {
         resizable: true,
     }).render(document.getElementById("wrapper"));
 
-    addStatusFilter();
 
     // Event listener for status filter
     $("#statusFilter").on("change", function() {
         grid.updateConfig({
             data: filterData($(this).find($('option:selected')).text())
         }).forceRender();
-
-        addStatusFilter();
     });
 });

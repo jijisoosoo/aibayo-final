@@ -1,0 +1,259 @@
+/* 페이지 상단 */
+/* .class_51 { width: 1280px; height: 58px; left: 0px; top: 0px; position: absolute } */
+.notepad_detail_top {
+    height: 55px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* .class_58 { width: 274px; height: 58px; left: 0px; top: 0px; position: absolute } */
+.notepad_detail_top_box {
+    height: 55px;
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.notepad_top_box {
+    height: 55px;
+    display: flex;
+    margin-left: 10px;
+}
+
+/* .class_60 { width: 55px; height: 55px; left: 0px; top: 0px; position: absolute } */
+.notepad_detail_top_svg {
+    width: 55px;
+    height: 55px;
+}
+
+/* .class_59 { width: 206px; left: 68px; top: 4px; position: absolute; color: black; font_size: 40px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
+.notepad_detail_top_text {
+    color: black;
+    font-size: 48px;
+    font-weight: 500;
+    word-wrap: break-word;
+    line-height: 50px;
+}
+
+.notepad_detail_top_btn_box {
+    display: flex;
+    gap: 10px;
+}
+
+/* .class_55 { width: 144px; height: 47px; left: 970px; top: 0px; position: absolute } */
+.notepad_detail_top_btn {
+    width: 144px;
+    height: 47px;
+    align-self: center;
+}
+
+/* .class_56 { width: 144px; height: 47px; left: 0px; top: 0px; position: absolute; background: #FFDB21; border-radius: 10px } */
+.btn_box {
+    width: 144px;
+    height: 47px;
+}
+
+/* .class_57 { left: 49px; top: 7px; position: absolute; color: black; font-size: 25px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
+.btn_text {
+    font-size: 20px;
+    font-weight: 500;
+    word-wrap: break-word;
+    line-height: 35px;
+}
+
+/* 알림장 내용-제목 */
+/* .class_2 { width: 1280px; height: 1032px; left: 0px; top: 105px; position: absolute; border-radius: 15px; border: 1px rgba(0, 0, 0, 0.30) solid } */
+.notepad_detail_content {
+    border-radius: 15px;
+    border: 1px rgb(195 195 195 / 30%) solid;
+}
+
+/* .class_49 { width: 1280px; height: 100px; left: 0px; top: 0px; position: absolute; border-bottom: 1px rgba(0, 0, 0, 0.30) solid } */
+.notepad_detail_content_date_box {
+    width: 100%;
+    height: 100px;
+    border-bottom: 1px rgb(195 195 195 / 30%) solid;
+    display: flex;
+    align-items: center;
+}
+
+/* .class_50 { left: 36px; top: 27px; position: absolute; color: black; font-size: 40px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
+.notepad_detail_content_date {
+    color: black;
+    font-size: 24px;
+    font-weight: 500;
+    word-wrap: break-word;
+    line-height: 100px;
+    margin-left: 55px;
+}
+
+/* .class_39 { width: 308px; height: 55px;  background: white; border-radius: 5px; border: 5px 0 0 5px rgba(0, 0, 0, 0.30) solid } */
+.date_input_box {
+    width: 200px;
+    height: 45px;
+    background: white;
+    border: 1px rgb(195 195 195 / 30%) solid;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* .class_41 { width: 131px; height: 55px;  color: black; font-size: 25px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
+.date_input_text {
+    color: black;
+    font-size: 20px;
+    line-height: 55px;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+/* .class_44 { width: 1098px; height: 100px; left: 91px; top: 100px; position: absolute; border-bottom: 1px rgba(0, 0, 0, 0.30) solid } */
+.notepad_detail_content_title_box {
+    height: 100px;
+    display: flex;
+    margin: 0 auto;
+    padding: 0 90px;
+    /* border-bottom: 1px rgb(195 195 195 / 30%) solid; */
+}
+
+/* .class_45 { width: 268px; height: 100px; left: 0px; top: 0px; position: absolute } */
+.notepad_detail_content_title_group {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px rgb(195 195 195 / 30%) solid;
+    gap: 10px;
+}
+
+/* .class_47 { width: 100px; height: 100px; left: 0px; top: 0px; position: absolute } */
+.notepad_detail_content_title_img_box {
+    align-content: center;
+}
+
+/* .class_48 { width: 75px; height: 75px; left: 12px; top: 12px; position: absolute; border-radius: 37px } */
+.notepad_detail_content_title_img {
+    width: 75px;
+    height: 75px;
+    border-radius: 37px
+}
+
+/* .class_46 { left: 100px; top: 35px; position: absolute; color: black; font-size: 25px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
+.notepad_detail_content_title_text {
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+/* 수정페이지 */
+.item_group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.item_title {
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.select_box {
+    display: flex;
+    gap: 10px;
+}
+
+.item_modify_box {
+    border-radius: 10px;
+    border: 1px rgb(195 195 195 / 30%) solid;
+}
+
+.sender_text {
+    width: 175px;
+    color: black;
+    font-size: 16px;
+    word-wrap: break-word;
+}
+
+
+/* .class_3 { width: 1098px; height: 786px; left: 91px; top: 200px; position: absolute } */
+.notepad_detail_content_body {
+    margin: 0 auto;
+    padding: 30px 90px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* .class_43 { left: 19px; top: 26px; position: absolute; color: black; font-size: 25px; font-family: Noto Sans; font-weight: 500; line-height: 50px; word-wrap: break-word } */
+.notepad_detail_content_body_text {
+    color: black;
+    font-size: 16px;
+    line-height: 50px;
+    word-wrap: break-word;
+}
+
+/* 생활기록 */
+/* .class_4 { width: 878px; height: 596px; left: 110px; top: 241px; position: absolute } */
+.liferecord {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 50px;
+}
+
+/* .class_42 { left: 14px; top: 0px; position: absolute; color: black; font-size: 25px; font-family: Noto Sans; font-weight: 500; line-height: 50px; word-wrap: break-word } */
+.liferecord_title {
+    color: black;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 50px;
+    word-wrap: break-word;
+}
+
+.liferecord_box {
+    width: 100%;
+    padding: 0 20px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.liferecord_item_box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* .class_40 { width: 60px; height: 14px; left: 46px; top: 59px; position: absolute; color: black; font-size: 18px; font-family: Noto Sans; font-weight: 400; word-wrap: break-word } */
+.liferecord_item_title {
+    color: black;
+    font-size: 16px;
+    word-wrap: break-word;
+    font-weight: 500;
+}
+
+.btn-outline-ab {
+    color: black;
+    border: 1px rgb(195 195 195 / 30%) solid;
+}
+
+.btn-check:disabled+.btn, .btn-check[disabled]+.btn {
+    pointer-events: none;
+    filter: none;
+    opacity: 1;
+}
+
+/* .class_33 { width: 265px; height: 14px; left: 0px; top: 11px; position: absolute; text-align: center; color: black; font-size: 18px; font-family: NanumSquare; font-weight: 700; word-wrap: break-word } */
+.liferecord_item_text {
+    text-align: center;
+    color: black;
+    font-size: 16px;
+    word-wrap: break-word;
+}
+
+.sleeptime-text {
+    font-size: 16px;
+}
