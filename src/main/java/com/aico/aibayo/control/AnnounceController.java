@@ -20,7 +20,7 @@ public class AnnounceController {
         return "/announce/admin/writeForm";
     }
     @GetMapping("/admin/detail")
-    public String detail(){
+    public String admindetail(){
         return "/announce/admin/detail";
     }
     @GetMapping("/admin/modifyForm")
@@ -29,16 +29,19 @@ public class AnnounceController {
     }
 
 
-//    user
-@GetMapping("/user/card")
-public String usercard(){
-    return "/announce/user/card";
-}
+    //    user
+    @GetMapping("/user/card")
+    public String usercard(){
+        return "/announce/user/card";
+    }
     @GetMapping("/user/list")
     public String userList(){
         return "/announce/user/list";
     }
-
+    @GetMapping("/user/detail")
+    public String userdetail(){
+        return "/announce/user/detail";
+    }
 
 
 
