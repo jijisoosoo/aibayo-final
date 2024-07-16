@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="/medication/writeForm.css" />
 </th:block>
 
+<th:block layout:fragment="javascript">
+  <script src="/medication/medication.js"></script></th:block>
+
 <div class="container main_container" layout:fragment="content">
   <div class="frame">
     <form action="">
@@ -52,13 +55,13 @@
                 <div class="frame-wrapper-3">
                   <div class="btn-group" id="btn-group" role="group" aria-label="Basic radio toggle button group">
                     <input type="radio" class="btn-check" name="btnradio" id="day1" autocomplete="off" checked>
-                    <label class="btn btn-outline-primary custom-style" for="day1">7월 1일</label>
+                    <label class="btn btn-outline-ab custom-style" for="day1">7월 1일</label>
 
                     <input type="radio" class="btn-check" name="btnradio" id="day2" autocomplete="off">
-                    <label class="btn btn-outline-primary custom-style" for="day2">7월 2일</label>
+                    <label class="btn btn-outline-ab custom-style" for="day2">7월 2일</label>
 
                     <input type="radio" class="btn-check" name="btnradio" id="day3" autocomplete="off">
-                    <label class="btn btn-outline-primary custom-style" for="day3">7월 3일</label>
+                    <label class="btn btn-outline-ab custom-style" for="day3">7월 3일</label>
                   </div>
                 </div>
               </div>
@@ -82,7 +85,7 @@
                     </div>
                     <div class="modal-body">
                         <div>
-                          <table class="table" id="modal table">
+                          <table class="table" id="modalTable">
                             <tr>
                               <th>약의 종류</th>
                               <td>
@@ -137,7 +140,8 @@
                             </tr>
                             <tr>
                               <th>사진 추가</th>
-                              <td class="pic"><input type="button" value="추가" class="add">
+                              <td class="pic">
+                                <input type="file" class="add" accept="image/*" name="drugPic" id="drugPic">
                               <span class="filename">drug.jpg</span>
                               </td>
                             </tr>
@@ -146,7 +150,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                      <button type="button" class="btn btn-primary">전송</button>
+                      <button type="button" class="btn btn-primary" id="mediAddSubmit" >전송</button>
                     </div>
                   </div>
                 </div>
@@ -188,6 +192,22 @@
                   </tr>
                 </table>
               </div>
+            </div>
+          </div>
+        </div>
+        <div class="sign">
+          <div class="promise">
+            투약으로 인한 책임은 의뢰자가 집니다.
+          </div>
+          <div class="date">
+            2024년 6월 30 일
+          </div>
+          <div class="parent">
+            <div class="name">
+              김엄마
+            </div>
+            <div class="parentSign">
+              (인)
             </div>
           </div>
         </div>
