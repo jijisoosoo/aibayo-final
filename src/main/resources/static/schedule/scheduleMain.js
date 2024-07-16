@@ -6,6 +6,16 @@ $(document).ready(function() {
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
+        googleCalendarApiKey: "AIzaSyAKURukCy6rYdcfKAFsNYhY6wpn7XLzRqA",
+        height: "700px",
+        expandRows: true,
+        events:
+            {
+                googleCalendarId : 'ko.south_korea#holiday@group.v.calendar.google.com',
+                backgroundColor: 'red'
+            }
+        ,
+
         themeSystem: 'bootstrap5',
         headerToolbar: {
             left: 'prev',
