@@ -644,6 +644,7 @@
     text-align: center;
     display: flex;
     height:50px;
+    width: 200px;
 }
 .pick{
     display: flex;
@@ -665,4 +666,9 @@ svg.bi-calendar3 {
     text-align: center;
     border-radius: 8px;
 }
-
+.datepicker-dropdown{
+    top: 302px;
+    left: 977.58px;
+    z-index: 10;
+    display: block;
+}
