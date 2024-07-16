@@ -219,3 +219,81 @@
     border-radius: 10px;
     text-align: center;
 }
+
+/* 모달 */
+.modal-header, .modal-footer {
+    border: 0;
+}
+
+.modal_header_title {
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    line-height: 29px;
+    word-wrap: break-word;
+}
+
+/* .class_8 { align-self: stretch; height: 294px; padding-left: 44px; padding-right: 44px; padding-top: 30px; padding-bottom: 30px; background: #F7F7F7; border-radius: 15px; overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 30px; display: flex } */
+.modal_body {
+    align-self: stretch;
+    padding: 30px 44px;
+    background: #F7F7F7;
+    border-radius: 15px;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 30px;
+    display: flex;
+    margin: 0 10px;
+}
+
+.modal_reject_box {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+}
+
+.modal_reject_body {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+    display: inline-flex
+}
+
+.modal_reject_input {
+    align-self: stretch;
+    padding: 10px 20px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    display: inline-flex
+}
+
+.modal_footer_invite {
+    justify-content: center;
+}
+
+.modal_btn_box {
+    width: 150px;
+    height: 50px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    display: flex
+}
+
+.modal_btn_text {
+    color: black;
+    font-size: 20px;
+    line-height: 30px;
+    word-wrap: break-word;
+}
