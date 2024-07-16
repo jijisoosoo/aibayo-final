@@ -11,4 +11,19 @@ public class ElectronicApprovalController {
     public String list() {
         return "/electronicApproval/list";
     }
+
+    @GetMapping("/detail")
+    public String detail() {
+        return "/electronicApproval/detail";
+    }
+
+    @GetMapping("/write")
+    public String writeForm() {
+        return "/electronicApproval/writeForm";
+    }
+
+    @GetMapping("/modify")
+    public String modifyForm() {
+        return "/electronicApproval/modifyForm";
+    }
 }
