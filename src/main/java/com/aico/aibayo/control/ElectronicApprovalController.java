@@ -11,4 +11,9 @@ public class ElectronicApprovalController {
     public String list() {
         return "/electronicApproval/list";
     }
+
+    @GetMapping("/detail")
+    public String detail() {
+        return "/electronicApproval/detail";
+    }
 }
