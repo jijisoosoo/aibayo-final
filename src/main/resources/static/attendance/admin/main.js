@@ -1,35 +1,39 @@
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
-        googleCalendarApiKey: "AIzaSyDmARKhz1ID0UKoEVehnqnMa-C9NTFt8Sg",
+        themeSystem: 'bootstrap5',
         initialView: 'dayGridMonth',
-        navLinks: false,
-        dateClick: function (info) {
-        var today = new Date();
-        var clickedDate = new Date(info.dateStr);
+        locale: 'ko',
+        googleCalendarApiKey: 'AIzaSyAgH-X2n7hFaaKAo5h8_mBWcKbaV-G2hnk',
+        events: {
+            googleCalendarId: 'ko.south_korea#holiday@group.v.calendar.google.com',
+            className: 'kr-holiday',
+            textColor: 'red'
+        },
 
-        var command = '';
+        buttonText: {
+            today: '이번달',
+            month: '월간',
+            week: '주간',
+            day: '일간',
+            list: '목록'
+        },
 
-        if (clickedDate.toDateString() === today.toDateString()) {
-            command = 'detailToday';
-        } else if (clickedDate < today) {
-            command = 'detailBefore';
-        } else {
-            command = 'detailAfter';
-        }
+        dateClick: function(info) {
+            var today = new Date();
+            var clickedDate = new Date(info.dateStr);
+            var command = '';
 
-
-        eventSources :[
-            {
-                googleCalendarId : 'ko.south_korea#holiday@group.v.calendar.google.com'
-                , color: 'white'   // an option!
-                , textColor: 'red' // an option!
+            if (clickedDate.toDateString() === today.toDateString()) {
+                command = 'detailToday';
+            } else if (clickedDate < today) {
+                command = 'detailBefore';
+            } else {
+                command = 'detailAfter';
             }
-        ],
 
-        // window.location.href = 'attendance.do?cmd=' + cmd + '&date=' + info.dateStr + '&classNo=1&attendanceInsertStatus=0';
-        window.location.href = '/attendance/admin/' + command;
-    }
+            window.location.href = '/attendance/admin/' + command;
+        }
     });
     calendar.render();
 });

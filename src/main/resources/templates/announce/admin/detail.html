@@ -10,7 +10,7 @@
 </th:block>
 
 <th:block layout:fragment="javascript">
-    <script src="/announce/writeForm.js"></script></th:block>
+    <script src="/announce/detail.js"></script></th:block>
 
 <div class="container main_container" layout:fragment="content">
     <form action="">
@@ -20,6 +20,9 @@
                     <div class="frame-2">
                         <div class="div-wrapper">
                             <div class="text-wrapper">[부모 교육]</div>
+                        </div>
+                        <div class="div-wrapper">
+                            <div class="text-wrapper"> 가족사진 찍으세요 </div>
                         </div>
                     </div>
                     <div class="frame-3">
@@ -36,17 +39,36 @@
                                 </div>
                             </div>
                         </a>
-                        <div class="element-tab-list-wrapper">
-                            <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                <a href="#" class="btn btn-outline-secondary">이전글</a>
-                                <a href="/announce/admin/card" class="btn btn-outline-secondary">목록</a>
-                                <a href="#" class="btn btn-outline-secondary">다음글</a>
-                            </div>
+                        <div>
+                            <a href="" class="BTN">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/>
+                                </svg>이전글
+                            </a>
+                            <a href="" class="BTN">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                                </svg>다음글
+                            </a>
+                            <a href="/announce/admin/card" class="listbtn">목록</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="frame-9">
+                <div class="edit">
+                    <div class="dropdown" id="drop1">
+                        <button class="btn dropdown-toggle" id="dd1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/announce/admin/modifyForm">수정</a></li>
+                            <li>
+                                <button type="button" class="dropdown-item" onclick="button_event();">삭제</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20141105_159%2Fkbrkjs_1415113969662tMGMt_JPEG%2F17287670_480x427.jpg&type=sc960_832" alt="" srcset="">
                 <div class="frame-10">
                     <p class="text-wrapper-5">
                         여기는 본문입니다 <br />
@@ -62,142 +84,198 @@
                         <br />러 냐ㅐ여ㅗ냐ㅗㅓㄷ야ㅏ느티ㅏㄴ아ㅣㄷ에자갸ㅐㅓ라ㅣ늘ㅇ치ㅏ너ㅡ이ㅏ너이ㅏ
                     </p>
                 </div>
-                <div class="frame-11">
-                    <div class="count-wrapper">
-                        <div class="count">
-                            <div class="frame-12">
-                                <div class="text-wrapper-6">댓글</div>
-                            </div>
-                            <div class="frame-13">
-                                <div class="text-wrapper-7">3</div>
-                            </div>
-                            <div class="frame-14">
-                                <div class="text-wrapper-6">개</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="frame-15">
-                        <a href="/announce/admin/modifyForm" class="element-secondary-button">
-                            수정
-                        </a>
-                        <button type="button" class="deleteBtn">삭제</button>
-                    </div>
-                </div>
             </div>
-            <div class="view">
-                <div class="frame-16">
-                    <div class="rectangle-wrapper">
-                        <img class="img" alt="Rectangle" src="image.png" />
-                    </div>
-                    <div class="frame-17">
-                        <div class="frame-18">
-                            <div class="frame-19">
-                                <div class="text-wrapper-10">짱구 아빠</div>
-                            </div>
-                            <div class="frame-19">
-                                <div class="text-wrapper-6">
-                                    <div class="dropdown">
-                                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">수정</a></li>
-                                            <li><a class="dropdown-item" href="#">삭제</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="frame-20">
-                            <div class="text-wrapper-11">댓글</div>
-                        </div>
-                        <div class="frame-21">
-                            <div class="frame-22">
-                                <div class="text-wrapper-12">2024.06.29 14:00:36</div>
-                            </div>
-                            <a href="#" class="frame-19">
-<!--                                <div class="text-wrapper-12">답글쓰기</div>-->
-
-
-
-                            <!-- Button trigger modal -->
-                            <button type="button" class="text-wrapper-12" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                답글쓰기
+            <div class="commnet">
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <span>댓글</span>
+                                <span class="count">3</span>
+                                <span>개</span>
                             </button>
-                            </a>
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">답글 쓰기</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="btn">
+                                    <div class="btns">
+                                        <input type="button" value="등록순">
+                                        <input type="button" value="최신순">
+                                    </div>
+                                </div>
+                                <div class="view">
+                                    <div class="frame-16">
+                                        <div class="rectangle-wrapper">
+                                            <img class="img" alt="Rectangle" src="image.png" />
                                         </div>
-                                        <div class="modal-body">
-                                            <textarea class="reply"></textarea>
+                                        <div class="frame-17">
+                                            <div class="frame-18">
+                                                <div class="frame-19">
+                                                    <div class="text-wrapper-10">짱구 아빠</div>
+                                                </div>
+                                                <div class="frame-19">
+                                                    <div class="text-wrapper-6">
+                                                        <div class="dropdown" id="drop2">
+                                                            <button class="btn dropdown-toggle" id="dd22" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li>
+                                                                    <input type="button" value="수정" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                                                                </li>
+                                                                <li>
+                                                                    <button type="button" class="dropdown-item" onclick="button_event();">삭제</button>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h1 class="modal-title fs-5" id="exampleModalLabel1">수정 하기</h1>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <textarea class="reply"></textarea>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="close" data-bs-dismiss="modal">닫기</button>
+                                                                        <button type="button" class="save">저장</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="frame-20">
+                                                <div class="text-wrapper-11">댓글</div>
+                                            </div>
+                                            <div class="frame-21">
+                                                <div class="frame-22">
+                                                    <div class="text-wrapper-12">2024.06.29 14:00:36</div>
+                                                </div>
+                                                <a href="#" class="frame-19">
+                                                    <!-- Button trigger modal -->
+                                                    <button type="button" class="text-wrapper-12" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                                        답글쓰기
+                                                    </button>
+                                                </a>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel2">답글 쓰기</h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <textarea class="reply"></textarea>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="close" data-bs-dismiss="modal">닫기</button>
+                                                                <button type="button" class="save">저장</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                                            <button type="button" class="btn btn-primary">저장</button>
+                                    </div>
+                                    <div class="frame-23">
+                                        <div class="img-wrapper">
+                                            <img class="img" alt="Rectangle" src="rectangle-1-2.png" />
+                                        </div>
+                                        <div class="frame-24">
+                                            <div class="frame-18">
+                                                <div class="frame-19">
+                                                    <div class="text-wrapper-10">짱구 엄마</div>
+                                                </div>
+                                                <div class="frame-19">
+                                                    <div class="text-wrapper-6">
+                                                        <div class="dropdown" id="drop3">
+                                                            <button class="btn dropdown-toggle" id="dd3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                <li>
+                                                                    <input type="button" value="수정" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                                                                </li>
+                                                                <li>
+                                                                    <button type="button" class="dropdown-item" onclick="button_event();">삭제</button>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h1 class="modal-title fs-5" id="exampleModalLabel3">답글 쓰기</h1>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <textarea class="reply"></textarea>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="close" data-bs-dismiss="modal">닫기</button>
+                                                                        <button type="button" class="save">저장</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="frame-20">
+                                                <div class="text-wrapper-11">대댓글</div>
+                                            </div>
+                                            <div class="frame-25">
+                                                <div class="frame-19">
+                                                    <div class="text-wrapper-12">2024.06.29 14:00:36</div>
+                                                </div>
+                                                <a href="#" class="frame-19" data-bs-toggle="modal" data-bs-target="#exampleModal4">
+                                                    <div class="text-wrapper-12">답글쓰기</div>
+                                                </a>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel4" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel4">수정하기</h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <textarea class="reply"></textarea>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="close" data-bs-dismiss="modal">닫기</button>
+                                                                <button type="button" class="save">저장</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="frame-26">
+                                        <div class="frame-27">
+                                            <div class="frame-28">
+                                                <div class="element-secondary-button-wrapper">
+                                                    <input type="submit" value="등록" class="element-secondary-button-3">
+                                                </div>
+                                            </div>
+                                            <div class="element-input-field">
+                                                <textarea class="element-input-field"></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-
-
-
-                        </div>
-                    </div>
-                </div>
-                <div class="frame-23">
-                    <div class="img-wrapper">
-                        <img class="img" alt="Rectangle" src="rectangle-1-2.png" />
-                    </div>
-                    <div class="frame-24">
-                        <div class="frame-18">
-                            <div class="frame-19">
-                                <div class="text-wrapper-10">짱구 엄마</div>
-                            </div>
-                            <div class="frame-19">
-                                <div class="text-wrapper-6">
-                                    <div class="dropdown">
-                                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">수정</a></li>
-                                            <li><a class="dropdown-item" href="#">삭제</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="frame-20">
-                            <div class="text-wrapper-11">대댓글</div>
-                        </div>
-                        <div class="frame-25">
-                            <div class="frame-19">
-                                <div class="text-wrapper-12">2024.06.29 14:00:36</div>
-                            </div>
-                            <a href="#" class="frame-19">
-                                <div class="text-wrapper-12">답글쓰기</div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="frame-26">
-                    <div class="frame-27">
-                        <div class="frame-28">
-                            <div class="element-secondary-button-wrapper">
-                                <input type="submit" value="등록" class="element-secondary-button-3">
-                            </div>
-                        </div>
-                        <div class="element-input-field">
-                            <textarea class="element-input-field"></textarea>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </form>
 </div>
-</html>

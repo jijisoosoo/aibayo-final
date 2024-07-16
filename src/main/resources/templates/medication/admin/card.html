@@ -6,14 +6,12 @@
 <title layout:fragment="title">투약동의서 메인</title>
 
 <th:block layout:fragment="css">
-    <link href="/vendor/datepicker-dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <th:block th:replace="~{/common/datepicker :: css}"/>
     <link rel="stylesheet" href="/medication/list.css" />
 </th:block>
 
 <th:block layout:fragment="javascript">
-    <script src="/vendor/datepicker-dist/js/bootstrap-datepicker.min.js"></script>
-    <script src="/vendor/datepicker-dist/js/bootstrap-datepicker.ko.min.js"></script>
-    <script src="/common/datepicker.js"></script>
+    <th:block th:replace="~{/common/datepicker :: js}"/>
 </th:block>
 
 
@@ -59,17 +57,15 @@
                         </div>
                     </div>
                 </div>
-
-
-                <div class="date-picker">
-                    <button id="datePickerButton" class="button-new">
-                        <p id="selectedDate" class="date">날짜 선택</p>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
-                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+                <div class="pick">
+                    <div class="date-picker">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 34 34">
+                            <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857z"/>
+                            <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
                         </svg>
-                    </button>
+                        <input type="text" class="form-control datepicker" placeholder="년/월/일" readonly>
+                    </div>
                 </div>
-
 
             </div>
 
@@ -103,7 +99,7 @@
                                     <div class="frame-6">
                                         <div class="avatar-wrapper">
                                             <div class="avatar">
-                                                <img class="rectangle" alt="Rectangle" src="rectangle-1-8.png" />
+                                                <img class="rectangle" alt="Rectangle" src="/medication/img/image.png" />
                                             </div>
                                         </div>
                                     </div>
@@ -111,10 +107,10 @@
                             </div>
                         </div>
                         <div class="frame-7">
-                            <div class="text-wrapper-3">[새싹반]</div>
+                            <div class="text-wrapper-3">해바라기반</div>
                         </div>
                         <div class="frame-7">
-                            <div class="text-wrapper-3">라이언</div>
+                            <div class="text-wrapper-3">신짱구</div>
                         </div>
                     </div>
                     <div class="tb">
