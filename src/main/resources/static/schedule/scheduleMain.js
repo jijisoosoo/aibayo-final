@@ -91,6 +91,7 @@ $(document).ready(function() {
             {
                 title: '화채 만들기',
                 start: '2024-07-16',
+                end: '2024-07-19',
                 classNo: 0,
                 contents: '각 반마다 화채 만들기 실습이 있을 예정입니다.',
                 location: ''
