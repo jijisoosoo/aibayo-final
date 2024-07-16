@@ -29,6 +29,15 @@
     line-height: 50px;
 }
 
+.approval_form_top_text  {
+    margin-left: 10px;
+    color: black;
+    font-size: 48px;
+    font-weight: 500;
+    word-wrap: break-word;
+    padding-bottom: 7px;
+}
+
 .approval_detail_top_btn_box {
     display: flex;
     gap: 10px;
@@ -168,4 +177,44 @@
     gap: 10px;
     justify-content: center;
     align-items: center;
+}
+
+.content_col_input_box {
+    justify-content: flex-start;
+    padding: 10px;
+    gap: 10px;
+}
+
+/* 사유 선택 */
+.input_box {
+    /* width: 157px; */
+    border-radius: 10px;
+}
+
+/* .class_5 { width: 200px; height: 50px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; background: white; border-radius: 8px; border: 1px #E0E0E0 solid; justify-content: center; align-items: center; gap: 16px; display: flex } */
+.reason_text {
+    width: 200px;
+    height: 42px;
+    color: gray;
+    font-size: inherit;
+    word-wrap: break-word;
+}
+
+.custom_select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='gray' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e")
+}
+
+.approval_svg_box {
+    width: 30px;
+    height: 30px;
+}
+
+.approval_date_text_input {
+    color: black;
+    font-size: 16px;
+    word-wrap: break-word;
+    width: 150px;
+    height: 38px;
+    border-radius: 10px;
+    text-align: center;
 }
