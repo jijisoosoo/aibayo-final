@@ -11,13 +11,12 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @ToString
+@IdClass(ClassKidId.class)
 public class ClassKidEntity {
     @Id
-    @GeneratedValue
     @Column(name = "class_no")
     private int classNo;
     @Id
-    @GeneratedValue
     @Column(name = "kid_no")
     private int kidNo;
     @Column(name = "accept_no")

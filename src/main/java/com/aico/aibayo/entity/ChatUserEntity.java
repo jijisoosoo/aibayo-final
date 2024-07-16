@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @AllArgsConstructor
 @Builder
 @ToString
-public class ChatUser {
+public class ChatUserEntity {
     @Id
     @Field("name")
     private String name;

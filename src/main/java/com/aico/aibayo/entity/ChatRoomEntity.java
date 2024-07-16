@@ -22,7 +22,7 @@ public class ChatRoomEntity {
     @Field("chat_room_name")
     private String chatRoomName;
     @Field("chat_memebers")
-    private List<ChatMember> chatMembers;
+    private List<ChatMemberEntity> chatMemberEntities;
     @Field("create_room_time")
     private LocalDateTime createRoomTime;
     @Field("update_room_time")
