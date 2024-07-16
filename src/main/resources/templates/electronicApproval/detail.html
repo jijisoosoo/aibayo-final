@@ -178,12 +178,56 @@
                 </div>
 
                 <div class="approval_detail_top_btn">
-                    <input type="button"
-                           class="btn btn-secondary btn_box btn_text"
-                           value="반려">
+
+                    <div class="btn btn-secondary btn_box btn_text">
+                        <div class="btn_text"
+                             data-bs-toggle="modal"
+                             data-bs-target="#rejectModal">반려
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade fixed-width-modal" id="rejectModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h1 class="modal-title modal_header_title" id="rejectModalLabel">반려 사유</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+
+                    <div class="modal-body modal_body">
+
+                        <div class="modal_reject_box">
+                            <div class="modal_reject_body">
+
+                                <input type="text" class="modal_reject_input form-control"
+                                       name="approvalRejectReason" id="approvalRejectReason"
+                                       placeholder="반려 사유를 작성해주세요.">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="modal-footer modal_footer_invite">
+                        <input type="button" data-bs-dismiss="modal"
+                               class="btn btn-secondary modal_btn_box btn_text" value="닫기">
+                        <input type="button"
+                               class="btn btn-ab modal_btn_box btn_text" value="반려">
+                    </div>
+
+                </div>
+            </div>
         </div>
 
     </div>
