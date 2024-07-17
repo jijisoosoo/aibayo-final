@@ -2,6 +2,7 @@ package com.aico.aibayo.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Table(name = "notepad")
@@ -18,7 +19,8 @@ public class NotepadEntity {
     private Long notepadNo;
     @Column(name = "board_no")
     private Long boardNo;
-    @Column
+    @Column()
+    @ColumnDefault("-1")
     private int weather;
     @Column(name = "has_life_record")
     private String hasLifeRecord;
