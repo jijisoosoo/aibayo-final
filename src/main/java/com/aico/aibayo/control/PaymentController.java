@@ -11,23 +11,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PaymentController {
 
     @GetMapping("/admin/paymentBillingMain")
-    public String adminPaymentBillingMain(){ return "paymentBillingMain"; }
+    public String adminPaymentBillingMain(){ return "/payment/admin/paymentBillingMain"; }
 
     @GetMapping("/admin/paymentBillingWrite")
-    public String adminPaymentBillingWrite(){ return "paymentBillingWrite"; }
+    public String adminPaymentBillingWrite(){ return "/payment/admin/paymentBillingWrite"; }
 
     @GetMapping("/admin/paymentBillingConfirm")
-    public String adminPaymentBillingConfirm(){ return "paymentBillingConfirm"; }
+    public String adminPaymentBillingConfirm(){ return "/payment/admin/paymentBillingConfirm"; }
 
     @GetMapping("/admin/paymentBillingDone")
-    public String adminPaymentBillingDone(){ return "paymentBillingDone"; }
+    public String adminPaymentBillingDone(){ return "/payment/admin/paymentBillingDone"; }
 
     @GetMapping("/user/paymentMain")
-    public String userPaymentWrite(){ return "paymentMain"; }
+    public String userPaymentWrite(){ return "/payment/user/paymentMain"; }
 
     @GetMapping("/user/paymentPay")
-    public String userPaymentPay(){ return "paymentPay"; }
+    public String userPaymentPay(){ return "/payment/user/paymentPay"; }
 
     @GetMapping("/user/paymentDone")
-    public String userPaymentDone(){ return "paymentDone"; }
+    public String userPaymentDone(){ return "/payment/user/paymentDone"; }
 }
