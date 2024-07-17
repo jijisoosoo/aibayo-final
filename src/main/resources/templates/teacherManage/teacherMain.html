@@ -7,14 +7,15 @@
 
 <th:block layout:fragment="css">
   <link rel="stylesheet" th:href="@{/teacher/globals.css}" />
-  <link rel="stylesheet" th:href="@{/teacher/main.css}" />
-  <link rel="stylesheet" th:href="@{/teacher/mainguide.css}" />
+  <link rel="stylesheet" th:href="@{/teacher/teacherMain.css}" />
+  <link rel="stylesheet" th:href="@{/teacher/teacherMainFullCalendar.css}" />
+  <link rel="stylesheet" th:href="@{/teacher/teacherMainGuide.css}" />
   <link rel="stylesheet" th:href="@{/teacher/teacherModal.css}" />
   <link rel="stylesheet" th:href="@{/teacher/teacherModalguide.css}" />
 </th:block>
 
 <th:block layout:fragment="javascript">
-  <script src="/teacher/teacherList.js"></script>
+  <script src="/teacher/teacherMain.js"></script>
 </th:block>
 
 <div class="container main_container" layout:fragment="content">

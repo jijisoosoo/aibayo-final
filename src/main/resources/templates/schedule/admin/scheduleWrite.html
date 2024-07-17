@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout}">
+
+<title layout:fragment="title">scheduleWrite</title>
+
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/schedule/globals.css}" />
+  <link rel="stylesheet" th:href="@{/schedule/scheduleWrite.css}" />
+  <link rel="stylesheet" th:href="@{/schedule/scheduleWriteGuide.css}" />
+  <link rel="stylesheet" th:href="@{/schedule/scheduleModal.css}" />
+  <link rel="stylesheet" th:href="@{/schedule/scheduleModalguide.css}" />
+  <link rel="stylesheet" th:href="@{/common/SMJCommonContainer.css}" />
+  <link rel="stylesheet" th:href="@{/common/SMJCommonHover.css}" />
+</th:block>
+
+<th:block layout:fragment="javascript">
+  <script src="/schedule/scheduleWrite.js"></script>
+</th:block>
+
+<div class="container main_container" layout:fragment="content">
+  <form class="schedule-form" th:action="@{schedule/admin/scheduleMain}" method="post">
+
+    <div class="title"><div class="text-wrapper-4">일정표 작성</div></div>
+
+    <div class="buttons">
+      <a class="button-cancel" th:href="@{schedule/admin/scheduleMain}">
+        <div class="text-cancel">취소</div>
+      </a>
+      <input type="submit" class="button-submit" value="추가하기">
+    </div>
+
+    <div class="calendar">
+      <div class="input-name">
+        <div class="text-date"><div class="text-wrapper-7">날짜</div></div>
+        <div class="inputarea">
+          <input type="text" class="textarea" placeholder="날짜를 입력하세요."/>
+          <a href="">
+            <img class="vector" src="/schedule/img/calendar.png" />
+          </a>
+        </div>
+      </div>
+      <div class="input-name-2">
+        <div class="title-class">
+          <div class="text-wrapper-7">반 선택</div>
+          <div class="text-wrapper-10">(3개)</div>
+        </div>
+        <div class="class-selection">
+          <div class="selectedclass">
+            <div class="class" style="fill: #ffffff">
+              <div class="text-class">브로콜리반</div>
+            </div>
+            <div class="class">
+              <div class="text-class">토마토반</div>
+            </div>
+            <div class="class">
+              <div class="text-class">오이반</div>
+            </div>
+          </div>
+
+          <a class="button-submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop3">
+            <img class="icon-pencil" src="/schedule/img/pencil.png" />
+            <div class="text-submit">반 편집</div>
+          </a>
+
+
+          <!-- Modal -->
+          <div class="modal fade" id="staticBackdrop3"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-title">
+                  <div class="textarea">
+                    <div class="text-wrapper">소속 반 수정</div>
+                  </div>
+                  <button class="button-x" href="" data-bs-dismiss="modal" aria-label="Close">
+                    <img src="/schedule/img/x.png" alt=""/>
+                  </button>
+                </div>
+                <form class="modalform" th:action="@{/schedule/admin/scheduleWrite}" th:method="post">
+                  <div class="row-input">
+                    <div class="text-addable">
+                      <div class="modal-div-2">
+                        <input type="checkbox" class="form-check-input" id="checkAll">
+                        <div class="text-wrapper-2" for="checkAll">반 전체 선택</div>
+                      </div>
+                    </div>
+                    <div class="form-check carousel">
+                      <label class="class-selected" for="broccoli">
+                        <div class="text-wrapper-3">브로콜리반</div>
+                        <input class="form-check-input" type="checkbox" name="classCheckedCb" value="broccoli" id="broccoli">
+                      </label>
+
+                      <label class="class-selected" for="tomato">
+                        <div class="text-wrapper-3">토마토반</div>
+                        <input class="form-check-input" type="checkbox" name="classCheckedCb" value="tomato" id="tomato">
+                      </label>
+
+                      <label class="class-selected" for="paprica">
+                        <div class="text-wrapper-3">파프리카반</div>
+                        <input class="form-check-input" type="checkbox" name="classCheckedCb" value="paprica" id="paprica" autocomplete="off" >
+                      </label>
+
+                      <label class="class-selected" for="eggplant">
+                        <div class="text-wrapper-3">가지반</div>
+                        <input class="form-check-input" type="checkbox" name="classCheckedCb" value="eggplant" id="eggplant" autocomplete="off" >
+                      </label>
+
+                      <label class="class-selected" for="cabbage">
+                        <div class="text-wrapper-3">양배추반</div>
+                        <input class="form-check-input" type="checkbox" name="classCheckedCb" value="cabbage" id="cabbage" autocomplete="off" >
+                      </label>
+
+                      <label class="class-selected" for="cucumber">
+                        <div class="text-wrapper-3">오이반</div>
+                        <input class="form-check-input" type="checkbox" name="classCheckedCb" value="cucumber" id="cucumber" autocomplete="off" >
+                      </label>
+
+                      <label class="class-selected" for="pimento">
+                        <div class="text-wrapper-3">피망반</div>
+                        <input class="form-check-input" type="checkbox" name="classCheckedCb" value="pimento" id="pimento" autocomplete="off" >
+                      </label>
+
+                    </div>
+                  </div>
+                  <div class="buttonarea">
+                    <input type="submit" class="btn btn-ab button-send" value="적용" data-bs-dismiss="modal">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- Modal end -->
+
+
+        </div>
+
+      </div>
+      <div class="input-name-2">
+        <div class="text-date"><div class="text-wrapper-7">제목</div></div>
+        <input type="text" class="default-wrapper" placeholder="제목을 작성해주세요."></input>
+      </div>
+      <div class="input-name-2">
+        <div class="text-date"><div class="text-wrapper-7">내용</div></div>
+        <div class="inputarea-2">
+          <textarea class="default-2" onkeyup="autoResize(this)" onkeydown="autoResize(this)" placeholder="일정표는 알림을 보내지 않습니다."></textarea>
+          <div class="grammar">
+            <a class="class-2" href="">
+              <img class="img-2" src="/schedule/img/doublecheck.png" />
+              <div class="text-wrapper-12">맞춤법 검사</div>
+            </a>
+            <div class="text-wrapper-12">0 / 5000</div>
+          </div>
+        </div>
+      </div>
+      <div class="input-name-2">
+        <div class="text-date"><div class="text-wrapper-7">위치</div></div>
+        <div class="inputarea-3">
+          <a class="input-loc" href="">
+            <div class="button-x">
+              <img src="/schedule/img/plus.png"></img>
+            </div>
+            <div class="default">위치 첨부하기</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</html>

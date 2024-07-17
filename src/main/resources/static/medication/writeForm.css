@@ -7,6 +7,7 @@
     justify-content: center;
     padding: 10px;
     position: relative;
+    width: 1056px;
 }
 
 .frame .div {
@@ -17,7 +18,7 @@
     justify-content: space-between;
     padding: 10px;
     position: relative;
-    width: 100%;
+    width: 1056px;
 }
 
 .frame .div-wrapper {
@@ -162,7 +163,7 @@
     display: flex;
     flex: 0 0 auto;
     gap: 10px;
-    padding: 10px 10px 10px 108px;
+    padding: 10px 30px;
     position: relative;
     width: 100%;
 
@@ -266,7 +267,7 @@
 
 .frame .text-wrapper-6 {
     color: #000000;
-    font-family: "Inter-Medium", Helvetica;
+    /*font-family: "Inter-Medium", Helvetica;*/
     font-size: 16px;
     font-weight: 500;
     letter-spacing: 0;
@@ -285,7 +286,7 @@
     flex-direction: column;
     gap: 10px;
     justify-content: center;
-    padding: 26px 32px;
+    padding: 0px 32px;
     position: relative;
     width: 100%;
 }
@@ -389,28 +390,14 @@
 
 .frame .text-wrapper-8 {
     color: #000000;
-    font-family: "Inter-Bold", Helvetica;
+    /*font-family: "Inter-Bold", Helvetica;*/
     font-size: 16px;
     font-weight: 700;
     letter-spacing: 0;
     line-height: 24px;
-    margin-top: -1px;
     position: relative;
     white-space: nowrap;
-    width: fit-content;
-}
-.frame .text-wrapper-88 {
-    color: #000000;
-    font-family: "Inter-Bold", Helvetica;
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 0;
-    line-height: 24px;
-    margin-top: -1px;
-    position: relative;
-    white-space: nowrap;
-    width: fit-content;
-    padding: 0px 17px;
+
 }
 
 .frame .frame-wrapper-5 {
@@ -428,6 +415,16 @@
 }
 
 .frame .element-input-field-wrapper {
+    align-items: flex-start;
+    align-self: stretch;
+    background-color: #f9fafb;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+}
+.frame .element-input-field-wrapper1 {
     align-items: flex-start;
     align-self: stretch;
     background-color: #f9fafb;
@@ -459,7 +456,7 @@
     flex-direction: column;
     gap: 10px;
     justify-content: center;
-    padding: 20px 0px;
+    padding: 15px 45px;
     position: relative;
     width: 100%;
 }
@@ -477,7 +474,7 @@
 
 .frame .element-secondary-button-4 {
     align-items: center;
-    background-color: #00a3ff;
+    background-color: #c4eaff;
     border-radius: 8px;
     display: flex;
     gap: 8px;
@@ -521,8 +518,10 @@
     flex-direction: column;
     justify-content: center;
     overflow: hidden;
-    padding: 14px;
+    padding: 0px 14px;
     position: relative;
+    width: 970px;
+
 }
 .frame .frame-wrapper-88 {
     align-items: center;
@@ -563,7 +562,7 @@
     display: inline-flex;
     flex: 0 0 auto;
     flex-direction: column;
-    padding: 3px 0px;
+    padding: 0px;
     position: relative;
 }
 
@@ -724,7 +723,7 @@
     display: flex;
     flex: 0 0 auto;
     flex-direction: column;
-    padding: 3px 0px;
+    padding: 0px;
     position: relative;
     width: 100%;
 }
@@ -746,6 +745,18 @@
     align-self: stretch;
     background-color: #f9fafb;
     border: 1px solid;
+    border-color: #828282;
+    border-radius: 8px;
+    box-shadow: var(--button-shadow);
+    height: 50px;
+    position: relative;
+    width: 100%;
+    margin: 0px 15px;
+}
+.frame .element-input-field-33 {
+    align-self: stretch;
+    background-color: #f9fafb;
+    border-bottom: 1px solid;
     border-color: #828282;
     border-radius: 8px;
     box-shadow: var(--button-shadow);
@@ -899,7 +910,7 @@
 .custom-style {
     color: black !important; /* 텍스트 색상을 검정색으로 변경 */
     padding: 12px !important; /* 텍스트에 12px 패딩 추가 */
-    border-color: #828282 !important; /* 버튼 테두리 색상 변경 */
+    border-color: #DFDFDF !important; /* 버튼 테두리 색상 변경 */
 }
 
 /* btn-outline-primary 클래스를 재정의하여 테두리 색상 변경 */
@@ -921,7 +932,7 @@
 }
 #symton{
     border: 1px solid;
-    border-color: #828282;
+    border-color: #DFDFDF;
     border-radius: 8px;
     box-shadow: var(--button-shadow);
     height: 50px;
@@ -948,8 +959,131 @@
 .button {
     display: flex;
     justify-content: flex-end;
-    align-content: center;
+    align-content: flex-start;
     flex-wrap: wrap;
-    align-items: baseline;
-    width: 97%;
+    align-items: flex-start;
+    width: 920px;
+    flex-direction: row;
+}
+.avatar{
+    border-radius: 1000px;
+    margin: 0px 10px;
+}
+.add{
+    width: 80px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.table{
+    text-align: center;
+}
+#dose{
+    background-size: 16px 12px;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    width: 359.7px;
+    height: 38px;
+}
+#memo{
+    background-size: 16px 12px;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    width: 359.7px;
+    height: 38px;
+}
+#storage {
+    display: flex;
+    flex-direction: row; /* 가로 방향으로 요소들을 나열합니다 */
+    align-items: center; /* 요소들을 세로 방향으로 정렬합니다 */
+}
+
+#storage .form-check {
+    margin-right: 20px; /* 각 라디오 버튼 사이의 간격을 조절합니다 */
+}
+.pic{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.filename {
+    text-align: center;
+    margin: 0px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 수정된 부분 */
+}
+
+#modalTable td{
+    display: flex;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    height: 55px;
+    border: none;
+}
+#modalTable th{
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    height: 55px;
+    border: none;
+}
+.btn-primary {
+    color: #000000;
+    background-color: #c4eaff;
+    border-color: #c4eaff;
+}
+.btn-close {
+    margin-top: 15px ;
+}
+#drugPic {
+    margin-top: 8px !important;
+}
+.sign {
+    width: 970px;
+    height: 50px;
+    margin: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    float: left;
+}
+.promise{
+    display: flex;
+    justify-content: flex-end;
+}
+.date{
+    display: flex;
+    justify-content: flex-end;
+}
+.parent{
+    display: flex;
+    justify-content: flex-end;
+}
+.parentSign{
+    margin-left: 20px;
+}
+.sign {
+    width: 970px;
+    height: 50px;
+    margin: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    float: left;
+}
+.promise{
+    display: flex;
+    justify-content: flex-end;
+}
+.date{
+    display: flex;
+    justify-content: flex-end;
+}
+.parent{
+    display: flex;
+    justify-content: flex-end;
+}
+.parentSign{
+    margin-left: 20px;
 }

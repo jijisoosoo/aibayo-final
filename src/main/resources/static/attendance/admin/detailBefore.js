@@ -22,4 +22,11 @@ $(document).ready(function(){
 
         window.location.href = newUrl;
     });
+
+    // Initialize DataTable
+    new DataTable('#attendanceTable', {
+        info: false,
+        ordering: false,
+        paging: false
+    });
 });

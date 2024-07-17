@@ -6,14 +6,12 @@
 <title layout:fragment="title">투약동의서 메인</title>
 
 <th:block layout:fragment="css">
-    <link href="/vendor/datepicker-dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <th:block th:replace="~{/common/datepicker :: css}"/>
     <link rel="stylesheet" href="/medication/list.css" />
 </th:block>
 
 <th:block layout:fragment="javascript">
-    <script src="/vendor/datepicker-dist/js/bootstrap-datepicker.min.js"></script>
-    <script src="/vendor/datepicker-dist/js/bootstrap-datepicker.ko.min.js"></script>
-    <script src="/common/datepicker.js"></script>
+    <th:block th:replace="~{/common/datepicker :: js}"/>
 </th:block>
 
 
@@ -59,17 +57,14 @@
                         </div>
                     </div>
                 </div>
-
-
-                <div class="date-picker">
-                    <button id="datePickerButton" class="button-new">
-                        <p id="selectedDate" class="date">날짜 선택</p>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
-                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+                <div class="pick">
+                    <div class="date-picker">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
+                            <path d="M18.75 20.8333V24.9999H14.5833V20.8333H18.75ZM27.0833 20.8333V24.9999H22.9167V20.8333H27.0833ZM35.4167 20.8333V24.9999H31.25V20.8333H35.4167ZM39.5833 6.24992C40.6884 6.24992 41.7482 6.68891 42.5296 7.47031C43.311 8.25171 43.75 9.31152 43.75 10.4166V39.5833C43.75 40.6883 43.311 41.7481 42.5296 42.5295C41.7482 43.3109 40.6884 43.7499 39.5833 43.7499H10.4167C9.3116 43.7499 8.25179 43.3109 7.47039 42.5295C6.68899 41.7481 6.25 40.6883 6.25 39.5833V10.4166C6.25 9.31152 6.68899 8.25171 7.47039 7.47031C8.25179 6.68891 9.3116 6.24992 10.4167 6.24992H12.5V2.08325H16.6667V6.24992H33.3333V2.08325H37.5V6.24992H39.5833ZM39.5833 39.5833V16.6666H10.4167V39.5833H39.5833ZM18.75 29.1666V33.3333H14.5833V29.1666H18.75ZM27.0833 29.1666V33.3333H22.9167V29.1666H27.0833ZM35.4167 29.1666V33.3333H31.25V29.1666H35.4167Z" fill="#FFDB21"/>
                         </svg>
-                    </button>
+                        <input type="text" class="form-control datepicker" placeholder="년/월/일" readonly>
+                    </div>
                 </div>
-
 
             </div>
 
@@ -103,7 +98,7 @@
                                     <div class="frame-6">
                                         <div class="avatar-wrapper">
                                             <div class="avatar">
-                                                <img class="rectangle" alt="Rectangle" src="rectangle-1-8.png" />
+                                                <img class="rectangle" alt="Rectangle" src="/medication/img/image.png" />
                                             </div>
                                         </div>
                                     </div>
@@ -111,10 +106,10 @@
                             </div>
                         </div>
                         <div class="frame-7">
-                            <div class="text-wrapper-3">[새싹반]</div>
+                            <div class="text-wrapper-3">해바라기반</div>
                         </div>
                         <div class="frame-7">
-                            <div class="text-wrapper-3">라이언</div>
+                            <div class="text-wrapper-3">신짱구</div>
                         </div>
                     </div>
                     <div class="tb">

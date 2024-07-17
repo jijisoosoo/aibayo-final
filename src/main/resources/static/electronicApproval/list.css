@@ -1,0 +1,89 @@
+/* 상단 제목, 작성버튼 */
+/* .class_28 { width: 1280px; height: 60px; left: 0px; top: 0px; position: absolute } */
+.approval_top_box {
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* .class_29 {  color: black; font-size: 40px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
+.approval_top_title {
+    color: black;
+    font-size: 48px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+/* .class_30 { width: 200px; height: 60px; left: 1080px; top: 0px; position: absolute } */
+.approval_top_btn_box {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+/* .class_31 { width: 200px; height: 60px;  background: #FFDB21; border-radius: 5px } */
+.approval_top_btn_link {
+    width: 160px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.approval_top_btn {
+    width: 144px;
+    height: 47px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .class_34 { width: 36px; height: 36px; } */
+.approval_top_btn_svg_box {
+    width: 27px;
+    height: 27px;
+}
+
+.approval_top_btn_text {
+    font-size: 20px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+/* 승인상태 필터 */
+.status_box {
+    /* width: 157px; */
+    border-radius: 10px;
+}
+
+/* .class_5 { width: 200px; height: 50px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; background: white; border-radius: 8px; border: 1px #E0E0E0 solid; justify-content: center; align-items: center; gap: 16px; display: flex } */
+.status_text {
+    width: 200px;
+    height: 42px;
+    color: gray;
+    font-size: inherit;
+    word-wrap: break-word;
+}
+
+.custom_select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='gray' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e")
+}
+
+.filter-container {
+    padding: 0 4px;
+}
+
+input.gridjs-input {
+    border-radius: 10px;
+}
+
+.data_grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#wrapper a:hover {
+    opacity: 0.7;
+}
+
