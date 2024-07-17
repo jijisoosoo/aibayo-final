@@ -17,7 +17,7 @@ public class BoardEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "board_no")
-    private String boardNo;
+    private int boardNo;
     @Column(name = "invisible_flag")
     private String invisibleFlag;
     @Column(name = "board_type")
