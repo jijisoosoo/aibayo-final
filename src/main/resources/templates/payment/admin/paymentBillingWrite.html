@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout}">
+
+<title layout:fragment="title">paymentBillingWrite</title>
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/common/SMJCommonContainer.css}" />
+    <link rel="stylesheet" th:href="@{/common/SMJCommonHover.css}" />
+    <link rel="stylesheet" th:href="@{/payment/globals.css}" />
+    <link rel="stylesheet" th:href="@{/payment/paymentWrite.css}" />
+
+</th:block>
+
+<th:block layout:fragment="javascript">
+</th:block>
+
+<div class="container main_container" layout:fragment="content">
+
+
+
+</div>
+</html>

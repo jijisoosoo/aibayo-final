@@ -16,4 +16,6 @@ public class ScheduleController {
     @GetMapping("/admin/scheduleWrite")
     public String adminScheduleWrite(){ return "/schedule/admin/scheduleWrite"; }
 
+    @GetMapping("/user/scheduleMain")
+    public String userScheduleWrite(){ return "/schedule/user/scheduleMain"; }
 }
