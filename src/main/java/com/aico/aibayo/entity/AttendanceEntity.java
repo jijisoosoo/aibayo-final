@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 
 @Entity
-@Table(name = "member")
+@Table(name = "attendance")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,9 +16,9 @@ import java.time.LocalDateTime;
 @ToString
 public class AttendanceEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "attendance_no")
-    private int attendanceNo; // 출석부 번호
+    private Long attendanceNo; // 출석부 번호
     @Column(name = "attendance_date")
     private LocalDateTime attendanceDate; // 출석 날짜
     @Column(name = "class_no")
