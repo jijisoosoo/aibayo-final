@@ -14,8 +14,8 @@ public class NotepadServiceImpl implements NotepadService {
     @Override
     public List<NotepadDto> getAllByKinderNo(int kinderNo) {
 //        return notepadReceiverRepository.findAll();
-        QNotepadEntity qNotepad = new QNotepadEntity();
-        
+//        QNotepadEntity qNotepad = new QNotepadEntity();
+
         return List.of();
     }
 }
