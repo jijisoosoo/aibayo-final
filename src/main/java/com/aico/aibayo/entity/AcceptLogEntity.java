@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class AcceptLogEntity {
     @Id
     @Column(name = "accept_no")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int acceptNo;
     @Column(name = "code_verify")
     private int codeVerify;

@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @ToString
 public class PaymentEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "request_no")
     private int requestNo;
     @Column(name = "kid_no")

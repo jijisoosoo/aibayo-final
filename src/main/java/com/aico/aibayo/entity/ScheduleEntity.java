@@ -13,9 +13,9 @@ import lombok.*;
 @ToString
 public class ScheduleEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "schedule_no")
-    private int scheduleNo;
+    private Long scheduleNo;
     @Column(name = "board_no")
     private int boardNo;
     @Column(name = "schedule_start_date")

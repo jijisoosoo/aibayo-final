@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "member")
+@Table(name = "payment_discount")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -13,7 +13,7 @@ import lombok.*;
 @ToString
 public class PaymentDiscountEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "discount_no")
     private int discountNo;
     @Column(name = "discount_type")

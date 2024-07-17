@@ -6,7 +6,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "member")
+@Table(name = "class")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @ToString
 public class ClassEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "class_no")
     private int classNo;
     @Column(name = "class_name")
