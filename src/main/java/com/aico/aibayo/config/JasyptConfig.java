@@ -13,11 +13,12 @@ public class JasyptConfig {
 
     @Bean(name = "jasyptStringEncryptor")
     public StringEncryptor stringEncryptor() {
-        String SecretKey = "aibayo";
+//        String password = "aibayo";
+        String password = System.getProperty("jasypt.encryptor.password");
         PooledPBEStringEncryptor encryptor = new PooledPBEStringEncryptor();
 
         SimpleStringPBEConfig config = new SimpleStringPBEConfig();
-        config.setPassword(SecretKey); // 암호화할 때 사용하는 키
+        config.setPassword(password); // 암호화할 때 사용하는 키
         config.setAlgorithm("PBEWithMD5AndDES"); // 암호화 알고리즘
         config.setKeyObtentionIterations("1000"); // 반복할 해싱 횟수
         config.setPoolSize("1"); // 인스턴스 pool
