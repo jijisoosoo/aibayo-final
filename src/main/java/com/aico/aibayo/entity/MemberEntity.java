@@ -15,8 +15,12 @@ import java.time.LocalDateTime;
 @ToString
 public class MemberEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column
+    private String email;
+    @Column
+    private String name;
     @Column
     private String pw;
     @Column(name = "reg_type")
@@ -35,4 +39,7 @@ public class MemberEntity {
     private LocalDateTime latestLogDate;
     @Column(name = "latest_ip")
     private String latestIp;
+
+    @Column(name = "kinder_no") //register_kinder 테이블에서 참고하는 컬럼
+    private Long kinderNo;
 }
