@@ -1,7 +1,7 @@
 package com.aico.aibayo.service;
 
 import com.aico.aibayo.dto.NotepadDto;
-import com.aico.aibayo.entity.QNotepadEntity;
+//import com.aico.aibayo.entity.QNotepadEntity;
 import com.aico.aibayo.repository.NotepadReceiverRepository;
 import lombok.RequiredArgsConstructor;
 
