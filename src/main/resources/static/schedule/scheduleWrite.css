@@ -213,8 +213,6 @@
 .container .default {
   position: relative;
   width: fit-content;
-  /*font-family: "Inter-Medium", Helvetica;*/
-  font-weight: 500;
   color: #828282;
   font-size: 16px;
   text-align: center;
@@ -228,7 +226,7 @@
   -webkit-box-orient: vertical;
 }
 
-.container .default-2 {
+.container .calendar-textarea {
   padding: 10px 0px;
   display: inline-flex;
   align-items: center;
@@ -236,10 +234,9 @@
   flex: 0 0 auto;
   border: none;
   width: 100%;
-  height: 150px;
-  font-size: 20px;
-  font-family: "Inter-Medium", Helvetica;
-  font-weight: 500;
+  min-height: 145px;
+  /*font-family: "Inter-Medium", Helvetica;*/
+  /*font-weight: 500;*/
   color: #828282;
   font-size: 16px;
   resize: none;
@@ -247,11 +244,11 @@
   padding-bottom: 15px;
 }
 
-.default-2:focus {
+.calendar-textarea:focus {
   outline: none;
 }
 
-.default-2::-webkit-scrollbar{
+.calendar-textarea::-webkit-scrollbar{
   display:none;
 }
 
@@ -296,13 +293,34 @@
   border-radius: 12px;
   overflow: hidden;
   border: 0.5px solid;
+  text-decoration: none;
 }
 
 .container .text-wrapper-12 {
   position: relative;
   width: fit-content;
-  font-family: "Inter-Medium", Helvetica;
-  font-weight: 500;
+  /*font-family: "Inter-Medium", Helvetica;*/
+  /*font-weight: 500;*/
+  color: #b3b3b3;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 28px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+
+
+.container .textcnt {
+  position: relative;
+  width: fit-content;
+  /*font-family: "Inter-Medium", Helvetica;*/
+  /*font-weight: 500;*/
   color: #b3b3b3;
   font-size: 16px;
   text-align: center;
