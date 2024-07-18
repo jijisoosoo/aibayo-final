@@ -35,7 +35,7 @@
 
 .list .text-wrapper {
     color: #000000;
-    font-family: "Noto Sans-Bold", Helvetica;
+    /*font-family: "Noto Sans-Bold", Helvetica;*/
     font-size: 25px;
     font-weight: 700;
     letter-spacing: 0;
@@ -343,7 +343,7 @@
 
 .list .text-wrapper-4 {
     color: #000000;
-    font-family: "Inter-Regular", Helvetica;
+    /*font-family: "Inter-Regular", Helvetica;*/
     font-size: 16px;
     font-weight: 400;
     height: 42px;
@@ -372,7 +372,7 @@
 
 .list .text-wrapper-5 {
     color: #000000;
-    font-family: "Inter-Regular", Helvetica;
+    /*font-family: "Inter-Regular", Helvetica;*/
     font-size: 16px;
     font-weight: 400;
     height: 42px;
@@ -457,7 +457,7 @@
 
 .list .text-wrapper-7 {
     color: #5b5b5b;
-    font-family: "Inter-Regular", Helvetica;
+    /*font-family: "Inter-Regular", Helvetica;*/
     font-size: 16px;
     font-weight: 400;
     letter-spacing: 0;
@@ -495,7 +495,7 @@
 
 .list .text-wrapper-8 {
     color: #000000;
-    font-family: "Inter-Regular", Helvetica;
+    /*font-family: "Inter-Regular", Helvetica;*/
     font-size: 16px;
     font-weight: 400;
     height: 42px;
@@ -513,7 +513,7 @@
 
 .list .text-wrapper-9 {
     color: #000000;
-    font-family: "Inter-Regular", Helvetica;
+    /*font-family: "Inter-Regular", Helvetica;*/
     font-size: 16px;
     font-weight: 400;
     height: 42px;
