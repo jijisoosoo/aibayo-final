@@ -1,7 +1,9 @@
 package com.aico.aibayo.dto;
 
-import jakarta.persistence.Column;
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
@@ -11,12 +13,14 @@ import lombok.*;
 public class NotepadDto {
     private Long boardNo;
     private Integer boardType;
-    private 
+    private String writer;
+    private String boardTitle;
+    private String boardContents;
+    private String invisibleFlag;
+    private LocalDateTime boardRegDate;
 
     private Long id;
     private Long kinderNo;
 
     private Long notepadNo;
-    private int weather;
-    private String hasLifeRecord;
 }
