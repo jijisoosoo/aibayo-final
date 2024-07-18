@@ -19,7 +19,7 @@ public class NotepadEntity {
     @Column(name = "board_no")
     private Long boardNo;
     @Column
-    private int weather;
+    private Integer weather;
     @Column(name = "has_life_record")
     private String hasLifeRecord;
 }
