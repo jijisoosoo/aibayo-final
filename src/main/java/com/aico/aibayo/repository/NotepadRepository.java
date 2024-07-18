@@ -7,6 +7,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface NotepadRepository extends JpaRepository<NotepadEntity, Long>, NotepadRepositoryCustom {
-    @Override
-    List<Tuple> findAllByKinderNo(Long kinderNo);
 }

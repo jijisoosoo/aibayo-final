@@ -5,6 +5,7 @@ import com.aico.aibayo.dto.NotepadDto;
 import com.aico.aibayo.service.NotepadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,11 +18,12 @@ public class NotepadController {
     private final NotepadService notepadService;
 
     @GetMapping("/admin/list")
-    public String adminList() {
+    public String adminList(Model model) {
         // 역할에 따라 사용자/관리자 구분하여 이동
         // 사용자의 유치원번호의 사용자가 등록한 모든 알림장 조회
 //        List<NotepadDto> notepads = notepadService.getAllByKinderNo(1);
-        notepadService.getAllByKinderNo(1L);
+        List<NotepadDto> notepads = notepadService.getAllByKinderNo(1L);
+        model.addAttribute("notepads", notepads);
 
         return "/notepad/admin/list";
     }
