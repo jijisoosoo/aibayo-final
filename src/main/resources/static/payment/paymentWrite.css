@@ -78,7 +78,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 40px;
-    padding: 40px 108px;
+    padding: 40px 90px;
     position: relative;
     align-self: stretch;
     width: 100%;
@@ -124,6 +124,10 @@
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 }
+
+/*.container .button-cancel{*/
+/*    padding: 15px !important;*/
+/*}*/
 
 .container .div-4 {
     display: flex;
@@ -258,6 +262,23 @@
 }
 
 .container .text-wrapper-10 {
+    position: relative;
+    width: fit-content;
+    color: #000000;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: 19.6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.container .text-wrapper-10-1 {
     position: relative;
     width: fit-content;
     color: #000000;
@@ -878,25 +899,6 @@
     flex: 0 0 auto;
 }
 
-.container .div-16 {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    flex: 0 0 auto;
-}
-
-.container .text-wrapper-21 {
-    position: relative;
-    width: fit-content;
-    font-weight: 500;
-    color: #828282;
-    font-size: 16px;
-    text-align: center;
-    letter-spacing: 0;
-    line-height: normal;
-    white-space: nowrap;
-}
 
 .container .vector {
     position: relative;
@@ -950,7 +952,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 20px;
+    gap: 10px;
     padding: 20px 24px;
     align-self: stretch;
     width: 100%;
@@ -993,4 +995,18 @@
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
+}
+
+
+.form-check.form-switch .form-check-input {
+    width: 60px;
+    height: 27px;
+}
+
+.form-switch {
+    padding: 0px !important;
+}
+
+.form-switch:focus {
+    background: white;
 }

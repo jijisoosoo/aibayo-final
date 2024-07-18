@@ -10,17 +10,21 @@
     <link rel="stylesheet" th:href="@{/common/SMJCommonHover.css}" />
     <link rel="stylesheet" th:href="@{/payment/globals.css}" />
     <link rel="stylesheet" th:href="@{/payment/paymentWrite.css}" />
+    <link rel="stylesheet" th:href="@{/payment/paymentWriteModal.css}" />
 
 </th:block>
 
 <th:block layout:fragment="javascript">
+    <script src="/payment/paymentWrite.js"></script>
+    <th:block th:replace="~{/common/datepicker :: js}"/>
+    <th:block th:replace="~{/common/datepicker :: css}"/>
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
 
     <div class="title">
         <div class="title-flow2">
-            <a class="icon-back" href="/page_teacher_done/index.html">
+            <a class="icon-back" th:href="@{/payment/admin/paymentBillingMain}">
                 <img src="/payment/img/back.png" alt=""/>
             </a>
             <div class="div-wrapper"><div class="text-wrapper-title">청구서 작성하기</div></div>
@@ -31,10 +35,133 @@
         <div class="div-3">
             <div class="title-3">
                 <div class="text-wrapper-6">청구 대상</div>
-                <a class="button-cancel" href="/page_billing_manage_item_hover_add/index.html">
+                <a class="btn button-cancel" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     <img class="img-2" src="/payment/img/pencil-white.png" />
-                    <div class="button-cancel">편집</div>
+                    <div class="text-cancel">편집</div>
                 </a>
+
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-title">
+                                <div class="textarea">
+                                    <div class="text-wrapper">소속 반 수정</div>
+                                </div>
+                                <button class="button-x" href="" data-bs-dismiss="modal" aria-label="Close">
+                                    <img src="/schedule/img/x.png" alt=""/>
+                                </button>
+                            </div>
+                            <div class="modalform">
+                                <div class="row-input">
+                                    <div class="text-addable">
+                                        <select class="selectoption-child">
+                                            <option class="text-wrapper-5" value="">반 선택</option>
+                                            <option class="text-wrapper-5" value="">브로콜리반</option>
+                                            <option class="text-wrapper-5" value="">오이반</option>
+                                            <option class="text-wrapper-5" value="">당근반</option>
+                                            <option class="text-wrapper-5" value="">파프리카반</option>
+                                        </select>
+                                        <div class="modal-div-2">
+                                            <input type="checkbox" class="form-check-input" id="checkAll">
+                                            <div class="text-wrapper-2" for="checkAll">반 전체 선택</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-check carousel">
+
+                                        <label class="modal-child" for="child_1">
+                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" value="child_1" id="child_1">
+                                            <div class="profile">
+                                                <img src="/payment/img/profile.png" alt=""/>
+                                            </div>
+                                            <div class="textarea">
+                                                <div class="text-wrapper-10">김원아</div>
+                                                <div class="text-wrapper-10-1">(부모 : 김부모)</div>
+                                            </div>
+                                        </label>
+
+                                        <label class="modal-child" for="child_2">
+                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" value="child_2" id="child_2">
+                                            <div class="profile">
+                                                <img src="/payment/img/profile.png" alt=""/>
+                                            </div>
+                                            <div class="textarea">
+                                                <div class="text-wrapper-10">김원아</div>
+                                                <div class="text-wrapper-10-1">(부모 : 김부모)</div>
+                                            </div>
+                                        </label>
+
+                                        <label class="modal-child" for="child_3">
+                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" value="child_3" id="child_3">
+                                            <div class="profile">
+                                                <img src="/payment/img/profile.png" alt=""/>
+                                            </div>
+                                            <div class="textarea">
+                                                <div class="text-wrapper-10">김원아</div>
+                                                <div class="text-wrapper-10-1">(부모 : 김부모)</div>
+                                            </div>
+                                        </label>
+
+                                        <label class="modal-child" for="child_4">
+                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" value="child_4" id="child_4">
+                                            <div class="profile">
+                                                <img src="/payment/img/profile.png" alt=""/>
+                                            </div>
+                                            <div class="textarea">
+                                                <div class="text-wrapper-10">김원아</div>
+                                                <div class="text-wrapper-10-1">(부모 : 김부모)</div>
+                                            </div>
+                                        </label>
+
+                                        <label class="modal-child" for="child_5">
+                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" value="child_5" id="child_5">
+                                            <div class="profile">
+                                                <img src="/payment/img/profile.png" alt=""/>
+                                            </div>
+                                            <div class="textarea">
+                                                <div class="text-wrapper-10">김원아</div>
+                                                <div class="text-wrapper-10-1">(부모 : 김부모)</div>
+                                            </div>
+                                        </label>
+
+                                        <label class="modal-child" for="child_6">
+                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" value="child_6" id="child_6">
+                                            <div class="profile">
+                                                <img src="/payment/img/profile.png" alt=""/>
+                                            </div>
+                                            <div class="textarea">
+                                                <div class="text-wrapper-10">김원아</div>
+                                                <div class="text-wrapper-10-1">(부모 : 김부모)</div>
+                                            </div>
+                                        </label>
+
+                                        <label class="modal-child" for="child_7">
+                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" value="child_7" id="child_7">
+                                            <div class="profile">
+                                                <img src="/payment/img/profile.png" alt=""/>
+                                            </div>
+                                            <div class="textarea">
+                                                <div class="text-wrapper-10">김원아</div>
+                                                <div class="text-wrapper-10-1">(부모 : 김부모)</div>
+                                            </div>
+                                        </label>
+
+
+
+                                    </div>
+                                </div>
+                                <div class="buttonarea">
+                                    <button class="btn btn-ab button-send" data-bs-dismiss="modal">적용</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal end -->
+
+
             </div>
             <div class="inputarea">
                 <div class="div-2">
@@ -51,7 +178,7 @@
                             </div>
                             <div class="textarea">
                                 <div class="text-wrapper-10">김원아</div>
-                                <div class="text-wrapper-10">(부모 : 김부모)</div>
+                                <div class="text-wrapper-10-1">(부모 : 김부모)</div>
                             </div>
                         </div>
                         <div class="child">
@@ -60,7 +187,7 @@
                             </div>
                             <div class="textarea">
                                 <div class="text-wrapper-10">박원아</div>
-                                <div class="text-wrapper-10">(부모 : 박부모)</div>
+                                <div class="text-wrapper-10-1">(부모 : 박부모)</div>
                             </div>
                         </div>
                         <div class="child">
@@ -69,7 +196,7 @@
                             </div>
                             <div class="textarea">
                                 <div class="text-wrapper-10">이원아</div>
-                                <div class="text-wrapper-10">(부모 : 이부모)</div>
+                                <div class="text-wrapper-10-1">(부모 : 이부모)</div>
                             </div>
                         </div>
                     </div>
@@ -263,32 +390,20 @@
             <div class="title-4">
                 <div class="text-wrapper-8">예약 발송</div>
                 <p class="p">
-                <span class="span"
-                >예약 발송 활성화 시 만료일이 초기화되며, 예약발송 설정 후 만료일 설정이 가능합니다.</span
-                >
-                    <span class="text-wrapper-20">다.</span>
+                <span class="span">예약 발송 활성화 시 만료일이 초기화되며, 예약발송 설정 후 만료일 설정이 가능합니다.</span>
                 </p>
             </div>
             <div class="inputarea-5">
-                <img class="toggle" src="img/toggle.svg" />
-                <div>토글넣는자리</div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="notepad" checked>
+                    <label class="form-check-label" for="notepad"></label>
+                </div>
                 <div class="inputarea-6">
                     <div class="div-6">
                         <div class="text-wrapper-11">예약일</div>
                         <div class="div-15">
                             <div class="textarea-2">
-                                <div class="div-16">
-                                    <div class="text-wrapper-21">2024</div>
-                                    <div class="text-wrapper-21">.</div>
-                                </div>
-                                <div class="div-16">
-                                    <div class="text-wrapper-21">06</div>
-                                    <div class="text-wrapper-21">.</div>
-                                </div>
-                                <div class="div-16">
-                                    <div class="text-wrapper-21">28</div>
-                                    <div class="text-wrapper-21">.</div>
-                                </div>
+                                <input type="text" class="datepickerdiv datepicker" placeholder="날짜 선택" readonly>
                             </div>
                             <img class="vector" src="/payment/img/calendar_gray.png" />
                         </div>
@@ -319,18 +434,7 @@
                     <div class="text-wrapper-11">날짜</div>
                     <div class="div-15">
                         <div class="textarea-2">
-                            <div class="div-16">
-                                <div class="text-wrapper-21">2024</div>
-                                <div class="text-wrapper-21">.</div>
-                            </div>
-                            <div class="div-16">
-                                <div class="text-wrapper-21">06</div>
-                                <div class="text-wrapper-21">.</div>
-                            </div>
-                            <div class="div-16">
-                                <div class="text-wrapper-21">28</div>
-                                <div class="text-wrapper-21">.</div>
-                            </div>
+                            <input type="text" class="datepickerdiv datepicker" placeholder="날짜 선택" readonly>
                         </div>
                         <img class="vector" src="/payment/img/calendar_gray.png" />
                     </div>
