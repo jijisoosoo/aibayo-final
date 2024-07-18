@@ -466,7 +466,7 @@
   justify-content: flex-end;
   position: relative;
   width: 1054px;
-  padding : 10px 50px;
+  padding : 10px 40px;
   border-bottom:1px solid #DFDFDF ;
 }
 .screen .rectangle-wrapper {
@@ -597,7 +597,7 @@
   position: relative;
   width: 1054px;
   justify-content: center;
-  padding: 10px 50px 10px 80px;
+  padding: 10px 40px 10px 80px;
   border-bottom:1px solid #DFDFDF ;
 }
 
@@ -744,11 +744,11 @@
   height: 38px;
 }
 
-.dropdown-menu {
+.dmenu {
   width: 100%; /* 메뉴 너비를 자동으로 설정 */
 }
 
-.dropdown-item {
+.ditem {
   text-align: center; /* 텍스트를 가운데 정렬 */
   white-space: nowrap; /* 텍스트가 길어도 한 줄에 표시 */
 }
@@ -800,6 +800,7 @@
   width: fit-content;
   display: flex;
   padding : 0px;
+  margin: 0px 20px;
 }
 .BTN{
   text-decoration-line : none;

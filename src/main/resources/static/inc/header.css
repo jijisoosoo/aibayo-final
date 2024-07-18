@@ -19,7 +19,7 @@ body {
 }
 
 .h_class_79 {
-    color: #FFDB21;
+    color: #FFDB21 !important;
     font-size: 80px;
     font-weight: 500;
     line-height: 140px;
