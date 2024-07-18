@@ -53,6 +53,8 @@
   position: relative;
   width: 90px;
   border: none;
+  text-decoration-line : none;
+  color: black;
 }
 .setting .element-secondary-button2 {
   align-items: center;
@@ -240,11 +242,13 @@
   width: 60px;
   height: 27px;
 }
-.table{
+.table {
   text-align: center;
   width: 976px;
   display: flex;
   flex-direction: column;
+  align-content: center;
+  align-items: center;
 }
 .setting .frame-a {
   align-items: center;
@@ -262,12 +266,12 @@ td{
   height: 50px;
   text-align: center;
   vertical-align: middle;
-  width: 70%;
+  width: 600px;
 
 }
 th{
   height: 67px;
-  width: 30%;
+  width: 300px;
   text-align: center;
   vertical-align: middle;
 }

@@ -20,7 +20,6 @@
 <div class="container main_container" layout:fragment="content">
     <form action="#">
     <div class="list">
-
             <div class="frame">
                 <div class="view">
                     <div class="text-wrapper">귀가 동의서</div>
@@ -31,45 +30,32 @@
                     <div class="element-dropdown-wrapper">
                         <div class="element-dropdown">
                             <select class="label">
-                                <option value="all">전체 반</option>
-                                <option value="class1">1반</option>
-                                <option value="class2">2반</option>
-                                <option value="class3">3반</option>
+                                <option value="all">내 자녀 보기</option>
+                                <option value="class1">신짱구</option>
+                                <option value="class2">신짱아</option>
+                                <option value="class3">흰둥이</option>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
                                 </svg>
                             </select>
                         </div>
                     </div>
-                    <div class="div-wrapper">
-                        <div class="element-dropdown-wrapper">
-                            <div class="element-dropdown">
-                                <select class="label">
-                                    <option value="kidAll">전체 원아 보기</option>
-                                    <option value="kid1">가가가</option>
-                                    <option value="kid2">나나나</option>
-                                    <option value="kid3">다다다</option>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
-                                    </svg>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="pick">
-                    <div class="date-picker" style="width:235px;">
+                    <div class="date-picker">
                         <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
                             <path d="M18.75 20.8333V24.9999H14.5833V20.8333H18.75ZM27.0833 20.8333V24.9999H22.9167V20.8333H27.0833ZM35.4167 20.8333V24.9999H31.25V20.8333H35.4167ZM39.5833 6.24992C40.6884 6.24992 41.7482 6.68891 42.5296 7.47031C43.311 8.25171 43.75 9.31152 43.75 10.4166V39.5833C43.75 40.6883 43.311 41.7481 42.5296 42.5295C41.7482 43.3109 40.6884 43.7499 39.5833 43.7499H10.4167C9.3116 43.7499 8.25179 43.3109 7.47039 42.5295C6.68899 41.7481 6.25 40.6883 6.25 39.5833V10.4166C6.25 9.31152 6.68899 8.25171 7.47039 7.47031C8.25179 6.68891 9.3116 6.24992 10.4167 6.24992H12.5V2.08325H16.6667V6.24992H33.3333V2.08325H37.5V6.24992H39.5833ZM39.5833 39.5833V16.6666H10.4167V39.5833H39.5833ZM18.75 29.1666V33.3333H14.5833V29.1666H18.75ZM27.0833 29.1666V33.3333H22.9167V29.1666H27.0833ZM35.4167 29.1666V33.3333H31.25V29.1666H35.4167Z" fill="#FFDB21"/>
                         </svg>
                         <input type="text" class="form-control datepicker" placeholder="년/월/일" readonly>
+                        <a href="/returnhome/user/writeform" class="button-new">작성</a>
                     </div>
                 </div>
+
             </div>
 
         <div class="frame-a">
             <div>
-                <a href="/returnhome/admin/card" class="cardver">
+                <a href="/returnhome/user/card" class="cardver">
                     <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-view-stacked" viewBox="0 0 16 16">
                         <path d="M3 0h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2m0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm0 8h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2m0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/>
                     </svg>
@@ -77,7 +63,7 @@
                 </a>
             </div>
             <div>
-                <a href="/returnhome/admin/list" class="listver">
+                <a href="/returnhome/user/list" class="listver">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
                     </svg>
@@ -89,7 +75,7 @@
 
 
             <div class="card-list">
-                <a href="/returnhome/admin/detail" class="card">
+                <a href="/returnhome/user/detail" class="card">
                     <div class="frame-3">
                         <div class="frame-wrapper">
                             <div class="frame-4">
@@ -133,7 +119,7 @@
                     </div>
                     <div class="frame-15">
                         <div class="frame-16">
-                            <div class="text-wrapper-7">투약 요청일</div>
+                            <div class="text-wrapper-7">귀가 요청일</div>
                         </div>
                         <div class="frame-16">
                             <div class="text-wrapper-7">2024년 07월 05일</div>
