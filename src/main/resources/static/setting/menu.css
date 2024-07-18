@@ -5,9 +5,8 @@
   justify-content: center;
   width: 100%;
 }
-
 .setting .menu {
-  align-items: flex-start;
+  align-items: center;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -38,21 +37,37 @@
   position: relative;
   width: 341px;
 }
+.element-secondary-button-wrapper{
+  display: flex;
+  gap:10px;
+}
 
 .setting .element-secondary-button {
   align-items: center;
   background-color: #ffe668;
   border-radius: 8px;
   display: flex;
-  height: 47px;
+  height: 50px;
   justify-content: center;
   padding: 0px 10px;
   position: relative;
-  width: 131px;
+  width: 90px;
   border: none;
-  margin-left: 20px; /* 간격 조정 추가 */
 }
-
+.setting .element-secondary-button2 {
+  align-items: center;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  padding: 0px 10px;
+  position: relative;
+  width: 90px;
+  border: none;
+  text-decoration-line : none;
+  color:black;
+}
 
 .setting .div {
   color: #000000;
@@ -224,4 +239,120 @@
 .form-check.form-switch .form-check-input {
   width: 60px;
   height: 27px;
+}
+.table{
+  text-align: center;
+  width: 976px;
+  display: flex;
+  flex-direction: column;
+}
+.setting .frame-a {
+  align-items: center;
+  background-color: #f9fafb;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  width: 976px;
+}
+td{
+  height: 50px;
+  text-align: center;
+  vertical-align: middle;
+  width: 70%;
+
+}
+th{
+  height: 67px;
+  width: 30%;
+  text-align: center;
+  vertical-align: middle;
+}
+.kinder{
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #e0e0e0;
+  border-radius: 8px;
+  display: flex;
+  gap: 12px;
+  height: 50px;
+  padding: 8px 16px 8px 12px;
+  position: relative;
+  width: 600px;
+  text-align: center;
+}
+.notice{
+  text-align: center;
+  font-size: 11px;
+}
+.location{
+  width: 90px;
+  height: 50px;
+  text-align: center;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #e0e0e0;
+  border-radius: 8px;
+}
+.no {
+  width: 110px;
+  height: 50px;
+  text-align: center;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #e0e0e0;
+  border-radius: 8px;
+}
+.hypen{
+  text-align: center;
+  padding: 1px;
+}
+.button{
+  width: 110px;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+}
+#sample6_postcode{
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #e0e0e0;
+  border-radius: 8px;
+  margin: 0px 10px;
+}
+#sample6_address{
+  width: 380px;
+  height: 50px;
+  text-align: center;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #e0e0e0;
+  border-radius: 8px;
+}
+#sample6_detailAddress{
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #e0e0e0;
+  border-radius: 8px;
+  margin: 0px 10px;
+}
+tbody, td, tfoot, th, thead, tr {
+  border-color: inherit;
+  border-style: none;
+  border-width: 0;
 }

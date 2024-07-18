@@ -6,6 +6,17 @@ $(document).ready(function() {
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
+        googleCalendarApiKey: "AIzaSyAKURukCy6rYdcfKAFsNYhY6wpn7XLzRqA",
+        height: "700px",
+        expandRows: true,
+        locale: 'ko',
+        events:
+            {
+                googleCalendarId : 'ko.south_korea#holiday@group.v.calendar.google.com',
+                backgroundColor: 'red'
+            }
+        ,
+
         themeSystem: 'bootstrap5',
         headerToolbar: {
             left: 'prev',
@@ -23,6 +34,7 @@ $(document).ready(function() {
             list: '목록'
         },
 
+        // 선택한 날짜 출력
         dateClick: function(dateInfo) {
             //날짜 선택
             selectedValue = dateInfo.dateStr;
@@ -36,8 +48,7 @@ $(document).ready(function() {
             document.getElementById("selectedDate").innerHTML = selectedValueStr;
         },
 
-
-        locale: 'ko',
+        // 날짜별 일정 출력
         datesSet: function (dateInfo) {
             // 처음 calendar 로드 시 모든 div 숨기고
             $('.single-schedule').hide();
@@ -91,6 +102,7 @@ $(document).ready(function() {
             {
                 title: '화채 만들기',
                 start: '2024-07-16',
+                end: '2024-07-19',
                 classNo: 0,
                 contents: '각 반마다 화채 만들기 실습이 있을 예정입니다.',
                 location: ''

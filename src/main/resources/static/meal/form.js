@@ -81,9 +81,16 @@ $(document).ready(function(){
 
             reader.readAsDataURL(file);
         } else { // 파일을 등록하지 않았을 경우, 원래 img/svg 표시
-            label.append('<img src="' + "http://via.placeholder.com/330x300" + '" alt="사진 미리보기" ' +
-                ' class="modal_meal_img">');
-            label.find('svg').show();
+            let url = window.location.href;
+            console.log(url);
+
+            if (url.includes('/meal/admin/write')) {
+                label.find('svg').show();
+            } else if (url.includes('/meal/admin/modify')) {
+                label.append('<img src="' + "http://via.placeholder.com/330x300" + '" alt="사진 미리보기" ' +
+                    ' class="modal_meal_img">');
+            }
+
         }
     });
 });

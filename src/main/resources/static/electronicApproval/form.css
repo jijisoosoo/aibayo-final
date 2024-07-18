@@ -1,0 +1,299 @@
+/* 페이지 상단 */
+/* .class_51 { width: 1280px; height: 58px; left: 0px; top: 0px; position: absolute } */
+.approval_detail_top {
+    height: 55px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* .class_58 { width: 274px; height: 58px; left: 0px; top: 0px; position: absolute } */
+.approval_detail_top_box {
+    height: 55px;
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+/* .class_60 { width: 55px; height: 55px; left: 0px; top: 0px; position: absolute } */
+.approval_detail_top_svg {
+    width: 55px;
+    height: 55px;
+}
+
+/* .class_59 { width: 206px; left: 68px; top: 4px; position: absolute; color: black; font_size: 40px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
+.approval_detail_top_text {
+    color: black;
+    font-size: 48px;
+    font-weight: 500;
+    word-wrap: break-word;
+    line-height: 50px;
+}
+
+.approval_form_top_text  {
+    margin-left: 10px;
+    color: black;
+    font-size: 48px;
+    font-weight: 500;
+    word-wrap: break-word;
+    padding-bottom: 7px;
+    line-height: 55px;
+}
+
+.approval_detail_top_btn_box {
+    display: flex;
+    gap: 10px;
+}
+
+/* .class_55 { width: 144px; height: 47px; left: 970px; top: 0px; position: absolute } */
+.approval_detail_top_btn {
+    width: 144px;
+    height: 47px;
+    align-self: center;
+}
+
+/* .class_56 { width: 144px; height: 47px; left: 0px; top: 0px; position: absolute; background: #FFDB21; border-radius: 10px } */
+.btn_box {
+    width: 144px;
+    height: 47px;
+}
+
+/* .class_57 { left: 49px; top: 7px; position: absolute; color: black; font-size: 25px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
+.btn_text {
+    font-size: 20px;
+    font-weight: 500;
+    word-wrap: break-word;
+    line-height: 35px;
+}
+
+/* 결재 내용-제목 */
+/* .class_2 { width: 1280px; height: 1032px; left: 0px; top: 105px; position: absolute; border-radius: 15px; border: 1px rgba(0, 0, 0, 0.30) solid } */
+.approval_detail_content {
+    border-radius: 15px;
+    border: 1px rgb(195 195 195 / 30%) solid;
+}
+
+/* .class_49 { width: 1280px; height: 100px; left: 0px; top: 0px; position: absolute; border-bottom: 1px rgba(0, 0, 0, 0.30) solid } */
+.approval_detail_content_title_box {
+    width: 100%;
+    height: 100px;
+    border-bottom: 1px rgb(195 195 195 / 30%) solid;
+    display: flex;
+    align-items: center;
+}
+
+/* .class_50 { left: 36px; top: 27px; position: absolute; color: black; font-size: 40px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
+.approval_detail_content_title {
+    color: black;
+    font-size: 24px;
+    font-weight: 500;
+    word-wrap: break-word;
+    line-height: 100px;
+    margin-left: 55px;
+}
+
+.approval_detail_content_body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 50px 0;
+    gap: 30px;
+}
+
+.approval_table_box {
+    display: flex;
+    width: 567px;
+    height: 750px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px rgb(195 195 195 / 70%) solid;
+    border-radius: 10px;
+}
+
+.approval_table_row {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border-bottom: 1px rgb(195 195 195 / 70%) solid;
+}
+
+.approval_table_title_col {
+    width: 30%;
+    background-color: #FFDB21;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title_col_text {
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+    word-wrap: break-word;
+}
+
+.content_col_text {
+    color: black;
+    font-size: 16px;
+    word-wrap: break-word;
+}
+
+.approval_table_content_col {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row_first {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.title_col_first {
+    border-top-left-radius: 10px;
+}
+
+.content_col_first {
+    border-top-right-radius: 10px;
+}
+
+.row_last {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: none;
+}
+
+.title_col_last {
+    border-bottom-left-radius: 10px;
+}
+
+.content_col_last {
+    border-bottom-right-radius: 10px;
+}
+
+.btn_box {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.content_col_input_box {
+    justify-content: flex-start;
+    padding: 10px;
+    gap: 10px;
+}
+
+/* 사유 선택 */
+.input_box {
+    /* width: 157px; */
+    border-radius: 10px;
+}
+
+/* .class_5 { width: 200px; height: 50px; padding-left: 16px; padding-right: 16px; padding-top: 8px; padding-bottom: 8px; background: white; border-radius: 8px; border: 1px #E0E0E0 solid; justify-content: center; align-items: center; gap: 16px; display: flex } */
+.reason_text {
+    width: 200px;
+    height: 42px;
+    color: gray;
+    font-size: inherit;
+    word-wrap: break-word;
+}
+
+.custom_select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='gray' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e")
+}
+
+.approval_svg_box {
+    width: 30px;
+    height: 30px;
+}
+
+.approval_date_text_input {
+    color: black;
+    font-size: 16px;
+    word-wrap: break-word;
+    width: 150px;
+    height: 38px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* 모달 */
+.modal-header, .modal-footer {
+    border: 0;
+}
+
+.modal_header_title {
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    line-height: 29px;
+    word-wrap: break-word;
+}
+
+/* .class_8 { align-self: stretch; height: 294px; padding-left: 44px; padding-right: 44px; padding-top: 30px; padding-bottom: 30px; background: #F7F7F7; border-radius: 15px; overflow: hidden; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 30px; display: flex } */
+.modal_body {
+    align-self: stretch;
+    padding: 30px 44px;
+    background: #F7F7F7;
+    border-radius: 15px;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 30px;
+    display: flex;
+    margin: 0 10px;
+}
+
+.modal_reject_box {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+}
+
+.modal_reject_body {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 10px;
+    display: inline-flex
+}
+
+.modal_reject_input {
+    align-self: stretch;
+    padding: 10px 20px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    display: inline-flex
+}
+
+.modal_footer_invite {
+    justify-content: center;
+}
+
+.modal_btn_box {
+    width: 150px;
+    height: 50px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    display: flex
+}
+
+.modal_btn_text {
+    color: black;
+    font-size: 20px;
+    line-height: 30px;
+    word-wrap: break-word;
+}

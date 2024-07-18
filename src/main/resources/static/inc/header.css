@@ -24,6 +24,7 @@ body {
     font-weight: 500;
     line-height: 140px;
     word-wrap: break-word;
+    text-decoration-line : none;
 }
 
 .h_class_71 {
@@ -31,7 +32,7 @@ body {
     height: 150px;
     justify-content: end;
     align-items: center;
-    gap: 25px;
+    gap: 10px;
     display: flex;
     margin-right: 20px;
 }
