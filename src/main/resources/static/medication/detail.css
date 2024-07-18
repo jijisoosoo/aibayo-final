@@ -33,7 +33,7 @@
 .frame .text-wrapper {
     align-self: stretch;
     color: #000000;
-    font-family: "Inter-Bold", Helvetica;
+    /*font-family: "Inter-Bold", Helvetica;*/
     font-size: 30px;
     font-weight: 700;
     letter-spacing: 0;
@@ -380,7 +380,7 @@
 
 .frame .text-wrapper-7 {
     color: #000000;
-    font-family: "Inter-Bold", Helvetica;
+    /*font-family: "Inter-Bold", Helvetica;*/
     font-size: 20px;
     font-weight: 700;
     letter-spacing: 0;
@@ -511,7 +511,7 @@
 
 .frame .text-wrapper-9 {
     color: #000000;
-    font-family: "Inter-Bold", Helvetica;
+    /*font-family: "Inter-Bold", Helvetica;*/
     font-size: 16px;
     font-weight: 700;
     letter-spacing: 0;
@@ -659,7 +659,7 @@
 
 .frame .text-wrapper-10 {
     color: #000000;
-    font-family: "Inter-Bold", Helvetica;
+    /*font-family: "Inter-Bold", Helvetica;*/
     font-size: 16px;
     font-weight: 700;
     letter-spacing: 0;
