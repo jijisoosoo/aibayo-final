@@ -21,7 +21,7 @@ public class NotepadController {
         // 역할에 따라 사용자/관리자 구분하여 이동
         // 사용자의 유치원번호의 사용자가 등록한 모든 알림장 조회
 //        List<NotepadDto> notepads = notepadService.getAllByKinderNo(1);
-        notepadService.getAllByKinderNo(1);
+        notepadService.getAllByKinderNo(1L);
 
         return "/notepad/admin/list";
     }

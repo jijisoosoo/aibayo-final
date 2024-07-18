@@ -2,17 +2,17 @@ package com.aico.aibayo.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
-import lombok.RequiredArgsConstructor;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@RequiredArgsConstructor
-public class QueryDSLConfig {
-    private final EntityManager entityManager;
+public class QuerydslConfig {
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Bean
-    public JPAQueryFactory jpaQueryFactory() {
+    public JPAQueryFactory jpaQueryFactory(){
         return new JPAQueryFactory(entityManager);
     }
 }
