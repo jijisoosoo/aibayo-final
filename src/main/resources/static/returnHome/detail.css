@@ -33,7 +33,7 @@
 .frame .text-wrapper {
     align-self: stretch;
     color: #000000;
-    font-family: "Inter-Bold", Helvetica;
+    /*font-family: "Inter-Bold", Helvetica;*/
     font-size: 30px;
     font-weight: 700;
     letter-spacing: 0;
@@ -71,7 +71,7 @@
 
 .frame .text-wrapper-2 {
     color: #000000;
-    font-family: "Inter-Medium", Helvetica;
+    /*font-family: "Inter-Medium", Helvetica;*/
     font-size: 16px;
     font-weight: 500;
     letter-spacing: 0;
@@ -99,7 +99,7 @@
 
 .frame .text-wrapper-3 {
     color: #000000;
-    font-family: "Inter-Medium", Helvetica;
+    /*font-family: "Inter-Medium", Helvetica;*/
     font-size: 16px;
     font-weight: 500;
     letter-spacing: 0;
@@ -162,7 +162,7 @@
 
 .frame .text-wrapper-4 {
     color: #000000;
-    font-family: "Inter-Medium", Helvetica;
+    /*font-family: "Inter-Medium", Helvetica;*/
     font-size: 20px;
     font-weight: 500;
     letter-spacing: 0;
@@ -249,7 +249,7 @@
 
 .frame .text-wrapper-5 {
     color: #000000;
-    font-family: "Inter-Medium", Helvetica;
+    /*font-family: "Inter-Medium", Helvetica;*/
     font-size: 16px;
     font-weight: 500;
     letter-spacing: 0;
@@ -273,7 +273,7 @@
 
 .frame .text-wrapper-6 {
     color: #5b5b5b;
-    font-family: "Inter-Medium", Helvetica;
+    /*font-family: "Inter-Medium", Helvetica;*/
     font-size: 16px;
     font-weight: 500;
     letter-spacing: 0;
@@ -380,7 +380,7 @@
 
 .frame .text-wrapper-7 {
     color: #000000;
-    font-family: "Inter-Bold", Helvetica;
+    /*font-family: "Inter-Bold", Helvetica;*/
     font-size: 20px;
     font-weight: 700;
     letter-spacing: 0;
@@ -453,7 +453,7 @@
 
 .frame .text-wrapper-8 {
     color: #000000;
-    font-family: "Inter-Regular", Helvetica;
+    /*font-family: "Inter-Regular", Helvetica;*/
     font-size: 16px;
     font-weight: 400;
     letter-spacing: 0;
@@ -511,7 +511,7 @@
 
 .frame .text-wrapper-9 {
     color: #000000;
-    font-family: "Inter-Bold", Helvetica;
+    /*font-family: "Inter-Bold", Helvetica;*/
     font-size: 16px;
     font-weight: 700;
     letter-spacing: 0;
@@ -659,7 +659,7 @@
 
 .frame .text-wrapper-10 {
     color: #000000;
-    font-family: "Inter-Bold", Helvetica;
+    /*font-family: "Inter-Bold", Helvetica;*/
     font-size: 16px;
     font-weight: 700;
     letter-spacing: 0;
@@ -701,7 +701,7 @@
 
 .frame .text-wrapper-11 {
     color: #000000;
-    font-family: "Inter-Medium", Helvetica;
+    /*font-family: "Inter-Medium", Helvetica;*/
     font-size: 16px;
     font-weight: 500;
     letter-spacing: 0;
@@ -754,7 +754,7 @@
 
 .frame .label {
     color: #828282;
-    font-family: var(--small-text-font-family);
+    /*font-family: var(--small-text-font-family);*/
     font-size: var(--small-text-font-size);
     font-style: var(--small-text-font-style);
     font-weight: var(--small-text-font-weight);
@@ -768,10 +768,6 @@
 .table{
     text-align: center;
 }
-
-
-
-
 .date-picker {
     display: inline-block;
     position: relative;
@@ -870,4 +866,24 @@ a {
 }
 .pn{
     display: flex;
+}
+.sign {
+    width: 970px;
+    height: fit-content;
+    margin: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    float: left;
+}
+.promise{
+    display: flex;
+    justify-content: flex-end;
+}
+.date{
+    display: flex;
+    justify-content: flex-end;
+}
+.parent{
+    display: flex;
+    justify-content: flex-end;
 }
