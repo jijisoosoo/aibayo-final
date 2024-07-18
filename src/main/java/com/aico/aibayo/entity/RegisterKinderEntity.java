@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "register_kinder")
@@ -21,9 +22,9 @@ public class RegisterKinderEntity {
     @Column(name="ldgr_id")
     private String ldgrId; //원장 아이디
     @Column(name="kinder_kid_drop")
-    private LocalDateTime kinderKidDrop; // 유치원 등원시간
+    private LocalTime kinderKidDrop; // 유치원 등원시간
     @Column(name="kinder_kid_pickup")
-    private LocalDateTime kinderKidPickup; //유치원 하원시간
+    private LocalTime kinderKidPickup; //유치원 하원시간
     @Column(name="kinderCode")
     private String kinderCode; //유치원 코드
     @Column(name="kinder_reg_date")

@@ -16,4 +16,19 @@ public class SettingController {
 //        return "/setting/function";
 //    }
     //펑션은 안하기로 했음요 !
+    @GetMapping("/add")
+    public String add(){
+        return "/setting/add";
+    }
+    @GetMapping("/modify")
+    public String modify(){
+        return "/setting/modify";
+    }
+    @GetMapping("/info")
+    public String info(){
+        return "/setting/info";
+    }
+
+
+
 }

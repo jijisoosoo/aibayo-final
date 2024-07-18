@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
     @Controller
-    @RequestMapping("/retrunhome")
+    @RequestMapping("/returnhome")
     public class ReturnHomeController {
         @GetMapping("/admin/card")
         public String admincard(){

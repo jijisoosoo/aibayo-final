@@ -141,7 +141,7 @@
     background-color: #ffe668;
     border-radius: 8px;
     box-shadow: var(--button-shadow);
-    height: 59px;
+    height: 50px;
     position: relative;
     width: 150px;
     border: none ;
@@ -149,6 +149,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    text-decoration-line : none;
+    color: black;
+    margin-left: 20px;
 }
 
 .list .text-wrapper-2 {
@@ -421,7 +424,7 @@
 
 .list .text-wrapper-6 {
     color: #000000;
-    font-family: var(--presets-body2-font-family);
+    /*font-family: var(--presets-body2-font-family);*/
     font-size: var(--presets-body2-font-size);
     font-style: var(--presets-body2-font-style);
     font-weight: var(--presets-body2-font-weight);
@@ -640,35 +643,39 @@
 .medication:hover{
     background-color: #f0f0f0;
 }
-.date-picker{
+.date-picker {
     text-align: center;
     display: flex;
-    height:50px;
-    width: 200px;
-}
-.pick{
-    display: flex;
-}
-.custom-svg {
-    width: 34px;
-    height: 34px;
-}
+    height: 50px;
+    width: 327px;
 
-svg.bi-calendar3 {
-    width: 59px;
-    height: 59px;
-    display: flex;
-    padding: 0px;
-    margin: 0px;
-    color: #ffe668;
-}
-.datepicker{
-    text-align: center;
-    border-radius: 8px;
-}
-.datepicker-dropdown{
-    top: 302px;
-    left: 977.58px;
-    z-index: 10;
-    display: block;
+    .pick {
+        display: flex;
+    }
+
+    .custom-svg {
+        width: 34px;
+        height: 34px;
+    }
+
+    svg.bi-calendar3 {
+        width: 59px;
+        height: 59px;
+        display: flex;
+        padding: 0px;
+        margin: 0px;
+        color: #ffe668;
+    }
+
+    .datepicker {
+        text-align: center;
+        border-radius: 8px;
+    }
+
+    .datepicker-dropdown {
+        top: 302px;
+        left: 977.58px;
+        z-index: 10;
+        display: block;
+    }
 }
