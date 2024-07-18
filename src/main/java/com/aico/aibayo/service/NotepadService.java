@@ -8,5 +8,5 @@ import java.util.List;
 
 @Service
 public interface NotepadService {
-    List<NotepadEntity> getAllByKinderNo(Long kinderNo);
+    List<NotepadDto> getAllByKinderNo(Long kinderNo);
 }

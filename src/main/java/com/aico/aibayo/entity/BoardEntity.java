@@ -21,7 +21,7 @@ public class BoardEntity {
     @Column(name = "invisible_flag")
     private String invisibleFlag;
     @Column(name = "board_type")
-    private int boardType;
+    private Integer boardType;
     @Column
     private String writer;
     @Column(name = "board_title")
@@ -31,7 +31,7 @@ public class BoardEntity {
     @Column(name = "board_pic")
     private String boardPic;
     @Column(name = "board_reg_date")
-    private String boardRegDate;
+    private LocalDateTime boardRegDate;
     @Column(name = "board_delete_date")
     private LocalDateTime boardDeleteDate;
     @Column(name = "board_modify_date")
