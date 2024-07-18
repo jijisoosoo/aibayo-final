@@ -11,6 +11,7 @@ import java.util.List;
 public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
     private final JPAQueryFactory jpaQueryFactory;
 
+    @Override
     public List<Tuple> findAllByKinderNo(Long kinderNo) {
         QMemberEntity member = QMemberEntity.memberEntity;
         QBoardEntity board = QBoardEntity.boardEntity;

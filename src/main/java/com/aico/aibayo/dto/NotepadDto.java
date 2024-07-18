@@ -9,8 +9,14 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class NotepadDto {
-    private Long notepadNo;
     private Long boardNo;
+    private Integer boardType;
+    private 
+
+    private Long id;
+    private Long kinderNo;
+
+    private Long notepadNo;
     private int weather;
     private String hasLifeRecord;
 }
