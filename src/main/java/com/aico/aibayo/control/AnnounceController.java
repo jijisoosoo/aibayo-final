@@ -27,11 +27,11 @@ public class AnnounceController {
     public String modifyForm(){
         return "/announce/admin/modifyForm";
     }
-//    user
-@GetMapping("/user/card")
-public String usercard(){
-    return "/announce/user/card";
-}
+    //    user
+    @GetMapping("/user/card")
+    public String usercard(){
+        return "/announce/user/card";
+    }
     @GetMapping("/user/list")
     public String userList(){
         return "/announce/user/list";
@@ -40,6 +40,7 @@ public String usercard(){
     public String userdetail(){
         return "/announce/user/detail";
     }
+
 
 
 
