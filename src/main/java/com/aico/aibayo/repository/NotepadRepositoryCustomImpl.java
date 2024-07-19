@@ -42,6 +42,7 @@ public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
                         board.invisibleFlag.eq(BooleanEnum.FALSE.getBool()),
                         member.kinderNo.eq(kinderNo)
                 )
+                .orderBy(board.boardRegDate.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
