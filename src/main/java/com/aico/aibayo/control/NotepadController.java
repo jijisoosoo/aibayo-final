@@ -4,10 +4,13 @@ import com.aico.aibayo.dto.NotepadDto;
 //import com.aico.aibayo.service.NotepadService;
 import com.aico.aibayo.service.NotepadService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -18,11 +21,10 @@ public class NotepadController {
     private final NotepadService notepadService;
 
     @GetMapping("/admin/list")
-    public String adminList(Model model) {
+    public String adminList(@RequestParam(defaultValue = "0") int page, Model model) {
         // 역할에 따라 사용자/관리자 구분하여 이동
         // 사용자의 유치원번호의 사용자가 등록한 모든 알림장 조회
-//        List<NotepadDto> notepads = notepadService.getAllByKinderNo(1);
-        List<NotepadDto> notepads = notepadService.getAllByKinderNo(1L);
+        Page<NotepadDto> notepads = notepadService.getAllByKinderNo(1L, page);
         model.addAttribute("notepads", notepads);
 
         return "/notepad/admin/list";
@@ -33,9 +35,10 @@ public class NotepadController {
         return "/notepad/user/list";
     }
 
-    // 나중에 detail 대신 boardno 대신 가져오기
-    @GetMapping("/admin/detail")
-    public String adminDetail() {
+    // 나중에 detail 대신 notepadNo 대신 가져오기
+    @GetMapping("/admin/{notepadNo}")
+    public String adminDetail(@PathVariable Long notepadNo) {
+        
         return "/notepad/admin/detail";
     }
 

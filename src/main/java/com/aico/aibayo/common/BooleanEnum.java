@@ -1,4 +1,4 @@
-package com.aico.aibayo.entity;
+package com.aico.aibayo.common;
 
 import lombok.Getter;
 
