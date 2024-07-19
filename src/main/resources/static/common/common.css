@@ -104,6 +104,19 @@ body {
     color: black;
 }
 
+.page-item.active .page-link {
+    background-color: #FFDB21;
+    border-color: #FFDB21;
+}
+
+.page-item.disabled .page-link svg path  {
+    /*color: #6c757d;*/
+    /*pointer-events: none;*/
+    /*background-color: #fff;*/
+    /*border-color: #dee2e6;*/
+    fill: #dee2e6;
+}
+
 .page-text-ab {
     color: black;
     font-size: 18px;
