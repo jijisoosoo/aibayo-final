@@ -18,7 +18,7 @@ public class MedicationDetailEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long mediDetailNo; //투약 내용 번호
     @Column(name="medi_order_no")
-    private int mediOrderNo; //투약 의뢰번호
+    private Long mediOrderNo; //투약 의뢰번호
     @Column(name="medi_type")
     private String mediType; //약 종류
     @Column
