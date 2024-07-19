@@ -1,15 +1,8 @@
-// const myModal = document.getElementById('myModal')
-// const myInput = document.getElementById('myInput')
-//
-// myModal.addEventListener('shown.bs.modal', () => {
-//     myInput.focus()
-// })
 
 function button_event(){
     if (confirm("정말 삭제하시겠습니까??") === true){    //확인
         document.form.submit();
     }else{   //취소
-
     }
 }
 

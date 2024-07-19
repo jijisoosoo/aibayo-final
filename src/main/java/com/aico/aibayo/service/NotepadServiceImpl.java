@@ -4,6 +4,7 @@ import com.aico.aibayo.dto.NotepadDto;
 //import com.aico.aibayo.entity.QNotepadEntity;
 import com.aico.aibayo.entity.*;
 import com.aico.aibayo.repository.NotepadReceiverRepository;
+import com.aico.aibayo.repository.NotepadRepository;
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -17,15 +18,15 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class NotepadServiceImpl implements NotepadService {
-    private final NotepadReceiverRepository notepadReceiverRepository;
+    private final NotepadRepository notepadRepository;
 
     @Override
-    public List<NotepadEntity> getAllByKinderNo(Long kinderNo) {
+    public List<NotepadDto> getAllByKinderNo(Long kinderNo) {
 
-//        List<Tuple> notepads = notepadReceiverRepository.findAllByKinderNo(kinderNo)
+        List<NotepadDto> notepads = notepadRepository.findAllByKinderNo(kinderNo);
 
-//        notepads.forEach(tuple -> log.info("\n{}", tuple.toString()));
+        notepads.forEach(tuple -> log.info("\n{}", tuple.toString()));
 
-        return List.of();
+        return notepads;
     }
 }
