@@ -23,5 +23,9 @@ public class LoginController {
         return "login/signInFindPw";
     }
 
+    @GetMapping("/myPage")
+    public String myPage() {
+        return "login/myPage";
+    }
 
 }
