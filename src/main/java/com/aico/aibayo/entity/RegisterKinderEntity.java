@@ -34,23 +34,23 @@ public class RegisterKinderEntity {
     @Column(name="kinder_delete_date")
     private LocalDateTime kinderDeleteDate; //유치원 삭제일자
     @Column(name="announce_status")
-    private int announceStatus; //공지사항 상태
+    private Integer announceStatus; //공지사항 상태
     @Column(name="notepad_status")
-    private int notepadStatus; //알림장 상태
+    private Integer notepadStatus; //알림장 상태
     @Column(name="meal_status")
-    private int mealStatus; //식단표 상태
+    private Integer mealStatus; //식단표 상태
     @Column(name="medication_status")
-    private int medicationStatus; //투약 의뢰서 상태
+    private Integer medicationStatus; //투약 의뢰서 상태
     @Column(name="return_home_status")
-    private int returnHomeStatus; //귀가 동의서 상태
+    private Integer returnHomeStatus; //귀가 동의서 상태
     @Column(name="attendance_status")
-    private int attendanceStatus; //출석부 상태
+    private Integer attendanceStatus; //출석부 상태
     @Column(name="schedule_status")
-    private int scheduleStatus; //일정표 상태
+    private Integer scheduleStatus; //일정표 상태
     @Column(name="pick_drop_status")
-    private int pickDropStatus; //안심 승하차 상태
+    private Integer pickDropStatus; //안심 승하차 상태
     @Column(name="life_record_status")
-    private int lifeRecordStatus; //생활 기록 상태
+    private Integer lifeRecordStatus; //생활 기록 상태
     @Column(name="chat_status")
-    private int chatStatus; //열린소통 상태
+    private Integer chatStatus; //열린소통 상태
 }
