@@ -17,7 +17,7 @@ public class ReturnHomeAgreementParentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rhAgreeParentNo; //귀가 동의 보호자 번호
     @Column(name="rh_agree_no")
-    private Integer rhAgreeNo; //귀가 동의 번호 0:주보호자 1:부보호자
+    private Long rhAgreeNo; //귀가 동의 번호 0:주보호자 1:부보호자
     @Column(name="rh_agree_parent_type")
     private Integer rhAgreeParentType; //귀가 동의 보호자 분류
     @Column(name="rh_agree_parent_name")
