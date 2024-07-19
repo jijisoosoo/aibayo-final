@@ -1,0 +1,129 @@
+.container .frame-2 {
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+}
+
+.container .img-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    padding: 50px 0px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+}
+
+.container .component-wrapper {
+    position: relative;
+    width: 166px;
+    height: 136px;
+}
+
+.container .component {
+    position: relative;
+    width: 136px;
+    height: 136px;
+    left: 15px;
+    background-color: #ffe668;
+    border-radius: 68px;
+}
+
+.container .image {
+    position: absolute;
+    width: 136px;
+    height: 96px;
+    top: 10px;
+    left: 0;
+    object-fit: cover;
+}
+
+.container .text-wrapper-4 {
+    position: relative;
+    width: fit-content;
+    font-weight: 600;
+    color: #000000;
+    font-size: 32px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.container .buttonarea {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 23px;
+    position: relative;
+    align-self: stretch;
+    width: 100%;
+    flex: 0 0 auto;
+}
+
+.container .button-home {
+    display: flex;
+    width: 146px;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 0px 16px;
+    position: relative;
+    background-color: #bdbdbd;
+    border-radius: 8px;
+}
+
+.container .text-wrapper-5 {
+    position: relative;
+    width: fit-content;
+    font-weight: var(--small-text-font-weight);
+    color: #ffffff;
+    font-size: var(--small-text-font-size);
+    letter-spacing: var(--small-text-letter-spacing);
+    line-height: var(--small-text-line-height);
+    white-space: nowrap;
+    font-style: var(--small-text-font-style);
+}
+
+.container .button-status {
+    display: flex;
+    width: 146px;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 16px;
+    position: relative;
+    background-color: #ffe668;
+    border-radius: 8px;
+}
+
+.container .text-wrapper-6 {
+    position: relative;
+    width: fit-content;
+    font-weight: var(--small-text-font-weight);
+    color: #000000;
+    font-size: var(--small-text-font-size);
+    letter-spacing: var(--small-text-letter-spacing);
+    line-height: var(--small-text-line-height);
+    white-space: nowrap;
+    font-style: var(--small-text-font-style);
+}
+
+:root {
+    --x-1: rgba(133, 199, 233, 1);
+    --x-2: rgba(13, 17, 83, 1);
+    --x-3: rgba(255, 255, 255, 1);
+    ---font-weight: 500;
+    ---font-size: 100px;
+    ---letter-spacing: -5px;
+    ---line-height: 89.99999761581421%;
+    ---font-style: normal;
+    --small-text-font-weight: 500;
+    --small-text-font-size: 16px;
+    --small-text-letter-spacing: 0px;
+    --small-text-line-height: 150%;
+    --small-text-font-style: normal;
+}

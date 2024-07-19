@@ -876,19 +876,6 @@
     flex: 0 0 auto;
 }
 
-.container .div-15 {
-    display: flex;
-    width: 300px;
-    height: 50px;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0px 20px;
-    position: relative;
-    background-color: #ffffff;
-    border-radius: 8px;
-    border: 1px solid;
-    border-color: #e0e0e0;
-}
 
 .container .textarea-2 {
     gap: 5px;
@@ -899,12 +886,6 @@
     flex: 0 0 auto;
 }
 
-
-.container .vector {
-    position: relative;
-    width: 18px;
-    height: 20px;
-}
 
 .container .text-wrapper-22 {
     position: relative;
