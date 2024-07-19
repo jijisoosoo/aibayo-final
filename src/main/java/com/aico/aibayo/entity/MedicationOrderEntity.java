@@ -18,7 +18,7 @@ public class MedicationOrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long mediOrderNo; //투약 의뢰 번호
     @Column(name="order_no")
-    private int orderNo; //의뢰 번호
+    private Long orderNo; //의뢰 번호
     @Column
     private String symptoms; //증상
 }

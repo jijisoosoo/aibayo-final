@@ -103,28 +103,23 @@
     position: relative;
     width: 170px;
   }
-  
-  .ann-write .label {
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    color: #828282;
-    display: -webkit-box;
-    flex: 1;
-    /*font-family: var(--presets-body2-font-family);*/
-    /*font-size: var(--presets-body2-font-size);*/
-    /*font-style: var(--presets-body2-font-style);*/
-    /*font-weight: var(--presets-body2-font-weight);*/
-    /*letter-spacing: var(--presets-body2-letter-spacing);*/
-    /*line-height: var(--presets-body2-line-height);*/
-    overflow: hidden;
-    position: relative;
-    text-overflow: ellipsis;
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-  
-  .ann-write .chevron-down {
+
+
+.ann-write .category,.ann-write .class {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  color: #828282;
+  display: -webkit-box;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  text-overflow: ellipsis;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.ann-write .chevron-down {
     height: 24px;
     position: relative;
     width: 24px;

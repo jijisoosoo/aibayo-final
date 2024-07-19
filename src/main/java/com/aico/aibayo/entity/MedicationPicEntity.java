@@ -12,7 +12,7 @@ import lombok.*;
 @Builder
 @ToString
 
-public class medicationPicEntity {
+public class MedicationPicEntity {
     @Id
     @Column(name="medi_order_no")
     private Long mediOrderNo; // 투약 의뢰번호
