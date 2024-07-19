@@ -2,17 +2,17 @@ package com.aico.aibayo.control;
 
 import com.aico.aibayo.dto.NotepadDto;
 //import com.aico.aibayo.service.NotepadService;
+import com.aico.aibayo.dto.NotepadSearchCondition;
 import com.aico.aibayo.service.NotepadService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 
 @Slf4j
@@ -26,7 +26,10 @@ public class NotepadController {
     public String adminList(@RequestParam(defaultValue = "1") int page, Model model) {
         // 역할에 따라 사용자/관리자 구분하여 이동
         // 사용자의 유치원번호의 사용자가 등록한 모든 알림장 조회
-        Page<NotepadDto> notepads = notepadService.getAllByKinderNo(1L, page);
+        NotepadSearchCondition condition = new NotepadSearchCondition();
+        condition.setKinderNo(1L);
+
+        Page<NotepadDto> notepads = notepadService.getAllByKinderNo(condition, page);
         model.addAttribute("notepads", notepads);
 
         log.info("getPageNumber: {}", notepads.getPageable().getPageNumber());
@@ -37,6 +40,17 @@ public class NotepadController {
         log.info("getTotalPages: {}", notepads.getTotalPages());
 
         return "/notepad/admin/list";
+    }
+
+    @PostMapping("/admin/searchDate")
+    @ResponseBody
+    public Page<NotepadDto> searchDate(@RequestBody NotepadSearchCondition condition) {
+        log.info("{}", condition);
+
+        Page<NotepadDto> notepads = notepadService.getAllByKinderNo(condition);
+
+
+        return notepads;
     }
 
     @GetMapping("/user/list")

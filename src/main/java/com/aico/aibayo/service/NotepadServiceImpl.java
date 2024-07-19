@@ -2,6 +2,7 @@ package com.aico.aibayo.service;
 
 import com.aico.aibayo.dto.NotepadDto;
 //import com.aico.aibayo.entity.QNotepadEntity;
+import com.aico.aibayo.dto.NotepadSearchCondition;
 import com.aico.aibayo.entity.*;
 import com.aico.aibayo.repository.NotepadReceiverRepository;
 import com.aico.aibayo.repository.NotepadRepository;
@@ -26,12 +27,24 @@ public class NotepadServiceImpl implements NotepadService {
     private static final int PAGE_SIZE = 6;
 
     @Override
-    public Page<NotepadDto> getAllByKinderNo(Long kinderNo, int page) {
+    public Page<NotepadDto> getAllByKinderNo(NotepadSearchCondition cond) {
+        Pageable pageable = PageRequest.of(0, PAGE_SIZE);
+
+        return getNotepadDtos(cond, pageable);
+    }
+
+    @Override
+    public Page<NotepadDto> getAllByKinderNo(NotepadSearchCondition cond, int page) {
         Pageable pageable = PageRequest.of(page - 1, PAGE_SIZE);
-        Page<NotepadDto> notepads = notepadRepository.findAllByKinderNo(kinderNo, pageable);
+
+        return getNotepadDtos(cond, pageable);
+    }
+
+    private Page<NotepadDto> getNotepadDtos(NotepadSearchCondition cond, Pageable pageable) {
+        Page<NotepadDto> notepads = notepadRepository.findAllByKinderNo(cond, pageable);
 
         notepads.forEach(tuple -> log.info("\n{}", tuple.toString()));
-
         return notepads;
     }
+
 }
