@@ -119,7 +119,7 @@
   margin-left: 10px;
 }
 
-.ann-list .label {
+.ann-list .category , .ann-list .class {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   color: #828282;
