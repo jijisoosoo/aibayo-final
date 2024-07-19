@@ -19,13 +19,10 @@ public class RegisterKinderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="kinder_no")
     private Long kinderNo; //유치원 번호
-    @Column(name="ldgr_id")
-    private String ldgrId; //원장 아이디
-    @Column(name="kinder_kid_drop")
-    private LocalTime kinderKidDrop; // 유치원 등원시간
-    @Column(name="kinder_kid_pickup")
-    private LocalTime kinderKidPickup; //유치원 하원시간
-    @Column(name="kinderCode")
+    private LocalTime kinderOpenTime; // 유치원 등원시간
+    @Column(name="kinder_close_time")
+    private LocalTime kinderCloseTime; //유치원 하원시간
+    @Column(name="kinder_code")
     private String kinderCode; //유치원 코드
     @Column(name="kinder_reg_date")
     private LocalDateTime kinderRegDate; //유치원 등록일자
