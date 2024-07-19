@@ -27,7 +27,7 @@ public class NotepadServiceImpl implements NotepadService {
 
     @Override
     public Page<NotepadDto> getAllByKinderNo(Long kinderNo, int page) {
-        Pageable pageable = PageRequest.of(page, PAGE_SIZE);
+        Pageable pageable = PageRequest.of(page - 1, PAGE_SIZE);
         Page<NotepadDto> notepads = notepadRepository.findAllByKinderNo(kinderNo, pageable);
 
         notepads.forEach(tuple -> log.info("\n{}", tuple.toString()));
