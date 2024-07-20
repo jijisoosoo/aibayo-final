@@ -23,7 +23,7 @@ public class BoardEntity {
     @Column(name = "board_type")
     private Integer boardType;
     @Column
-    private String writer;
+    private Long writer;
     @Column(name = "board_title")
     private String boardTitle;
     @Column(name = "board_contents")
