@@ -13,7 +13,6 @@ import lombok.*;
 @ToString
 public class LifeRecordEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "notepad_no")
     private Long notepadNo;
     @Column
