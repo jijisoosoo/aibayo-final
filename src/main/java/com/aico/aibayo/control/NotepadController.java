@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
+import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
 @Controller
@@ -30,27 +31,42 @@ public class NotepadController {
         condition.setKinderNo(1L);
 
         Page<NotepadDto> notepads = notepadService.getAllByKinderNo(condition, page);
-        model.addAttribute("notepads", notepads);
 
-        log.info("getPageNumber: {}", notepads.getPageable().getPageNumber());
-        log.info("getOffset: {}", notepads.getPageable().getOffset());
-        log.info("hasPrevious: {}", notepads.getPageable().hasPrevious());
-        log.info("first: {}", notepads.getPageable().first());
-        log.info("next: {}", notepads.getPageable().next());
-        log.info("getTotalPages: {}", notepads.getTotalPages());
-
-        return "/notepad/admin/list";
+        // 페이지네이션에 필요한 정보
+        return getPageInfoAndGoView(model, notepads);
     }
 
     @PostMapping("/admin/searchDate")
-    @ResponseBody
-    public Page<NotepadDto> searchDate(@RequestBody NotepadSearchCondition condition) {
+    public String searchDate(@RequestBody NotepadSearchCondition condition,
+                             Model model) {
         log.info("{}", condition);
 
         Page<NotepadDto> notepads = notepadService.getAllByKinderNo(condition);
 
+        // 페이지네이션에 필요한 정보
+        return getPageInfoAndGoView(model, notepads);
+    }
 
-        return notepads;
+    private String getPageInfoAndGoView(Model model, Page<NotepadDto> notepads) {
+        int totalPages = notepads.getTotalPages();
+        int currentPage = notepads.getNumber();
+        int startPage = Math.max(0, currentPage - 2);
+        int endPage = Math.min(totalPages - 1, currentPage + 2);
+
+        if (endPage - startPage < 4) {
+            if (startPage == 0) {
+                endPage = Math.min(4, totalPages - 1);
+            } else if (endPage == totalPages - 1) {
+                startPage = Math.max(0, totalPages - 5);
+            }
+        }
+
+        model.addAttribute("notepads", notepads);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+
+        return "/notepad/admin/list";
     }
 
     @GetMapping("/user/list")
