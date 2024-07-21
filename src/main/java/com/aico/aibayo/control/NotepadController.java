@@ -43,7 +43,7 @@ public class NotepadController {
                              Model model) {
         log.info("{}", condition);
 
-        Page<NotepadDto> notepads = notepadService.getAllByKinderNo(condition);
+        Page<NotepadDto> notepads = notepadService.getAllByKinderNo(condition, 1);
 
         // 페이지네이션에 필요한 정보
         return getPageInfoAndGoView(model, notepads, "/notepad/admin/list");
