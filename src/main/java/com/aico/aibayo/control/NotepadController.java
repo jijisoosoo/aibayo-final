@@ -100,13 +100,23 @@ public class NotepadController {
         int startPage = Math.max(0, currentPage - 2);
         int endPage = Math.min(totalPages - 1, currentPage + 2);
 
-        if (endPage - startPage < 4) {
-            if (startPage == 0) {
-                endPage = Math.min(4, totalPages - 1);
-            } else if (endPage == totalPages - 1) {
-                startPage = Math.max(0, totalPages - 5);
+        // 조회된 결과가 없을 때 endPage를 0으로 설정
+        if (totalPages == 0) {
+            endPage = 0;
+        } else {// 페이지 5개 범위 확인
+            if (endPage - startPage < 4) {
+                if (startPage == 0) {
+                    endPage = Math.min(4, totalPages - 1);
+                } else if (endPage == totalPages - 1) {
+                    startPage = Math.max(0, totalPages - 5);
+                }
             }
         }
+
+        log.info(">>>>>>>>>>>>>>>>>>>>>>pagination");
+        log.info("startPage: {}", startPage);
+        log.info("endPage: {}", endPage);
+        log.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 
         model.addAttribute("notepads", notepads);
         model.addAttribute("currentPage", currentPage);
