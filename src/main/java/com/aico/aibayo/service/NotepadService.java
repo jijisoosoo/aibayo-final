@@ -11,6 +11,6 @@ import java.util.List;
 
 @Service
 public interface NotepadService {
-    Page<NotepadDto> getAllByKinderNo(NotepadSearchCondition cond);
-    Page<NotepadDto> getAllByKinderNo(NotepadSearchCondition cond, int page);
+    Page<NotepadDto> getAllByKinderNo(NotepadSearchCondition condition);
+    Page<NotepadDto> getAllByKinderNo(NotepadSearchCondition condition, int page);
 }

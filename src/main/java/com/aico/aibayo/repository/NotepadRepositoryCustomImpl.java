@@ -9,6 +9,7 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.query.sqm.TemporalUnit;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
@@ -42,7 +43,7 @@ public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
                         notepad.notepadNo))
                 .from(notepad)
                 .join(board).on(board.boardNo.eq(notepad.boardNo))
-                .join(member).on(board.writer.eq(member.name))
+                .join(member).on(board.writer.eq(member.id))
                 .where(
                         getInvisibleFlagEq(board),
                         getKinderNoEq(cond.getKinderNo(), member),
@@ -56,7 +57,7 @@ public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
         JPAQuery<Long> count = jpaQueryFactory.select(notepad.count())
                 .from(notepad)
                 .join(board).on(board.boardNo.eq(notepad.boardNo))
-                .join(member).on(board.writer.eq(member.name))
+                .join(member).on(board.writer.eq(member.id))
                 .where(
                         getInvisibleFlagEq(board),
                         getKinderNoEq(cond.getKinderNo(), member)
@@ -72,7 +73,7 @@ public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
 
         LocalDate date = boardRegDate.toLocalDate();
         LocalDateTime startDateTime = date.atStartOfDay();
-        LocalDateTime endDateTime = date.atTime(LocalTime.MAX);
+        LocalDateTime endDateTime = date.atTime(LocalTime.MAX).minusSeconds(1L);
 
         return board.boardRegDate.between(startDateTime, endDateTime);
     }

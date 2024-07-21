@@ -264,6 +264,7 @@
   line-height: normal;
   white-space: nowrap;
   border: none;
+  width: 155px;
 }
 
 .container .datepicker:focus{
@@ -289,5 +290,26 @@
 .datepicker .active {
   border-radius: 100px;
   background-image: none !important;
-  background-color: #3fa6ff !important;
+  background-color: #0080ff !important;
+}
+
+.container .calendar-vector {
+  position: relative;
+  width: 18px;
+  height: 20px;
+}
+
+.container .calendar-pick {
+  display: flex;
+  width: fit-content;
+  height: 50px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 20px;
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid;
+  border-color: #e0e0e0;
+  gap: 20px;
 }

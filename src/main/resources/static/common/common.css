@@ -102,6 +102,7 @@ body {
 .page-link-ab:focus {
     background: #FFDB21;
     color: black;
+    box-shadow: 0 0 0 .25rem rgba(244, 211, 134, 0.717);
 }
 
 .page-item.active .page-link {
@@ -110,10 +111,6 @@ body {
 }
 
 .page-item.disabled .page-link svg path  {
-    /*color: #6c757d;*/
-    /*pointer-events: none;*/
-    /*background-color: #fff;*/
-    /*border-color: #dee2e6;*/
     fill: #dee2e6;
 }
 

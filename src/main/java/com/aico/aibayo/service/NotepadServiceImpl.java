@@ -27,23 +27,22 @@ public class NotepadServiceImpl implements NotepadService {
     private static final int PAGE_SIZE = 6;
 
     @Override
-    public Page<NotepadDto> getAllByKinderNo(NotepadSearchCondition cond) {
+    public Page<NotepadDto> getAllByKinderNo(NotepadSearchCondition condition) {
         Pageable pageable = PageRequest.of(0, PAGE_SIZE);
 
-        return getNotepadDtos(cond, pageable);
+        return getNotepadDtos(condition, pageable);
     }
 
     @Override
-    public Page<NotepadDto> getAllByKinderNo(NotepadSearchCondition cond, int page) {
+    public Page<NotepadDto> getAllByKinderNo(NotepadSearchCondition condition, int page) {
         Pageable pageable = PageRequest.of(page - 1, PAGE_SIZE);
 
-        return getNotepadDtos(cond, pageable);
+        return getNotepadDtos(condition, pageable);
     }
 
-    private Page<NotepadDto> getNotepadDtos(NotepadSearchCondition cond, Pageable pageable) {
-        Page<NotepadDto> notepads = notepadRepository.findAllByKinderNo(cond, pageable);
+    private Page<NotepadDto> getNotepadDtos(NotepadSearchCondition condition, Pageable pageable) {
+        Page<NotepadDto> notepads = notepadRepository.findAllByKinderNo(condition, pageable);
 
-        notepads.forEach(tuple -> log.info("\n{}", tuple.toString()));
         return notepads;
     }
 

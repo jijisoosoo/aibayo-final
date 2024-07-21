@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "parent_kid")
+@Table(name = "meal_type")
 @Getter
 @Setter
 @NoArgsConstructor
