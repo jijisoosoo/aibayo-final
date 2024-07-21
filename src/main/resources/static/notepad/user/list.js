@@ -2,10 +2,10 @@ function findByRegDate(parameter) {
     console.log('dateText: ' + parameter.dateText);
 
     $.ajax({
-        url: '/notepad/admin/searchDate', // 서버에서 데이터를 가져올 URL 지정
+        url: '/notepad/user/searchDate', // 서버에서 데이터를 가져올 URL 지정
         type: 'POST',
         data:  JSON.stringify({
-            kinderNo : parameter.kinderNo,
+            kidNo : parameter.kidNo,
             boardRegDate: parameter.dateText
         }),
         contentType: 'application/json',
@@ -22,16 +22,3 @@ function findByRegDate(parameter) {
     });
 
 }
-
-$(document).ready(function() {
-    // // 스크롤 위치 복원
-    // if (localStorage.getItem("scrollPosition")) {
-    //     $(window).scrollTop(localStorage.getItem("scrollPosition"));
-    //     localStorage.removeItem("scrollPosition");
-    // }
-    //
-    // // 페이지네이션 링크 클릭 시 스크롤 위치 저장
-    // $(".pagination a").on("click", function() {
-    //     localStorage.setItem("scrollPosition", $(window).scrollTop());
-    // });
-});

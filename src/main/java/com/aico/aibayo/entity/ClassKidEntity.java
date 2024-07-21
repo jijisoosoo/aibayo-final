@@ -15,10 +15,10 @@ import lombok.*;
 public class ClassKidEntity {
     @Id
     @Column(name = "class_no")
-    private int classNo;
+    private Long classNo;
     @Id
     @Column(name = "kid_no")
-    private int kidNo;
+    private Long kidNo;
     @Column(name = "accept_no")
-    private int acceptNo;
+    private Long acceptNo;
 }

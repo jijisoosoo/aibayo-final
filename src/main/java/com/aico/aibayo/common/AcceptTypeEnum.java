@@ -1,5 +1,8 @@
 package com.aico.aibayo.common;
 
+import lombok.Getter;
+
+@Getter
 public enum AcceptTypeEnum {
     CLASS_KID(0),
     PARENT_KID(1),

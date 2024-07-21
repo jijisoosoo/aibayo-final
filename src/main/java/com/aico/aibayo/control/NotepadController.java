@@ -30,24 +30,71 @@ public class NotepadController {
         NotepadSearchCondition condition = new NotepadSearchCondition();
         condition.setKinderNo(1L);
 
+        model.addAttribute("kinderNo", 1L);
+
         Page<NotepadDto> notepads = notepadService.getAllByKinderNo(condition, page);
 
         // 페이지네이션에 필요한 정보
-        return getPageInfoAndGoView(model, notepads);
+        return getPageInfoAndGoView(model, notepads, "/notepad/admin/list");
     }
 
     @PostMapping("/admin/searchDate")
-    public String searchDate(@RequestBody NotepadSearchCondition condition,
+    public String adminSearchDate(@RequestBody NotepadSearchCondition condition,
                              Model model) {
         log.info("{}", condition);
 
         Page<NotepadDto> notepads = notepadService.getAllByKinderNo(condition);
 
         // 페이지네이션에 필요한 정보
-        return getPageInfoAndGoView(model, notepads);
+        return getPageInfoAndGoView(model, notepads, "/notepad/admin/list");
     }
 
-    private String getPageInfoAndGoView(Model model, Page<NotepadDto> notepads) {
+    @GetMapping("/user/list")
+    public String userList(@RequestParam(defaultValue = "1") int page, Model model) {
+        NotepadSearchCondition condition = new NotepadSearchCondition();
+        condition.setKidNo(1L);
+
+        model.addAttribute("kidNo", 1L);
+
+        Page<NotepadDto> notepads = notepadService.getAllByKidNo(condition, page);
+
+        return getPageInfoAndGoView(model, notepads, "/notepad/user/list");
+    }
+
+    @PostMapping("/user/searchDate")
+    public String userSearchDate(@RequestBody NotepadSearchCondition condition,
+                             Model model) {
+        log.info("{}", condition);
+
+        Page<NotepadDto> notepads = notepadService.getAllByKidNo(condition, 1);
+
+        // 페이지네이션에 필요한 정보
+        return getPageInfoAndGoView(model, notepads, "/notepad/user/list");
+    }
+
+    // 나중에 detail 대신 notepadNo 대신 가져오기
+    @GetMapping("/admin/{notepadNo}")
+    public String adminDetail(@PathVariable Long notepadNo) {
+
+        return "/notepad/admin/detail";
+    }
+    @GetMapping("/user/detail")
+    public String userDetail() {
+        return "/notepad/user/detail";
+    }
+
+    // 나중에는 post(put)로
+
+    @GetMapping("/admin/modify")
+    public String modifyForm() {
+        return "/notepad/admin/modifyForm";
+    }
+    @GetMapping("/admin/write")
+    public String writeForm() {
+        return "/notepad/admin/writeForm";
+    }
+
+    private String getPageInfoAndGoView(Model model, Page<NotepadDto> notepads, String view) {
         int totalPages = notepads.getTotalPages();
         int currentPage = notepads.getNumber();
         int startPage = Math.max(0, currentPage - 2);
@@ -66,34 +113,6 @@ public class NotepadController {
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
 
-        return "/notepad/admin/list";
-    }
-
-    @GetMapping("/user/list")
-    public String userList() {
-        return "/notepad/user/list";
-    }
-
-    // 나중에 detail 대신 notepadNo 대신 가져오기
-    @GetMapping("/admin/{notepadNo}")
-    public String adminDetail(@PathVariable Long notepadNo) {
-        
-        return "/notepad/admin/detail";
-    }
-
-    @GetMapping("/user/detail")
-    public String userDetail() {
-        return "/notepad/user/detail";
-    }
-
-    // 나중에는 post(put)로
-    @GetMapping("/admin/modify")
-    public String modifyForm() {
-        return "/notepad/admin/modifyForm";
-    }
-
-    @GetMapping("/admin/write")
-    public String writeForm() {
-        return "/notepad/admin/writeForm";
+        return view;
     }
 }

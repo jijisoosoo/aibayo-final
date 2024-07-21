@@ -11,4 +11,9 @@ public class NotepadSearchCondition {
     private String invisibleFlag;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime boardRegDate;
+
+    private Long kidNo;
+    private LocalDateTime dischargeDate;
+
+    private Integer acceptStatus;
 }
