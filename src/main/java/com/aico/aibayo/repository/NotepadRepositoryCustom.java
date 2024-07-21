@@ -9,5 +9,6 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface NotepadRepositoryCustom {
-    Page<NotepadDto> findAllByKinderNo(NotepadSearchCondition cond, Pageable pageable);
+    Page<NotepadDto> findAllByKinderNo(NotepadSearchCondition condition, Pageable pageable);
+    Page<NotepadDto> findAllByKidNo(NotepadSearchCondition condition, Pageable pageable);
 }

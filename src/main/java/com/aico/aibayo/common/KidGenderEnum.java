@@ -1,5 +1,8 @@
 package com.aico.aibayo.common;
 
+import lombok.Getter;
+
+@Getter
 public enum KidGenderEnum {
     MALE(1, "남자"),
     FEMALE(2, "여자");

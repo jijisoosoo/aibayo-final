@@ -17,7 +17,7 @@ public class ClassEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "class_no")
-    private int classNo;
+    private Long classNo;
     @Column(name = "class_name")
     private String className;
     @Column(name = "class_age")

@@ -20,6 +20,7 @@ public class NotepadDto {
     private LocalDateTime boardRegDate;
 
     private Long id;
+    private String name;
     private Long kinderNo;
 
     private Long notepadNo;

@@ -1,5 +1,8 @@
 package com.aico.aibayo.common;
 
+import lombok.Getter;
+
+@Getter
 public enum AcceptStatusEnum {
     WAIT(0),
     ACCEPT(1),

@@ -30,70 +30,99 @@ public class NotepadController {
         NotepadSearchCondition condition = new NotepadSearchCondition();
         condition.setKinderNo(1L);
 
+        model.addAttribute("kinderNo", 1L);
+
         Page<NotepadDto> notepads = notepadService.getAllByKinderNo(condition, page);
 
         // 페이지네이션에 필요한 정보
-        return getPageInfoAndGoView(model, notepads);
+        return getPageInfoAndGoView(model, notepads, "/notepad/admin/list");
     }
 
     @PostMapping("/admin/searchDate")
-    public String searchDate(@RequestBody NotepadSearchCondition condition,
+    public String adminSearchDate(@RequestBody NotepadSearchCondition condition,
                              Model model) {
         log.info("{}", condition);
 
-        Page<NotepadDto> notepads = notepadService.getAllByKinderNo(condition);
+        Page<NotepadDto> notepads = notepadService.getAllByKinderNo(condition, 1);
 
         // 페이지네이션에 필요한 정보
-        return getPageInfoAndGoView(model, notepads);
-    }
-
-    private String getPageInfoAndGoView(Model model, Page<NotepadDto> notepads) {
-        int totalPages = notepads.getTotalPages();
-        int currentPage = notepads.getNumber();
-        int startPage = Math.max(0, currentPage - 2);
-        int endPage = Math.min(totalPages - 1, currentPage + 2);
-
-        if (endPage - startPage < 4) {
-            if (startPage == 0) {
-                endPage = Math.min(4, totalPages - 1);
-            } else if (endPage == totalPages - 1) {
-                startPage = Math.max(0, totalPages - 5);
-            }
-        }
-
-        model.addAttribute("notepads", notepads);
-        model.addAttribute("currentPage", currentPage);
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
-
-        return "/notepad/admin/list";
+        return getPageInfoAndGoView(model, notepads, "/notepad/admin/list");
     }
 
     @GetMapping("/user/list")
-    public String userList() {
-        return "/notepad/user/list";
+    public String userList(@RequestParam(defaultValue = "1") int page, Model model) {
+        NotepadSearchCondition condition = new NotepadSearchCondition();
+        condition.setKidNo(1L);
+
+        model.addAttribute("kidNo", 1L);
+
+        Page<NotepadDto> notepads = notepadService.getAllByKidNo(condition, page);
+
+        return getPageInfoAndGoView(model, notepads, "/notepad/user/list");
+    }
+
+    @PostMapping("/user/searchDate")
+    public String userSearchDate(@RequestBody NotepadSearchCondition condition,
+                             Model model) {
+        log.info("{}", condition);
+
+        Page<NotepadDto> notepads = notepadService.getAllByKidNo(condition, 1);
+
+        // 페이지네이션에 필요한 정보
+        return getPageInfoAndGoView(model, notepads, "/notepad/user/list");
     }
 
     // 나중에 detail 대신 notepadNo 대신 가져오기
     @GetMapping("/admin/{notepadNo}")
     public String adminDetail(@PathVariable Long notepadNo) {
-        
+
         return "/notepad/admin/detail";
     }
-
     @GetMapping("/user/detail")
     public String userDetail() {
         return "/notepad/user/detail";
     }
 
     // 나중에는 post(put)로
+
     @GetMapping("/admin/modify")
     public String modifyForm() {
         return "/notepad/admin/modifyForm";
     }
-
     @GetMapping("/admin/write")
     public String writeForm() {
         return "/notepad/admin/writeForm";
+    }
+
+    private String getPageInfoAndGoView(Model model, Page<NotepadDto> notepads, String view) {
+        int totalPages = notepads.getTotalPages();
+        int currentPage = notepads.getNumber();
+        int startPage = Math.max(0, currentPage - 2);
+        int endPage = Math.min(totalPages - 1, currentPage + 2);
+
+        // 조회된 결과가 없을 때 endPage를 0으로 설정
+        if (totalPages == 0) {
+            endPage = 0;
+        } else {// 페이지 5개 범위 확인
+            if (endPage - startPage < 4) {
+                if (startPage == 0) {
+                    endPage = Math.min(4, totalPages - 1);
+                } else if (endPage == totalPages - 1) {
+                    startPage = Math.max(0, totalPages - 5);
+                }
+            }
+        }
+
+        log.info(">>>>>>>>>>>>>>>>>>>>>>pagination");
+        log.info("startPage: {}", startPage);
+        log.info("endPage: {}", endPage);
+        log.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+
+        model.addAttribute("notepads", notepads);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+
+        return view;
     }
 }
