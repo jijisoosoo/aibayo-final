@@ -3,6 +3,8 @@ package com.aico.aibayo.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "schedule")
 @Getter
@@ -19,7 +21,7 @@ public class ScheduleEntity {
     @Column(name = "board_no")
     private int boardNo;
     @Column(name = "schedule_start_date")
-    private int scheduleStartDate;
+    private LocalDateTime scheduleStartDate;
     @Column(name = "schedule_end_date")
-    private int scheduleEndDate;
+    private LocalDateTime scheduleEndDate;
 }
