@@ -4,16 +4,16 @@ import lombok.Getter;
 
 @Getter
 public enum KinderEnum {
-    announce_on(0),announce_off(1),
-    notepad_on(0),notepad_off(1),
-    meal_on(0),meal_off(1),
-    medication_on(0),medication_off(1),
-    home_on(0),home_off(1),
-    attendance_on(0),attendance_off(1),
-    schedule_on(0),schedule_off(1),
-    pick_drop_on(0),pick_drop_off(1),
-    life_record_on(0),life_record_off(1),
-    chat_on(0),chat_off(0);
+    ANNOUNCE_ON(0),ANNOUNCE_OFF(1),
+    NOTEPAD_ON(0),NOTEPAD_OFF(1),
+    MEAL_ON(0),MEAL_OFF(1),
+    MEDICATION_ON(0),MEDICATION_OFF(1),
+    HOME_ON(0),HOME_OFF(1),
+    ATTENDANCE_ON(0),ATTENDANCE_OFF(1),
+    SCHEDULE_ON(0), SCHEDULE_OFF(1),
+    PICK_DROP_ON(0),PICK_DROP_OFF(1),
+    LIFE_RECORD_ON(0),LIFE_RECORD_OFF(1),
+    CHAT_ON(0),CHAT_OFF(0);
 
     private int num;
 
