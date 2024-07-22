@@ -11,7 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @ToString
-
+@IdClass(AnnounceMemberId.class)
 public class AnnounceMemberEntity {
     @Id
     @Column(name="announce_no")

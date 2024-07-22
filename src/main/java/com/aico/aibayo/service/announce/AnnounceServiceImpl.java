@@ -17,6 +17,6 @@ public class AnnounceServiceImpl implements AnnounceService{
 
     @Override
     public AnnounceDto getByAnnounceNo(Long announceNo) {
-        return announceRepository.findBy;
+        return null;
     }
 }

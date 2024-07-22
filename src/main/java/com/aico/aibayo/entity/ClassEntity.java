@@ -30,4 +30,6 @@ public class ClassEntity {
     private LocalDateTime classModifyDate;
     @Column(name = "class_delete_date")
     private LocalDateTime classDeleteDate;
+    @Column(name = "class_delete_flag")
+    private String classDeleteFlag;
 }
