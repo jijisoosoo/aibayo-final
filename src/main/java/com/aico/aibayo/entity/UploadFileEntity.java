@@ -24,6 +24,6 @@ public class UploadFileEntity {
     private String uploadFileOriginName;
     @Column(name = "upload_file_save_name")
     private String uploadFileSaveName;
-    @Column(name = "upload_file_is_deleted")
-    private String upload_file_is_deleted;
+    @Column(name = "upload_file_delete_flag")
+    private String uploadFileDeleteFlag;
 }

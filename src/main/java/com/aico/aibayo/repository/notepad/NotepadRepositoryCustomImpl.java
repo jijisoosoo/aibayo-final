@@ -174,7 +174,7 @@ public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
     }
 
     private BooleanExpression isValidKid() {
-        return kid.dischargeDate.isNull();
+        return kid.dischargeFlag.eq(BooleanEnum.FALSE.getBool());
     }
 
     private BooleanExpression isValidAcceptStatus() {

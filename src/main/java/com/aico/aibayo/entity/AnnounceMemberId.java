@@ -1,5 +1,6 @@
 package com.aico.aibayo.entity;
 
+import jakarta.persistence.IdClass;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
