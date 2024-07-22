@@ -22,4 +22,5 @@ public class ClassKidEntity {
     @Id
     @Column(name = "accept_no")
     private Long acceptNo;
+
 }

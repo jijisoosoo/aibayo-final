@@ -15,7 +15,7 @@ public class PaymentDiscountEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "discount_no")
-    private int discountNo;
+    private Long discountNo;
     @Column(name = "discount_type")
     private int discountType;
     @Column(name = "discount_rate")

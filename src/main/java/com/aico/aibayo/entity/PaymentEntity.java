@@ -17,11 +17,11 @@ public class PaymentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "request_no")
-    private int requestNo;
+    private Long requestNo;
     @Column(name = "kid_no")
-    private int kidNo;
+    private Long kidNo;
     @Column(name = "discount_no")
-    private int discountNo;
+    private Long discountNo;
     @Column(name = "category_no")
     private int categoryNo;
     @Column(name = "payment_price")
