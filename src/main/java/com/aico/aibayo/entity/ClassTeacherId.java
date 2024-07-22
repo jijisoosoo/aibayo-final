@@ -1,6 +1,7 @@
 package com.aico.aibayo.entity;
 
-import jakarta.persistence.IdClass;
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -12,7 +13,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Getter
-public class AnnounceMemberId implements Serializable {
-    private Long announceNo;
-    private Long id;
+public class ClassTeacherId {
+    private Long classNo;
+    private Long classTeacherId;
+    private Long acceptNo;
 }

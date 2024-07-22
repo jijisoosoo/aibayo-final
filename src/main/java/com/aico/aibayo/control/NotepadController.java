@@ -1,5 +1,6 @@
 package com.aico.aibayo.control;
 
+import com.aico.aibayo.dto.ClassDto;
 import com.aico.aibayo.dto.notepad.NotepadDto;
 //import com.aico.aibayo.service.notepad.NotepadService;
 import com.aico.aibayo.dto.notepad.NotepadSearchCondition;
@@ -10,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -87,8 +90,12 @@ public class NotepadController {
     public String modifyForm() {
         return "/notepad/admin/modifyForm";
     }
+
     @GetMapping("/admin/write")
-    public String writeForm() {
+    public String writeForm(Model model) {
+        // TO-DO: 쿼리로 반, 원생 목록 가져와서 저장하기
+//        List<ClassDto> =
+
         return "/notepad/admin/writeForm";
     }
 

@@ -13,7 +13,7 @@ public class NotepadSearchCondition {
     private LocalDateTime boardRegDate;
 
     private Long kidNo;
-    private LocalDateTime dischargeDate;
+    private String dischargeFlag;
 
     private Integer acceptStatus;
 }

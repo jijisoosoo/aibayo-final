@@ -33,4 +33,6 @@ public class KidEntity {
     private LocalDateTime modifyDate;
     @Column(name = "discharge_date")
     private LocalDateTime dischargeDate;
+    @Column(name = "discharge_flag")
+    private String dischargeFlag;
 }
