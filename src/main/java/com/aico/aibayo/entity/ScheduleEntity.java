@@ -19,7 +19,7 @@ public class ScheduleEntity {
     @Column(name = "schedule_no")
     private Long scheduleNo;
     @Column(name = "board_no")
-    private int boardNo;
+    private Long boardNo;
     @Column(name = "schedule_start_date")
     private LocalDateTime scheduleStartDate;
     @Column(name = "schedule_end_date")
