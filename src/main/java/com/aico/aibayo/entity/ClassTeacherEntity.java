@@ -17,11 +17,11 @@ import lombok.*;
 public class ClassTeacherEntity {
     @Id
     @Column(name = "class_no")
-    private int classNo;
+    private Long classNo;
     @Id
     @Column(name = "class_teacher_id")
-    private String classTeacherId;
+    private Long classTeacherId;
     @Id
     @Column(name = "accept_no")
-    private int acceptNo;
+    private Long acceptNo;
 }
