@@ -21,6 +21,7 @@ public class TeacherKinderEntity {
     @Id
     @Column(name = "kinder_no")
     private String kinderNo;
+    @Id
     @Column(name = "accept_no")
     private int acceptNo;
 }
