@@ -1,4 +1,4 @@
-package com.aico.aibayo.dto;
+package com.aico.aibayo.dto.notepad;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
