@@ -1,9 +1,9 @@
-package com.aico.aibayo.repository;
+package com.aico.aibayo.repository.notepad;
 
 import com.aico.aibayo.common.AcceptStatusEnum;
 import com.aico.aibayo.common.BooleanEnum;
-import com.aico.aibayo.dto.NotepadDto;
-import com.aico.aibayo.dto.NotepadSearchCondition;
+import com.aico.aibayo.dto.notepad.NotepadDto;
+import com.aico.aibayo.dto.notepad.NotepadSearchCondition;
 import com.aico.aibayo.entity.*;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -19,7 +19,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.function.LongSupplier;
 
 @RequiredArgsConstructor
 public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
@@ -35,6 +34,7 @@ public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
     private final QAcceptLogEntity acceptLog = QAcceptLogEntity.acceptLogEntity;
     private final QParentKidEntity parentKid = QParentKidEntity.parentKidEntity;
     private final QAcceptLogEntity acceptLog2 = QAcceptLogEntity.acceptLogEntity;
+    private final QLifeRecordEntity lifeRecord = QLifeRecordEntity.lifeRecordEntity;
 
     @Override
     public Page<NotepadDto> findAllByKinderNo(NotepadSearchCondition condition, Pageable pageable) {
@@ -140,6 +140,37 @@ public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
                 );
 
         return PageableExecutionUtils.getPage(notepads, pageable, count::fetchOne);
+    }
+
+    @Override
+    public NotepadDto findByNotepadNo(Long notepadNo) {
+
+        return jpaQueryFactory
+                .select(Projections.constructor(NotepadDto.class,
+                        board.boardNo,
+                        board.boardType,
+                        board.writer,
+                        board.boardTitle,
+                        board.boardContents,
+                        board.invisibleFlag,
+                        board.boardRegDate,
+                        member.id,
+                        member.name,
+                        member.kinderNo,
+                        notepad.notepadNo,
+                        notepad.hasLifeRecord,
+                        lifeRecord.mood,
+                        lifeRecord.health,
+                        lifeRecord.temperature,
+                        lifeRecord.meal,
+                        lifeRecord.sleepTime,
+                        lifeRecord.defecationStatus))
+                .from(notepad)
+                .join(board).on(board.boardNo.eq(notepad.notepadNo))
+                .join(member).on(member.id.eq(board.writer))
+                .leftJoin(lifeRecord).on(notepad.notepadNo.eq(lifeRecord.notepadNo))
+                .where(notepad.notepadNo.eq(notepadNo))
+                .fetchOne();
     }
 
     private BooleanExpression isValidKid() {

@@ -1,20 +1,15 @@
 package com.aico.aibayo.control;
 
-import com.aico.aibayo.dto.NotepadDto;
-//import com.aico.aibayo.service.NotepadService;
-import com.aico.aibayo.dto.NotepadSearchCondition;
-import com.aico.aibayo.service.NotepadService;
+import com.aico.aibayo.dto.notepad.NotepadDto;
+//import com.aico.aibayo.service.notepad.NotepadService;
+import com.aico.aibayo.dto.notepad.NotepadSearchCondition;
+import com.aico.aibayo.service.notepad.NotepadService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
 @Controller
@@ -74,17 +69,20 @@ public class NotepadController {
 
     // 나중에 detail 대신 notepadNo 대신 가져오기
     @GetMapping("/admin/{notepadNo}")
-    public String adminDetail(@PathVariable Long notepadNo) {
-
+    public String adminDetail(@PathVariable Long notepadNo, Model model) {
+        NotepadDto notepadDto = notepadService.getByNotepadNo(notepadNo);
+        model.addAttribute("notepad", notepadDto);
         return "/notepad/admin/detail";
     }
-    @GetMapping("/user/detail")
-    public String userDetail() {
+
+    @GetMapping("/user/{notepadNo}")
+    public String userDetail(@PathVariable Long notepadNo, Model model) {
+        NotepadDto notepadDto = notepadService.getByNotepadNo(notepadNo);
+        model.addAttribute("notepad", notepadDto);
         return "/notepad/user/detail";
     }
 
     // 나중에는 post(put)로
-
     @GetMapping("/admin/modify")
     public String modifyForm() {
         return "/notepad/admin/modifyForm";
