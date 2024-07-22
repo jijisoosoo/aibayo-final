@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    // modal 전체 선택
+    // checkbox 전체 선택
     $("#checkAll").click(function() {
         if($("#checkAll").is(":checked")) $("input[class='form-check-input']").prop("checked", true);
         else $("input[class='form-check-input']").prop("checked", false);

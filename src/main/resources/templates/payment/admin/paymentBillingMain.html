@@ -17,9 +17,14 @@
 </th:block>
 
 <th:block layout:fragment="javascript">
+    <script th:src="@{/payment/paymentMain.js}"></script>
+
     <!--datatable-->
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
-    <script th:src="@{/payment/paymentMain.js}"></script>
+
+    <!--datepicker-->
+    <th:block th:replace="~{/common/datepicker :: js}"/>
+    <th:block th:replace="~{/common/datepicker :: css}"/>
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
@@ -36,40 +41,14 @@
             <div class="div-3">
                 <div class="div-3"><div class="text-wrapper-6">기간 선택</div></div>
                 <div class="div-4">
-                    <div class="inputarea">
-                        <div class="textarea">
-                            <div class="div-5">
-                                <div class="text-wrapper-7">2024</div>
-                                <div class="text-wrapper-7">.</div>
-                            </div>
-                            <div class="div-5">
-                                <div class="text-wrapper-7">06</div>
-                                <div class="text-wrapper-7">.</div>
-                            </div>
-                            <div class="div-5">
-                                <div class="text-wrapper-7">28</div>
-                                <div class="text-wrapper-7">.</div>
-                            </div>
-                        </div>
-                        <img class="vector" src="/payment/img/calendar_gray.png" />
+                    <div class="calendar-pick">
+                        <img class="calendar-vector" src="/payment/img/calendar_gray.png" />
+                        <input type="text" class="datepickerdiv datepicker" placeholder="날짜 선택" readonly>
                     </div>
                     <div class="text-wrapper-8">-</div>
-                    <div class="inputarea">
-                        <div class="textarea">
-                            <div class="div-5">
-                                <div class="text-wrapper-7">2024</div>
-                                <div class="text-wrapper-7">.</div>
-                            </div>
-                            <div class="div-5">
-                                <div class="text-wrapper-7">06</div>
-                                <div class="text-wrapper-7">.</div>
-                            </div>
-                            <div class="div-5">
-                                <div class="text-wrapper-7">28</div>
-                                <div class="text-wrapper-7">.</div>
-                            </div>
-                        </div>
-                        <img class="vector" src="/payment/img/calendar.png" />
+                    <div class="calendar-pick">
+                        <img class="calendar-vector" src="/payment/img/calendar_gray.png" />
+                        <input type="text" class="datepickerdiv datepicker" placeholder="날짜 선택" readonly>
                     </div>
                 </div>
             </div>
@@ -88,31 +67,30 @@
                 <div class="text-class"><div class="text-wrapper-6">수납 상태</div></div>
                 <div class="form-check selectedoption">
 
-                    <label class="optiondiv" for="soonap">
+                    <input type="checkbox" class="btn-check" id="soonap" autocomplete="off">
+                    <label class="btn optiondiv" for="soonap">
                         <div class="text-wrapper-9">수납</div>
-                        <input class="form-check-input" type="checkbox" name="classCheckedCb" value="soonap" id="soonap">
                     </label>
 
-                    <label class="optiondiv" for="minap">
+                    <input type="checkbox" class="btn-check" id="minap" autocomplete="off">
+                    <label class="btn optiondiv" for="minap">
                         <div class="text-wrapper-9">미납</div>
-                        <input class="form-check-input" type="checkbox" name="classCheckedCb" value="minap" id="minap">
                     </label>
 
-                    <label class="optiondiv" for="wanryo">
+                    <input type="checkbox" class="btn-check" id="wanryo" autocomplete="off">
+                    <label class="btn optiondiv" for="wanryo">
                         <div class="text-wrapper-9">완료</div>
-                        <input class="form-check-input" type="checkbox" name="classCheckedCb" value="wanryo" id="wanryo">
                     </label>
 
-                    <label class="optiondiv" for="balhangcancel">
+                    <input type="checkbox" class="btn-check" id="balhangcancel" autocomplete="off">
+                    <label class="btn optiondiv" for="balhangcancel">
                         <div class="text-wrapper-9">발행취소</div>
-                        <input class="form-check-input" type="checkbox" name="classCheckedCb" value="balhangcancel" id="balhangcancel">
                     </label>
 
-                    <label class="optiondiv" for="confirmcancel">
+                    <input type="checkbox" class="btn-check" id="confirmcancel" autocomplete="off">
+                    <label class="btn optiondiv" for="confirmcancel">
                         <div class="text-wrapper-9">승인취소</div>
-                        <input class="form-check-input" type="checkbox" name="classCheckedCb" value="confirmcancel" id="confirmcancel">
                     </label>
-
 
                 </div>
             </div>
@@ -153,8 +131,8 @@
         <table class="datatable-payment" id="datatable-payment">
             <thead>
                 <tr class="column">
-                    <th><div class="checkbox"></div></th>
-                    <th class="text-wrapper-15">수납상태</th>
+                    <th><input class="form-check-input" type="checkbox" id="checkAll"></th>
+                    <th class="text-wrapper-15" data-orderable="false">수납상태</th>
                     <th class="text-wrapper-16">수납일</th>
                     <th class="text-wrapper-16">발송일</th>
                     <th class="text-wrapper-17">만료일</th>
@@ -168,10 +146,10 @@
             </thead>
             <tbody class="tuples">
                 <tr class="tuple">
-                    <td><div class="checkbox"></div></td>
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
                     <td class="text-wrapper-23">미수납</td>
                     <td class="text-wrapper-24">2023.5.11.<br />17:21:47</td>
-                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-24">2023.5.31.<br />20:08:20</td>
                     <td class="text-wrapper-25">2023.5.18.<br />15:00:00</td>
                     <td class="text-wrapper-26">최원아</td>
                     <td class="text-wrapper-27">브로콜리반</td>
@@ -181,10 +159,10 @@
                     <td class="text-wrapper-29">200,000원</td>
                 </tr>
                 <tr class="tuple">
-                    <td><div class="checkbox"></div></td>
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
                     <td class="text-wrapper-23">미수납</td>
                     <td class="text-wrapper-24">-</td>
-                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-24">2023.5.30.<br />20:08:20</td>
                     <td class="text-wrapper-25">2023.5.18.<br />15:00:00</td>
                     <td class="text-wrapper-26">김원아</td>
                     <td class="text-wrapper-27">브로콜리반</td>
@@ -194,10 +172,10 @@
                     <td class="text-wrapper-29">270,000원</td>
                 </tr>
                 <tr class="tuple">
-                    <td><div class="checkbox"></div></td>
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
                     <td class="text-wrapper-23">미수납</td>
                     <td class="text-wrapper-24">-</td>
-                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-24">2023.5.29.<br />20:08:20</td>
                     <td class="text-wrapper-25">2023.5.18.<br />15:00:00</td>
                     <td class="text-wrapper-26">박원아</td>
                     <td class="text-wrapper-27">브로콜리반</td>
@@ -207,10 +185,10 @@
                     <td class="text-wrapper-29">300,000원</td>
                 </tr>
                 <tr class="tuple">
-                    <td><div class="checkbox"></div></td>
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
                     <td class="text-wrapper-23">수납완료</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
-                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-24">2023.5.28.<br />20:08:20</td>
                     <td class="text-wrapper-25">2023.5.18.<br />15:00:00</td>
                     <td class="text-wrapper-26">이원아</td>
                     <td class="text-wrapper-27">브로콜리반</td>
@@ -220,10 +198,10 @@
                     <td class="text-wrapper-29">300,000원</td>
                 </tr>
                 <tr class="tuple">
-                    <td><div class="checkbox"></div></td>
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
                     <td class="text-wrapper-23">발행취소</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
-                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-24">2023.5.27.<br />20:08:20</td>
                     <td class="text-wrapper-25">2023.5.18.<br />15:00:00</td>
                     <td class="text-wrapper-26">마원아</td>
                     <td class="text-wrapper-27">브로콜리반</td>
@@ -233,7 +211,7 @@
                     <td class="text-wrapper-29">275,000원</td>
                 </tr>
                 <tr class="tuple">
-                    <td><div class="checkbox"></div></td>
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
                     <td class="text-wrapper-23">수납완료</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
@@ -246,7 +224,7 @@
                     <td class="text-wrapper-29">300,000원</td>
                 </tr>
                 <tr class="tuple">
-                    <td><div class="checkbox"></div></td>
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
                     <td class="text-wrapper-23">미수납</td>
                     <td class="text-wrapper-24">-</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
@@ -259,7 +237,7 @@
                     <td class="text-wrapper-29">300,000원</td>
                 </tr>
                 <tr class="tuple">
-                    <td><div class="checkbox"></div></td>
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
                     <td class="text-wrapper-23">승인취소</td>
                     <td class="text-wrapper-24">2023.5.11.<br />17:21:47</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
@@ -272,7 +250,7 @@
                     <td class="text-wrapper-29">200,000원</td>
                 </tr>
                 <tr class="tuple">
-                    <td><div class="checkbox"></div></td>
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
                     <td class="text-wrapper-23">미수납</td>
                     <td class="text-wrapper-24">-</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
@@ -285,7 +263,7 @@
                     <td class="text-wrapper-29">270,000원</td>
                 </tr>
                 <tr class="tuple">
-                    <td><div class="checkbox"></div></td>
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
                     <td class="text-wrapper-23">미수납</td>
                     <td class="text-wrapper-24">-</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
@@ -298,7 +276,7 @@
                     <td class="text-wrapper-29">300,000원</td>
                 </tr>
                 <tr class="tuple">
-                    <td><div class="checkbox"></div></td>
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
                     <td class="text-wrapper-23">수납완료</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
@@ -311,7 +289,7 @@
                     <td class="text-wrapper-29">300,000원</td>
                 </tr>
                 <tr class="tuple">
-                    <td><div class="checkbox"></div></td>
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
                     <td class="text-wrapper-23">수납완료</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
@@ -324,7 +302,7 @@
                     <td class="text-wrapper-29">275,000원</td>
                 </tr>
                 <tr class="tuple">
-                    <td><div class="checkbox"></div></td>
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
                     <td class="text-wrapper-23">수납완료</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
@@ -337,7 +315,7 @@
                     <td class="text-wrapper-29">300,000원</td>
                 </tr>
                 <tr class="tuple">
-                    <td><div class="checkbox"></div></td>
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
                     <td class="text-wrapper-23">미수납</td>
                     <td class="text-wrapper-24">-</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
@@ -350,7 +328,7 @@
                     <td class="text-wrapper-29">300,000원</td>
                 </tr>
                 <tr class="tuple">
-                    <td><div class="checkbox"></div></td>
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
                     <td class="text-wrapper-23">승인취소</td>
                     <td class="text-wrapper-24">2023.5.11.<br />17:21:47</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
@@ -363,7 +341,7 @@
                     <td class="text-wrapper-29">200,000원</td>
                 </tr>
                 <tr class="tuple">
-                    <td><div class="checkbox"></div></td>
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
                     <td class="text-wrapper-23">미수납</td>
                     <td class="text-wrapper-24">-</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
@@ -376,7 +354,7 @@
                     <td class="text-wrapper-29">270,000원</td>
                 </tr>
                 <tr class="tuple">
-                    <td><div class="checkbox"></div></td>
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
                     <td class="text-wrapper-23">미수납</td>
                     <td class="text-wrapper-24">-</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
@@ -389,7 +367,7 @@
                     <td class="text-wrapper-29">300,000원</td>
                 </tr>
                 <tr class="tuple">
-                    <td><div class="checkbox"></div></td>
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
                     <td class="text-wrapper-23">수납완료</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
@@ -402,7 +380,7 @@
                     <td class="text-wrapper-29">300,000원</td>
                 </tr>
                 <tr class="tuple">
-                    <td><div class="checkbox"></div></td>
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
                     <td class="text-wrapper-23">발행취소</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
@@ -415,7 +393,7 @@
                     <td class="text-wrapper-29">275,000원</td>
                 </tr>
                 <tr class="tuple">
-                    <td><div class="checkbox"></div></td>
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
                     <td class="text-wrapper-23">수납완료</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
@@ -428,7 +406,215 @@
                     <td class="text-wrapper-29">300,000원</td>
                 </tr>
                 <tr class="tuple">
-                    <td><div class="checkbox"></div></td>
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
+                    <td class="text-wrapper-23">미수납</td>
+                    <td class="text-wrapper-24">-</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-25">2023.5.18.<br />15:00:00</td>
+                    <td class="text-wrapper-26">홍원아</td>
+                    <td class="text-wrapper-27">브로콜리반</td>
+                    <td class="text-wrapper-28">2024 교구비(6개월)</td>
+                    <td class="text-wrapper-29">250,000원</td>
+                    <td class="text-wrapper-30">-</td>
+                    <td class="text-wrapper-29">300,000원</td>
+                </tr>
+                <tr class="tuple">
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
+                    <td class="text-wrapper-23">수납완료</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-25">2023.5.18.<br />15:00:00</td>
+                    <td class="text-wrapper-26">고원아</td>
+                    <td class="text-wrapper-27">브로콜리반</td>
+                    <td class="text-wrapper-28">2024 상반기 교습비(월 1회)</td>
+                    <td class="text-wrapper-29">300,000원</td>
+                    <td class="text-wrapper-30">-</td>
+                    <td class="text-wrapper-29">300,000원</td>
+                </tr>
+                <tr class="tuple">
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
+                    <td class="text-wrapper-23">미수납</td>
+                    <td class="text-wrapper-24">-</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-25">2023.5.18.<br />15:00:00</td>
+                    <td class="text-wrapper-26">홍원아</td>
+                    <td class="text-wrapper-27">브로콜리반</td>
+                    <td class="text-wrapper-28">2024 교구비(6개월)</td>
+                    <td class="text-wrapper-29">250,000원</td>
+                    <td class="text-wrapper-30">-</td>
+                    <td class="text-wrapper-29">300,000원</td>
+                </tr>
+                <tr class="tuple">
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
+                    <td class="text-wrapper-23">승인취소</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />17:21:47</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-25">2023.5.18.<br />15:00:00</td>
+                    <td class="text-wrapper-26">최원아</td>
+                    <td class="text-wrapper-27">브로콜리반</td>
+                    <td class="text-wrapper-28">2024 교구비(6개월)</td>
+                    <td class="text-wrapper-29">250,000원</td>
+                    <td class="text-wrapper-30">20%</td>
+                    <td class="text-wrapper-29">200,000원</td>
+                </tr>
+                <tr class="tuple">
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
+                    <td class="text-wrapper-23">미수납</td>
+                    <td class="text-wrapper-24">-</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-25">2023.5.18.<br />15:00:00</td>
+                    <td class="text-wrapper-26">김원아</td>
+                    <td class="text-wrapper-27">브로콜리반</td>
+                    <td class="text-wrapper-28">2024 상반기 교습비(월 1회)</td>
+                    <td class="text-wrapper-29">300,000원</td>
+                    <td class="text-wrapper-30">10%</td>
+                    <td class="text-wrapper-29">270,000원</td>
+                </tr>
+                <tr class="tuple">
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
+                    <td class="text-wrapper-23">미수납</td>
+                    <td class="text-wrapper-24">-</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-25">2023.5.18.<br />15:00:00</td>
+                    <td class="text-wrapper-26">박원아</td>
+                    <td class="text-wrapper-27">브로콜리반</td>
+                    <td class="text-wrapper-28">2024 상반기 교습비(월 1회)</td>
+                    <td class="text-wrapper-29">300,000원</td>
+                    <td class="text-wrapper-30">-</td>
+                    <td class="text-wrapper-29">300,000원</td>
+                </tr>
+                <tr class="tuple">
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
+                    <td class="text-wrapper-23">수납완료</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-25">2023.5.18.<br />15:00:00</td>
+                    <td class="text-wrapper-26">이원아</td>
+                    <td class="text-wrapper-27">브로콜리반</td>
+                    <td class="text-wrapper-28">2024 상반기 교습비(월 1회)</td>
+                    <td class="text-wrapper-29">300,000원</td>
+                    <td class="text-wrapper-30">-</td>
+                    <td class="text-wrapper-29">300,000원</td>
+                </tr>
+                <tr class="tuple">
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
+                    <td class="text-wrapper-23">수납완료</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-25">2023.5.18.<br />15:00:00</td>
+                    <td class="text-wrapper-26">마원아</td>
+                    <td class="text-wrapper-27">브로콜리반</td>
+                    <td class="text-wrapper-28">2024 교구비(6개월)</td>
+                    <td class="text-wrapper-29">250,000원</td>
+                    <td class="text-wrapper-30">10%</td>
+                    <td class="text-wrapper-29">275,000원</td>
+                </tr>
+                <tr class="tuple">
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
+                    <td class="text-wrapper-23">수납완료</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-25">2023.5.18.<br />15:00:00</td>
+                    <td class="text-wrapper-26">고원아</td>
+                    <td class="text-wrapper-27">브로콜리반</td>
+                    <td class="text-wrapper-28">2024 상반기 교습비(월 1회)</td>
+                    <td class="text-wrapper-29">300,000원</td>
+                    <td class="text-wrapper-30">-</td>
+                    <td class="text-wrapper-29">300,000원</td>
+                </tr>
+                <tr class="tuple">
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
+                    <td class="text-wrapper-23">미수납</td>
+                    <td class="text-wrapper-24">-</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-25">2023.5.18.<br />15:00:00</td>
+                    <td class="text-wrapper-26">홍원아</td>
+                    <td class="text-wrapper-27">브로콜리반</td>
+                    <td class="text-wrapper-28">2024 교구비(6개월)</td>
+                    <td class="text-wrapper-29">250,000원</td>
+                    <td class="text-wrapper-30">-</td>
+                    <td class="text-wrapper-29">300,000원</td>
+                </tr>
+                <tr class="tuple">
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
+                    <td class="text-wrapper-23">승인취소</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />17:21:47</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-25">2023.5.18.<br />15:00:00</td>
+                    <td class="text-wrapper-26">최원아</td>
+                    <td class="text-wrapper-27">브로콜리반</td>
+                    <td class="text-wrapper-28">2024 교구비(6개월)</td>
+                    <td class="text-wrapper-29">250,000원</td>
+                    <td class="text-wrapper-30">20%</td>
+                    <td class="text-wrapper-29">200,000원</td>
+                </tr>
+                <tr class="tuple">
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
+                    <td class="text-wrapper-23">미수납</td>
+                    <td class="text-wrapper-24">-</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-25">2023.5.18.<br />15:00:00</td>
+                    <td class="text-wrapper-26">김원아</td>
+                    <td class="text-wrapper-27">브로콜리반</td>
+                    <td class="text-wrapper-28">2024 상반기 교습비(월 1회)</td>
+                    <td class="text-wrapper-29">300,000원</td>
+                    <td class="text-wrapper-30">10%</td>
+                    <td class="text-wrapper-29">270,000원</td>
+                </tr>
+                <tr class="tuple">
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
+                    <td class="text-wrapper-23">미수납</td>
+                    <td class="text-wrapper-24">-</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-25">2023.5.18.<br />15:00:00</td>
+                    <td class="text-wrapper-26">박원아</td>
+                    <td class="text-wrapper-27">브로콜리반</td>
+                    <td class="text-wrapper-28">2024 상반기 교습비(월 1회)</td>
+                    <td class="text-wrapper-29">300,000원</td>
+                    <td class="text-wrapper-30">-</td>
+                    <td class="text-wrapper-29">300,000원</td>
+                </tr>
+                <tr class="tuple">
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
+                    <td class="text-wrapper-23">수납완료</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-25">2023.5.18.<br />15:00:00</td>
+                    <td class="text-wrapper-26">이원아</td>
+                    <td class="text-wrapper-27">브로콜리반</td>
+                    <td class="text-wrapper-28">2024 상반기 교습비(월 1회)</td>
+                    <td class="text-wrapper-29">300,000원</td>
+                    <td class="text-wrapper-30">-</td>
+                    <td class="text-wrapper-29">300,000원</td>
+                </tr>
+                <tr class="tuple">
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
+                    <td class="text-wrapper-23">발행취소</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-25">2023.5.18.<br />15:00:00</td>
+                    <td class="text-wrapper-26">마원아</td>
+                    <td class="text-wrapper-27">브로콜리반</td>
+                    <td class="text-wrapper-28">2024 교구비(6개월)</td>
+                    <td class="text-wrapper-29">250,000원</td>
+                    <td class="text-wrapper-30">10%</td>
+                    <td class="text-wrapper-29">275,000원</td>
+                </tr>
+                <tr class="tuple">
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
+                    <td class="text-wrapper-23">수납완료</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
+                    <td class="text-wrapper-25">2023.5.18.<br />15:00:00</td>
+                    <td class="text-wrapper-26">고원아</td>
+                    <td class="text-wrapper-27">브로콜리반</td>
+                    <td class="text-wrapper-28">2024 상반기 교습비(월 1회)</td>
+                    <td class="text-wrapper-29">300,000원</td>
+                    <td class="text-wrapper-30">-</td>
+                    <td class="text-wrapper-29">300,000원</td>
+                </tr>
+                <tr class="tuple">
+                    <td><input class="form-check-input" type="checkbox" value="1"></td>
                     <td class="text-wrapper-23">미수납</td>
                     <td class="text-wrapper-24">-</td>
                     <td class="text-wrapper-24">2023.5.11.<br />20:08:20</td>
@@ -442,316 +628,6 @@
                 </tr>
             </tbody>
         </table>
-
-
-
-
-
-
-
-
-<!--        <table class="datatable-payment" id="datatable-payment">-->
-<!--            <thead>-->
-<!--                <tr>-->
-<!--                    <th><div class="checkbox"></div></th>-->
-<!--                    <th>수납상태</th>-->
-<!--                    <th>수납일</th>-->
-<!--                    <th>발송일</th>-->
-<!--                    <th>만료일</th>-->
-<!--                    <th>학생명</th>-->
-<!--                    <th>반정보</th>-->
-<!--                    <th>청구항목</th>-->
-<!--                    <th>청구금액</th>-->
-<!--                    <th>할인</th>-->
-<!--                    <th>최종금액</th>-->
-<!--                </tr>-->
-<!--            </thead>-->
-<!--            <tbody>-->
-<!--                <tr>-->
-<!--                    <td><div class="checkbox"></div></td>-->
-<!--                    <td>미수납</td>-->
-<!--                    <td>2023.5.11.<br />17:21:47</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.18.<br />15:00:00</td>-->
-<!--                    <td>최원아</td>-->
-<!--                    <td>브로콜리반</td>-->
-<!--                    <td>2024 교구비(6개월)</td>-->
-<!--                    <td>250,000원</td>-->
-<!--                    <td>20%</td>-->
-<!--                    <td>200,000원</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td><div class="checkbox"></div></td>-->
-<!--                    <td>미수납</td>-->
-<!--                    <td>-</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.18.<br />15:00:00</td>-->
-<!--                    <td>김원아</td>-->
-<!--                    <td>브로콜리반</td>-->
-<!--                    <td>2024 상반기 교습비(월 1회)</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                    <td>10%</td>-->
-<!--                    <td>270,000원</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td><div class="checkbox"></div></td>-->
-<!--                    <td>미수납</td>-->
-<!--                    <td>-</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.18.<br />15:00:00</td>-->
-<!--                    <td>박원아</td>-->
-<!--                    <td>브로콜리반</td>-->
-<!--                    <td>2024 상반기 교습비(월 1회)</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                    <td>-</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td><div class="checkbox"></div></td>-->
-<!--                    <td>수납완료</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.18.<br />15:00:00</td>-->
-<!--                    <td>이원아</td>-->
-<!--                    <td>브로콜리반</td>-->
-<!--                    <td>2024 상반기 교습비(월 1회)</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                    <td>-</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td><div class="checkbox"></div></td>-->
-<!--                    <td>발행취소</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.18.<br />15:00:00</td>-->
-<!--                    <td>마원아</td>-->
-<!--                    <td>브로콜리반</td>-->
-<!--                    <td>2024 교구비(6개월)</td>-->
-<!--                    <td>250,000원</td>-->
-<!--                    <td>10%</td>-->
-<!--                    <td>275,000원</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td><div class="checkbox"></div></td>-->
-<!--                    <td>수납완료</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.18.<br />15:00:00</td>-->
-<!--                    <td>고원아</td>-->
-<!--                    <td>브로콜리반</td>-->
-<!--                    <td>2024 상반기 교습비(월 1회)</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                    <td>-</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td><div class="checkbox"></div></td>-->
-<!--                    <td>미수납</td>-->
-<!--                    <td>-</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.18.<br />15:00:00</td>-->
-<!--                    <td>홍원아</td>-->
-<!--                    <td>브로콜리반</td>-->
-<!--                    <td>2024 교구비(6개월)</td>-->
-<!--                    <td>250,000원</td>-->
-<!--                    <td>-</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td><div class="checkbox"></div></td>-->
-<!--                    <td>승인취소</td>-->
-<!--                    <td>2023.5.11.<br />17:21:47</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.18.<br />15:00:00</td>-->
-<!--                    <td>최원아</td>-->
-<!--                    <td>브로콜리반</td>-->
-<!--                    <td>2024 교구비(6개월)</td>-->
-<!--                    <td>250,000원</td>-->
-<!--                    <td>20%</td>-->
-<!--                    <td>200,000원</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td><div class="checkbox"></div></td>-->
-<!--                    <td>미수납</td>-->
-<!--                    <td>-</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.18.<br />15:00:00</td>-->
-<!--                    <td>김원아</td>-->
-<!--                    <td>브로콜리반</td>-->
-<!--                    <td>2024 상반기 교습비(월 1회)</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                    <td>10%</td>-->
-<!--                    <td>270,000원</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td><div class="checkbox"></div></td>-->
-<!--                    <td>미수납</td>-->
-<!--                    <td>-</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.18.<br />15:00:00</td>-->
-<!--                    <td>박원아</td>-->
-<!--                    <td>브로콜리반</td>-->
-<!--                    <td>2024 상반기 교습비(월 1회)</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                    <td>-</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td><div class="checkbox"></div></td>-->
-<!--                    <td>수납완료</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.18.<br />15:00:00</td>-->
-<!--                    <td>이원아</td>-->
-<!--                    <td>브로콜리반</td>-->
-<!--                    <td>2024 상반기 교습비(월 1회)</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                    <td>-</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td><div class="checkbox"></div></td>-->
-<!--                    <td>수납완료</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.18.<br />15:00:00</td>-->
-<!--                    <td>마원아</td>-->
-<!--                    <td>브로콜리반</td>-->
-<!--                    <td>2024 교구비(6개월)</td>-->
-<!--                    <td>250,000원</td>-->
-<!--                    <td>10%</td>-->
-<!--                    <td>275,000원</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td><div class="checkbox"></div></td>-->
-<!--                    <td>수납완료</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.18.<br />15:00:00</td>-->
-<!--                    <td>고원아</td>-->
-<!--                    <td>브로콜리반</td>-->
-<!--                    <td>2024 상반기 교습비(월 1회)</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                    <td>-</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td><div class="checkbox"></div></td>-->
-<!--                    <td>미수납</td>-->
-<!--                    <td>-</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.18.<br />15:00:00</td>-->
-<!--                    <td>홍원아</td>-->
-<!--                    <td>브로콜리반</td>-->
-<!--                    <td>2024 교구비(6개월)</td>-->
-<!--                    <td>250,000원</td>-->
-<!--                    <td>-</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td><div class="checkbox"></div></td>-->
-<!--                    <td>승인취소</td>-->
-<!--                    <td>2023.5.11.<br />17:21:47</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.18.<br />15:00:00</td>-->
-<!--                    <td>최원아</td>-->
-<!--                    <td>브로콜리반</td>-->
-<!--                    <td>2024 교구비(6개월)</td>-->
-<!--                    <td>250,000원</td>-->
-<!--                    <td>20%</td>-->
-<!--                    <td>200,000원</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td><div class="checkbox"></div></td>-->
-<!--                    <td>미수납</td>-->
-<!--                    <td>-</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.18.<br />15:00:00</td>-->
-<!--                    <td>김원아</td>-->
-<!--                    <td>브로콜리반</td>-->
-<!--                    <td>2024 상반기 교습비(월 1회)</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                    <td>10%</td>-->
-<!--                    <td>270,000원</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td><div class="checkbox"></div></td>-->
-<!--                    <td>미수납</td>-->
-<!--                    <td>-</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.18.<br />15:00:00</td>-->
-<!--                    <td>박원아</td>-->
-<!--                    <td>브로콜리반</td>-->
-<!--                    <td>2024 상반기 교습비(월 1회)</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                    <td>-</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td><div class="checkbox"></div></td>-->
-<!--                    <td>수납완료</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.18.<br />15:00:00</td>-->
-<!--                    <td>이원아</td>-->
-<!--                    <td>브로콜리반</td>-->
-<!--                    <td>2024 상반기 교습비(월 1회)</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                    <td>-</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td><div class="checkbox"></div></td>-->
-<!--                    <td>발행취소</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.18.<br />15:00:00</td>-->
-<!--                    <td>마원아</td>-->
-<!--                    <td>브로콜리반</td>-->
-<!--                    <td>2024 교구비(6개월)</td>-->
-<!--                    <td>250,000원</td>-->
-<!--                    <td>10%</td>-->
-<!--                    <td>275,000원</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td><div class="checkbox"></div></td>-->
-<!--                    <td>수납완료</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.18.<br />15:00:00</td>-->
-<!--                    <td>고원아</td>-->
-<!--                    <td>브로콜리반</td>-->
-<!--                    <td>2024 상반기 교습비(월 1회)</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                    <td>-</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                    <td><div class="checkbox"></div></td>-->
-<!--                    <td>미수납</td>-->
-<!--                    <td>-</td>-->
-<!--                    <td>2023.5.11.<br />20:08:20</td>-->
-<!--                    <td>2023.5.18.<br />15:00:00</td>-->
-<!--                    <td>홍원아</td>-->
-<!--                    <td>브로콜리반</td>-->
-<!--                    <td>2024 교구비(6개월)</td>-->
-<!--                    <td>250,000원</td>-->
-<!--                    <td>-</td>-->
-<!--                    <td>300,000원</td>-->
-<!--                </tr>-->
-<!--            </tbody>-->
-<!--        </table>-->
-
-
-
-
-
-
-
-
-
-
 
     </div>
 

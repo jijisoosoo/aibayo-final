@@ -13,13 +13,14 @@ import java.time.LocalDateTime;
 public class NotepadDto {
     private Long boardNo;
     private Integer boardType;
-    private String writer;
+    private Long writer;
     private String boardTitle;
     private String boardContents;
     private String invisibleFlag;
     private LocalDateTime boardRegDate;
 
     private Long id;
+    private String name;
     private Long kinderNo;
 
     private Long notepadNo;

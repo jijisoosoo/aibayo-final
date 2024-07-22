@@ -96,6 +96,15 @@
   flex: 0 0 auto;
 }
 
+.container .div-4 {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  position: relative;
+  flex: 0 0 auto;
+  padding-bottom: 5px;
+}
+
 .container .vector {
   position: relative;
   width: 30px;

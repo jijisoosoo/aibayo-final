@@ -4,6 +4,20 @@ $(document).ready(function(){
         autoclose: true,
         language: 'ko',
         orientation: 'bottom',
-        todayHighlight: true
+        todayHighlight: true,
+    }).on('changeDate', function(e) {
+        var date = e.date;
+        var dateText = moment(date).format('YYYY-MM-DD HH:mm:ss');
+
+        // 날짜 검색 function이 있을 경우에만 AJAX 요청 실행
+        if (typeof findByRegDate === "function") {
+            let parameter = {
+                kinderNo : $('.datepicker').data('kinder-no'),
+                kidNo : $('.datepicker').data('kid-no'),
+                dateText : dateText
+            };
+            console.log(parameter);
+            findByRegDate(parameter);
+        }
     });
 });

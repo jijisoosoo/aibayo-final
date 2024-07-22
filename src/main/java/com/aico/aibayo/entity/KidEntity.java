@@ -26,7 +26,7 @@ public class KidEntity {
     @Column(name = "kid_birth")
     private LocalDate kidBirth;
     @Column(name = "kid_gender")
-    private int kidGender;
+    private Integer kidGender;
     @Column(name = "admission_date")
     private LocalDateTime admissionDate;
     @Column(name = "modify_date")
