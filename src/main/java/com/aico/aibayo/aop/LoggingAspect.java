@@ -1,5 +1,6 @@
 package com.aico.aibayo.aop;
 
+import com.aico.aibayo.dto.notepad.NotepadDto;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -20,7 +21,7 @@ public class LoggingAspect {
 
     // 메서드가 정상적으로 반환될 때 실행되는 후처리
     @AfterReturning(pointcut = "serviceMethods()", returning = "result")
-    public void logPageInfo(Object result) {
+    public void logInfo(Object result) {
 
         // Page<T>를 반환할 때 로깅
         if (result instanceof Page) {
@@ -39,6 +40,15 @@ public class LoggingAspect {
             page.forEach(item -> log.info("\n{}", item.toString()));
             log.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 
+        }
+
+
+        if (result instanceof NotepadDto) {
+            NotepadDto notepadDto = (NotepadDto) result;
+
+            log.info(">>>>>>>>>>>>>>>>>>>>logNotepadInfo");
+            log.info(notepadDto.toString());
+            log.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         }
     }
 }

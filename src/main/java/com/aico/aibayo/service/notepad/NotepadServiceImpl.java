@@ -1,9 +1,9 @@
-package com.aico.aibayo.service;
+package com.aico.aibayo.service.notepad;
 
-import com.aico.aibayo.dto.NotepadDto;
+import com.aico.aibayo.dto.notepad.NotepadDto;
 //import com.aico.aibayo.entity.QNotepadEntity;
-import com.aico.aibayo.dto.NotepadSearchCondition;
-import com.aico.aibayo.repository.NotepadRepository;
+import com.aico.aibayo.dto.notepad.NotepadSearchCondition;
+import com.aico.aibayo.repository.notepad.NotepadRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -22,26 +22,19 @@ public class NotepadServiceImpl implements NotepadService {
     public Page<NotepadDto> getAllByKinderNo(NotepadSearchCondition condition, int page) {
         Pageable pageable = PageRequest.of(page - 1, PAGE_SIZE);
 
-        return getNotepadDtosByKinderNo(condition, pageable);
+        return notepadRepository.findAllByKinderNo(condition, pageable);
     }
 
     @Override
     public Page<NotepadDto> getAllByKidNo(NotepadSearchCondition condition, int page) {
         Pageable pageable = PageRequest.of(page - 1, PAGE_SIZE);
 
-        return getNotepadDtosByKidNo(condition, pageable);
+        return notepadRepository.findAllByKidNo(condition, pageable);
     }
 
-    private Page<NotepadDto> getNotepadDtosByKidNo(NotepadSearchCondition condition, Pageable pageable) {
-        Page<NotepadDto> notepads = notepadRepository.findAllByKidNo(condition, pageable);
-
-        return notepads;
-    }
-
-    private Page<NotepadDto> getNotepadDtosByKinderNo(NotepadSearchCondition condition, Pageable pageable) {
-        Page<NotepadDto> notepads = notepadRepository.findAllByKinderNo(condition, pageable);
-
-        return notepads;
+    @Override
+    public NotepadDto getByNotepadNo(Long notepadNo) {
+        return notepadRepository.findByNotepadNo(notepadNo);
     }
 
 }
