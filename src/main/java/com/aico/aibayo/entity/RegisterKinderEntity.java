@@ -19,6 +19,7 @@ public class RegisterKinderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="kinder_no")
     private Long kinderNo; //유치원 번호
+    @Column(name ="kinder_open_time")
     private LocalTime kinderOpenTime; // 유치원 등원시간
     @Column(name="kinder_close_time")
     private LocalTime kinderCloseTime; //유치원 하원시간
