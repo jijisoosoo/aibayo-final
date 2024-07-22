@@ -11,7 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @ToString
-@IdClass(ParentKidId.class)
+@IdClass(TeacherKinderId.class)
 public class TeacherKinderEntity {
     @Id
     @Column(name = "teacher_id")
