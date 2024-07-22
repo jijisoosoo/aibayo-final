@@ -37,4 +37,6 @@ public class OrderFormEntity {
     private String orderParentSign; //보호자 서명
     @Column(name="order_delete_date")
     private LocalDateTime orderDeleteDate; //의뢰 삭제 일자
+    @Column(name="order_delete_flag")
+    private String orderDeleteFlag; //의뢰 삭제 여부
 }
