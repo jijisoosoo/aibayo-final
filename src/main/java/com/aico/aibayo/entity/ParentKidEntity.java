@@ -19,6 +19,7 @@ public class ParentKidEntity {
     @Id
     @Column(name = "kid_no")
     private Long kidNo;
+    @Id
     @Column(name = "accept_no")
     private Long acceptNo;
     @Column(name = "is_main_parent")
