@@ -19,6 +19,7 @@ public class ClassKidEntity {
     @Id
     @Column(name = "kid_no")
     private Long kidNo;
+    @Id
     @Column(name = "accept_no")
     private Long acceptNo;
 }

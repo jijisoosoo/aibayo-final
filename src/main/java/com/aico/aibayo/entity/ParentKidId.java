@@ -14,4 +14,5 @@ import java.io.Serializable;
 public class ParentKidId implements Serializable {
     private Long id;
     private Long kidNo;
+    private Long acceptNo;
 }
