@@ -1,11 +1,14 @@
 package com.aico.aibayo.control;
 
+import com.aico.aibayo.dto.announce.AnnounceSearchCondition;
 import com.aico.aibayo.service.announce.AnnounceService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Slf4j
@@ -13,10 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/announce")
 @RequiredArgsConstructor
 public class AnnounceController {
-//    private final AnnounceService announceService;
+    private final AnnounceService announceService;
 
     @GetMapping("/admin/card")
-    public String admincard(){
+    public String admincard(@RequestParam(defaultValue = "1") int page, Model model){
+        AnnounceSearchCondition condition = new AnnounceSearchCondition();
+
+
 
 
         return "/announce/admin/card";

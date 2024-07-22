@@ -25,7 +25,7 @@ public class CommentEntity {
     @Column(name="parent_comment_no")
     private Integer parentCommentNo; //댓글 번호
     @Column(name="comment_writer")
-    private String commentWriter; //댓글 작성자
+    private Integer commentWriter; //댓글 작성자 (member의 id값)
     @Column(name="comment_reg_date")
     private LocalDateTime commentRegDate; //댓글 작성일자
     @Column(name="comment_modify_date")
@@ -38,8 +38,10 @@ public class CommentEntity {
     private String invisibleFlag;//삭제 여부
     @Column(name="comment_class")
     private String commentClass;//댓글 구분 (0:댓글 1:대댓글)
-    @Column(name="comment_order")
-    private Integer commentOrder; //댓글 순서(따로 컬럼줘서 orderby안해도 되게)
     @Column(name="commnet_group_no")
     private Integer commnetGroupNo;//댓글그룹(댓글-댓글번호/ 대댓글-부모 댓글번호 저장)
+    @Column(name="comment_delete_flag")
+    private String commentDeleteFlag; //댓글 삭제 여부
+
+
 }

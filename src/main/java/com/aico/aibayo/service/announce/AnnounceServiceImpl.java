@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 
-public class AnnounceServiceImpl implements AnnounceService{
+public class AnnounceServiceImpl implements AnnounceService {
     private final AnnounceRepository announceRepository;
 
 
