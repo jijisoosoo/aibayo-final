@@ -16,6 +16,7 @@ public class AnnounceMemberEntity {
     @Id
     @Column(name="announce_no")
     private Long announceNo;//공지 번호
+    @Id
     @Column(name="id")
     private Long id; //아이디
     @Column(name="is_read")
