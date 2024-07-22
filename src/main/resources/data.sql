@@ -12,21 +12,49 @@ INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, 
 INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,3,'2022-03-02','shy@haesung.go.kr','송현우','1111');
 INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,3,'2022-03-02','ljs@haesung.go.kr','임지수','1111');
 INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,3,'2022-03-02','yjh@haesung.go.kr','윤준호','1111');
-INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,1,'2022-03-02','kty@gmail.com','김태영','2222');
-INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,1,'2022-03-02','ljw@gmail.com','이지원','2222');
-INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,1,'2022-03-02','psj@gmail.com','박수진','2222');
-INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,1,'2022-03-02','cjh@gmail.com','최재현','2222');
-INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,1,'2022-03-02','jsy@gmail.com','정서연','2222');
-INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,2,'2022-03-02','hsm@gmail.com','한승민','2222');
-INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,2,'2022-03-02','sjw@gmail.com','송지우','2222');
-INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,2,'2022-03-02','ldh@gmail.com','임도훈','2222');
-INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,2,'2022-03-02','yjh@gmail.com','윤주현','2222');
-INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,2,'2022-03-02','kyj@gmail.com','강유진','2222');
-INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,3,'2023-03-02','hsm@gmail.com','황성민','2222');
-INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,3,'2023-03-02','osj@gmail.com','오수진','2222');
-INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,3,'2023-03-02','hsh@gmail.com','한승호','2222');
-INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,3,'2023-03-02','jyn@gmail.com','조유나','2222');
-INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,3,'2023-03-02','bjw@gmail.com','백진우','2222');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,NULL,'2022-03-02','kty@gmail.com','김태영','2222');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,NULL,'2022-03-02','ljw@gmail.com','이지원','2222');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,NULL,'2022-03-02','psj@gmail.com','박수진','2222');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,NULL,'2022-03-02','cjh@gmail.com','최재현','2222');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,NULL,'2022-03-02','jsy@gmail.com','정서연','2222');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,NULL,'2022-03-02','hsm@gmail.com','한승민','2222');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,NULL,'2022-03-02','sjw@gmail.com','송지우','2222');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,NULL,'2022-03-02','ldh@gmail.com','임도훈','2222');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,NULL,'2022-03-02','yjh@gmail.com','윤주현','2222');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,NULL,'2022-03-02','kyj@gmail.com','강유진','2222');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,NULL,'2023-03-02','hsm@gmail.com','황성민','2222');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,NULL,'2023-03-02','osj@gmail.com','오수진','2222');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,NULL,'2023-03-02','hsh@gmail.com','한승호','2222');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,NULL,'2023-03-02','jyn@gmail.com','조유나','2222');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,3,0,NULL,'2023-03-02','bjw@gmail.com','백진우','2222');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,1,'2015-03-02','msy@hangang.go.kr','마순영','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,1,'2015-03-02','mlh@hangang.go.kr','문이현','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,1,'2015-03-02','kys@hangang.go.kr','고연서','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,2,'2015-03-02','cjy@kookwon.go.kr','차정연','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,2,'2015-03-02','omh@kookwon.go.kr','옥미현','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,2,'2015-03-02','osj@kookwon.go.kr','오수진','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,3,'2015-03-02','shj@haesung.go.kr','서혜주','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,3,'2015-03-02','yjm@haesung.go.kr','유정민','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,3,'2015-03-02','swja@haesung.go.kr','선우진아','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,1,'2017-03-02','kjy@hangang.go.kr','김지윤','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,1,'2017-03-02','lhs@hangang.go.kr','이현승','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,1,'2017-03-02','pky@hangang.go.kr','박경희','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,2,'2017-03-02','cjm@kookwon.go.kr','최준민','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,2,'2017-03-02','jhs@kookwon.go.kr','정현숙','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,2,'2017-03-02','hys@kookwon.go.kr','한영숙','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,3,'2017-03-02','skj@haesung.go.kr','송경준','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,3,'2017-03-02','lhj@haesung.go.kr','임희준','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,3,'2017-03-02','ymr@haesung.go.kr','윤마리아','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,1,'2019-03-02','mha@hangang.go.kr','명현아','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,1,'2019-03-02','kmj@hangang.go.kr','경미진','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,1,'2019-03-02','kjk@hangang.go.kr','강주경','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,2,'2019-03-02','cka@kookwon.go.kr','차경아','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,2,'2019-03-02','pwh@kookwon.go.kr','박원희','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,2,'2019-03-02','oky@kookwon.go.kr','오기영','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,3,'2019-03-02','shi@haesung.go.kr','서해인','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,3,'2019-03-02','kaj@haesung.go.kr','김아정','1111');
+INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,2,0,3,'2019-03-02','pdnl@haesung.go.kr','박다니엘','1111');
+
 
 
 #등록 유치원 추가
@@ -410,6 +438,153 @@ INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date)
 INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(0,1,'2024-03-04 06:00:00','2024-03-04');
 INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(0,1,'2024-03-04 06:00:00','2024-03-04');
 
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(3,1,'2022-03-02 06:00:00','2022-03-02');
+
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_date, accept_reg_date) VALUES(2,1,'2022-03-02 06:00:00','2022-03-02');
+
+
 
 # 게시글 추가
 INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,0,'2','김민준의 알림장','<p>김민준 원생의<b>건강검진</b>이 7월 25일에 예정되어 있습니다.</p>','2024-06-01');
@@ -612,6 +787,36 @@ INSERT INTO board (invisible_flag, board_type, writer, board_title, board_conten
 INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,0,'2','구름반 알림장','<p>구름반 친구들이 오늘 책 읽기 시간에 많은 책을 읽었습니다. 책 읽는 시간을 가져주세요.</p>','2024-07-20');
 INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,0,'3','홍지민의 알림장','<p>홍지민 원생이<b>음악 시간</b>에 노래를 잘 불렀습니다.</p>','2024-07-20');
 INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,0,'3','민들레반 알림장','<p>민들레반 친구들이 오늘 퍼즐 놀이에서 뛰어난 성과를 보였습니다. 많은 칭찬 부탁드립니다!</p>','2024-07-20');
+
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'40','5월 예절교육','2024년 5월 예절교육이 있을 예정입니다.','2024-05-01 05:34:48');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'40','가정의 달 체험','가정의 달을 맞아 어린이날 축하와 부모님께 감사하는 시간을 가질 예정입니다.','2024-05-01 05:34:49');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'40','텃밭 가꾸기','상추와 깻잎을 심는 자연체험이 있을 예정입니다.','2024-05-01 05:34:50');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'29','천문관 현장학습','평창 천문관으로 과학 체험학습을 갈 예정입니다.','2024-05-01 05:34:51');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'29','화채 만들기','수박으로 화채를 만드는 요리실습이 있을 예정입니다.','2024-05-01 05:34:52');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'48','5월 생일 축하','5월에 생일을 맞는 원아들의 생일 파티가 있을 예정입니다.','2024-05-01 05:34:53');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'48','지진대피훈련','유치원 전체 지진대피훈련이 있을 예정입니다.','2024-05-01 05:34:54');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'49','6월 예절교육','2024년 6월 예절교육이 있을 예정입니다.','2024-06-01 05:34:48');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'49','텃밭 수확하기','상추와 깻잎에 물을 주고 수확하는 자연체험이 있을 예정입니다.','2024-06-01 05:34:49');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'49','컬러데이 패션쇼','다양한 색상을 활용한 패션쇼를 통해 어린이들의 시각적 감각을 키웁니다.','2024-06-01 05:34:50');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'38','농촌 나들이','농촌으로 고구마와 감자캐기 등 여러 다양한 체험활동을 할 예정입니다.','2024-06-01 05:34:51');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'38','6월 생일 축하','6월에 생일을 맞는 원아들의 생일 파티가 있을 예정입니다.','2024-06-01 05:34:52');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'7','운동회','2024년 상반기 유치원 전체 운동회가 있을 예정입니다.','2024-06-01 05:34:53');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'7','시 낭독회','유치원 전체 시 낭독회를 실시합니다.','2024-06-01 05:34:54');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'7','7월 예절교육','2024년 7월 예절교육이 있을 예정입니다.','2024-07-01 5:34:54');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'7','학부모 심폐소생술 교육','신청하신 학부모님들을 대상으로 심폐소생술 교육을 실시할 예정입니다.','2024-07-02 5:34:54');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'49','직업체험 지원기간','직업체험의 날에 멘토 역할을 해주실 학부모님의 지원을 받습니다.','2024-07-03 5:34:54');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'49','7월 생일축하','7월에 생일을 맞는 원아들의 생일 파티가 있을 예정입니다.','2024-07-04 5:34:54');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'49','화재 대피훈련','유치원 전체 화재대피훈련이 있을 예정입니다.','2024-07-05 5:34:54');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'31','직업체험의 날','자원하신 학부모님들을 모시고 직업체험을 진행할 예정입니다.','2024-07-06 5:34:54');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'31','수영장 물놀이','학원 수영장에서 다양한 액티비티를 비롯한 물놀이가 있을 예정입니다.','2024-07-07 5:34:54');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'48','8월 예절교육','2024년 8월 예절교육이 있을 예정입니다.','2024-08-01 5:34:54');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'48','방울토마토 수확','봄에 심은 방울토마토 모종에서 열매를 수확할 예정입니다.','2024-08-02 5:34:54');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'40','교통안전체험','유치원 전체 교통안전체험이 있을 예정입니다.','2024-08-03 5:34:54');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'40','과학 현장체험학습','서울시립과학관으로 현장체험학습 예정입니다.','2024-08-04 5:34:54');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'40','7월 생일축하','8월에 생일을 맞는 원아들의 생일 파티가 있을 예정입니다.','2024-08-05 5:34:54');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'38','영어동요대회','유치원 전체 영어동요대회를 실시합니다.','2024-08-06 5:34:54');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'38','여름 방학식','2024년 1학기 방학식입니다.','2024-08-07 5:34:54');
+INSERT INTO board (invisible_flag, board_type, writer, board_title, board_contents, board_reg_date) VALUES(0,2,'38','2024년 하반기 사전등록기','기간 내에 2024년 2학기 사전등록을 실시합니다','2024-08-08 5:34:54');
 
 
 # 알림장 추가
@@ -1172,440 +1377,599 @@ INSERT INTO  schedule(
     schedule_start_date,
     schedule_end_date
 ) VALUES
-(201,'2024-05-01','2024-05-01'),
-(202,'2024-05-03','2024-05-03'),
-(203,'2024-05-07','2024-05-07'),
-(204,'2024-05-14','2024-05-14'),
-(205,'2024-05-17','2024-05-17'),
-(206,'2024-05-21','2024-05-21'),
-(207,'2024-05-23','2024-05-23'),
-(208,'2024-06-03','2024-06-03'),
-(209,'2024-06-05','2024-06-05'),
-(210,'2024-06-12','2024-06-12'),
-(211,'2024-06-17','2024-06-18'),
-(212,'2024-06-21','2024-06-21'),
-(213,'2024-06-24','2024-06-24'),
-(214,'2024-06-29','2024-06-29'),
-(215,'2024-07-03','2024-07-03'),
-(216,'2024-07-05','2024-07-05'),
-(217,'2024-07-22','2024-07-26'),
-(218,'2024-07-10','2024-07-10'),
-(219,'2024-07-16','2024-07-16'),
-(220,'2024-07-24','2024-07-24'),
-(221,'2024-07-29','2024-07-29'),
-(222,'2024-08-01','2024-08-01'),
-(223,'2024-08-06','2024-08-06'),
-(224,'2024-08-08','2024-08-08'),
-(225,'2024-08-14','2024-08-14'),
-(226,'2024-08-15','2024-08-15'),
-(227,'2024-08-20','2024-08-20'),
-(228,'2024-08-26','2024-08-26'),
-(229,'2024-08-01','2024-08-05');
+      (201,'2024-05-01','2024-05-01'),
+      (202,'2024-05-03','2024-05-03'),
+      (203,'2024-05-07','2024-05-07'),
+      (204,'2024-05-14','2024-05-14'),
+      (205,'2024-05-17','2024-05-17'),
+      (206,'2024-05-21','2024-05-21'),
+      (207,'2024-05-23','2024-05-23'),
+      (208,'2024-06-03','2024-06-03'),
+      (209,'2024-06-05','2024-06-05'),
+      (210,'2024-06-12','2024-06-12'),
+      (211,'2024-06-17','2024-06-18'),
+      (212,'2024-06-21','2024-06-21'),
+      (213,'2024-06-24','2024-06-24'),
+      (214,'2024-06-29','2024-06-29'),
+      (215,'2024-07-03','2024-07-03'),
+      (216,'2024-07-05','2024-07-05'),
+      (217,'2024-07-22','2024-07-26'),
+      (218,'2024-07-10','2024-07-10'),
+      (219,'2024-07-16','2024-07-16'),
+      (220,'2024-07-24','2024-07-24'),
+      (221,'2024-07-29','2024-07-29'),
+      (222,'2024-08-01','2024-08-01'),
+      (223,'2024-08-06','2024-08-06'),
+      (224,'2024-08-08','2024-08-08'),
+      (225,'2024-08-14','2024-08-14'),
+      (226,'2024-08-15','2024-08-15'),
+      (227,'2024-08-20','2024-08-20'),
+      (228,'2024-08-26','2024-08-26'),
+      (229,'2024-08-01','2024-08-05');
 
 
 #----------------------------board(announce)-----------------------------------
 INSERT INTO board (board_type, board_reg_date, board_title, board_contents, invisible_flag, writer) VALUES
-(1, '2024-01-03', '2024년 새해 인사', '새해 복 많이 받으세요! 2024년에도 잘 부탁드립니다.', 0, 2),
-(1, '2024-01-07', '선생님 워크숍 안내', '2024년 1월 10일, 선생님 워크숍이 진행됩니다. 필히 참석 바랍니다.', 0, 2),
-(1, '2024-01-12', '1월 교사 회의 공지', '2024년 1월 15일에 교사 회의가 있습니다. 중요한 안건이 있으니 참석해 주세요.', 0, 2),
-(1, '2024-01-18', '교사 연수 프로그램 안내', '2024년 1월 20일, 교사 연수 프로그램이 진행됩니다. 자세한 내용은 공지사항을 참조하세요.', 0, 2),
-(1, '2024-02-01', '2월 교사 워크숍 일정', '2024년 2월 5일 교사 워크숍이 예정되어 있습니다. 자세한 사항은 공지사항을 확인해 주세요.', 0, 2),
-(1, '2024-02-10', '교사 직무 교육 안내', '2024년 2월 12일부터 2월 14일까지 교사 직무 교육이 진행됩니다.', 0, 2),
-(1, '2024-02-15', '교사 연수 프로그램 안내', '2024년 2월 20일, 교사 연수 프로그램이 진행됩니다. 많은 참여 부탁드립니다.', 0, 2),
-(1, '2024-03-01', '3월 교사 회의 공지', '2024년 3월 5일 교사 회의가 있습니다. 모두 참석해 주세요.', 0, 2),
-(1, '2024-03-08', '교사 업무 분장 안내', '2024년 3월 10일부터 새로 교사 업무 분장이 시작됩니다. 확인해 주세요.', 0, 2),
-(1, '2024-03-15', '교사 연수 프로그램 안내', '2024년 3월 18일부터 3월 20일까지 교사 연수가 있습니다.', 0, 2),
-(1, '2024-04-01', '4월 교사 워크숍 일정', '2024년 4월 5일 교사 워크숍이 진행됩니다. 많은 참여 부탁드립니다.', 0, 2),
-(1, '2024-04-10', '교사 건강 관리 팁', '교사의 건강을 위한 관리 방법과 팁을 안내드립니다.', 0, 2),
-(1, '2024-04-15', '교사 직무 교육 안내', '2024년 4월 17일부터 4월 19일까지 교사 직무 교육이 진행됩니다.', 0, 2),
-(1, '2024-05-01', '5월 교사 회의 공지', '2024년 5월 3일 교사 회의가 있습니다. 참석해 주세요.', 0, 2),
-(1, '2024-05-10', '교사 연수 프로그램 안내', '2024년 5월 12일부터 5월 14일까지 교사 연수가 진행됩니다.', 0, 2),
-(1, '2024-05-20', '교사 업무 분장 안내', '2024년 5월 22일부터 새로 교사 업무 분장이 시작됩니다.', 0, 2),
-(1, '2024-06-01', '6월 교사 워크숍 안내', '2024년 6월 5일 교사 워크숍이 진행됩니다. 많은 참여 바랍니다.', 0, 2),
-(1, '2024-02-18', '교사 건강 관리법', '겨울철 교사 건강 관리법에 대한 안내입니다.', 0, 3),
-(1, '2024-03-05', '교사 워크숍 일정 안내', '2024년 3월 8일 교사 워크숍이 예정되어 있습니다.', 0, 3),
-(1, '2024-03-12', '교사 연수 프로그램', '2024년 3월 14일부터 3월 16일까지 교사 연수가 진행됩니다.', 0, 3),
-(1, '2024-04-07', '교사 회의 공지', '2024년 4월 10일 교사 회의가 있습니다. 모두 참석해 주세요.', 0, 3),
-(1, '2024-05-03', '교사 직무 교육 안내', '2024년 5월 5일부터 5월 7일까지 교사 직무 교육이 진행됩니다.', 0, 3),
-(1, '2024-06-20', '교사 연수 프로그램 안내', '2024년 6월 22일부터 6월 24일까지 교사 연수가 있습니다.', 0, 3),
-(1, '2024-07-08', '교사 건강 관리법', '여름철 교사 건강 관리법과 예방 수칙을 안내드립니다.', 0, 3),
-(1, '2024-07-15', '7월 교사 워크숍 안내', '2024년 7월 17일 교사 워크숍이 진행됩니다. 많은 참여 부탁드립니다.', 0, 3),
-(1, '2024-01-14', '교사 교육 프로그램 안내', '2024년 1월 16일부터 1월 18일까지 교사 교육 프로그램이 진행됩니다.', 0, 3),
-(1, '2024-02-08', '교사 직무 교육 공지', '2024년 2월 10일부터 2월 12일까지 교사 직무 교육이 있습니다.', 0, 3),
-(1, '2024-03-20', '교사 복지 프로그램 안내', '2024년 3월 22일 복지 프로그램에 대해 안내드립니다.', 0, 3),
-(1, '2024-01-03', '2024년 새해 인사', '새해 복 많이 받으세요! 2024년에도 잘 부탁드립니다.', 0, 3),
-(1, '2024-02-05', '교사 연수 안내', '2024년 2월 7일부터 2월 9일까지 교사 연수가 진행됩니다.', 0, 3),
-(1, '2024-02-20', '어린이집 교사 연수 안내', '2024년 2월 25일 어린이집 교사 연수가 진행됩니다. 교사 분들은 필히 참석해 주세요.', 0, 2),
-(1, '2024-02-20', '어린이집 교사 연수 안내', '2024년 2월 25일 어린이집 교사 연수가 진행됩니다. 교사 분들은 필히 참석해 주세요.', 0, 3),
-(1, '2024-01-02', '2024년 신년 맞이 행사 안내', '2024년 신년 맞이 행사에 대한 자세한 내용을 안내드립니다.', 0, 2),
-(1, '2024-01-12', '2024년 1월 원생 건강검진 안내', '2024년 1월 20일 원생 건강검진이 진행됩니다. 자세한 사항은 공지사항을 확인해 주세요.', 0, 2),
-(1, '2024-01-20', '겨울 방학 기간 안내', '겨울 방학 기간은 2024년 1월 15일부터 1월 19일까지입니다.', 0, 2),
-(1, '2024-02-01', '2월 학사 일정 안내', '2024년 2월의 학사 일정을 안내드립니다. 세부 사항은 공지사항을 확인하세요.', 0, 2),
-(1, '2024-02-15', '겨울철 실내 활동 안내', '겨울철 실내 활동 및 안전수칙에 대한 안내입니다. 참고하시기 바랍니다.', 0, 2),
-(1, '2024-03-01', '2024년 봄학기 시작 알림', '2024년 3월 1일부터 봄학기가 시작됩니다. 준비물과 일정을 확인해 주세요.', 0, 2),
-(1, '2024-03-15', '봄 방학 프로그램 안내', '봄 방학 동안 진행될 프로그램에 대한 자세한 내용입니다.', 0, 2),
-(1, '2024-04-01', '4월 어린이집 개방일 안내', '2024년 4월 5일 어린이집 개방일입니다. 부모님들의 많은 방문 부탁드립니다.', 0, 2),
-(1, '2024-04-15', '여름 방학 준비사항 안내', '여름 방학에 대비하여 준비사항과 일정을 안내드립니다.', 0, 2),
-(1, '2024-05-01', '5월 원생 활동 계획 안내', '5월의 원생 활동 계획과 주요 일정을 안내드립니다.', 0, 2),
-(1, '2024-05-10', '2024년 5월 학부모 교육 강좌 안내', '2024년 5월 12일에 학부모 교육 강좌가 열립니다. 관심 있는 부모님들의 많은 참여 부탁드립니다.', 0, 2),
-(1, '2024-06-01', '6월 원생 건강검진 안내', '2024년 6월 5일부터 원생 건강검진이 진행됩니다. 자세한 사항은 공지사항을 확인해 주세요.', 0, 2),
-(1, '2024-06-15', '여름 방학 일정 안내', '여름 방학 기간은 2024년 7월 1일부터 7월 14일까지입니다.', 0, 2),
-(1, '2024-07-01', '2024년 7월 원생 안전 교육 안내', '2024년 7월 5일 원생들을 위한 안전 교육이 진행됩니다. 자세한 사항은 공지사항을 확인하세요.', 0, 2),
-(1, '2024-07-10', '2024년 7월 생일 축하', '7월에 생일인 원생들을 축하합니다! 생일을 맞은 모든 아이들에게 행복을 기원합니다.', 0, 2),
-(1, '2024-03-10', '3월 학부모 설명회 안내', '2024년 3월 15일에 학부모 설명회가 있습니다. 많은 참여 부탁드립니다.', 0, 2),
-(1, '2024-06-22', '2024년 여름 캠프 모집 안내', '여름 캠프는 2024년 7월 5일부터 7월 10일까지 진행됩니다. 많은 참여 바랍니다.', 0, 2),
-(1, '2024-01-02', '2024년 신년 맞이 행사 안내', '2024년 신년 맞이 행사에 대한 자세한 내용을 안내드립니다.', 0, 3),
-(1, '2024-01-12', '2024년 1월 원생 건강검진 안내', '2024년 1월 20일 원생 건강검진이 진행됩니다. 자세한 사항은 공지사항을 확인해 주세요.', 0, 3),
-(1, '2024-01-20', '겨울 방학 기간 안내', '겨울 방학 기간은 2024년 1월 15일부터 1월 19일까지입니다.', 0, 3),
-(1, '2024-02-01', '2월 학사 일정 안내', '2024년 2월의 학사 일정을 안내드립니다. 세부 사항은 공지사항을 확인하세요.', 0, 3),
-(1, '2024-02-15', '겨울철 실내 활동 안내', '겨울철 실내 활동 및 안전수칙에 대한 안내입니다. 참고하시기 바랍니다.', 0, 3),
-(1, '2024-03-01', '2024년 봄학기 시작 알림', '2024년 3월 1일부터 봄학기가 시작됩니다. 준비물과 일정을 확인해 주세요.', 0, 3),
-(1, '2024-03-15', '봄 방학 프로그램 안내', '봄 방학 동안 진행될 프로그램에 대한 자세한 내용입니다.', 0, 3),
-(1, '2024-04-01', '4월 어린이집 개방일 안내', '2024년 4월 5일 어린이집 개방일입니다. 부모님들의 많은 방문 부탁드립니다.', 0, 3),
-(1, '2024-04-15', '여름 방학 준비사항 안내', '여름 방학에 대비하여 준비사항과 일정을 안내드립니다.', 0, 3),
-(1, '2024-05-01', '5월 원생 활동 계획 안내', '5월의 원생 활동 계획과 주요 일정을 안내드립니다.', 0, 3),
-(1, '2024-05-10', '2024년 5월 학부모 교육 강좌 안내', '2024년 5월 12일에 학부모 교육 강좌가 열립니다. 관심 있는 부모님들의 많은 참여 부탁드립니다.', 0, 3),
-(1, '2024-06-01', '6월 원생 건강검진 안내', '2024년 6월 5일부터 원생 건강검진이 진행됩니다. 자세한 사항은 공지사항을 확인해 주세요.', 0, 3),
-(1, '2024-06-15', '여름 방학 일정 안내', '여름 방학 기간은 2024년 7월 1일부터 7월 14일까지입니다.', 0, 3),
-(1, '2024-07-01', '2024년 7월 원생 안전 교육 안내', '2024년 7월 5일 원생들을 위한 안전 교육이 진행됩니다. 자세한 사항은 공지사항을 확인하세요.', 0, 3),
-(1, '2024-07-10', '2024년 7월 생일 축하', '7월에 생일인 원생들을 축하합니다! 생일을 맞은 모든 아이들에게 행복을 기원합니다.', 0, 3),
-(1, '2024-03-10', '3월 학부모 설명회 안내', '2024년 3월 15일에 학부모 설명회가 있습니다. 많은 참여 부탁드립니다.', 0, 3),
-(1, '2024-06-22', '2024년 여름 캠프 모집 안내', '여름 캠프는 2024년 7월 5일부터 7월 10일까지 진행됩니다. 많은 참여 바랍니다.', 0, 3),
-(1, '2024-01-01', '2024년 원 운영시간 변경 안내', '2024년부터 원의 운영시간이 변경됩니다. 새로운 운영시간은 오전 9시부터 오후 5시까지입니다.', 0, 2),
-(1, '2024-01-10', '설 연휴 휴일 안내', '설 연휴로 인해 2024년 1월 21일부터 1월 23일까지 원이 휴원합니다. 이용에 참고해 주세요.', 0, 2),
-(1, '2024-01-20', '원 내 건강 및 안전 수칙 안내', '원 내에서 지켜야 할 건강 및 안전 수칙에 대해 안내드립니다. 모든 부모님과 원생들이 준수해 주세요.', 0, 2),
-(1, '2024-02-01', '겨울 방학 프로그램 안내', '2024년 겨울 방학 동안 진행될 특별 프로그램과 활동 일정입니다. 많은 참여 부탁드립니다.', 0, 2),
-(1, '2024-02-10', '2024년 봄학기 수업 일정 안내', '2024년 봄학기 수업 일정과 주요 활동 계획을 안내드립니다.', 0, 2),
-(1, '2024-03-01', '원 내 외부 방문자 규칙 안내', '외부 방문자(학부모, 외부 강사 등) 방문 시 지켜야 할 규칙과 절차를 안내드립니다.', 0, 2),
-(1, '2024-03-15', '봄학기 부모 면담 일정 안내', '봄학기 부모님과의 면담 일정을 안내드립니다. 면담 희망 시간은 사전에 예약해 주세요.', 0, 2),
-(1, '2024-04-01', '원 내 시설 점검 및 보수 작업 안내', '2024년 4월 5일부터 4월 7일까지 원 내 시설 점검 및 보수 작업이 진행됩니다.', 0, 2),
-(1, '2024-05-01', '어린이집 원장 인사말', '어린이집 원장님의 인사말과 2024년의 비전 및 목표를 공유합니다.', 0, 2),
-(1, '2024-06-01', '여름 방학 계획 안내', '여름 방학 동안 진행될 특별 활동과 프로그램에 대한 안내입니다.', 0, 2),
-(1, '2024-01-01', '2024년 원 운영시간 변경 안내', '2024년부터 원의 운영시간이 변경됩니다. 새로운 운영시간은 오전 9시부터 오후 5시까지입니다.', 0, 3),
-(1, '2024-01-10', '설 연휴 휴일 안내', '설 연휴로 인해 2024년 1월 21일부터 1월 23일까지 원이 휴원합니다. 이용에 참고해 주세요.', 0, 3),
-(1, '2024-01-20', '원 내 건강 및 안전 수칙 안내', '원 내에서 지켜야 할 건강 및 안전 수칙에 대해 안내드립니다. 모든 부모님과 원생들이 준수해 주세요.', 0, 3),
-(1, '2024-02-01', '겨울 방학 프로그램 안내', '2024년 겨울 방학 동안 진행될 특별 프로그램과 활동 일정입니다. 많은 참여 부탁드립니다.', 0, 3),
-(1, '2024-02-10', '2024년 봄학기 수업 일정 안내', '2024년 봄학기 수업 일정과 주요 활동 계획을 안내드립니다.', 0, 3),
-(1, '2024-03-01', '원 내 외부 방문자 규칙 안내', '외부 방문자(학부모, 외부 강사 등) 방문 시 지켜야 할 규칙과 절차를 안내드립니다.', 0, 3),
-(1, '2024-03-15', '봄학기 부모 면담 일정 안내', '봄학기 부모님과의 면담 일정을 안내드립니다. 면담 희망 시간은 사전에 예약해 주세요.', 0, 3),
-(1, '2024-04-01', '원 내 시설 점검 및 보수 작업 안내', '2024년 4월 5일부터 4월 7일까지 원 내 시설 점검 및 보수 작업이 진행됩니다.', 0, 3),
-(1, '2024-05-01', '어린이집 원장 인사말', '어린이집 원장님의 인사말과 2024년의 비전 및 목표를 공유합니다.', 0, 3),
-(1, '2024-06-01', '여름 방학 계획 안내', '여름 방학 동안 진행될 특별 활동과 프로그램에 대한 안내입니다.', 0, 3),
-(1, '2024-01-02', '2024년 신년 맞이 행사 안내', '2024년 신년 맞이 행사에 대한 자세한 내용을 안내드립니다.', 0, 2),
-(1, '2024-01-10', '겨울 방학 기간 안내', '겨울 방학 기간은 2024년 1월 15일부터 1월 19일까지입니다.', 0, 2),
-(1, '2024-01-20', '1월 학부모 설명회 안내', '2024년 1월 25일 학부모 설명회가 있습니다. 많은 참석 부탁드립니다.', 0, 2),
-(1, '2024-02-10', '겨울철 실내 활동 안내', '겨울철 실내 활동 및 안전수칙에 대한 안내입니다. 참고하시기 바랍니다.', 0, 2),
-(1, '2024-03-01', '2024년 봄학기 시작 알림', '2024년 3월 1일부터 봄학기가 시작됩니다. 준비물과 일정을 확인해 주세요.', 0, 2),
-(1, '2024-03-10', '3월 학부모 설명회 안내', '2024년 3월 15일에 학부모 설명회가 있습니다. 많은 참여 부탁드립니다.', 0, 2),
-(1, '2024-03-15', '봄 방학 프로그램 안내', '봄 방학 동안 진행될 프로그램에 대한 자세한 내용입니다.', 0, 2),
-(1, '2024-04-01', '4월 어린이집 개방일 안내', '2024년 4월 5일 어린이집 개방일입니다. 부모님들의 많은 방문 부탁드립니다.', 0, 2),
-(1, '2024-04-10', '원장님과의 만남 안내', '2024년 4월 12일 원장님과의 만남이 예정되어 있습니다. 참석 부탁드립니다.', 0, 2),
-(1, '2024-04-15', '여름 방학 준비사항 안내', '여름 방학에 대비하여 준비사항과 일정을 안내드립니다.', 0, 2),
-(1, '2024-05-01', '5월 원생 활동 계획 안내', '5월의 원생 활동 계획과 주요 일정을 안내드립니다.', 0, 2),
-(1, '2024-05-10', '2024년 5월 학부모 교육 강좌 안내', '2024년 5월 12일에 학부모 교육 강좌가 열립니다. 관심 있는 부모님들의 많은 참여 부탁드립니다.', 0, 2),
-(1, '2024-05-20', '여름 방학 일정 안내', '여름 방학 기간은 2024년 7월 1일부터 7월 14일까지입니다.', 0, 2),
-(1, '2024-06-01', '6월 원생 건강검진 안내', '2024년 6월 5일부터 원생 건강검진이 진행됩니다. 자세한 사항은 공지사항을 확인해 주세요.', 0, 2),
-(1, '2024-06-10', '6월 원생 안전 교육 안내', '2024년 6월 15일 원생들을 위한 안전 교육이 진행됩니다. 자세한 사항은 공지사항을 확인하세요.', 0, 2),
-(1, '2024-06-15', '여름 방학 프로그램 안내', '여름 방학 동안 진행될 프로그램에 대한 자세한 내용입니다.', 0, 2),
-(1, '2024-06-22', '여름 캠프 모집 안내', '여름 캠프는 2024년 7월 5일부터 7월 10일까지 진행됩니다. 많은 참여 바랍니다.', 0, 2),
-(1, '2024-07-01', '2024년 7월 원생 안전 교육 안내', '2024년 7월 5일 원생들을 위한 안전 교육이 진행됩니다. 자세한 사항은 공지사항을 확인하세요.', 0, 2),
-(1, '2024-07-10', '2024년 7월 생일 축하', '7월에 생일인 원생들을 축하합니다! 생일을 맞은 모든 아이들에게 행복을 기원합니다.', 0, 2),
-(1, '2024-01-25', '2024년 2월 학사 일정 안내', '2024년 2월의 학사 일정을 안내드립니다. 자세한 내용은 공지사항을 확인해 주세요.', 0, 2),
-(1, '2024-02-28', '2024년 3월 행사 일정 안내', '2024년 3월의 주요 행사 일정을 공지드립니다.', 0, 2),
-(1, '2024-03-25', '2024년 4월 주요 행사 안내', '2024년 4월의 주요 행사 일정과 세부 사항을 안내드립니다.', 0, 2),
-(1, '2024-04-18', '2024년 5월 행사 일정 안내', '2024년 5월의 주요 행사 일정을 공지드립니다.', 0, 2),
-(1, '2024-05-23', '2024년 6월 행사 일정 안내', '2024년 6월의 주요 행사 일정을 공지드립니다.', 0, 2),
-(1, '2024-06-27', '2024년 7월 행사 일정 안내', '2024년 7월의 주요 행사 일정을 공지드립니다.', 0, 2),
-(1, '2024-01-28', '2024년 봄학기 계획 안내', '2024년 봄학기 동안의 주요 계획과 일정입니다. 많은 관심 부탁드립니다.', 0, 2),
-(1, '2024-02-25', '2024년 3월 방학 프로그램 안내', '2024년 3월 방학 기간 동안 진행될 프로그램에 대한 자세한 내용입니다.', 0, 2),
-(1, '2024-03-30', '2024년 4월 봄학기 시작 안내', '2024년 4월 1일부터 봄학기가 시작됩니다. 준비물과 일정을 확인해 주세요.', 0, 2),
-(1, '2024-04-25', '2024년 여름 캠프 준비사항 안내', '2024년 여름 캠프에 대한 준비사항과 세부 일정을 안내드립니다.', 0, 2),
-(1, '2024-05-28', '2024년 6월 여름 방학 준비 안내', '2024년 6월 여름 방학 준비 사항과 일정을 안내드립니다.', 0, 2),
-(1, '2024-06-10', '2024년 6월 행사 안내', '2024년 6월의 주요 행사와 일정 안내입니다.', 0, 2),
-(1, '2024-01-02', '2024년 신년 맞이 행사 안내', '2024년 신년 맞이 행사에 대한 자세한 내용을 안내드립니다.', 0, 3),
-(1, '2024-01-10', '겨울 방학 기간 안내', '겨울 방학 기간은 2024년 1월 15일부터 1월 19일까지입니다.', 0, 3),
-(1, '2024-01-20', '1월 학부모 설명회 안내', '2024년 1월 25일 학부모 설명회가 있습니다. 많은 참석 부탁드립니다.', 0, 3),
-(1, '2024-02-10', '겨울철 실내 활동 안내', '겨울철 실내 활동 및 안전수칙에 대한 안내입니다. 참고하시기 바랍니다.', 0, 3),
-(1, '2024-03-01', '2024년 봄학기 시작 알림', '2024년 3월 1일부터 봄학기가 시작됩니다. 준비물과 일정을 확인해 주세요.', 0, 3),
-(1, '2024-03-10', '3월 학부모 설명회 안내', '2024년 3월 15일에 학부모 설명회가 있습니다. 많은 참여 부탁드립니다.', 0, 3),
-(1, '2024-03-15', '봄 방학 프로그램 안내', '봄 방학 동안 진행될 프로그램에 대한 자세한 내용입니다.', 0, 3),
-(1, '2024-04-01', '4월 어린이집 개방일 안내', '2024년 4월 5일 어린이집 개방일입니다. 부모님들의 많은 방문 부탁드립니다.', 0, 3),
-(1, '2024-04-10', '원장님과의 만남 안내', '2024년 4월 12일 원장님과의 만남이 예정되어 있습니다. 참석 부탁드립니다.', 0, 3),
-(1, '2024-04-15', '여름 방학 준비사항 안내', '여름 방학에 대비하여 준비사항과 일정을 안내드립니다.', 0, 3),
-(1, '2024-05-01', '5월 원생 활동 계획 안내', '5월의 원생 활동 계획과 주요 일정을 안내드립니다.', 0, 3),
-(1, '2024-05-10', '2024년 5월 학부모 교육 강좌 안내', '2024년 5월 12일에 학부모 교육 강좌가 열립니다. 관심 있는 부모님들의 많은 참여 부탁드립니다.', 0, 3),
-(1, '2024-05-20', '여름 방학 일정 안내', '여름 방학 기간은 2024년 7월 1일부터 7월 14일까지입니다.', 0, 3),
-(1, '2024-06-01', '6월 원생 건강검진 안내', '2024년 6월 5일부터 원생 건강검진이 진행됩니다. 자세한 사항은 공지사항을 확인해 주세요.', 0, 3),
-(1, '2024-06-10', '6월 원생 안전 교육 안내', '2024년 6월 15일 원생들을 위한 안전 교육이 진행됩니다. 자세한 사항은 공지사항을 확인하세요.', 0, 3),
-(1, '2024-06-15', '여름 방학 프로그램 안내', '여름 방학 동안 진행될 프로그램에 대한 자세한 내용입니다.', 0, 3),
-(1, '2024-06-22', '여름 캠프 모집 안내', '여름 캠프는 2024년 7월 5일부터 7월 10일까지 진행됩니다. 많은 참여 바랍니다.', 0, 3),
-(1, '2024-07-01', '2024년 7월 원생 안전 교육 안내', '2024년 7월 5일 원생들을 위한 안전 교육이 진행됩니다. 자세한 사항은 공지사항을 확인하세요.', 0, 3),
-(1, '2024-07-10', '2024년 7월 생일 축하', '7월에 생일인 원생들을 축하합니다! 생일을 맞은 모든 아이들에게 행복을 기원합니다.', 0, 3),
-(1, '2024-01-25', '2024년 2월 학사 일정 안내', '2024년 2월의 학사 일정을 안내드립니다. 자세한 내용은 공지사항을 확인해 주세요.', 0, 3),
-(1, '2024-02-28', '2024년 3월 행사 일정 안내', '2024년 3월의 주요 행사 일정을 공지드립니다.', 0, 3),
-(1, '2024-03-25', '2024년 4월 주요 행사 안내', '2024년 4월의 주요 행사 일정과 세부 사항을 안내드립니다.', 0, 3),
-(1, '2024-04-18', '2024년 5월 행사 일정 안내', '2024년 5월의 주요 행사 일정을 공지드립니다.', 0, 3),
-(1, '2024-05-23', '2024년 6월 행사 일정 안내', '2024년 6월의 주요 행사 일정을 공지드립니다.', 0, 3),
-(1, '2024-06-27', '2024년 7월 행사 일정 안내', '2024년 7월의 주요 행사 일정을 공지드립니다.', 0, 3),
-(1, '2024-01-28', '2024년 봄학기 계획 안내', '2024년 봄학기 동안의 주요 계획과 일정입니다. 많은 관심 부탁드립니다.', 0, 3),
-(1, '2024-02-25', '2024년 3월 방학 프로그램 안내', '2024년 3월 방학 기간 동안 진행될 프로그램에 대한 자세한 내용입니다.', 0, 3),
-(1, '2024-03-30', '2024년 4월 봄학기 시작 안내', '2024년 4월 1일부터 봄학기가 시작됩니다. 준비물과 일정을 확인해 주세요.', 0, 3),
-(1, '2024-04-25', '2024년 여름 캠프 준비사항 안내', '2024년 여름 캠프에 대한 준비사항과 세부 일정을 안내드립니다.', 0, 3),
-(1, '2024-05-28', '2024년 6월 여름 방학 준비 안내', '2024년 6월 여름 방학 준비 사항과 일정을 안내드립니다.', 0, 3),
-(1, '2024-06-10', '2024년 6월 행사 안내', '2024년 6월의 주요 행사와 일정 안내입니다.', 0, 3),
-(1, '2024-01-05', '2024년 신입 원생 교육 프로그램 안내', '2024년 신입 원생을 위한 교육 프로그램에 대해 안내드립니다.', 0, 2),
-(1, '2024-01-15', '겨울철 실내 교육 활동 안내', '겨울철에 적합한 실내 교육 활동에 대해 안내드립니다.', 0, 2),
-(1, '2024-01-25', '2024년 2월 교육 계획 안내', '2024년 2월의 교육 계획과 주요 활동에 대해 안내드립니다.', 0, 3),
-(1, '2024-02-01', '2월 신입 원생 교육 안내', '2024년 2월 신입 원생을 위한 교육 내용과 일정입니다.', 0, 3),
-(1, '2024-02-10', '어린이집 교육 자료 제공', '어린이집에서 사용할 교육 자료와 자료 사용 방법을 안내드립니다.', 0, 2),
-(1, '2024-03-01', '3월 교육 프로그램 안내', '2024년 3월의 교육 프로그램과 주요 활동 일정입니다.', 0, 2),
-(1, '2024-03-10', '봄학기 교육 자료 안내', '봄학기 동안 사용할 교육 자료와 그 활용법에 대해 안내드립니다.', 0, 3),
-(1, '2024-03-20', '2024년 4월 교육 계획 안내', '2024년 4월의 교육 계획과 주요 활동 일정을 안내드립니다.', 0, 3),
-(1, '2024-04-05', '4월 교육 프로그램 안내', '2024년 4월 교육 프로그램과 주요 활동 일정입니다.', 0, 2),
-(1, '2024-04-15', '어린이집 교육 자료 제공', '어린이집에서 사용할 교육 자료와 자료 사용 방법을 안내드립니다.', 0, 2),
-(1, '2024-04-25', '2024년 5월 교육 계획 안내', '2024년 5월의 교육 계획과 주요 활동 일정을 안내드립니다.', 0, 3),
-(1, '2024-05-01', '여름 방학 교육 프로그램 안내', '2024년 여름 방학 동안 진행될 교육 프로그램에 대한 안내입니다.', 0, 3),
-(1, '2024-05-10', '2024년 5월 교육 자료 제공', '2024년 5월의 교육 자료와 자료 사용 방법을 안내드립니다.', 0, 2),
-(1, '2024-05-15', '2024년 여름 방학 교육 계획', '여름 방학 동안 진행될 교육 계획과 일정 안내입니다.', 0, 2),
-(1, '2024-06-01', '6월 교육 프로그램 안내', '2024년 6월의 교육 프로그램과 주요 활동 일정입니다.', 0, 3),
-(1, '2024-06-10', '여름 방학 교육 자료 제공', '여름 방학 동안 사용할 교육 자료와 자료 활용법에 대해 안내드립니다.', 0, 3),
-(1, '2024-06-15', '2024년 7월 교육 계획 안내', '2024년 7월의 교육 계획과 주요 활동 일정을 안내드립니다.', 0, 2),
-(1, '2024-07-01', '여름 방학 교육 프로그램 안내', '2024년 여름 방학 동안 진행될 교육 프로그램에 대한 안내입니다.', 0, 2),
-(1, '2024-07-10', '2024년 7월 교육 자료 제공', '2024년 7월의 교육 자료와 자료 사용 방법을 안내드립니다.', 0, 3),
-(1, '2024-07-15', '2024년 여름 방학 교육 활동 계획', '여름 방학 동안의 교육 활동 계획과 주요 일정 안내입니다.', 0, 3),
-(1, '2024-01-15', '겨울철 교육 활동 가이드', '겨울철에 적합한 교육 활동과 가이드입니다.', 0, 2),
-(1, '2024-02-05', '2024년 2월 교육 자료 제공', '2024년 2월의 교육 자료와 자료 사용 방법을 안내드립니다.', 0, 3),
-(1, '2024-03-01', '2024년 3월 교육 계획 안내', '2024년 3월의 교육 계획과 주요 활동 일정을 안내드립니다.', 0, 2),
-(1, '2024-03-12', '봄학기 교육 자료 안내', '봄학기 동안 사용할 교육 자료와 그 활용법에 대해 안내드립니다.', 0, 3),
-(1, '2024-04-01', '4월 교육 프로그램 안내', '2024년 4월의 교육 프로그램과 주요 활동 일정입니다.', 0, 2),
-(1, '2024-04-15', '어린이집 교육 자료 제공', '어린이집에서 사용할 교육 자료와 자료 활용법에 대해 안내드립니다.', 0, 2),
-(1, '2024-04-25', '2024년 5월 교육 계획 안내', '2024년 5월의 교육 계획과 주요 활동 일정을 안내드립니다.', 0, 3),
-(1, '2024-05-05', '여름 방학 교육 프로그램 안내', '여름 방학 동안 진행될 교육 프로그램에 대한 안내입니다.', 0, 3),
-(1, '2024-05-12', '2024년 5월 교육 자료 제공', '2024년 5월의 교육 자료와 자료 사용 방법을 안내드립니다.', 0, 2),
-(1, '2024-05-20', '여름 방학 교육 계획 안내', '여름 방학 동안 진행될 교육 계획과 일정 안내입니다.', 0, 2),
-(1, '2024-06-01', '2024년 6월 교육 프로그램 안내', '2024년 6월의 교육 프로그램과 주요 활동 일정입니다.', 0, 3),
-(1, '2024-06-10', '여름 방학 교육 자료 제공', '여름 방학 동안 사용할 교육 자료와 자료 활용법에 대해 안내드립니다.', 0, 3),
-(1, '2024-06-15', '2024년 7월 교육 계획 안내', '2024년 7월의 교육 계획과 주요 활동 일정을 안내드립니다.', 0, 2),
-(1, '2024-07-01', '여름 방학 교육 프로그램 안내', '2024년 여름 방학 동안 진행될 교육 프로그램에 대한 안내입니다.', 0, 2),
-(1, '2024-07-10', '2024년 7월 교육 자료 제공', '2024년 7월의 교육 자료와 자료 사용 방법을 안내드립니다.', 0, 3),
-(1, '2024-07-15', '2024년 여름 방학 교육 활동 계획', '여름 방학 동안의 교육 활동 계획과 주요 일정 안내입니다.', 0, 3),
-(1, '2024-01-10', '2024년 2월 보육료 안내', '2024년 2월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 2),
-(1, '2024-02-10', '2024년 3월 보육료 안내', '2024년 3월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 2),
-(1, '2024-03-10', '2024년 4월 보육료 안내', '2024년 4월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 2),
-(1, '2024-04-10', '2024년 5월 보육료 안내', '2024년 5월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 2),
-(1, '2024-05-10', '2024년 6월 보육료 안내', '2024년 6월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 2),
-(1, '2024-06-10', '2024년 7월 보육료 안내', '2024년 7월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 2),
-(1, '2024-07-10', '2024년 8월 보육료 안내', '2024년 8월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 2),
-(1, '2024-07-20', '2024년 하반기 보육료 인상 안내', '2024년 하반기 부터 보육료가 인상 될 예정입니다.', 0, 2),
-(1, '2024-01-10', '2024년 2월 보육료 안내', '2024년 2월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 3),
-(1, '2024-02-10', '2024년 3월 보육료 안내', '2024년 3월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 3),
-(1, '2024-03-10', '2024년 4월 보육료 안내', '2024년 4월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 3),
-(1, '2024-04-10', '2024년 5월 보육료 안내', '2024년 5월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 3),
-(1, '2024-05-10', '2024년 6월 보육료 안내', '2024년 6월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 3),
-(1, '2024-06-10', '2024년 7월 보육료 안내', '2024년 7월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 3),
-(1, '2024-07-10', '2024년 8월 보육료 안내', '2024년 8월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 3),
-(1, '2024-07-20', '2024년 하반기 보육료 인상 안내', '2024년 하반기 부터 보육료가 인상 될 예정입니다.', 0, 3);
+                                                                                                        (1, '2024-01-03', '2024년 새해 인사', '새해 복 많이 받으세요! 2024년에도 잘 부탁드립니다.', 0, 2),
+                                                                                                        (1, '2024-01-07', '선생님 워크숍 안내', '2024년 1월 10일, 선생님 워크숍이 진행됩니다. 필히 참석 바랍니다.', 0, 2),
+                                                                                                        (1, '2024-01-12', '1월 교사 회의 공지', '2024년 1월 15일에 교사 회의가 있습니다. 중요한 안건이 있으니 참석해 주세요.', 0, 2),
+                                                                                                        (1, '2024-01-18', '교사 연수 프로그램 안내', '2024년 1월 20일, 교사 연수 프로그램이 진행됩니다. 자세한 내용은 공지사항을 참조하세요.', 0, 2),
+                                                                                                        (1, '2024-02-01', '2월 교사 워크숍 일정', '2024년 2월 5일 교사 워크숍이 예정되어 있습니다. 자세한 사항은 공지사항을 확인해 주세요.', 0, 2),
+                                                                                                        (1, '2024-02-10', '교사 직무 교육 안내', '2024년 2월 12일부터 2월 14일까지 교사 직무 교육이 진행됩니다.', 0, 2),
+                                                                                                        (1, '2024-02-15', '교사 연수 프로그램 안내', '2024년 2월 20일, 교사 연수 프로그램이 진행됩니다. 많은 참여 부탁드립니다.', 0, 2),
+                                                                                                        (1, '2024-03-01', '3월 교사 회의 공지', '2024년 3월 5일 교사 회의가 있습니다. 모두 참석해 주세요.', 0, 2),
+                                                                                                        (1, '2024-03-08', '교사 업무 분장 안내', '2024년 3월 10일부터 새로 교사 업무 분장이 시작됩니다. 확인해 주세요.', 0, 2),
+                                                                                                        (1, '2024-03-15', '교사 연수 프로그램 안내', '2024년 3월 18일부터 3월 20일까지 교사 연수가 있습니다.', 0, 2),
+                                                                                                        (1, '2024-04-01', '4월 교사 워크숍 일정', '2024년 4월 5일 교사 워크숍이 진행됩니다. 많은 참여 부탁드립니다.', 0, 2),
+                                                                                                        (1, '2024-04-10', '교사 건강 관리 팁', '교사의 건강을 위한 관리 방법과 팁을 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-04-15', '교사 직무 교육 안내', '2024년 4월 17일부터 4월 19일까지 교사 직무 교육이 진행됩니다.', 0, 2),
+                                                                                                        (1, '2024-05-01', '5월 교사 회의 공지', '2024년 5월 3일 교사 회의가 있습니다. 참석해 주세요.', 0, 2),
+                                                                                                        (1, '2024-05-10', '교사 연수 프로그램 안내', '2024년 5월 12일부터 5월 14일까지 교사 연수가 진행됩니다.', 0, 2),
+                                                                                                        (1, '2024-05-20', '교사 업무 분장 안내', '2024년 5월 22일부터 새로 교사 업무 분장이 시작됩니다.', 0, 2),
+                                                                                                        (1, '2024-06-01', '6월 교사 워크숍 안내', '2024년 6월 5일 교사 워크숍이 진행됩니다. 많은 참여 바랍니다.', 0, 2),
+                                                                                                        (1, '2024-02-18', '교사 건강 관리법', '겨울철 교사 건강 관리법에 대한 안내입니다.', 0, 3),
+                                                                                                        (1, '2024-03-05', '교사 워크숍 일정 안내', '2024년 3월 8일 교사 워크숍이 예정되어 있습니다.', 0, 3),
+                                                                                                        (1, '2024-03-12', '교사 연수 프로그램', '2024년 3월 14일부터 3월 16일까지 교사 연수가 진행됩니다.', 0, 3),
+                                                                                                        (1, '2024-04-07', '교사 회의 공지', '2024년 4월 10일 교사 회의가 있습니다. 모두 참석해 주세요.', 0, 3),
+                                                                                                        (1, '2024-05-03', '교사 직무 교육 안내', '2024년 5월 5일부터 5월 7일까지 교사 직무 교육이 진행됩니다.', 0, 3),
+                                                                                                        (1, '2024-06-20', '교사 연수 프로그램 안내', '2024년 6월 22일부터 6월 24일까지 교사 연수가 있습니다.', 0, 3),
+                                                                                                        (1, '2024-07-08', '교사 건강 관리법', '여름철 교사 건강 관리법과 예방 수칙을 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-07-15', '7월 교사 워크숍 안내', '2024년 7월 17일 교사 워크숍이 진행됩니다. 많은 참여 부탁드립니다.', 0, 3),
+                                                                                                        (1, '2024-01-14', '교사 교육 프로그램 안내', '2024년 1월 16일부터 1월 18일까지 교사 교육 프로그램이 진행됩니다.', 0, 3),
+                                                                                                        (1, '2024-02-08', '교사 직무 교육 공지', '2024년 2월 10일부터 2월 12일까지 교사 직무 교육이 있습니다.', 0, 3),
+                                                                                                        (1, '2024-03-20', '교사 복지 프로그램 안내', '2024년 3월 22일 복지 프로그램에 대해 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-01-03', '2024년 새해 인사', '새해 복 많이 받으세요! 2024년에도 잘 부탁드립니다.', 0, 3),
+                                                                                                        (1, '2024-02-05', '교사 연수 안내', '2024년 2월 7일부터 2월 9일까지 교사 연수가 진행됩니다.', 0, 3),
+                                                                                                        (1, '2024-02-20', '어린이집 교사 연수 안내', '2024년 2월 25일 어린이집 교사 연수가 진행됩니다. 교사 분들은 필히 참석해 주세요.', 0, 2),
+                                                                                                        (1, '2024-02-20', '어린이집 교사 연수 안내', '2024년 2월 25일 어린이집 교사 연수가 진행됩니다. 교사 분들은 필히 참석해 주세요.', 0, 3),
+                                                                                                        (1, '2024-01-02', '2024년 신년 맞이 행사 안내', '2024년 신년 맞이 행사에 대한 자세한 내용을 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-01-12', '2024년 1월 원생 건강검진 안내', '2024년 1월 20일 원생 건강검진이 진행됩니다. 자세한 사항은 공지사항을 확인해 주세요.', 0, 2),
+                                                                                                        (1, '2024-01-20', '겨울 방학 기간 안내', '겨울 방학 기간은 2024년 1월 15일부터 1월 19일까지입니다.', 0, 2),
+                                                                                                        (1, '2024-02-01', '2월 학사 일정 안내', '2024년 2월의 학사 일정을 안내드립니다. 세부 사항은 공지사항을 확인하세요.', 0, 2),
+                                                                                                        (1, '2024-02-15', '겨울철 실내 활동 안내', '겨울철 실내 활동 및 안전수칙에 대한 안내입니다. 참고하시기 바랍니다.', 0, 2),
+                                                                                                        (1, '2024-03-01', '2024년 봄학기 시작 알림', '2024년 3월 1일부터 봄학기가 시작됩니다. 준비물과 일정을 확인해 주세요.', 0, 2),
+                                                                                                        (1, '2024-03-15', '봄 방학 프로그램 안내', '봄 방학 동안 진행될 프로그램에 대한 자세한 내용입니다.', 0, 2),
+                                                                                                        (1, '2024-04-01', '4월 어린이집 개방일 안내', '2024년 4월 5일 어린이집 개방일입니다. 부모님들의 많은 방문 부탁드립니다.', 0, 2),
+                                                                                                        (1, '2024-04-15', '여름 방학 준비사항 안내', '여름 방학에 대비하여 준비사항과 일정을 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-05-01', '5월 원생 활동 계획 안내', '5월의 원생 활동 계획과 주요 일정을 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-05-10', '2024년 5월 학부모 교육 강좌 안내', '2024년 5월 12일에 학부모 교육 강좌가 열립니다. 관심 있는 부모님들의 많은 참여 부탁드립니다.', 0, 2),
+                                                                                                        (1, '2024-06-01', '6월 원생 건강검진 안내', '2024년 6월 5일부터 원생 건강검진이 진행됩니다. 자세한 사항은 공지사항을 확인해 주세요.', 0, 2),
+                                                                                                        (1, '2024-06-15', '여름 방학 일정 안내', '여름 방학 기간은 2024년 7월 1일부터 7월 14일까지입니다.', 0, 2),
+                                                                                                        (1, '2024-07-01', '2024년 7월 원생 안전 교육 안내', '2024년 7월 5일 원생들을 위한 안전 교육이 진행됩니다. 자세한 사항은 공지사항을 확인하세요.', 0, 2),
+                                                                                                        (1, '2024-07-10', '2024년 7월 생일 축하', '7월에 생일인 원생들을 축하합니다! 생일을 맞은 모든 아이들에게 행복을 기원합니다.', 0, 2),
+                                                                                                        (1, '2024-03-10', '3월 학부모 설명회 안내', '2024년 3월 15일에 학부모 설명회가 있습니다. 많은 참여 부탁드립니다.', 0, 2),
+                                                                                                        (1, '2024-06-22', '2024년 여름 캠프 모집 안내', '여름 캠프는 2024년 7월 5일부터 7월 10일까지 진행됩니다. 많은 참여 바랍니다.', 0, 2),
+                                                                                                        (1, '2024-01-02', '2024년 신년 맞이 행사 안내', '2024년 신년 맞이 행사에 대한 자세한 내용을 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-01-12', '2024년 1월 원생 건강검진 안내', '2024년 1월 20일 원생 건강검진이 진행됩니다. 자세한 사항은 공지사항을 확인해 주세요.', 0, 3),
+                                                                                                        (1, '2024-01-20', '겨울 방학 기간 안내', '겨울 방학 기간은 2024년 1월 15일부터 1월 19일까지입니다.', 0, 3),
+                                                                                                        (1, '2024-02-01', '2월 학사 일정 안내', '2024년 2월의 학사 일정을 안내드립니다. 세부 사항은 공지사항을 확인하세요.', 0, 3),
+                                                                                                        (1, '2024-02-15', '겨울철 실내 활동 안내', '겨울철 실내 활동 및 안전수칙에 대한 안내입니다. 참고하시기 바랍니다.', 0, 3),
+                                                                                                        (1, '2024-03-01', '2024년 봄학기 시작 알림', '2024년 3월 1일부터 봄학기가 시작됩니다. 준비물과 일정을 확인해 주세요.', 0, 3),
+                                                                                                        (1, '2024-03-15', '봄 방학 프로그램 안내', '봄 방학 동안 진행될 프로그램에 대한 자세한 내용입니다.', 0, 3),
+                                                                                                        (1, '2024-04-01', '4월 어린이집 개방일 안내', '2024년 4월 5일 어린이집 개방일입니다. 부모님들의 많은 방문 부탁드립니다.', 0, 3),
+                                                                                                        (1, '2024-04-15', '여름 방학 준비사항 안내', '여름 방학에 대비하여 준비사항과 일정을 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-05-01', '5월 원생 활동 계획 안내', '5월의 원생 활동 계획과 주요 일정을 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-05-10', '2024년 5월 학부모 교육 강좌 안내', '2024년 5월 12일에 학부모 교육 강좌가 열립니다. 관심 있는 부모님들의 많은 참여 부탁드립니다.', 0, 3),
+                                                                                                        (1, '2024-06-01', '6월 원생 건강검진 안내', '2024년 6월 5일부터 원생 건강검진이 진행됩니다. 자세한 사항은 공지사항을 확인해 주세요.', 0, 3),
+                                                                                                        (1, '2024-06-15', '여름 방학 일정 안내', '여름 방학 기간은 2024년 7월 1일부터 7월 14일까지입니다.', 0, 3),
+                                                                                                        (1, '2024-07-01', '2024년 7월 원생 안전 교육 안내', '2024년 7월 5일 원생들을 위한 안전 교육이 진행됩니다. 자세한 사항은 공지사항을 확인하세요.', 0, 3),
+                                                                                                        (1, '2024-07-10', '2024년 7월 생일 축하', '7월에 생일인 원생들을 축하합니다! 생일을 맞은 모든 아이들에게 행복을 기원합니다.', 0, 3),
+                                                                                                        (1, '2024-03-10', '3월 학부모 설명회 안내', '2024년 3월 15일에 학부모 설명회가 있습니다. 많은 참여 부탁드립니다.', 0, 3),
+                                                                                                        (1, '2024-06-22', '2024년 여름 캠프 모집 안내', '여름 캠프는 2024년 7월 5일부터 7월 10일까지 진행됩니다. 많은 참여 바랍니다.', 0, 3),
+                                                                                                        (1, '2024-01-01', '2024년 원 운영시간 변경 안내', '2024년부터 원의 운영시간이 변경됩니다. 새로운 운영시간은 오전 9시부터 오후 5시까지입니다.', 0, 2),
+                                                                                                        (1, '2024-01-10', '설 연휴 휴일 안내', '설 연휴로 인해 2024년 1월 21일부터 1월 23일까지 원이 휴원합니다. 이용에 참고해 주세요.', 0, 2),
+                                                                                                        (1, '2024-01-20', '원 내 건강 및 안전 수칙 안내', '원 내에서 지켜야 할 건강 및 안전 수칙에 대해 안내드립니다. 모든 부모님과 원생들이 준수해 주세요.', 0, 2),
+                                                                                                        (1, '2024-02-01', '겨울 방학 프로그램 안내', '2024년 겨울 방학 동안 진행될 특별 프로그램과 활동 일정입니다. 많은 참여 부탁드립니다.', 0, 2),
+                                                                                                        (1, '2024-02-10', '2024년 봄학기 수업 일정 안내', '2024년 봄학기 수업 일정과 주요 활동 계획을 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-03-01', '원 내 외부 방문자 규칙 안내', '외부 방문자(학부모, 외부 강사 등) 방문 시 지켜야 할 규칙과 절차를 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-03-15', '봄학기 부모 면담 일정 안내', '봄학기 부모님과의 면담 일정을 안내드립니다. 면담 희망 시간은 사전에 예약해 주세요.', 0, 2),
+                                                                                                        (1, '2024-04-01', '원 내 시설 점검 및 보수 작업 안내', '2024년 4월 5일부터 4월 7일까지 원 내 시설 점검 및 보수 작업이 진행됩니다.', 0, 2),
+                                                                                                        (1, '2024-05-01', '어린이집 원장 인사말', '어린이집 원장님의 인사말과 2024년의 비전 및 목표를 공유합니다.', 0, 2),
+                                                                                                        (1, '2024-06-01', '여름 방학 계획 안내', '여름 방학 동안 진행될 특별 활동과 프로그램에 대한 안내입니다.', 0, 2),
+                                                                                                        (1, '2024-01-01', '2024년 원 운영시간 변경 안내', '2024년부터 원의 운영시간이 변경됩니다. 새로운 운영시간은 오전 9시부터 오후 5시까지입니다.', 0, 3),
+                                                                                                        (1, '2024-01-10', '설 연휴 휴일 안내', '설 연휴로 인해 2024년 1월 21일부터 1월 23일까지 원이 휴원합니다. 이용에 참고해 주세요.', 0, 3),
+                                                                                                        (1, '2024-01-20', '원 내 건강 및 안전 수칙 안내', '원 내에서 지켜야 할 건강 및 안전 수칙에 대해 안내드립니다. 모든 부모님과 원생들이 준수해 주세요.', 0, 3),
+                                                                                                        (1, '2024-02-01', '겨울 방학 프로그램 안내', '2024년 겨울 방학 동안 진행될 특별 프로그램과 활동 일정입니다. 많은 참여 부탁드립니다.', 0, 3),
+                                                                                                        (1, '2024-02-10', '2024년 봄학기 수업 일정 안내', '2024년 봄학기 수업 일정과 주요 활동 계획을 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-03-01', '원 내 외부 방문자 규칙 안내', '외부 방문자(학부모, 외부 강사 등) 방문 시 지켜야 할 규칙과 절차를 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-03-15', '봄학기 부모 면담 일정 안내', '봄학기 부모님과의 면담 일정을 안내드립니다. 면담 희망 시간은 사전에 예약해 주세요.', 0, 3),
+                                                                                                        (1, '2024-04-01', '원 내 시설 점검 및 보수 작업 안내', '2024년 4월 5일부터 4월 7일까지 원 내 시설 점검 및 보수 작업이 진행됩니다.', 0, 3),
+                                                                                                        (1, '2024-05-01', '어린이집 원장 인사말', '어린이집 원장님의 인사말과 2024년의 비전 및 목표를 공유합니다.', 0, 3),
+                                                                                                        (1, '2024-06-01', '여름 방학 계획 안내', '여름 방학 동안 진행될 특별 활동과 프로그램에 대한 안내입니다.', 0, 3),
+                                                                                                        (1, '2024-01-02', '2024년 신년 맞이 행사 안내', '2024년 신년 맞이 행사에 대한 자세한 내용을 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-01-10', '겨울 방학 기간 안내', '겨울 방학 기간은 2024년 1월 15일부터 1월 19일까지입니다.', 0, 2),
+                                                                                                        (1, '2024-01-20', '1월 학부모 설명회 안내', '2024년 1월 25일 학부모 설명회가 있습니다. 많은 참석 부탁드립니다.', 0, 2),
+                                                                                                        (1, '2024-02-10', '겨울철 실내 활동 안내', '겨울철 실내 활동 및 안전수칙에 대한 안내입니다. 참고하시기 바랍니다.', 0, 2),
+                                                                                                        (1, '2024-03-01', '2024년 봄학기 시작 알림', '2024년 3월 1일부터 봄학기가 시작됩니다. 준비물과 일정을 확인해 주세요.', 0, 2),
+                                                                                                        (1, '2024-03-10', '3월 학부모 설명회 안내', '2024년 3월 15일에 학부모 설명회가 있습니다. 많은 참여 부탁드립니다.', 0, 2),
+                                                                                                        (1, '2024-03-15', '봄 방학 프로그램 안내', '봄 방학 동안 진행될 프로그램에 대한 자세한 내용입니다.', 0, 2),
+                                                                                                        (1, '2024-04-01', '4월 어린이집 개방일 안내', '2024년 4월 5일 어린이집 개방일입니다. 부모님들의 많은 방문 부탁드립니다.', 0, 2),
+                                                                                                        (1, '2024-04-10', '원장님과의 만남 안내', '2024년 4월 12일 원장님과의 만남이 예정되어 있습니다. 참석 부탁드립니다.', 0, 2),
+                                                                                                        (1, '2024-04-15', '여름 방학 준비사항 안내', '여름 방학에 대비하여 준비사항과 일정을 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-05-01', '5월 원생 활동 계획 안내', '5월의 원생 활동 계획과 주요 일정을 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-05-10', '2024년 5월 학부모 교육 강좌 안내', '2024년 5월 12일에 학부모 교육 강좌가 열립니다. 관심 있는 부모님들의 많은 참여 부탁드립니다.', 0, 2),
+                                                                                                        (1, '2024-05-20', '여름 방학 일정 안내', '여름 방학 기간은 2024년 7월 1일부터 7월 14일까지입니다.', 0, 2),
+                                                                                                        (1, '2024-06-01', '6월 원생 건강검진 안내', '2024년 6월 5일부터 원생 건강검진이 진행됩니다. 자세한 사항은 공지사항을 확인해 주세요.', 0, 2),
+                                                                                                        (1, '2024-06-10', '6월 원생 안전 교육 안내', '2024년 6월 15일 원생들을 위한 안전 교육이 진행됩니다. 자세한 사항은 공지사항을 확인하세요.', 0, 2),
+                                                                                                        (1, '2024-06-15', '여름 방학 프로그램 안내', '여름 방학 동안 진행될 프로그램에 대한 자세한 내용입니다.', 0, 2),
+                                                                                                        (1, '2024-06-22', '여름 캠프 모집 안내', '여름 캠프는 2024년 7월 5일부터 7월 10일까지 진행됩니다. 많은 참여 바랍니다.', 0, 2),
+                                                                                                        (1, '2024-07-01', '2024년 7월 원생 안전 교육 안내', '2024년 7월 5일 원생들을 위한 안전 교육이 진행됩니다. 자세한 사항은 공지사항을 확인하세요.', 0, 2),
+                                                                                                        (1, '2024-07-10', '2024년 7월 생일 축하', '7월에 생일인 원생들을 축하합니다! 생일을 맞은 모든 아이들에게 행복을 기원합니다.', 0, 2),
+                                                                                                        (1, '2024-01-25', '2024년 2월 학사 일정 안내', '2024년 2월의 학사 일정을 안내드립니다. 자세한 내용은 공지사항을 확인해 주세요.', 0, 2),
+                                                                                                        (1, '2024-02-28', '2024년 3월 행사 일정 안내', '2024년 3월의 주요 행사 일정을 공지드립니다.', 0, 2),
+                                                                                                        (1, '2024-03-25', '2024년 4월 주요 행사 안내', '2024년 4월의 주요 행사 일정과 세부 사항을 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-04-18', '2024년 5월 행사 일정 안내', '2024년 5월의 주요 행사 일정을 공지드립니다.', 0, 2),
+                                                                                                        (1, '2024-05-23', '2024년 6월 행사 일정 안내', '2024년 6월의 주요 행사 일정을 공지드립니다.', 0, 2),
+                                                                                                        (1, '2024-06-27', '2024년 7월 행사 일정 안내', '2024년 7월의 주요 행사 일정을 공지드립니다.', 0, 2),
+                                                                                                        (1, '2024-01-28', '2024년 봄학기 계획 안내', '2024년 봄학기 동안의 주요 계획과 일정입니다. 많은 관심 부탁드립니다.', 0, 2),
+                                                                                                        (1, '2024-02-25', '2024년 3월 방학 프로그램 안내', '2024년 3월 방학 기간 동안 진행될 프로그램에 대한 자세한 내용입니다.', 0, 2),
+                                                                                                        (1, '2024-03-30', '2024년 4월 봄학기 시작 안내', '2024년 4월 1일부터 봄학기가 시작됩니다. 준비물과 일정을 확인해 주세요.', 0, 2),
+                                                                                                        (1, '2024-04-25', '2024년 여름 캠프 준비사항 안내', '2024년 여름 캠프에 대한 준비사항과 세부 일정을 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-05-28', '2024년 6월 여름 방학 준비 안내', '2024년 6월 여름 방학 준비 사항과 일정을 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-06-10', '2024년 6월 행사 안내', '2024년 6월의 주요 행사와 일정 안내입니다.', 0, 2),
+                                                                                                        (1, '2024-01-02', '2024년 신년 맞이 행사 안내', '2024년 신년 맞이 행사에 대한 자세한 내용을 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-01-10', '겨울 방학 기간 안내', '겨울 방학 기간은 2024년 1월 15일부터 1월 19일까지입니다.', 0, 3),
+                                                                                                        (1, '2024-01-20', '1월 학부모 설명회 안내', '2024년 1월 25일 학부모 설명회가 있습니다. 많은 참석 부탁드립니다.', 0, 3),
+                                                                                                        (1, '2024-02-10', '겨울철 실내 활동 안내', '겨울철 실내 활동 및 안전수칙에 대한 안내입니다. 참고하시기 바랍니다.', 0, 3),
+                                                                                                        (1, '2024-03-01', '2024년 봄학기 시작 알림', '2024년 3월 1일부터 봄학기가 시작됩니다. 준비물과 일정을 확인해 주세요.', 0, 3),
+                                                                                                        (1, '2024-03-10', '3월 학부모 설명회 안내', '2024년 3월 15일에 학부모 설명회가 있습니다. 많은 참여 부탁드립니다.', 0, 3),
+                                                                                                        (1, '2024-03-15', '봄 방학 프로그램 안내', '봄 방학 동안 진행될 프로그램에 대한 자세한 내용입니다.', 0, 3),
+                                                                                                        (1, '2024-04-01', '4월 어린이집 개방일 안내', '2024년 4월 5일 어린이집 개방일입니다. 부모님들의 많은 방문 부탁드립니다.', 0, 3),
+                                                                                                        (1, '2024-04-10', '원장님과의 만남 안내', '2024년 4월 12일 원장님과의 만남이 예정되어 있습니다. 참석 부탁드립니다.', 0, 3),
+                                                                                                        (1, '2024-04-15', '여름 방학 준비사항 안내', '여름 방학에 대비하여 준비사항과 일정을 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-05-01', '5월 원생 활동 계획 안내', '5월의 원생 활동 계획과 주요 일정을 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-05-10', '2024년 5월 학부모 교육 강좌 안내', '2024년 5월 12일에 학부모 교육 강좌가 열립니다. 관심 있는 부모님들의 많은 참여 부탁드립니다.', 0, 3),
+                                                                                                        (1, '2024-05-20', '여름 방학 일정 안내', '여름 방학 기간은 2024년 7월 1일부터 7월 14일까지입니다.', 0, 3),
+                                                                                                        (1, '2024-06-01', '6월 원생 건강검진 안내', '2024년 6월 5일부터 원생 건강검진이 진행됩니다. 자세한 사항은 공지사항을 확인해 주세요.', 0, 3),
+                                                                                                        (1, '2024-06-10', '6월 원생 안전 교육 안내', '2024년 6월 15일 원생들을 위한 안전 교육이 진행됩니다. 자세한 사항은 공지사항을 확인하세요.', 0, 3),
+                                                                                                        (1, '2024-06-15', '여름 방학 프로그램 안내', '여름 방학 동안 진행될 프로그램에 대한 자세한 내용입니다.', 0, 3),
+                                                                                                        (1, '2024-06-22', '여름 캠프 모집 안내', '여름 캠프는 2024년 7월 5일부터 7월 10일까지 진행됩니다. 많은 참여 바랍니다.', 0, 3),
+                                                                                                        (1, '2024-07-01', '2024년 7월 원생 안전 교육 안내', '2024년 7월 5일 원생들을 위한 안전 교육이 진행됩니다. 자세한 사항은 공지사항을 확인하세요.', 0, 3),
+                                                                                                        (1, '2024-07-10', '2024년 7월 생일 축하', '7월에 생일인 원생들을 축하합니다! 생일을 맞은 모든 아이들에게 행복을 기원합니다.', 0, 3),
+                                                                                                        (1, '2024-01-25', '2024년 2월 학사 일정 안내', '2024년 2월의 학사 일정을 안내드립니다. 자세한 내용은 공지사항을 확인해 주세요.', 0, 3),
+                                                                                                        (1, '2024-02-28', '2024년 3월 행사 일정 안내', '2024년 3월의 주요 행사 일정을 공지드립니다.', 0, 3),
+                                                                                                        (1, '2024-03-25', '2024년 4월 주요 행사 안내', '2024년 4월의 주요 행사 일정과 세부 사항을 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-04-18', '2024년 5월 행사 일정 안내', '2024년 5월의 주요 행사 일정을 공지드립니다.', 0, 3),
+                                                                                                        (1, '2024-05-23', '2024년 6월 행사 일정 안내', '2024년 6월의 주요 행사 일정을 공지드립니다.', 0, 3),
+                                                                                                        (1, '2024-06-27', '2024년 7월 행사 일정 안내', '2024년 7월의 주요 행사 일정을 공지드립니다.', 0, 3),
+                                                                                                        (1, '2024-01-28', '2024년 봄학기 계획 안내', '2024년 봄학기 동안의 주요 계획과 일정입니다. 많은 관심 부탁드립니다.', 0, 3),
+                                                                                                        (1, '2024-02-25', '2024년 3월 방학 프로그램 안내', '2024년 3월 방학 기간 동안 진행될 프로그램에 대한 자세한 내용입니다.', 0, 3),
+                                                                                                        (1, '2024-03-30', '2024년 4월 봄학기 시작 안내', '2024년 4월 1일부터 봄학기가 시작됩니다. 준비물과 일정을 확인해 주세요.', 0, 3),
+                                                                                                        (1, '2024-04-25', '2024년 여름 캠프 준비사항 안내', '2024년 여름 캠프에 대한 준비사항과 세부 일정을 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-05-28', '2024년 6월 여름 방학 준비 안내', '2024년 6월 여름 방학 준비 사항과 일정을 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-06-10', '2024년 6월 행사 안내', '2024년 6월의 주요 행사와 일정 안내입니다.', 0, 3),
+                                                                                                        (1, '2024-01-05', '2024년 신입 원생 교육 프로그램 안내', '2024년 신입 원생을 위한 교육 프로그램에 대해 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-01-15', '겨울철 실내 교육 활동 안내', '겨울철에 적합한 실내 교육 활동에 대해 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-01-25', '2024년 2월 교육 계획 안내', '2024년 2월의 교육 계획과 주요 활동에 대해 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-02-01', '2월 신입 원생 교육 안내', '2024년 2월 신입 원생을 위한 교육 내용과 일정입니다.', 0, 3),
+                                                                                                        (1, '2024-02-10', '어린이집 교육 자료 제공', '어린이집에서 사용할 교육 자료와 자료 사용 방법을 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-03-01', '3월 교육 프로그램 안내', '2024년 3월의 교육 프로그램과 주요 활동 일정입니다.', 0, 2),
+                                                                                                        (1, '2024-03-10', '봄학기 교육 자료 안내', '봄학기 동안 사용할 교육 자료와 그 활용법에 대해 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-03-20', '2024년 4월 교육 계획 안내', '2024년 4월의 교육 계획과 주요 활동 일정을 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-04-05', '4월 교육 프로그램 안내', '2024년 4월 교육 프로그램과 주요 활동 일정입니다.', 0, 2),
+                                                                                                        (1, '2024-04-15', '어린이집 교육 자료 제공', '어린이집에서 사용할 교육 자료와 자료 사용 방법을 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-04-25', '2024년 5월 교육 계획 안내', '2024년 5월의 교육 계획과 주요 활동 일정을 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-05-01', '여름 방학 교육 프로그램 안내', '2024년 여름 방학 동안 진행될 교육 프로그램에 대한 안내입니다.', 0, 3),
+                                                                                                        (1, '2024-05-10', '2024년 5월 교육 자료 제공', '2024년 5월의 교육 자료와 자료 사용 방법을 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-05-15', '2024년 여름 방학 교육 계획', '여름 방학 동안 진행될 교육 계획과 일정 안내입니다.', 0, 2),
+                                                                                                        (1, '2024-06-01', '6월 교육 프로그램 안내', '2024년 6월의 교육 프로그램과 주요 활동 일정입니다.', 0, 3),
+                                                                                                        (1, '2024-06-10', '여름 방학 교육 자료 제공', '여름 방학 동안 사용할 교육 자료와 자료 활용법에 대해 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-06-15', '2024년 7월 교육 계획 안내', '2024년 7월의 교육 계획과 주요 활동 일정을 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-07-01', '여름 방학 교육 프로그램 안내', '2024년 여름 방학 동안 진행될 교육 프로그램에 대한 안내입니다.', 0, 2),
+                                                                                                        (1, '2024-07-10', '2024년 7월 교육 자료 제공', '2024년 7월의 교육 자료와 자료 사용 방법을 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-07-15', '2024년 여름 방학 교육 활동 계획', '여름 방학 동안의 교육 활동 계획과 주요 일정 안내입니다.', 0, 3),
+                                                                                                        (1, '2024-01-15', '겨울철 교육 활동 가이드', '겨울철에 적합한 교육 활동과 가이드입니다.', 0, 2),
+                                                                                                        (1, '2024-02-05', '2024년 2월 교육 자료 제공', '2024년 2월의 교육 자료와 자료 사용 방법을 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-03-01', '2024년 3월 교육 계획 안내', '2024년 3월의 교육 계획과 주요 활동 일정을 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-03-12', '봄학기 교육 자료 안내', '봄학기 동안 사용할 교육 자료와 그 활용법에 대해 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-04-01', '4월 교육 프로그램 안내', '2024년 4월의 교육 프로그램과 주요 활동 일정입니다.', 0, 2),
+                                                                                                        (1, '2024-04-15', '어린이집 교육 자료 제공', '어린이집에서 사용할 교육 자료와 자료 활용법에 대해 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-04-25', '2024년 5월 교육 계획 안내', '2024년 5월의 교육 계획과 주요 활동 일정을 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-05-05', '여름 방학 교육 프로그램 안내', '여름 방학 동안 진행될 교육 프로그램에 대한 안내입니다.', 0, 3),
+                                                                                                        (1, '2024-05-12', '2024년 5월 교육 자료 제공', '2024년 5월의 교육 자료와 자료 사용 방법을 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-05-20', '여름 방학 교육 계획 안내', '여름 방학 동안 진행될 교육 계획과 일정 안내입니다.', 0, 2),
+                                                                                                        (1, '2024-06-01', '2024년 6월 교육 프로그램 안내', '2024년 6월의 교육 프로그램과 주요 활동 일정입니다.', 0, 3),
+                                                                                                        (1, '2024-06-10', '여름 방학 교육 자료 제공', '여름 방학 동안 사용할 교육 자료와 자료 활용법에 대해 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-06-15', '2024년 7월 교육 계획 안내', '2024년 7월의 교육 계획과 주요 활동 일정을 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-07-01', '여름 방학 교육 프로그램 안내', '2024년 여름 방학 동안 진행될 교육 프로그램에 대한 안내입니다.', 0, 2),
+                                                                                                        (1, '2024-07-10', '2024년 7월 교육 자료 제공', '2024년 7월의 교육 자료와 자료 사용 방법을 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-07-15', '2024년 여름 방학 교육 활동 계획', '여름 방학 동안의 교육 활동 계획과 주요 일정 안내입니다.', 0, 3),
+                                                                                                        (1, '2024-01-10', '2024년 2월 보육료 안내', '2024년 2월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-02-10', '2024년 3월 보육료 안내', '2024년 3월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-03-10', '2024년 4월 보육료 안내', '2024년 4월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-04-10', '2024년 5월 보육료 안내', '2024년 5월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-05-10', '2024년 6월 보육료 안내', '2024년 6월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-06-10', '2024년 7월 보육료 안내', '2024년 7월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-07-10', '2024년 8월 보육료 안내', '2024년 8월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 2),
+                                                                                                        (1, '2024-07-20', '2024년 하반기 보육료 인상 안내', '2024년 하반기 부터 보육료가 인상 될 예정입니다.', 0, 2),
+                                                                                                        (1, '2024-01-10', '2024년 2월 보육료 안내', '2024년 2월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-02-10', '2024년 3월 보육료 안내', '2024년 3월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-03-10', '2024년 4월 보육료 안내', '2024년 4월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-04-10', '2024년 5월 보육료 안내', '2024년 5월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-05-10', '2024년 6월 보육료 안내', '2024년 6월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-06-10', '2024년 7월 보육료 안내', '2024년 7월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-07-10', '2024년 8월 보육료 안내', '2024년 8월의 보육료와 납부 방법에 대해 안내드립니다.', 0, 3),
+                                                                                                        (1, '2024-07-20', '2024년 하반기 보육료 인상 안내', '2024년 하반기 부터 보육료가 인상 될 예정입니다.', 0, 3);
 
 #--------------------------------------------------------announce---------------------------------------------------------
 INSERT INTO announce (board_no, announce_type, announce_primary, can_comment) VALUES
-(230,0,'0','0'),
-(231,0,'1','0'),
-(232,0,'0','0'),
-(233,0,'0','0'),
-(234,0,'0','0'),
-(235,0,'0','0'),
-(236,0,'0','0'),
-(237,0,'0','0'),
-(238,0,'0','0'),
-(239,0,'0','0'),
-(240,0,'0','0'),
-(241,0,'0','0'),
-(242,0,'0','0'),
-(243,0,'0','0'),
-(244,0,'0','0'),
-(245,0,'0','0'),
-(246,0,'1','0'),
-(247,0,'0','0'),
-(248,0,'0','0'),
-(249,0,'0','0'),
-(250,0,'0','0'),
-(251,0,'0','0'),
-(252,0,'0','0'),
-(253,0,'0','0'),
-(254,0,'0','0'),
-(255,0,'0','0'),
-(256,0,'0','0'),
-(257,0,'0','0'),
-(258,0,'0','0'),
-(259,0,'0','0'),
-(260,0,'0','1'),
-(261,0,'0','1'),
-(262,1,'0','1'),
-(263,1,'1','1'),
-(264,1,'0','1'),
-(265,1,'0','1'),
-(266,1,'0','1'),
-(267,1,'0','1'),
-(268,1,'0','1'),
-(269,1,'0','1'),
-(270,1,'0','1'),
-(271,1,'0','1'),
-(272,1,'0','1'),
-(273,1,'0','1'),
-(274,1,'0','1'),
-(275,1,'0','1'),
-(276,1,'0','1'),
-(277,1,'0','1'),
-(278,1,'0','1'),
-(279,1,'0','1'),
-(280,1,'0','1'),
-(281,1,'0','1'),
-(282,1,'0','1'),
-(283,1,'0','1'),
-(284,1,'0','1'),
-(285,1,'0','1'),
-(286,1,'0','1'),
-(287,1,'0','1'),
-(288,1,'0','1'),
-(289,1,'0','1'),
-(290,1,'0','1'),
-(291,1,'0','1'),
-(292,1,'0','1'),
-(293,1,'0','1'),
-(294,1,'0','1'),
-(295,1,'1','1'),
-(296,1,'0','1'),
-(297,1,'0','1'),
-(298,1,'0','1'),
-(299,1,'0','1'),
-(300,1,'0','1'),
-(301,1,'0','1'),
-(302,1,'0','1'),
-(303,1,'0','1'),
-(304,1,'0','1'),
-(305,1,'0','1'),
-(306,1,'0','1'),
-(307,1,'0','1'),
-(308,1,'0','1'),
-(309,1,'0','1'),
-(310,1,'0','1'),
-(311,1,'1','1'),
-(312,1,'0','1'),
-(313,1,'0','1'),
-(314,1,'0','1'),
-(315,1,'0','1'),
-(316,2,'0','1'),
-(317,2,'0','1'),
-(318,2,'0','1'),
-(319,2,'0','1'),
-(320,2,'0','1'),
-(321,2,'0','1'),
-(322,2,'0','1'),
-(323,2,'0','1'),
-(324,2,'0','1'),
-(325,2,'0','1'),
-(326,2,'0','1'),
-(327,2,'0','1'),
-(328,2,'0','1'),
-(329,2,'0','1'),
-(330,2,'0','1'),
-(331,2,'0','1'),
-(332,2,'0','1'),
-(333,2,'0','1'),
-(334,2,'0','1'),
-(335,2,'0','1'),
-(336,2,'0','1'),
-(337,2,'0','1'),
-(338,2,'0','1'),
-(339,2,'0','1'),
-(340,2,'0','1'),
-(341,2,'0','1'),
-(342,2,'0','1'),
-(343,2,'0','1'),
-(344,2,'0','1'),
-(345,2,'0','1'),
-(346,2,'0','1'),
-(347,2,'0','1'),
-(348,2,'0','1'),
-(349,2,'0','1'),
-(350,2,'0','1'),
-(351,2,'0','1'),
-(352,2,'0','1'),
-(353,2,'0','1'),
-(354,2,'0','1'),
-(355,2,'0','1'),
-(356,2,'0','1'),
-(357,2,'0','1'),
-(358,2,'0','1'),
-(359,2,'0','1'),
-(360,2,'0','1'),
-(361,2,'0','1'),
-(362,2,'0','1'),
-(363,2,'0','1'),
-(364,2,'1','1'),
-(365,2,'0','1'),
-(366,2,'0','1'),
-(367,2,'0','1'),
-(368,2,'0','1'),
-(369,2,'0','1'),
-(370,2,'0','1'),
-(371,2,'0','1'),
-(372,2,'0','1'),
-(373,2,'0','1'),
-(374,2,'0','1'),
-(375,2,'0','1'),
-(376,2,'0','1'),
-(377,2,'0','1'),
-(378,3,'0','1'),
-(379,3,'0','1'),
-(380,3,'0','1'),
-(381,3,'0','1'),
-(382,3,'0','1'),
-(383,3,'0','1'),
-(384,3,'0','1'),
-(385,3,'0','1'),
-(386,3,'0','1'),
-(387,3,'0','1'),
-(388,3,'0','1'),
-(389,3,'0','1'),
-(390,3,'0','1'),
-(391,3,'0','1'),
-(392,3,'0','1'),
-(393,3,'0','1'),
-(394,3,'0','1'),
-(395,3,'0','1'),
-(396,3,'0','1'),
-(397,3,'0','1'),
-(398,3,'0','1'),
-(399,3,'0','1'),
-(400,3,'0','1'),
-(401,3,'0','1'),
-(402,3,'0','1'),
-(403,3,'0','1'),
-(404,3,'0','1'),
-(405,3,'0','1'),
-(406,3,'0','1'),
-(407,3,'0','1'),
-(408,3,'0','1'),
-(409,3,'0','1'),
-(410,3,'0','1'),
-(411,3,'0','1'),
-(412,3,'0','1'),
-(413,3,'0','1'),
-(414,4,'0','0'),
-(415,4,'0','0'),
-(416,4,'0','0'),
-(417,4,'0','0'),
-(418,4,'0','0'),
-(419,4,'0','0'),
-(420,4,'0','0'),
-(421,4,'0','0'),
-(422,4,'0','0'),
-(423,4,'0','0'),
-(424,4,'0','0'),
-(425,4,'0','0'),
-(426,4,'0','0'),
-(427,4,'0','0'),
-(428,4,'0','0'),
-(429,4,'0','0');
+                                                                                  (230,0,'0','0'),
+                                                                                  (231,0,'1','0'),
+                                                                                  (232,0,'0','0'),
+                                                                                  (233,0,'0','0'),
+                                                                                  (234,0,'0','0'),
+                                                                                  (235,0,'0','0'),
+                                                                                  (236,0,'0','0'),
+                                                                                  (237,0,'0','0'),
+                                                                                  (238,0,'0','0'),
+                                                                                  (239,0,'0','0'),
+                                                                                  (240,0,'0','0'),
+                                                                                  (241,0,'0','0'),
+                                                                                  (242,0,'0','0'),
+                                                                                  (243,0,'0','0'),
+                                                                                  (244,0,'0','0'),
+                                                                                  (245,0,'0','0'),
+                                                                                  (246,0,'1','0'),
+                                                                                  (247,0,'0','0'),
+                                                                                  (248,0,'0','0'),
+                                                                                  (249,0,'0','0'),
+                                                                                  (250,0,'0','0'),
+                                                                                  (251,0,'0','0'),
+                                                                                  (252,0,'0','0'),
+                                                                                  (253,0,'0','0'),
+                                                                                  (254,0,'0','0'),
+                                                                                  (255,0,'0','0'),
+                                                                                  (256,0,'0','0'),
+                                                                                  (257,0,'0','0'),
+                                                                                  (258,0,'0','0'),
+                                                                                  (259,0,'0','0'),
+                                                                                  (260,0,'0','1'),
+                                                                                  (261,0,'0','1'),
+                                                                                  (262,1,'0','1'),
+                                                                                  (263,1,'1','1'),
+                                                                                  (264,1,'0','1'),
+                                                                                  (265,1,'0','1'),
+                                                                                  (266,1,'0','1'),
+                                                                                  (267,1,'0','1'),
+                                                                                  (268,1,'0','1'),
+                                                                                  (269,1,'0','1'),
+                                                                                  (270,1,'0','1'),
+                                                                                  (271,1,'0','1'),
+                                                                                  (272,1,'0','1'),
+                                                                                  (273,1,'0','1'),
+                                                                                  (274,1,'0','1'),
+                                                                                  (275,1,'0','1'),
+                                                                                  (276,1,'0','1'),
+                                                                                  (277,1,'0','1'),
+                                                                                  (278,1,'0','1'),
+                                                                                  (279,1,'0','1'),
+                                                                                  (280,1,'0','1'),
+                                                                                  (281,1,'0','1'),
+                                                                                  (282,1,'0','1'),
+                                                                                  (283,1,'0','1'),
+                                                                                  (284,1,'0','1'),
+                                                                                  (285,1,'0','1'),
+                                                                                  (286,1,'0','1'),
+                                                                                  (287,1,'0','1'),
+                                                                                  (288,1,'0','1'),
+                                                                                  (289,1,'0','1'),
+                                                                                  (290,1,'0','1'),
+                                                                                  (291,1,'0','1'),
+                                                                                  (292,1,'0','1'),
+                                                                                  (293,1,'0','1'),
+                                                                                  (294,1,'0','1'),
+                                                                                  (295,1,'1','1'),
+                                                                                  (296,1,'0','1'),
+                                                                                  (297,1,'0','1'),
+                                                                                  (298,1,'0','1'),
+                                                                                  (299,1,'0','1'),
+                                                                                  (300,1,'0','1'),
+                                                                                  (301,1,'0','1'),
+                                                                                  (302,1,'0','1'),
+                                                                                  (303,1,'0','1'),
+                                                                                  (304,1,'0','1'),
+                                                                                  (305,1,'0','1'),
+                                                                                  (306,1,'0','1'),
+                                                                                  (307,1,'0','1'),
+                                                                                  (308,1,'0','1'),
+                                                                                  (309,1,'0','1'),
+                                                                                  (310,1,'0','1'),
+                                                                                  (311,1,'1','1'),
+                                                                                  (312,1,'0','1'),
+                                                                                  (313,1,'0','1'),
+                                                                                  (314,1,'0','1'),
+                                                                                  (315,1,'0','1'),
+                                                                                  (316,2,'0','1'),
+                                                                                  (317,2,'0','1'),
+                                                                                  (318,2,'0','1'),
+                                                                                  (319,2,'0','1'),
+                                                                                  (320,2,'0','1'),
+                                                                                  (321,2,'0','1'),
+                                                                                  (322,2,'0','1'),
+                                                                                  (323,2,'0','1'),
+                                                                                  (324,2,'0','1'),
+                                                                                  (325,2,'0','1'),
+                                                                                  (326,2,'0','1'),
+                                                                                  (327,2,'0','1'),
+                                                                                  (328,2,'0','1'),
+                                                                                  (329,2,'0','1'),
+                                                                                  (330,2,'0','1'),
+                                                                                  (331,2,'0','1'),
+                                                                                  (332,2,'0','1'),
+                                                                                  (333,2,'0','1'),
+                                                                                  (334,2,'0','1'),
+                                                                                  (335,2,'0','1'),
+                                                                                  (336,2,'0','1'),
+                                                                                  (337,2,'0','1'),
+                                                                                  (338,2,'0','1'),
+                                                                                  (339,2,'0','1'),
+                                                                                  (340,2,'0','1'),
+                                                                                  (341,2,'0','1'),
+                                                                                  (342,2,'0','1'),
+                                                                                  (343,2,'0','1'),
+                                                                                  (344,2,'0','1'),
+                                                                                  (345,2,'0','1'),
+                                                                                  (346,2,'0','1'),
+                                                                                  (347,2,'0','1'),
+                                                                                  (348,2,'0','1'),
+                                                                                  (349,2,'0','1'),
+                                                                                  (350,2,'0','1'),
+                                                                                  (351,2,'0','1'),
+                                                                                  (352,2,'0','1'),
+                                                                                  (353,2,'0','1'),
+                                                                                  (354,2,'0','1'),
+                                                                                  (355,2,'0','1'),
+                                                                                  (356,2,'0','1'),
+                                                                                  (357,2,'0','1'),
+                                                                                  (358,2,'0','1'),
+                                                                                  (359,2,'0','1'),
+                                                                                  (360,2,'0','1'),
+                                                                                  (361,2,'0','1'),
+                                                                                  (362,2,'0','1'),
+                                                                                  (363,2,'0','1'),
+                                                                                  (364,2,'1','1'),
+                                                                                  (365,2,'0','1'),
+                                                                                  (366,2,'0','1'),
+                                                                                  (367,2,'0','1'),
+                                                                                  (368,2,'0','1'),
+                                                                                  (369,2,'0','1'),
+                                                                                  (370,2,'0','1'),
+                                                                                  (371,2,'0','1'),
+                                                                                  (372,2,'0','1'),
+                                                                                  (373,2,'0','1'),
+                                                                                  (374,2,'0','1'),
+                                                                                  (375,2,'0','1'),
+                                                                                  (376,2,'0','1'),
+                                                                                  (377,2,'0','1'),
+                                                                                  (378,3,'0','1'),
+                                                                                  (379,3,'0','1'),
+                                                                                  (380,3,'0','1'),
+                                                                                  (381,3,'0','1'),
+                                                                                  (382,3,'0','1'),
+                                                                                  (383,3,'0','1'),
+                                                                                  (384,3,'0','1'),
+                                                                                  (385,3,'0','1'),
+                                                                                  (386,3,'0','1'),
+                                                                                  (387,3,'0','1'),
+                                                                                  (388,3,'0','1'),
+                                                                                  (389,3,'0','1'),
+                                                                                  (390,3,'0','1'),
+                                                                                  (391,3,'0','1'),
+                                                                                  (392,3,'0','1'),
+                                                                                  (393,3,'0','1'),
+                                                                                  (394,3,'0','1'),
+                                                                                  (395,3,'0','1'),
+                                                                                  (396,3,'0','1'),
+                                                                                  (397,3,'0','1'),
+                                                                                  (398,3,'0','1'),
+                                                                                  (399,3,'0','1'),
+                                                                                  (400,3,'0','1'),
+                                                                                  (401,3,'0','1'),
+                                                                                  (402,3,'0','1'),
+                                                                                  (403,3,'0','1'),
+                                                                                  (404,3,'0','1'),
+                                                                                  (405,3,'0','1'),
+                                                                                  (406,3,'0','1'),
+                                                                                  (407,3,'0','1'),
+                                                                                  (408,3,'0','1'),
+                                                                                  (409,3,'0','1'),
+                                                                                  (410,3,'0','1'),
+                                                                                  (411,3,'0','1'),
+                                                                                  (412,3,'0','1'),
+                                                                                  (413,3,'0','1'),
+                                                                                  (414,4,'0','0'),
+                                                                                  (415,4,'0','0'),
+                                                                                  (416,4,'0','0'),
+                                                                                  (417,4,'0','0'),
+                                                                                  (418,4,'0','0'),
+                                                                                  (419,4,'0','0'),
+                                                                                  (420,4,'0','0'),
+                                                                                  (421,4,'0','0'),
+                                                                                  (422,4,'0','0'),
+                                                                                  (423,4,'0','0'),
+                                                                                  (424,4,'0','0'),
+                                                                                  (425,4,'0','0'),
+                                                                                  (426,4,'0','0'),
+                                                                                  (427,4,'0','0'),
+                                                                                  (428,4,'0','0'),
+                                                                                  (429,4,'0','0');
 
+#-------------------------schedule_class 일정표_반-----------------------------------------------
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(1,0);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(2,0);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(3,1);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(3,4);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(3,7);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(3,10);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(4,3);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(4,6);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(4,9);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(5,1);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(6,0);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(7,0);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(8,0);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(9,1);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(9,4);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(9,7);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(9,10);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(10,4);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(11,2);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(11,5);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(11,8);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(12,0);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(13,0);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(14,0);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(15,0);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(16,0);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(17,0);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(18,0);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(19,0);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(20,3);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(20,6);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(20,9);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(21,5);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(22,0);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(23,2);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(24,1);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(24,4);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(24,7);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(24,10);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(25,9);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(26,0);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(27,0);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(28,0);
+INSERT INTO schedule_class(schedule_no, class_no) VALUES(29,0);
+
+#--------------------------schedule 일정표----------------------------
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(201, '2024-05-01', '2024-05-01');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(202, '2024-05-03', '2024-05-03');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(203, '2024-05-07', '2024-05-07');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(204, '2024-05-14', '2024-05-14');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(205, '2024-05-17', '2024-05-17');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(206, '2024-05-21', '2024-05-21');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(207, '2024-05-23', '2024-05-23');
+
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(208, '2024-06-03', '2024-06-03');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(209, '2024-06-05', '2024-06-05');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(210, '2024-06-12', '2024-06-12');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(211, '2024-06-17', '2024-06-18');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(212, '2024-06-21', '2024-06-21');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(213, '2024-06-24', '2024-06-24');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(214, '2024-06-29', '2024-06-29');
+
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(215, '2024-07-03', '2024-07-03');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(216, '2024-07-05', '2024-07-05');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(217, '2024-07-22', '2024-07-26');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(218, '2024-07-10', '2024-07-10');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(219, '2024-07-16', '2024-07-16');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(220, '2024-07-24', '2024-07-24');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(221, '2024-07-29', '2024-07-29');
+
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(222, '2024-08-01', '2024-08-01');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(223, '2024-08-06', '2024-08-06');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(224, '2024-08-08', '2024-08-08');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(225, '2024-08-14', '2024-08-14');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(226, '2024-08-15', '2024-08-15');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(227, '2024-08-20', '2024-08-20');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(228, '2024-08-26', '2024-08-26');
+INSERT INTO  schedule(board_no, schedule_start_date, schedule_end_date) VALUES(229, '2024-08-01', '2024-08-05');
+
+#---------------------------------teacher_kinder 교사_유치원-------------------------------------------------
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(125,5,1);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(126,6,1);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(127,7,1);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(128,8,2);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(129,9,2);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(130,10,2);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(131,11,3);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(132,12,3);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(133,13,3);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(134,29,1);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(135,30,1);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(136,31,1);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(137,32,2);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(138,33,2);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(139,34,2);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(140,35,3);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(141,36,3);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(142,37,3);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(143,38,1);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(144,39,1);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(145,40,1);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(146,41,2);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(147,42,2);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(148,43,2);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(149,44,3);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(150,45,3);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(151,46,3);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(152,47,1);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(153,48,1);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(154,49,1);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(155,50,2);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(156,51,2);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(157,52,2);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(158,53,3);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(159,54,3);
+INSERT INTO teacher_kinder(accept_no, teacher_id, kinder_no) VALUES(160,55,3);
+
+#----------------------------------------class_teacher 반_교사------------------------------------------
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(1,5,161);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(1,30,162);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(2,6,163);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(2,31,164);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(3,7,165);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(3,32,166);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(4,30,167);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(4,39,168);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(5,31,169);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(5,40,170);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(6,32,171);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(6,41,172);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(7,39,173);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(7,48,174);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(8,40,175);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(8,49,176);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(9,41,177);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(9,48,178);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(10,49,179);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(10,50,180);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(11,8,181);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(11,33,182);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(12,9,183);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(12,34,184);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(13,10,185);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(13,35,186);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(14,33,187);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(14,42,188);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(15,34,189);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(15,43,190);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(16,35,191);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(16,44,192);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(17,42,193);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(17,51,194);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(18,43,195);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(18,52,196);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(19,44,197);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(19,51,198);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(20,52,199);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(20,53,200);
