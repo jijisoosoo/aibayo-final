@@ -13,6 +13,6 @@ import java.io.Serializable;
 @Getter
 public class TeacherKinderId {
     private Long teacherId;
-    private Long kidNo;
+    private Long kinderNo;
     private Long acceptNo;
 }
