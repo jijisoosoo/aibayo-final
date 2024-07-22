@@ -17,10 +17,8 @@ import lombok.*;
 public class TeacherKinderEntity {
     @Id
     @Column(name = "teacher_id")
-    private String teacherId;
+    private Long teacherId;
     @Id
-    @Column(name = "kinder_no")
-    private String kinderNo;
     @Column(name = "accept_no")
     private int acceptNo;
 }
