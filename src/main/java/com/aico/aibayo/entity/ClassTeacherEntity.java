@@ -21,8 +21,7 @@ public class ClassTeacherEntity {
     @Id
     @Column(name = "class_teacher_id")
     private String classTeacherId;
+    @Id
     @Column(name = "accept_no")
     private int acceptNo;
-    @Column(name = "accept_status")
-    private int acceptStatus;
 }
