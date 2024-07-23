@@ -55,5 +55,43 @@ chatInput.addEventListener("keydown", (e) => {
 });
 
 
+
+
+// sendChatBtn.addEventListener("click", handleChat);
+// chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
+
 sendChatBtn.addEventListener("click", handleChat);
-chatbotToggler.addEventListener("click", () => document.body.classList.toggle("show-chatbot"));
+chatbotToggler.addEventListener("click", () => {
+    document.body.classList.toggle("show-chatbot");
+    if (document.body.classList.contains("show-chatbot")) {
+        chatIframe.style.width = '460px';  // 원하는 크기로 설정
+        chatIframe.style.height = '680px'; // 원하는 크기로 설정
+    } else {
+        chatIframe.style.width = '50px';
+        chatIframe.style.height = '50px';
+    }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const chatbotToggler = document.querySelector(".chatbot-toggler");
+
+    chatbotToggler.addEventListener("click", () => {
+        parent.document.body.classList.toggle("show-chatbot");
+        const chatIframe = parent.document.getElementById("chatIframe");
+        if (parent.document.body.classList.contains("show-chatbot")) {
+            chatIframe.style.width = '460px';  // 원하는 크기로 설정
+            chatIframe.style.height = '680px'; // 원하는 크기로 설정
+        } else {
+            chatIframe.style.width = '100px';
+            chatIframe.style.height = '100px';
+        }
+    });
+});
+
+
+// 페이지 로드 시 채팅팝업을 끈 상태로 설정
+document.addEventListener("DOMContentLoaded", () => {
+    document.body.classList.remove("show-chatbot");
+    chatbot.style.width = '50px';
+    chatbot.style.height = '50px';
+});

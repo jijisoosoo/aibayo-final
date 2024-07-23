@@ -40,9 +40,23 @@ function initializeMarquee($text_div) {
     }
 }
 
+
+
 $(document).ready(function() {
     // 페이지가 로드되면 모든 컨테이너에 대해 marquee 초기화
     $('.text_div').each(function() {
         initializeMarquee($(this));
     });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const chatIframe = document.getElementById("chatIframe");
+
+    // 페이지 로드 시 채팅팝업을 끈 상태로 설정
+    document.body.classList.remove("show-chatbot");
+    chatIframe.style.width = '100px';
+    chatIframe.style.height = '100px';
+});
+
+
+
