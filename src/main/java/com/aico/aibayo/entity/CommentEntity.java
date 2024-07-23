@@ -22,10 +22,8 @@ public class CommentEntity {
     private Long commentNo; //댓글번호
     @Column(name="board_no")
     private Long boardNo; //게시글 번호
-    @Column(name="parent_comment_no")
-    private Integer parentCommentNo; //댓글 번호
     @Column(name="comment_writer")
-    private Integer commentWriter; //댓글 작성자 (member의 id값)
+    private Long commentWriter; //댓글 작성자 (member의 id값)
     @Column(name="comment_reg_date")
     private LocalDateTime commentRegDate; //댓글 작성일자
     @Column(name="comment_modify_date")

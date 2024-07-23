@@ -16,8 +16,7 @@
 
     <footer th:replace="~{inc/footer :: footer}"></footer>
 
-    <iframe th:src="@{/chat}" style="width: 460px; height:680px; border:none; position: fixed; right: 40px; bottom: 35px; z-index: 9999 "></iframe>
-
+    <iframe id="chatIframe" th:src="@{/chat}" style="border:none; position: fixed; right: 40px; bottom: 35px; z-index: 900;"></iframe>
 
 </body>
 </html>

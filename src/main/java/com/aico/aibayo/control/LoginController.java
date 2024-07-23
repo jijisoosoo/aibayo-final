@@ -18,6 +18,11 @@ public class LoginController {
         return "login/signUp";
     }
 
+    @GetMapping("/signUpKid")
+    public String signUpKid() {
+        return "login/signUpKid";
+    }
+
     @GetMapping("/signInFindPw")
     public String signInFindPw() {
         return "login/signInFindPw";
