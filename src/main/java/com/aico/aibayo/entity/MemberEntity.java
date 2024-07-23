@@ -23,6 +23,8 @@ public class MemberEntity {
     private String name;
     @Column
     private String pw;
+    @Column
+    private String phone;
     @Column(name = "reg_type")
     private int regType;
     @Column(name = "role_no")
@@ -39,6 +41,7 @@ public class MemberEntity {
     private LocalDateTime latestLogDate;
     @Column(name = "latest_ip")
     private String latestIp;
+
 
     @Column(name = "kinder_no") //register_kinder 테이블에서 참고하는 컬럼
     private Long kinderNo;
