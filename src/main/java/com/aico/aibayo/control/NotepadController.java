@@ -1,10 +1,14 @@
 package com.aico.aibayo.control;
 
 import com.aico.aibayo.dto.ClassDto;
+import com.aico.aibayo.dto.KidDto;
 import com.aico.aibayo.dto.notepad.NotepadDto;
 //import com.aico.aibayo.service.notepad.NotepadService;
 import com.aico.aibayo.dto.notepad.NotepadSearchCondition;
+import com.aico.aibayo.service.classManage.ClassService;
+import com.aico.aibayo.service.kid.KidService;
 import com.aico.aibayo.service.notepad.NotepadService;
+import java.util.ArrayList;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -20,6 +24,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class NotepadController {
     private final NotepadService notepadService;
+    private final ClassService classService;
+    private final KidService kidService;
 
     @GetMapping("/admin/list")
     public String adminList(@RequestParam(defaultValue = "1") int page, Model model) {
@@ -93,8 +99,24 @@ public class NotepadController {
 
     @GetMapping("/admin/write")
     public String writeForm(Model model) {
-        // TO-DO: 쿼리로 반, 원생 목록 가져와서 저장하기
-//        List<ClassDto> =
+//        int roleNo = 1;
+        int roleNo = 2;
+        List<ClassDto> classDtos = new ArrayList<>();
+        List<KidDto> kidDtos = new ArrayList<>();
+
+        if (roleNo < 2) { // 사이트 관리자/원장
+            Long kinderNo = 1L;
+            classDtos = classService.getByKinderNo(kinderNo);
+            kidDtos = kidService.getByKinderNo(kinderNo);
+
+        } else if (roleNo == 2) { // 교사
+            Long id = 31L;
+            classDtos = classService.getByMemberId(id);
+            kidDtos = kidService.getByMemberId(id);
+        }
+
+        model.addAttribute("classDtos", classDtos);
+        model.addAttribute("kidDtos", kidDtos);
 
         return "/notepad/admin/writeForm";
     }
