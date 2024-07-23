@@ -15,12 +15,15 @@ public class TeacherController {
         return "/teacherManage/teacherMain";
     }
 
-    @GetMapping("/admin/teacherProfile")
-    public String adminTeacherProfile() {
-        return "/teacherManage/teacherProfile";
+    @GetMapping("/admin/teacherProfileAccept")
+    public String adminTeacherProfileAccept() {
+        return "/teacherManage/teacherProfileAccept";
     }
 
-
+    @GetMapping("/admin/teacherProfileWait")
+    public String adminTeacherProfileWait() {
+        return "/teacherManage/teacherProfileWait";
+    }
 
 
 
