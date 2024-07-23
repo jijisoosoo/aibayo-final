@@ -23,13 +23,13 @@ public class PaymentEntity {
     @Column(name = "discount_no")
     private Long discountNo;
     @Column(name = "category_no")
-    private int categoryNo;
+    private Integer categoryNo;
     @Column(name = "payment_price")
-    private int paymentPrice;
+    private Integer paymentPrice;
     @Column(name = "category_type")
-    private int categoryType;
+    private Integer categoryType;
     @Column(name = "payment_status")
-    private int paymentStatus;
+    private Integer paymentStatus;
     @Column(name = "payment_pay_date")
     private LocalDateTime paymentPayDate;
     @Column(name = "payment_start_date")
