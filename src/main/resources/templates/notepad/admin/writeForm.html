@@ -69,21 +69,14 @@
 
                     <select class="form-select item_modify_box sender_text" id="selectClass">
                         <option value="0" selected>반 선택</option>
-                        <option value="1">당근반</option>
-                        <option value="2">양배추반</option>
-                        <option value="3">토마토반</option>
-                        <option value="4">오이반</option>
-                        <option value="5">피망반</option>
+                        <option th:each="class : ${classDtos}" th:object="${class}"
+                                th:value="*{classNo}" th:text="*{className}">반 이름</option>
                     </select>
 
                     <select class="form-select item_modify_box sender_text" id="selectKid">
                         <option value="0" selected>원생 선택</option>
-                        <option value="1">김원생</option>
-                        <option value="2">박원생</option>
-                        <option value="3">최원생</option>
-                        <option value="4">이원생</option>
-                        <option value="5">강원생</option>
-                        <option value="6">나원생</option>
+                        <option th:each="kid : ${kidDtos}" th:object="${kid}"
+                                th:value="*{kidNo}" th:text="*{kidName}">원생 이름</option>
                     </select>
 
                 </div>
