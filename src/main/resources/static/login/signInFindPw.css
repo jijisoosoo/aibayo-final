@@ -17,7 +17,7 @@
 
 
 .login-page {
-    background-color: #fcf2e3;
+    background-color: #fffcf0;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -30,7 +30,7 @@ body {
 }
 
 .login-page .div {
-    background-color: #fcf2e3;
+    background-color: #fffcf0;
     width: 1440px;
     height: 957px;
     position: relative;
@@ -225,10 +225,11 @@ body {
     position: relative;
     width: 450px;
     height: 54px;
-    background-color: #e48700;
     border-radius: 10px;
     box-shadow: 0px 4px 19px #7793414c;
     margin-top: 5%;
+    background-color: #ffd700;
+    border: none !important;
 }
 
 .login-page .text-wrapper-6 {
@@ -254,7 +255,7 @@ body {
 
 .login-page .text-wrapper-7 {
     top: 84px;
-    left: 44px;
+    left: 37px;
     font-family: "Noto Sans-DisplayRegular", Helvetica;
     color: #000000;
     font-size: 45px;
@@ -332,4 +333,11 @@ body {
     line-height: 57.6px;
     white-space: nowrap;
 }
-  
+
+.login-page .span {
+    color: #a5c02a;
+    position: absolute;
+    top: 200px;
+    left: 890px;
+    text-decoration: none;
+}
