@@ -1,6 +1,7 @@
 package com.aico.aibayo.aop;
 
 import com.aico.aibayo.dto.notepad.NotepadDto;
+import java.util.List;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -38,6 +39,14 @@ public class LoggingAspect {
 
             log.info(">>>>>>>>>>>>>>>>>>>>logPageItems");
             page.forEach(item -> log.info("\n{}", item.toString()));
+            log.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+
+        }
+
+        if (result instanceof List) {
+            List<?> list = (List<?>) result;
+            log.info(">>>>>>>>>>>>>>>>>>>>logListItems");
+            list.forEach(item -> log.info("\n{}", item.toString()));
             log.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 
         }
