@@ -6,15 +6,15 @@
 <title layout:fragment="title">알림장</title>
 
 <th:block layout:fragment="css">
-<link href="/vendor/datepicker-dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
-<link rel="stylesheet" href="/notepad/form.css" />
+    <th:block th:replace="~{/common/datepicker :: css}"/>
+    <th:block th:replace="~{/common/sweetalert2 :: css}"/>
+    <link rel="stylesheet" href="/notepad/form.css" />
 </th:block>
 
 <th:block layout:fragment="javascript">
-<script src="/vendor/datepicker-dist/js/bootstrap-datepicker.min.js"></script>
-<script src="/vendor/datepicker-dist/js/bootstrap-datepicker.ko.min.js"></script>
-<script src="/common/datepicker.js"></script>
-<script src="/notepad/writeForm.js"></script>
+    <th:block th:replace="~{/common/datepicker :: js}"/>
+    <th:block th:replace="~{/common/sweetalert2 :: js}"/>
+    <script src="/notepad/writeForm.js"></script>
 </th:block>
 
   <div class="container main_container" layout:fragment="content">
@@ -34,7 +34,7 @@
             </div>
 
             <div class="notepad_detail_top_btn">
-                <input type="button" 
+                <input type="button" id="writeBtn"
                     class="btn btn-ab btn_box btn_text" 
                     value="등록">
             </div>
@@ -44,9 +44,11 @@
     </div>
     
 
-    <div class="notepad_detail_content">
+    <form class="notepad_detail_content" id="writeFrm" action="/notepad/writeOk" method="post">
+
         
         <div class="notepad_detail_content_date_box">
+            <div class="msg datepicker_msg">날짜를 선택해 주세요</div>
             <input type="text"
             class="form-control notepad_detail_content_date date_input_box date_input_text datepicker"
             placeholder="연도. 월. 일" readonly>
@@ -57,7 +59,10 @@
 
             <div class="item_group sender_group">
 
-                <div class="item_title">알림 수신자</div>
+                <div class="msg_box">
+                    <div class="item_title">알림 수신자</div>
+                    <div class="msg item_title_msg">알림 수신자를 선택해 주세요</div>
+                </div>
 
                 <div class="select_box">
     
@@ -69,21 +74,14 @@
 
                     <select class="form-select item_modify_box sender_text" id="selectClass">
                         <option value="0" selected>반 선택</option>
-                        <option value="1">당근반</option>
-                        <option value="2">양배추반</option>
-                        <option value="3">토마토반</option>
-                        <option value="4">오이반</option>
-                        <option value="5">피망반</option>
+                        <option th:each="class : ${classDtos}" th:object="${class}"
+                                th:value="*{classNo}" th:text="*{className}">반 이름</option>
                     </select>
 
                     <select class="form-select item_modify_box sender_text" id="selectKid">
                         <option value="0" selected>원생 선택</option>
-                        <option value="1">김원생</option>
-                        <option value="2">박원생</option>
-                        <option value="3">최원생</option>
-                        <option value="4">이원생</option>
-                        <option value="5">강원생</option>
-                        <option value="6">나원생</option>
+                        <option th:each="kid : ${kidDtos}" th:object="${kid}"
+                                th:value="*{kidNo}" th:text="*{kidName}">원생 이름</option>
                     </select>
 
                 </div>
@@ -92,7 +90,10 @@
 
             <div class="item_group content_group">
 
-                <div class="item_title">내용</div>
+                <div class="msg_box">
+                    <div class="item_title summernote_title">내용</div>
+                    <div class="msg">내용을 입력해 주세요</div>
+                </div>
                 
                 <div class="notepad_detail_content_body_text summernote_create"></div>
 
@@ -107,16 +108,19 @@
 
                 <div class="liferecord_item_box mood-box">
 
-                    <div class="liferecord_item_title mood-title">기분</div>
+                    <div class="msg_box">
+                        <div class="liferecord_item_title mood-title">기분</div>
+                        <div class="msg">항목을 선택해 주세요</div>
+                    </div>
 
                     <div class="btn-group" role="group">
-                        <input type="radio" class="btn-check" name="mood" id="mood1" autocomplete="off">
+                        <input type="radio" class="btn-check mood" name="mood" id="mood1" autocomplete="off">
                         <label class="btn btn-outline-ab liferecord_item_text mood-text" for="mood1">좋음</label>
                     
-                        <input type="radio" class="btn-check" name="mood" id="mood2" autocomplete="off">
+                        <input type="radio" class="btn-check mood" name="mood" id="mood2" autocomplete="off">
                         <label class="btn btn-outline-ab liferecord_item_text mood-text" for="mood2">보통</label>
                     
-                        <input type="radio" class="btn-check" name="mood" id="mood3" autocomplete="off">
+                        <input type="radio" class="btn-check mood" name="mood" id="mood3" autocomplete="off">
                         <label class="btn btn-outline-ab liferecord_item_text mood-text" for="mood3">나쁨</label>
                     </div>
 
@@ -124,16 +128,19 @@
 
                 <div class="liferecord_item_box health-box">
 
-                    <div class="liferecord_item_title health-title">건강</div>
+                    <div class="msg_box">
+                        <div class="liferecord_item_title health-title">건강</div>
+                        <div class="msg">항목을 선택해 주세요</div>
+                    </div>
 
                     <div class="btn-group" role="group">
-                        <input type="radio" class="btn-check" name="health" id="health1" autocomplete="off">
+                        <input type="radio" class="btn-check health" name="health" id="health1" autocomplete="off">
                         <label class="btn btn-outline-ab liferecord_item_text health-text" for="health1">좋음</label>
                     
-                        <input type="radio" class="btn-check" name="health" id="health2" autocomplete="off">
+                        <input type="radio" class="btn-check health" name="health" id="health2" autocomplete="off">
                         <label class="btn btn-outline-ab liferecord_item_text health-text" for="health2">보통</label>
                     
-                        <input type="radio" class="btn-check" name="health" id="health3" autocomplete="off">
+                        <input type="radio" class="btn-check health" name="health" id="health3" autocomplete="off">
                         <label class="btn btn-outline-ab liferecord_item_text health-text" for="health3">나쁨</label>
                     </div>
 
@@ -141,16 +148,19 @@
 
                 <div class="liferecord_item_box temperature-box">
 
-                    <div class="liferecord_item_title temperature-title">체온 체크</div>
+                    <div class="msg_box">
+                        <div class="liferecord_item_title temperature-title">체온 체크</div>
+                        <div class="msg">항목을 선택해 주세요</div>
+                    </div>
 
                     <div class="btn-group" role="group">
-                        <input type="radio" class="btn-check" name="temperature" id="temperature1" autocomplete="off">
+                        <input type="radio" class="btn-check temperature" name="temperature" id="temperature1" autocomplete="off">
                         <label class="btn btn-outline-ab liferecord_item_text temperature-text" for="temperature1">정상</label>
                     
-                        <input type="radio" class="btn-check" name="temperature" id="temperature2" autocomplete="off">
+                        <input type="radio" class="btn-check temperature" name="temperature" id="temperature2" autocomplete="off">
                         <label class="btn btn-outline-ab liferecord_item_text temperature-text" for="temperature2">미열</label>
                     
-                        <input type="radio" class="btn-check" name="temperature" id="temperature3" autocomplete="off">
+                        <input type="radio" class="btn-check temperature" name="temperature" id="temperature3" autocomplete="off">
                         <label class="btn btn-outline-ab liferecord_item_text temperature-text" for="temperature3">고열</label>
                     </div>
 
@@ -158,19 +168,22 @@
 
                 <div class="liferecord_item_box meal-box">
 
-                    <div class="liferecord_item_title meal-title">식사 여부</div>
+                    <div class="msg_box">
+                        <div class="liferecord_item_title meal-title">식사 여부</div>
+                        <div class="msg">항목을 선택해 주세요</div>
+                    </div>
 
                     <div class="btn-group" role="group">
-                        <input type="radio" class="btn-check" name="meal" id="meal1" autocomplete="off">
+                        <input type="radio" class="btn-check meal" name="meal" id="meal1" autocomplete="off">
                         <label class="btn btn-outline-ab liferecord_item_text meal-text" for="meal1">정량</label>
                     
-                        <input type="radio" class="btn-check" name="meal" id="meal2" autocomplete="off">
+                        <input type="radio" class="btn-check meal" name="meal" id="meal2" autocomplete="off">
                         <label class="btn btn-outline-ab liferecord_item_text meal-text" for="meal2">많이</label>
                     
-                        <input type="radio" class="btn-check" name="meal" id="meal3" autocomplete="off">
+                        <input type="radio" class="btn-check meal" name="meal" id="meal3" autocomplete="off">
                         <label class="btn btn-outline-ab liferecord_item_text meal-text" for="meal3">적게</label>
 
-                        <input type="radio" class="btn-check" name="meal" id="meal4" autocomplete="off">
+                        <input type="radio" class="btn-check meal" name="meal" id="meal4" autocomplete="off">
                         <label class="btn btn-outline-ab liferecord_item_text meal-text" for="meal4">안했음</label>
                     </div>
 
@@ -178,22 +191,25 @@
 
                 <div class="liferecord_item_box sleeptime-box">
 
-                    <div class="liferecord_item_title sleeptime-title">수면시간</div>
+                    <div class="msg_box">
+                        <div class="liferecord_item_title sleeptime-title">수면시간</div>
+                        <div class="msg">항목을 선택해 주세요</div>
+                    </div>
 
                     <div class="btn-group" role="group">
-                        <input type="radio" class="btn-check" name="sleeptime" id="sleeptime1" autocomplete="off">
+                        <input type="radio" class="btn-check sleeptime" name="sleeptime" id="sleeptime1" autocomplete="off">
                         <label class="btn btn-outline-ab liferecord_item_text sleeptime-text" for="sleeptime1">잠을 안 잤어요</label>
                     
-                        <input type="radio" class="btn-check" name="sleeptime" id="sleeptime2" autocomplete="off">
+                        <input type="radio" class="btn-check sleeptime" name="sleeptime" id="sleeptime2" autocomplete="off">
                         <label class="btn btn-outline-ab liferecord_item_text sleeptime-text" for="sleeptime2">1시간 미만</label>
                     
-                        <input type="radio" class="btn-check" name="sleeptime" id="sleeptime3" autocomplete="off">
+                        <input type="radio" class="btn-check sleeptime" name="sleeptime" id="sleeptime3" autocomplete="off">
                         <label class="btn btn-outline-ab liferecord_item_text sleeptime-text" for="sleeptime3">1시간~1시간 30분</label>
 
-                        <input type="radio" class="btn-check" name="sleeptime" id="sleeptime4" autocomplete="off">
+                        <input type="radio" class="btn-check sleeptime" name="sleeptime" id="sleeptime4" autocomplete="off">
                         <label class="btn btn-outline-ab liferecord_item_text sleeptime-text" for="sleeptime4">1시간 30분~2시간</label>
 
-                        <input type="radio" class="btn-check" name="sleeptime" id="sleeptime5" autocomplete="off">
+                        <input type="radio" class="btn-check sleeptime" name="sleeptime" id="sleeptime5" autocomplete="off">
                         <label class="btn btn-outline-ab liferecord_item_text sleeptime-text" for="sleeptime5">2시간 이상</label>
                     </div>
 
@@ -201,22 +217,25 @@
 
                 <div class="liferecord_item_box defecation_status-box">
 
-                    <div class="liferecord_item_title defecation_status-title">배변 상태</div>
+                    <div class="msg_box">
+                        <div class="liferecord_item_title defecation_status-title">배변 상태</div>
+                        <div class="msg">항목을 선택해 주세요</div>
+                    </div>
 
                     <div class="btn-group" role="group">
-                        <input type="radio" class="btn-check" name="defecation_status" id="defecation_status1" autocomplete="off">
+                        <input type="radio" class="btn-check defecation_status" name="defecation_status" id="defecation_status1" autocomplete="off">
                         <label class="btn btn-outline-ab liferecord_item_text defecation_status-text" for="defecation_status1">보통</label>
                     
-                        <input type="radio" class="btn-check" name="defecation_status" id="defecation_status2" autocomplete="off">
+                        <input type="radio" class="btn-check defecation_status" name="defecation_status" id="defecation_status2" autocomplete="off">
                         <label class="btn btn-outline-ab liferecord_item_text defecation_status-text" for="defecation_status2">딱딱함</label>
                     
-                        <input type="radio" class="btn-check" name="defecation_status" id="defecation_status3" autocomplete="off">
+                        <input type="radio" class="btn-check defecation_status" name="defecation_status" id="defecation_status3" autocomplete="off">
                         <label class="btn btn-outline-ab liferecord_item_text defecation_status-text" for="defecation_status3">묽음</label>
 
-                        <input type="radio" class="btn-check" name="defecation_status" id="defecation_status4" autocomplete="off">
+                        <input type="radio" class="btn-check defecation_status" name="defecation_status" id="defecation_status4" autocomplete="off">
                         <label class="btn btn-outline-ab liferecord_item_text defecation_status-text" for="defecation_status4">설사</label>
 
-                        <input type="radio" class="btn-check" name="defecation_status" id="defecation_status5" autocomplete="off">
+                        <input type="radio" class="btn-check defecation_status" name="defecation_status" id="defecation_status5" autocomplete="off">
                         <label class="btn btn-outline-ab liferecord_item_text defecation_status-text" for="defecation_status5">안했음</label>
                     </div>
 
@@ -229,6 +248,6 @@
        
            </div>
 
-    </div>
+    </form>
 
   </div>

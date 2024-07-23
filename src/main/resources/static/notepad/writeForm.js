@@ -37,4 +37,83 @@ $(document).ready(function() {
             $("#liferecord input[type='radio']").prop("required", true);
         }
     });
+
+    // 등록 시 작성한 값이 누락될 경우 alert 표시 후 포커스
+    $('#writeBtn').on('click', function () {
+        initMsg();
+
+        let datepicker = $('.datepicker');
+
+        let selectScope = $('#selectScope');
+        let selectClass = $('#selectClass');
+        let selectKid = $('#selectKid');
+
+        let summernote = $('.summernote_create');
+        let contentEmpty = summernote.summernote('isEmpty');
+
+        if (datepicker.val() === '') {
+            console.log("날짜 공란");
+            let msg = datepicker.siblings('.msg');
+            console.log("tooltip: ", msg.text());
+            msg.show();
+            datepicker.focus();
+        } else if (selectScope.val() === '0' || (selectClass.val() === '0' && selectKid.val() === '0')) {
+            console.log("수신자 공란");
+            // let msg = $('.sender').siblings('.msg');
+            let msg = selectScope.closest('.item_group').find('.msg');
+            console.log("tooltip: ", msg.text());
+            msg.show();
+            selectScope.focus();
+        } else if (contentEmpty) {
+            console.log("내용 공란");
+            let msg = summernote.closest('.item_group').find('.msg');
+            console.log("tooltip: ", msg.text());
+            msg.show();
+            summernote.summernote('focus');
+        } else {
+            console.log(summernote.summernote('code'));
+
+            let liferecord = $('.liferecord');
+
+            if (liferecord.is(':visible')) {
+
+                const elementsToCheck = ['.mood', '.health', '.temperature', '.meal', '.sleeptime', '.defecation_status'];
+
+                for (const selector of elementsToCheck) {
+                    if (!isChecked($(selector))) {
+                        return;
+                    }
+                }
+            }
+
+            
+
+            $('#writeFrm').submit();
+        }
+    });
 });
+
+function isChecked(selector) {
+    initMsg();
+    let bool = false;
+
+    selector.each(function () {
+        if ($(this).is(':checked')) {
+            // console.log('체크 있음');
+            bool = true;
+            return false;
+        }
+        selector.closest('.liferecord_item_box').find('.msg').show();
+        selector.first().focus();
+    });
+
+    console.log(`bool: ${bool}`);
+
+    return bool;
+}
+
+function initMsg() {
+    $('.msg').each(function () {
+        $(this).hide();
+    })
+}
