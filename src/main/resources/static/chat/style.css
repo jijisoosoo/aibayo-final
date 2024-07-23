@@ -34,7 +34,7 @@
     justify-content: center;
     outline: none;
     cursor: pointer;
-    background: #c3abe7;
+    background: #FFC3AC;
     border-radius: 50%;
     transition: all 0.2s ease;
 }
@@ -59,9 +59,9 @@
 
 .chatbot {
     position: fixed;
+    width: 420px;
     right: 40px;
     bottom: 100px;
-    width: 420px;
     transform: scale(0.5);
     opacity: 0;
     pointer-events: none;
@@ -84,7 +84,7 @@
 }
 
 .chatbot header {
-    background: #c3abe7;
+    background: #FFC3AC;
     padding: 16px 0;
     text-align: center;
     position: relative;
@@ -120,7 +120,7 @@
     width: 32px;
     color: #fff;
     align-self: flex-end;
-    background: #c3abe7;
+    background: #FFC3AC;
     text-align: center;
     line-height: 32px;
     border-radius: 4px;
@@ -139,7 +139,7 @@
     font-size: 0.95rem;
     padding: 12px 16px;
     border-radius: 10px 10px 0 10px;
-    background: #8472b6;
+    background: #FC8C78;
 }
 
 .chatbox .incoming p {
@@ -178,7 +178,7 @@
     align-self: flex-end;
     height: 55px;
     line-height: 55px;
-    color: #7a57e1;
+    color:  #FFC3AC;
     font-size: 1.35rem;
     cursor: pointer;
     visibility: hidden;
