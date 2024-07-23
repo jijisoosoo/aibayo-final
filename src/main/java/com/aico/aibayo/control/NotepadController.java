@@ -121,6 +121,14 @@ public class NotepadController {
         return "/notepad/admin/writeForm";
     }
 
+    @PostMapping("/writeOk")
+    public void writeOk(@ModelAttribute NotepadDto notepadDto) {
+        // TO-DO
+        log.info("{}", notepadDto);
+
+
+    }
+
     private String getPageInfoAndGoView(Model model, Page<NotepadDto> notepads, String view) {
         int totalPages = notepads.getTotalPages();
         int currentPage = notepads.getNumber();
