@@ -23,7 +23,7 @@ public class ClassEntity {
     @Column(name = "class_age")
     private String classAge;
     @Column(name = "kinder_no")
-    private int kinderNo;
+    private Long kinderNo;
     @Column(name = "class_reg_date")
     private LocalDateTime classRegDate;
     @Column(name = "class_modify_date")
