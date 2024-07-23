@@ -18,8 +18,6 @@ public class AcceptLogEntity {
     @Column(name = "accept_no")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long acceptNo;
-    @Column(name = "code_verify")
-    private int codeVerify;
     @Column(name = "accept_type")
     private int acceptType;
     @Column(name = "accept_date")
