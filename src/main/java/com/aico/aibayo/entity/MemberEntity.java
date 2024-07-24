@@ -42,9 +42,8 @@ public class MemberEntity {
     @Column(name = "latest_ip")
     private String latestIp;
     @Lob
-    @Column
+    @Column(name = "profile_picture")
     private String profilePicture;
-
     @Column(name = "kinder_no") //register_kinder 테이블에서 참고하는 컬럼
     private Long kinderNo;
 }
