@@ -40,7 +40,21 @@ function initializeMarquee($text_div) {
     }
 }
 
-
+// ajax json 전달
+function commonAjax(url,type, param) {
+    $.ajax({
+        url: url,
+        type: type,
+        data:  JSON.stringify(param),
+        contentType: 'application/json',
+        success: function(response) {
+            afterSuccess(response);
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX 요청 오류:", status, error);
+        }
+    })
+}
 
 $(document).ready(function() {
     // 페이지가 로드되면 모든 컨테이너에 대해 marquee 초기화
