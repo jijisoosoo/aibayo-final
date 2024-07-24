@@ -3,6 +3,8 @@ package com.aico.aibayo.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "notepad")
 @Getter
@@ -22,4 +24,6 @@ public class NotepadEntity {
     private Integer weather;
     @Column(name = "has_life_record")
     private String hasLifeRecord;
+    @Column(name = "notepad_date")
+    private LocalDate notepadDate;
 }
