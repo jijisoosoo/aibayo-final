@@ -19,15 +19,8 @@
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
-  <div class="title"><div class="text-wrapper-4">교사 관리</div></div>
-  <div class="buttons">
-    <select class="dropdown-class">
-      <option value="반 선택">반 선택</option>
-      <option value="1반">1반</option>
-      <option value="2반">2반</option>
-      <option value="3반">3반</option>
-      <option value="4반">4반</option>
-    </select>
+  <div class="title">
+    <div class="text-wrapper-4">교사 관리</div>
     <a class="btn btn-ab button-invite" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
       <btn class="text-wrapper-5">초대하기</btn>
     </a>
@@ -88,14 +81,23 @@
 <!--  승인 완료된 교사  -->
     <div class="row-selected-teacher" id="teacherStatus1Div">
       <div class="text-selected-num">
-        <div class="icon">
-          <img src="/teacher/img/default-yellow.png" alt=""/>
+        <div class="select-textarea">
+          <div class="icon">
+            <img src="/teacher/img/default-yellow.png" alt=""/>
+          </div>
+          <div class="textarea">
+            <div class="text-wrapper-10">승인 완료된 교사</div>
+            <div class="n-wrapper"><div class="n-2">5</div></div>
+            <div class="text-wrapper-10">명</div>
+          </div>
         </div>
-        <div class="textarea">
-          <div class="text-wrapper-10">승인 완료된 교사</div>
-          <div class="n-wrapper"><div class="n-2">5</div></div>
-          <div class="text-wrapper-10">명</div>
-        </div>
+        <select class="dropdown-class">
+          <option value="반 선택">반 선택</option>
+          <option value="1반">1반</option>
+          <option value="2반">2반</option>
+          <option value="3반">3반</option>
+          <option value="4반">4반</option>
+        </select>
       </div>
       <div class="carousel">
         <div class="profile">
@@ -169,7 +171,7 @@
 
 <!--  승인 대기 중인 교사  -->
     <div class="row-selected-teacher kids_list_box" id="teacherStatus0Div">
-      <div class="text-selected-num">
+      <div class="select-textarea">
         <div class="icon">
           <img src="/teacher/img/default-yellow.png" alt=""/>
         </div>
@@ -221,7 +223,7 @@
 
 <!--   초대 중인 교사   -->
     <div class="row-selected-teacher kids_list_box" id="teacherStatus2Div">
-      <div class="text-selected-num">
+      <div class="select-textarea">
         <div class="icon">
           <img src="/teacher/img/default-yellow.png" alt=""/>
         </div>

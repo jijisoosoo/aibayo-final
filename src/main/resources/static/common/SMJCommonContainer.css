@@ -1,3 +1,17 @@
+/* 페이지 title */
+.container .text-wrapper-4 {
+  position: relative;
+  width: 268px;
+  height: 58px;
+  /*font-family: var(--font-selected-menu-font-family);*/
+  font-weight: var(--font-selected-menu-font-weight);
+  color: #000000;
+  font-size: var(--font-selected-menu-font-size);
+  letter-spacing: var(--font-selected-menu-letter-spacing);
+  font-style: var(--font-selected-menu-font-style);
+}
+
+
 /* 뒤로가기 포함 title */
 .container .title-flow2 {
   align-items: center;
@@ -245,52 +259,6 @@
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
-}
-
-/*------------------------------------------------*/
-/*   datepicker   */
-
-.container .datepickerdiv {
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-start;
-  position: relative;
-  flex: 0 0 auto;
-  font-weight: 500;
-  color: #828282;
-  font-size: 16px;
-  text-align: left;
-  letter-spacing: 0;
-  line-height: normal;
-  white-space: nowrap;
-  border: none;
-  width: 155px;
-}
-
-.container .datepicker:focus{
-  border: none;
-  outline: none;
-}
-
-.datepicker-dropdown {
-  border-radius: 10px !important;
-  padding: 10px !important;
-}
-
-.datepicker-days th, td {
-  padding: 5px !important;
-}
-
-.datepicker .today {
-  border-radius: 100px;
-  background-image: none !important;
-  background-color: #fdda21 !important;
-}
-
-.datepicker .active {
-  border-radius: 100px;
-  background-image: none !important;
-  background-color: #0080ff !important;
 }
 
 .container .calendar-vector {
