@@ -1,3 +1,4 @@
+
 .container .title {
     display: flex;
     align-items: center;
@@ -38,16 +39,16 @@
     flex: 0 0 auto;
 }
 
-.container .text-wrapper-4 {
-    position: relative;
-    width: fit-content;
-    font-weight: var(--font-selected-menu-font-weight);
-    color: #000000;
-    font-size: var(--font-selected-menu-font-size);
-    letter-spacing: var(--font-selected-menu-letter-spacing);
-    line-height: var(--font-selected-menu-line-height);
-    font-style: var(--font-selected-menu-font-style);
-}
+/*.container .text-wrapper-4 {*/
+/*    position: relative;*/
+/*    width: fit-content;*/
+/*    font-weight: var(--font-selected-menu-font-weight);*/
+/*    color: #000000;*/
+/*    font-size: var(--font-selected-menu-font-size);*/
+/*    letter-spacing: var(--font-selected-menu-letter-spacing);*/
+/*    line-height: var(--font-selected-menu-line-height);*/
+/*    font-style: var(--font-selected-menu-font-style);*/
+/*}*/
 
 .container .button-send {
     display: flex;
