@@ -22,8 +22,6 @@ public class AcceptLogEntity {
     private Integer codeVerify;
     @Column(name = "accept_type")
     private Integer acceptType;
-    @Column(name = "accept_date")
-    private LocalDateTime acceptDate;
     @Column(name = "accept_status")
     private Integer acceptStatus;
     @Column(name = "accept_reg_date")
