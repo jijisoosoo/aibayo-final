@@ -44,7 +44,13 @@
     </div>
     
 
-    <form class="notepad_detail_content" id="writeFrm" action="/notepad/writeOk" method="post">
+    <form class="notepad_detail_content"
+          id="writeFrm"
+          action="/notepad/writeOk"
+          method="post" th:object="${notepadInfo}"
+          th:data-board-type="*{get('boardType')}"
+          th:data-writer="*{get('writer')}"
+          th:data-board-title="">
 
         
         <div class="notepad_detail_content_date_box">

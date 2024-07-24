@@ -1,10 +1,10 @@
-function findByRegDate(parameter) {
+function findByDate(parameter) {
     console.log('dateText: ' + parameter.dateText);
 
     let url = '/notepad/user/searchDate';
     let data = {
         kidNo : parameter.kidNo,
-        boardRegDate: parameter.dateText
+        notepadDate: parameter.dateText
     }
 
     commonAjax(url, 'POST', data);

@@ -2,6 +2,7 @@ package com.aico.aibayo.dto.notepad;
 
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Setter
@@ -23,6 +24,7 @@ public class NotepadDto {
     private Long kinderNo;
 
     private Long notepadNo;
+    private LocalDate notepadDate;
     private String hasLifeRecord;
 
     private int mood;
@@ -34,7 +36,7 @@ public class NotepadDto {
 
     public NotepadDto(Long boardNo, Integer boardType, Long writer, String boardTitle,
                       String boardContents, String invisibleFlag, LocalDateTime boardRegDate,
-                      Long id, String name, Long kinderNo, Long notepadNo) {
+                      Long id, String name, Long kinderNo, Long notepadNo, LocalDate notepadDate) {
         this.boardNo = boardNo;
         this.boardType = boardType;
         this.writer = writer;
@@ -46,5 +48,6 @@ public class NotepadDto {
         this.name = name;
         this.kinderNo = kinderNo;
         this.notepadNo = notepadNo;
+        this.notepadDate = notepadDate;
     }
 }
