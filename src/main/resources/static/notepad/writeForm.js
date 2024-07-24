@@ -105,7 +105,7 @@ $(document).ready(function() {
                 boardTitle : writeFrm.data('board-title'),
                 boardContents : writeFrm.data('board-contents'),
                 hasLifeRecord : writeFrm.data('has-life-record'),
-                notepadDate : writeFrm.data('notepad_date'),
+                notepadDate : writeFrm.data('notepad-date'),
                 mood : writeFrm.data('mood'),
                 health : writeFrm.data('health'),
                 temperature : writeFrm.data('temperature'),
@@ -144,6 +144,10 @@ function setData(selector) {
 
     let isVisible = $('.liferecord').is(':visible') ? '1': '0';
     selector.data('has-life-record', isVisible);
+
+    selector.data('notepad-date', moment($('.datepicker')).format('YYYY-MM-DD'));
+    // console.log(`datepicker: ${$('.datepicker').val()}`);
+    // console.log(`notepad-date: ${selector.data('notepad-date')}`);
 
     if (isVisible === '1') {
 

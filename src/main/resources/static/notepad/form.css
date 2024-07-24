@@ -272,10 +272,3 @@
     display: flex;
     gap: 10px;
 }
-
-.btn-ab-swal:focus {
-    color: black;
-    background: #FFDB21;
-    border-color: #FFDB21;
-    box-shadow: inherit;
-}

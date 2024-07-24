@@ -172,7 +172,7 @@ public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
                         lifeRecord.sleepTime,
                         lifeRecord.defecationStatus))
                 .from(notepad)
-                .join(board).on(board.boardNo.eq(notepad.notepadNo))
+                .join(board).on(board.boardNo.eq(notepad.boardNo))
                 .join(member).on(member.id.eq(board.writer))
                 .leftJoin(lifeRecord).on(notepad.notepadNo.eq(lifeRecord.notepadNo))
                 .where(notepad.notepadNo.eq(notepadNo))
