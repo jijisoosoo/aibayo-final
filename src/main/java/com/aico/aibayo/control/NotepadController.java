@@ -134,11 +134,11 @@ public class NotepadController {
     }
 
     @PostMapping("/writeOk")
-    public void writeOk(@ModelAttribute NotepadDto notepadDto) {
+    public String writeOk(@RequestBody NotepadDto notepadDto) {
         // TO-DO
         log.info("{}", notepadDto);
 
-
+        return "redirect:/notepad/admin/list";
     }
 
     private String getPageInfoAndGoView(Model model, Page<NotepadDto> notepads, String view) {
