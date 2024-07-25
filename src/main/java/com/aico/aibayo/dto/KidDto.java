@@ -27,15 +27,15 @@ public class KidDto {
 
     public static KidDto toDto(KidEntity entity) {
         return new KidDto(
-                entity.getKidNo(),
-                entity.getKinderNo(),
-                entity.getKidName(),
-                entity.getKidBirth(),
-                entity.getKidGender(),
-                entity.getAdmissionDate(),
-                entity.getModifyDate(),
-                entity.getDischargeDate(),
-                entity.getDischargeFlag()
+            entity.getKidNo(),
+            entity.getKinderNo(),
+            entity.getKidName(),
+            entity.getKidBirth(),
+            entity.getKidGender(),
+            entity.getAdmissionDate(),
+            entity.getModifyDate(),
+            entity.getDischargeDate(),
+            entity.getDischargeFlag()
         );
     }
 }

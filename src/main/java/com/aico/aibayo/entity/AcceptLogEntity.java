@@ -32,5 +32,7 @@ public class AcceptLogEntity {
     private LocalDateTime acceptDeleteDate;
     @Column(name = "accept_delete_flag")
     private String acceptDeleteFlag;
+    @Column(name = "kinder_no")
+    private String kinderNo;
 
 }
