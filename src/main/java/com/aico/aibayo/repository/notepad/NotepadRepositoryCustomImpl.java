@@ -51,16 +51,18 @@ public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
                         member.id,
                         member.name,
                         member.kinderNo,
-                        notepad.notepadNo))
+                        notepad.notepadNo,
+                        notepad.notepadDate))
                 .from(notepad)
                 .join(board).on(board.boardNo.eq(notepad.boardNo))
                 .join(member).on(board.writer.eq(member.id))
                 .where(
                         getInvisibleFlagEq(board),
                         getKinderNoEq(condition.getKinderNo(), member),
-                        getBoardRegDateEq(condition.getBoardRegDate(), board)
+//                        getBoardRegDateEq(condition.getBoardRegDate(), board),
+                        getNotepadDateEq(condition.getNotepadDate())
                 )
-                .orderBy(board.boardRegDate.desc())
+                .orderBy(notepad.notepadDate.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
@@ -103,7 +105,8 @@ public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
                         member.id,
                         member.name,
                         member.kinderNo,
-                        notepad.notepadNo))
+                        notepad.notepadNo,
+                        notepad.notepadDate))
                 .from(notepad)
                 .join(board).on(board.boardNo.eq(notepad.boardNo))
                 .join(member).on(board.writer.eq(member.id))
@@ -116,9 +119,10 @@ public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
                         getKidNoEq(condition.getKidNo()),
                         isValidAcceptStatus(),
                         isValidKid(),
-                        getBoardRegDateEq(condition.getBoardRegDate(), board)
+//                        getBoardRegDateEq(condition.getBoardRegDate(), board),
+                        getNotepadDateEq(condition.getNotepadDate())
                 )
-                .orderBy(board.boardRegDate.desc())
+                .orderBy(notepad.notepadDate.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
@@ -136,7 +140,8 @@ public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
                         getKidNoEq(condition.getKidNo()),
                         isValidAcceptStatus(),
                         isValidKid(),
-                        getBoardRegDateEq(condition.getBoardRegDate(), board)
+//                        getBoardRegDateEq(condition.getBoardRegDate(), board),
+                        getNotepadDateEq(condition.getNotepadDate())
                 );
 
         return PageableExecutionUtils.getPage(notepads, pageable, count::fetchOne);
@@ -158,6 +163,7 @@ public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
                         member.name,
                         member.kinderNo,
                         notepad.notepadNo,
+                        notepad.notepadDate,
                         notepad.hasLifeRecord,
                         lifeRecord.mood,
                         lifeRecord.health,
@@ -166,11 +172,15 @@ public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
                         lifeRecord.sleepTime,
                         lifeRecord.defecationStatus))
                 .from(notepad)
-                .join(board).on(board.boardNo.eq(notepad.notepadNo))
+                .join(board).on(board.boardNo.eq(notepad.boardNo))
                 .join(member).on(member.id.eq(board.writer))
                 .leftJoin(lifeRecord).on(notepad.notepadNo.eq(lifeRecord.notepadNo))
                 .where(notepad.notepadNo.eq(notepadNo))
                 .fetchOne();
+    }
+
+    private BooleanExpression getNotepadDateEq(LocalDate notepadDate) {
+        return notepadDate == null ? null : notepad.notepadDate.eq(notepadDate);
     }
 
     private BooleanExpression isValidKid() {

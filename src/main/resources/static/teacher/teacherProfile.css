@@ -73,6 +73,22 @@
   -webkit-box-orient: vertical;
 }
 
+.container .button-approve {
+  display: flex;
+  width: 80px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0px 16px;
+  position: relative;
+  /*background-color: #ffe668;*/
+  border-radius: 8px;
+  text-decoration-line : none;
+  border: none !important;
+  font-weight: 500;
+}
+
 .container .buttons {
   display: flex;
   width: 156px;
@@ -104,7 +120,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 15px;
   position: relative;
   align-self: stretch;
   width: 100%;
@@ -112,12 +127,23 @@
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-color: #d3d4d4;
+  padding-bottom: 20px;
+}
+
+.container .div-3 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
 }
 
 .container .div-wrapper-2 {
   display: inline-flex;
   height: 50px;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
   position: relative;
 }
@@ -142,16 +168,16 @@
 
 .container .inputarea {
   display: flex;
-  height: 65px;
+  height: fit-content;
   align-items: center;
   align-self: stretch;
   width: 100%;
   gap: 10px;
-  padding: 10px 0px;
   position: relative;
   background-color: #ffffff;
   border-radius: 10px;
   overflow: hidden;
+  padding: 5px 0px 20px;
 }
 
 .container .text-wrapper-8 {
@@ -182,21 +208,31 @@
   width: 100%;
 }
 
+.container .selectedclasses {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 5px 0px 20px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
 .container .title-class {
   display: inline-flex;
   height: 50px;
-  align-items: center;
+  align-items: flex-start;
+  gap: 10px;
   position: relative;
+  justify-content: space-between;
   width: 100%;
-  gap: 5px;
-  align-self: stretch;
+}
 
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 8px 0px;
-  position: relative;
-  /* flex: 0 0 auto; */
+.container .title-class-text {
+  display: flex;
 }
 
 .container .text-wrapper-9 {
@@ -316,14 +352,6 @@
 .container .textarea {
   gap: 5px;
   padding: 10px 0px;
-  display: inline-flex;
-  align-items: center;
-  position: relative;
-  flex: 0 0 auto;
-}
-
-.container .div-3 {
-  justify-content: center;
   display: inline-flex;
   align-items: center;
   position: relative;

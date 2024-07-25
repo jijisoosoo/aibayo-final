@@ -1,5 +1,6 @@
 package com.aico.aibayo.control;
 
+import com.aico.aibayo.common.BoardTypeEnum;
 import com.aico.aibayo.dto.ClassDto;
 import com.aico.aibayo.dto.KidDto;
 import com.aico.aibayo.dto.notepad.NotepadDto;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Slf4j
@@ -99,26 +101,44 @@ public class NotepadController {
 
     @GetMapping("/admin/write")
     public String writeForm(Model model) {
+        // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
 //        int roleNo = 1;
+//        Long id = 2L;
+        Long kinderNo = 1L;
+
         int roleNo = 2;
+        Long id = 31L;
+
+
         List<ClassDto> classDtos = new ArrayList<>();
         List<KidDto> kidDtos = new ArrayList<>();
 
         if (roleNo < 2) { // 사이트 관리자/원장
-            Long kinderNo = 1L;
             classDtos = classService.getByKinderNo(kinderNo);
             kidDtos = kidService.getByKinderNo(kinderNo);
 
         } else if (roleNo == 2) { // 교사
-            Long id = 31L;
             classDtos = classService.getByMemberId(id);
             kidDtos = kidService.getByMemberId(id);
         }
 
+        HashMap<String, Object> notepadInfo = new HashMap<>();
+        notepadInfo.put("boardType", BoardTypeEnum.NOTEPAD.getNum());
+        notepadInfo.put("writer", id);
+
         model.addAttribute("classDtos", classDtos);
         model.addAttribute("kidDtos", kidDtos);
+        model.addAttribute("notepadInfo", notepadInfo);
 
         return "/notepad/admin/writeForm";
+    }
+
+    @PostMapping("/writeOk")
+    @ResponseBody
+    public void writeOk(@RequestBody NotepadDto notepadDto) {
+        // TO-DO
+        log.info("{}", notepadDto);
+        notepadService.insertNotepad(notepadDto);
     }
 
     private String getPageInfoAndGoView(Model model, Page<NotepadDto> notepads, String view) {

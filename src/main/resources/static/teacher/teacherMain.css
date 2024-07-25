@@ -1,8 +1,8 @@
 .container .title {
   display: inline-flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: space-between;
   gap: 10px;
   position: relative;
   flex: 0 0 auto;
@@ -17,19 +17,26 @@
   color: #000000;
   font-size: var(--font-selected-menu-font-size);
   letter-spacing: var(--font-selected-menu-letter-spacing);
-  line-height: var(--font-selected-menu-line-height);
+  /*line-height: var(--font-selected-menu-line-height);*/
   font-style: var(--font-selected-menu-font-style);
 }
 
 .container .buttons {
   display: flex;
   align-items: center;
-  justify-content: space-between !important;
+  justify-content: flex-end !important;
   position: relative;
   align-self: stretch;
   width: 100%;
   flex: 0 0 auto;
 }
+
+.container .select-textarea {
+  display: flex;
+  gap: 15px;
+  height: 50px;
+}
+
 
 .container .dropdown-class {
   display: flex;
@@ -186,6 +193,7 @@
   align-self: stretch;
   width: 100%;
   flex: 0 0 auto;
+  justify-content: space-between;
 }
 
 .container .icon {
@@ -321,6 +329,22 @@
   -webkit-box-orient: vertical;
 }
 
+.container .button-approve {
+  display: flex;
+  width: 60px;
+  height: 35px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0px 16px;
+  position: relative;
+  /*background-color: #ffe668;*/
+  border-radius: 8px;
+  text-decoration-line : none;
+  border: none !important;
+  font-size: 14px;
+}
+
 .container .text-wrapper-12 {
   position: relative;
   /*font-family: "Inter-Medium", Helvetica;*/
@@ -336,6 +360,29 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
+
+.container .button-cancel-mini {
+  display: flex;
+  width: 60px;
+  height: 35px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0px 16px;
+  position: relative;
+  background-color: white;
+  border-radius: 8px;
+  text-decoration-line : none;
+  border: 1px solid #b0b0b0 !important;
+  font-size: 14px;
+  color: #b0b0b0;
+}
+
+.container .button-cancel-mini:hover {
+  background-color: #b0b0b0;
+  color: white;
+}
+
 
 :root {
   --x-1: rgba(133, 199, 233, 1);

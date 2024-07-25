@@ -74,7 +74,12 @@
     height: 100px;
     border-bottom: 1px rgb(195 195 195 / 30%) solid;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.datepicker_msg {
+    margin-left: 55px;
 }
 
 /* .class_50 { left: 36px; top: 27px; position: absolute; color: black; font-size: 40px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
@@ -256,4 +261,14 @@
 
 .sleeptime-text {
     font-size: 16px;
+}
+
+.msg {
+    color: red;
+    display: none;
+}
+
+.msg_box {
+    display: flex;
+    gap: 10px;
 }
