@@ -4,14 +4,12 @@ import com.aico.aibayo.common.AcceptStatusEnum;
 import com.aico.aibayo.common.BooleanEnum;
 import com.aico.aibayo.dto.announce.AnnounceDto;
 import com.aico.aibayo.dto.announce.AnnounceSearchCondition;
-import com.aico.aibayo.dto.notepad.NotepadSearchCondition;
 import com.aico.aibayo.entity.*;
 import com.aico.aibayo.service.announce.AnnounceService;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import jakarta.persistence.criteria.Fetch;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,37 +30,37 @@ public class AnnounceRepositoryCustomImpl implements AnnounceRepositoryCustom {
     private final QAcceptLogEntity acceptLog=QAcceptLogEntity.acceptLogEntity;
     private final QCommentEntity comment = QCommentEntity.commentEntity;
 
-
-
     @Override
     public AnnounceDto findByAnnounceNo(Long announceNo) {
         return jpaQueryFactory
                 .select(Projections.constructor(AnnounceDto.class,
-                    board.boardNo,
-                    board.boardType,
-                    board.writer,
-                    board.boardTitle,
-                    board.boardContents,
-                    board.invisibleFlag,
-                    board.boardRegDate,
-                    member.id,
-                    member.name,
-                    announce.announceNo,
-                    announce.announcePrimary,
-                    announce.announceType,
-                    announce.canComment,
-                    comment.commentGroupNo,
-                    comment.commentRegDate,
-                    comment.commentWriter,
-                    comment.commentClass,
-                    comment.commentDeleteFlag,
-                    comment.invisibleFlag
+                        announce.announceType,
+                        announce.announceNo,
+                        announce.announcePrimary,
+                        announce.canComment,
+                        board.boardType,
+                        board.boardNo,
+                        board.writer,
+                        board.boardContents,
+                        board.boardTitle,
+                        board.invisibleFlag,
+                        board.boardRegDate,
+                        member.roleNo,
+                        member.id,
+                        member.name,
+                        comment.commentGroupNo,
+                        comment.commentRegDate,
+                        comment.commentWriter,
+                        comment.commentClass,
+                        comment.commentContent,
+                        comment.commentDeleteFlag
                 ))
                 .from(announce)
                 .join(board).on(board.boardNo.eq(announce.boardNo))
                 .join(member).on(board.writer.eq(member.id))
-                .join(comment).on(comment.boardNo.eq(board.boardNo))
+                .leftJoin(comment).on(comment.boardNo.eq(board.boardNo))
                 .leftJoin(member).on(member.id.eq(comment.commentWriter))
+                .where(announce.announceNo.eq(announceNo))
                 .fetchOne();
 
     }

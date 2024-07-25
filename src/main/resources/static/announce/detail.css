@@ -279,7 +279,8 @@
   background-color: #ffffff;
   display: flex;
   gap: 10px;
-  height: 340px;
+  height: fit-content;
+  min-height: 300px;
   padding: 20px;
   position: relative;
   width: 100%;

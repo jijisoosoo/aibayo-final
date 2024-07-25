@@ -70,16 +70,16 @@
                     <table class="table" id="table">
                         <tr>
                             <th>글 번호</th>
-                            <th>중요</th>
+<!--                            <th>중요</th>-->
                             <th>말머리</th>
                             <th>제목</th>
                             <th>작성자</th>
                             <th>작성일</th>
                             <th>댓글</th>
                         </tr>
-                        <tr class="announce" th:each="announce : ${primaryAnnounces}" th:object="${announce}" onclick="location.href='/announce/admin/detail';">
+                        <tr class="announce" th:each="announce : ${primaryAnnounces}" th:object="${announce}" th:onclick="|location.href='/announce/admin/${announce.announceNo}'|">
                             <td th:text="*{boardNo}"></td>
-                            <td th:text="*{announcePrimary}"></td>
+<!--                            <td th:text="*{announcePrimary}"></td>-->
                             <td>
                                 <span th:if="${announce.announceType == 0}">선생님만</span>
                                 <span th:if="${announce.announceType == 1}">원 공지</span>
@@ -92,9 +92,10 @@
                             <td th:text="*{#temporals.format(boardRegDate, 'yyyy년 MM월 dd일')}">2024.07.11.</td>
                             <td>0</td>
                         </tr>
+
                         <tr class="announce" th:each="announce : ${announces}" th:object="${announce}" onclick="location.href='/announce/admin/detail';">
                             <td th:text="*{boardNo}"></td>
-                            <td th:text="*{announcePrimary}"></td>
+<!--                            <td th:text="*{announcePrimary}"></td>-->
                             <td>
                                 <span th:if="${announce.announceType == 0}">선생님만</span>
                                 <span th:if="${announce.announceType == 1}">원 공지</span>
