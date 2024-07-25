@@ -10,7 +10,9 @@ import java.util.HashMap;
 
 @Service
 public interface AnnounceService {
-    Page<AnnounceDto>findAllByKinderNo(AnnounceSearchCondition condition, HashMap<String, Object> hashMap);
+    Page<AnnounceDto>findAllByKinderNoList(AnnounceSearchCondition condition, HashMap<String, Object> hashMap);
+    Page<AnnounceDto>findAllByKinderNoCard(AnnounceSearchCondition condition, HashMap<String, Object> hashMap);
+
     AnnounceDto findByAnnounceNo(Long announceNo);
 
 
