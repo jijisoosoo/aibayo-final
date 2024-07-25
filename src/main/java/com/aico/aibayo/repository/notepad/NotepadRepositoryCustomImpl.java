@@ -63,7 +63,7 @@ public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
 //                        getBoardRegDateEq(condition.getBoardRegDate(), board),
                         getNotepadDateEq(condition.getNotepadDate())
                 )
-                .orderBy(notepad.notepadDate.desc())
+                .orderBy(board.boardRegDate.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
