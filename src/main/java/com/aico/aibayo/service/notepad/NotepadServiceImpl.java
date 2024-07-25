@@ -122,19 +122,22 @@ public class NotepadServiceImpl implements NotepadService {
         assert notepadEntity != null;
         notepadEntity.setNotepadDate(notepadDto.getNotepadDate());
 
-        notepadRepository.save(notepadEntity);
+        NotepadEntity modifiedNotepad = notepadRepository.save(notepadEntity);
 
-        LifeRecordEntity lifeRecordEntity =
-                lifeRecordRepository.findById(notepadDto.getNotepadNo()).orElse(null);
-        assert lifeRecordEntity != null;
-        lifeRecordEntity.setMood(notepadDto.getMood());
-        lifeRecordEntity.setHealth(notepadDto.getHealth());
-        lifeRecordEntity.setTemperature(notepadDto.getTemperature());
-        lifeRecordEntity.setMeal(notepadDto.getMeal());
-        lifeRecordEntity.setSleepTime(notepadDto.getSleepTime());
-        lifeRecordEntity.setDefecationStatus(notepadDto.getDefecationStatus());
+        if (modifiedNotepad.getHasLifeRecord().equals(BooleanEnum.TRUE.getBool())) {
 
-        lifeRecordRepository.save(lifeRecordEntity);
+            LifeRecordEntity lifeRecordEntity =
+                    lifeRecordRepository.findById(notepadDto.getNotepadNo()).orElse(null);
+            assert lifeRecordEntity != null;
+            lifeRecordEntity.setMood(notepadDto.getMood());
+            lifeRecordEntity.setHealth(notepadDto.getHealth());
+            lifeRecordEntity.setTemperature(notepadDto.getTemperature());
+            lifeRecordEntity.setMeal(notepadDto.getMeal());
+            lifeRecordEntity.setSleepTime(notepadDto.getSleepTime());
+            lifeRecordEntity.setDefecationStatus(notepadDto.getDefecationStatus());
+
+            lifeRecordRepository.save(lifeRecordEntity);
+        }
     }
 
     @Override
