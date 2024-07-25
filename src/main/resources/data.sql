@@ -1532,11 +1532,11 @@ INSERT INTO notepad_receiver(notepad_no, class_no, kid_no) VALUES(200,20,null);
 
 #--------------------------------------------------------announce---------------------------------------------------------
 INSERT INTO announce (board_no, announce_type, announce_primary, can_comment) VALUES
-                                                                                  (230,0,'0','0'),
+                                                                                  (230,0,'1','0'),
                                                                                   (231,0,'1','0'),
-                                                                                  (232,0,'0','0'),
-                                                                                  (233,0,'0','0'),
-                                                                                  (234,0,'0','0'),
+                                                                                  (232,0,'1','0'),
+                                                                                  (233,0,'1','0'),
+                                                                                  (234,0,'1','0'),
                                                                                   (235,0,'0','0'),
                                                                                   (236,0,'0','0'),
                                                                                   (237,0,'0','0'),
@@ -2099,7 +2099,7 @@ INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(19,51,19
 INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(20,52,199);
 INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(20,53,200);
 
-INSERT INTO comment (comment_writer,commnet_group_no , board_no, comment_reg_date, comment_class, comment_content, comment_delete_flag, invisible_flag)
+INSERT INTO comment (comment_writer,comment_group_no , board_no, comment_reg_date, comment_class, comment_content, comment_delete_flag, invisible_flag)
 VALUES
     (8, 1, 260, '2024-02-20', '0', '저는 그날 연차인데 어떻게 하나요?', '0', '0'),
     (2, 1, 260, '2024-02-21 14:00:30', '1', '모든 전 교사 워크샵 필참입니다.', '0', '0'),

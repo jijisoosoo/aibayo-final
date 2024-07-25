@@ -22,10 +22,29 @@ import java.util.Objects;
 public class AnnounceServiceImpl implements AnnounceService {
     private final AnnounceRepository announceRepository;
     private static final int PAGE_SIZE_CARD = 6;
-    private static final int PAGE_SIZE_LIST = 20;
+    private static final int PAGE_SIZE_LIST = 15;
+    private static final int PAGE_SIZE_PRIMARY = 5;
 
     @Override
-    public Page<AnnounceDto> findAllByKinderNo(AnnounceSearchCondition condition, HashMap<String, Object>hashMap) {
+    public Page<AnnounceDto> findAllByKinderNoList(AnnounceSearchCondition condition, HashMap<String, Object>hashMap) {
+        int page = (int) hashMap.get("page");
+        String type = (String) hashMap.get("type");
+        int pagesize=0;
+        if(type.equals("card")){
+            pagesize=PAGE_SIZE_CARD;
+        }else if(type.equals("list")){
+            pagesize=PAGE_SIZE_LIST;
+        }else if(type.equals("listPrimary")) {
+            pagesize = PAGE_SIZE_PRIMARY;
+        }
+
+
+        Pageable pageable = PageRequest.of(page - 1, pagesize);
+        return announceRepository.findAllByKinderNoList(condition,pageable);
+    }
+
+    @Override
+    public Page<AnnounceDto> findAllByKinderNoCard(AnnounceSearchCondition condition, HashMap<String, Object> hashMap) {
         int page = (int) hashMap.get("page");
         String type = (String) hashMap.get("type");
         int pagesize=0;
@@ -35,7 +54,7 @@ public class AnnounceServiceImpl implements AnnounceService {
             pagesize=PAGE_SIZE_LIST;
         }
         Pageable pageable = PageRequest.of(page - 1, pagesize);
-        return announceRepository.findAllByKinderNo(condition,pageable);
+        return announceRepository.findAllByKinderNoCard(condition,pageable);
     }
 
 

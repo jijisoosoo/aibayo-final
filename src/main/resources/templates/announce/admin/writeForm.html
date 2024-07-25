@@ -17,29 +17,6 @@
         <form action="#">
             <div class="frame">
                 <div class="c">
-                    <div class="a">
-                        <div class="frame-2">
-                            <div class="element-dropdown">
-                                <select class="category" >
-                                    <option selected>말머리</option>
-                                    <option value="category1">선생님만</option>
-                                    <option value="category2">원 공지</option>
-                                    <option value="category3">안내</option>
-                                    <option value="category4">일정/행사</option>
-                                    <option value="category5">교육</option>
-                                    <option value="category6">보육료</option>
-                                </select>
-                            </div>
-                            <div class="element-dropdown">
-                                <select class="class" >
-                                    <option selected>반 선택</option>
-                                    <option value="class1">해바라기반</option>
-                                    <option value="class2">장미반</option>
-                                    <option value="class3">소나무반</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
                     <div class="b">
                         <div class="div">
                             <a href="/announce/admin/card" class="element-secondary-button">
@@ -49,12 +26,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="frame-5">
+                <div class="header">
+                    <div class="frame-2">
+                        <div class="element-dropdown">
+                            <select class="category" >
+                                <option selected>말머리</option>
+                                <option value="category1">선생님만</option>
+                                <option value="category2">원 공지</option>
+                                <option value="category3">안내</option>
+                                <option value="category4">일정/행사</option>
+                                <option value="category5">교육</option>
+                                <option value="category6">보육료</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="element-input-field">
                         <input type="text" class="label-2" name="title" id="title" placeholder="제목을 입력해주세요">
                     </div>
                 </div>
-
                 <div class="element-input-field-wrapper">
                     <div class="label-wrapper">
                         <textarea name="content" class="summernote" id="content"></textarea>
@@ -66,8 +55,8 @@
                         <div class="frame-4">
                             <div class="text-wrapper-2">댓글 허용</div>
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" role="switch" id="cancomment" checked>
-                                <label class="form-check-label" for="cancomment"></label>
+                                <input class="form-check-input" type="checkbox" role="switch" id="comment" checked>
+                                <label class="form-check-label" for="comment"></label>
                             </div>
                         </div>
                     </div>
