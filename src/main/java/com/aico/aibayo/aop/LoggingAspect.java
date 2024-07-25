@@ -69,9 +69,13 @@ public class LoggingAspect {
     public void logAfterReturning(Object result) {
         if (result instanceof Collection) {
             Collection<?> collection = (Collection<?>) result;
+            log.info(">>>>>>>>>>>>>>>>>>>>return entities");
             collection.forEach(entity -> log.info("\n{}", entity.toString()));
+            log.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         } else if (result != null) {
+            log.info(">>>>>>>>>>>>>>>>>>>>return entity");
             log.info("{}", result);
+            log.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         }
     }
 }

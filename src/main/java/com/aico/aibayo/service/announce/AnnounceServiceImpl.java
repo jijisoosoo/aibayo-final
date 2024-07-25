@@ -56,10 +56,8 @@ public class AnnounceServiceImpl implements AnnounceService {
         Pageable pageable = PageRequest.of(page - 1, pagesize);
         return announceRepository.findAllByKinderNoCard(condition,pageable);
     }
-
-
     @Override
     public AnnounceDto findByAnnounceNo(Long announceNo) {
-        return null;
+        return announceRepository.findByAnnounceNo(announceNo);
     }
 }

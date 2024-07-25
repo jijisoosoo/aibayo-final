@@ -29,12 +29,20 @@ public class NotepadController {
     private final ClassService classService;
     private final KidService kidService;
 
+    // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
+    private int roleNo = 1;
+    private Long id = 2L;
+    private Long kinderNo = 1L;
+
+//    private int roleNo = 2;
+//    private Long id = 31L;
+
     @GetMapping("/admin/list")
     public String adminList(@RequestParam(defaultValue = "1") int page, Model model) {
         // 역할에 따라 사용자/관리자 구분하여 이동
         // 사용자의 유치원번호의 사용자가 등록한 모든 알림장 조회
         NotepadSearchCondition condition = new NotepadSearchCondition();
-        condition.setKinderNo(1L);
+        condition.setKinderNo(kinderNo);
 
         model.addAttribute("kinderNo", 1L);
 
@@ -58,7 +66,7 @@ public class NotepadController {
     @GetMapping("/user/list")
     public String userList(@RequestParam(defaultValue = "1") int page, Model model) {
         NotepadSearchCondition condition = new NotepadSearchCondition();
-        condition.setKidNo(1L);
+        condition.setKidNo(kinderNo);
 
         model.addAttribute("kidNo", 1L);
 
@@ -82,13 +90,6 @@ public class NotepadController {
     @GetMapping("/admin/{notepadNo}")
     public String adminDetail(@PathVariable Long notepadNo, Model model) {
         // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
-//        int roleNo = 1;
-//        Long id = 2L;
-        Long kinderNo = 1L;
-
-        int roleNo = 2;
-        Long id = 31L;
-
         HashMap<String, Object> memberDto = new HashMap<>();
         memberDto.put("roleNo", roleNo);
         memberDto.put("id", id);
@@ -108,17 +109,9 @@ public class NotepadController {
         return "/notepad/user/detail";
     }
 
-    // 나중에는 post(put)로
     @GetMapping("/admin/modify/{notepadNo}")
     public String modifyForm(@PathVariable Long notepadNo, Model model) {
         // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
-//        int roleNo = 1;
-//        Long id = 2L;
-        Long kinderNo = 1L;
-
-        int roleNo = 2;
-        Long id = 31L;
-
         HashMap<String, Object> memberDto = new HashMap<>();
         memberDto.put("roleNo", roleNo);
         memberDto.put("id", id);
@@ -131,16 +124,16 @@ public class NotepadController {
         return "/notepad/admin/modifyForm";
     }
 
+    @PutMapping("/modifyOk")
+    @ResponseBody
+    public void modify(@RequestBody NotepadDto notepadDto) {
+        log.info("modify: {}", notepadDto);
+        notepadService.updateNotepad(notepadDto);
+    }
+
     @GetMapping("/admin/write")
     public String writeForm(Model model) {
         // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
-//        int roleNo = 1;
-//        Long id = 2L;
-        Long kinderNo = 1L;
-
-        int roleNo = 2;
-        Long id = 31L;
-
         List<ClassDto> classDtos = new ArrayList<>();
         List<KidDto> kidDtos = new ArrayList<>();
 
@@ -168,9 +161,15 @@ public class NotepadController {
     @PostMapping("/writeOk")
     @ResponseBody
     public void writeOk(@RequestBody NotepadDto notepadDto) {
-        // TO-DO
-        log.info("{}", notepadDto);
+        log.info("create: {}", notepadDto);
         notepadService.insertNotepad(notepadDto);
+    }
+
+    @DeleteMapping("/delete")
+    @ResponseBody
+    public void delete(@RequestBody NotepadDto notepadDto) {
+        log.info("delete: {}", notepadDto);
+        notepadService.deleteNotepad(notepadDto);
     }
 
     private String getPageInfoAndGoView(Model model, Page<NotepadDto> notepads, String view) {
