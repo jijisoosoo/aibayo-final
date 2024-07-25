@@ -6,10 +6,12 @@
 <title layout:fragment="title">알림장</title>
 
 <th:block layout:fragment="css">
+    <th:block th:replace="~{/common/sweetalert2 :: css}"/>
     <link rel="stylesheet" href="/notepad/form.css" />
 </th:block>
 
 <th:block layout:fragment="javascript">
+    <th:block th:replace="~{/common/sweetalert2 :: js}"/>
     <script src="/notepad/detail.js"></script>
 </th:block>
 
@@ -42,6 +44,8 @@
             <div class="notepad_detail_top_btn">
                 <input type="button"
                        class="btn btn-danger btn_box btn_text"
+                       id="deleteBtn"
+                       th:data-board-no="${notepad.boardNo}"
                        value="삭제">
             </div>
 

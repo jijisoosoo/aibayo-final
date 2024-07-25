@@ -6,15 +6,16 @@
 <title layout:fragment="title">알림장</title>
 
 <th:block layout:fragment="css">
-<link href="/vendor/datepicker-dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
-<link rel="stylesheet" href="/notepad/form.css" />
+    <th:block th:replace="~{/common/datepicker :: css}"/>
+    <th:block th:replace="~{/common/sweetalert2 :: css}"/>
+    <link rel="stylesheet" href="/notepad/form.css" />
 </th:block>
 
 <th:block layout:fragment="javascript">
-<script src="/vendor/datepicker-dist/js/bootstrap-datepicker.min.js"></script>
-<script src="/vendor/datepicker-dist/js/bootstrap-datepicker.ko.min.js"></script>
-<script src="/common/datepicker.js"></script>
-<script src="/notepad/modifyForm.js"></script>
+    <th:block th:replace="~{common/datepicker :: js}"/>
+    <th:block th:replace="~{/common/sweetalert2 :: js}"/>
+    <script src="/notepad/notepad.js"></script>
+    <script src="/notepad/modifyForm.js"></script>
 </th:block>
 
 
@@ -31,12 +32,13 @@
         <div class="notepad_detail_top_btn_box">
 
             <div class="notepad_detail_top_btn">
-                <a href="/notepad/admin/detail" class="btn btn-secondary btn_box btn_text" alt="취소">취소</a>
+                <a th:href="@{|/notepad/admin/${notepadNo}|}" class="btn btn-secondary btn_box btn_text" alt="취소">취소</a>
             </div>
 
             <div class="notepad_detail_top_btn">
                 <input type="button"
                        class="btn btn-ab btn_box btn_text"
+                       id="modifyBtn"
                        value="수정">
             </div>
 
@@ -45,38 +47,55 @@
     </div>
 
 
-    <div class="notepad_detail_content">
+    <div class="notepad_detail_content" th:object="${notepad}">
 
         <div class="notepad_detail_content_date_box">
             <input type="text"
                    class="form-control notepad_detail_content_date date_input_box date_input_text datepicker"
-                   placeholder="연도. 월. 일" readonly>
+                   placeholder="연도. 월. 일"
+                   th:value="*{#temporals.format(notepadDate, 'YYYY.MM.dd')}" readonly>
         </div>
 
 
-        <div class="notepad_detail_content_body">
+        <div class="notepad_detail_content_body"
+             id="modifyForm" th:object="${notepad}"
+             th:data-board-no="*{boardNo}"
+             th:data-notepad-no="*{notepadNo}"
+             data-board-contents
+             data-has-life-record
+             data-notepad-date
+             data-mood data-health data-temperature
+             data-meal data-sleep-time data-defecation-status>
 
             <div class="item_group sender_group">
 
                 <div class="item_title">알림 수신자</div>
 
                 <select class="form-select item_modify_box sender_text" disabled>
-                    <option value="1" selected>김원생</option>
-                    <option value="2">이원생</option>
-                    <option value="3">박원생</option>
+
+                    <option th:if="*{kidNo}"
+                            th:value="*{kidNo}" th:text="*{kidName}" selected></option>
+
+                    <option th:if="*{classNo}"
+                            th:value="*{classNo}" th:text="*{className}" selected></option>
+
                 </select>
 
             </div>
 
             <div class="item_group content_group">
 
-                <div class="item_title">내용</div>
+                <div class="msg_box">
+                    <div class="item_title">내용</div>
+                    <div class="msg">내용은 공란일 수 없습니다.</div>
+                </div>
 
-                <div class="notepad_detail_content_body_text summernote"></div>
+                <div class="notepad_detail_content_body_text summernote"
+                     th:data-board-contents="*{boardContents}"></div>
 
             </div>
 
-            <div class="liferecord">
+            <div class="liferecord" th:if="*{hasLifeRecord == '1'}">
 
                 <div class="liferecord_title">생활기록</div>
 
@@ -85,16 +104,17 @@
 
                     <div class="liferecord_item_box mood-box">
 
-                        <div class="liferecord_item_title mood-title">기분</div>
+                        <div class="liferecord_item_title mood-title"
+                             th:data-mood="*{mood}">기분</div>
 
                         <div class="btn-group" role="group">
-                            <input type="radio" class="btn-check" name="mood" id="mood1" autocomplete="off" checked>
+                            <input type="radio" class="btn-check mood" name="mood" id="mood1" value="1" autocomplete="off">
                             <label class="btn btn-outline-ab liferecord_item_text mood-text" for="mood1">좋음</label>
 
-                            <input type="radio" class="btn-check" name="mood" id="mood2" autocomplete="off">
+                            <input type="radio" class="btn-check mood" name="mood" id="mood2" value="2" autocomplete="off">
                             <label class="btn btn-outline-ab liferecord_item_text mood-text" for="mood2">보통</label>
 
-                            <input type="radio" class="btn-check" name="mood" id="mood3" autocomplete="off">
+                            <input type="radio" class="btn-check mood" name="mood" id="mood3" value="3" autocomplete="off">
                             <label class="btn btn-outline-ab liferecord_item_text mood-text" for="mood3">나쁨</label>
                         </div>
 
@@ -102,16 +122,17 @@
 
                     <div class="liferecord_item_box health-box">
 
-                        <div class="liferecord_item_title health-title">건강</div>
+                        <div class="liferecord_item_title health-title"
+                             th:data-health="*{health}">건강</div>
 
                         <div class="btn-group" role="group">
-                            <input type="radio" class="btn-check" name="health" id="health1" autocomplete="off" checked>
+                            <input type="radio" class="btn-check health" name="health" id="health1" value="1" autocomplete="off">
                             <label class="btn btn-outline-ab liferecord_item_text health-text" for="health1">좋음</label>
 
-                            <input type="radio" class="btn-check" name="health" id="health2" autocomplete="off">
+                            <input type="radio" class="btn-check health" name="health" id="health2" value="2" autocomplete="off">
                             <label class="btn btn-outline-ab liferecord_item_text health-text" for="health2">보통</label>
 
-                            <input type="radio" class="btn-check" name="health" id="health3" autocomplete="off">
+                            <input type="radio" class="btn-check health" name="health" id="health3" value="3" autocomplete="off">
                             <label class="btn btn-outline-ab liferecord_item_text health-text" for="health3">나쁨</label>
                         </div>
 
@@ -119,16 +140,17 @@
 
                     <div class="liferecord_item_box temperature-box">
 
-                        <div class="liferecord_item_title temperature-title">체온 체크</div>
+                        <div class="liferecord_item_title temperature-title"
+                             th:data-temperature="*{temperature}">체온 체크</div>
 
                         <div class="btn-group" role="group">
-                            <input type="radio" class="btn-check" name="temperature" id="temperature1" autocomplete="off" checked>
+                            <input type="radio" class="btn-check temperature" name="temperature" id="temperature1" value="1" autocomplete="off">
                             <label class="btn btn-outline-ab liferecord_item_text temperature-text" for="temperature1">정상</label>
 
-                            <input type="radio" class="btn-check" name="temperature" id="temperature2" autocomplete="off">
+                            <input type="radio" class="btn-check temperature" name="temperature" id="temperature2" value="2" autocomplete="off">
                             <label class="btn btn-outline-ab liferecord_item_text temperature-text" for="temperature2">미열</label>
 
-                            <input type="radio" class="btn-check" name="temperature" id="temperature3" autocomplete="off">
+                            <input type="radio" class="btn-check temperature" name="temperature" id="temperature3" value="3" autocomplete="off">
                             <label class="btn btn-outline-ab liferecord_item_text temperature-text" for="temperature3">고열</label>
                         </div>
 
@@ -136,19 +158,20 @@
 
                     <div class="liferecord_item_box meal-box">
 
-                        <div class="liferecord_item_title meal-title">식사 여부</div>
+                        <div class="liferecord_item_title meal-title"
+                             th:data-meal="*{meal}">식사 여부</div>
 
                         <div class="btn-group" role="group">
-                            <input type="radio" class="btn-check" name="meal" id="meal1" autocomplete="off" checked>
+                            <input type="radio" class="btn-check meal" name="meal" id="meal1" value="1" autocomplete="off">
                             <label class="btn btn-outline-ab liferecord_item_text meal-text" for="meal1">정량</label>
 
-                            <input type="radio" class="btn-check" name="meal" id="meal2" autocomplete="off">
+                            <input type="radio" class="btn-check meal" name="meal" id="meal2" value="2" autocomplete="off">
                             <label class="btn btn-outline-ab liferecord_item_text meal-text" for="meal2">많이</label>
 
-                            <input type="radio" class="btn-check" name="meal" id="meal3" autocomplete="off">
+                            <input type="radio" class="btn-check meal" name="meal" id="meal3" value="3" autocomplete="off">
                             <label class="btn btn-outline-ab liferecord_item_text meal-text" for="meal3">적게</label>
 
-                            <input type="radio" class="btn-check" name="meal" id="meal4" autocomplete="off">
+                            <input type="radio" class="btn-check meal" name="meal" id="meal4" value="4" autocomplete="off">
                             <label class="btn btn-outline-ab liferecord_item_text meal-text" for="meal4">안했음</label>
                         </div>
 
@@ -156,22 +179,23 @@
 
                     <div class="liferecord_item_box sleeptime-box">
 
-                        <div class="liferecord_item_title sleeptime-title">수면시간</div>
+                        <div class="liferecord_item_title sleeptime-title"
+                             th:data-sleep-time="*{sleepTime}">수면시간</div>
 
                         <div class="btn-group" role="group">
-                            <input type="radio" class="btn-check" name="sleeptime" id="sleeptime1" autocomplete="off" checked>
+                            <input type="radio" class="btn-check sleeptime" name="sleeptime" id="sleeptime1" value="1" autocomplete="off">
                             <label class="btn btn-outline-ab liferecord_item_text sleeptime-text" for="sleeptime1">잠을 안 잤어요</label>
 
-                            <input type="radio" class="btn-check" name="sleeptime" id="sleeptime2" autocomplete="off">
+                            <input type="radio" class="btn-check sleeptime" name="sleeptime" id="sleeptime2" value="2" autocomplete="off">
                             <label class="btn btn-outline-ab liferecord_item_text sleeptime-text" for="sleeptime2">1시간 미만</label>
 
-                            <input type="radio" class="btn-check" name="sleeptime" id="sleeptime3" autocomplete="off">
+                            <input type="radio" class="btn-check sleeptime" name="sleeptime" id="sleeptime3" value="3" autocomplete="off">
                             <label class="btn btn-outline-ab liferecord_item_text sleeptime-text" for="sleeptime3">1시간~1시간 30분</label>
 
-                            <input type="radio" class="btn-check" name="sleeptime" id="sleeptime4" autocomplete="off">
+                            <input type="radio" class="btn-check sleeptime" name="sleeptime" id="sleeptime4" value="4" autocomplete="off">
                             <label class="btn btn-outline-ab liferecord_item_text sleeptime-text" for="sleeptime4">1시간 30분~2시간</label>
 
-                            <input type="radio" class="btn-check" name="sleeptime" id="sleeptime5" autocomplete="off">
+                            <input type="radio" class="btn-check sleeptime" name="sleeptime" id="sleeptime5" value="5" autocomplete="off">
                             <label class="btn btn-outline-ab liferecord_item_text sleeptime-text" for="sleeptime5">2시간 이상</label>
                         </div>
 
@@ -179,22 +203,23 @@
 
                     <div class="liferecord_item_box defecation_status-box">
 
-                        <div class="liferecord_item_title defecation_status-title">배변 상태</div>
+                        <div class="liferecord_item_title defecation_status-title"
+                             th:data-defecation-status="*{defecationStatus}">배변 상태</div>
 
                         <div class="btn-group" role="group">
-                            <input type="radio" class="btn-check" name="defecation_status" id="defecation_status1" autocomplete="off" checked>
+                            <input type="radio" class="btn-check defecation_status" name="defecation_status" id="defecation_status1" value="1" autocomplete="off">
                             <label class="btn btn-outline-ab liferecord_item_text defecation_status-text" for="defecation_status1">보통</label>
 
-                            <input type="radio" class="btn-check" name="defecation_status" id="defecation_status2" autocomplete="off">
+                            <input type="radio" class="btn-check defecation_status" name="defecation_status" id="defecation_status2" value="2" autocomplete="off">
                             <label class="btn btn-outline-ab liferecord_item_text defecation_status-text" for="defecation_status2">딱딱함</label>
 
-                            <input type="radio" class="btn-check" name="defecation_status" id="defecation_status3" autocomplete="off">
+                            <input type="radio" class="btn-check defecation_status" name="defecation_status" id="defecation_status3" value="3" autocomplete="off">
                             <label class="btn btn-outline-ab liferecord_item_text defecation_status-text" for="defecation_status3">묽음</label>
 
-                            <input type="radio" class="btn-check" name="defecation_status" id="defecation_status4" autocomplete="off">
+                            <input type="radio" class="btn-check defecation_status" name="defecation_status" id="defecation_status4" value="4" autocomplete="off">
                             <label class="btn btn-outline-ab liferecord_item_text defecation_status-text" for="defecation_status4">설사</label>
 
-                            <input type="radio" class="btn-check" name="defecation_status" id="defecation_status5" autocomplete="off">
+                            <input type="radio" class="btn-check defecation_status" name="defecation_status" id="defecation_status5" value="5" autocomplete="off">
                             <label class="btn btn-outline-ab liferecord_item_text defecation_status-text" for="defecation_status5">안했음</label>
                         </div>
 
