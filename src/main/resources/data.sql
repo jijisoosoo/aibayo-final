@@ -456,6 +456,15 @@ INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,0,'2022-03-02');
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,0,'2022-03-02');
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,0,'2022-03-02');
@@ -465,15 +474,6 @@ INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,0,'
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,0,'2022-03-02');
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,0,'2022-03-02');
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,0,'2022-03-02');
-INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,2,'2022-03-02');
-INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,2,'2022-03-02');
-INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,2,'2022-03-02');
-INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,2,'2022-03-02');
-INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,2,'2022-03-02');
-INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,2,'2022-03-02');
-INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,2,'2022-03-02');
-INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,2,'2022-03-02');
-INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,2,'2022-03-02');
 
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(2,1,'2022-03-02');
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(2,1,'2022-03-02');
