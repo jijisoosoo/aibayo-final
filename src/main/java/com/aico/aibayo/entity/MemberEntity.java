@@ -26,11 +26,11 @@ public class MemberEntity {
     @Column
     private String phone;
     @Column(name = "reg_type")
-    private int regType;
+    private Integer regType;
     @Column(name = "role_no")
-    private int roleNo;
+    private Integer roleNo;
     @Column
-    private int status;
+    private Integer status;
     @Column(name = "reg_date")
     private LocalDateTime regDate;
     @Column(name = "modify_date")

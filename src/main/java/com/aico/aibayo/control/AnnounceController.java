@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -126,8 +127,12 @@ public class AnnounceController {
     public String writeForm(){
         return "/announce/admin/writeForm";
     }
-    @GetMapping("/admin/detail")
-    public String admindetail(){
+    @GetMapping("/admin/{announceNo}")
+    public String admindetail(@PathVariable Long announceNo, Model model){
+        AnnounceDto announceDto = announceService.findByAnnounceNo(announceNo);
+
+        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>announceDto>>>>>{}",announceDto);
+        model.addAttribute("announce",announceDto);
         return "/announce/admin/detail";
     }
     @GetMapping("/admin/modifyForm")

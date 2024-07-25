@@ -14,15 +14,21 @@
 
 <div class="container main_container" layout:fragment="content">
     <form action="">
-        <div class="screen">
+        <div class="screen" th:object="${announce}">
             <div class="frame">
                 <div class="div">
                     <div class="frame-2">
-                        <div class="div-wrapper">
-                            <div class="text-wrapper">[부모 교육]</div>
+                        <div class="text-wrapper">
+                            [
+                            <span th:if="${announce.announceType == 0}">선생님만</span>
+                            <span th:if="${announce.announceType == 1}">원 공지</span>
+                            <span th:if="${announce.announceType == 2}">일정 / 행사</span>
+                            <span th:if="${announce.announceType == 3}">교육</span>
+                            <span th:if="${announce.announceType == 4}">보육료</span>
+                            ]
                         </div>
                         <div class="div-wrapper">
-                            <div class="text-wrapper"> 가족사진 찍으세요 </div>
+                            <div class="text-wrapper" th:text="*{boardTitle}"> 가족사진 찍으세요 </div>
                         </div>
                     </div>
                     <div class="frame-3">
@@ -34,8 +40,12 @@
                             </div>
                             <div class="frame-wrapper">
                                 <div class="frame-5">
-                                    <div class="text-wrapper-2">김원장 원장선생님</div>
-                                    <p class="p">2024년 06월 23일 오후 08:27</p>
+                                    <div class="text-wrapper-2"
+                                    th:text="*{name}"
+                                    >김원장 원장선생님</div>
+                                    <p class="p"
+                                    th:text ="*{#temporals.format(boardRegDate, 'yyyy년 MM월 dd일 a hh:mm')}"
+                                    >2024년 06월 23일 오후 08:27</p>
                                 </div>
                             </div>
                         </a>
@@ -70,18 +80,8 @@
                 </div>
                 <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20141105_159%2Fkbrkjs_1415113969662tMGMt_JPEG%2F17287670_480x427.jpg&type=sc960_832" alt="" srcset="">
                 <div class="frame-10">
-                    <p class="text-wrapper-5">
+                    <p class="text-wrapper-5" th:text="*{boardContents}">
                         여기는 본문입니다 <br />
-                        본문 내용 <br />
-                        어쩌구 저쩌구 <br />
-                        집에 가고싶어
-                        <br />
-                        이;ㄴ이ㅏㄴㅇ
-                        <br />
-                        ㅇ나ㅣㄷ여ㅓㅐ쟈겨 ㅐㅑㅈ러치;ㄴ아ㅔㅐ냐ㅕㅓㄱㄷ에ㅐㄴ어ㅡ나
-                        <br />
-                        ㄹ어 쟈ㅐㅔ어 ㅣㅑ나ㅡㅇ치나ㅓ이ㅏ너이나ㅓ아ㅢ나어ㅣㅑㄷ너랴ㅓㅣㅏ눌ㄴㄷ
-                        <br />러 냐ㅐ여ㅗ냐ㅗㅓㄷ야ㅏ느티ㅏㄴ아ㅣㄷ에자갸ㅐㅓ라ㅣ늘ㅇ치ㅏ너ㅡ이ㅏ너이ㅏ
                     </p>
                 </div>
             </div>
@@ -97,12 +97,6 @@
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <div class="btn">
-                                    <div class="btns">
-                                        <input type="button" value="등록순">
-                                        <input type="button" value="최신순">
-                                    </div>
-                                </div>
                                 <div class="view">
                                     <div class="frame-16">
                                         <div class="rectangle-wrapper">
