@@ -44,6 +44,13 @@ body {
     box-shadow: 0 0 0 .25rem rgba(243, 199, 56, 0.5);
 }
 
+.btn-ab-swal:focus {
+    color: black;
+    background: #FFDB21;
+    border-color: #FFDB21;
+    box-shadow: inherit;
+}
+
 .btn-outline-ab {
     color: black;
     border-color: rgba(0, 0, 0, 0.30);

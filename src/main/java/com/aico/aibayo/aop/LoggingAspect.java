@@ -1,6 +1,8 @@
 package com.aico.aibayo.aop;
 
 import com.aico.aibayo.dto.notepad.NotepadDto;
+
+import java.util.Collection;
 import java.util.List;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -19,6 +21,9 @@ public class LoggingAspect {
     // 특정 서비스 패키지의 모든 메서드를 타겟으로 설정
     @Pointcut("execution(* com.aico.aibayo.service..*(..))")
     public void serviceMethods() {}
+
+    @Pointcut("execution(* com.aico.aibayo.repository..*(..))")
+    public void repositoryMethods() {}
 
     // 메서드가 정상적으로 반환될 때 실행되는 후처리
     @AfterReturning(pointcut = "serviceMethods()", returning = "result")
@@ -51,13 +56,22 @@ public class LoggingAspect {
 
         }
 
-
         if (result instanceof NotepadDto) {
             NotepadDto notepadDto = (NotepadDto) result;
 
             log.info(">>>>>>>>>>>>>>>>>>>>logNotepadInfo");
             log.info(notepadDto.toString());
             log.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+        }
+    }
+
+    @AfterReturning(pointcut = "repositoryMethods()", returning = "result")
+    public void logAfterReturning(Object result) {
+        if (result instanceof Collection) {
+            Collection<?> collection = (Collection<?>) result;
+            collection.forEach(entity -> log.info("\n{}", entity.toString()));
+        } else if (result != null) {
+            log.info("{}", result);
         }
     }
 }

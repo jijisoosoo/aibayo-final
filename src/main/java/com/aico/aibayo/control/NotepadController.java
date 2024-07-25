@@ -134,11 +134,11 @@ public class NotepadController {
     }
 
     @PostMapping("/writeOk")
-    public void writeOk(@ModelAttribute NotepadDto notepadDto) {
+    @ResponseBody
+    public void writeOk(@RequestBody NotepadDto notepadDto) {
         // TO-DO
         log.info("{}", notepadDto);
-
-
+        notepadService.insertNotepad(notepadDto);
     }
 
     private String getPageInfoAndGoView(Model model, Page<NotepadDto> notepads, String view) {
