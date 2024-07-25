@@ -29,11 +29,21 @@ public class AnnounceDto {
     private Integer roleNo;
     private String name;
 
+    private Integer commentGroupNo;
+    private LocalDateTime commentRegDate;
+    private Integer commentWriter;
+    private String commentClass;
+    private String commentContent;
+    private String commentDeleteFlag;
 
     public AnnounceDto(
                 Integer announceType,Long announceNo,String announcePrimary,String canComment,Integer boardType,
                 Long boardNo, Long writer, String boardContents, String boardTitle, String invisibleFlag,
-                LocalDateTime boardRegDate, Integer roleNo, Long id, String name){
+                LocalDateTime boardRegDate, Integer roleNo, Long id, String name
+
+
+
+    ){
             this.announceType=announceType;
             this.announceNo=announceNo;
             this.announcePrimary=announcePrimary;
@@ -48,5 +58,6 @@ public class AnnounceDto {
             this.roleNo=roleNo;
             this.id=id;
             this.name=name;
+
     }
 }
