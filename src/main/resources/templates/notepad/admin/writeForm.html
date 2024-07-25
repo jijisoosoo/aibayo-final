@@ -7,13 +7,12 @@
 
 <th:block layout:fragment="css">
     <th:block th:replace="~{/common/datepicker :: css}"/>
-    <th:block th:replace="~{/common/sweetalert2 :: css}"/>
     <link rel="stylesheet" href="/notepad/form.css" />
 </th:block>
 
 <th:block layout:fragment="javascript">
     <th:block th:replace="~{/common/datepicker :: js}"/>
-    <th:block th:replace="~{/common/sweetalert2 :: js}"/>
+    <script src="/notepad/notepad.js"></script>
     <script src="/notepad/writeForm.js"></script>
 </th:block>
 
@@ -49,6 +48,7 @@
           th:data-board-type="*{get('boardType')}"
           th:data-writer="*{get('writer')}"
           data-board-title data-board-contents
+          th:data-board-kinder-no="*{get('boardKinderNo')}"
           data-has-life-record data-notepad-date
           data-mood data-health data-temperature
           data-meal data-sleep-time data-defecation-status

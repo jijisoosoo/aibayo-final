@@ -48,6 +48,7 @@ public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
                         board.boardContents,
                         board.invisibleFlag,
                         board.boardRegDate,
+                        board.kinderNo,
                         member.id,
                         member.name,
                         member.kinderNo,
@@ -58,7 +59,7 @@ public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
                 .join(member).on(board.writer.eq(member.id))
                 .where(
                         getInvisibleFlagEq(board),
-                        getKinderNoEq(condition.getKinderNo(), member),
+                        getKinderNoEq(condition.getKinderNo(), board),
 //                        getBoardRegDateEq(condition.getBoardRegDate(), board),
                         getNotepadDateEq(condition.getNotepadDate())
                 )
@@ -73,7 +74,7 @@ public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
                 .join(member).on(board.writer.eq(member.id))
                 .where(
                         getInvisibleFlagEq(board),
-                        getKinderNoEq(condition.getKinderNo(), member)
+                        getKinderNoEq(condition.getKinderNo(), board)
                 );
 
         return PageableExecutionUtils.getPage(notepads, pageable, count::fetchOne);
@@ -102,6 +103,7 @@ public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
                         board.boardContents,
                         board.invisibleFlag,
                         board.boardRegDate,
+                        board.kinderNo,
                         member.id,
                         member.name,
                         member.kinderNo,
@@ -159,6 +161,7 @@ public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
                         board.boardContents,
                         board.invisibleFlag,
                         board.boardRegDate,
+                        board.kinderNo,
                         member.id,
                         member.name,
                         member.kinderNo,
@@ -170,11 +173,18 @@ public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
                         lifeRecord.temperature,
                         lifeRecord.meal,
                         lifeRecord.sleepTime,
-                        lifeRecord.defecationStatus))
+                        lifeRecord.defecationStatus,
+                        notepadReceiver.classNo,
+                        notepadReceiver.kidNo,
+                        clazz.className,
+                        kid.kidName))
                 .from(notepad)
                 .join(board).on(board.boardNo.eq(notepad.boardNo))
                 .join(member).on(member.id.eq(board.writer))
                 .leftJoin(lifeRecord).on(notepad.notepadNo.eq(lifeRecord.notepadNo))
+                .join(notepadReceiver).on(notepadReceiver.notepadNo.eq(notepadNo))
+                .leftJoin(kid).on(kid.kidNo.eq(notepadReceiver.kidNo))
+                .leftJoin(clazz).on(clazz.classNo.eq(notepadReceiver.classNo))
                 .where(notepad.notepadNo.eq(notepadNo))
                 .fetchOne();
     }
@@ -207,8 +217,8 @@ public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
         return board.boardRegDate.between(startDateTime, endDateTime);
     }
 
-    private BooleanExpression getKinderNoEq(Long kinderNo, QMemberEntity member) {
-        return kinderNo == null ? null : member.kinderNo.eq(kinderNo);
+    private BooleanExpression getKinderNoEq(Long kinderNo, QBoardEntity board) {
+        return kinderNo == null ? null : board.kinderNo.eq(kinderNo);
     }
 
     private BooleanExpression getInvisibleFlagEq(QBoardEntity board) {

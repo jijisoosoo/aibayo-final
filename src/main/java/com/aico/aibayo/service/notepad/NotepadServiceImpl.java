@@ -54,7 +54,7 @@ public class NotepadServiceImpl implements NotepadService {
 
     @Override
     @Transactional
-    public NotepadDto insertNotepad(NotepadDto notepadDto) {
+    public void insertNotepad(NotepadDto notepadDto) {
         BoardEntity boardEntity = BoardEntity.builder()
                 .invisibleFlag(BooleanEnum.FALSE.getBool())
                 .boardType(notepadDto.getBoardType())
@@ -62,6 +62,7 @@ public class NotepadServiceImpl implements NotepadService {
                 .boardTitle(notepadDto.getBoardTitle())
                 .boardContents(notepadDto.getBoardContents())
                 .boardRegDate(LocalDateTime.now())
+                .kinderNo(notepadDto.getBoardKinderNo())
                 .build();
 
         BoardEntity savedBoard = boardRepository.save(boardEntity);
@@ -103,7 +104,47 @@ public class NotepadServiceImpl implements NotepadService {
             notepadReceiverRepository.save(notepadReceiverEntity);
         }
 
-        return null;
+    }
+
+    @Override
+    @Transactional
+    public void updateNotepad(NotepadDto notepadDto) {
+        BoardEntity boardEntity =
+                boardRepository.findById(notepadDto.getBoardNo()).orElse(null);
+        assert boardEntity != null;
+        boardEntity.setBoardContents(notepadDto.getBoardContents());
+        boardEntity.setBoardModifyDate(LocalDateTime.now());
+
+        boardRepository.save(boardEntity);
+
+        NotepadEntity notepadEntity =
+                notepadRepository.findById(notepadDto.getNotepadNo()).orElse(null);
+        assert notepadEntity != null;
+        notepadEntity.setNotepadDate(notepadDto.getNotepadDate());
+
+        notepadRepository.save(notepadEntity);
+
+        LifeRecordEntity lifeRecordEntity =
+                lifeRecordRepository.findById(notepadDto.getNotepadNo()).orElse(null);
+        assert lifeRecordEntity != null;
+        lifeRecordEntity.setMood(notepadDto.getMood());
+        lifeRecordEntity.setHealth(notepadDto.getHealth());
+        lifeRecordEntity.setTemperature(notepadDto.getTemperature());
+        lifeRecordEntity.setMeal(notepadDto.getMeal());
+        lifeRecordEntity.setSleepTime(notepadDto.getSleepTime());
+        lifeRecordEntity.setDefecationStatus(notepadDto.getDefecationStatus());
+
+        lifeRecordRepository.save(lifeRecordEntity);
+    }
+
+    @Override
+    public void deleteNotepad(NotepadDto notepadDto) {
+        BoardEntity boardEntity =
+                boardRepository.findById(notepadDto.getBoardNo()).orElse(null);
+        assert boardEntity != null;
+        boardEntity.setInvisibleFlag(BooleanEnum.TRUE.getBool());
+
+        boardRepository.save(boardEntity);
     }
 
 }

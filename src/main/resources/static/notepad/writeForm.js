@@ -1,5 +1,5 @@
 // 라디오 체크용
-const elementsToCheck = ['.mood', '.health', '.temperature', '.meal', '.sleeptime', '.defecation_status'];
+const elementsToCheck = ['mood', 'health', 'temperature', 'meal', 'sleeptime', 'defecation_status'];
 const dataNames = ['mood', 'health', 'temperature', 'meal', 'sleep-time', 'defecation-status'];
 
 
@@ -66,61 +66,71 @@ $(document).ready(function() {
             console.log("tooltip: ", msg.text());
             msg.show();
             datepicker.focus();
-        } else if (selectScope.val() === '0' || (selectClass.val() === '0' && selectKid.val() === '0')) {
+            return false;
+        }
+
+        if (selectScope.val() === '0' || (selectClass.val() === '0' && selectKid.val() === '0')) {
             console.log("수신자 공란");
             // let msg = $('.sender').siblings('.msg');
             let msg = selectScope.closest('.item_group').find('.msg');
             console.log("tooltip: ", msg.text());
             msg.show();
             selectScope.focus();
-        } else if (contentEmpty) {
+            return false;
+        }
+
+        if (contentEmpty) {
             console.log("내용 공란");
             let msg = summernote.closest('.item_group').find('.msg');
             console.log("tooltip: ", msg.text());
             msg.show();
             summernote.summernote('focus');
-        } else {
-            // console.log(summernote.summernote('code'));
+            return false;
+        }
 
-            let liferecord = $('.liferecord');
+        // console.log(summernote.summernote('code'));
 
-            if (liferecord.is(':visible')) {
+        let liferecord = $('.liferecord');
 
-                for (const selector of elementsToCheck) {
-                    if (!isChecked($(selector))) {
-                        $(selector).closest('.liferecord_item_box').find('.msg').show();
-                        $(selector).first().focus();
-                        return;
-                    }
+        if (liferecord.is(':visible')) {
+
+            for (const selector of elementsToCheck) {
+                let classSelector = '.' + selector;
+
+                if (!isChecked($(classSelector))) {
+                    $(classSelector).closest('.liferecord_item_box').find('.msg').show();
+                    $(classSelector).first().focus();
+                    return;
                 }
             }
-
-            let writeFrm = $('#writeFrm');
-
-            setData(writeFrm);
-
-            let param = {
-                boardType : writeFrm.data('board-type'),
-                writer : writeFrm.data('writer'),
-                boardTitle : writeFrm.data('board-title'),
-                boardContents : writeFrm.data('board-contents'),
-                hasLifeRecord : writeFrm.data('has-life-record'),
-                notepadDate : writeFrm.data('notepad-date'),
-                mood : writeFrm.data('mood'),
-                health : writeFrm.data('health'),
-                temperature : writeFrm.data('temperature'),
-                meal : writeFrm.data('meal'),
-                sleepTime : writeFrm.data('sleep-time'),
-                defecationStatus : writeFrm.data('defecation-status'),
-                classNo : writeFrm.data('class-no'),
-                kidNo : writeFrm.data('kid-no')
-            }
-            console.log('param: ' + JSON.stringify(param));
-
-            let url = '/notepad/writeOk';
-
-            commonAjax(url, 'POST', param);
         }
+
+        let writeFrm = $('#writeFrm');
+
+        setData(writeFrm);
+
+        let param = {
+            boardType : writeFrm.data('board-type'),
+            writer : writeFrm.data('writer'),
+            boardTitle : writeFrm.data('board-title'),
+            boardContents : writeFrm.data('board-contents'),
+            boardKinderNo : writeFrm.data('board-kinder-no'),
+            hasLifeRecord : writeFrm.data('has-life-record'),
+            notepadDate : writeFrm.data('notepad-date'),
+            mood : writeFrm.data('mood'),
+            health : writeFrm.data('health'),
+            temperature : writeFrm.data('temperature'),
+            meal : writeFrm.data('meal'),
+            sleepTime : writeFrm.data('sleep-time'),
+            defecationStatus : writeFrm.data('defecation-status'),
+            classNo : writeFrm.data('class-no'),
+            kidNo : writeFrm.data('kid-no')
+        }
+        console.log('param: ' + JSON.stringify(param));
+
+        let url = '/notepad/writeOk';
+
+        commonAjax(url, 'POST', param);
     });
 });
 
@@ -135,36 +145,6 @@ function afterSuccess(response) {
     }).then((result) => {
         window.location.href = window.location.origin + '/notepad/admin/list';
     });
-}
-
-function setData(selector) {
-    setTitle(selector);
-
-    selector.data('board-contents', $('.summernote_create').summernote('code'));
-
-    let isVisible = $('.liferecord').is(':visible') ? '1': '0';
-    selector.data('has-life-record', isVisible);
-
-    selector.data('notepad-date', moment($('.datepicker')).format('YYYY-MM-DD'));
-    // console.log(`datepicker: ${$('.datepicker').val()}`);
-    // console.log(`notepad-date: ${selector.data('notepad-date')}`);
-
-    if (isVisible === '1') {
-
-        for (let i = 0; i < elementsToCheck.length; i++) {
-            let element = elementsToCheck[i];
-
-            if (isChecked($(element))) {
-                // console.log(`클래스 선택자: ${element}`);
-                // console.log(`체크된 값: ${$(element + ':checked').val()}`);
-                selector.data(dataNames[i], $(element + ':checked').val());
-            }
-        }
-    } else if (isVisible === '0') {
-        for (const dataName of dataNames) {
-            selector.data(dataName, '');
-        }
-    }
 }
 
 function setTitle(selector) {
@@ -186,24 +166,6 @@ function setTitle(selector) {
     }
 }
 
-function isChecked(selector) {
-    initMsg();
-    let bool = false;
-
-    selector.each(function () {
-        if ($(this).is(':checked')) {
-            // console.log('체크 있음');
-            bool = true;
-            return false;
-        }
-
-    });
-
-    return bool;
-}
-
-function initMsg() {
-    $('.msg').each(function () {
-        $(this).hide();
-    })
+function setBoardContent(selector) {
+    selector.data('board-contents', $('.summernote_create').summernote('code'));
 }

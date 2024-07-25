@@ -31,15 +31,19 @@
 
         </div>
 
-        <div class="notepad_detail_top_btn_box">
+        <div class="notepad_detail_top_btn_box"
+             th:if="${member.get('roleNo') < 2 || member.get('id') == notepad.writer}">
 
             <div class="notepad_detail_top_btn">
-                <a href="/notepad/admin/modify" class="btn btn-ab btn_box btn_text" alt="수정">수정</a>
+                <a th:href="@{|/notepad/admin/modify/${notepadNo}|}"
+                   class="btn btn-ab btn_box btn_text" alt="수정">수정</a>
             </div>
 
             <div class="notepad_detail_top_btn">
                 <input type="button"
                        class="btn btn-danger btn_box btn_text"
+                       id="deleteBtn"
+                       th:data-board-no="${notepad.boardNo}"
                        value="삭제">
             </div>
 
