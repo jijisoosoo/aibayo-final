@@ -7,13 +7,11 @@
 
 <th:block layout:fragment="css">
     <th:block th:replace="~{/common/datepicker :: css}"/>
-    <th:block th:replace="~{/common/sweetalert2 :: css}"/>
     <link rel="stylesheet" href="/notepad/form.css" />
 </th:block>
 
 <th:block layout:fragment="javascript">
     <th:block th:replace="~{common/datepicker :: js}"/>
-    <th:block th:replace="~{/common/sweetalert2 :: js}"/>
     <script src="/notepad/notepad.js"></script>
     <script src="/notepad/modifyForm.js"></script>
 </th:block>
