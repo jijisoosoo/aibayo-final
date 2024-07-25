@@ -81,8 +81,23 @@ public class NotepadController {
     // 나중에 detail 대신 notepadNo 대신 가져오기
     @GetMapping("/admin/{notepadNo}")
     public String adminDetail(@PathVariable Long notepadNo, Model model) {
+        // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
+//        int roleNo = 1;
+//        Long id = 2L;
+        Long kinderNo = 1L;
+
+        int roleNo = 2;
+        Long id = 31L;
+
+        HashMap<String, Object> memberDto = new HashMap<>();
+        memberDto.put("roleNo", roleNo);
+        memberDto.put("id", id);
+
         NotepadDto notepadDto = notepadService.getByNotepadNo(notepadNo);
+
+        model.addAttribute("member", memberDto);
         model.addAttribute("notepad", notepadDto);
+
         return "/notepad/admin/detail";
     }
 
@@ -94,8 +109,25 @@ public class NotepadController {
     }
 
     // 나중에는 post(put)로
-    @GetMapping("/admin/modify")
-    public String modifyForm() {
+    @GetMapping("/admin/modify/{notepadNo}")
+    public String modifyForm(@PathVariable Long notepadNo, Model model) {
+        // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
+//        int roleNo = 1;
+//        Long id = 2L;
+        Long kinderNo = 1L;
+
+        int roleNo = 2;
+        Long id = 31L;
+
+        HashMap<String, Object> memberDto = new HashMap<>();
+        memberDto.put("roleNo", roleNo);
+        memberDto.put("id", id);
+
+        NotepadDto notepadDto = notepadService.getByNotepadNo(notepadNo);
+
+        model.addAttribute("member", memberDto);
+        model.addAttribute("notepad", notepadDto);
+
         return "/notepad/admin/modifyForm";
     }
 
@@ -108,7 +140,6 @@ public class NotepadController {
 
         int roleNo = 2;
         Long id = 31L;
-
 
         List<ClassDto> classDtos = new ArrayList<>();
         List<KidDto> kidDtos = new ArrayList<>();
@@ -125,6 +156,7 @@ public class NotepadController {
         HashMap<String, Object> notepadInfo = new HashMap<>();
         notepadInfo.put("boardType", BoardTypeEnum.NOTEPAD.getNum());
         notepadInfo.put("writer", id);
+        notepadInfo.put("boardKinderNo", kinderNo);
 
         model.addAttribute("classDtos", classDtos);
         model.addAttribute("kidDtos", kidDtos);

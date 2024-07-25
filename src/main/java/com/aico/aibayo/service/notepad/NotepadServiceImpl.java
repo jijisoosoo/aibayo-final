@@ -62,6 +62,7 @@ public class NotepadServiceImpl implements NotepadService {
                 .boardTitle(notepadDto.getBoardTitle())
                 .boardContents(notepadDto.getBoardContents())
                 .boardRegDate(LocalDateTime.now())
+                .kinderNo(notepadDto.getBoardKinderNo())
                 .build();
 
         BoardEntity savedBoard = boardRepository.save(boardEntity);

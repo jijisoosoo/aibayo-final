@@ -310,6 +310,7 @@ INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationsh
 
 
 # 승인이력 추가
+# 승인이력 추가
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(0,1,'2022-03-02');
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(0,1,'2022-03-02');
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(0,1,'2022-03-02');
@@ -456,6 +457,15 @@ INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
+INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,1,'2022-03-02');
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,0,'2022-03-02');
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,0,'2022-03-02');
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,0,'2022-03-02');
@@ -465,15 +475,6 @@ INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,0,'
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,0,'2022-03-02');
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,0,'2022-03-02');
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,0,'2022-03-02');
-INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,2,'2022-03-02');
-INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,2,'2022-03-02');
-INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,2,'2022-03-02');
-INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,2,'2022-03-02');
-INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,2,'2022-03-02');
-INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,2,'2022-03-02');
-INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,2,'2022-03-02');
-INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,2,'2022-03-02');
-INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(3,2,'2022-03-02');
 
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(2,1,'2022-03-02');
 INSERT INTO accept_log(accept_type, accept_status, accept_reg_date) VALUES(2,1,'2022-03-02');
@@ -1530,18 +1531,18 @@ INSERT INTO notepad_receiver(notepad_no, class_no, kid_no) VALUES(200,20,null);
 
 #--------------------------------------------------------announce---------------------------------------------------------
 INSERT INTO announce (board_no, announce_type, announce_primary, can_comment) VALUES
-                                                                                  (230,0,'1','0'),
+                                                                                  (230,0,'0','0'),
                                                                                   (231,0,'1','0'),
-                                                                                  (232,0,'1','0'),
-                                                                                  (233,0,'1','0'),
-                                                                                  (234,0,'1','0'),
+                                                                                  (232,0,'0','0'),
+                                                                                  (233,0,'0','0'),
+                                                                                  (234,0,'0','0'),
                                                                                   (235,0,'0','0'),
                                                                                   (236,0,'0','0'),
                                                                                   (237,0,'0','0'),
                                                                                   (238,0,'0','0'),
-                                                                                  (239,0,'0','0'),
-                                                                                  (240,0,'0','0'),
-                                                                                  (241,0,'0','0'),
+                                                                                  (239,0,'1','0'),
+                                                                                  (240,0,'1','0'),
+                                                                                  (241,0,'1','0'),
                                                                                   (242,0,'0','0'),
                                                                                   (243,0,'0','0'),
                                                                                   (244,0,'0','0'),
@@ -1552,7 +1553,7 @@ INSERT INTO announce (board_no, announce_type, announce_primary, can_comment) VA
                                                                                   (249,0,'0','0'),
                                                                                   (250,0,'0','0'),
                                                                                   (251,0,'0','0'),
-                                                                                  (252,0,'0','0'),
+                                                                                  (252,0,'1','0'),
                                                                                   (253,0,'0','0'),
                                                                                   (254,0,'0','0'),
                                                                                   (255,0,'0','0'),
@@ -1572,7 +1573,7 @@ INSERT INTO announce (board_no, announce_type, announce_primary, can_comment) VA
                                                                                   (269,1,'0','1'),
                                                                                   (270,1,'0','1'),
                                                                                   (271,1,'0','1'),
-                                                                                  (272,1,'0','1'),
+                                                                                  (272,1,'1','1'),
                                                                                   (273,1,'0','1'),
                                                                                   (274,1,'0','1'),
                                                                                   (275,1,'0','1'),

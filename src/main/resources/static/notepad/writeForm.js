@@ -104,6 +104,7 @@ $(document).ready(function() {
                 writer : writeFrm.data('writer'),
                 boardTitle : writeFrm.data('board-title'),
                 boardContents : writeFrm.data('board-contents'),
+                boardKinderNo : writeFrm.data('board-kinder-no'),
                 hasLifeRecord : writeFrm.data('has-life-record'),
                 notepadDate : writeFrm.data('notepad-date'),
                 mood : writeFrm.data('mood'),
