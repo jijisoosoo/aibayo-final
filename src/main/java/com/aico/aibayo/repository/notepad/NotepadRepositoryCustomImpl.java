@@ -173,11 +173,18 @@ public class NotepadRepositoryCustomImpl implements NotepadRepositoryCustom {
                         lifeRecord.temperature,
                         lifeRecord.meal,
                         lifeRecord.sleepTime,
-                        lifeRecord.defecationStatus))
+                        lifeRecord.defecationStatus,
+                        notepadReceiver.classNo,
+                        notepadReceiver.kidNo,
+                        clazz.className,
+                        kid.kidName))
                 .from(notepad)
                 .join(board).on(board.boardNo.eq(notepad.boardNo))
                 .join(member).on(member.id.eq(board.writer))
                 .leftJoin(lifeRecord).on(notepad.notepadNo.eq(lifeRecord.notepadNo))
+                .join(notepadReceiver).on(notepadReceiver.notepadNo.eq(notepadNo))
+                .leftJoin(kid).on(kid.kidNo.eq(notepadReceiver.kidNo))
+                .leftJoin(clazz).on(clazz.classNo.eq(notepadReceiver.classNo))
                 .where(notepad.notepadNo.eq(notepadNo))
                 .fetchOne();
     }

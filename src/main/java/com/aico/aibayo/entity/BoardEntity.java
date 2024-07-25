@@ -26,7 +26,7 @@ public class BoardEntity {
     private Long writer;
     @Column(name = "board_title")
     private String boardTitle;
-    @Column(name = "board_contents")
+    @Column(name = "board_contents", columnDefinition = "LONGTEXT")
     private String boardContents;
     @Column(name = "board_pic")
     private String boardPic;
