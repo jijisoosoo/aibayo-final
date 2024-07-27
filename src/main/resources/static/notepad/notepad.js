@@ -15,8 +15,8 @@ function setData(selector) {
     console.log(`isVisible: ${isVisible}`);
     selector.data('has-life-record', isVisible);
 
-    selector.data('notepad-date', moment($('.datepicker')).format('YYYY-MM-DD'));
-    // console.log(`datepicker: ${$('.datepicker').val()}`);
+    selector.data('notepad-date', moment($('.datepicker').val()).format('YYYY-MM-DD'));
+    // console.log(`datepicker: ${moment($('.datepicker').val()).format('YYYY-MM-DD')}`);
     // console.log(`notepad-date: ${selector.data('notepad-date')}`);
 
     if (isVisible === '1') {
