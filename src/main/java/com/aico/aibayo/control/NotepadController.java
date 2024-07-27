@@ -2,7 +2,7 @@ package com.aico.aibayo.control;
 
 import com.aico.aibayo.common.BoardTypeEnum;
 import com.aico.aibayo.dto.ClassDto;
-import com.aico.aibayo.dto.KidDto;
+import com.aico.aibayo.dto.kid.KidDto;
 import com.aico.aibayo.dto.notepad.NotepadDto;
 //import com.aico.aibayo.service.notepad.NotepadService;
 import com.aico.aibayo.dto.notepad.NotepadSearchCondition;
