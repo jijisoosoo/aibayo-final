@@ -2,13 +2,13 @@ package com.aico.aibayo.control;
 
 import com.aico.aibayo.common.AcceptStatusEnum;
 import com.aico.aibayo.dto.ClassDto;
-import com.aico.aibayo.dto.MemberDto;
+import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.dto.kid.KidDto;
 import com.aico.aibayo.dto.kid.KidSearchCondition;
+import com.aico.aibayo.dto.member.MemberSearchCondition;
 import com.aico.aibayo.service.MemberService;
 import com.aico.aibayo.service.classManage.ClassService;
 import com.aico.aibayo.service.kid.KidService;
-import java.util.HashMap;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,17 +30,20 @@ public class KidController {
     private final MemberService memberService;
 
     // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
-    private int roleNo = 1;
-    private Long id = 2L;
+//    private int roleNo = 1;
+//    private Long id = 2L;
     private Long kinderNo = 1L;
 
 //    private int roleNo = 2;
 //    private Long id = 31L;
 
+    private int roleNo = 3;
+    private Long id = 14L;
+
     @GetMapping("/list")
     public String list(Model model) {
         KidSearchCondition condition = new KidSearchCondition();
-        return getConditionAndGoView(model, condition);
+        return getConditionAndGoList(model, condition);
     }
 
     @PostMapping("/searchByClass")
@@ -48,25 +51,28 @@ public class KidController {
                                 Model model) {
         log.info("search: {}", condition);
 
-        return getConditionAndGoView(model, condition);
+        return getConditionAndGoList(model, condition);
     }
 
     @GetMapping("/{kidNo}")
     public String detail(@PathVariable Long kidNo, Model model) {
-        KidDto kidDto = kidService.getByKidNo(kidNo);
-        List<MemberDto> memberDtos = memberService.getAllByKidNo(kidNo);
-        List<ClassDto> classDtos = classService.getAllByKidNo(kidNo);
-
-        model.addAttribute("kid", kidDto);
-        model.addAttribute("members", memberDtos);
-        model.addAttribute("classes", classDtos);
+        getConditionAndGoDetail(kidNo, model);
 
         return "/kid/detail";
     }
 
-    @GetMapping("/user/detail")
-    public String userDetail() {
+    @GetMapping("/user/{kidNo}")
+    public String userDetail(@PathVariable Long kidNo, Model model) {
         // 주보호자 여부 확인
+        MemberSearchCondition condition = new MemberSearchCondition();
+        condition.setId(id);
+        condition.setKidNo(kidNo);
+
+        MemberDto loginUser = memberService.getByIdAndKidNo(condition);
+
+        model.addAttribute("isMainParent", loginUser.getIsMainParent());
+
+        getConditionAndGoDetail(kidNo, model);
 
         return "/kid/user_detail";
     }
@@ -76,7 +82,18 @@ public class KidController {
         return "/kid/writeForm";
     }
 
-    private String getConditionAndGoView(Model model, KidSearchCondition condition) {
+    private void getConditionAndGoDetail(@PathVariable Long kidNo,
+                                         Model model) {
+        KidDto kidDto = kidService.getByKidNo(kidNo);
+        List<MemberDto> memberDtos = memberService.getAllByKidNo(kidNo);
+        List<ClassDto> classDtos = classService.getAllByKidNo(kidNo);
+
+        model.addAttribute("kid", kidDto);
+        model.addAttribute("members", memberDtos);
+        model.addAttribute("classes", classDtos);
+    }
+
+    private String getConditionAndGoList(Model model, KidSearchCondition condition) {
         condition.setKinderNo(kinderNo);
 
         condition.setAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
