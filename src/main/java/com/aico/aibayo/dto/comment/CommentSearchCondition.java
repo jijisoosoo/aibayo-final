@@ -6,9 +6,10 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class CommentSearchCondtion {
+public class CommentSearchCondition {
     private Long boardNo;
     private String invisibleFlag;
+    private Long announceNo;
 
     private Integer roleNo;
     private String name;
