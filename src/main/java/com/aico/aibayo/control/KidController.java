@@ -9,12 +9,17 @@ import com.aico.aibayo.service.kid.KidService;
 import com.aico.aibayo.service.kid.KidServiceImpl;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+@Slf4j
 @Controller
 @RequestMapping("/kid")
 @RequiredArgsConstructor
@@ -34,6 +39,32 @@ public class KidController {
     @GetMapping("/list")
     public String list(Model model) {
         KidSearchCondition condition = new KidSearchCondition();
+        condition.setKinderNo(kinderNo);
+
+        condition.setAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
+        List<KidDto> kidAcceptDtos = kidService.getAllByClassNoAndAcceptStatus(condition);
+        model.addAttribute("kidsAccept", kidAcceptDtos);
+
+        condition.setAcceptStatus(AcceptStatusEnum.WAIT.getStatus());
+        List<KidDto> kidWaitDtos = kidService.getAllWithParentByClassNoAndAcceptStatus(condition);
+        model.addAttribute("kidsWait", kidWaitDtos);
+
+        condition.setAcceptStatus(null);
+        condition.setInviteAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
+        List<KidDto> kidInviteDtos = kidService.getAllWithParentByClassNoAndAcceptStatus(condition);
+        model.addAttribute("kidsInvite", kidInviteDtos);
+
+        List<ClassDto> classDtos = classService.getByKinderNo(kinderNo);
+        model.addAttribute("classes", classDtos);
+
+        return "/kid/list";
+    }
+
+    @PostMapping("/searchByClass")
+    public String searchByClass(@RequestBody KidSearchCondition condition,
+                                Model model) {
+        log.info("search: {}", condition);
+
         condition.setKinderNo(kinderNo);
 
         condition.setAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());

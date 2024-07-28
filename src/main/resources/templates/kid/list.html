@@ -22,8 +22,9 @@
 
         <div class="kid_top_box">
 
-            <select class="form-select item_modify_box class_text">
-                <option value="0" selected>반 선택</option>
+            <select class="form-select item_modify_box class_text"
+                    id="selectClass">
+                <option value selected>반 선택</option>
                 <option th:each="class : ${classes}"
                  th:object="${class}" th:value="*{classNo}"
                  th:text="*{className}">반이름</option>
