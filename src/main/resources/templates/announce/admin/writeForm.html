@@ -12,9 +12,10 @@
 <th:block layout:fragment="javascript">
     <script src="/announce/writeForm.js"></script></th:block>
 
-<div class="container main_container" layout:fragment="content">
-    <div class="ann-write">
-        <form action="#">
+<form id="announceForm">
+
+    <div class="container main_container" layout:fragment="content">
+        <div class="ann-write">
             <div class="frame">
                 <div class="c">
                     <div class="b">
@@ -22,25 +23,35 @@
                             <a href="/announce/admin/card" class="element-secondary-button">
                                 <div class="text-wrapper">취소</div>
                             </a>
-                            <input type="submit" value="작성" class="div-wrapper">
+                            <input type="submit" id="writeBtn" value="작성" class="div-wrapper">
                         </div>
                     </div>
                 </div>
                 <div class="header">
                     <div class="frame-2">
-                        <div class="element-dropdown">
-                            <select class="category" >
-                                <option selected>말머리</option>
-                                <option value="category1">선생님만</option>
-                                <option value="category2">원 공지</option>
-                                <option value="category3">안내</option>
-                                <option value="category4">일정/행사</option>
-                                <option value="category5">교육</option>
-                                <option value="category6">보육료</option>
-                            </select>
+                        <div class="frame-2">
+                            <div class="element-dropdown" >
+                                <select name="announceType" class="category" id="selectScope">
+                                    <option value="0" selected>말머리</option>
+                                    <option value="1">선생님만</option>
+                                    <option value="2">원 공지</option>
+                                    <option value="3">일정/행사</option>
+                                    <option value="4">교육</option>
+                                    <option value="5">보육료</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div class="element-input-field">
+                    <div class="element-input-field"
+                         th:object="${announceInfo}"
+                         th:data-board-type="*{get('boardType')}"
+                         th:data-writer="*{get('writer')}"
+                         data-board-title data-board-contents
+                         th:data-board-kinder-no="*{get('boardKinderNo')}"
+                         data-annunce-primary
+                         data-can-comment
+                         data-announce-type
+                    >
                         <input type="text" class="label-2" name="title" id="title" placeholder="제목을 입력해주세요">
                     </div>
                 </div>
@@ -49,7 +60,6 @@
                         <textarea name="content" class="summernote" id="content"></textarea>
                     </div>
                 </div>
-
                 <div class="frame-3">
                     <div class="frame-wrapper">
                         <div class="frame-4">
@@ -71,6 +81,6 @@
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
-</div>
+</form>
