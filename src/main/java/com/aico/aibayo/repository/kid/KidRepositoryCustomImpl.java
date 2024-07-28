@@ -104,6 +104,7 @@ public class KidRepositoryCustomImpl implements KidRepositoryCustom {
                         getClassEq(condition.getClassNo()),
                         getAcceptStatusEq(condition.getAcceptStatus())
                 )
+                .orderBy(kid.kidName.asc())
                 .fetch();
     }
 
@@ -150,11 +151,11 @@ public class KidRepositoryCustomImpl implements KidRepositoryCustom {
                 .where(
                         kid.dischargeFlag.eq(BooleanEnum.FALSE.getBool()),
                         kid.kinderNo.eq(condition.getKinderNo()),
-//                        acceptLog2.acceptStatus.eq(AcceptStatusEnum.ACCEPT.getStatus()),
                         getClassEq(condition.getClassNo()),
                         getAcceptStatusEq(condition.getAcceptStatus()),
                         getInviteAcceptTypeEq(condition.getInviteAcceptStatus())
                 )
+                .orderBy(kid.kidName.asc())
                 .fetch();
     }
 
