@@ -4,8 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum KidGenderEnum {
-    MALE(1, "남자"),
-    FEMALE(2, "여자");
+    MALE(1, "남아"),
+    FEMALE(2, "여아");
 
     private final int type;
     private final String name;
