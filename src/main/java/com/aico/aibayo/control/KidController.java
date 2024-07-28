@@ -2,11 +2,13 @@ package com.aico.aibayo.control;
 
 import com.aico.aibayo.common.AcceptStatusEnum;
 import com.aico.aibayo.dto.ClassDto;
+import com.aico.aibayo.dto.MemberDto;
 import com.aico.aibayo.dto.kid.KidDto;
 import com.aico.aibayo.dto.kid.KidSearchCondition;
+import com.aico.aibayo.service.MemberService;
 import com.aico.aibayo.service.classManage.ClassService;
 import com.aico.aibayo.service.kid.KidService;
-import com.aico.aibayo.service.kid.KidServiceImpl;
+import java.util.HashMap;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
 @Controller
@@ -26,7 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class KidController {
     private final KidService kidService;
     private final ClassService classService;
-    private final KidServiceImpl kidServiceImpl;
+    private final MemberService memberService;
 
     // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
     private int roleNo = 1;
@@ -39,25 +40,7 @@ public class KidController {
     @GetMapping("/list")
     public String list(Model model) {
         KidSearchCondition condition = new KidSearchCondition();
-        condition.setKinderNo(kinderNo);
-
-        condition.setAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
-        List<KidDto> kidAcceptDtos = kidService.getAllByClassNoAndAcceptStatus(condition);
-        model.addAttribute("kidsAccept", kidAcceptDtos);
-
-        condition.setAcceptStatus(AcceptStatusEnum.WAIT.getStatus());
-        List<KidDto> kidWaitDtos = kidService.getAllWithParentByClassNoAndAcceptStatus(condition);
-        model.addAttribute("kidsWait", kidWaitDtos);
-
-        condition.setAcceptStatus(null);
-        condition.setInviteAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
-        List<KidDto> kidInviteDtos = kidService.getAllWithParentByClassNoAndAcceptStatus(condition);
-        model.addAttribute("kidsInvite", kidInviteDtos);
-
-        List<ClassDto> classDtos = classService.getByKinderNo(kinderNo);
-        model.addAttribute("classes", classDtos);
-
-        return "/kid/list";
+        return getConditionAndGoView(model, condition);
     }
 
     @PostMapping("/searchByClass")
@@ -65,6 +48,35 @@ public class KidController {
                                 Model model) {
         log.info("search: {}", condition);
 
+        return getConditionAndGoView(model, condition);
+    }
+
+    @GetMapping("/{kidNo}")
+    public String detail(@PathVariable Long kidNo, Model model) {
+        KidDto kidDto = kidService.getByKidNo(kidNo);
+        List<MemberDto> memberDtos = memberService.getAllByKidNo(kidNo);
+        List<ClassDto> classDtos = classService.getAllByKidNo(kidNo);
+
+        model.addAttribute("kid", kidDto);
+        model.addAttribute("members", memberDtos);
+        model.addAttribute("classes", classDtos);
+
+        return "/kid/detail";
+    }
+
+    @GetMapping("/user/detail")
+    public String userDetail() {
+        // 주보호자 여부 확인
+
+        return "/kid/user_detail";
+    }
+
+    @GetMapping("/write")
+    public String writeForm() {
+        return "/kid/writeForm";
+    }
+
+    private String getConditionAndGoView(Model model, KidSearchCondition condition) {
         condition.setKinderNo(kinderNo);
 
         condition.setAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
@@ -84,22 +96,5 @@ public class KidController {
         model.addAttribute("classes", classDtos);
 
         return "/kid/list";
-    }
-
-    @GetMapping("/{kidNo}")
-    public String detail(@PathVariable Long kidNo) {
-
-
-        return "/kid/detail";
-    }
-
-    @GetMapping("/user/detail")
-    public String userDetail() {
-        return "/kid/user_detail";
-    }
-
-    @GetMapping("/write")
-    public String writeForm() {
-        return "/kid/writeForm";
     }
 }

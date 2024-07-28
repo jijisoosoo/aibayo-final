@@ -85,8 +85,11 @@ public class KidRepositoryCustomImpl implements KidRepositoryCustom {
                         kid.dischargeFlag
                         ))
                 .from(kid)
-                .join(parentKid).on(kid.kidNo.eq(parentKid.kidNo))
-                .join(acceptLog1).on(acceptLog1.acceptNo.eq(parentKid.acceptNo))
+                .leftJoin(parentKid).on(kid.kidNo.eq(parentKid.kidNo))
+                .leftJoin(acceptLog1).on(
+                        acceptLog1.acceptNo.eq(parentKid.acceptNo)
+                        .and(acceptLog1.acceptStatus.eq(AcceptStatusEnum.ACCEPT.getStatus()))
+                )
 
                 .join(classKid).on(kid.kidNo.eq(classKid.kidNo))
                 .join(clazz).on(
@@ -101,8 +104,7 @@ public class KidRepositoryCustomImpl implements KidRepositoryCustom {
                 .where(
                         kid.dischargeFlag.eq(BooleanEnum.FALSE.getBool()),
                         kid.kinderNo.eq(condition.getKinderNo()),
-                        getClassEq(condition.getClassNo()),
-                        getAcceptStatusEq(condition.getAcceptStatus())
+                        getClassEq(condition.getClassNo())
                 )
                 .orderBy(kid.kidName.asc())
                 .fetch();
