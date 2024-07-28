@@ -45,24 +45,20 @@ public class AnnounceRepositoryCustomImpl implements AnnounceRepositoryCustom {
                         board.boardTitle,
                         board.invisibleFlag,
                         board.boardRegDate,
+                        board.kinderNo,
                         member.roleNo,
                         member.id,
-                        member.name,
-                        comment.commentGroupNo,
-                        comment.commentRegDate,
-                        comment.commentWriter,
-                        comment.commentClass,
-                        comment.commentContent,
-                        comment.commentDeleteFlag
+                        member.name
                 ))
                 .from(announce)
                 .join(board).on(board.boardNo.eq(announce.boardNo))
                 .join(member).on(board.writer.eq(member.id))
-                .leftJoin(comment).on(comment.boardNo.eq(board.boardNo))
-                .leftJoin(member).on(member.id.eq(comment.commentWriter))
+                .leftJoin(comment).on(comment.boardNo.eq(board.boardNo)
+                        .and(announce.canComment.eq("1")))
+                .orderBy(comment.commentNo.desc())
                 .where(announce.announceNo.eq(announceNo))
+                .limit(1)  // 최신 댓글만 가져오기 위해 limit 사용
                 .fetchOne();
-
     }
 
     @Override
@@ -80,6 +76,7 @@ public class AnnounceRepositoryCustomImpl implements AnnounceRepositoryCustom {
                         board.boardTitle,
                         board.invisibleFlag,
                         board.boardRegDate,
+                        board.kinderNo,
                         member.roleNo,
                         member.id,
                         member.name ))
@@ -127,6 +124,7 @@ public class AnnounceRepositoryCustomImpl implements AnnounceRepositoryCustom {
                         board.boardTitle,
                         board.invisibleFlag,
                         board.boardRegDate,
+                        board.kinderNo,
                         member.roleNo,
                         member.id,
                         member.name ))
