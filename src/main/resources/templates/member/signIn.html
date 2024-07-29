@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
 <!--    <link rel="stylesheet" href="/login/signIn.css"/>-->
 <!--    <link rel="stylesheet" href="/login/signInGuide.css"/>-->
-    <link rel="stylesheet" th:href="@{/login/signIn.css}" />
-    <link rel="stylesheet" th:href="@{/login/signInGuide.css}" />
+    <link rel="stylesheet" th:href="@{/member/signIn.css}" />
+    <link rel="stylesheet" th:href="@{/member/signInGuide.css}" />
 
 
 
@@ -29,7 +29,7 @@
 
                                 <div class="text-wrapper-3" >이메일</div>
                                 <!-- <div class="username-or-email-wrapper"><div class="text-wrapper-4">email address</div></div> -->
-                                <input class="username-or-email-wrapper" name="email" id="email-input" type="email"  required ></input>
+                                <input class="username-or-email-wrapper" name="username" id="email-input" type="email"  required ></input>
                             </div>
 
 
@@ -65,8 +65,8 @@
         </div>
 
 
-        <a th:href="@{/login/signUp}" class="text-wrapper-2">회원가입</a>
-        <a th:href="@{/login/signInFindPw}" class="text-wrapper-5">비밀번호 찾기</a>
+        <a th:href="@{/member/signUp}" class="text-wrapper-2">회원가입</a>
+        <a th:href="@{/member/signInFindPw}" class="text-wrapper-5">비밀번호 찾기</a>
 
     </div>
 </div>

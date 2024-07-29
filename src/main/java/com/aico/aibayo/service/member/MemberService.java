@@ -1,4 +1,4 @@
-package com.aico.aibayo.service;
+package com.aico.aibayo.service.member;
 
 import org.springframework.stereotype.Service;
 

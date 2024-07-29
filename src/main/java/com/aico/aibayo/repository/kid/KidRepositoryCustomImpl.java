@@ -120,7 +120,7 @@ public class KidRepositoryCustomImpl implements KidRepositoryCustom {
                         kid.modifyDate,
                         kid.dischargeDate,
                         kid.dischargeFlag,
-                        member.email,
+                        member.username,
                         inviteCode.inviteEmail
                 ))
                 .from(kid)
