@@ -14,7 +14,7 @@ public class MemberServiceImpl implements MemberService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
-    public void  signUpProcess(MemberDto memberDto) {
+    public void signUpProcess(MemberDto memberDto) {
 
         String name = memberDto.getName();
         String role = memberDto.getRole();

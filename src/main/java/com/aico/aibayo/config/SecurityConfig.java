@@ -53,7 +53,9 @@ public class SecurityConfig {
 
         http // 경로별 인가 설정
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/", "/member/**", "/login", "/signIn", "/signUp", "/signUpKid", "/signInFindPw").permitAll() // 로그인, 홈, 회원가입 경로는 모든 사용자에게 허용
+                        .requestMatchers("/member/**", "/").permitAll() // 로그인, 홈, 회원가입 경로는 모든 사용자에게 허용
+                        .requestMatchers("/main/admin").hasRole("ADMIN")
+                        .requestMatchers("/main/user").hasRole("USER")
                         .anyRequest().authenticated() // 그 외의 모든 요청은 인증 필요
                 );
 

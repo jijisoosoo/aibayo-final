@@ -39,11 +39,6 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
 
     @Override
-    protected String obtainUsername(HttpServletRequest request) {
-        return request.getParameter("username");
-    }
-
-    @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         CustomMemberDetails customMemberDetails = (CustomMemberDetails) authResult.getPrincipal();
 
