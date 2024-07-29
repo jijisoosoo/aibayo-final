@@ -1,7 +1,8 @@
 package com.aico.aibayo.service.kid;
 
 import com.aico.aibayo.common.BooleanEnum;
-import com.aico.aibayo.dto.KidDto;
+import com.aico.aibayo.dto.kid.KidDto;
+import com.aico.aibayo.dto.kid.KidSearchCondition;
 import com.aico.aibayo.entity.KidEntity;
 import com.aico.aibayo.repository.kid.KidRepository;
 import java.util.List;
@@ -27,5 +28,15 @@ public class KidServiceImpl implements KidService {
     @Override
     public List<KidDto> getByMemberId(Long id) {
         return kidRepository.findAllByMemberId(id);
+    }
+
+    @Override
+    public List<KidDto> getAllByClassNoAndAcceptStatus(KidSearchCondition condition) {
+        return kidRepository.findAllByClassNoAndAcceptStatus(condition);
+    }
+
+    @Override
+    public List<KidDto> getAllWithParentByClassNoAndAcceptStatus(KidSearchCondition condition) {
+        return kidRepository.findAllWithParentByClassNoAndAcceptStatus(condition);
     }
 }

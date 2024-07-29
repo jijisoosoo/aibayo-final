@@ -7,7 +7,8 @@ public enum AcceptTypeEnum {
     CLASS_KID(0),
     PARENT_KID(1),
     CLASS_TEACHER(2),
-    TEACHER_KINDER(3);
+    TEACHER_KINDER(3),
+    INVITE_CODE(4);
 
     private final int type;
 

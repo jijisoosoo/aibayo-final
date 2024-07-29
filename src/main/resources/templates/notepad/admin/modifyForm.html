@@ -51,7 +51,8 @@
             <input type="text"
                    class="form-control notepad_detail_content_date date_input_box date_input_text datepicker"
                    placeholder="연도. 월. 일"
-                   th:value="*{#temporals.format(notepadDate, 'YYYY.MM.dd')}" readonly>
+                   th:data-date="*{notepadDate}"
+                   readonly>
         </div>
 
 
