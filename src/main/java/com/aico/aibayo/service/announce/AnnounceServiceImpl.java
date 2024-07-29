@@ -91,6 +91,28 @@ public class AnnounceServiceImpl implements AnnounceService {
     }
 
     @Override
+    @Transactional
+    public void updatennounce(AnnounceDto announceDto) {
+        BoardEntity boardEntity =
+            boardRepository.findById(announceDto.getBoardNo()).orElse(null);
+            assert boardEntity != null;
+            boardEntity.setBoardTitle(announceDto.getBoardTitle());
+            boardEntity.setBoardContents(announceDto.getBoardContents());
+            boardEntity.setBoardModifyDate(LocalDateTime.now());
+
+            boardRepository.save(boardEntity);
+
+        AnnounceEntity announceEntity =
+            announceRepository.findById(announceDto.getAnnounceNo()).orElse(null);
+            assert announceEntity != null;
+            announceEntity.setAnnounceType(announceDto.getAnnounceType());
+            announceEntity.setAnnouncePrimary(announceDto.getAnnouncePrimary());
+            announceEntity.setCanComment(announceDto.getCanComment());
+
+        announceRepository.save(announceEntity);
+    }
+
+    @Override
     public void deleteAnnounce(AnnounceDto announceNo) {
         BoardEntity boardEntity =
                 boardRepository.findById(announceNo.getBoardNo()).orElse(null);

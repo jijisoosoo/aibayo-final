@@ -1,3 +1,5 @@
+
+=======
 # 사용자 추가
 INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,0,1,NULL,'2020-01-01','admin@aico.co.kr','admin','1234');
 INSERT INTO member(reg_type, role_no, status, kinder_no, reg_date, email, name, pw) VALUES(0,1,1,1,'2020-01-01','hangang@hangang.go.kr','류병완','0000');
