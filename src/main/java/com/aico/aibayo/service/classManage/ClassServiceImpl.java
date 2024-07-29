@@ -29,4 +29,9 @@ public class ClassServiceImpl implements ClassService{
     public List<ClassDto> getByMemberId(Long id) {
         return classRepository.findAllByMemberId(id);
     }
+
+    @Override
+    public List<ClassDto> getAllByKidNo(Long kidNo) {
+        return classRepository.findAllByKidNo(kidNo);
+    }
 }
