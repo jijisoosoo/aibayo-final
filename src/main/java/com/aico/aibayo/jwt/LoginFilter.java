@@ -1,5 +1,6 @@
 package com.aico.aibayo.jwt;
 
+import jakarta.servlet.http.Cookie;
 import com.aico.aibayo.dto.member.CustomMemberDetails;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -31,7 +32,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 //        System.out.println("attemptAuthentication test username : " + username);
 
         // spring security에서 username, password를 검증하기 위해서 toekn에 담아야 한다
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password, null);
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
 
         // token에 담은 검증을 위한 AuthenticationManager로 전달
         return authenticationManager.authenticate(authenticationToken);
@@ -45,13 +46,28 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String username = customMemberDetails.getUsername();
 
         Collection<? extends GrantedAuthority> authorities = authResult.getAuthorities();
-        Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
-        GrantedAuthority auth = iterator.next();
-        String role = auth.getAuthority();
+//        Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
+//        GrantedAuthority auth = iterator.next();
+//        String role = auth.getAuthority();
+        String role = authorities.stream().map(GrantedAuthority::getAuthority).findFirst().orElse("ROLE_ADMIN");
+
 
         String token = jwtUtil.createJwt(username, role, 60 * 60 * 10L);
 
         response.addHeader("Authorization", "Bearer " + token);
+
+        // JWT를 쿠키에 설정
+        Cookie jwtCookie = new Cookie("jwt", token);
+        jwtCookie.setHttpOnly(true);
+        jwtCookie.setSecure(true); // HTTPS를 사용하는 경우 설정
+        jwtCookie.setPath("/");
+        jwtCookie.setMaxAge(60 * 60 * 10); // 쿠키 유효 시간 설정 (초 단위)
+//        jwtCookie.setSameSite(Cookie.SameSite.NONE.name());
+
+
+        response.addCookie(jwtCookie);
+        response.sendRedirect("/main/admin");
+
     }
 
     @Override
