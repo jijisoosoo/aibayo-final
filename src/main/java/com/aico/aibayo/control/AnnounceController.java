@@ -186,10 +186,30 @@ public class AnnounceController {
 
 
 
-    @GetMapping("/admin/modifyForm")
-    public String modifyForm(){
+    @GetMapping("/admin/modify/{announceNo}")
+    public String modifyForm(@PathVariable Long announceNo, Model model){
+        HashMap<String, Object> memberDto = new HashMap<>();
+        memberDto.put("roleNo", roleNo);
+        memberDto.put("id", id);
+
+        AnnounceDto announceDto = announceService.findByAnnounceNo(announceNo);
+
+        model.addAttribute("member",memberDto);
+        model.addAttribute("announce",announceDto);
+
         return "/announce/admin/modifyForm";
     }
+
+    @PutMapping("/modifyOk")
+    @ResponseBody
+    public void modify(@RequestBody AnnounceDto announceDto) {
+        log.info("modify announce: {}", announceDto);
+        announceService.updatennounce(announceDto);
+    }
+
+
+
+
     @DeleteMapping("/delete")
     @ResponseBody
     public void delete(@RequestBody AnnounceDto announceDto) {
