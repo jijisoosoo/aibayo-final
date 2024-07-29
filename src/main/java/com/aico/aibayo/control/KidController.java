@@ -87,10 +87,12 @@ public class KidController {
         KidDto kidDto = kidService.getByKidNo(kidNo);
         List<MemberDto> memberDtos = memberService.getAllByKidNo(kidNo);
         List<ClassDto> classDtos = classService.getAllByKidNo(kidNo);
+        List<ClassDto> classAllDtos = classService.getByKinderNo(kinderNo);
 
         model.addAttribute("kid", kidDto);
         model.addAttribute("members", memberDtos);
         model.addAttribute("classes", classDtos);
+        model.addAttribute("allClass", classAllDtos);
     }
 
     private String getConditionAndGoList(Model model, KidSearchCondition condition) {
