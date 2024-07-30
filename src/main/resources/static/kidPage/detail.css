@@ -94,6 +94,7 @@
 .kid_info_box_detail {
     display: flex;
     justify-content: center;
+    gap: 10px;
 }
 
 .kid_info_box_form {
@@ -133,6 +134,13 @@
     border-radius: 10px;
 }
 
+.kid_info_text_input:disabled {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px rgb(195 195 195 / 30%) solid;
+}
+
 .kid_birth_text_input {
     text-align: center;
 }
@@ -146,7 +154,7 @@
 }
 
 /* .class_9 { width: 30px; height: 30px; left: 0px; top: 0px; position: absolute } */
-.kid_birth_svg {
+.kid_info_svg {
     width: 30px;
     height: 30px;
     padding-top: 5px;
