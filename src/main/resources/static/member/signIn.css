@@ -314,13 +314,7 @@ body {
     line-height: normal;
 }
 
-.login-page .SNS-kakaotalk {
-    position: absolute;
-    width: 35px;
-    height: 35px;
-    top: 645px;
-    left: 147px;
-}
+
 
 .login-page .text-wrapper-10 {
     position: absolute;
@@ -333,4 +327,28 @@ body {
     letter-spacing: -3.2px;
     line-height: 57.6px;
     white-space: nowrap;
+}
+
+
+.group-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 50px;
+}
+.login-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+.login-button img {
+    width: 50px;
+    height: 100%;
+    object-fit: contain;
 }

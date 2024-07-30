@@ -9,7 +9,8 @@
     <link rel="stylesheet" th:href="@{/member/signInFindPw.css}"/>
     <link rel="stylesheet" th:href="@{/member/signInGuide.css}"/>
 
-    <script th:src="@{/member/signInFindPw.js}"></script>
+    <script th:src="@{/member/signInResetPw.js}"></script>
+
 </head>
 <body>
 <div class="login-page">
@@ -27,28 +28,18 @@
                     <form action="#" method="post">
                         <div class="group-4">
 
-                            <div class="text-wrapper-3">이메일</div>
-                            <!-- <div class="username-or-email-wrapper"><div class="text-wrapper-4">email address</div></div> -->
-                            <input class="username-or-email-wrapper" name="username" id="email-input" type="email"
-                                   required></input>
+                            <div class="text-wrapper-3">비밀번호를 입력해주세요</div>
+                            <input class="username-or-email-wrapper" name="password1" id="password1" type="password" required>
                         </div>
 
                         <div class="group-5">
-                            <div class="text-wrapper-3">인증번호</div>
-                            <input type="password" class="div-wrapper" name="password" id="certification-number">
+                            <div class="text-wrapper-3">비밀번호 다시 입력해주세요</div>
+                            <input type="password" class="div-wrapper" name="password2" id="password2" required>
                         </div>
 
 
                         <div class="overlap-wrapper">
-                            <!-- <div class="overlap-2"><div class="text-wrapper-6">Sign in</div></div> -->
-                            <input id="certification-number-submit" class="overlap-2 text-wrapper-1" type="submit" value="인증번호 보내기">
-                        </div>
-
-
-                        <div class="group-wrapper">
-                            <div class="overlap-group-wrapper">
-                                <div class="overlap-group-2"><a th:href="@{/member/signInResetPw}"  class="text-wrapper-8">인증완료</a></div>
-                            </div>
+                            <input id="certification-number-submit" class="overlap-2 text-wrapper-1" type="submit" value="비밀번호 재설정">
                         </div>
 
                     </form>
@@ -56,7 +47,7 @@
 
                 </div>
             </div>
-            <div class="text-wrapper-7">비밀번호 찾기</div>
+            <div class="text-wrapper-7">비밀번호 초기화</div>
 
 
         </div>

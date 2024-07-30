@@ -1,11 +1,10 @@
 package com.aico.aibayo.config;
 
-
 import com.aico.aibayo.jwt.JWTFilter;
-
 import com.aico.aibayo.jwt.JWTUtil;
 import com.aico.aibayo.jwt.LoginFilter;
-import jakarta.servlet.http.HttpServletRequest;
+import com.aico.aibayo.oauth2.CustomSuccessHandler;
+import com.aico.aibayo.service.member.CustomOAuth2MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,18 +16,18 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
 
-import java.util.Collections;
 
 @Configuration // 이 클래스가 설정 클래스임을 나타냄
 @EnableWebSecurity // 웹 보안을 활성화
 @RequiredArgsConstructor // final 필드에 대한 생성자를 자동으로 생성
 public class SecurityConfig {
-
+    private final CustomOAuth2MemberService customOAuth2MemberService;
+    private final CustomSuccessHandler customSuccessHandler;
     private final JWTUtil jwtUtil;
     private final AuthenticationConfiguration authenticationConfiguration;
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
@@ -39,38 +38,64 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean // SecurityFilterChain 빈 생성
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http // CSRF 보호 비활성화
-                .csrf((csrf) -> csrf.disable());
+        // CSRF 보호 비활성화
+        http.csrf(csrf -> csrf.disable());
 
-        http // 기본 폼 로그인 비활성화
-                .formLogin((form) -> form.disable());
+        // 기본 폼 로그인 비활성화
+        http.formLogin(form -> form.disable());
 
-        http // HTTP 기본 인증 비활성화
-                .httpBasic((basic) -> basic.disable());
+        // HTTP 기본 인증 비활성화
+        http.httpBasic(basic -> basic.disable());
 
-        http // 경로별 인가 설정
-                .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/member/**", "/", "/login").permitAll() // 로그인, 홈, 회원가입 경로는 모든 사용자에게 허용
-                        .requestMatchers("/main/admin").hasRole("ADMIN")
-                        .requestMatchers("/main/user").hasRole("USER")
-                        .anyRequest().authenticated() // 그 외의 모든 요청은 인증 필요
-                );
+        // OAuth2 로그인 설정
+        http.oauth2Login(oauth2 -> oauth2
+                .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint
+                        .userService(customOAuth2MemberService))
+                .successHandler(customSuccessHandler));
 
-        http // JWT 검증
-                .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
+        // JWT 검증
+        http.addFilterAfter(new JWTFilter(jwtUtil), OAuth2LoginAuthenticationFilter.class)
+                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
-        http // 커스텀 로그인 필터 추가
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class); // LoginFilter를 UsernamePasswordAuthenticationFilter 위치에 추가
-        // AuthenticationConfiguration: SpringSecurity에서 제공하는 설정 객체로, AuthenticationManager를 구성하는 데 필요한 정보를 제공
+        // 경로별 인가 설정
+        http.authorizeHttpRequests(auth -> auth
+                .requestMatchers("/member/**", "/", "/login", "/css/**", "/images/**", "/js/**").permitAll() // 로그인, 홈, 회원가입 경로는 모든 사용자에게 허용
+                .requestMatchers("/main/admin").hasRole("ADMIN")
+                .requestMatchers("/main/user").hasRole("USER")
+                .anyRequest().authenticated() // 그 외의 모든 요청은 인증 필요
+        );
 
-        http // 세션 관리 설정
-                .sessionManagement((session) -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 세션을 사용하지 않음 (무상태)
-                );
+        // 세션 관리 설정
+        http.sessionManagement(session -> session
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)); // 세션을 사용하지 않음 (무상태)
 
         return http.build(); // 설정된 SecurityFilterChain을 빌드하여 반환
     }
+
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//
+//        http
+//                .csrf(csrf -> csrf.disable())
+//                .formLogin(form -> form.disable())
+//                .httpBasic(basic -> basic.disable())
+//                .oauth2Login(oauth2 -> oauth2
+//                        .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint
+//                                .userService(customOAuth2MemberService))
+//                        .successHandler(customSuccessHandler))
+//                .authorizeHttpRequests(auth -> auth
+//                        .requestMatchers("/member/**", "/", "/login").permitAll()
+//                        .requestMatchers("/main/admin").hasRole("ADMIN")
+//                        .requestMatchers("/main/user").hasRole("USER")
+//                        .anyRequest().authenticated())
+//                .addFilterAfter(new JWTFilter(jwtUtil), OAuth2LoginAuthenticationFilter.class)
+//                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class)
+//                .sessionManagement(session -> session
+//                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+//
+//        return http.build();
+//    }
 }

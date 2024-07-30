@@ -28,9 +28,13 @@ public class LoginController {
         return "member/signInFindPw";
     }
 
+    @GetMapping("signInResetPw")
+    public String singInResetPw() { return "member/signInResetPw"; }
+
     @GetMapping("/myPage")
     public String myPage() {
         return "member/myPage";
     }
+
 
 }

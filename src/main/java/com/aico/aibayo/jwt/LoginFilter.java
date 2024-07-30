@@ -59,7 +59,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         // JWT를 쿠키에 설정
         Cookie jwtCookie = new Cookie("jwt", token);
         jwtCookie.setHttpOnly(true);
-        jwtCookie.setSecure(true); // HTTPS를 사용하는 경우 설정
+//        jwtCookie.setSecure(true); // HTTPS를 사용하는 경우 설정
         jwtCookie.setPath("/");
         jwtCookie.setMaxAge(60 * 60 * 10); // 쿠키 유효 시간 설정 (초 단위)
 //        jwtCookie.setSameSite(Cookie.SameSite.NONE.name());
