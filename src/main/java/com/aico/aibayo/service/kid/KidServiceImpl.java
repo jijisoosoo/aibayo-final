@@ -6,6 +6,7 @@ import com.aico.aibayo.dto.kid.KidSearchCondition;
 import com.aico.aibayo.entity.KidEntity;
 import com.aico.aibayo.repository.kid.KidRepository;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,5 +39,10 @@ public class KidServiceImpl implements KidService {
     @Override
     public List<KidDto> getAllWithParentByClassNoAndAcceptStatus(KidSearchCondition condition) {
         return kidRepository.findAllWithParentByClassNoAndAcceptStatus(condition);
+    }
+
+    @Override
+    public KidDto getByKidNo(Long kidNo) {
+        return KidDto.toDto(Objects.requireNonNull(kidRepository.findById(kidNo).orElse(null)));
     }
 }

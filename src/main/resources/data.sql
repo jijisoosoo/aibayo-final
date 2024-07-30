@@ -295,21 +295,23 @@ INSERT INTO class_kid(class_no, kid_no, accept_no) VALUES(6,1,269);
 
 
 # 부모_원생 추가
-INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(42,14,1,1,'mother');
-INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(43,15,2,1,'mother');
-INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(44,16,3,1,'father');
-INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(45,17,4,1,'father');
-INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(46,17,5,1,'father');
-INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(47,18,6,1,'father');
-INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(48,19,7,1,'mother');
-INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(49,19,8,1,'mother');
-INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(50,20,9,1,'mother');
-INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(51,21,10,1,'father');
-INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(52,22,11,1,'mother');
-INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(53,22,12,1,'mother');
-INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(54,23,13,1,'father');
-INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(55,24,14,1,'mother');
-INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(56,25,15,1,'father');
+INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(40,14,1,1,'mother');
+INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(41,15,2,1,'mother');
+INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(42,16,3,1,'father');
+INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(43,17,4,1,'father');
+INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(44,17,5,1,'father');
+INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(45,18,6,1,'father');
+INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(46,19,7,1,'mother');
+INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(47,19,8,1,'mother');
+INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(48,20,9,1,'mother');
+INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(49,21,10,1,'father');
+INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(50,22,11,1,'mother');
+INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(51,22,12,1,'mother');
+INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(52,23,13,1,'father');
+INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(53,24,14,1,'mother');
+INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(54,25,15,1,'father');
+INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(270,16,1,0,'father');
+INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(271,14,3,0,'mother');
 INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(272,15,2,0,'');
 INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(273,17,4,0,'');
 INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(274,18,5,0,'');
