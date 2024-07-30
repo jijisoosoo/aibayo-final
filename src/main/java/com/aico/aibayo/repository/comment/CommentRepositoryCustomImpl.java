@@ -17,15 +17,12 @@ import org.springframework.data.support.PageableExecutionUtils;
 
 import java.util.List;
 
-
 @RequiredArgsConstructor
-public class CommentRepositoryCustomlmpl implements CommentRepositoryCustom{
+public class CommentRepositoryCustomImpl implements CommentRepositoryCustom {
     private final JPAQueryFactory jpaQueryFactory;
     private final QCommentEntity comment = QCommentEntity.commentEntity;
     private final QBoardEntity board = QBoardEntity.boardEntity;
-    private final QMemberEntity member =QMemberEntity.memberEntity;
-
-
+    private final QMemberEntity member = QMemberEntity.memberEntity;
 
     @Override
     public Page<CommentDto> findAllByBoardNo(CommentSearchCondition condition, Pageable pageable) {
@@ -44,9 +41,10 @@ public class CommentRepositoryCustomlmpl implements CommentRepositoryCustom{
                 ))
                 .from(comment)
                 .join(board).on(board.boardNo.eq(comment.boardNo))
-                .leftJoin(member).on(board.writer.eq(member.id))
+                .leftJoin(member).on(comment.commentWriter.eq(member.id)) // 이 부분 수정
                 .where(
-                        getInvisibleFlagEq(board)
+                        getInvisibleFlagEq(board),
+                        comment.boardNo.eq(condition.getBoardNo())
                 )
                 .orderBy(
                         comment.commentGroupNo.desc(),
@@ -56,18 +54,23 @@ public class CommentRepositoryCustomlmpl implements CommentRepositoryCustom{
                 .limit(pageable.getPageSize())
                 .fetch();
 
-        JPAQuery<Long> count = jpaQueryFactory.select(comment.count())
+        JPAQuery<Long> countQuery = jpaQueryFactory
+                .select(comment.count())
                 .from(comment)
                 .join(board).on(board.boardNo.eq(comment.boardNo))
-                .join(member).on(board.writer.eq(member.id))
+                .join(member).on(comment.commentWriter.eq(member.id)) // 이 부분 수정
                 .where(
-                        getInvisibleFlagEq(board)
+                        getInvisibleFlagEq(board),
+                        comment.boardNo.eq(condition.getBoardNo())
                 );
 
-        return PageableExecutionUtils.getPage(comments, pageable, count::fetchOne);
+        return PageableExecutionUtils.getPage(comments, pageable, countQuery::fetchOne);
     }
+
     private BooleanExpression getInvisibleFlagEq(QBoardEntity board) {
+        if (board.invisibleFlag == null) {
+            return board.invisibleFlag.isNull(); // 또는 board.invisibleFlag.isNotNull();
+        }
         return board.invisibleFlag.eq(BooleanEnum.FALSE.getBool());
     }
 }
-

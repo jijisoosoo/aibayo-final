@@ -73,6 +73,13 @@
                     <a class="card"
                     th:each="announce : ${announces}" th:object="${announce}" th:href="@{|/announce/admin/*{announceNo}|}">
                         <div class="frame-3">
+                            [
+                            <span th:if="${announce.announceType == 1}">선생님만</span>
+                            <span th:if="${announce.announceType == 2}">원 공지</span>
+                            <span th:if="${announce.announceType == 3}">일정 / 행사</span>
+                            <span th:if="${announce.announceType == 4}">교육</span>
+                            <span th:if="${announce.announceType == 5}">보육료</span>
+                            ]
                             <p class="p" th:text="*{boardTitle}"></p>
                         </div>
                         <div class="frame-wrapper">
@@ -89,7 +96,12 @@
                                     </div>
                                 </div>
                                 <div class="frame-8">
-                                    <div class="text-wrapper-4"th:text="*{name}" ></div>
+                                    <div class="text-wrapper-4">
+                                        <span th:text="*{name}">[Name]</span>
+                                        <span th:if="*{roleNo == 1}" th:text="' 원장 선생님'">[Principal Teacher]</span>
+                                        <span th:if="*{roleNo == 2}" th:text="' 선생님'">[Teacher]</span>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
