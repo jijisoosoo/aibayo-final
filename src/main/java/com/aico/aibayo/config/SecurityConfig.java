@@ -1,10 +1,14 @@
 package com.aico.aibayo.config;
 
+import com.aico.aibayo.jwt.CustomLogoutFilter;
 import com.aico.aibayo.jwt.JWTFilter;
 import com.aico.aibayo.jwt.JWTUtil;
 import com.aico.aibayo.jwt.LoginFilter;
 import com.aico.aibayo.oauth2.CustomSuccessHandler;
 import com.aico.aibayo.service.member.CustomOAuth2MemberService;
+import com.aico.aibayo.service.member.TokenService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +22,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
 
-
 @Configuration // 이 클래스가 설정 클래스임을 나타냄
 @EnableWebSecurity // 웹 보안을 활성화
 @RequiredArgsConstructor // final 필드에 대한 생성자를 자동으로 생성
@@ -27,6 +30,7 @@ public class SecurityConfig {
     private final CustomSuccessHandler customSuccessHandler;
     private final JWTUtil jwtUtil;
     private final AuthenticationConfiguration authenticationConfiguration;
+    private final TokenService tokenService;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
@@ -52,13 +56,15 @@ public class SecurityConfig {
 
         // OAuth2 로그인 설정
         http.oauth2Login(oauth2 -> oauth2
+                .loginPage("/member/signIn")
                 .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint
                         .userService(customOAuth2MemberService))
                 .successHandler(customSuccessHandler));
 
         // JWT 검증
-        http.addFilterAfter(new JWTFilter(jwtUtil), OAuth2LoginAuthenticationFilter.class)
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterAfter(new JWTFilter(jwtUtil), OAuth2LoginAuthenticationFilter.class);
+        http.addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, tokenService), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new CustomLogoutFilter(jwtUtil, tokenService), UsernamePasswordAuthenticationFilter.class);
 
         // 경로별 인가 설정
         http.authorizeHttpRequests(auth -> auth
@@ -74,28 +80,4 @@ public class SecurityConfig {
 
         return http.build(); // 설정된 SecurityFilterChain을 빌드하여 반환
     }
-
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//
-//        http
-//                .csrf(csrf -> csrf.disable())
-//                .formLogin(form -> form.disable())
-//                .httpBasic(basic -> basic.disable())
-//                .oauth2Login(oauth2 -> oauth2
-//                        .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint
-//                                .userService(customOAuth2MemberService))
-//                        .successHandler(customSuccessHandler))
-//                .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers("/member/**", "/", "/login").permitAll()
-//                        .requestMatchers("/main/admin").hasRole("ADMIN")
-//                        .requestMatchers("/main/user").hasRole("USER")
-//                        .anyRequest().authenticated())
-//                .addFilterAfter(new JWTFilter(jwtUtil), OAuth2LoginAuthenticationFilter.class)
-//                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class)
-//                .sessionManagement(session -> session
-//                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-//
-//        return http.build();
-//    }
 }

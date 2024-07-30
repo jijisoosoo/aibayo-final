@@ -1,5 +1,6 @@
 package com.aico.aibayo.jwt;
 
+import com.aico.aibayo.service.member.TokenService;
 import jakarta.servlet.http.Cookie;
 import com.aico.aibayo.dto.member.CustomMemberDetails;
 import jakarta.servlet.FilterChain;
@@ -22,6 +23,7 @@ import java.util.Iterator;
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
     private final JWTUtil jwtUtil;
+    private final TokenService tokenService;
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
@@ -46,15 +48,12 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String username = customMemberDetails.getUsername();
 
         Collection<? extends GrantedAuthority> authorities = authResult.getAuthorities();
-//        Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
-//        GrantedAuthority auth = iterator.next();
-//        String role = auth.getAuthority();
         String role = authorities.stream().map(GrantedAuthority::getAuthority).findFirst().orElse("ROLE_ADMIN");
-
-
         String token = jwtUtil.createJwt(username, role, 60 * 60 * 10L);
+//        response.addHeader("Authorization", "Bearer " + token);
 
-        response.addHeader("Authorization", "Bearer " + token);
+        // JWT를 서버에 저장
+        tokenService.saveToken(token);
 
         // JWT를 쿠키에 설정
         Cookie jwtCookie = new Cookie("jwt", token);
@@ -62,7 +61,6 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 //        jwtCookie.setSecure(true); // HTTPS를 사용하는 경우 설정
         jwtCookie.setPath("/");
         jwtCookie.setMaxAge(60 * 60 * 10); // 쿠키 유효 시간 설정 (초 단위)
-//        jwtCookie.setSameSite(Cookie.SameSite.NONE.name());
 
 
         response.addCookie(jwtCookie);

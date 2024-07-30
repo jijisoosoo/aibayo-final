@@ -2,6 +2,7 @@ package com.aico.aibayo.oauth2;
 
 import com.aico.aibayo.dto.member.CustomOAuth2Member;
 import com.aico.aibayo.jwt.JWTUtil;
+import com.aico.aibayo.service.member.TokenService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,6 +22,7 @@ import java.util.logging.Logger;
 public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private static final Logger LOGGER = Logger.getLogger(CustomSuccessHandler.class.getName());
     private final JWTUtil jwtUtil;
+    private final TokenService tokenService;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
@@ -37,6 +39,9 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         // JWT를 생성합니다.
         String token = jwtUtil.createJwt(username, role, 60 * 60 * 10L);
         LOGGER.info("Generated JWT Token: " + token);
+
+        // JWT를 서버에 저장
+        tokenService.saveToken(token);
 
         // 생성된 JWT를 쿠키에 담아 응답에 추가
         Cookie jwtCookie = createCookie("jwt", token);
