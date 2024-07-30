@@ -1,9 +1,13 @@
 package com.aico.aibayo.service.announce;
 
 
+import com.aico.aibayo.common.BooleanEnum;
 import com.aico.aibayo.dto.announce.AnnounceDto;
 import com.aico.aibayo.dto.announce.AnnounceSearchCondition;
 import com.aico.aibayo.dto.notepad.NotepadSearchCondition;
+import com.aico.aibayo.entity.AnnounceEntity;
+import com.aico.aibayo.entity.BoardEntity;
+import com.aico.aibayo.repository.BoardRepository;
 import com.aico.aibayo.repository.announce.AnnounceRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +15,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -21,6 +27,7 @@ import java.util.Objects;
 
 public class AnnounceServiceImpl implements AnnounceService {
     private final AnnounceRepository announceRepository;
+    private final BoardRepository boardRepository;
     private static final int PAGE_SIZE_CARD = 6;
     private static final int PAGE_SIZE_LIST = 15;
     private static final int PAGE_SIZE_PRIMARY = 5;
@@ -59,5 +66,59 @@ public class AnnounceServiceImpl implements AnnounceService {
     @Override
     public AnnounceDto findByAnnounceNo(Long announceNo) {
         return announceRepository.findByAnnounceNo(announceNo);
+    }
+
+    @Override
+    @Transactional
+    public void insertAnnounce(AnnounceDto announceDto) {
+        BoardEntity boardEntity = BoardEntity.builder()
+                .invisibleFlag(BooleanEnum.FALSE.getBool())
+                .boardType(announceDto.getBoardType())
+                .writer(announceDto.getWriter())
+                .boardTitle(announceDto.getBoardTitle())
+                .boardContents(announceDto.getBoardContents())
+                .boardRegDate(LocalDateTime.now())
+                .kinderNo(announceDto.getKinderNo())
+                .build();
+        BoardEntity savedBoard = boardRepository.save(boardEntity);
+        AnnounceEntity announceEntity = AnnounceEntity.builder()
+                .boardNo(savedBoard.getBoardNo())
+                .announceType(announceDto.getAnnounceType())
+                .announcePrimary(announceDto.getAnnouncePrimary())
+                .canComment(announceDto.getCanComment())
+                .build();
+        AnnounceEntity savedAnnounce = announceRepository.save(announceEntity);
+    }
+
+    @Override
+    @Transactional
+    public void updatennounce(AnnounceDto announceDto) {
+        BoardEntity boardEntity =
+            boardRepository.findById(announceDto.getBoardNo()).orElse(null);
+            assert boardEntity != null;
+            boardEntity.setBoardTitle(announceDto.getBoardTitle());
+            boardEntity.setBoardContents(announceDto.getBoardContents());
+            boardEntity.setBoardModifyDate(LocalDateTime.now());
+
+            boardRepository.save(boardEntity);
+
+        AnnounceEntity announceEntity =
+            announceRepository.findById(announceDto.getAnnounceNo()).orElse(null);
+            assert announceEntity != null;
+            announceEntity.setAnnounceType(announceDto.getAnnounceType());
+            announceEntity.setAnnouncePrimary(announceDto.getAnnouncePrimary());
+            announceEntity.setCanComment(announceDto.getCanComment());
+
+        announceRepository.save(announceEntity);
+    }
+
+    @Override
+    public void deleteAnnounce(AnnounceDto announceNo) {
+        BoardEntity boardEntity =
+                boardRepository.findById(announceNo.getBoardNo()).orElse(null);
+        assert boardEntity != null;
+        boardEntity.setInvisibleFlag(BooleanEnum.TRUE.getBool());
+
+        boardRepository.save(boardEntity);
     }
 }

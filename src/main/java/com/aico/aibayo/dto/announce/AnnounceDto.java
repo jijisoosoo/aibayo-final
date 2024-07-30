@@ -1,8 +1,11 @@
 package com.aico.aibayo.dto.announce;
 
+import com.aico.aibayo.common.AnnounceTypeEnum;
 import lombok.*;
 
 import java.time.LocalDateTime;
+
+import static com.aico.aibayo.common.AnnounceTypeEnum.*;
 
 @Setter
 @Getter
@@ -17,6 +20,7 @@ public class AnnounceDto {
     private String boardContents;
     private String invisibleFlag;
     private LocalDateTime boardRegDate;
+    private Long kinderNo;
 
     private Long announceNo;
     private Integer announceType;
@@ -38,7 +42,7 @@ public class AnnounceDto {
     public AnnounceDto(
                 Integer announceType,Long announceNo,String announcePrimary,String canComment,Integer boardType,
                 Long boardNo, Long writer, String boardContents, String boardTitle, String invisibleFlag,
-                LocalDateTime boardRegDate, Integer roleNo, Long id, String name){
+                LocalDateTime boardRegDate, Long kinderNo, Integer roleNo, Long id, String name){
                     this.announceType=announceType;
                     this.announceNo=announceNo;
                     this.announcePrimary=announcePrimary;
@@ -50,35 +54,10 @@ public class AnnounceDto {
                     this.boardTitle=boardTitle;
                     this.invisibleFlag=invisibleFlag;
                     this.boardRegDate=boardRegDate;
+                    this.kinderNo=kinderNo;
                     this.roleNo=roleNo;
                     this.id=id;
                     this.name=name;
     }
-    public AnnounceDto(
-            Integer announceType,Long announceNo,String announcePrimary,String canComment,Integer boardType,
-            Long boardNo, Long writer, String boardContents, String boardTitle, String invisibleFlag,
-            LocalDateTime boardRegDate, Integer roleNo, Long id, String name,
-            Integer commentGroupNo,LocalDateTime commentRegDate,Long commentWriter,
-            String commentClass,String commentContent, String commentDeleteFlag){
-                this.announceType=announceType;
-                this.announceNo=announceNo;
-                this.announcePrimary=announcePrimary;
-                this.canComment=canComment;
-                this.boardType=boardType;
-                this.boardNo=boardNo;
-                this.writer=writer;
-                this.boardContents=boardContents;
-                this.boardTitle=boardTitle;
-                this.invisibleFlag=invisibleFlag;
-                this.boardRegDate=boardRegDate;
-                this.roleNo=roleNo;
-                this.id=id;
-                this.name=name;
-                this.commentGroupNo=commentGroupNo;
-                this.commentRegDate=commentRegDate;
-                this.commentWriter=commentWriter;
-                this.commentClass=commentClass;
-                this.commentContent=commentContent;
-                this.commentDeleteFlag=commentDeleteFlag;
-    }
+
 }

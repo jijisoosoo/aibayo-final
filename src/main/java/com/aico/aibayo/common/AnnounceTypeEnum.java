@@ -16,7 +16,7 @@ public enum AnnounceTypeEnum {
         this.num = num;
     }
 
-    static AnnounceTypeEnum findByNumber (int num){
+    public static AnnounceTypeEnum findByNumber(int num){
         for(AnnounceTypeEnum announceType : AnnounceTypeEnum.values()){{
             if(num == announceType.num){
                 return announceType;
