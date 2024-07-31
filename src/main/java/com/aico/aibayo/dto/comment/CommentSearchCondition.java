@@ -9,11 +9,10 @@ import java.time.LocalDateTime;
 public class CommentSearchCondition {
     private Long boardNo;
     private String invisibleFlag;
-    private Long announceNo;
 
     private Integer roleNo;
     private String name;
-    private Integer kinderNo;
+    private Long kinderNo;
 
     private Integer commentGroupNo;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

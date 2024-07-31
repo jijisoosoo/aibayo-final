@@ -92,7 +92,7 @@ public class AnnounceServiceImpl implements AnnounceService {
 
     @Override
     @Transactional
-    public void updatennounce(AnnounceDto announceDto) {
+    public void updateAnnounce(AnnounceDto announceDto) {
         BoardEntity boardEntity =
             boardRepository.findById(announceDto.getBoardNo()).orElse(null);
             assert boardEntity != null;

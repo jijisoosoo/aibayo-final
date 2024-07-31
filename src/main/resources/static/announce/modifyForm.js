@@ -21,6 +21,7 @@ $(document).ready(function () {
         console.log("Primary checked: " + $('#primary').prop('checked')); // true 또는 false
         console.log("Comment checked: " + $('#comment').prop('checked')); // true 또는 false
     }
+
     // 초기화 함수 호출
     initializeForm();
 
@@ -63,6 +64,15 @@ $(document).ready(function () {
             }
         });
     });
+
+    // 토글 버튼 클릭 시 로그 출력
+    $('#primary').on('click', function () {
+        console.log('Primary checked: ' + ($(this).prop('checked') ? '1' : '0'));
+    });
+    $('#comment').on('click', function () {
+        console.log('comment checked: ' + ($(this).prop('checked') ? '1' : '0'));
+    });
+
 });
 
 function afterSuccess(response) {
@@ -103,9 +113,3 @@ function setData(modifyForm) {
     console.log("Set Data - Primary: " + modifyForm.data('announce-primary'));
     console.log("Set Data - Comment: " + modifyForm.data('can-comment'));
 }
-    //토글버튼 로그 출력
-    $(document).ready(function () {
-        $('#primary').on('click', function () {
-            console.log('Primary checked: ' + $(this).prop('checked')?'1': '0');
-        });
-    });
