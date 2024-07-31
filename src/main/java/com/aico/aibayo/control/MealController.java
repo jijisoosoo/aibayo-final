@@ -9,21 +9,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MealController {
     @GetMapping("/admin/list")
     public String adminList() {
-        return "/meal/admin/list";
+        return "/admin/meal/list";
     }
 
     @GetMapping("/user/list")
     public String userList() {
-        return "/meal/user/list";
+        return "/user/meal/list";
     }
 
     @GetMapping("/admin/write")
     public String writeForm() {
-        return "/meal/admin/writeForm";
+        return "/admin/meal/writeForm";
     }
 
     @GetMapping("/admin/modify")
     public String modifyForm() {
-        return "/meal/admin/modifyForm";
+        return "/admin/meal/modifyForm";
     }
 }
