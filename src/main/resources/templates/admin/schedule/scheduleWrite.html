@@ -6,11 +6,9 @@
 <title layout:fragment="title">scheduleWrite</title>
 
 <th:block layout:fragment="css">
-  <link rel="stylesheet" th:href="@{/schedule/globals.css}" />
+  <link rel="stylesheet" th:href="@{/css/globals.css}" />
   <link rel="stylesheet" th:href="@{/css/schedule/scheduleWrite.css}" />
-  <link rel="stylesheet" th:href="@{/schedule/scheduleWriteGuide.css}" />
   <link rel="stylesheet" th:href="@{/css/schedule/scheduleModal.css}" />
-  <link rel="stylesheet" th:href="@{/schedule/scheduleModalguide.css}" />
   <link rel="stylesheet" th:href="@{/css/CommonContainerPlus.css}" />
   <link rel="stylesheet" th:href="@{/css/CommonHoverPlus.css}" />
 </th:block>
@@ -22,12 +20,12 @@
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
-  <form class="schedule-form" th:action="@{/schedule/admin/scheduleMain}" method="post">
+  <form class="schedule-form" th:action="@{/admin/scheduleMain}" method="post">
 
     <div class="title"><div class="text-wrapper-4">일정표 작성</div></div>
 
     <div class="buttons">
-      <a class="button-cancel" th:href="@{/schedule/admin/scheduleMain}">
+      <a class="button-cancel" th:href="@{/admin/scheduleMain}">
         <div class="text-cancel">취소</div>
       </a>
       <input type="submit" class="button-submit" value="추가하기">
@@ -44,7 +42,7 @@
           <div class="text-wrapper-8">-</div>
           <div class="calendar-pick">
             <img class="calendar-vector" src="/images/common/calendar_gray.png" />
-            <input type="text" class="datepickerdiv datepicker" placeholder="날짜 선택" disabled>
+            <input type="text" class="datepickerdiv datepicker" placeholder="날짜 선택" readonly>
           </div>
         </div>
       </div>
