@@ -8,7 +8,7 @@
 <th:block layout:fragment="css">
     <link rel="stylesheet" th:href="@{/css/CommonContainerPlus.css}" />
     <link rel="stylesheet" th:href="@{/css/CommonHoverPlus.css}" />
-    <link rel="stylesheet" th:href="@{/payment/globals.css}" />
+    <link rel="stylesheet" th:href="@{/css/globals.css}" />
     <link rel="stylesheet" th:href="@{/css/payment/paymentConfirm.css}" />
 
 </th:block>
@@ -19,7 +19,7 @@
 <div class="container main_container" layout:fragment="content">
 
     <div class="title">
-        <a class="icon-back" th:href="@{/payment/user/paymentMain}">
+        <a class="icon-back" th:href="@{/user/paymentMain}">
             <img src="/payment/img/back.png" alt=""/>
         </a>
         <div class="div-wrapper"><div class="text-wrapper-title">납부하기</div></div>
@@ -125,10 +125,10 @@
 
         <div class="buttonarea">
             <div class="buttons">
-                <a class="button-cancel" th:href="@{/payment/user/paymentMain}">
+                <a class="button-cancel" th:href="@{/user/paymentMain}">
                     <div class="text-cancel">취소</div>
                 </a>
-                <a class="button-submit" th:href="@{/payment/user/paymentDone}">
+                <a class="button-submit" th:href="@{/user/paymentDone}">
                     <div class="text-submit">결제하기</div>
                 </a>
             </div>

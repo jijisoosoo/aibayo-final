@@ -822,7 +822,7 @@
 }
 
 .container .img-9 {
-    background-image: url(img/clock.png);
+    background-image: url(../../images/common/clock.png);
     position: relative;
     width: 35px;
     height: 35px;

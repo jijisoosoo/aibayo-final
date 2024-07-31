@@ -7,22 +7,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
 @Controller
-@RequestMapping("/teacher")
+@RequestMapping
 public class TeacherController {
 
     @GetMapping("/admin/teacherMain")
     public String adminTeacherMain() {
-        return "/teacherManage/teacherMain";
+        return "/admin/teacher/teacherMain";
     }
 
     @GetMapping("/admin/teacherProfileAccept")
     public String adminTeacherProfileAccept() {
-        return "/teacherManage/teacherProfileAccept";
+        return "/admin/teacher/teacherProfileAccept";
     }
 
     @GetMapping("/admin/teacherProfileWait")
     public String adminTeacherProfileWait() {
-        return "/teacherManage/teacherProfileWait";
+        return "/admin/teacher/teacherProfileWait";
     }
 
 
