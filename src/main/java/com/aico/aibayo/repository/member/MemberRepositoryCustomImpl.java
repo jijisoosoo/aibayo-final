@@ -24,9 +24,9 @@ public class MemberRepositoryCustomImpl implements MemberRepositoryCustom{
         return jpaQueryFactory
                 .select(Projections.constructor(MemberDto.class,
                         member.id,
-                        member.email,
+                        member.username,
                         member.name,
-                        member.pw,
+                        member.password,
                         member.phone,
                         member.regType,
                         member.roleNo,
@@ -55,9 +55,9 @@ public class MemberRepositoryCustomImpl implements MemberRepositoryCustom{
         return jpaQueryFactory
                 .select(Projections.constructor(MemberDto.class,
                         member.id,
-                        member.email,
+                        member.username,
                         member.name,
-                        member.pw,
+                        member.password,
                         member.phone,
                         member.regType,
                         member.roleNo,

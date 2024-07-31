@@ -1,4 +1,4 @@
-package com.aico.aibayo.service;
+package com.aico.aibayo.service.member;
 
 import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.dto.member.MemberSearchCondition;

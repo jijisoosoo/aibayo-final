@@ -1,6 +1,8 @@
 package com.aico.aibayo.dto.member;
 
 import java.time.LocalDateTime;
+
+import com.aico.aibayo.entity.MemberEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,13 +16,14 @@ import lombok.ToString;
 @AllArgsConstructor
 public class MemberDto {
     private Long id;
-    private String email;
+    private String username;
     private String name;
-    private String pw;
+    private String password;
     private String phone;
-    private Integer regType;
-    private Integer roleNo;
-    private Integer status;
+    private int regType;
+    private int roleNo;
+    private String role;
+    private int status;
     private LocalDateTime regDate;
     private LocalDateTime modifyDate;
     private LocalDateTime inactivateDate;
@@ -29,16 +32,15 @@ public class MemberDto {
     private String profilePicture;
     private Long kinderNo;
 
-
     private String isMainParent;
 
-    public MemberDto(Long id, String email, String name, String pw, String phone, Integer regType, Integer roleNo,
+    public MemberDto(Long id, String username, String name, String password, String phone, Integer regType, Integer roleNo,
                      Integer status, LocalDateTime regDate, LocalDateTime modifyDate, LocalDateTime inactivateDate,
                      LocalDateTime latestLogDate, String latestIp, String profilePicture, Long kinderNo) {
         this.id = id;
-        this.email = email;
+        this.username = username;
         this.name = name;
-        this.pw = pw;
+        this.password = password;
         this.phone = phone;
         this.regType = regType;
         this.roleNo = roleNo;
@@ -50,6 +52,26 @@ public class MemberDto {
         this.latestIp = latestIp;
         this.profilePicture = profilePicture;
         this.kinderNo = kinderNo;
+    }
+
+    public static MemberDto toDto(MemberEntity entity) {
+        return new MemberDto(
+                entity.getId(),
+                entity.getUsername(),
+                entity.getName(),
+                entity.getPassword(),
+                entity.getPhone(),
+                entity.getRegType(),
+                entity.getRoleNo(),
+                entity.getStatus(),
+                entity.getRegDate(),
+                entity.getModifyDate(),
+                entity.getInactivateDate(),
+                entity.getLatestLogDate(),
+                entity.getLatestIp(),
+                entity.getProfilePicture(),
+                entity.getKinderNo()
+        );
     }
 
 }
