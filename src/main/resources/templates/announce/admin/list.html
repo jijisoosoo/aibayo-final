@@ -81,14 +81,20 @@
                             <td th:text="*{announceNo}"></td>
                             <!--                            <td th:text="*{announcePrimary}"></td>-->
                             <td>
-                                <span th:if="${announce.announceType == 0}">선생님만</span>
-                                <span th:if="${announce.announceType == 1}">원 공지</span>
-                                <span th:if="${announce.announceType == 2}">일정 / 행사</span>
-                                <span th:if="${announce.announceType == 3}">교육</span>
-                                <span th:if="${announce.announceType == 4}">보육료</span>
+                                <span th:if="${announce.announceType == 1}">선생님만</span>
+                                <span th:if="${announce.announceType == 2}">원 공지</span>
+                                <span th:if="${announce.announceType == 3}">일정 / 행사</span>
+                                <span th:if="${announce.announceType == 4}">교육</span>
+                                <span th:if="${announce.announceType == 5}">보육료</span>
                             </td>
                             <td th:text="*{boardTitle}"></td>
-                            <td th:text="*{name}"></td>
+<!--                            <td th:text="*{name}"></td>-->
+                            <td>
+                                <span th:text="*{name}">[Name]</span>
+                                <span th:if="*{roleNo == 1}" th:text="' 원장 선생님'">[Principal Teacher]</span>
+                                <span th:if="*{roleNo == 2}" th:text="' 선생님'">[Teacher]</span>
+                            </td>
+
                             <td th:text="*{#temporals.format(boardRegDate, 'yyyy년 MM월 dd일')}">2024.07.11.</td>
                             <td>0</td>
                         </tr>
@@ -97,14 +103,18 @@
                             <td th:text="*{announceNo}"></td>
                             <!--                            <td th:text="*{announcePrimary}"></td>-->
                             <td>
-                                <span th:if="${announce.announceType == 0}">선생님만</span>
-                                <span th:if="${announce.announceType == 1}">원 공지</span>
-                                <span th:if="${announce.announceType == 2}">일정 / 행사</span>
-                                <span th:if="${announce.announceType == 3}">교육</span>
-                                <span th:if="${announce.announceType == 4}">보육료</span>
+                                <span th:if="${announce.announceType == 1}">선생님만</span>
+                                <span th:if="${announce.announceType == 2}">원 공지</span>
+                                <span th:if="${announce.announceType == 3}">일정 / 행사</span>
+                                <span th:if="${announce.announceType == 4}">교육</span>
+                                <span th:if="${announce.announceType == 5}">보육료</span>
                             </td>
                             <td th:text="*{boardTitle}"></td>
-                            <td th:text="*{name}"></td>
+                            <td>
+                                <span th:text="*{name}">[Name]</span>
+                                <span th:if="*{roleNo == 1}" th:text="' 원장 선생님'">[Principal Teacher]</span>
+                                <span th:if="*{roleNo == 2}" th:text="' 선생님'">[Teacher]</span>
+                            </td>
                             <td th:text="*{#temporals.format(boardRegDate, 'yyyy년 MM월 dd일')}">2024.07.11.</td>
                             <td>0</td>
                         </tr>

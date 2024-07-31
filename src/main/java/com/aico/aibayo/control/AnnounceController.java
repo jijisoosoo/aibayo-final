@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,8 +44,8 @@ public class AnnounceController {
     public String admincard(@RequestParam(defaultValue = "1") int page, Model model){
         HashMap<String, Object> hashMap = new HashMap<>();
         AnnounceSearchCondition condition = new AnnounceSearchCondition();
-        condition.setKinderNo(1L);
-        model.addAttribute("KinderNo",1L);
+        condition.setKinderNo(kinderNo);
+        model.addAttribute("KinderNo",kinderNo);
         hashMap.put("page",page);
         hashMap.put("type","card");
         Page<AnnounceDto>announces= announceService.findAllByKinderNoCard(condition,hashMap);
@@ -121,12 +122,12 @@ public class AnnounceController {
             HashMap<String, Object> hashMap2 = new HashMap<>();
             AnnounceSearchCondition condition1 = new AnnounceSearchCondition();
             AnnounceSearchCondition condition2 = new AnnounceSearchCondition();
-            condition1.setKinderNo(1L);
+            condition1.setKinderNo(kinderNo);
 
-            condition2.setKinderNo(1L);
+            condition2.setKinderNo(kinderNo);
             condition2.setAnnouncePrimary("1");
 
-            model.addAttribute("KinderNo",1L);
+            model.addAttribute("KinderNo",kinderNo);
             hashMap1.put("page",page);
             hashMap1.put("type","list");
             hashMap2.put("page",1);
@@ -179,8 +180,6 @@ public class AnnounceController {
 
         model.addAttribute("announce",announceDto);
         return "/announce/admin/detail";
-
-
     }
 
 
@@ -192,23 +191,21 @@ public class AnnounceController {
         memberDto.put("id", id);
 
         AnnounceDto announceDto = announceService.findByAnnounceNo(announceNo);
-
         model.addAttribute("member",memberDto);
         model.addAttribute("announce",announceDto);
+        // 현재 시간 가져오기
+        LocalDateTime now = LocalDateTime.now();
+        // 모델에 추가
+        model.addAttribute("boardModifyDate", now);
 
         return "/announce/admin/modifyForm";
     }
-
     @PutMapping("/modifyOk")
     @ResponseBody
     public void modify(@RequestBody AnnounceDto announceDto) {
         log.info("modify announce: {}", announceDto);
-        announceService.updatennounce(announceDto);
+        announceService.updateAnnounce(announceDto);
     }
-
-
-
-
     @DeleteMapping("/delete")
     @ResponseBody
     public void delete(@RequestBody AnnounceDto announceDto) {
@@ -222,15 +219,51 @@ public class AnnounceController {
 
     //    user
     @GetMapping("/user/card")
-    public String usercard(){
-        return "/announce/user/card";
+    public String usercard(@RequestParam(defaultValue = "1") int page, Model model){
+        HashMap<String, Object> hashMap = new HashMap<>();
+        AnnounceSearchCondition condition = new AnnounceSearchCondition();
+        condition.setKinderNo(kinderNo);
+        model.addAttribute("KinderNo",kinderNo);
+        hashMap.put("page",page);
+        hashMap.put("type","card");
+        Page<AnnounceDto>announces= announceService.findAllByKinderNoCard(condition,hashMap);
+
+
+        return getPageInfoAndGoView(model, announces, "/announce/user/card");
     }
     @GetMapping("/user/list")
-    public String userList(){
-        return "/announce/user/list";
+    public String userList(@RequestParam(defaultValue = "1") int page, Model model){
+        HashMap<String, Object> hashMap1 = new HashMap<>();
+        HashMap<String, Object> hashMap2 = new HashMap<>();
+        AnnounceSearchCondition condition1 = new AnnounceSearchCondition();
+        AnnounceSearchCondition condition2 = new AnnounceSearchCondition();
+        condition1.setKinderNo(kinderNo);
+
+        condition2.setKinderNo(kinderNo);
+        condition2.setAnnouncePrimary("1");
+
+        model.addAttribute("KinderNo",kinderNo);
+        hashMap1.put("page",page);
+        hashMap1.put("type","list");
+        hashMap2.put("page",1);
+        hashMap2.put("type","listPrimary");
+
+        Page<AnnounceDto>announces= announceService.findAllByKinderNoList(condition1,hashMap1);
+        Page<AnnounceDto>primaryAnnounces= announceService.findAllByKinderNoList(condition2,hashMap2);
+
+        return getPageInfoAndGoView(model, announces, primaryAnnounces, "/announce/user/list");
     }
-    @GetMapping("/user/detail")
-    public String userdetail(){
+    @GetMapping("/user/{announceNo}")
+    public String userdetail(@PathVariable Long announceNo, Model model){
+        AnnounceDto announceDto = announceService.findByAnnounceNo(announceNo);
+
+        CommentSearchCondition condition = new CommentSearchCondition();
+//        Page<CommentDto> commentDto=commentService.findAllByBoardNo(condition,1);
+
+        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>announceDto>>>>>{}",announceDto);
+//        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>commentDto>>>>>{}",commentDto);
+
+        model.addAttribute("announce",announceDto);
         return "/announce/user/detail";
     }
 
