@@ -7,8 +7,6 @@ import com.aico.aibayo.jwt.LoginFilter;
 import com.aico.aibayo.oauth2.CustomSuccessHandler;
 import com.aico.aibayo.service.member.CustomOAuth2MemberService;
 import com.aico.aibayo.service.member.TokenService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
