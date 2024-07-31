@@ -58,7 +58,7 @@ public class KidController {
     public String detail(@PathVariable Long kidNo, Model model) {
         getConditionAndGoDetail(kidNo, model);
 
-        return "/kid/detail";
+        return "/admin/kid/detail";
     }
 
     @GetMapping("/user/{kidNo}")
@@ -74,7 +74,7 @@ public class KidController {
 
         getConditionAndGoDetail(kidNo, model);
 
-        return "/kid/user_detail";
+        return "/user/kid/detail";
     }
 
     @GetMapping("/write")
@@ -114,6 +114,6 @@ public class KidController {
         List<ClassDto> classDtos = classService.getByKinderNo(kinderNo);
         model.addAttribute("classes", classDtos);
 
-        return "/kid/list";
+        return "/admin/kid/list";
     }
 }

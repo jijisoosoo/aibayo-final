@@ -16,7 +16,7 @@ public class AttendanceController {
 
     @GetMapping("/admin/main")
     public String adminMain() {
-        return "attendance/admin/main";
+        return "admin/attendance/main";
     }
 
     @GetMapping("/admin/detailToday")
@@ -24,7 +24,7 @@ public class AttendanceController {
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
         model.addAttribute("date", date);
         log.info("day : detailToday");
-        return "attendance/admin/detailToday";
+        return "admin/attendance/detailToday";
     }
 
     @GetMapping("/admin/detailBefore")
@@ -32,7 +32,7 @@ public class AttendanceController {
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
         model.addAttribute("date", date);
         log.info("day : detailBefore");
-        return "attendance/admin/detailBefore";
+        return "admin/attendance/detailBefore";
     }
 
     @GetMapping("/admin/detailAfter")
@@ -42,7 +42,7 @@ public class AttendanceController {
         model.addAttribute("date", date);
 
         log.info("day : detailAfter");
-        return "attendance/admin/detailAfter";
+        return "admin/attendance/detailAfter";
     }
 
     @GetMapping("/admin/write")
@@ -50,6 +50,6 @@ public class AttendanceController {
         String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
         model.addAttribute("date", date);
 
-        return "attendance/admin/detailWrite";
+        return "admin/attendance/detailWrite";
     }
 }
