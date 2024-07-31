@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout}">
+
+<title layout:fragment="title">식단표</title>
+
+<th:block layout:fragment="css">
+    <th:block th:replace="~{/common/datepicker :: css}"/>
+    <link rel="stylesheet" href="/css/meal/list.css" />
+</th:block>
+
+<th:block layout:fragment="javascript">
+    <th:block th:replace="~{/common/datepicker :: js}"/>
+    <script src="/js/meal/form.js"></script>
+</th:block>
+
+<div class="container main_container" layout:fragment="content">
+
+    <div class="meal_top_box">
+
+        <div class="meal_top_title">식단표 수정</div>
+
+        <div class="meal_top_btn_box">
+
+            <a class="btn btn-secondary meal_top_btn" href="/meal/admin/list" alt="취소">
+
+                <div class="meal_top_btn_text">취소</div>
+
+            </a>
+
+            <div class="btn btn-ab meal_top_btn">
+                <div class="meal_top_btn_text">수정</div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="meal_form_body">
+
+        <div class="meal_option_box">
+
+            <div class="meal_time_checkbox">
+                <div class="form-check">
+                    <label class="form-check-label" for="mealTime0">아침</label>
+                    <input class="form-check-input" type="checkbox" name="mealTime0" id="mealTime0">
+                </div>
+
+                <div class="form-check">
+                    <label class="form-check-label" for="mealTime1">오전간식</label>
+                    <input class="form-check-input" type="checkbox" name="mealTime1" id="mealTime1" checked>
+                </div>
+
+
+                <div class="form-check">
+                    <label class="form-check-label" for="mealTime2">점심</label>
+                    <input class="form-check-input" type="checkbox" name="mealTime2" id="mealTime2" checked>
+                </div>
+
+
+                <div class="form-check">
+                    <label class="form-check-label" for="mealTime3">오후간식</label>
+                    <input class="form-check-input" type="checkbox" name="mealTime3" id="mealTime3" checked>
+                </div>
+
+
+                <div class="form-check">
+                    <label class="form-check-label" for="mealTime4">저녁</label>
+                    <input class="form-check-input" type="checkbox" name="mealTime4" id="mealTime4">
+                </div>
+            </div>
+
+
+            <div class="meal_datepicker">
+                <div class="meal_datepicker_svg_box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="31" viewBox="0 0 30 31" fill="none">
+                        <path d="M10 13.5632V16.5632H6.66667V13.5632H10ZM16.6667 13.5632V16.5632H13.3333V13.5632H16.6667ZM23.3333 13.5632V16.5632H20V13.5632H23.3333ZM26.6667 3.06323C27.5507 3.06323 28.3986 3.3793 29.0237 3.94191C29.6488 4.50452 30 5.26758 30 6.06323V27.0632C30 27.8589 29.6488 28.6219 29.0237 29.1846C28.3986 29.7472 27.5507 30.0632 26.6667 30.0632H3.33333C2.44928 30.0632 1.60143 29.7472 0.976311 29.1846C0.351189 28.6219 0 27.8589 0 27.0632V6.06323C0 5.26758 0.351189 4.50452 0.976311 3.94191C1.60143 3.3793 2.44928 3.06323 3.33333 3.06323H5V0.0632324H8.33333V3.06323H21.6667V0.0632324H25V3.06323H26.6667ZM26.6667 27.0632V10.5632H3.33333V27.0632H26.6667ZM10 19.5632V22.5632H6.66667V19.5632H10ZM16.6667 19.5632V22.5632H13.3333V19.5632H16.6667ZM23.3333 19.5632V22.5632H20V19.5632H23.3333Z" fill="#FFDB21"/>
+                    </svg>
+                </div>
+                <input type="text" class="form-control meal_date_text_input datepicker"
+                       name="mealDate" id="mealDate" placeholder="연도. 월. 일" readonly>
+            </div>
+
+
+            <div class="space"></div>
+
+        </div>
+
+
+        <div class="modal_meals_box meals_box_form">
+
+            <div class="meal_item_box_form" id="mealItemDiv0">
+
+                <div class="modal_meal_title_box">
+                    <div class="modal_meal_title">아침</div>
+                </div>
+
+
+                <div class="modal_meal_img_box">
+                    <label for="mealPic0" class="meal_img_svg_box" title="사진 수정">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="150" height="151" viewBox="0 0 150 151" fill="none">
+                            <path d="M68.75 81.3765V100.126C68.75 101.897 69.35 103.383 70.55 104.583C71.75 105.783 73.2333 106.381 75 106.376C76.7667 106.372 78.2521 105.772 79.4563 104.576C80.6604 103.381 81.2583 101.897 81.25 100.126V81.3765H100C101.771 81.3765 103.256 80.7765 104.456 79.5765C105.656 78.3765 106.254 76.8931 106.25 75.1265C106.246 73.3598 105.646 71.8765 104.45 70.6765C103.254 69.4765 101.771 68.8765 100 68.8765H81.25V50.1265C81.25 48.3556 80.65 46.8723 79.45 45.6765C78.25 44.4806 76.7667 43.8806 75 43.8765C73.2333 43.8723 71.75 44.4723 70.55 45.6765C69.35 46.8806 68.75 48.364 68.75 50.1265V68.8765H50C48.2292 68.8765 46.7458 69.4765 45.55 70.6765C44.3542 71.8765 43.7542 73.3598 43.75 75.1265C43.7458 76.8931 44.3458 78.3785 45.55 79.5827C46.7542 80.7869 48.2375 81.3848 50 81.3765H68.75ZM75 137.626C66.3542 137.626 58.2292 135.985 50.625 132.701C43.0208 129.418 36.4063 124.966 30.7813 119.345C25.1563 113.724 20.7042 107.11 17.425 99.5015C14.1458 91.8931 12.5042 83.7681 12.5 75.1265C12.4958 66.4848 14.1375 58.3598 17.425 50.7515C20.7125 43.1431 25.1646 36.5285 30.7813 30.9077C36.3979 25.2869 43.0125 20.8348 50.625 17.5515C58.2375 14.2681 66.3625 12.6265 75 12.6265C83.6375 12.6265 91.7625 14.2681 99.375 17.5515C106.988 20.8348 113.602 25.2869 119.219 30.9077C124.835 36.5285 129.29 43.1431 132.581 50.7515C135.873 58.3598 137.513 66.4848 137.5 75.1265C137.488 83.7681 135.846 91.8931 132.575 99.5015C129.304 107.11 124.852 113.724 119.219 119.345C113.585 124.966 106.971 129.42 99.375 132.708C91.7792 135.995 83.6542 137.635 75 137.626ZM75 125.126C88.9583 125.126 100.781 120.283 110.469 110.595C120.156 100.908 125 89.0848 125 75.1265C125 61.1681 120.156 49.3452 110.469 39.6577C100.781 29.9702 88.9583 25.1265 75 25.1265C61.0417 25.1265 49.2188 29.9702 39.5313 39.6577C29.8438 49.3452 25 61.1681 25 75.1265C25 89.0848 29.8438 100.908 39.5313 110.595C49.2188 120.283 61.0417 125.126 75 125.126Z" fill="#FFDB21"/>
+                        </svg>
+                        <input type="file" class="meal_input_file" accept="image/*"
+                               name="mealPic1" id="mealPic0" />
+                    </label>
+                </div>
+
+
+                <div class="meal_menu_box_form" id="meal_menu_box_form0">
+                    <div class="menu_input_form">
+                        <input type="text" class="form-control menu_input_text" name="mealMenu0"
+                               placeholder="메뉴명을 입력해주세요.">
+                        <div class="btn menu_input_plus" title="메뉴 추가">+</div>
+                    </div>
+
+                    <div class="menu_input_form">
+                        <input type="text" class="form-control menu_input_text" name="mealMenu0"
+                               placeholder="메뉴명을 입력해주세요.">
+                        <div class="btn menu_input_close" title="메뉴 삭제">x</div>
+                    </div>
+
+                    <div class="menu_input_form">
+                        <input type="text" class="form-control menu_input_text" name="mealMenu0"
+                               placeholder="메뉴명을 입력해주세요.">
+                        <div class="btn menu_input_close" title="메뉴 삭제">x</div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="meal_item_box_form" id="mealItemDiv1">
+
+                <div class="modal_meal_title_box">
+                    <div class="modal_meal_title">오전 간식</div>
+                </div>
+
+
+                <div class="modal_meal_img_box">
+                    <label for="mealPic1" class="meal_img_svg_box" title="사진 수정">
+                        <img class="modal_meal_img" src="http://via.placeholder.com/330x300">
+                        <input type="file" class="meal_input_file" accept="image/*"
+                               name="mealPic1" id="mealPic1" />
+                    </label>
+                </div>
+
+
+                <div class="meal_menu_box_form" id="meal_menu_box_form1">
+                    <div class="menu_input_form">
+                        <input type="text" class="form-control menu_input_text" name="mealMenu1"
+                               placeholder="메뉴명을 입력해주세요." value="요구르트">
+                        <div class="btn menu_input_plus" title="메뉴 추가">+</div>
+                    </div>
+
+                    <div class="menu_input_form">
+                        <input type="text" class="form-control menu_input_text" name="mealMenu1"
+                               placeholder="메뉴명을 입력해주세요." value="딸기">
+                        <div class="btn menu_input_close" title="메뉴 삭제">x</div>
+                    </div>
+
+                    <div class="menu_input_form">
+                        <input type="text" class="form-control menu_input_text" name="mealMenu1"
+                               placeholder="메뉴명을 입력해주세요." value="복숭아">
+                        <div class="btn menu_input_close" title="메뉴 삭제">x</div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="meal_item_box_form" id="mealItemDiv2">
+
+                <div class="modal_meal_title_box">
+                    <div class="modal_meal_title">점심</div>
+                </div>
+
+
+                <div class="modal_meal_img_box">
+                    <label for="mealPic2" class="meal_img_svg_box" title="사진 수정">
+                        <img class="modal_meal_img" src="http://via.placeholder.com/330x300">
+                        <input type="file" class="meal_input_file" accept="image/*"
+                               name="mealPic2" id="mealPic2" />
+                    </label>
+                </div>
+
+
+                <div class="meal_menu_box_form" id="meal_menu_box_form2">
+                    <div class="menu_input_form">
+                        <input type="text" class="form-control menu_input_text" name="mealMenu2"
+                               placeholder="메뉴명을 입력해주세요.">
+                        <div class="btn menu_input_plus" title="메뉴 추가">+</div>
+                    </div>
+
+
+                    <div class="menu_input_form">
+                        <input type="text" class="form-control menu_input_text" name="mealMenu2"
+                               placeholder="메뉴명을 입력해주세요.">
+                        <div class="btn menu_input_close" title="메뉴 삭제">x</div>
+                    </div>
+
+
+                    <div class="menu_input_form">
+                        <input type="text" class="form-control menu_input_text" name="mealMenu2"
+                               placeholder="메뉴명을 입력해주세요.">
+                        <div class="btn menu_input_close" title="메뉴 삭제">x</div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="meal_item_box_form" id="mealItemDiv3">
+
+                <div class="modal_meal_title_box">
+                    <div class="modal_meal_title">오후 간식</div>
+                </div>
+
+
+                <div class="modal_meal_img_box">
+                    <label for="mealPic3" class="meal_img_svg_box" title="사진 수정">
+                        <img class="modal_meal_img" src="http://via.placeholder.com/330x300">
+                        <input type="file" class="meal_input_file" accept="image/*"
+                               name="mealPic3" id="mealPic3" />
+                    </label>
+                </div>
+
+                <div class="meal_menu_box_form" id="meal_menu_box_form3">
+                    <div class="menu_input_form">
+                        <input type="text" class="form-control menu_input_text" name="mealMenu3"
+                               placeholder="메뉴명을 입력해주세요.">
+                        <div class="btn menu_input_plus" title="메뉴 추가">+</div>
+                    </div>
+
+
+                    <div class="menu_input_form">
+                        <input type="text" class="form-control menu_input_text" name="mealMenu3"
+                               placeholder="메뉴명을 입력해주세요.">
+                        <div class="btn menu_input_close" title="메뉴 삭제">x</div>
+                    </div>
+
+
+                    <div class="menu_input_form">
+                        <input type="text" class="form-control menu_input_text" name="mealMenu3"
+                               placeholder="메뉴명을 입력해주세요.">
+                        <div class="btn menu_input_close" title="메뉴 삭제">x</div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="meal_item_box_form" id="mealItemDiv4">
+
+                <div class="modal_meal_title_box">
+                    <div class="modal_meal_title">저녁</div>
+                </div>
+
+
+                <div class="modal_meal_img_box">
+                    <label for="mealPic4" class="meal_img_svg_box" title="사진 수정">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="150" height="151" viewBox="0 0 150 151" fill="none">
+                            <path d="M68.75 81.3765V100.126C68.75 101.897 69.35 103.383 70.55 104.583C71.75 105.783 73.2333 106.381 75 106.376C76.7667 106.372 78.2521 105.772 79.4563 104.576C80.6604 103.381 81.2583 101.897 81.25 100.126V81.3765H100C101.771 81.3765 103.256 80.7765 104.456 79.5765C105.656 78.3765 106.254 76.8931 106.25 75.1265C106.246 73.3598 105.646 71.8765 104.45 70.6765C103.254 69.4765 101.771 68.8765 100 68.8765H81.25V50.1265C81.25 48.3556 80.65 46.8723 79.45 45.6765C78.25 44.4806 76.7667 43.8806 75 43.8765C73.2333 43.8723 71.75 44.4723 70.55 45.6765C69.35 46.8806 68.75 48.364 68.75 50.1265V68.8765H50C48.2292 68.8765 46.7458 69.4765 45.55 70.6765C44.3542 71.8765 43.7542 73.3598 43.75 75.1265C43.7458 76.8931 44.3458 78.3785 45.55 79.5827C46.7542 80.7869 48.2375 81.3848 50 81.3765H68.75ZM75 137.626C66.3542 137.626 58.2292 135.985 50.625 132.701C43.0208 129.418 36.4063 124.966 30.7813 119.345C25.1563 113.724 20.7042 107.11 17.425 99.5015C14.1458 91.8931 12.5042 83.7681 12.5 75.1265C12.4958 66.4848 14.1375 58.3598 17.425 50.7515C20.7125 43.1431 25.1646 36.5285 30.7813 30.9077C36.3979 25.2869 43.0125 20.8348 50.625 17.5515C58.2375 14.2681 66.3625 12.6265 75 12.6265C83.6375 12.6265 91.7625 14.2681 99.375 17.5515C106.988 20.8348 113.602 25.2869 119.219 30.9077C124.835 36.5285 129.29 43.1431 132.581 50.7515C135.873 58.3598 137.513 66.4848 137.5 75.1265C137.488 83.7681 135.846 91.8931 132.575 99.5015C129.304 107.11 124.852 113.724 119.219 119.345C113.585 124.966 106.971 129.42 99.375 132.708C91.7792 135.995 83.6542 137.635 75 137.626ZM75 125.126C88.9583 125.126 100.781 120.283 110.469 110.595C120.156 100.908 125 89.0848 125 75.1265C125 61.1681 120.156 49.3452 110.469 39.6577C100.781 29.9702 88.9583 25.1265 75 25.1265C61.0417 25.1265 49.2188 29.9702 39.5313 39.6577C29.8438 49.3452 25 61.1681 25 75.1265C25 89.0848 29.8438 100.908 39.5313 110.595C49.2188 120.283 61.0417 125.126 75 125.126Z" fill="#FFDB21"/>
+                        </svg>
+                        <input type="file" class="meal_input_file" accept="image/*"
+                               name="mealPic3" id="mealPic4" />
+                    </label>
+                </div>
+
+                <div class="meal_menu_box_form" id="meal_menu_box_form4">
+                    <div class="menu_input_form">
+                        <input type="text" class="form-control menu_input_text" name="mealMenu4"
+                               placeholder="메뉴명을 입력해주세요.">
+                        <div class="btn menu_input_plus" title="메뉴 추가">+</div>
+                    </div>
+
+
+                    <div class="menu_input_form">
+                        <input type="text" class="form-control menu_input_text" name="mealMenu4"
+                               placeholder="메뉴명을 입력해주세요.">
+                        <div class="btn menu_input_close" title="메뉴 삭제">x</div>
+                    </div>
+
+
+                    <div class="menu_input_form">
+                        <input type="text" class="form-control menu_input_text" name="mealMenu4"
+                               placeholder="메뉴명을 입력해주세요.">
+                        <div class="btn menu_input_close" title="메뉴 삭제">x</div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -9,21 +9,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ElectronicApprovalController {
     @GetMapping("/list")
     public String list() {
-        return "/electronicApproval/list";
+        return "/admin/electronicApproval/list";
     }
 
     @GetMapping("/detail")
     public String detail() {
-        return "/electronicApproval/detail";
+        return "/admin/electronicApproval/detail";
     }
 
     @GetMapping("/write")
     public String writeForm() {
-        return "/electronicApproval/writeForm";
+        return "/admin/electronicApproval/writeForm";
     }
 
     @GetMapping("/modify")
     public String modifyForm() {
-        return "/electronicApproval/modifyForm";
+        return "/admin/electronicApproval/modifyForm";
     }
 }
