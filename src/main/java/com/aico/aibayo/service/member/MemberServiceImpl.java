@@ -1,11 +1,14 @@
 package com.aico.aibayo.service.member;
 
 import com.aico.aibayo.dto.member.MemberDto;
+import com.aico.aibayo.dto.member.MemberSearchCondition;
 import com.aico.aibayo.entity.MemberEntity;
-import com.aico.aibayo.repository.MemberRepository;
+import com.aico.aibayo.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -36,5 +39,15 @@ public class MemberServiceImpl implements MemberService {
         memberEntity.setPhone(phone);
 
         memberRepository.save(memberEntity);
+    }
+
+    @Override
+    public List<MemberDto> getAllByKidNo(Long kidNo) {
+        return memberRepository.findAllByKidNo(kidNo);
+    }
+
+    @Override
+    public MemberDto getByIdAndKidNo(MemberSearchCondition condition) {
+        return memberRepository.findByIdAndKidNo(condition);
     }
 }

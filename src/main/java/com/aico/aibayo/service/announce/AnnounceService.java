@@ -14,7 +14,7 @@ public interface AnnounceService {
     Page<AnnounceDto>findAllByKinderNoCard(AnnounceSearchCondition condition, HashMap<String, Object> hashMap);
     AnnounceDto findByAnnounceNo(Long announceNo);
     void insertAnnounce(AnnounceDto announceDto);
-
+    void updateAnnounce(AnnounceDto announceDto);
     void deleteAnnounce(AnnounceDto announceNo);
 
 }

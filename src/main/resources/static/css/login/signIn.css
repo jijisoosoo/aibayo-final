@@ -1,0 +1,354 @@
+.h_class_78 {
+    width: 280px;
+    height: 150px;
+    float: left;
+    margin-left: 20px;
+}
+
+.h_class_79 {
+    color: #FFDB21 !important;
+    font-size: 80px;
+    font-weight: 500;
+    line-height: 140px;
+    word-wrap: break-word;
+    text-decoration-line : none;
+}
+
+body {
+    margin: 0px !important;
+}
+
+.login-page {
+    background-color: #fffcf0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+body {
+    margin: 0px !important;
+}
+
+.login-page .div {
+    background-color: #fffcf0;
+    width: 1440px;
+    height: 957px;
+    position: relative;
+}
+
+.login-page .overlap {
+    position: absolute;
+    width: 539px;
+    height: 741px;
+    top: 79px;
+    left: 450px;
+}
+
+.login-page .group {
+    position: absolute;
+    width: 539px;
+    height: 741px;
+    top: 0;
+    left: 0;
+}
+
+.login-page .overlap-group {
+    position: relative;
+    height: 741px;
+    border-radius: 40px;
+}
+
+.login-page .group-2 {
+    position: absolute;
+    width: 539px;
+    height: 741px;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    border-radius: 40px;
+    box-shadow: 0px 4px 35px #00000014;
+}
+
+.login-page .group-3 {
+    position: absolute;
+    width: 463px;
+    height: 76px;
+    top: 50px;
+    left: 44px;
+}
+
+.login-page .text-wrapper {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    font-family: "Poppins-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.login-page .p {
+    width: 132px;
+    top: 0;
+    left: 327px;
+    font-family: "Poppins-Regular", Helvetica;
+    color: transparent;
+    font-size: 16px;
+    position: absolute;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.login-page .span {
+    color: #8d8d8d;
+}
+
+.login-page .text-wrapper-2 {
+    position: absolute;
+    color: #b87514;
+    top: 518px;
+    left: 765px;
+    text-decoration: none;
+}
+/* .text-wrapper-2 {
+  color: #b87514;
+  top: 50%;
+  left: ;
+} */
+
+
+.login-page .text-wrapper-3 {
+    position: absolute;
+    top: -3px;
+    left: 0;
+    font-family: "Poppins-Regular", Helvetica;
+    font-weight: 400;
+    color: #000000;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.login-page .username-or-email-wrapper {
+    position: absolute;
+    width: 440px;
+    height: 50px;
+    top: 35px;
+    left: 0;
+    background-color: #ffffff;
+    border-radius: 9px;
+    border: 1px solid;
+    border-color: #adadad;
+
+    font-family: "Poppins-Light", Helvetica;
+    font-weight: 300;
+    color: #7f7f7f;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.login-page .text-wrapper-4 {
+    position: absolute;
+    width: 302px;
+    top: 17px;
+    left: 24px;
+    font-family: "Poppins-Light", Helvetica;
+    font-weight: 300;
+    color: #7f7f7f;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.login-page .group-4 {
+    position: absolute;
+    width: 450px;
+    height: 90px;
+    top: 230px;
+    left: 44px;
+}
+
+.login-page .group-5 {
+    position: absolute;
+    width: 450px;
+    height: 90px;
+    top: 340px;
+    left: 44px;
+}
+
+.login-page .group-6 {
+    position: absolute;
+    width: 451px;
+    height: 92px;
+    top: 0;
+    left: 0;
+}
+
+.login-page .div-wrapper {
+    position: absolute;
+    height: 50px;
+    width: 440px;
+    top: 35px;
+    left: 0;
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #adadad;
+    border-radius: 9px;
+}
+
+.login-page .text-wrapper-5 {
+    position: absolute;
+    top: 518px;
+    left: 840px;
+    font-family: "Poppins-Regular", Helvetica;
+    color: #ad3113;
+    /* font-size: 14px; */
+    position: absolute;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    text-decoration: none;
+}
+
+.login-page .overlap-wrapper {
+    position: absolute;
+    width: 453px;
+    height: 54px;
+    top: 491px;
+    left: 44px;
+}
+
+.login-page .overlap-2 {
+    position: relative;
+    width: 451px;
+    height: 54px;
+    background-color: #ffd700;
+    border: none !important;    border-radius: 10px;
+    box-shadow: 0px 4px 19px #7793414c;
+    margin-top: 5%;
+}
+
+.login-page .text-wrapper-6 {
+    position: absolute;
+    width: 56px;
+    top: 15px;
+    left: 198px;
+    font-family: "Poppins-Medium", Helvetica;
+    font-weight: 500;
+    color: #ffffff;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.login-page .eye {
+    position: absolute;
+    width: 22px;
+    height: 19px;
+    top: 372px;
+    left: 454px;
+}
+
+.login-page .text-wrapper-7 {
+    top: 84px;
+    left: 37px;
+    font-family: "Noto Sans-DisplayRegular", Helvetica;
+    color: #000000;
+    font-size: 55px;
+    position: absolute;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.login-page .group-wrapper {
+    position: absolute;
+    width: 451px;
+    height: 55px;
+    top: 635px;
+    left: 44px;
+}
+
+.login-page .overlap-group-wrapper {
+    width: 453px;
+    height: 55px;
+}
+
+.login-page .overlap-group-2 {
+    position: relative;
+    height: 55px;
+    background-color: #fff3e3;
+    width: 451px;
+    border-radius: 9px;
+}
+
+.login-page .text-wrapper-8 {
+    position: absolute;
+    width: 229px;
+    top: 15px;
+    left: 120px;
+    font-family: "Poppins-Regular", Helvetica;
+    font-weight: 400;
+    color: #b87514;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.login-page .text-wrapper-9 {
+    position: absolute;
+    top: 595px;
+    /* left: 259px; */
+    left: 47%;
+    font-family: "Poppins-Regular", Helvetica;
+    font-weight: 400;
+    color: #ababab;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+
+
+.login-page .text-wrapper-10 {
+    position: absolute;
+    top: 30px;
+    left: 42px;
+    font-family: "Noto Sans-Medium", Helvetica;
+    font-weight: 500;
+    color: #ffdb20;
+    font-size: 64px;
+    letter-spacing: -3.2px;
+    line-height: 57.6px;
+    white-space: nowrap;
+}
+
+
+.group-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 50px;
+}
+.login-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+.login-button img {
+    width: 50px;
+    height: 100%;
+    object-fit: contain;
+}

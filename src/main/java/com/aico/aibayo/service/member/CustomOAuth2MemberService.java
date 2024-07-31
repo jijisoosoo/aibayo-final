@@ -2,7 +2,7 @@ package com.aico.aibayo.service.member;
 
 import com.aico.aibayo.dto.member.*;
 import com.aico.aibayo.entity.MemberEntity;
-import com.aico.aibayo.repository.MemberRepository;
+import com.aico.aibayo.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
