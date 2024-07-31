@@ -1,17 +1,12 @@
 package com.aico.aibayo.control;
 
-import com.aico.aibayo.common.AnnounceTypeEnum;
 import com.aico.aibayo.common.BoardTypeEnum;
 import com.aico.aibayo.dto.ClassDto;
 import com.aico.aibayo.dto.announce.AnnounceDto;
 import com.aico.aibayo.dto.announce.AnnounceSearchCondition;
-import com.aico.aibayo.dto.comment.CommentDto;
 import com.aico.aibayo.dto.comment.CommentSearchCondition;
-import com.aico.aibayo.dto.notepad.NotepadDto;
 import com.aico.aibayo.service.announce.AnnounceService;
 import com.aico.aibayo.service.classManage.ClassService;
-import com.aico.aibayo.service.comment.CommentService;
-import com.aico.aibayo.service.kid.KidService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -31,9 +26,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AnnounceController {
     private final AnnounceService announceService;
-    private final CommentService commentService;
     private final ClassService classService;
-    private final KidService kidService;
 
     // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
     private int roleNo = 1;
@@ -51,7 +44,7 @@ public class AnnounceController {
         Page<AnnounceDto>announces= announceService.findAllByKinderNoCard(condition,hashMap);
 
 
-        return getPageInfoAndGoView(model, announces, "/announce/admin/card");
+        return getPageInfoAndGoView(model, announces, "/admin/announce/card");
     }
     private String getPageInfoAndGoView(Model model, Page<AnnounceDto> announces, String view) {
         int totalPages = announces.getTotalPages();
@@ -136,7 +129,7 @@ public class AnnounceController {
             Page<AnnounceDto>announces= announceService.findAllByKinderNoList(condition1,hashMap1);
             Page<AnnounceDto>primaryAnnounces= announceService.findAllByKinderNoList(condition2,hashMap2);
 
-            return getPageInfoAndGoView(model, announces, primaryAnnounces, "/announce/admin/list");
+            return getPageInfoAndGoView(model, announces, primaryAnnounces, "/admin/announce/list");
         }
 
     @GetMapping("/admin/write")
@@ -158,7 +151,7 @@ public class AnnounceController {
         model.addAttribute("classDtos", classDtos);
         model.addAttribute("announceInfo",announceInfo);
 
-        return "/announce/admin/writeForm";
+        return "/admin/announce/writeForm";
     }
     @PostMapping("/writeOk")
     @ResponseBody
@@ -179,7 +172,7 @@ public class AnnounceController {
 //        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>commentDto>>>>>{}",commentDto);
 
         model.addAttribute("announce",announceDto);
-        return "/announce/admin/detail";
+        return "/admin/announce/detail";
     }
 
 
@@ -198,7 +191,7 @@ public class AnnounceController {
         // 모델에 추가
         model.addAttribute("boardModifyDate", now);
 
-        return "/announce/admin/modifyForm";
+        return "/admin/announce/modifyForm";
     }
     @PutMapping("/modifyOk")
     @ResponseBody
@@ -229,7 +222,7 @@ public class AnnounceController {
         Page<AnnounceDto>announces= announceService.findAllByKinderNoCard(condition,hashMap);
 
 
-        return getPageInfoAndGoView(model, announces, "/announce/user/card");
+        return getPageInfoAndGoView(model, announces, "/user/announce/card");
     }
     @GetMapping("/user/list")
     public String userList(@RequestParam(defaultValue = "1") int page, Model model){
@@ -251,7 +244,7 @@ public class AnnounceController {
         Page<AnnounceDto>announces= announceService.findAllByKinderNoList(condition1,hashMap1);
         Page<AnnounceDto>primaryAnnounces= announceService.findAllByKinderNoList(condition2,hashMap2);
 
-        return getPageInfoAndGoView(model, announces, primaryAnnounces, "/announce/user/list");
+        return getPageInfoAndGoView(model, announces, primaryAnnounces, "/user/announce/list");
     }
     @GetMapping("/user/{announceNo}")
     public String userdetail(@PathVariable Long announceNo, Model model){
@@ -264,7 +257,7 @@ public class AnnounceController {
 //        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>commentDto>>>>>{}",commentDto);
 
         model.addAttribute("announce",announceDto);
-        return "/announce/user/detail";
+        return "/user/announce/detail";
     }
 
 
