@@ -5,7 +5,9 @@ import com.aico.aibayo.dto.comment.CommentSearchCondition;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+
 @Service
 public interface CommentService {
-    Page<CommentDto>findAllByBoardNo(CommentSearchCondition condition, int page);
+    Page<CommentDto>findAllByBoardNo(CommentSearchCondition condition, HashMap<String, Object> hashMap);
 }

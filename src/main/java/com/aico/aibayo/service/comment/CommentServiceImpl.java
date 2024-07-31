@@ -11,6 +11,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -22,9 +24,12 @@ public class CommentServiceImpl implements CommentService{
 
 
     @Override
-    public Page<CommentDto> findAllByBoardNo(CommentSearchCondition condition, int page) {
-        Pageable pageable = PageRequest.of(page - 1, PAGE_SIZE);
+    public Page<CommentDto> findAllByBoardNo(CommentSearchCondition condition, HashMap<String, Object> hashMap) {
+        int page = (int) hashMap.get("page");
+        String type = (String) hashMap.get("type");
+        int pagesize=10;
 
-        return commentRepository.findAllByBoardNo(condition, pageable);
+        Pageable pageable = PageRequest.of(page - 1, pagesize);
+        return commentRepository.findAllByBoardNo(condition,pageable);
     }
 }
