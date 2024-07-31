@@ -127,6 +127,6 @@ document.addEventListener("DOMContentLoaded", () => {
 // 페이지 로드 시 채팅팝업을 끈 상태로 설정
 document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.remove("show-chatbot");
-    chatbot.style.width = '50px';
-    chatbot.style.height = '50px';
+    // chatbot.style.width = '50px';
+    // chatbot.style.height = '50px';
 });
