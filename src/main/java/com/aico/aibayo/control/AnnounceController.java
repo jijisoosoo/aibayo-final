@@ -1,19 +1,27 @@
 package com.aico.aibayo.control;
 
+import com.aico.aibayo.common.AnnounceTypeEnum;
+import com.aico.aibayo.common.BoardTypeEnum;
+import com.aico.aibayo.dto.ClassDto;
 import com.aico.aibayo.dto.announce.AnnounceDto;
 import com.aico.aibayo.dto.announce.AnnounceSearchCondition;
+import com.aico.aibayo.dto.comment.CommentDto;
+import com.aico.aibayo.dto.comment.CommentSearchCondition;
+import com.aico.aibayo.dto.notepad.NotepadDto;
 import com.aico.aibayo.service.announce.AnnounceService;
+import com.aico.aibayo.service.classManage.ClassService;
+import com.aico.aibayo.service.comment.CommentService;
+import com.aico.aibayo.service.kid.KidService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 @Slf4j
@@ -22,7 +30,14 @@ import java.util.HashMap;
 @RequiredArgsConstructor
 public class AnnounceController {
     private final AnnounceService announceService;
+    private final CommentService commentService;
+    private final ClassService classService;
+    private final KidService kidService;
 
+    // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
+    private int roleNo = 1;
+    private Long id = 2L;
+    private Long kinderNo = 1L;
 
     @GetMapping("/admin/card")
     public String admincard(@RequestParam(defaultValue = "1") int page, Model model){
@@ -123,22 +138,88 @@ public class AnnounceController {
             return getPageInfoAndGoView(model, announces, primaryAnnounces, "/announce/admin/list");
         }
 
-    @GetMapping("/admin/writeForm")
-    public String writeForm(){
+    @GetMapping("/admin/write")
+    public String writeForm(Model model){
+        // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
+        List<ClassDto> classDtos = new ArrayList<>();
+
+        if (roleNo < 2) { // 사이트 관리자/원장
+            classDtos = classService.getByKinderNo(kinderNo);
+
+        } else if (roleNo == 2) { // 교사
+            classDtos = classService.getByMemberId(id);
+        }
+        HashMap<String, Object> announceInfo = new HashMap<>();
+        announceInfo.put("boardType", BoardTypeEnum.ANNOUNCE.getNum());
+        announceInfo.put("writer", id);
+        announceInfo.put("boardKinderNo", kinderNo);
+
+        model.addAttribute("classDtos", classDtos);
+        model.addAttribute("announceInfo",announceInfo);
+
         return "/announce/admin/writeForm";
     }
+    @PostMapping("/writeOk")
+    @ResponseBody
+    public void writeOk(@RequestBody AnnounceDto announceDto) {
+        log.info("create Announce: {}", announceDto);
+
+        announceService.insertAnnounce(announceDto);
+    }
+
     @GetMapping("/admin/{announceNo}")
     public String admindetail(@PathVariable Long announceNo, Model model){
         AnnounceDto announceDto = announceService.findByAnnounceNo(announceNo);
 
+        CommentSearchCondition condition = new CommentSearchCondition();
+//        Page<CommentDto> commentDto=commentService.findAllByBoardNo(condition,1);
+
         log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>announceDto>>>>>{}",announceDto);
+//        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>commentDto>>>>>{}",commentDto);
+
         model.addAttribute("announce",announceDto);
         return "/announce/admin/detail";
+
+
     }
-    @GetMapping("/admin/modifyForm")
-    public String modifyForm(){
+
+
+
+    @GetMapping("/admin/modify/{announceNo}")
+    public String modifyForm(@PathVariable Long announceNo, Model model){
+        HashMap<String, Object> memberDto = new HashMap<>();
+        memberDto.put("roleNo", roleNo);
+        memberDto.put("id", id);
+
+        AnnounceDto announceDto = announceService.findByAnnounceNo(announceNo);
+
+        model.addAttribute("member",memberDto);
+        model.addAttribute("announce",announceDto);
+
         return "/announce/admin/modifyForm";
     }
+
+    @PutMapping("/modifyOk")
+    @ResponseBody
+    public void modify(@RequestBody AnnounceDto announceDto) {
+        log.info("modify announce: {}", announceDto);
+        announceService.updatennounce(announceDto);
+    }
+
+
+
+
+    @DeleteMapping("/delete")
+    @ResponseBody
+    public void delete(@RequestBody AnnounceDto announceDto) {
+        log.info("delete: {}", announceDto);
+        announceService.deleteAnnounce(announceDto);
+    }
+
+
+
+
+
     //    user
     @GetMapping("/user/card")
     public String usercard(){

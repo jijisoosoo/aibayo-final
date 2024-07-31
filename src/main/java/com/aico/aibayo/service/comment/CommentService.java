@@ -1,15 +1,11 @@
 package com.aico.aibayo.service.comment;
 
 import com.aico.aibayo.dto.comment.CommentDto;
-import com.aico.aibayo.dto.comment.CommentSearchCondtion;
+import com.aico.aibayo.dto.comment.CommentSearchCondition;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
 public interface CommentService {
-    CommentDto findByBoardNo(Long BoardNo);
-
-    Page<CommentDto>findAllByBoardNo(CommentSearchCondtion condtion, int page);
-
+    Page<CommentDto>findAllByBoardNo(CommentSearchCondition condition, int page);
 }

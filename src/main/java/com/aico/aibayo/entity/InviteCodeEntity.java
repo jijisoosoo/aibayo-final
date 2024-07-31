@@ -31,4 +31,8 @@ public class InviteCodeEntity {
     private LocalDate inviteExpireDate;
     @Column(name = "invite_expire_flag")
     private String inviteExpireFlag;
+    @Column(name = "kinder_no")
+    private Long kinderNo;
+    @Column(name = "kid_no")
+    private Long kidNo;
 }

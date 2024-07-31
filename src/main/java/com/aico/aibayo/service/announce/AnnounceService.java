@@ -12,8 +12,9 @@ import java.util.HashMap;
 public interface AnnounceService {
     Page<AnnounceDto>findAllByKinderNoList(AnnounceSearchCondition condition, HashMap<String, Object> hashMap);
     Page<AnnounceDto>findAllByKinderNoCard(AnnounceSearchCondition condition, HashMap<String, Object> hashMap);
-
     AnnounceDto findByAnnounceNo(Long announceNo);
-
+    void insertAnnounce(AnnounceDto announceDto);
+    void updatennounce(AnnounceDto announceDto);
+    void deleteAnnounce(AnnounceDto announceNo);
 
 }

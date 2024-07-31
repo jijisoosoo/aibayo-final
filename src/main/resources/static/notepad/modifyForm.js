@@ -3,6 +3,9 @@ const elementsToCheck = ['mood', 'health', 'temperature', 'meal', 'sleeptime', '
 const dataNames = ['mood', 'health', 'temperature', 'meal', 'sleep-time', 'defecation-status'];
 
 $(document).ready(function() {
+    let date = moment($('.datepicker').data('date')).format('YYYY.MM.DD');
+    $('.datepicker').val(date);
+
     $('.summernote').summernote({
         height: 300,
         lang: 'ko-KR' // 한국어 설정

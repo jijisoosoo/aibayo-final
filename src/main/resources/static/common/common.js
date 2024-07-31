@@ -1,13 +1,13 @@
 function initializeMarquee($text_div) {
     var $textCompact = $text_div.find('.text-compact');
 
-    console.log($textCompact[0].scrollWidth);
-    console.log($textCompact[0].offsetWidth);
+    // console.log($textCompact[0].scrollWidth);
+    // console.log($textCompact[0].offsetWidth);
 
     // 이미 초기화된 경우에는 다시 초기화하지 않음
     // 모달 팝업 시 텍스트 무한 복제 방지
     if ($textCompact.find('.js-marquee').length > 0) {
-        console.log("초기화 생략")
+        // console.log("초기화 생략")
         return;
     }
 

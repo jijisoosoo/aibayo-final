@@ -1,4 +1,4 @@
-package com.aico.aibayo.dto;
+package com.aico.aibayo.dto.kid;
 
 import com.aico.aibayo.entity.KidEntity;
 import java.time.LocalDate;
@@ -24,6 +24,24 @@ public class KidDto {
     private LocalDateTime modifyDate;
     private LocalDateTime dischargeDate;
     private String dischargeFlag;
+
+    private String email;
+
+    private String inviteEmail;
+
+    public KidDto(Long kidNo, Long kinderNo, String kidName, LocalDate kidBirth, Integer kidGender,
+                  LocalDateTime admissionDate, LocalDateTime modifyDate, LocalDateTime dischargeDate,
+                  String dischargeFlag) {
+        this.kidNo = kidNo;
+        this.kinderNo = kinderNo;
+        this.kidName = kidName;
+        this.kidBirth = kidBirth;
+        this.kidGender = kidGender;
+        this.admissionDate = admissionDate;
+        this.modifyDate = modifyDate;
+        this.dischargeDate = dischargeDate;
+        this.dischargeFlag = dischargeFlag;
+    }
 
     public static KidDto toDto(KidEntity entity) {
         return new KidDto(
