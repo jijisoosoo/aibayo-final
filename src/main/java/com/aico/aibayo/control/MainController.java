@@ -1,50 +1,86 @@
 package com.aico.aibayo.control;
 
+import com.aico.aibayo.jwt.JWTUtil;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Collection;
-import java.util.Iterator;
-
 @Controller
 @RequestMapping("/main")
 public class MainController {
+
+    private final JWTUtil jwtUtil;
+
+    public MainController(JWTUtil jwtUtil) {
+        this.jwtUtil = jwtUtil;
+    }
 
     @GetMapping("/")
     public String mainPage() {
         return "/index";
     }
 
-
     @GetMapping("/admin")
-    public String adminMain(HttpSession session) {
-        // 세션 정보 검색
-        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+    public String adminMain(HttpServletRequest request, HttpServletResponse response) {
+        // 쿠키에서 JWT 토큰을 가져옴
+        String token = getTokenFromCookies(request.getCookies());
+        if (token == null || jwtUtil.isExpired(token)) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return "redirect:/login";
+        }
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
-        GrantedAuthority auth = iterator.next();
-        String role = auth.getAuthority();
+        // JWT 토큰에서 사용자 정보 추출
+        String username = jwtUtil.getUsername(token);
+        String role = jwtUtil.getRole(token);
 
-        // 세션에 사용자 이름과 역할 저장
-        session.setAttribute("username", name);
-        session.setAttribute("role", role);
+        if (!"ROLE_ADMIN".equals(role)) {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            return "redirect:/login";
+        }
+
+        // 사용자 정보를 request에 저장 (필요 시 사용)
+        request.setAttribute("username", username);
+        request.setAttribute("role", role);
 
         return "/admin/main/main";
     }
 
     @GetMapping("/user")
-    public String userMain(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        session.setAttribute("role", "user");
+    public String userMain(HttpServletRequest request, HttpServletResponse response) {
+        // 쿠키에서 JWT 토큰을 가져옴
+        String token = getTokenFromCookies(request.getCookies());
+        if (token == null || jwtUtil.isExpired(token)) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return "redirect:/login";
+        }
+
+        // JWT 토큰에서 사용자 정보 추출
+        String username = jwtUtil.getUsername(token);
+        String role = jwtUtil.getRole(token);
+
+        if (!"ROLE_USER".equals(role)) {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            return "redirect:/login";
+        }
+
+        // 사용자 정보를 request에 저장 (필요 시 사용)
+        request.setAttribute("username", username);
+        request.setAttribute("role", role);
 
         return "/user/main/main";
+    }
+
+    private String getTokenFromCookies(Cookie[] cookies) {
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("jwt".equals(cookie.getName())) {
+                    return cookie.getValue();
+                }
+            }
+        }
+        return null;
     }
 }

@@ -2,7 +2,7 @@ package com.aico.aibayo.control;
 
 import com.aico.aibayo.common.BoardTypeEnum;
 import com.aico.aibayo.dto.ClassDto;
-import com.aico.aibayo.dto.announce.AnnounceDto;
+    import com.aico.aibayo.dto.announce.AnnounceDto;
 import com.aico.aibayo.dto.announce.AnnounceSearchCondition;
 import com.aico.aibayo.dto.comment.CommentSearchCondition;
 import com.aico.aibayo.service.announce.AnnounceService;
