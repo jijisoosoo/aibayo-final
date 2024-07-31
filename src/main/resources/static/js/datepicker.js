@@ -7,7 +7,7 @@ $(document).ready(function(){
         todayHighlight: true,
     }).on('changeDate', function(e) {
         var date = e.date;
-        $('.datepicker').val(date);
+        $(this).val(date);
 
         // var dateText = moment(date).format('YYYY-MM-DD HH:mm:ss');
         var dateText = moment(date).format('YYYY-MM-DD');

@@ -8,10 +8,7 @@
 <th:block layout:fragment="css">
   <link rel="stylesheet" th:href="@{/css/globals.css}" />
   <link rel="stylesheet" th:href="@{/css/teacher/teacherMain.css}" />
-  <link rel="stylesheet" th:href="@{/teacher/teacherMainFullCalendar.css}" />
-  <link rel="stylesheet" th:href="@{/teacher/teacherMainGuide.css}" />
   <link rel="stylesheet" th:href="@{/css/teacher/teacherModal.css}" />
-  <link rel="stylesheet" th:href="@{/teacher/teacherModalguide.css}" />
 </th:block>
 
 <th:block layout:fragment="javascript">
@@ -34,12 +31,12 @@
               <div class="textarea">
                 <div class="text-wrapper">선생님 초대하기</div>
               </div>
+            </div>
               <button class="button-x" href="" data-bs-dismiss="modal" aria-label="Close">
                 <img src="/images/common/x.png" alt=""/>
               </button>
-            </div>
           </div>
-          <form class="modalform" th:action="@{/teacher/admin/mainDone}" th:method="post">
+          <form class="modalform" th:action="@{/admin/mainDone}" th:method="post">
             <div class="row-input">
               <div class="div">
                 <div class="div-2">
@@ -101,67 +98,67 @@
       </div>
       <div class="carousel">
         <div class="profile">
-          <a class="img-2" th:href="@{/teacher/admin/teacherProfileAccept}">
+          <a class="img-2" th:href="@{/admin/teacherProfileAccept}">
             <img src="/images/common/teacher.png" alt="">
           </a>
           <div class="id"><div class="text-wrapper-11">김가나</div></div>
         </div>
         <div class="profile">
-          <a class="img-2" th:href="@{/teacher/admin/teacherProfileAccept}">
+          <a class="img-2" th:href="@{/admin/teacherProfileAccept}">
             <img src="/images/common/teacher.png" alt="">
           </a>
           <div class="id"><div class="text-wrapper-11">이다라</div></div>
         </div>
         <div class="profile">
-          <a class="img-2" th:href="@{/teacher/admin/teacherProfileAccept}">
+          <a class="img-2" th:href="@{/admin/teacherProfileAccept}">
             <img src="/images/common/teacher.png" alt="">
           </a>
           <div class="id"><div class="text-wrapper-11">박마바</div></div>
         </div>
         <div class="profile">
-          <a class="img-2" th:href="@{/teacher/admin/teacherProfileAccept}">
+          <a class="img-2" th:href="@{/admin/teacherProfileAccept}">
             <img src="/images/common/teacher.png" alt="">
           </a>
           <div class="id"><div class="text-wrapper-11">최사아</div></div>
         </div>
         <div class="profile">
-          <a class="img-2" th:href="@{/teacher/admin/teacherProfileAccept}">
+          <a class="img-2" th:href="@{/admin/teacherProfileAccept}">
             <img src="/images/common/teacher.png" alt="">
           </a>
           <div class="id"><div class="text-wrapper-11">김가나</div></div>
         </div>
         <div class="profile">
-          <a class="img-2" th:href="@{/teacher/admin/teacherProfileAccept}">
+          <a class="img-2" th:href="@{/admin/teacherProfileAccept}">
             <img src="/images/common/teacher.png" alt="">
           </a>
           <div class="id"><div class="text-wrapper-11">이다라</div></div>
         </div>
         <div class="profile">
-          <a class="img-2" th:href="@{/teacher/admin/teacherProfileAccept}">
+          <a class="img-2" th:href="@{/admin/teacherProfileAccept}">
             <img src="/images/common/teacher.png" alt="">
           </a>
           <div class="id"><div class="text-wrapper-11">박마바</div></div>
         </div>
         <div class="profile">
-          <a class="img-2" th:href="@{/teacher/admin/teacherProfileAccept}">
+          <a class="img-2" th:href="@{/admin/teacherProfileAccept}">
             <img src="/images/common/teacher.png" alt="">
           </a>
           <div class="id"><div class="text-wrapper-11">최사아</div></div>
         </div>
         <div class="profile">
-          <a class="img-2" th:href="@{/teacher/admin/teacherProfileAccept}">
+          <a class="img-2" th:href="@{/admin/teacherProfileAccept}">
             <img src="/images/common/teacher.png" alt="">
           </a>
           <div class="id"><div class="text-wrapper-11">김가나</div></div>
         </div>
         <div class="profile">
-          <a class="img-2" th:href="@{/teacher/admin/teacherProfileAccept}">
+          <a class="img-2" th:href="@{/admin/teacherProfileAccept}">
             <img src="/images/common/teacher.png" alt="">
           </a>
           <div class="id"><div class="text-wrapper-11">이다라</div></div>
         </div>
         <div class="profile">
-          <a class="img-2" th:href="@{/teacher/admin/teacherProfileAccept}">
+          <a class="img-2" th:href="@{/admin/teacherProfileAccept}">
             <img src="/images/common/teacher.png" alt="">
           </a>
           <div class="id"><div class="text-wrapper-11">최사아</div></div>
@@ -183,35 +180,35 @@
       </div>
       <div class="carousel">
         <div class="profile">
-          <a class="img-2" th:href="@{/teacher/admin/teacherProfileWait}">
+          <a class="img-2" th:href="@{/admin/teacherProfileWait}">
             <img src="/images/common/teacher.png" alt="">
           </a>
           <div class="id"><div class="text-wrapper-11">김가나</div></div>
           <a class="btn btn-ab button-approve">승인</a>
         </div>
         <div class="profile">
-          <a class="img-2" th:href="@{/teacher/admin/teacherProfileWait}">
+          <a class="img-2" th:href="@{/admin/teacherProfileWait}">
             <img src="/images/common/teacher.png" alt="">
           </a>
           <div class="id"><div class="text-wrapper-11">이다라</div></div>
           <a class="btn btn-ab button-approve">승인</a>
         </div>
         <div class="profile">
-          <a class="img-2" th:href="@{/teacher/admin/teacherProfileWait}">
+          <a class="img-2" th:href="@{/admin/teacherProfileWait}">
             <img src="/images/common/teacher.png" alt="">
           </a>
           <div class="id"><div class="text-wrapper-11">박마바</div></div>
           <a class="btn btn-ab button-approve">승인</a>
         </div>
         <div class="profile">
-          <a class="img-2" th:href="@{/teacher/admin/teacherProfileWait}">
+          <a class="img-2" th:href="@{/admin/teacherProfileWait}">
             <img src="/images/common/teacher.png" alt="">
           </a>
           <div class="id"><div class="text-wrapper-11">최사아</div></div>
           <a class="btn btn-ab button-approve">승인</a>
         </div>
         <div class="profile">
-          <a class="img-2" th:href="@{/teacher/admin/teacherProfileWait}">
+          <a class="img-2" th:href="@{/admin/teacherProfileWait}">
             <img src="/images/common/teacher.png" alt="">
           </a>
           <div class="id"><div class="text-wrapper-11">김가나</div></div>

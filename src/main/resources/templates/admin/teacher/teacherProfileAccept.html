@@ -7,9 +7,7 @@
 
 <th:block layout:fragment="css">
     <link rel="stylesheet" th:href="@{/css/teacher/teacherProfile.css}" />
-    <link rel="stylesheet" th:href="@{/teacher/teacherProfileGuide.css}" />
     <link rel="stylesheet" th:href="@{/css/teacher/teacherModal.css}" />
-    <link rel="stylesheet" th:href="@{/teacher/teacherModalguide.css}" />
     <link rel="stylesheet" th:href="@{/css/CommonContainerPlus.css}" />
     <link rel="stylesheet" th:href="@{/css/CommonHoverPlus.css}" />
 </th:block>
@@ -20,7 +18,7 @@
 
 <div class="container main_container" layout:fragment="content">
     <div class="title-flow2">
-        <a class="icon-back" th:href="@{/teacher/admin/teacherMain}">
+        <a class="icon-back" th:href="@{/admin/teacherMain}">
             <img src="/images/common/back.png" alt=""/>
         </a>
         <div class="div-wrapper"><div class="text-wrapper-title">교사 정보</div></div>
@@ -50,7 +48,7 @@
                             <img src="/images/common/x.png" alt=""/>
                         </button>
                     </div>
-                    <div class="modalform" th:action="@{/teacher/admin/teacherMain}" th:method="post">
+                    <div class="modalform" th:action="@{/admin/teacherMain}" th:method="post">
                         <div>김가나 선생님의 퇴사를 승인하시겠습니까?</div>
                         <div class="buttonarea">
                             <input type="reset" class="button-cancel" value="취소" data-bs-dismiss="modal">
@@ -74,7 +72,7 @@
                             <img src="/images/common/x.png" alt=""/>
                         </button>
                     </div>
-                    <form class="modalform" th:action="@{/teacher/admin/teacherMain}" th:method="post">
+                    <form class="modalform" th:action="@{/admin/teacherMain}" th:method="post">
                         <div>퇴사 처리가 완료되었습니다.</div>
                         <div class="buttonarea">
                             <input type="submit" class="button-cancel" value="확인" data-bs-dismiss="modal">
@@ -125,7 +123,7 @@
                                     <img src="/images/common/x.png" alt=""/>
                                 </button>
                             </div>
-                            <form class="modalform" th:action="@{/teacher/admin/teacherProfile}" th:method="post">
+                            <form class="modalform" th:action="@{/admin/teacherProfile}" th:method="post">
                                 <div class="row-input">
                                     <div class="text-addable">
                                         <div class="div-2">
