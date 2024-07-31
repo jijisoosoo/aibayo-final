@@ -16,6 +16,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -40,6 +41,12 @@ public class SecurityConfig {
     @Bean // BCryptPasswordEncoder 빈 생성, 비밀번호 암호화에 사용
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring()
+                .requestMatchers("/chat/**", "/inc/**", "/layout/**", "/vendor/**");
     }
 
     @Bean
@@ -68,7 +75,8 @@ public class SecurityConfig {
 
         // 경로별 인가 설정
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/member/**", "/", "/login", "/css/**", "/images/**", "/js/**").permitAll() // 로그인, 홈, 회원가입 경로는 모든 사용자에게 허용
+                .requestMatchers("/member/**", "/", "/login", "/logout", "/css/**", "/images/**", "/js/**").permitAll() // 로그인, 홈, 회원가입, CSS, 이미지, JS, 인클루드, 벤더, 채팅 경로는 모든 사용자에게 허용
+                .requestMatchers("/chat/**", "/inc/**", "/layout/**", "/vendor/**").permitAll()
                 .requestMatchers("/main/admin").hasRole("ADMIN")
                 .requestMatchers("/main/user").hasRole("USER")
                 .anyRequest().authenticated() // 그 외의 모든 요청은 인증 필요

@@ -49,7 +49,15 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         LOGGER.info("JWT Cookie added: " + jwtCookie.getValue());
 
         // 인증 성공 후 리디렉트할 URL로 이동
-        response.sendRedirect("/main/admin");
+//        response.sendRedirect("/main/admin");
+        if (role.equals("ROLE_ADMIN")) {
+            response.sendRedirect("/main/admin");
+        } else if (role.equals("ROLE_USER")) {
+            response.sendRedirect("/main/user");
+        } else {
+            response.sendRedirect("/login?error");
+        }
+
     }
 
     private Cookie createCookie(String key, String value) {
