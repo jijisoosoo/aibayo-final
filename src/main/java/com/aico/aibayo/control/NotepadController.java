@@ -49,7 +49,7 @@ public class NotepadController {
         Page<NotepadDto> notepads = notepadService.getAllByKinderNo(condition, page);
 
         // 페이지네이션에 필요한 정보
-        return getPageInfoAndGoView(model, notepads, "/notepad/admin/list");
+        return getPageInfoAndGoView(model, notepads, "/admin/notepad/list");
     }
 
     @PostMapping("/admin/searchDate")
@@ -60,7 +60,7 @@ public class NotepadController {
         Page<NotepadDto> notepads = notepadService.getAllByKinderNo(condition, 1);
 
         // 페이지네이션에 필요한 정보
-        return getPageInfoAndGoView(model, notepads, "/notepad/admin/list");
+        return getPageInfoAndGoView(model, notepads, "/admin/notepad/list");
     }
 
     @GetMapping("/user/list")
@@ -72,7 +72,7 @@ public class NotepadController {
 
         Page<NotepadDto> notepads = notepadService.getAllByKidNo(condition, page);
 
-        return getPageInfoAndGoView(model, notepads, "/notepad/user/list");
+        return getPageInfoAndGoView(model, notepads, "/user/notepad/list");
     }
 
     @PostMapping("/user/searchDate")
@@ -83,7 +83,7 @@ public class NotepadController {
         Page<NotepadDto> notepads = notepadService.getAllByKidNo(condition, 1);
 
         // 페이지네이션에 필요한 정보
-        return getPageInfoAndGoView(model, notepads, "/notepad/user/list");
+        return getPageInfoAndGoView(model, notepads, "/user/notepad/list");
     }
 
     // 나중에 detail 대신 notepadNo 대신 가져오기
@@ -99,14 +99,14 @@ public class NotepadController {
         model.addAttribute("member", memberDto);
         model.addAttribute("notepad", notepadDto);
 
-        return "/notepad/admin/detail";
+        return "/admin/notepad/detail";
     }
 
     @GetMapping("/user/{notepadNo}")
     public String userDetail(@PathVariable Long notepadNo, Model model) {
         NotepadDto notepadDto = notepadService.getByNotepadNo(notepadNo);
         model.addAttribute("notepad", notepadDto);
-        return "/notepad/user/detail";
+        return "/user/notepad/detail";
     }
 
     @GetMapping("/admin/modify/{notepadNo}")
@@ -121,7 +121,7 @@ public class NotepadController {
         model.addAttribute("member", memberDto);
         model.addAttribute("notepad", notepadDto);
 
-        return "/notepad/admin/modifyForm";
+        return "/admin/notepad/modifyForm";
     }
 
     @PutMapping("/modifyOk")
@@ -155,7 +155,7 @@ public class NotepadController {
         model.addAttribute("kidDtos", kidDtos);
         model.addAttribute("notepadInfo", notepadInfo);
 
-        return "/notepad/admin/writeForm";
+        return "/admin/notepad/writeForm";
     }
 
     @PostMapping("/writeOk")

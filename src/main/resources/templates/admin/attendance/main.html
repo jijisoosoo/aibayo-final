@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout}">
+
+<title layout:fragment="title">Attendance Calendar</title>
+
+<th:block layout:fragment="css">
+  <th:block th:replace="~{/common/fullcalendar :: css}"> </th:block>
+  <link rel="stylesheet" th:href="@{/css/attendance/main.css}">
+</th:block>
+
+<th:block layout:fragment="javascript">
+  <th:block th:replace="~{/common/fullcalendar :: js}"> </th:block>
+  <script src="/js/attendance/main.js"></script>
+</th:block>
+
+<div class="container" layout:fragment="content">
+  <h1>월간 출석부</h1>
+  <div id='calendar' style="z-index: 1"></div>
+</div>
+
+
+</html>

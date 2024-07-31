@@ -14,7 +14,7 @@ public class MainController {
         HttpSession session = request.getSession();
         session.setAttribute("role", "admin");
 
-        return "/main/admin/main";
+        return "/admin/main/main";
     }
 
     @GetMapping("/user")
@@ -22,6 +22,6 @@ public class MainController {
         HttpSession session = request.getSession();
         session.setAttribute("role", "user");
 
-        return "/main/user/main";
+        return "/user/main/main";
     }
 }
