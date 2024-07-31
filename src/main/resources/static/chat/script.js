@@ -3,6 +3,7 @@ const sendChatBtn = document.querySelector(".chat-input span")
 const chatbox = document.querySelector(".chatbox")
 const chatbotToggler = document.querySelector(".chatbot-toggler")
 
+
 let userMessage;
 const inputInitHeight = chatInput.scrollHeight;
 
