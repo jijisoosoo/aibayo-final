@@ -36,7 +36,8 @@
 
         <div class="kid_content_top_box">
 
-            <div class="kid_profile_box" th:object="${kid}">
+            <div class="kid_profile_box" th:object="${kid}"
+                 id="kidProfile" th:data-kid-no="*{kidNo}">
 
                 <div class="kid_profile_svg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="250" height="250" viewBox="0 0 250 250" fill="none">
@@ -134,7 +135,7 @@
                             </div>
                         </div>
 
-                        <div class="close_box" th:if="${isMainParent == '1'}">
+                        <div class="close_box" th:if="${isMainParent == '1' && members.size() > 1}">
                             <button type="button" class="btn-close remove_relation"></button>
                         </div>
 
