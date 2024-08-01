@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
 //                 // 모든 쿠키 삭제
 //                 allDelCookies();
 //                 alert('Logged out successfully');
-//                 window.location.href = '/login'; // 로그아웃 후 리디렉션 할 페이지
+//                 window.location.href = '/member'; // 로그아웃 후 리디렉션 할 페이지
 //             },
 //             error: function(xhr, status, error) {
 //                 alert('Logout failed');
@@ -133,7 +133,7 @@ $(document).ready(function() {
                 var domain = window.location.hostname;
                 document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain + ';';
                 alert('Logged out successfully');
-                window.location.href = '/login'; // 로그아웃 후 리디렉션 할 페이지
+                window.location.href = '/member'; // 로그아웃 후 리디렉션 할 페이지
             },
             error: function(xhr, status, error) {
                 alert('Logout failed');
