@@ -1,14 +1,15 @@
 package com.aico.aibayo.dto.member;
 
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
+@Data
 @RequiredArgsConstructor
 public class CustomOAuth2Member implements OAuth2User {
     private final MemberDto memberDto;
@@ -38,13 +39,5 @@ public class CustomOAuth2Member implements OAuth2User {
 
     public String getUsername() {
         return memberDto.getUsername();
-    }
-
-    public boolean isNewMember() {
-        return newMember;
-    }
-
-    public void setNewMember(boolean newMember) {
-        this.newMember = newMember;
     }
 }

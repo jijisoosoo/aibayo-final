@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
-<!--    <link rel="stylesheet" href="/login/signIn.css"/>-->
-<!--    <link rel="stylesheet" href="/login/signInGuide.css"/>-->
-    <link rel="stylesheet" th:href="@{/css/login/signIn.css}" />
-    <link rel="stylesheet" th:href="@{/css/login/signInGuide.css}" />
+<!--    <link rel="stylesheet" href="/member/signIn.css"/>-->
+<!--    <link rel="stylesheet" href="/member/signInGuide.css"/>-->
+    <link rel="stylesheet" th:href="@{/css/member/signIn.css}" />
+    <link rel="stylesheet" th:href="@{/css/member/signInGuide.css}" />
 
 
 
@@ -13,16 +13,16 @@
     <title>LoginPage</title>
 </head>
 <body>
-<!--<div class="login-page">-->
+<!--<div class="member-page">-->
 <div class="login-page">
     <div class="div">
         <div class="overlap">
             <div class="group">
                 <div class="overlap-group">
                     <div class="group-2">
-                        <div class="group-3">
-                            <div class="text-wrapper">Welcome to aibayo</div>
-                        </div>
+<!--                        <div class="group-3">-->
+<!--                            <div class="text-wrapper">Welcome to aibayo</div>-->
+<!--                        </div>-->
                     </div>
 
                         <form action="/login" method="post">
@@ -30,7 +30,7 @@
 
                                 <div class="text-wrapper-3" >이메일</div>
                                 <!-- <div class="username-or-email-wrapper"><div class="text-wrapper-4">email address</div></div> -->
-                                <input class="username-or-email-wrapper" name="username" id="email-input" type="email"  required ></input>
+                                <input class="username-or-email-wrapper" name="username" id="email-input" type="email"  required style="padding: 0px 10px; width: 430px; height: 50px;" ></input>
                             </div>
 
 
@@ -42,7 +42,7 @@
 
                     <div class="group-5">
                         <div class="text-wrapper-3">비밀번호</div>
-                        <input type="password" class="div-wrapper" name="password" id="password-input">
+                        <input type="password" class="div-wrapper" name="password" id="password-input" style="padding: 0px 10px; width: 430px; height: 50px;">
                     </div>
                     </form>
 
@@ -69,7 +69,7 @@
         </div>
 <!--        <a th:href="@{/main/admin}" class="text-wrapper-10" style="text-decoration: none; color: inherit;">aibayo</a>-->
         <div class="logo h_class_78">
-            <div class="h_class_79"><a th:href="@{/main/admin}" style="text-decoration: none; color: inherit;">aibayo</a></div>
+            <div class="h_class_79"><a th:href="@{/main/admin}" style="text-decoration: none; color: inherit; font-family: 'Noto Sans KR', sans-serif;'">aibayo</a></div>
         </div>
 
 

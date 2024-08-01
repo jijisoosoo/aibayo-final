@@ -82,7 +82,7 @@ public class SecurityConfig {
                         if (oAuth2Member.isNewMember()) {
                             response.sendRedirect("/register-child"); // 원아정보입력페이지로 리디렉션
                         } else {
-                            response.sendRedirect("/main/admin"); // 메인페이지로 리디렉션
+                            response.sendRedirect("/main"); // 메인페이지로 리디렉션
                         }
                     }
                 }));
@@ -103,9 +103,12 @@ public class SecurityConfig {
 
         // 경로별 인가 설정
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/member/**", "/", "/login", "/users/login", "/member/**", "/logout", "/css/**", "/images/**", "/js/**").permitAll()
+                .requestMatchers("/member/**", "/", "/login", "/users/login", "/logout", "/css/**", "/images/**", "/js/**").permitAll()
                 .requestMatchers("/chat/**", "/inc/**", "/layout/**", "/vendor/**").permitAll()
-                .requestMatchers("/main/admin").hasRole("ADMIN")
+//                .requestMatchers("/main/admin").hasRole("ADMIN")
+                .requestMatchers("/main/admin").hasAnyRole("ADMIN", "PRINCIPAL", "TEACHER")
+//                .requestMatchers("/main/principal").hasRole("PRINCIPAL")
+//                .requestMatchers("/main/teacher").hasRole("TEACHER")
                 .requestMatchers("/main/user").hasRole("USER")
                 .anyRequest().authenticated());
 
