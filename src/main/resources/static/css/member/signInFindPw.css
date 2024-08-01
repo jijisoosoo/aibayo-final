@@ -100,9 +100,7 @@ body {
     line-height: normal;
 }
 
-.login-page .span {
-    color: #8d8d8d;
-}
+
 
 .login-page .text-wrapper-2 {
     position: absolute;
@@ -224,6 +222,7 @@ body {
     margin-top: 5%;
     background-color: #ffd700;
     border: none !important;
+    font-size: 16px;
 }
 
 .login-page .text-wrapper-6 {
@@ -249,11 +248,11 @@ body {
 .login-page .text-wrapper-7 {
     top: 84px;
     left: 37px;
-    font-family: "Noto Sans-DisplayRegular", Helvetica;
-    color: #000000;
+    font-family: "Noto Sans KR", Helvetica;
+    color: #5d3700;
     font-size: 45px;
     position: absolute;
-    font-weight: 400;
+    font-weight: 500;
     letter-spacing: 0;
     line-height: normal;
 }
@@ -287,7 +286,7 @@ body {
     left: 113px;
     /*font-weight: 400;*/
     color: #000000;
-    font-size: 14px;
+    font-size: 16px;
     text-align: center;
     letter-spacing: 0;
     line-height: normal;
@@ -327,9 +326,9 @@ body {
 }
 
 .login-page .span {
-    color: #a5c02a;
+    color: #6f850b;
     position: absolute;
-    top: 200px;
+    top: 208px;
     left: 890px;
     text-decoration: none;
 }
