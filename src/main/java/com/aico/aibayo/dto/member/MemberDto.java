@@ -20,7 +20,6 @@ public class MemberDto {
     private String name;
     private String password;
     private String phone;
-    private int regType;
     private int roleNo;
     private String role;
     private int status;
@@ -28,28 +27,25 @@ public class MemberDto {
     private LocalDateTime modifyDate;
     private LocalDateTime inactivateDate;
     private LocalDateTime latestLogDate;
-    private String latestIp;
     private String profilePicture;
     private Long kinderNo;
 
     private String isMainParent;
 
-    public MemberDto(Long id, String username, String name, String password, String phone, Integer regType, Integer roleNo,
+    public MemberDto(Long id, String username, String name, String password, String phone, Integer roleNo,
                      Integer status, LocalDateTime regDate, LocalDateTime modifyDate, LocalDateTime inactivateDate,
-                     LocalDateTime latestLogDate, String latestIp, String profilePicture, Long kinderNo) {
+                     LocalDateTime latestLogDate, String profilePicture, Long kinderNo) {
         this.id = id;
         this.username = username;
         this.name = name;
         this.password = password;
         this.phone = phone;
-        this.regType = regType;
         this.roleNo = roleNo;
         this.status = status;
         this.regDate = regDate;
         this.modifyDate = modifyDate;
         this.inactivateDate = inactivateDate;
         this.latestLogDate = latestLogDate;
-        this.latestIp = latestIp;
         this.profilePicture = profilePicture;
         this.kinderNo = kinderNo;
     }
@@ -61,14 +57,12 @@ public class MemberDto {
                 entity.getName(),
                 entity.getPassword(),
                 entity.getPhone(),
-                entity.getRegType(),
                 entity.getRoleNo(),
                 entity.getStatus(),
                 entity.getRegDate(),
                 entity.getModifyDate(),
                 entity.getInactivateDate(),
                 entity.getLatestLogDate(),
-                entity.getLatestIp(),
                 entity.getProfilePicture(),
                 entity.getKinderNo()
         );

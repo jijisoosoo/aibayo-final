@@ -25,7 +25,7 @@ public class KidDto {
     private LocalDateTime dischargeDate;
     private String dischargeFlag;
 
-    private String email;
+    private String username;
 
     private String inviteEmail;
 

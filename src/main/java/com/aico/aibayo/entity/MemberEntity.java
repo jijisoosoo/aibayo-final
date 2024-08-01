@@ -25,11 +25,10 @@ public class MemberEntity {
     private String password;
     @Column
     private String phone;
-    @Column(name = "reg_type")
-    private Integer regType;
 
     @Column(name = "role_no")
     private Integer roleNo;
+
     private String role;
 
     @Column
@@ -42,8 +41,7 @@ public class MemberEntity {
     private LocalDateTime inactivateDate;
     @Column(name = "latest_log_date")
     private LocalDateTime latestLogDate;
-    @Column(name = "latest_ip")
-    private String latestIp;
+
     @Lob
     @Column(name = "profile_picture")
     private String profilePicture;
