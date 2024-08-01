@@ -13,13 +13,10 @@ import java.util.List;
 import com.aico.aibayo.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Controller
@@ -31,15 +28,15 @@ public class KidController {
     private final MemberService memberService;
 
     // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
-//    private int roleNo = 1;
-//    private Long id = 2L;
+    private int roleNo = 1;
+    private Long id = 2L;
     private Long kinderNo = 1L;
 
 //    private int roleNo = 2;
 //    private Long id = 31L;
 
-    private int roleNo = 3;
-    private Long id = 14L;
+//    private int roleNo = 3;
+//    private Long id = 14L;
 
     @GetMapping("/list")
     public String list(Model model) {
@@ -76,6 +73,16 @@ public class KidController {
         getConditionAndGoDetail(kidNo, model);
 
         return "/user/kid/detail";
+    }
+
+    @PutMapping("/modifyOk")
+    @ResponseBody
+    public ResponseEntity<KidDto> modifyOk(@RequestBody KidDto kidDto) {
+        log.info("modify: {}", kidDto);
+        KidDto updated = kidService.updateKid(kidDto);
+
+        return updated == null ? ResponseEntity.badRequest().build() :
+                                 ResponseEntity.ok(updated);
     }
 
     @GetMapping("/write")

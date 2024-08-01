@@ -5,6 +5,8 @@ import com.aico.aibayo.dto.kid.KidDto;
 import com.aico.aibayo.dto.kid.KidSearchCondition;
 import com.aico.aibayo.entity.KidEntity;
 import com.aico.aibayo.repository.kid.KidRepository;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -44,5 +46,19 @@ public class KidServiceImpl implements KidService {
     @Override
     public KidDto getByKidNo(Long kidNo) {
         return KidDto.toDto(Objects.requireNonNull(kidRepository.findById(kidNo).orElse(null)));
+    }
+
+    @Override
+    public KidDto updateKid(KidDto kidDto) {
+        KidEntity target = kidRepository.findById(kidDto.getKidNo()).orElse(null);
+
+        if (target == null) { return null; }
+
+        if (kidDto.getKidName() != null) { target.setKidName(kidDto.getKidName()); }
+        if (kidDto.getKidBirth() != null) { target.setKidBirth(kidDto.getKidBirth()); }
+
+        target.setModifyDate(LocalDateTime.now());
+
+        return KidDto.toDto(kidRepository.save(target));
     }
 }
