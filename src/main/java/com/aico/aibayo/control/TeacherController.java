@@ -1,5 +1,6 @@
 package com.aico.aibayo.control;
 
+import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.dto.teacher.teacherDto;
 import com.aico.aibayo.service.teacher.teacherService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class TeacherController {
 
     @GetMapping("/list")
     public String adminTeacherMain(Model model) {
-        List<teacherDto> teachers = teacherService.getAllByKinderNo(1l);
+        List<MemberDto> teachers = teacherService.getAllByKinderNo(1L);
         model.addAttribute("teachers", teachers);
         return "/admin/teacher/teacherMain";
     }

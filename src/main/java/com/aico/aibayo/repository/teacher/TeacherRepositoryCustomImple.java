@@ -1,5 +1,8 @@
 package com.aico.aibayo.repository.teacher;
 
+import com.aico.aibayo.common.AcceptStatusEnum;
+import com.aico.aibayo.common.AcceptTypeEnum;
+import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.dto.teacher.TeacherSearchCondition;
 import com.aico.aibayo.dto.teacher.teacherDto;
 import com.aico.aibayo.entity.*;
@@ -11,6 +14,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class TeacherRepositoryCustomImple implements TeacherRepositoryCustom{
@@ -25,25 +29,42 @@ public class TeacherRepositoryCustomImple implements TeacherRepositoryCustom{
 
 
     @Override
-    public List<teacherDto> findAllByKinderNo(Long kinderNo) {
-        List<teacherDto> teachers = jpaQueryFactory
-                .select(Projections.constructor(teacherDto.class,
+    public List<MemberDto> findAllByKinderNo(Long kinderNo) {
+        List<MemberDto> fetch = jpaQueryFactory
+                .select(Projections.constructor(MemberDto.class,
                         member.id,
                         member.username,
                         member.name,
+                        member.password,
                         member.phone,
+                        member.roleNo,
+                        member.status,
+                        member.regDate,
+                        member.modifyDate,
+                        member.inactivateDate,
+                        member.latestLogDate,
+                        member.profilePicture,
+                        member.kinderNo
 //                        member.profilePicture,
-                        acceptLog.acceptRegDate,
-                        acceptLog.acceptNo))
+//                        acceptLog.acceptRegDate,
+//                        acceptLog.acceptNo
+                ))
                 .from(member)
                 .join(teacherKinder).on(member.id.eq(teacherKinder.teacherId))
                 .join(acceptLog).on(teacherKinder.acceptNo.eq(acceptLog.acceptNo))
-                .where(acceptLog.acceptStatus.eq(1),
-                        teacherKinder.kinderNo.eq(1L))
+                .where(
+                        acceptLog.acceptStatus.eq(AcceptStatusEnum.ACCEPT.getStatus()),
+                        teacherKinder.kinderNo.eq(kinderNo)
+                )
                 .fetch();
+        System.out.println(" fetch : " + fetch);
+        System.out.println(" fetch : " + fetch.size());
 
-        System.out.println("repository : " + teachers.toString());
-        return teachers;
+        fetch.stream().map(t ->
+                        MemberDto.toDto(t))
+                .collect(Collectors.toList());
+
+        return fetch;
     }
 
 //    @Override
@@ -78,3 +99,37 @@ public class TeacherRepositoryCustomImple implements TeacherRepositoryCustom{
 //        return classNo == null ? null : classTeacher.classNo.eq(classNo);
 //    }
 }
+
+
+
+
+
+//List<MemberDto> fetch = jpaQueryFactory
+//                .select(Projections.constructor(MemberDto.class,
+//                        member.id,
+//                        member.username,
+//                        member.name,
+//                        member.password,
+//                        member.phone,
+//                        member.roleNo,
+//                        member.status,
+//                        member.regDate,
+//                        member.modifyDate,
+//                        member.inactivateDate,
+//                        member.latestLogDate,
+//                        member.profilePicture,
+//                        member.kinderNo
+////                        member.profilePicture,
+////                        acceptLog.acceptRegDate,
+////                        acceptLog.acceptNo
+//                ))
+//                .from(member)
+//                .join(teacherKinder).on(member.id.eq(teacherKinder.teacherId))
+//                .join(acceptLog).on(teacherKinder.acceptNo.eq(acceptLog.acceptNo))
+//                .where(
+//                        acceptLog.acceptStatus.eq(AcceptStatusEnum.ACCEPT.getStatus()),
+//                        teacherKinder.kinderNo.eq(kinderNo)
+//                )
+//                .fetch();
+//        System.out.println(" fetch : " + fetch);
+//        System.out.println(" fetch : " + fetch.size());
