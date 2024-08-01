@@ -1,0 +1,22 @@
+package com.aico.aibayo.entity;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "schedule_class")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString
+@IdClass(ScheduleClassId.class)
+public class ScheduleClassEntity {
+    @Id
+    @Column(name = "schedule_no")
+    private Long scheduleNo;
+    @Id
+    @Column(name = "class_no")
+    private Long classNo;
+}

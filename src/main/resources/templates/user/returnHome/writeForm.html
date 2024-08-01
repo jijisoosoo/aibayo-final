@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout}">
+
+<title layout:fragment="title">귀가 동의서 작성</title>
+
+<th:block layout:fragment="css">
+  <link rel="stylesheet" href="/css/returnHome/writeForm.css" />
+</th:block>
+
+<th:block layout:fragment="javascript">
+  <script src="/returnHome/returnHome.js"></script></th:block>
+
+<div class="container main_container" layout:fragment="content">
+  <div class="frame">
+    <form action="">
+      <div class="div">
+        <div class="div-wrapper">
+          <div class="text-wrapper">귀가 동의서</div>
+        </div>
+        <div class="view">
+          <a href="/returnhome/user/card" class="element-secondary-button">
+            <div class="text-wrapper-2">취소</div>
+          </a>
+          <input type="submit" value="작성" class="element-secondary-button-2">
+        </div>
+      </div>
+      <div class="div-2">
+        <div class="div-3">
+          <div class="frame-wrapper">
+            <div class="div-4">
+              <div class="div-3">
+                <div class="frame-wrapper-2">
+                  <div class="div-5">
+                    <div class="div-6">
+                      <img class="avatar" alt="Avatar" src="/returnHome/img/1.png" />
+                    </div>
+                    <div class="div-7">
+                      <div class="div-8">
+                        <div class="div-6">
+                          <div class="text-wrapper-4">흰둥이</div>
+                        </div>
+                        <div class="div-6">
+                          <div class="text-wrapper-4">어린이</div>
+                        </div>
+                      </div>
+                      <div class="div-6">
+                        <div class="text-wrapper-5">새싹반</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="frame-wrapper-3">
+                  <div class="btn-group" id="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="btnradio" id="day1" autocomplete="off" checked>
+                    <label class="btn btn-outline-ab custom-style" for="day1">7월 1일</label>
+                    <input type="radio" class="btn-check" name="btnradio" id="day2" autocomplete="off">
+                    <label class="btn btn-outline-ab custom-style" for="day2">7월 2일</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="frame-wrapper-7">
+          <div class="frame-wrapper-8">
+            <div class="div-11">
+              <div class="div-13">
+                <div class="button">
+                </div>
+                <table class="table" id="home">
+                  <tr>
+                    <th>귀가 방법</th>
+                    <td>
+                      <select class="form-select" aria-label="Default select example" id="selectbox">
+                        <option selected>선택</option>
+                        <option value="1">도보</option>
+                        <option value="2">자가용</option>
+                        <option value="3">기타</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>특이 사항</th>
+                    <td><input type="text" name="time" id="time"></td>
+                  </tr>
+                  <tr>
+                    <th>연락처</th>
+                    <td>
+                      <span><input type="text" class="name" name="name2" id="name2" placeholder="홍길동"></span>
+                      <span><input type="rs" class="rs" name="rs" id="rs1" placeholder="원아와의 관계"></span>
+                      <span>
+                        <input type="text" class="num" id="num11">
+                        <span class="hypen">-</span>
+                      </span>
+                      <span>
+                        <input type="text" class="num" id="num22">
+                        <span class="hypen">-</span>
+                      </span>
+                      <span><input type="text" class="num" id="num33"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>연락처</th>
+                    <td>
+                      <span><input type="text" class="name" name="name1" id="name1" placeholder="홍길동"></span>
+                      <span><input type="rs" class="rs" name="rs" id="rs" placeholder="원아와의 관계"></span>
+                        <span>
+                          <input type="text" class="num" id="num1">
+                          <span class="hypen">-</span>
+                        </span>
+                        <span>
+                          <input type="text" class="num" id="num2">
+                          <span class="hypen">-</span>
+                        </span>
+                        <span><input type="text" class="num" id="num3"></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>의뢰자</th>
+                    <td>흰둥맘</td>
+                  </tr>
+                  <tr>
+                    <th>특이 사항</th>
+                    <td><input type="text" name="memo" id="memo"></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sign">
+          <div class="promise">
+            영유아의 귀가 시 위 보호자에게 인도하여 주세요. <br>
+            위 보호자 이외의 다른 사람에게 인계할 때는 사전에 반드시 연락을 취하겠습니다. <br>
+            원에서는 부모가 희망하더라도 영유아를 혼자 귀가시키지 않습니다. <br>
+            금일 자녀의 귀가를 선생님께 의뢰합니다.
+          </div>
+          <div class="date">
+            2024년 6월 30 일
+          </div>
+          <div class="parent">
+            <div class="name">
+              김엄마
+            </div>
+            <div class="parentSign">
+              (인)
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

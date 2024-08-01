@@ -7,8 +7,8 @@
 
 ## 주요 기능
 - **회원 관리**
-  - 회원가입, 로그인
-- **공지사항**
+  - 회원가입, 로그인(OAuth2, Spring Security)
+- **공지사항, 알림장**
   - 주요 공지 설정, 댓글 작성, 전체조회, 상세조회, 작성, 수정, 삭제
 - **식단표 및 출석부**
   - 월별조회, 상세조회, 작성, 수정, 삭제
@@ -17,23 +17,23 @@
 
 ## 사용 기술 및 개발 환경
 - **운영체제**: Windows, MacOS
-- **DB**: MySQL
-- **사용 언어**: JAVA
-- **개발 도구**: Eclipse, VSCode, DBeaver, Git, ERDCloud
-- **기타 S/W**: VisualPardigm, SpreadSheet, Notion, Discord
+- **DB**: MySQL, MongoDB
+- **사용 언어**: JAVA, Spring Boot, JPA, Javascript
+- **개발 도구**: IntelliJ, Eclipse, VSCode, DBeaver, Git, ERDCloud
+- **기타 S/W**: ERDCloud, SpreadSheet, Notion, Discord
 
 ## 팀원 및 역할
-- **팀장**: 문주영
-  - **Front-End**: 사이트 관리, 공지사항, 식단표
+- **팀장**: 문주영 (alex.moonjy@gmail.com)
+  - **Front-End**: 사이트 관리, 공지사항, 식단표, 로그인(회원가입), 채팅
   - **Back-End**: 출석부, 반 관리, 유치원 관리, 회원 관리
-- **팀원**: 김소연
+- **팀원**: 김소연 (winternrabbit@gmail.com)
   - **Front-End**: 교사 관리, 일정표
-  - **Back-End**: 식단표, 알림장, 원생 관리
-- **팀원**: 소민지
-  - **Front-End**: 유치원 관리, 알림장, 댓글
+  - **Back-End**: 식단표, 알림장, 원생 관리, 전자결재
+- **팀원**: 소민지 (mindyso7151@gmail.com)
+  - **Front-End**: 유치원 관리, 알림장, 댓글, 청구서
   - **Back-End**: 일정표, 교사 관리
-- **팀원**: 홍지수
+- **팀원**: 홍지수 (ji931229@gmail.com)
   - **Front-End**: 원생 관리, 출석부
-  - **Back-End**: 공지사항, 댓글, 사이트 관리
+  - **Back-End**: 공지사항, 댓글, 사이트 관리, 투약의뢰서, 귀가동의서
 
 
