@@ -18,7 +18,7 @@ $(document).ready(function () {
            // console.log("원생생일 변경 함수")
            let param = {
                kidNo : $('#kidProfile').data('kid-no'),
-               kidBirth : $('#kidBirth').val(),
+               kidBirth : moment($('#kidBirth').val()).format('YYYY-MM-DD')
            }
 
            return param;
@@ -76,7 +76,7 @@ $(document).ready(function () {
 
 function afterSuccess(response) {
     $('#kidName').val(response.kidName);
-    $('#kidBirth').val(response.kidBirth);
+    $('#kidBirth').val(moment(response.kidBirth).format('YYYY.MM.DD'));
 }
 
 function alertConfirmModify(modifyInfo) {

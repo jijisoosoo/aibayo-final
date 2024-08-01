@@ -74,7 +74,7 @@ public class KidController {
 
         return "/user/kid/detail";
     }
-
+// http://localhost:8080/kid/modifyOk
     @PutMapping("/modifyOk")
     @ResponseBody
     public ResponseEntity<KidDto> modifyOk(@RequestBody KidDto kidDto) {
