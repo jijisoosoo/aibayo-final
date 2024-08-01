@@ -20,30 +20,22 @@ public class teacherDto {
     private String username;
     private String name;
     private String phone;
-    private String profilePicture;
+//    private String profilePicture;
 
     private LocalDateTime acceptRegDate;
 
     private Long acceptNo;
 
-    public teacherDto(Long id, String username, String name, String phone,
-                      String profilePicture) {
-        this.id = id;
-        this.username = username;
-        this.name = name;
-        this.phone = phone;
-        this.profilePicture = profilePicture;
-        this.acceptRegDate = acceptRegDate;
-        this.acceptNo = acceptNo;
-    }
 
-    public static teacherDto toDto(MemberEntity memberEntity, AcceptLogEntity acceptLogEntity) {
-        return new teacherDto(
-                memberEntity.getId(),
-                memberEntity.getUsername(),
-                memberEntity.getName(),
-                memberEntity.getPhone(),
-                memberEntity.getProfilePicture()
-        );
-    }
+//    public static teacherDto toDto(MemberEntity memberEntity, AcceptLogEntity acceptLogEntity) {
+//        return new teacherDto(
+//                memberEntity.getId(),
+//                memberEntity.getUsername(),
+//                memberEntity.getName(),
+//                memberEntity.getPhone(),
+//                memberEntity.getProfilePicture(),
+//                acceptLogEntity.getAcceptRegDate(),
+//                acceptLogEntity.getAcceptNo()
+//        );
+//    }
 }

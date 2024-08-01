@@ -20,9 +20,9 @@ public class MemberDto {
     private String name;
     private String password;
     private String phone;
-    private int roleNo;
+    private Integer roleNo;
     private String role;
-    private int status;
+    private Integer status;
     private LocalDateTime regDate;
     private LocalDateTime modifyDate;
     private LocalDateTime inactivateDate;

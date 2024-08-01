@@ -32,7 +32,7 @@ public class TeacherRepositoryCustomImple implements TeacherRepositoryCustom{
                         member.username,
                         member.name,
                         member.phone,
-                        member.profilePicture,
+//                        member.profilePicture,
                         acceptLog.acceptRegDate,
                         acceptLog.acceptNo))
                 .from(member)
