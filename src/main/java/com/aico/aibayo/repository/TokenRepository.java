@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface TokenRepository extends JpaRepository<TokenEntity, Long> {
     boolean existsByToken(String token);
     void deleteByToken(String token);
+    TokenEntity findByToken(String token);
 }
