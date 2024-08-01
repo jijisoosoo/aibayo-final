@@ -7,6 +7,7 @@ import com.aico.aibayo.jwt.LoginFilter;
 import com.aico.aibayo.oauth2.CustomSuccessHandler;
 import com.aico.aibayo.service.member.CustomOAuth2MemberService;
 import com.aico.aibayo.service.member.TokenService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,10 +21,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import jakarta.servlet.http.Cookie;
 
-@Configuration // 이 클래스가 설정 클래스임을 나타냄
-@EnableWebSecurity // 웹 보안을 활성화
-@RequiredArgsConstructor // final 필드에 대한 생성자를 자동으로 생성
+@Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
     private final CustomOAuth2MemberService customOAuth2MemberService;
     private final CustomSuccessHandler customSuccessHandler;
@@ -36,7 +40,7 @@ public class SecurityConfig {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-    @Bean // BCryptPasswordEncoder 빈 생성, 비밀번호 암호화에 사용
+    @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -71,19 +75,50 @@ public class SecurityConfig {
         http.addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, tokenService), UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(new CustomLogoutFilter(jwtUtil, tokenService), UsernamePasswordAuthenticationFilter.class);
 
+        // 커스텀 로그아웃 핸들러 추가
+        http.logout(logoutConfigurer -> logoutConfigurer                                       // 로그아웃 기능이 동작
+                .logoutUrl("/logout")                           // 로그아웃 처리 URL
+                .logoutSuccessUrl("/login")                     // 로그아웃 성공 후 이동 페이지
+                .deleteCookies("jwt")     // 로그아웃 후 쿠키 삭제
+                .addLogoutHandler(logoutHandler())              // 로그아웃 핸들러
+                .logoutSuccessHandler(logoutSuccessHandler()));  // 로그아웃 성공 후 핸들러
+
+
         // 경로별 인가 설정
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/member/**", "/", "/login", "/logout", "/css/**", "/images/**", "/js/**").permitAll() // 로그인, 홈, 회원가입, CSS, 이미지, JS, 인클루드, 벤더, 채팅 경로는 모든 사용자에게 허용
+                .requestMatchers("/member/**", "/", "/login", "/logout", "/css/**", "/images/**", "/js/**").permitAll()
                 .requestMatchers("/chat/**", "/inc/**", "/layout/**", "/vendor/**").permitAll()
                 .requestMatchers("/main/admin").hasRole("ADMIN")
                 .requestMatchers("/main/user").hasRole("USER")
-                .anyRequest().authenticated() // 그 외의 모든 요청은 인증 필요
-        );
+                .anyRequest().authenticated());
 
         // 세션 관리 설정
         http.sessionManagement(session -> session
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)); // 세션을 사용하지 않음 (무상태)
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-        return http.build(); // 설정된 SecurityFilterChain을 빌드하여 반환
+        return http.build();
+    }
+
+    @Bean
+    public LogoutHandler logoutHandler() {
+        return (request, response, authentication) -> {
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if ("jwt".equals(cookie.getName())) {
+                        String token = cookie.getValue();
+                        tokenService.invalidateToken(token); // 토큰 무효화
+                        break;
+                    }
+                }
+            }
+        };
+    }
+
+    @Bean
+    public LogoutSuccessHandler logoutSuccessHandler() {
+        return (request, response, authentication) -> {
+            response.setStatus(HttpServletResponse.SC_OK);
+        };
     }
 }

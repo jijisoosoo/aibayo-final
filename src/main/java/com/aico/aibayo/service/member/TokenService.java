@@ -32,4 +32,12 @@ public class TokenService {
     public void deleteToken(String token) {
         tokenRepository.deleteByToken(token);
     }
+
+    public void invalidateToken(String token) {
+        TokenEntity tokenEntity = tokenRepository.findByToken(token);
+        if (tokenEntity != null) {
+            tokenEntity.setToken(null); // 토큰 무효화
+            tokenRepository.save(tokenEntity);
+        }
+    }
 }
