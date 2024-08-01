@@ -89,11 +89,12 @@ public class KidController {
     }
 
     @GetMapping("/user/{kidNo}")
-    public String userDetail(@ModelAttribute MemberDto member,
-                             @PathVariable Long kidNo, Model model) {
+    public String userDetail(@PathVariable Long kidNo, Model model) {
+        MemberDto loginInfo = (MemberDto) model.getAttribute("loginInfo");
+
         // 주보호자 여부 확인
         MemberSearchCondition condition = new MemberSearchCondition();
-        condition.setId(member.getId());
+        condition.setId(loginInfo.getId());
         condition.setKidNo(kidNo);
 
         MemberDto loginUser = memberService.getByIdAndKidNo(condition);
@@ -103,6 +104,25 @@ public class KidController {
         getConditionAndGoDetail(kidNo, model);
 
         return "/user/kid/detail";
+    }
+
+    @PostMapping("/modifyOk")
+    public String modifyOk(@RequestBody KidDto kidDto, Model model) {
+        MemberDto loginInfo = (MemberDto) model.getAttribute("loginInfo");
+        int roleNo = loginInfo.getRoleNo();
+
+        kidService.updateKidRelation(kidDto);
+
+        getConditionAndGoDetail(kidDto.getKidNo(), model);
+
+        if (roleNo < 2) {
+            return "/admin/kid/detail";
+        } else if (roleNo == 2) {
+            return "/user/kid/detail";
+        } else {
+            throw new IllegalArgumentException("유효하지 않은 접근입니다.");
+        }
+
     }
 
     @PutMapping("/modifyOk")

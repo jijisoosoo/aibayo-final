@@ -4,10 +4,14 @@ $(document).ready(function () {
             // console.log("원생명 변경 함수")
             let param = {
                 kidNo : $('#kidProfile').data('kid-no'),
-                kidName : $('#kidName').val().trim(),
+                kidName : $('#kidName').val().trim()
             }
 
-            return param;
+            console.log(`param: ${JSON.stringify(param)}`);
+
+            let url = "/kid/modifyOk"
+
+            commonAjax(url, 'PUT', param);
         }
 
        alertConfirmModify(modifyInfo);
@@ -21,7 +25,11 @@ $(document).ready(function () {
                kidBirth : moment($('#kidBirth').val()).format('YYYY-MM-DD')
            }
 
-           return param;
+           console.log(`param: ${JSON.stringify(param)}`);
+
+           let url = "/kid/modifyOk"
+
+           commonAjax(url, 'PUT', param);
        }
 
        alertConfirmModify(modifyInfo);
@@ -72,11 +80,48 @@ $(document).ready(function () {
        });
    });
 
+   $('#modalAddClassBtn').on('click', function () {
+       function modifyInfo(result) {
+           console.log("반추가 모달 추가 버튼 클릭");
+
+           let modifyClassList = [];
+
+           $('.modal_class_item').each(function () {
+               let modalCheck = $(this).find('input[id^="classCheck"]');
+
+               if (modalCheck.is(':checked') && !modalCheck.is(':disabled')) {
+                   modifyClassList.push(modalCheck.val())
+               }
+           });
+
+           let url = "/kid/modifyOk"
+
+           for (let classNo of modifyClassList) {
+               let param = {
+                   kidNo : $('#kidProfile').data('kid-no'),
+                   classNo : classNo
+               }
+
+               console.log(`param: ${JSON.stringify(param)}`);
+
+               commonAjax(url, 'POST', param);
+           }
+       }
+
+       alertConfirmModify(modifyInfo);
+   });
+
 });
 
-function afterSuccess(response) {
-    $('#kidName').val(response.kidName);
-    $('#kidBirth').val(moment(response.kidBirth).format('YYYY.MM.DD'));
+function afterSuccess(response, method) {
+    if (method === 'PUT') {
+        $('#kidName').val(response.kidName);
+        $('#kidBirth').val(moment(response.kidBirth).format('YYYY.MM.DD'));
+    }
+
+    if (method === 'POST') {
+
+    }
 }
 
 function alertConfirmModify(modifyInfo) {
@@ -90,12 +135,7 @@ function alertConfirmModify(modifyInfo) {
         }
     }).then((result) => {
         if (result.isConfirmed) {
-            let param = modifyInfo(result);
-            console.log(`param: ${JSON.stringify(param)}`);
-
-            let url = "/kid/modifyOk"
-
-            commonAjax(url, 'PUT', param);
+             modifyInfo(result);
         }
     });
 }
