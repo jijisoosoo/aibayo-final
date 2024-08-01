@@ -55,7 +55,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         } else if (role.equals("ROLE_USER")) {
             response.sendRedirect("/main/user");
         } else {
-            response.sendRedirect("/login?error");
+            response.sendRedirect("/member?error");
         }
 
     }
