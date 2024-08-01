@@ -1,7 +1,13 @@
 $(document).ready(function () {
     $('#modifyKidName').on('click', function () {
         function modifyInfo(result) {
-            console.log("원생명 변경 함수")
+            // console.log("원생명 변경 함수")
+            let param = {
+                kidNo : $('#kidProfile').data('kid-no'),
+                kidName : $('#kidName').val().trim(),
+            }
+
+            return param;
         }
 
        alertConfirmModify(modifyInfo);
@@ -9,7 +15,13 @@ $(document).ready(function () {
 
    $('#modifyKidBirth').on('click', function () {
        function modifyInfo(result) {
-           console.log("원생생일 변경 함수")
+           // console.log("원생생일 변경 함수")
+           let param = {
+               kidNo : $('#kidProfile').data('kid-no'),
+               kidBirth : moment($('#kidBirth').val()).format('YYYY-MM-DD')
+           }
+
+           return param;
        }
 
        alertConfirmModify(modifyInfo);
@@ -62,6 +74,11 @@ $(document).ready(function () {
 
 });
 
+function afterSuccess(response) {
+    $('#kidName').val(response.kidName);
+    $('#kidBirth').val(moment(response.kidBirth).format('YYYY.MM.DD'));
+}
+
 function alertConfirmModify(modifyInfo) {
     Swal.fire({
         title: "정말로 수정하시겠습니까?",
@@ -72,6 +89,13 @@ function alertConfirmModify(modifyInfo) {
             confirmButton: 'btn-ab btn-ab-swal'
         }
     }).then((result) => {
-        modifyInfo(result);
+        if (result.isConfirmed) {
+            let param = modifyInfo(result);
+            console.log(`param: ${JSON.stringify(param)}`);
+
+            let url = "/kid/modifyOk"
+
+            commonAjax(url, 'PUT', param);
+        }
     });
 }

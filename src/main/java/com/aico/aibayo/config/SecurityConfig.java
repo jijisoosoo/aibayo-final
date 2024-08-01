@@ -55,7 +55,7 @@ public class SecurityConfig {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring()
-                .requestMatchers("/chat/**", "/inc/**", "/layout/**", "/vendor/**");
+                .requestMatchers("/chat/**", "/inc/**", "/layout/**", "/vendor/**", "/css/**", "/js/**");
     }
 
     @Bean
