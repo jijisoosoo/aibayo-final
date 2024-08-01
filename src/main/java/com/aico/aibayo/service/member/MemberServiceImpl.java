@@ -64,4 +64,9 @@ public class MemberServiceImpl implements MemberService {
     public MemberDto getByIdAndKidNo(MemberSearchCondition condition) {
         return memberRepository.findByIdAndKidNo(condition);
     }
+
+    @Override
+    public MemberDto findByUsername(String username) {
+        return MemberDto.toDto(memberRepository.findByUsername(username));
+    }
 }

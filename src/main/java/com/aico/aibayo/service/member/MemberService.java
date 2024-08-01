@@ -9,4 +9,5 @@ import org.springframework.stereotype.Service;
 public interface MemberService {
     List<MemberDto> getAllByKidNo(Long kidNo);
     MemberDto getByIdAndKidNo(MemberSearchCondition condition);
+    MemberDto findByUsername(String username);
 }
