@@ -15,17 +15,13 @@ import java.util.List;
 
 @Slf4j
 @Controller
-@RequestMapping
+@RequestMapping("/teacher")
 @RequiredArgsConstructor
 public class TeacherController {
 
-    private final com.aico.aibayo.service.teacher.teacherService teacherService;
+    private final teacherService teacherService;
 
-//    public TeacherController(@Qualifier("teacherService") teacherService teacherService) {
-//        this.teacherService = teacherService;
-//    }
-
-    @GetMapping("/admin/teacherMain")
+    @GetMapping("/list")
     public String adminTeacherMain(Model model) {
         List<teacherDto> teachers = teacherService.getAllByKinderNo(1l);
         model.addAttribute("teachers", teachers);

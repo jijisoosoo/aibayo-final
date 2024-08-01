@@ -1,8 +1,11 @@
 package com.aico.aibayo.repository.teacher;
 
+import com.aico.aibayo.dto.teacher.TeacherSearchCondition;
 import com.aico.aibayo.dto.teacher.teacherDto;
 import com.aico.aibayo.entity.*;
+import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -42,4 +45,36 @@ public class TeacherRepositoryCustomImple implements TeacherRepositoryCustom{
         System.out.println("repository : " + teachers.toString());
         return teachers;
     }
+
+//    @Override
+//    public List<teacherDto> findAllByKinderNo(TeacherSearchCondition condition, Long kinderNo) {
+//        List<teacherDto> teachers = jpaQueryFactory
+//                .select(Projections.constructor(teacherDto.class,
+//                        member.id,
+//                        member.username,
+//                        member.name,
+//                        member.phone,
+//                        member.profilePicture,
+//                        acceptLog.acceptRegDate,
+//                        classTeacher.classNo,
+//                        classTeacher.acceptNo,
+//                        teacherKinder.acceptNo))
+//                .from(member)
+//                .join(teacherKinder).on(member.id.eq(teacherKinder.teacherId))
+//                .join(acceptLog).on(teacherKinder.acceptNo.eq(acceptLog.acceptNo))
+//                .join(classTeacher).on(member.id.eq(classTeacher.classTeacherId))
+//                .join(acceptLog).on(classTeacher.acceptNo.eq(acceptLog.acceptNo))
+//                .where(teacherKinder.acceptNo.eq(1l),
+//                        classTeacher.acceptNo.eq(1l),
+//                        teacherKinder.kinderNo.eq(1l)
+//                        getClassNoEq(condition.getClass())
+//                )
+//                .fetch();
+//        return List.of();
+//    }
+
+//
+//    private BooleanExpression getClassNoEq(Long classNo) {
+//        return classNo == null ? null : classTeacher.classNo.eq(classNo);
+//    }
 }
