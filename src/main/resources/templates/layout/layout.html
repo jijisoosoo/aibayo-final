@@ -15,11 +15,11 @@
 <!--    <th:block>-->
 <!--        <header th:replace="~{inc/user_header :: header}"></header>-->
 <!--    </th:block>-->
-    <th:block th:if="${role} == 'ROLE_ADMIN'">
-        <header th:replace="~{inc/admin_header :: header}"></header>
-    </th:block>
+<th:block th:if="${role == 'ROLE_ADMIN' or role == 'ROLE_TEACHER' or role == 'ROLE_PRINCIPAL'}">
+    <header th:replace="~{inc/admin_header :: header}"></header>
+</th:block>
 
-    <th:block th:if="${role} == 'ROLE_USER'">
+<th:block th:if="${role == 'ROLE_USER'}">
         <header th:replace="~{inc/user_header :: header}"></header>
     </th:block>
 
