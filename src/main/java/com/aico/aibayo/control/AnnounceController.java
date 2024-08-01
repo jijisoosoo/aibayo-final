@@ -215,7 +215,11 @@ public class AnnounceController {
     public String usercard(@RequestParam(defaultValue = "1") int page, Model model){
         HashMap<String, Object> hashMap = new HashMap<>();
         AnnounceSearchCondition condition = new AnnounceSearchCondition();
+        AnnounceSearchCondition condition1 = new AnnounceSearchCondition();
         condition.setKinderNo(kinderNo);
+        if (condition1.getAnnounceType() != null && condition1.getAnnounceType() == 0) {
+            condition1.setAnnounceType(null); // 0이면 조건을 제거 (null로 설정)
+        }
         model.addAttribute("KinderNo",kinderNo);
         hashMap.put("page",page);
         hashMap.put("type","card");
@@ -234,6 +238,7 @@ public class AnnounceController {
 
         condition2.setKinderNo(kinderNo);
         condition2.setAnnouncePrimary("1");
+
 
         model.addAttribute("KinderNo",kinderNo);
         hashMap1.put("page",page);

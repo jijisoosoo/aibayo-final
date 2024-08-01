@@ -16,5 +16,5 @@ public interface AnnounceService {
     void insertAnnounce(AnnounceDto announceDto);
     void updateAnnounce(AnnounceDto announceDto);
     void deleteAnnounce(AnnounceDto announceNo);
-
+    Page<AnnounceDto>findKeywordByKinderNoList(AnnounceSearchCondition condition, HashMap<String, Object> hashMap);
 }
