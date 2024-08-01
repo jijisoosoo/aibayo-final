@@ -5,8 +5,11 @@ import com.aico.aibayo.dto.ClassDto;
     import com.aico.aibayo.dto.announce.AnnounceDto;
 import com.aico.aibayo.dto.announce.AnnounceSearchCondition;
 import com.aico.aibayo.dto.comment.CommentSearchCondition;
+import com.aico.aibayo.dto.member.MemberDto;
+import com.aico.aibayo.dto.member.MemberSearchCondition;
 import com.aico.aibayo.service.announce.AnnounceService;
 import com.aico.aibayo.service.classManage.ClassService;
+import com.aico.aibayo.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -27,6 +30,7 @@ import java.util.List;
 public class AnnounceController {
     private final AnnounceService announceService;
     private final ClassService classService;
+    private final MemberService memberService;
 
     // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
     private int roleNo = 1;
@@ -213,6 +217,10 @@ public class AnnounceController {
     //    user
     @GetMapping("/user/card")
     public String usercard(@RequestParam(defaultValue = "1") int page, Model model){
+        MemberSearchCondition memberSearchCondition = new MemberSearchCondition();
+        memberSearchCondition.setId(14L);
+        memberSearchCondition.setKidNo(1L);
+        MemberDto loginInfo=  memberService.getByIdAndKidNo(memberSearchCondition);
         HashMap<String, Object> hashMap = new HashMap<>();
         AnnounceSearchCondition condition = new AnnounceSearchCondition();
         AnnounceSearchCondition condition1 = new AnnounceSearchCondition();
