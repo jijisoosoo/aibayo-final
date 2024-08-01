@@ -20,7 +20,7 @@ public class MemberController {
     @PostMapping("/member/signUp")
     @ResponseBody
     public String signUpProcess(MemberDto memberDto) {
-        memberService.signUpProcess(memberDto);
+        MemberDto dto = memberService.signUpProcess(memberDto);
 
         return "ok";
     }

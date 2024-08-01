@@ -12,10 +12,11 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class CustomOAuth2Member implements OAuth2User {
     private final MemberDto memberDto;
+    private boolean newMember;
 
     @Override
     public Map<String, Object> getAttributes() {
-        return null; // // Google과 Naver의 응답 형식이 다르기 때문에 기본적으로 null을 반환
+        return null; // Google과 Naver의 응답 형식이 다르기 때문에 기본적으로 null을 반환
     }
 
     @Override
@@ -30,7 +31,6 @@ public class CustomOAuth2Member implements OAuth2User {
         return collection;
     }
 
-
     @Override
     public String getName() {
         return memberDto.getName();
@@ -40,4 +40,11 @@ public class CustomOAuth2Member implements OAuth2User {
         return memberDto.getUsername();
     }
 
+    public boolean isNewMember() {
+        return newMember;
+    }
+
+    public void setNewMember(boolean newMember) {
+        this.newMember = newMember;
+    }
 }
