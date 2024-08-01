@@ -29,7 +29,7 @@ public class MainController {
         String token = getTokenFromCookies(request.getCookies());
         if (token == null || jwtUtil.isExpired(token)) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            return "redirect:/login";
+            return "/login";
         }
 
         // JWT 토큰에서 사용자 정보 추출
@@ -38,7 +38,7 @@ public class MainController {
 
         if (!"ROLE_ADMIN".equals(role)) {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            return "redirect:/login";
+            return "/login";
         }
 
         // 사용자 정보를 request에 저장 (필요 시 사용)
@@ -54,7 +54,7 @@ public class MainController {
         String token = getTokenFromCookies(request.getCookies());
         if (token == null || jwtUtil.isExpired(token)) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            return "redirect:/login";
+            return "/login";
         }
 
         // JWT 토큰에서 사용자 정보 추출
@@ -63,7 +63,7 @@ public class MainController {
 
         if (!"ROLE_USER".equals(role)) {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            return "redirect:/login";
+            return "/login";
         }
 
         // 사용자 정보를 request에 저장 (필요 시 사용)
