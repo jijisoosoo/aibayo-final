@@ -5,6 +5,7 @@ import com.aico.aibayo.common.MemberStatusEnum;
 import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.dto.member.MemberSearchCondition;
 import com.aico.aibayo.entity.QAcceptLogEntity;
+import com.aico.aibayo.entity.QKidEntity;
 import com.aico.aibayo.entity.QMemberEntity;
 import com.aico.aibayo.entity.QParentKidEntity;
 import com.querydsl.core.types.Projections;
@@ -19,6 +20,8 @@ public class MemberRepositoryCustomImpl implements MemberRepositoryCustom{
     private final QMemberEntity member = QMemberEntity.memberEntity;
     private final QParentKidEntity parentKid = QParentKidEntity.parentKidEntity;
     private final QAcceptLogEntity acceptLog1 = QAcceptLogEntity.acceptLogEntity;
+    private final QKidEntity kid = QKidEntity.kidEntity;
+
 
     public List<MemberDto> findAllByKidNo(Long kidNo) {
         return jpaQueryFactory
@@ -65,12 +68,13 @@ public class MemberRepositoryCustomImpl implements MemberRepositoryCustom{
                         member.inactivateDate,
                         member.latestLogDate,
                         member.profilePicture,
-                        member.kinderNo,
+                        kid.kinderNo,
                         parentKid.isMainParent
                         ))
                 .from(member)
                 .join(parentKid).on(member.id.eq(parentKid.id))
                 .join(acceptLog1).on(acceptLog1.acceptNo.eq(parentKid.acceptNo))
+                .join(kid).on(parentKid.kidNo.eq(kid.kidNo))
                 .where(
                         acceptLog1.acceptStatus.eq(AcceptStatusEnum.ACCEPT.getStatus()),
                         member.id.eq(condition.getId()),
