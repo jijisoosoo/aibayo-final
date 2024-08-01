@@ -25,6 +25,8 @@ public class MainController {
 
     @GetMapping("/admin")
     public String adminMain(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("adminMain()=======================================");
+
         // 쿠키에서 JWT 토큰을 가져옴
         String token = getTokenFromCookies(request.getCookies());
         if (token == null || jwtUtil.isExpired(token)) {
@@ -36,7 +38,7 @@ public class MainController {
         String username = jwtUtil.getUsername(token);
         String role = jwtUtil.getRole(token);
 
-        if (!"ROLE_ADMIN".equals(role)) {
+        if (!"ROLE_ADMIN".equals(role) && !"ROLE_PRINCIPAL".equals(role) && !"ROLE_TEACHER".equals(role)) {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             return "redirect:/login";
         }
@@ -50,6 +52,9 @@ public class MainController {
 
     @GetMapping("/user")
     public String userMain(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("userMain()=======================================");
+
+
         // 쿠키에서 JWT 토큰을 가져옴
         String token = getTokenFromCookies(request.getCookies());
         if (token == null || jwtUtil.isExpired(token)) {
@@ -60,6 +65,8 @@ public class MainController {
         // JWT 토큰에서 사용자 정보 추출
         String username = jwtUtil.getUsername(token);
         String role = jwtUtil.getRole(token);
+
+        System.out.println("user role : " + role);
 
         if (!"ROLE_USER".equals(role)) {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);

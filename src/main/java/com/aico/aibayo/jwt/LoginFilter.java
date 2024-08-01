@@ -49,6 +49,9 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         Collection<? extends GrantedAuthority> authorities = authResult.getAuthorities();
         String role = authorities.stream().map(GrantedAuthority::getAuthority).findFirst().orElse("ROLE_ADMIN");
+
+        System.out.println("loginfilter role : " + role);
+
         String token = jwtUtil.createJwt(username, role, 60 * 60 * 10L);
 //        response.addHeader("Authorization", "Bearer " + token);
 
@@ -64,7 +67,12 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
 
         response.addCookie(jwtCookie);
-        response.sendRedirect("/main/admin");
+
+        if (role.equals("ROLE_ADMIN") || role.equals("ROLE_PRINCIPAL") || role.equals("ROLE_TEACHER")) {
+            response.sendRedirect("/main/admin");
+        } else if (role.equals("ROLE_USER")) {
+            response.sendRedirect("/main/user");
+        }
 
     }
 
