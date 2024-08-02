@@ -20,9 +20,9 @@ public class MemberDto {
     private String name;
     private String password;
     private String phone;
-    private int roleNo;
+    private Integer roleNo;
     private String role;
-    private int status;
+    private Integer status;
     private LocalDateTime regDate;
     private LocalDateTime modifyDate;
     private LocalDateTime inactivateDate;
@@ -30,9 +30,11 @@ public class MemberDto {
     private String profilePicture;
     private Long kinderNo;
 
+    private Long acceptNo;
+
     private String isMainParent;
 
-    public MemberDto(Long id, String username, String name, String password, String phone, Integer roleNo,
+    public MemberDto(Long id, String username, String name, String password, String phone, Integer roleNo, String role,
                      Integer status, LocalDateTime regDate, LocalDateTime modifyDate, LocalDateTime inactivateDate,
                      LocalDateTime latestLogDate, String profilePicture, Long kinderNo) {
         this.id = id;
@@ -41,6 +43,7 @@ public class MemberDto {
         this.password = password;
         this.phone = phone;
         this.roleNo = roleNo;
+        this.role = role;
         this.status = status;
         this.regDate = regDate;
         this.modifyDate = modifyDate;
@@ -50,6 +53,47 @@ public class MemberDto {
         this.kinderNo = kinderNo;
     }
 
+    public MemberDto(Long id, String username, String name, String password, String phone, Integer roleNo, String role,
+                     Integer status, LocalDateTime regDate, LocalDateTime modifyDate, LocalDateTime inactivateDate,
+                     LocalDateTime latestLogDate, String profilePicture, Long kinderNo, Long acceptNo) {
+        this.id = id;
+        this.username = username;
+        this.name = name;
+        this.password = password;
+        this.phone = phone;
+        this.roleNo = roleNo;
+        this.role = role;
+        this.status = status;
+        this.regDate = regDate;
+        this.modifyDate = modifyDate;
+        this.inactivateDate = inactivateDate;
+        this.latestLogDate = latestLogDate;
+        this.profilePicture = profilePicture;
+        this.kinderNo = kinderNo;
+        this.acceptNo = acceptNo;
+    }
+
+    public MemberDto(Long id, String username, String name, String password, String phone, Integer roleNo, String role,
+                     Integer status, LocalDateTime regDate, LocalDateTime modifyDate, LocalDateTime inactivateDate,
+                     LocalDateTime latestLogDate, String profilePicture, Long kinderNo, String isMainParent) {
+        this.id = id;
+        this.username = username;
+        this.name = name;
+        this.password = password;
+        this.phone = phone;
+        this.roleNo = roleNo;
+        this.role = role;
+        this.status = status;
+        this.regDate = regDate;
+        this.modifyDate = modifyDate;
+        this.inactivateDate = inactivateDate;
+        this.latestLogDate = latestLogDate;
+        this.profilePicture = profilePicture;
+        this.kinderNo = kinderNo;
+        this.isMainParent = isMainParent;
+    }
+
+
     public static MemberDto toDto(MemberEntity entity) {
         return new MemberDto(
                 entity.getId(),
@@ -58,6 +102,7 @@ public class MemberDto {
                 entity.getPassword(),
                 entity.getPhone(),
                 entity.getRoleNo(),
+                entity.getRole(),
                 entity.getStatus(),
                 entity.getRegDate(),
                 entity.getModifyDate(),

@@ -78,5 +78,14 @@
 
     </div>
 </div>
+
+<script>
+    document.getElementById('email-input').addEventListener('keydown', function(event) {
+        if (event.key === 'Tab') {
+            event.preventDefault();
+            document.getElementById('password-input').focus();
+        }
+    });
+</script>
 </body>
 </html>
