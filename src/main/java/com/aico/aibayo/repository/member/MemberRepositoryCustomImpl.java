@@ -29,13 +29,15 @@ public class MemberRepositoryCustomImpl implements MemberRepositoryCustom{
                         member.password,
                         member.phone,
                         member.roleNo,
+                        member.role,
                         member.status,
                         member.regDate,
                         member.modifyDate,
                         member.inactivateDate,
                         member.latestLogDate,
                         member.profilePicture,
-                        member.kinderNo
+                        member.kinderNo,
+                        acceptLog1.acceptNo
                         ))
                 .from(member)
                 .join(parentKid).on(member.id.eq(parentKid.id))

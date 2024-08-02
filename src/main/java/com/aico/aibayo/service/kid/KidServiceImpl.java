@@ -97,4 +97,34 @@ public class KidServiceImpl implements KidService {
             classKidRepository.save(classKidEntity);
         }
     }
+
+    @Override
+    public KidDto deleteKid(KidDto kidDto) {
+
+        // 관계 삭제일 경우
+        if (kidDto.getAcceptNo() != null) {
+            AcceptLogEntity target = acceptLogRepository.findById(kidDto.getAcceptNo()).orElse(null);
+            if (target != null) {
+                target.setAcceptStatus(AcceptStatusEnum.DELETE.getStatus());
+                target.setAcceptDeleteFlag(BooleanEnum.TRUE.getBool());
+                target.setAcceptDeleteDate(LocalDateTime.now());
+
+                acceptLogRepository.save(target);
+                return kidDto;
+            }
+        }
+
+        if (kidDto.getKidNo() != null) {
+            KidEntity target = kidRepository.findById(kidDto.getKidNo()).orElse(null);
+            if (target != null) {
+                target.setDischargeFlag(BooleanEnum.TRUE.getBool());
+                target.setDischargeDate(LocalDateTime.now());
+
+                KidEntity deleted = kidRepository.save(target);
+                return KidDto.toDto(deleted);
+            }
+        }
+
+        return null;
+    }
 }

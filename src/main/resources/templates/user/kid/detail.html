@@ -126,7 +126,8 @@
                 <div class="info_row">
 
                     <div class="info_item text_div"
-                         th:each="member : ${members}" th:object="${member}">
+                         th:each="member : ${members}" th:object="${member}"
+                         th:data-accept-no="*{acceptNo}">
 
                         <div class="item_text_box">
                             <div class="item_text text-compact"
