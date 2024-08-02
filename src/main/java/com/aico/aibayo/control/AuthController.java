@@ -41,7 +41,7 @@ public class AuthController {
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             // JWT 토큰 생성
-            String token = jwtUtil.createJwt(authentication.getName(), authentication.getAuthorities().iterator().next().getAuthority(), 3600000L); // 1시간 유효
+            String token = jwtUtil.createJwt(authentication.getName(), authentication.getAuthorities().iterator().next().getAuthority(), 86400000L); // 24시간 유효
 
             // HTTP-Only 쿠키 설정
             Cookie cookie = new Cookie("token", token);
