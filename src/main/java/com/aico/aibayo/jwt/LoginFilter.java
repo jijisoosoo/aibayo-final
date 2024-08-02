@@ -103,7 +103,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String username = customMemberDetails.getUsername();
         String role = customMemberDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).findFirst().orElse("ROLE_USER");
 
-        String token = jwtUtil.createJwt(username, role, 86400L);
+        String token = jwtUtil.createJwt(username, role, 86400000L);
 
         tokenService.saveToken(token);
 
