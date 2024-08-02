@@ -61,6 +61,7 @@ public class MemberRepositoryCustomImpl implements MemberRepositoryCustom{
                         member.password,
                         member.phone,
                         member.roleNo,
+                        member.role,
                         member.status,
                         member.regDate,
                         member.modifyDate,

@@ -41,14 +41,14 @@ function initializeMarquee($text_div) {
 }
 
 // ajax json 전달
-function commonAjax(url,type, param) {
+function commonAjax(url, type, param) {
     $.ajax({
         url: url,
         type: type,
         data:  JSON.stringify(param),
         contentType: 'application/json',
         success: function(response) {
-            afterSuccess(response);
+            afterSuccess(response, type);
         },
         error: function(xhr, status, error) {
             console.error("AJAX 요청 오류:", status, error);

@@ -29,6 +29,8 @@ public class KidDto {
 
     private String inviteEmail;
 
+    private Long classNo;
+
     public KidDto(Long kidNo, Long kinderNo, String kidName, LocalDate kidBirth, Integer kidGender,
                   LocalDateTime admissionDate, LocalDateTime modifyDate, LocalDateTime dischargeDate,
                   String dischargeFlag) {
@@ -41,6 +43,22 @@ public class KidDto {
         this.modifyDate = modifyDate;
         this.dischargeDate = dischargeDate;
         this.dischargeFlag = dischargeFlag;
+    }
+
+    public KidDto(Long kidNo, Long kinderNo, String kidName, LocalDate kidBirth, Integer kidGender,
+                  LocalDateTime admissionDate, LocalDateTime modifyDate, LocalDateTime dischargeDate,
+                  String dischargeFlag, String username, String inviteEmail) {
+        this.kidNo = kidNo;
+        this.kinderNo = kinderNo;
+        this.kidName = kidName;
+        this.kidBirth = kidBirth;
+        this.kidGender = kidGender;
+        this.admissionDate = admissionDate;
+        this.modifyDate = modifyDate;
+        this.dischargeDate = dischargeDate;
+        this.dischargeFlag = dischargeFlag;
+        this.username = username;
+        this.inviteEmail = inviteEmail;
     }
 
     public static KidDto toDto(KidEntity entity) {

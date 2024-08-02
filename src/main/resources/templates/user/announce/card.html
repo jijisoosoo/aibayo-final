@@ -72,12 +72,12 @@
                     <a class="card"
                        th:each="announce : ${announces}" th:object="${announce}" th:href="@{|/announce/user/*{announceNo}|}">
                         <div class="frame-3">
-                            [
-                            <span th:if="${announce.announceType == 2}">원 공지</span>
-                            <span th:if="${announce.announceType == 3}">일정 / 행사</span>
-                            <span th:if="${announce.announceType == 4}">교육</span>
-                            <span th:if="${announce.announceType == 5}">보육료</span>
-                            ]
+                            <span style="font-weight:bold;">[</span>
+                            <span class="notice" th:if="${announce.announceType == 2}">원 공지</span>
+                            <span class="schedule" th:if="${announce.announceType == 3}">일정 / 행사</span>
+                            <span class="edu" th:if="${announce.announceType == 4}">교육</span>
+                            <span class="pay" th:if="${announce.announceType == 5}">보육료</span>
+                            <span style="font-weight:bold;">]</span>
                             <p class="p" th:text="*{boardTitle}"></p>
                         </div>
                         <div class="frame-wrapper">

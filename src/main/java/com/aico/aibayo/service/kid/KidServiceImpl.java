@@ -1,9 +1,15 @@
 package com.aico.aibayo.service.kid;
 
+import com.aico.aibayo.common.AcceptStatusEnum;
+import com.aico.aibayo.common.AcceptTypeEnum;
 import com.aico.aibayo.common.BooleanEnum;
 import com.aico.aibayo.dto.kid.KidDto;
 import com.aico.aibayo.dto.kid.KidSearchCondition;
+import com.aico.aibayo.entity.AcceptLogEntity;
+import com.aico.aibayo.entity.ClassKidEntity;
 import com.aico.aibayo.entity.KidEntity;
+import com.aico.aibayo.repository.AcceptLogRepository;
+import com.aico.aibayo.repository.ClassKidRepository;
 import com.aico.aibayo.repository.kid.KidRepository;
 
 import java.time.LocalDateTime;
@@ -12,11 +18,14 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class KidServiceImpl implements KidService {
     private final KidRepository kidRepository;
+    private final ClassKidRepository classKidRepository;
+    private final AcceptLogRepository acceptLogRepository;
 
     @Override
     public List<KidDto> getByKinderNo(Long kinderNo) {
@@ -54,11 +63,38 @@ public class KidServiceImpl implements KidService {
 
         if (target == null) { return null; }
 
+        // 원생 기본정보 업데이트
         if (kidDto.getKidName() != null) { target.setKidName(kidDto.getKidName()); }
         if (kidDto.getKidBirth() != null) { target.setKidBirth(kidDto.getKidBirth()); }
 
         target.setModifyDate(LocalDateTime.now());
 
         return KidDto.toDto(kidRepository.save(target));
+    }
+
+    @Override
+    @Transactional
+    public void updateKidRelation(KidDto kidDto) {
+        // 반_원생 관계 업데이트
+        // 1. 승인이력 insert
+        // 2. 반_원생 insert
+        if (kidDto.getClassNo() != null) {
+            AcceptLogEntity acceptLogEntity = AcceptLogEntity.builder()
+                    .acceptType(AcceptTypeEnum.CLASS_KID.getType())
+                    .acceptStatus(AcceptStatusEnum.ACCEPT.getStatus())
+                    .acceptDate(LocalDateTime.now())
+                    .acceptRegDate(LocalDateTime.now())
+                    .acceptDeleteFlag(BooleanEnum.FALSE.getBool())
+                    .build();
+            AcceptLogEntity saved = acceptLogRepository.save(acceptLogEntity);
+
+            ClassKidEntity classKidEntity = ClassKidEntity.builder()
+                    .classNo(kidDto.getClassNo())
+                    .kidNo(kidDto.getKidNo())
+                    .acceptNo(saved.getAcceptNo())
+                    .build();
+
+            classKidRepository.save(classKidEntity);
+        }
     }
 }
