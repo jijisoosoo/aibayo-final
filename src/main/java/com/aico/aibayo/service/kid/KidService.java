@@ -14,4 +14,5 @@ public interface KidService {
     KidDto getByKidNo(Long kidNo);
     KidDto updateKid(KidDto kidDto);
     void updateKidRelation(KidDto kidDto);
+    KidDto deleteKid(KidDto kidDto);
 }

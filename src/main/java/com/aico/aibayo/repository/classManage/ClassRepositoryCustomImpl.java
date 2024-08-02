@@ -60,7 +60,8 @@ public class ClassRepositoryCustomImpl implements ClassRepositoryCustom{
                         clazz.classRegDate,
                         clazz.classModifyDate,
                         clazz.classDeleteDate,
-                        clazz.classDeleteFlag
+                        clazz.classDeleteFlag,
+                        acceptLog.acceptNo
                         ))
                 .from(clazz)
                 .join(classKid).on(clazz.classNo.eq(classKid.classNo))

@@ -25,11 +25,15 @@ public class KidDto {
     private LocalDateTime dischargeDate;
     private String dischargeFlag;
 
+    private Long id;
     private String username;
+
+    private Long classNo;
+
+    private Long acceptNo;
 
     private String inviteEmail;
 
-    private Long classNo;
 
     public KidDto(Long kidNo, Long kinderNo, String kidName, LocalDate kidBirth, Integer kidGender,
                   LocalDateTime admissionDate, LocalDateTime modifyDate, LocalDateTime dischargeDate,

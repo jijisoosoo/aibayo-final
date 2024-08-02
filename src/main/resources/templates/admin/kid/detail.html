@@ -88,7 +88,7 @@
 
             <div class="discharge_btn_box">
                 <div class="btn btn-secondary discharge_btn">
-                    <div class="discharge_btn_text">퇴소</div>
+                    <div class="discharge_btn_text" id="dischargeKid">퇴소</div>
                 </div>
             </div>
 
@@ -120,15 +120,16 @@
             </div>
 
 
-            <div class="info_content_box">
+            <div class="info_content_box" id="parentKidDiv">
 
                 <div class="info_row">
 
                     <div class="info_item text_div"
-                         th:each="member : ${members}" th:object="${member}">
+                         th:each="member : ${members}" th:object="${member}"
+                         th:data-accept-no="*{acceptNo}">
 
                         <div class="item_text_box">
-                            <div class="item_text text-compact"
+                            <div class="item_text text-compact parent_item"
                                  th:title="*{name}" th:text="*{name}">
                                 보호자명
                             </div>
@@ -171,12 +172,13 @@
             </div>
 
 
-            <div class="info_content_box">
+            <div class="info_content_box" id="classKidDiv">
 
                 <div class="info_row">
 
                     <div class="info_item text_div"
-                         th:each="class : ${classes}" th:object="${class}">
+                         th:each="class : ${classes}" th:object="${class}"
+                         th:data-accept-no="*{acceptNo}">
                         <div class="item_text_box class_text_box">
                             <div class="item_text text-compact class_item"
                                  th:title="*{className}" th:text="*{className}"
@@ -206,7 +208,11 @@
 
                 <div class="modal-header">
                     <h1 class="modal-title modal_header_title" id="addParentModalLabel">학부모 초대하기</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close"
+                            data-bs-dismiss="modal" aria-label="Close"
+                            id="closeParentModal">
+
+                    </button>
                 </div>
 
 
@@ -262,7 +268,11 @@
 
                 <div class="modal-header">
                     <h1 class="modal-title modal_header_title" id="addClassModalLabel">반 추가</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close"
+                            data-bs-dismiss="modal" aria-label="Close"
+                            id="closeClassModal">
+
+                    </button>
                 </div>
 
 
