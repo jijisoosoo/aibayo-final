@@ -15,27 +15,27 @@ import java.time.LocalDateTime;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class teacherDto {
     private Long id;
     private String username;
     private String name;
     private String phone;
-//    private String profilePicture;
+    private String profilePicture;
 
     private LocalDateTime acceptRegDate;
+    private Long KinderAcceptNo;
+    private Long classNo;
+    private Long ClassAcceptNo;
 
-    private Long acceptNo;
-
-
-//    public static teacherDto toDto(MemberEntity memberEntity, AcceptLogEntity acceptLogEntity) {
-//        return new teacherDto(
-//                memberEntity.getId(),
-//                memberEntity.getUsername(),
-//                memberEntity.getName(),
-//                memberEntity.getPhone(),
-//                memberEntity.getProfilePicture(),
-//                acceptLogEntity.getAcceptRegDate(),
-//                acceptLogEntity.getAcceptNo()
-//        );
-//    }
+    public teacherDto(Long id, String username, String name, String phone,
+                      String profilePicture, LocalDateTime acceptRegDate, Long KinderAcceptNo) {
+        this.id = id;
+        this.username = username;
+        this.name = name;
+        this.phone = phone;
+        this.profilePicture = profilePicture;
+        this.acceptRegDate = acceptRegDate;
+        this.KinderAcceptNo = KinderAcceptNo;
+    }
 }
