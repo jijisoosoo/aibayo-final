@@ -5,15 +5,19 @@ import com.aico.aibayo.common.BoardTypeEnum;
 import com.aico.aibayo.dto.ClassDto;
     import com.aico.aibayo.dto.announce.AnnounceDto;
 import com.aico.aibayo.dto.announce.AnnounceSearchCondition;
+import com.aico.aibayo.dto.comment.CommentDto;
 import com.aico.aibayo.dto.comment.CommentSearchCondition;
 import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.dto.member.MemberSearchCondition;
 import com.aico.aibayo.service.announce.AnnounceService;
 import com.aico.aibayo.service.classManage.ClassService;
+import com.aico.aibayo.service.comment.CommentService;
 import com.aico.aibayo.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,14 +36,12 @@ public class AnnounceController {
     private final AnnounceService announceService;
     private final ClassService classService;
     private final MemberService memberService;
+    private final CommentService commentService;
 
     // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
     private int roleNo = 1;
     private Long id = 2L;
     private Long kinderNo = 1L;
-
-
-
 
     @GetMapping("/admin/card")
     public String admincard(@RequestParam(defaultValue = "1") int page, Model model){
@@ -267,22 +269,57 @@ public class AnnounceController {
         return getPageInfoAndGoView(model, announces, primaryAnnounces, "/user/announce/list");
     }
     @GetMapping("/user/{announceNo}")
-    public String userdetail(@PathVariable Long announceNo, Model model){
+    public String userdetail(@PathVariable Long announceNo, @RequestParam(defaultValue = "1") int page, Model model){
         AnnounceDto announceDto = announceService.findByAnnounceNo(announceNo);
 
+        HashMap<String, Object> hashMap = new HashMap<>();
         CommentSearchCondition condition = new CommentSearchCondition();
-//        Page<CommentDto> commentDto=commentService.findAllByBoardNo(condition,1);
-
+        condition.setKinderNo(kinderNo);
+        condition.setBoardNo(announceDto.getBoardNo());
         log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>announceDto>>>>>{}",announceDto);
-//        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>commentDto>>>>>{}",commentDto);
 
         model.addAttribute("announce",announceDto);
-        return "/user/announce/detail";
+        model.addAttribute("KinderNo", kinderNo);
+        hashMap.put("page", page);
+        hashMap.put("type", "list");
+
+
+        Page<CommentDto> comments = commentService.findAllByBoardNo(condition, hashMap);
+        long commentCount = commentService.countByBoardNo(announceDto.getBoardNo());
+        model.addAttribute("commentCount",commentCount);
+        return getPageInfoAndGoViewComment(model, comments,"/user/announce/detail");
     }
+    private String getPageInfoAndGoViewComment(Model model, Page<CommentDto> comments, String view) {
+        int totalPages = comments.getTotalPages();
+        int currentPage = comments.getNumber();
+        int startPage = Math.max(0, currentPage - 2);
+        int endPage = Math.min(totalPages - 1, currentPage + 2);
 
+        // 조회된 결과가 없을 때 endPage를 0으로 설정
+        if (totalPages == 0) {
+            endPage = 0;
+        } else { // 페이지 5개 범위 확인
+            if (endPage - startPage < 4) {
+                if (startPage == 0) {
+                    endPage = Math.min(4, totalPages - 1);
+                } else if (endPage == totalPages - 1) {
+                    startPage = Math.max(0, totalPages - 5);
+                }
+            }
+        }
 
+        log.info(">>>>>>>>>>>>>>>>>>>>>>pagination");
+        log.info("startPage: {}", startPage);
+        log.info("endPage: {}", endPage);
+        log.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 
+        model.addAttribute("comments", comments);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
 
+        return view;
+    }
 
 }
 
