@@ -8,6 +8,7 @@ services:
       - 27017:27017
     volumes:
       - mongo:/data
+      - /etc/localtime:/etc/localtime:ro  # 시간 동기화
     environment:
       - MONGO_INITDB_ROOT_USERNAME=aibayo
       - MONGO_INITDB_ROOT_PASSWORD=aibayo
@@ -18,6 +19,8 @@ services:
     restart: always
     ports:
       - 8081:8081
+    volumes:
+      - /etc/localtime:/etc/localtime:ro  # 시간 동기화
     environment:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=aibayo
       - ME_CONFIG_MONGODB_ADMINPASSWORD=aibayo
@@ -30,6 +33,7 @@ services:
       - 3306:3306
     volumes:
       - mysql:/var/lib/mysql
+      - /etc/localtime:/etc/localtime:ro  # 시간 동기화
     environment:
       - MYSQL_ROOT_PASSWORD=aibayo
       - MYSQL_DATABASE=aicoMySQL

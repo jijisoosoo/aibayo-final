@@ -37,7 +37,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         String role = auth.getAuthority();
 
         // JWT를 생성합니다.
-        String token = jwtUtil.createJwt(username, role, 60 * 60 * 10L);
+        String token = jwtUtil.createJwt(username, role, 86400L);
         LOGGER.info("Generated JWT Token: " + token);
 
         // JWT를 서버에 저장
