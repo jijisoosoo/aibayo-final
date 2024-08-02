@@ -146,7 +146,8 @@ public class AnnounceRepositoryCustomImpl implements AnnounceRepositoryCustom {
                         getInvisibleFlagEq(board),
                         getKinderNoEq(condition.getKinderNo(), member),
                         getBoardRegDateEq(condition.getBoardRegDate(), board),
-                        getAnnouncePrimaryEq(condition.getAnnouncePrimary(), announce)
+                        getAnnouncePrimaryEq(condition.getAnnouncePrimary(), announce),
+                        getAnnounceTypeGt(condition.getAnnounceType())
                 )
                 .orderBy(
 //                        announce.announcePrimary.desc(),
@@ -162,7 +163,8 @@ public class AnnounceRepositoryCustomImpl implements AnnounceRepositoryCustom {
                         getInvisibleFlagEq(board),
                         getKinderNoEq(condition.getKinderNo(), member),
                         getBoardRegDateEq(condition.getBoardRegDate(), board),
-                        getAnnouncePrimaryEq(condition.getAnnouncePrimary(), announce)
+                        getAnnouncePrimaryEq(condition.getAnnouncePrimary(), announce),
+                        getAnnounceTypeGt(condition.getAnnounceType())
                 );
 
         return PageableExecutionUtils.getPage(announces, pageable, count::fetchOne);
@@ -193,7 +195,9 @@ public class AnnounceRepositoryCustomImpl implements AnnounceRepositoryCustom {
                 .where(
                         getInvisibleFlagEq(board),
                         getKinderNoEq(condition.getKinderNo(), member),
-                        getBoardRegDateEq(condition.getBoardRegDate(), board)
+                        getBoardRegDateEq(condition.getBoardRegDate(), board),
+                        getAnnounceTypeGt(condition.getAnnounceType())
+
                 )
                 .orderBy(board.boardRegDate.desc())
                 .offset(pageable.getOffset())
@@ -205,16 +209,25 @@ public class AnnounceRepositoryCustomImpl implements AnnounceRepositoryCustom {
                 .join(member).on(board.writer.eq(member.id))
                 .where(
                         getInvisibleFlagEq(board),
-                        getKinderNoEq(condition.getKinderNo(), member)
+                        getKinderNoEq(condition.getKinderNo(), member),
+                        getBoardRegDateEq(condition.getBoardRegDate(), board),
+                        getAnnounceTypeGt(condition.getAnnounceType())
                 );
 
         return PageableExecutionUtils.getPage(announces, pageable, count::fetchOne);
+    }
+
+    private BooleanExpression getAnnounceTypeGt(Integer announceType) {
+        return announceType == null ? null :
+                announce.announceType.gt(announceType);
     }
 
     private BooleanExpression getAnnouncePrimaryEq(String announcePrimary, QAnnounceEntity announce) {
         return announcePrimary == null ? null :
                 announce.announcePrimary.eq(announcePrimary);
     }
+
+
     private BooleanExpression isValidAcceptStatus() {
         return acceptLog.acceptStatus.eq(AcceptStatusEnum.ACCEPT.getStatus());
     }
