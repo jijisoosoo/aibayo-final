@@ -88,9 +88,14 @@ public class SecurityConfig {
                 }));
 
         // JWT 검증
+//        http.addFilterAfter(new JWTFilter(jwtUtil), OAuth2LoginAuthenticationFilter.class);
+//        http.addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, tokenService), UsernamePasswordAuthenticationFilter.class);
+//        http.addFilterBefore(new CustomLogoutFilter(jwtUtil, tokenService), UsernamePasswordAuthenticationFilter.class);
         http.addFilterAfter(new JWTFilter(jwtUtil), OAuth2LoginAuthenticationFilter.class);
-        http.addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, tokenService), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, tokenService), UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(new CustomLogoutFilter(jwtUtil, tokenService), UsernamePasswordAuthenticationFilter.class);
+
+
 
         // 커스텀 로그아웃 핸들러 추가
         http.logout(logoutConfigurer -> logoutConfigurer                                       // 로그아웃 기능이 동작
@@ -105,10 +110,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/member/**", "/", "/login", "/users/login", "/logout", "/css/**", "/images/**", "/js/**").permitAll()
                 .requestMatchers("/chat/**", "/inc/**", "/layout/**", "/vendor/**").permitAll()
-//                .requestMatchers("/main/admin").hasRole("ADMIN")
                 .requestMatchers("/main/admin").hasAnyRole("ADMIN", "PRINCIPAL", "TEACHER")
-//                .requestMatchers("/main/principal").hasRole("PRINCIPAL")
-//                .requestMatchers("/main/teacher").hasRole("TEACHER")
                 .requestMatchers("/main/user").hasRole("USER")
                 .anyRequest().authenticated());
 
