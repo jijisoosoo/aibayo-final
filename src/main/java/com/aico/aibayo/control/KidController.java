@@ -125,16 +125,6 @@ public class KidController {
 
     }
 
-    @PutMapping("/modifyOk")
-    @ResponseBody
-    public ResponseEntity<KidDto> modifyOk(@RequestBody KidDto kidDto) {
-        log.info("modify: {}", kidDto);
-        KidDto updated = kidService.updateKid(kidDto);
-
-        return updated == null ? ResponseEntity.badRequest().build() :
-                                 ResponseEntity.ok(updated);
-    }
-
     @GetMapping("/write")
     public String writeForm() {
         return "/admin/kid/writeForm";
