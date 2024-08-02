@@ -35,46 +35,6 @@ $(document).ready(function () {
        alertConfirmModify(modifyInfo);
    });
 
-   $(document).on('click', '.remove_relation', function () {
-       Swal.fire({
-           title: "정말로 삭제하시겠습니까?",
-           text: "삭제 후 복구할 수 없습니다.",
-           icon: "warning",
-           showCancelButton: true,
-           confirmButtonColor: "#dc3545",
-           confirmButtonText: "삭제",
-           cancelButtonText: "취소"
-
-       }).then((result) => {
-           if (result.isConfirmed) {
-               let $this = $(this);
-
-               // console.log("accept_log 삭제");
-               let param = {
-                   acceptNo : $this.closest('.info_item').data('accept-no')
-               }
-
-               let url = "/kid/deleteOk"
-
-               commonAjax(url, 'DELETE', param);
-
-               // item이 하나만 남을 경우 삭제 버튼 비표시
-               let itemBox = $this.closest('.info_content_box');
-               // console.dir(itemBox);
-
-               let itemCount = itemBox.find('.info_item').length - 1;
-               // console.log(`itemCount: ${itemCount}`);
-
-               $this.closest('.info_item').remove();
-
-               if (itemCount === 1) {
-                   let singleItem = itemBox.find('.info_item');
-                   singleItem.find('.close_box').remove();
-               }
-           }
-       });
-   });
-
     $('#dischargeKid').on('click', function () {
         Swal.fire({
             title: "정말로 퇴소시키겠습니까?",
@@ -108,6 +68,63 @@ $(document).ready(function () {
 
             }
         });
+    });
+
+    $(document).on('click', '.remove_relation', function () {
+        Swal.fire({
+            title: "정말로 삭제하시겠습니까?",
+            text: "삭제 후 복구할 수 없습니다.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#dc3545",
+            confirmButtonText: "삭제",
+            cancelButtonText: "취소"
+
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let $this = $(this);
+
+                // console.log("accept_log 삭제");
+                let param = {
+                    acceptNo : $this.closest('.info_item').data('accept-no')
+                }
+
+                let url = "/kid/deleteOk"
+
+                commonAjax(url, 'DELETE', param);
+
+                // item이 하나만 남을 경우 삭제 버튼 비표시
+                let itemBox = $this.closest('.info_content_box');
+                // console.dir(itemBox);
+
+                let itemCount = itemBox.find('.info_item').length - 1;
+                // console.log(`itemCount: ${itemCount}`);
+
+                $this.closest('.info_item').remove();
+
+                if (itemCount === 1) {
+                    let singleItem = itemBox.find('.info_item');
+                    singleItem.find('.close_box').remove();
+                }
+            }
+        });
+    });
+
+    $('#sendEmailBtn').on('click', function () {
+        // null 검증, 메시지 표시 필요
+        let inviteEmail = $('#parentEmail').val();
+        console.log(`inviteEmail: ${inviteEmail}`);
+        let inviteName = $('#parentName').val()
+        console.log(`inviteName: ${inviteName}`);
+
+        let url = "/inviteCode/mail"
+
+        let param = {
+            inviteType : 1,
+            inviteEmail : inviteEmail,
+            inviteName : inviteName,
+            kidNo : $('#kidProfile').data('kid-no')
+        }
     });
 
    $('#addClassModal').on('show.bs.modal', function (e) {
@@ -169,6 +186,15 @@ $(document).ready(function () {
 
 });
 
+function isJson(response) {
+    try {
+        let json = JSON.parse(response);
+        return (typeof json === 'object' && json !== null);
+    } catch (e) {
+        return false;
+    }
+}
+
 function afterSuccess(response, method) {
     if (method === 'PUT') {
         if (response.kidName != null || response.kidBirth != null) {
@@ -178,11 +204,21 @@ function afterSuccess(response, method) {
     }
 
     if (method === 'POST') {
-        $('#parentKidDiv').replaceWith($(response).find('#parentKidDiv'));
-        $('#classKidDiv').replaceWith($(response).find('#classKidDiv'));
+        // response 형식에 따라 작업 분기
+        let isJsonResponse = isJson(response);
+        console.log(`isJson: ${isJsonResponse}`);
 
-        $('#closeParentModal').click();
-        $('#closeClassModal').click();
+        if (!isJsonResponse) {
+            $('#parentKidDiv').replaceWith($(response).find('#parentKidDiv'));
+            $('#classKidDiv').replaceWith($(response).find('#classKidDiv'));
+
+            $('#closeParentModal').click();
+            $('#closeClassModal').click();
+        }
+
+        if (isJsonResponse) {
+
+        }
     }
 
     if (method === 'DELETE' && response.dischargeFlag === '1') {
