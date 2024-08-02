@@ -11,4 +11,6 @@ public interface AnnounceRepositoryCustom {
     Page<AnnounceDto> findAllByKinderNoCard(AnnounceSearchCondition condition, Pageable pageable);
 
     AnnounceDto findByAnnounceNo(Long announceNo);
+
+    Page<AnnounceDto> findKeywordByKinderNoList(AnnounceSearchCondition condition, Pageable pageable);
 }
