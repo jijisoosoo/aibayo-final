@@ -1,5 +1,6 @@
 package com.aico.aibayo.control;
 
+import com.aico.aibayo.common.AnnounceTypeEnum;
 import com.aico.aibayo.common.BoardTypeEnum;
 import com.aico.aibayo.dto.ClassDto;
     import com.aico.aibayo.dto.announce.AnnounceDto;
@@ -36,6 +37,9 @@ public class AnnounceController {
     private int roleNo = 1;
     private Long id = 2L;
     private Long kinderNo = 1L;
+
+
+
 
     @GetMapping("/admin/card")
     public String admincard(@RequestParam(defaultValue = "1") int page, Model model){
@@ -223,11 +227,8 @@ public class AnnounceController {
         MemberDto loginInfo=  memberService.getByIdAndKidNo(memberSearchCondition);
         HashMap<String, Object> hashMap = new HashMap<>();
         AnnounceSearchCondition condition = new AnnounceSearchCondition();
-        AnnounceSearchCondition condition1 = new AnnounceSearchCondition();
-        condition.setKinderNo(kinderNo);
-        if (condition1.getAnnounceType() != null && condition1.getAnnounceType() == 0) {
-            condition1.setAnnounceType(null); // 0이면 조건을 제거 (null로 설정)
-        }
+        condition.setKinderNo(loginInfo.getKinderNo());
+        condition.setAnnounceType(AnnounceTypeEnum.TEACHER.getNum());
         model.addAttribute("KinderNo",kinderNo);
         hashMap.put("page",page);
         hashMap.put("type","card");
@@ -238,14 +239,20 @@ public class AnnounceController {
     }
     @GetMapping("/user/list")
     public String userList(@RequestParam(defaultValue = "1") int page, Model model){
+        MemberSearchCondition memberSearchCondition = new MemberSearchCondition();
+        memberSearchCondition.setId(14L);
+        memberSearchCondition.setKidNo(1L);
+        MemberDto loginInfo=  memberService.getByIdAndKidNo(memberSearchCondition);
         HashMap<String, Object> hashMap1 = new HashMap<>();
         HashMap<String, Object> hashMap2 = new HashMap<>();
         AnnounceSearchCondition condition1 = new AnnounceSearchCondition();
         AnnounceSearchCondition condition2 = new AnnounceSearchCondition();
-        condition1.setKinderNo(kinderNo);
+        condition1.setKinderNo(loginInfo.getKinderNo());
+        condition1.setAnnounceType(AnnounceTypeEnum.TEACHER.getNum());
 
-        condition2.setKinderNo(kinderNo);
+        condition2.setKinderNo(loginInfo.getKinderNo());
         condition2.setAnnouncePrimary("1");
+        condition2.setAnnounceType(AnnounceTypeEnum.TEACHER.getNum());
 
 
         model.addAttribute("KinderNo",kinderNo);
