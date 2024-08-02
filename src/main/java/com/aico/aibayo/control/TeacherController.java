@@ -9,18 +9,15 @@ import com.aico.aibayo.jwt.JWTUtil;
 import com.aico.aibayo.service.classManage.ClassService;
 import com.aico.aibayo.service.member.MemberService;
 import com.aico.aibayo.service.teacher.teacherService;
-import com.querydsl.core.Tuple;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -60,7 +57,7 @@ public class TeacherController {
 
     // 일반조회
     @GetMapping("/list")
-    public String Main(Model model) {
+    public String teacherMain(Model model) {
         TeacherSearchCondition condition = new TeacherSearchCondition();
         return getConditionAndGoMain(model, condition);
     }
@@ -82,11 +79,33 @@ public class TeacherController {
         List<teacherDto> invitedTeacherList = teacherService.getAllByKinderNo(condition);
         model.addAttribute("invitedTeacherList", invitedTeacherList);
 
-        List<ClassDto> classDtos = classService.getByKinderNo(loginInfo.getKinderNo());
-        model.addAttribute("classes", classDtos);
+        List<ClassDto> classList = classService.getByKinderNo(loginInfo.getKinderNo());
+        model.addAttribute("classList", classList);
 
         return "/admin/teacher/teacherMain";
     }
+
+//    @GetMapping("/list")
+    public String mainByClass(Model model) {
+        TeacherSearchCondition condition = new TeacherSearchCondition();
+        return getConditionAndGoMainByClass(model, condition);
+    }
+
+    // 일반조회 - searchcondition 적용해서
+    public String getConditionAndGoMainByClass(Model model, TeacherSearchCondition condition) {
+        MemberDto loginInfo = (MemberDto)model.getAttribute("loginInfo");
+        condition.setKinderNo(loginInfo.getKinderNo());
+
+        condition.setAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
+        List<teacherDto> acceptedTeacherList = teacherService.getAllByKinderNo(condition);
+        model.addAttribute("acceptedTeacherList", acceptedTeacherList);
+
+        List<ClassDto> classList = classService.getByKinderNo(loginInfo.getKinderNo());
+        model.addAttribute("classList", classList);
+
+        return "/admin/teacher/teacherMain";
+    }
+
 
     @GetMapping("/teacherProfileAccept/{id}")
     public String adminTeacherProfileAccept() {

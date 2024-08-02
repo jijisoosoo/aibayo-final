@@ -1,6 +1,5 @@
 package com.aico.aibayo.repository.teacher;
 
-import com.aico.aibayo.common.AcceptStatusEnum;
 import com.aico.aibayo.dto.teacher.TeacherSearchCondition;
 import com.aico.aibayo.dto.teacher.teacherDto;
 import com.aico.aibayo.entity.*;
@@ -67,7 +66,7 @@ public class TeacherRepositoryCustomImpl implements TeacherRepositoryCustom{
                 .join(classAcceptLog).on(classTeacher.acceptNo.eq(classAcceptLog.acceptNo))
                 .where(kinderAcceptLog.acceptStatus.eq(1),
                         classAcceptLog.acceptStatus.eq(1),
-                        teacherKinder.kinderNo.eq(1L),
+                        teacherKinder.kinderNo.eq(condition.getKinderNo()),
                         getClassNoEq(condition.getClassNo())
                 )
                 .fetch();
