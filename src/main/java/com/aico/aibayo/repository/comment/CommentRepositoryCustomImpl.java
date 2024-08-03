@@ -11,10 +11,12 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 
+import java.io.Console;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -41,10 +43,10 @@ public class CommentRepositoryCustomImpl implements CommentRepositoryCustom {
                 ))
                 .from(comment)
                 .join(board).on(board.boardNo.eq(comment.boardNo))
-                .leftJoin(member).on(comment.commentWriter.eq(member.id)) // 이 부분 수정
+                .leftJoin(member).on(comment.commentWriter.eq(member.id))
                 .where(
                         getInvisibleFlagEq(board),
-                        comment.boardNo.eq(condition.getBoardNo())
+                        getCommentEq(condition.getBoardNo(),comment)
                 )
                 .orderBy(
                         comment.commentGroupNo.desc(),
@@ -58,19 +60,20 @@ public class CommentRepositoryCustomImpl implements CommentRepositoryCustom {
                 .select(comment.count())
                 .from(comment)
                 .join(board).on(board.boardNo.eq(comment.boardNo))
-                .join(member).on(comment.commentWriter.eq(member.id)) // 이 부분 수정
+                .join(member).on(comment.commentWriter.eq(member.id))
                 .where(
                         getInvisibleFlagEq(board),
-                        comment.boardNo.eq(condition.getBoardNo())
+                        getCommentEq(condition.getBoardNo(),comment)
                 );
-
         return PageableExecutionUtils.getPage(comments, pageable, countQuery::fetchOne);
     }
+    private BooleanExpression getCommentEq(Long boardNo , QCommentEntity comment) {
+        return boardNo == null? null : comment.boardNo.eq(boardNo);
+
+    }
+
 
     private BooleanExpression getInvisibleFlagEq(QBoardEntity board) {
-        if (board.invisibleFlag == null) {
-            return board.invisibleFlag.isNull(); // 또는 board.invisibleFlag.isNotNull();
-        }
         return board.invisibleFlag.eq(BooleanEnum.FALSE.getBool());
     }
 }

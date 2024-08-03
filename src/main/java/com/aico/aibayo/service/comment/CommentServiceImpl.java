@@ -32,4 +32,11 @@ public class CommentServiceImpl implements CommentService{
         Pageable pageable = PageRequest.of(page - 1, pagesize);
         return commentRepository.findAllByBoardNo(condition,pageable);
     }
+
+    @Override
+    public long countByBoardNo(Long boardNo) {
+        return commentRepository.countByBoardNo(boardNo);
+    }
+
+
 }
