@@ -35,46 +35,6 @@ $(document).ready(function () {
        alertConfirmModify(modifyInfo);
    });
 
-   $(document).on('click', '.remove_relation', function () {
-       Swal.fire({
-           title: "정말로 삭제하시겠습니까?",
-           text: "삭제 후 복구할 수 없습니다.",
-           icon: "warning",
-           showCancelButton: true,
-           confirmButtonColor: "#dc3545",
-           confirmButtonText: "삭제",
-           cancelButtonText: "취소"
-
-       }).then((result) => {
-           if (result.isConfirmed) {
-               let $this = $(this);
-
-               // console.log("accept_log 삭제");
-               let param = {
-                   acceptNo : $this.closest('.info_item').data('accept-no')
-               }
-
-               let url = "/kid/deleteOk"
-
-               commonAjax(url, 'DELETE', param);
-
-               // item이 하나만 남을 경우 삭제 버튼 비표시
-               let itemBox = $this.closest('.info_content_box');
-               // console.dir(itemBox);
-
-               let itemCount = itemBox.find('.info_item').length - 1;
-               // console.log(`itemCount: ${itemCount}`);
-
-               $this.closest('.info_item').remove();
-
-               if (itemCount === 1) {
-                   let singleItem = itemBox.find('.info_item');
-                   singleItem.find('.close_box').remove();
-               }
-           }
-       });
-   });
-
     $('#dischargeKid').on('click', function () {
         Swal.fire({
             title: "정말로 퇴소시키겠습니까?",
@@ -94,7 +54,7 @@ $(document).ready(function () {
                     let param = {
                         acceptNo : $(this).data('accept-no')
                     }
-                    console.log(`remove_relation param: ${JSON.stringify(param)}`);
+                    // console.log(`remove_relation param: ${JSON.stringify(param)}`);
 
                     commonAjax(url, 'DELETE', param);
                 });
@@ -102,13 +62,103 @@ $(document).ready(function () {
                 let param = {
                     kidNo : $('#kidProfile').data('kid-no')
                 }
-                console.log(`kidNo param: ${JSON.stringify(param)}`)
+                // console.log(`kidNo param: ${JSON.stringify(param)}`)
 
                 commonAjax(url, 'DELETE', param);
 
             }
         });
     });
+
+    $(document).on('click', '.remove_relation', function () {
+        Swal.fire({
+            title: "정말로 삭제하시겠습니까?",
+            text: "삭제 후 복구할 수 없습니다.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#dc3545",
+            confirmButtonText: "삭제",
+            cancelButtonText: "취소"
+
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let $this = $(this);
+
+                // console.log("accept_log 삭제");
+                let param = {
+                    acceptNo : $this.closest('.info_item').data('accept-no')
+                }
+
+                let url = "/kid/deleteOk"
+
+                commonAjax(url, 'DELETE', param);
+
+                // item이 하나만 남을 경우 삭제 버튼 비표시
+                let itemBox = $this.closest('.info_content_box');
+                // console.dir(itemBox);
+
+                let itemCount = itemBox.find('.info_item').length - 1;
+                // console.log(`itemCount: ${itemCount}`);
+
+                $this.closest('.info_item').remove();
+
+                if (itemCount === 1) {
+                    let singleItem = itemBox.find('.info_item');
+                    singleItem.find('.close_box').remove();
+                }
+            }
+        });
+    });
+
+
+    $('#sendEmailBtn').on('click', function () {
+        initMsg();
+
+        let inviteName = $('#parentName').val().trim();
+        // console.log(`inviteName: ${inviteName}`);
+        let inviteEmail = $('#parentEmail').val().trim();
+        // console.log(`inviteEmail: ${inviteEmail}`);
+
+        if (inviteName === '') {
+            // console.log("이름 공란");
+            let msg = $('#parentName').siblings('.msg_box').find('.msg');
+            msg.show();
+            $('#parentName').focus();
+            return false;
+        }
+
+        let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        if (inviteEmail === '' || !emailPattern.test(inviteEmail)) {
+            // console.log("이메일 형식 유효성 오류")
+            let msg = $('#parentEmail').siblings('.msg_box').find('.msg');
+            msg.show()
+            $('#parentEmail').focus();
+            return false;
+        }
+
+        let url = "/inviteCode/mail";
+
+        let param = {
+            inviteType : 1,
+            inviteEmail : inviteEmail,
+            inviteName : inviteName,
+            // kinderNo : $('#kidProfile').data('kinder-no'),
+            kidNo : $('#kidProfile').data('kid-no')
+        }
+        // console.log(`param: ${JSON.stringify(param)}`);
+
+        Swal.fire({
+            title: '전송 중...',
+            text: '초대 메일을 전송하고 있습니다.',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
+        commonAjax(url, 'POST', param);
+    });
+
 
    $('#addClassModal').on('show.bs.modal', function (e) {
        let selectedClasses = [];
@@ -135,6 +185,13 @@ $(document).ready(function () {
            }
        });
    });
+
+    $('#addParentModal').on('hidden.bs.modal', function () {
+        $('.modal_parent_input').each(function () {
+            $(this).val('');
+        });
+    });
+
 
    $('#modalAddClassBtn').on('click', function () {
        function modifyInfo(result) {
@@ -169,7 +226,15 @@ $(document).ready(function () {
 
 });
 
+function initMsg() {
+    $('.msg').each(function () {
+        $(this).hide();
+    })
+}
+
 function afterSuccess(response, method) {
+    // console.log(`response: ${response}`);
+
     if (method === 'PUT') {
         if (response.kidName != null || response.kidBirth != null) {
             $('#kidName').val(response.kidName);
@@ -178,11 +243,30 @@ function afterSuccess(response, method) {
     }
 
     if (method === 'POST') {
-        $('#parentKidDiv').replaceWith($(response).find('#parentKidDiv'));
-        $('#classKidDiv').replaceWith($(response).find('#classKidDiv'));
+        // response 형식에 따라 작업 분기
 
-        $('#closeParentModal').click();
-        $('#closeClassModal').click();
+        if ($(response).find('#kidProfile').length > 0) {
+            $('#parentKidDiv').replaceWith($(response).find('#parentKidDiv'));
+            $('#classKidDiv').replaceWith($(response).find('#classKidDiv'));
+
+            $('#closeParentModal').click();
+            $('#closeClassModal').click();
+        }
+
+        if (response.inviteEmail != null) {
+            Swal.close();
+
+            Swal.fire({
+                title: "초대 완료",
+                text: "초대 메일이 성공적으로 전송되었습니다.",
+                icon: "success",
+                customClass: {
+                    confirmButton: 'btn-ab btn-ab-swal'
+                }
+            }).then((result) => {
+                $('#closeParentModal').click();
+            })
+        }
     }
 
     if (method === 'DELETE' && response.dischargeFlag === '1') {

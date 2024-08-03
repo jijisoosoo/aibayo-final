@@ -619,3 +619,13 @@
     line-height: 30px;
     word-wrap: break-word;
 }
+
+.msg {
+    color: red;
+    display: none;
+}
+
+.msg_box {
+    display: flex;
+    gap: 10px;
+}

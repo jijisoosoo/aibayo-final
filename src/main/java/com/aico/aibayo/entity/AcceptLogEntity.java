@@ -18,8 +18,6 @@ public class AcceptLogEntity {
     @Column(name = "accept_no")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long acceptNo;
-    @Column(name = "code_verify")
-    private Integer codeVerify;
     @Column(name = "accept_type")
     private Integer acceptType;
     @Column(name = "accept_status")
@@ -34,7 +32,5 @@ public class AcceptLogEntity {
     private LocalDateTime acceptDeleteDate;
     @Column(name = "accept_delete_flag")
     private String acceptDeleteFlag;
-    @Column(name = "kinder_no")
-    private String kinderNo;
 
 }

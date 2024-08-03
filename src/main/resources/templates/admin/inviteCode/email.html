@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>email.html</title>
+</head>
+<body>
+<div></div>
+
+<h3>aibayo에서 초대 메시지가 도착했습니다.</h3>
+
+<p>
+    초대를 수락하실 경우 아래의 버튼을 클릭해 주세요.
+</p>
+
+<input type="button" value="회원가입/등록">
+
+<!--나중에 삭제-->
+<h3>인증코드</h3>
+<div th:text="${verifyCode}"></div>
+</body>
+</html>
