@@ -54,7 +54,7 @@ $(document).ready(function () {
                     let param = {
                         acceptNo : $(this).data('accept-no')
                     }
-                    console.log(`remove_relation param: ${JSON.stringify(param)}`);
+                    // console.log(`remove_relation param: ${JSON.stringify(param)}`);
 
                     commonAjax(url, 'DELETE', param);
                 });
@@ -62,7 +62,7 @@ $(document).ready(function () {
                 let param = {
                     kidNo : $('#kidProfile').data('kid-no')
                 }
-                console.log(`kidNo param: ${JSON.stringify(param)}`)
+                // console.log(`kidNo param: ${JSON.stringify(param)}`)
 
                 commonAjax(url, 'DELETE', param);
 
@@ -110,22 +110,55 @@ $(document).ready(function () {
         });
     });
 
-    $('#sendEmailBtn').on('click', function () {
-        // null 검증, 메시지 표시 필요
-        let inviteEmail = $('#parentEmail').val();
-        console.log(`inviteEmail: ${inviteEmail}`);
-        let inviteName = $('#parentName').val()
-        console.log(`inviteName: ${inviteName}`);
 
-        let url = "/inviteCode/mail"
+    $('#sendEmailBtn').on('click', function () {
+        initMsg();
+
+        let inviteName = $('#parentName').val().trim();
+        // console.log(`inviteName: ${inviteName}`);
+        let inviteEmail = $('#parentEmail').val().trim();
+        // console.log(`inviteEmail: ${inviteEmail}`);
+
+        if (inviteName === '') {
+            // console.log("이름 공란");
+            let msg = $('#parentName').siblings('.msg_box').find('.msg');
+            msg.show();
+            $('#parentName').focus();
+            return false;
+        }
+
+        let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        if (inviteEmail === '' || !emailPattern.test(inviteEmail)) {
+            // console.log("이메일 형식 유효성 오류")
+            let msg = $('#parentEmail').siblings('.msg_box').find('.msg');
+            msg.show()
+            $('#parentEmail').focus();
+            return false;
+        }
+
+        let url = "/inviteCode/mail";
 
         let param = {
             inviteType : 1,
             inviteEmail : inviteEmail,
             inviteName : inviteName,
+            // kinderNo : $('#kidProfile').data('kinder-no'),
             kidNo : $('#kidProfile').data('kid-no')
         }
+        // console.log(`param: ${JSON.stringify(param)}`);
+
+        Swal.fire({
+            title: '전송 중...',
+            text: '초대 메일을 전송하고 있습니다.',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
+        commonAjax(url, 'POST', param);
     });
+
 
    $('#addClassModal').on('show.bs.modal', function (e) {
        let selectedClasses = [];
@@ -152,6 +185,13 @@ $(document).ready(function () {
            }
        });
    });
+
+    $('#addParentModal').on('hidden.bs.modal', function () {
+        $('.modal_parent_input').each(function () {
+            $(this).val('');
+        });
+    });
+
 
    $('#modalAddClassBtn').on('click', function () {
        function modifyInfo(result) {
@@ -186,16 +226,15 @@ $(document).ready(function () {
 
 });
 
-function isJson(response) {
-    try {
-        let json = JSON.parse(response);
-        return (typeof json === 'object' && json !== null);
-    } catch (e) {
-        return false;
-    }
+function initMsg() {
+    $('.msg').each(function () {
+        $(this).hide();
+    })
 }
 
 function afterSuccess(response, method) {
+    // console.log(`response: ${response}`);
+
     if (method === 'PUT') {
         if (response.kidName != null || response.kidBirth != null) {
             $('#kidName').val(response.kidName);
@@ -205,10 +244,8 @@ function afterSuccess(response, method) {
 
     if (method === 'POST') {
         // response 형식에 따라 작업 분기
-        let isJsonResponse = isJson(response);
-        console.log(`isJson: ${isJsonResponse}`);
 
-        if (!isJsonResponse) {
+        if ($(response).find('#kidProfile').length > 0) {
             $('#parentKidDiv').replaceWith($(response).find('#parentKidDiv'));
             $('#classKidDiv').replaceWith($(response).find('#classKidDiv'));
 
@@ -216,8 +253,19 @@ function afterSuccess(response, method) {
             $('#closeClassModal').click();
         }
 
-        if (isJsonResponse) {
+        if (response.inviteEmail != null) {
+            Swal.close();
 
+            Swal.fire({
+                title: "초대 완료",
+                text: "초대 메일이 성공적으로 전송되었습니다.",
+                icon: "success",
+                customClass: {
+                    confirmButton: 'btn-ab btn-ab-swal'
+                }
+            }).then((result) => {
+                $('#closeParentModal').click();
+            })
         }
     }
 
