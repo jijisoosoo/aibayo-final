@@ -40,6 +40,8 @@ public class InviteCodeDto {
     }
 
     public static InviteCodeDto toDto(InviteCodeEntity entity) {
+        if (entity == null) { return null; }
+
         return new InviteCodeDto(
                 entity.getInviteId(),
                 entity.getAcceptNo(),

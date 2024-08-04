@@ -79,7 +79,7 @@ public class KidServiceImpl implements KidService {
 
     @Override
     @Transactional
-    public void updateKidRelation(KidDto kidDto) {
+    public void updateClassKid(KidDto kidDto) {
         // 반_원생 관계 업데이트
         // 1. 승인이력 insert
         // 2. 반_원생 insert
@@ -101,6 +101,23 @@ public class KidServiceImpl implements KidService {
 
             classKidRepository.save(classKidEntity);
         }
+
+    }
+
+    @Override
+    public KidDto updateParentKid(KidDto kidDto) {
+        if (kidDto.getParentKidAcceptNo() != null) {
+            acceptLogRepository.findById(kidDto.getParentKidAcceptNo()).ifPresent(target -> {
+                target.setAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
+                target.setAcceptModifyDate(LocalDateTime.now());
+                target.setAcceptDate(LocalDateTime.now());
+
+                acceptLogRepository.save(target);
+            });
+
+            return kidDto;
+        }
+        return null;
     }
 
     @Override
@@ -119,6 +136,21 @@ public class KidServiceImpl implements KidService {
             }
         }
 
+        // 보호자_원생 관계 승인거부
+        if (kidDto.getParentKidAcceptNo() != null) {
+            acceptLogRepository.findById(kidDto.getParentKidAcceptNo()).ifPresent(target -> {
+                target.setAcceptStatus(AcceptStatusEnum.REJECT.getStatus());
+                target.setAcceptDeleteDate(LocalDateTime.now());
+                target.setAcceptDeleteFlag(BooleanEnum.TRUE.getBool());
+
+                acceptLogRepository.save(target);
+            });
+
+            return kidDto;
+        }
+
+
+        // 원생 퇴소
         if (kidDto.getKidNo() != null) {
             KidEntity target = kidRepository.findById(kidDto.getKidNo()).orElse(null);
             if (target != null) {

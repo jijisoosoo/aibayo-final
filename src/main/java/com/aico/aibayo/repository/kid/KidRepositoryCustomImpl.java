@@ -175,6 +175,7 @@ public class KidRepositoryCustomImpl implements KidRepositoryCustom {
                         kid.modifyDate,
                         kid.dischargeDate,
                         kid.dischargeFlag,
+                        inviteCode.inviteId,
                         inviteCode.inviteEmail,
                         acceptLog1.acceptNo,
                         acceptLog3.acceptNo
