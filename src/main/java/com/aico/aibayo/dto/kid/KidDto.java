@@ -31,7 +31,11 @@ public class KidDto {
     private Long classNo;
 
     private Long acceptNo;
+    private Long parentKidAcceptNo;
+    private Long inviteCodeAcceptNo;
+    private Integer acceptStatus;
 
+    private Long inviteId;
     private String inviteEmail;
 
 
@@ -51,7 +55,7 @@ public class KidDto {
 
     public KidDto(Long kidNo, Long kinderNo, String kidName, LocalDate kidBirth, Integer kidGender,
                   LocalDateTime admissionDate, LocalDateTime modifyDate, LocalDateTime dischargeDate,
-                  String dischargeFlag, String username, String inviteEmail) {
+                  String dischargeFlag, String username, Long parentKidAcceptNo) {
         this.kidNo = kidNo;
         this.kinderNo = kinderNo;
         this.kidName = kidName;
@@ -62,10 +66,31 @@ public class KidDto {
         this.dischargeDate = dischargeDate;
         this.dischargeFlag = dischargeFlag;
         this.username = username;
+        this.parentKidAcceptNo = parentKidAcceptNo;
+    }
+
+    public KidDto(Long kidNo, Long kinderNo, String kidName, LocalDate kidBirth, Integer kidGender,
+                  LocalDateTime admissionDate, LocalDateTime modifyDate, LocalDateTime dischargeDate,
+                  String dischargeFlag, Long inviteId, String inviteEmail,
+                  Long parentKidAcceptNo, Long inviteCodeAcceptNo) {
+        this.kidNo = kidNo;
+        this.kinderNo = kinderNo;
+        this.kidName = kidName;
+        this.kidBirth = kidBirth;
+        this.kidGender = kidGender;
+        this.admissionDate = admissionDate;
+        this.modifyDate = modifyDate;
+        this.dischargeDate = dischargeDate;
+        this.dischargeFlag = dischargeFlag;
+        this.inviteId = inviteId;
         this.inviteEmail = inviteEmail;
+        this.parentKidAcceptNo = parentKidAcceptNo;
+        this.inviteCodeAcceptNo = inviteCodeAcceptNo;
     }
 
     public static KidDto toDto(KidEntity entity) {
+        if (entity == null) { return null; }
+
         return new KidDto(
             entity.getKidNo(),
             entity.getKinderNo(),

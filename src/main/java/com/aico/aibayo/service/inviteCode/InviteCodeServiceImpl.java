@@ -37,13 +37,65 @@ public class InviteCodeServiceImpl implements InviteCodeService {
     @Override
     @Transactional
     public InviteCodeDto sendAndInsertInviteCode(InviteCodeDto inviteCodeDto) {
+        InviteCodeDto inserted = insertInviteCode(inviteCodeDto);
         sendEmail(inviteCodeDto);
 
-        return insertInviteCode(inviteCodeDto);
+        return inserted;
+    }
+
+    @Override
+    @Transactional
+    public InviteCodeDto sendAndUpdateInviteCode(InviteCodeDto inviteCodeDto) {
+        acceptLogRepository.findById(inviteCodeDto.getAcceptNo()).ifPresent(target -> {
+            target.setAcceptModifyDate(LocalDateTime.now());
+            acceptLogRepository.save(target);
+        });
+
+        InviteCodeEntity updated =
+                inviteCodeRepository.findById(inviteCodeDto.getInviteId())
+                        .map(target -> {
+                            target.setInviteExpireDate(LocalDate.now().plusDays(7));
+
+                            return inviteCodeRepository.save(target);
+                        })
+                        .orElse(null);
+
+        InviteCodeDto updatedDto = InviteCodeDto.toDto(updated);
+        sendEmail(updatedDto);
+
+        return updatedDto;
+    }
+
+    @Override
+    @Transactional
+    public InviteCodeDto deleteInviteCode(InviteCodeDto inviteCodeDto) {
+        acceptLogRepository.findById(inviteCodeDto.getAcceptNo()).ifPresent(target -> {
+            target.setAcceptStatus(AcceptStatusEnum.DELETE.getStatus());
+            target.setAcceptDeleteDate(LocalDateTime.now());
+            target.setAcceptDeleteFlag(BooleanEnum.TRUE.getBool());
+
+            acceptLogRepository.save(target);
+        });
+
+        InviteCodeEntity deleted =
+                inviteCodeRepository.findById(inviteCodeDto.getInviteId())
+                        .map(target -> {
+                            target.setInviteExpireDate(LocalDate.now());
+                            target.setInviteExpireFlag(BooleanEnum.TRUE.getBool());
+
+                            return inviteCodeRepository.save(target);
+                        })
+                        .orElse(null);
+
+        return InviteCodeDto.toDto(deleted);
     }
 
     private void sendEmail(InviteCodeDto inviteCodeDto) {
-        inviteCodeDto.setVerifyCode(createCode()); // 인증번호 생성
+        if (inviteCodeDto == null) {
+            log.warn("InviteCodeDto is null");
+            throw new IllegalArgumentException();
+        }
+
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 
         String desc = InviteTypeEnum.findByType(inviteCodeDto.getInviteType())
@@ -70,10 +122,6 @@ public class InviteCodeServiceImpl implements InviteCodeService {
         return springTemplateEngine.process("/admin/inviteCode/email", context);
     }
 
-    private String createCode() {
-        return UUID.randomUUID().toString();
-    }
-
     private InviteCodeDto insertInviteCode(InviteCodeDto inviteCodeDto) {
         AcceptLogEntity acceptLogEntity = AcceptLogEntity.builder()
                 .acceptType(AcceptTypeEnum.INVITE_CODE.getType())
@@ -86,7 +134,7 @@ public class InviteCodeServiceImpl implements InviteCodeService {
 
         InviteCodeEntity inviteCodeEntity = InviteCodeEntity.builder()
                 .acceptNo(savedAcceptLog.getAcceptNo())
-                .verifyCode(inviteCodeDto.getVerifyCode())
+                .verifyCode(createCode())
                 .inviteType(inviteCodeDto.getInviteType())
                 .inviteEmail(inviteCodeDto.getInviteEmail())
                 .inviteRegDate(LocalDate.now())
@@ -99,5 +147,9 @@ public class InviteCodeServiceImpl implements InviteCodeService {
                 inviteCodeRepository.save(inviteCodeEntity);
 
         return InviteCodeDto.toDto(savedInviteCode);
+    }
+
+    private String createCode() {
+        return UUID.randomUUID().toString();
     }
 }

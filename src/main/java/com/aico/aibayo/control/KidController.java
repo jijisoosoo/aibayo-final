@@ -16,7 +16,6 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -111,7 +110,7 @@ public class KidController {
         MemberDto loginInfo = (MemberDto) model.getAttribute("loginInfo");
         int roleNo = loginInfo.getRoleNo();
 
-        kidService.updateKidRelation(kidDto);
+        kidService.updateClassKid(kidDto);
 
         getConditionAndGoDetail(kidDto.getKidNo(), model);
 
@@ -160,7 +159,7 @@ public class KidController {
 
         condition.setAcceptStatus(null);
         condition.setInviteAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
-        List<KidDto> kidInviteDtos = kidService.getAllWithParentByClassNoAndAcceptStatus(condition);
+        List<KidDto> kidInviteDtos = kidService.getAllWithInviteByClassNoAndAcceptStatus(condition);
         model.addAttribute("kidsInvite", kidInviteDtos);
 
         List<ClassDto> classDtos = classService.getByKinderNo(loginInfo.getKinderNo());
