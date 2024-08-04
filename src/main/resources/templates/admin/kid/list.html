@@ -145,7 +145,8 @@
 
                     </div>
 
-                    <div class="kid_item_btns">
+                    <div class="kid_item_btns"
+                         th:data-parent-kid-accept-no="*{parentKidAcceptNo}">
                         <input type="button"
                                class="btn btn-outline-ab kid_item_btn"
                                value="승인">
@@ -202,7 +203,9 @@
 
                     </div>
 
-                    <div class="kid_item_btns">
+                    <div class="kid_item_btns"
+                         th:data-parent-kid-accept-no="*{parentKidAcceptNo}"
+                         th:data-invite-code-accept-no="*{inviteCodeAcceptNo}">
                         <input type="button"
                                class="btn btn-outline-danger kid_item_btn"
                                value="취소">

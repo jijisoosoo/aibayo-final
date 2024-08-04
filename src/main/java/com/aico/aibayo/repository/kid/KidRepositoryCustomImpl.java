@@ -124,7 +124,8 @@ public class KidRepositoryCustomImpl implements KidRepositoryCustom {
                         kid.dischargeDate,
                         kid.dischargeFlag,
                         member.username,
-                        inviteCode.inviteEmail
+//                        inviteCode.inviteEmail
+                        acceptLog1.acceptNo
                 ))
                 .from(kid)
                 .leftJoin(parentKid).on(kid.kidNo.eq(parentKid.kidNo))
@@ -144,11 +145,11 @@ public class KidRepositoryCustomImpl implements KidRepositoryCustom {
                         .and(acceptLog2.acceptStatus.eq(AcceptStatusEnum.ACCEPT.getStatus()))
                 )
 
-                .leftJoin(inviteCode).on(kid.kidNo.eq(inviteCode.kidNo))
-                .leftJoin(acceptLog3).on(
-                        inviteCode.acceptNo.eq(acceptLog3.acceptNo)
-                        .and(acceptLog3.acceptStatus.eq(AcceptStatusEnum.ACCEPT.getStatus()))
-                )
+//                .leftJoin(inviteCode).on(kid.kidNo.eq(inviteCode.kidNo))
+//                .leftJoin(acceptLog3).on(
+//                        inviteCode.acceptNo.eq(acceptLog3.acceptNo)
+//                        .and(acceptLog3.acceptStatus.eq(AcceptStatusEnum.ACCEPT.getStatus()))
+//                )
 
                 .where(
                         kid.dischargeFlag.eq(BooleanEnum.FALSE.getBool()),
@@ -174,7 +175,9 @@ public class KidRepositoryCustomImpl implements KidRepositoryCustom {
                         kid.modifyDate,
                         kid.dischargeDate,
                         kid.dischargeFlag,
-                        inviteCode.inviteEmail
+                        inviteCode.inviteEmail,
+                        acceptLog1.acceptNo,
+                        acceptLog3.acceptNo
                 ))
                 .from(kid)
                 .leftJoin(parentKid).on(kid.kidNo.eq(parentKid.kidNo))
