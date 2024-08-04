@@ -92,7 +92,7 @@ public class AnnounceServiceImpl implements AnnounceService {
 
     @Override
     @Transactional
-    public void updatennounce(AnnounceDto announceDto) {
+    public void updateAnnounce(AnnounceDto announceDto) {
         BoardEntity boardEntity =
             boardRepository.findById(announceDto.getBoardNo()).orElse(null);
             assert boardEntity != null;
@@ -120,5 +120,23 @@ public class AnnounceServiceImpl implements AnnounceService {
         boardEntity.setInvisibleFlag(BooleanEnum.TRUE.getBool());
 
         boardRepository.save(boardEntity);
+    }
+
+    @Override
+    public Page<AnnounceDto> findKeywordByKinderNoList(AnnounceSearchCondition condition, HashMap<String, Object> hashMap) {
+        int page = (int) hashMap.get("page");
+        String type = (String) hashMap.get("type");
+        int pagesize=0;
+        if(type.equals("card")){
+            pagesize=PAGE_SIZE_CARD;
+        }else if(type.equals("list")){
+            pagesize=PAGE_SIZE_LIST;
+        }else if(type.equals("listPrimary")) {
+            pagesize = PAGE_SIZE_PRIMARY;
+        }
+
+
+        Pageable pageable = PageRequest.of(page - 1, pagesize);
+        return announceRepository.findKeywordByKinderNoList(condition,pageable);
     }
 }

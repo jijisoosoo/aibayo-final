@@ -17,4 +17,6 @@ public class AnnounceSearchCondition {
     private Integer announceType;
     private String canComment;
     private String announcePrimary;
+
+    private String keyword;
 }

@@ -18,6 +18,8 @@ public class CommentDto {
     private Long boardNo;
     private Integer commentGroupNo;
     private LocalDateTime commentRegDate;
+    private LocalDateTime commentModifyDate;
+    private LocalDateTime commentDeleteDate;
     private Long commentWriter;
     private String commentClass;
     private String commentContent;

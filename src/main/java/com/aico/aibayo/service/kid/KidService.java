@@ -12,4 +12,7 @@ public interface KidService {
     List<KidDto> getAllByClassNoAndAcceptStatus(KidSearchCondition condition);
     List<KidDto> getAllWithParentByClassNoAndAcceptStatus(KidSearchCondition condition);
     KidDto getByKidNo(Long kidNo);
+    KidDto updateKid(KidDto kidDto);
+    void updateKidRelation(KidDto kidDto);
+    KidDto deleteKid(KidDto kidDto);
 }
