@@ -1,14 +1,3 @@
-
-// function button_event(){
-//     if (confirm("정말 삭제하시겠습니까??") === true){    //확인
-//         document.form.submit();
-//     }else{   //취소
-//     }
-// }
-
-
-
-
 document.querySelectorAll('[data-bs-toggle="modal"]').forEach(function (modalToggle) {
     modalToggle.addEventListener('click', function () {
         var target = modalToggle.getAttribute('data-bs-target');
@@ -49,6 +38,26 @@ $(document).ready(function () {
             }
         });
     });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var commentFlag = document.getElementById('commentFlag').value;
+        console.log("commentFlag : "+commentFlag);
+        var commentSection = document.getElementById('commentSection');
+
+        if (commentFlag === '0') {
+            commentSection.style.display = 'none';
+        }
+    });
+
+
+
+
+
+
+
+
+
+
 });
 
 function afterSuccess(response) {

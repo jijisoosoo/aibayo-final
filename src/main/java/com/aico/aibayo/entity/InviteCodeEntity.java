@@ -21,6 +21,8 @@ public class InviteCodeEntity {
     private Long inviteId;
     @Column(name="accept_no")
     private Long acceptNo;
+    @Column(name = "verify_code")
+    private String verifyCode;
     @Column(name = "invite_type")
     private Integer inviteType;
     @Column(name = "invite_email")
