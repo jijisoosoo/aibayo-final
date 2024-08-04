@@ -53,6 +53,11 @@ public class KidServiceImpl implements KidService {
     }
 
     @Override
+    public List<KidDto> getAllWithInviteByClassNoAndAcceptStatus(KidSearchCondition condition) {
+        return kidRepository.findAllWithInviteByClassNoAndAcceptStatus(condition);
+    }
+
+    @Override
     public KidDto getByKidNo(Long kidNo) {
         return KidDto.toDto(Objects.requireNonNull(kidRepository.findById(kidNo).orElse(null)));
     }

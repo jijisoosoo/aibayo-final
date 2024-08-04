@@ -11,6 +11,7 @@ public interface KidService {
     List<KidDto> getByMemberId(Long id);
     List<KidDto> getAllByClassNoAndAcceptStatus(KidSearchCondition condition);
     List<KidDto> getAllWithParentByClassNoAndAcceptStatus(KidSearchCondition condition);
+    List<KidDto> getAllWithInviteByClassNoAndAcceptStatus(KidSearchCondition condition);
     KidDto getByKidNo(Long kidNo);
     KidDto updateKid(KidDto kidDto);
     void updateKidRelation(KidDto kidDto);

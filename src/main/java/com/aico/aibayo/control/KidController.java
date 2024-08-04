@@ -160,7 +160,7 @@ public class KidController {
 
         condition.setAcceptStatus(null);
         condition.setInviteAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
-        List<KidDto> kidInviteDtos = kidService.getAllWithParentByClassNoAndAcceptStatus(condition);
+        List<KidDto> kidInviteDtos = kidService.getAllWithInviteByClassNoAndAcceptStatus(condition);
         model.addAttribute("kidsInvite", kidInviteDtos);
 
         List<ClassDto> classDtos = classService.getByKinderNo(loginInfo.getKinderNo());

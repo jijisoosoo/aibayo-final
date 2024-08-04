@@ -113,7 +113,7 @@ public class KidRepositoryCustomImpl implements KidRepositoryCustom {
     @Override
     public List<KidDto> findAllWithParentByClassNoAndAcceptStatus(KidSearchCondition condition) {
         return jpaQueryFactory
-                .select(Projections.constructor(KidDto.class,
+                .selectDistinct(Projections.constructor(KidDto.class,
                         kid.kidNo,
                         kid.kinderNo,
                         kid.kidName,
@@ -148,6 +148,56 @@ public class KidRepositoryCustomImpl implements KidRepositoryCustom {
                 .leftJoin(acceptLog3).on(
                         inviteCode.acceptNo.eq(acceptLog3.acceptNo)
                         .and(acceptLog3.acceptStatus.eq(AcceptStatusEnum.ACCEPT.getStatus()))
+                )
+
+                .where(
+                        kid.dischargeFlag.eq(BooleanEnum.FALSE.getBool()),
+                        kid.kinderNo.eq(condition.getKinderNo()),
+                        getClassEq(condition.getClassNo()),
+                        getAcceptStatusEq(condition.getAcceptStatus())
+//                        getInviteAcceptTypeEq(condition.getInviteAcceptStatus())
+                )
+                .orderBy(kid.kidName.asc())
+                .fetch();
+    }
+
+    @Override
+    public List<KidDto> findAllWithInviteByClassNoAndAcceptStatus(KidSearchCondition condition) {
+        return jpaQueryFactory
+                .selectDistinct(Projections.constructor(KidDto.class,
+                        kid.kidNo,
+                        kid.kinderNo,
+                        kid.kidName,
+                        kid.kidBirth,
+                        kid.kidGender,
+                        kid.admissionDate,
+                        kid.modifyDate,
+                        kid.dischargeDate,
+                        kid.dischargeFlag,
+                        inviteCode.inviteEmail
+                ))
+                .from(kid)
+                .leftJoin(parentKid).on(kid.kidNo.eq(parentKid.kidNo))
+                .leftJoin(member).on(
+                        member.id.eq(parentKid.id)
+                                .and(member.status.eq(MemberStatusEnum.ACTIVE.getStatus()))
+                )
+                .leftJoin(acceptLog1).on(acceptLog1.acceptNo.eq(parentKid.acceptNo))
+
+                .join(classKid).on(kid.kidNo.eq(classKid.kidNo))
+                .join(clazz).on(
+                        clazz.classNo.eq(classKid.classNo)
+                                .and(clazz.classDeleteFlag.eq(BooleanEnum.FALSE.getBool()))
+                )
+                .join(acceptLog2).on(
+                        acceptLog2.acceptNo.eq(classKid.acceptNo)
+                                .and(acceptLog2.acceptStatus.eq(AcceptStatusEnum.ACCEPT.getStatus()))
+                )
+
+                .leftJoin(inviteCode).on(kid.kidNo.eq(inviteCode.kidNo))
+                .leftJoin(acceptLog3).on(
+                        inviteCode.acceptNo.eq(acceptLog3.acceptNo)
+                                .and(acceptLog3.acceptStatus.eq(AcceptStatusEnum.ACCEPT.getStatus()))
                 )
 
                 .where(
