@@ -66,6 +66,42 @@
 
                     </div>
 
+
+                    <div class="kid_info_box kid_info_box_form">
+
+<!--                        <div class="msg_box">-->
+<!--                            <div class="msg">원생 성별을 선택해 주세요</div>-->
+<!--                        </div>-->
+
+
+                        <div class="kid_name_box kid_info_box_detail">
+
+                            <div class="btn-group kid_gender_group" id="kidGenderRadioBox">
+                                <input type="radio" class="btn-check" name="kidGenderRd" id="kidGender1"
+                                       value="1" autocomplete="off"
+                                       th:checked="*{kidGender == 1}">
+                                <label class="btn btn-outline-ab kid_radio kid_radio_text"
+                                       for="kidGender1">
+                                    남아
+                                </label>
+
+                                <input type="radio" class="btn-check" name="kidGenderRd" id="kidGender2"
+                                       value="2" autocomplete="off"
+                                       th:checked="*{kidGender == 2}">
+                                <label class="btn btn-outline-ab kid_radio kid_radio_text"
+                                       for="kidGender2">
+                                    여아
+                                </label>
+                            </div>
+
+
+                            <input type="button" class="btn btn-outline-ab" id="modifyKidGender" value="수정">
+
+                        </div>
+
+                    </div>
+
+
                     <div class="kid_birth_box">
 
                         <div class="kid_info_svg">

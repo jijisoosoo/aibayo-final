@@ -72,6 +72,12 @@ document.addEventListener("DOMContentLoaded", () => {
     chatIframe.style.height = '100px';
 });
 
+// 값 입력 안내 메시지 초기화(숨김)
+function initMsg() {
+    $('.msg').each(function () {
+        $(this).hide();
+    })
+}
 
 
 

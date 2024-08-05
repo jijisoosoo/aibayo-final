@@ -13,6 +13,7 @@ public interface KidService {
     List<KidDto> getAllWithParentByClassNoAndAcceptStatus(KidSearchCondition condition);
     List<KidDto> getAllWithInviteByClassNoAndAcceptStatus(KidSearchCondition condition);
     KidDto getByKidNo(Long kidNo);
+    KidDto insertKid(KidDto kidDto);
     KidDto updateKid(KidDto kidDto);
     void updateClassKid(KidDto kidDto);
     KidDto updateParentKid(KidDto kidDto);

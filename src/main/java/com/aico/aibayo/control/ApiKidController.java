@@ -14,6 +14,15 @@ import org.springframework.web.bind.annotation.*;
 public class ApiKidController {
     private final KidService kidService;
 
+    @PostMapping("/writeOk")
+    public ResponseEntity<KidDto> writeOk(@RequestBody KidDto kidDto) {
+        log.info("write: {}", kidDto);
+        KidDto inserted = kidService.insertKid(kidDto);
+
+        return inserted == null ? ResponseEntity.badRequest().build() :
+                                  ResponseEntity.ok(inserted);
+    }
+
     @PutMapping("/modifyOk")
     public ResponseEntity<KidDto> modifyOk(@RequestBody KidDto kidDto) {
         log.info("modify: {}", kidDto);
