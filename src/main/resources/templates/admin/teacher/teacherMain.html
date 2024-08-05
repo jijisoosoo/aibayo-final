@@ -83,6 +83,7 @@
                     <img src="/images/common/default-yellow.png" alt=""/>
                 </div>
                 <div class="textarea">
+                    <div class="text-wrapper-10" id="ifClassNameExists"></div>
                     <div class="text-wrapper-10">승인 완료된 교사</div>
                     <div class="n-wrapper">
                         <div class="n-2" th:text="${acceptedTeacherList.size()}">n</div>
@@ -90,10 +91,6 @@
                     <div class="text-wrapper-10">명</div>
                 </div>
             </div>
-<!--            <select id="selectClass" class="dropdown-class">-->
-<!--                <option value selected>반 선택</option>-->
-<!--                <option th:each="class:${classList}" th:object="${class}" th:value="*{classNo}" th:text="*{className}">반이름</option>-->
-<!--            </select>-->
 
             <select id="selectClass" class="dropdown-class" th:name="className_hidden">
                 <option value="">반 선택</option>
@@ -117,6 +114,16 @@
                 </div>
             </div>
         </div>
+
+        <div class="ifResultNull">
+            <div class="ifResultNullInner">
+                <div class="icon">
+                    <img src="/images/common/!.jpg" alt=""/>
+                </div>
+                해당하는 교사가 없습니다.
+            </div>
+        </div>
+
     </div>
 
     <!--  승인 대기 중인 교사  -->
@@ -149,6 +156,16 @@
                 <a class="btn btn-ab button-approve">승인</a>
             </div>
         </div>
+
+        <div class="ifResultNull">
+            <div class="ifResultNullInner">
+                <div class="icon">
+                    <img src="/images/common/!.jpg" alt=""/>
+                </div>
+                해당하는 교사가 없습니다.
+            </div>
+        </div>
+
     </div>
 
 
@@ -178,8 +195,15 @@
                     <a class="btn button-cancel-mini">삭제</a>
                 </div>
             </div>
+
+            <div class="ifResultNull">
+                <div class="ifResultNullInner">
+                    <div class="icon">
+                        <img src="/images/common/!.jpg" alt=""/>
+                    </div>
+                    해당하는 교사가 없습니다.
+                </div>
+            </div>
         </div>
     </div>
-
-</div>
 </html>

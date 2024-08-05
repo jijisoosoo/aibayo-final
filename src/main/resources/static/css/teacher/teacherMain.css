@@ -385,6 +385,32 @@
   color: white;
 }
 
+.ifResultNull {
+
+  width: 100%;
+  height: 199.39px;
+  display: flex;
+  justify-content: center;
+  padding-top: 58px;
+
+}
+
+.ifResultNullInner {
+  display: flex;
+  width: fit-content;
+  height: fit-content;
+  font-size: 20px;
+  color: #a1a1a1;
+  gap: 10px;
+  align-items: center;
+}
+
+.ifResultNullInner .icon {
+  width: 23px;
+  height: 23px;
+}
+
+
 
 :root {
   --x-1: rgba(133, 199, 233, 1);

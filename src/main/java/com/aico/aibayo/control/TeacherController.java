@@ -103,9 +103,12 @@ public class TeacherController {
     }
 
 
-    @GetMapping("/teacherProfileAccept/{id}")
-    public String adminTeacherProfileAccept() {
-        return "/admin/teacher/teacherProfileAccept";
+    @PostMapping ("/teacherProfileAccept/{id}")
+    public String acceptedTeacherProfile(Model model, @PathVariable Long id) {
+
+
+
+        return "/admin/teacher/teacherProfileAccept/{id}";
     }
 
     @GetMapping("/admin/teacherProfileWait/{id}")

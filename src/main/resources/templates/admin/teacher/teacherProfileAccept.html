@@ -27,9 +27,9 @@
         <div class="blank"></div>
         <div class="div-profile">
             <div class="img-2">
-                <img src="/images/common/teacher.png" alt=""/>
+                <img th:src="${profilePicture}" alt=""/>
             </div>
-            <div class="id"><div class="text-wrapper-5">김가나</div></div>
+            <div class="id"><div class="text-wrapper-5" th:text="${name}">선생님명</div></div>
         </div>
         <a class="btn button-cancel" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             <div class="text-cancel">퇴사</div>
@@ -49,7 +49,7 @@
                         </button>
                     </div>
                     <div class="modalform" th:action="@{/admin/teacherMain}" th:method="post">
-                        <div>김가나 선생님의 퇴사를 승인하시겠습니까?</div>
+                        <div th:text="${name} + '선생님의 퇴사를 승인하시겠습니까?'"></div>
                         <div class="buttonarea">
                             <input type="reset" class="button-cancel" value="취소" data-bs-dismiss="modal">
                             <input type="submit" class="button-resign" value="퇴사" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
@@ -89,11 +89,11 @@
     <div class="info">
         <div class="div-1">
             <div class="div-wrapper-2"><div class="text-wrapper-7">휴대폰 번호</div></div>
-            <div class="inputarea"><div class="text-wrapper-8">01012345678</div></div>
+            <div class="inputarea"><div class="text-wrapper-8" th:text="${phone}">01012345678</div></div>
         </div>
         <div class="div-1">
             <div class="div-wrapper-2"><div class="text-wrapper-7">이메일</div></div>
-            <div class="inputarea"><div class="text-wrapper-8">teacher1@aibayo.co.kr</div></div>
+            <div class="inputarea"><div class="text-wrapper-8" th:text="${username}">teacher1@aibayo.co.kr</div></div>
         </div>
         <div class="div-1">
             <div class="select-class">
@@ -106,9 +106,9 @@
                             <div class="text-wrapper-10">개)</div>
                         </div>
                     </div>
-                <a class="btn btn-ab resign" data-bs-toggle="modal" data-bs-target="#staticBackdrop3">
-                    <div class="text-modify">소속 반 수정</div>
-                </a>
+                    <a class="btn btn-ab resign" data-bs-toggle="modal" data-bs-target="#staticBackdrop3">
+                        <div class="text-modify">소속 반 수정</div>
+                    </a>
                 </div>
 
                 <!-- Modal -->
@@ -195,7 +195,7 @@
         <div class="div-3">
             <div class="div-wrapper-2"><div class="text-wrapper-7">입사일</div></div>
             <div class="inputarea">
-                <div class="text-wrapper-8">2024.06.28</div>
+                <div class="text-wrapper-8" th:text="${acceptRegDate}">2024.06.28</div>
             </div>
         </div>
     </div>
