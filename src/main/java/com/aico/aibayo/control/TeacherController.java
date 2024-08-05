@@ -103,12 +103,19 @@ public class TeacherController {
     }
 
 
-    @PostMapping ("/teacherProfileAccept/{id}")
+    @GetMapping ("/teacherProfileAccept/{id}")
     public String acceptedTeacherProfile(Model model, @PathVariable Long id) {
 
+        teacherDto teacher = teacherService.getTeacherById(id);
+        model.addAttribute("teacher", teacher);
 
+        List<ClassDto> assignedClassList = classService.getClassByTeacherId(id);
+        model.addAttribute("assignedClassList", assignedClassList);
 
-        return "/admin/teacher/teacherProfileAccept/{id}";
+        List<ClassDto> addableClassList = classService.getAddableClassByTeacherId(id, assignedClassList);
+        model.addAttribute("addableClassList", addableClassList);
+
+        return "/admin/teacher/teacherProfileAccept";
     }
 
     @GetMapping("/admin/teacherProfileWait/{id}")

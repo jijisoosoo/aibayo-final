@@ -73,4 +73,51 @@ public class ClassRepositoryCustomImpl implements ClassRepositoryCustom{
                 )
                 .fetch();
     }
+
+    @Override
+    public List<ClassDto> findClassByTeacherId(Long id) {
+        List<ClassDto> classes = jpaQueryFactory
+                .select(Projections.constructor(ClassDto.class,
+                        clazz.classNo,
+                        clazz.className,
+                        clazz.classAge,
+                        clazz.kinderNo,
+                        clazz.classRegDate,
+                        clazz.classModifyDate,
+                        clazz.classDeleteDate,
+                        clazz.classDeleteFlag))
+                .from(clazz)
+                .join(classTeacher).on(clazz.classNo.eq(classTeacher.classNo))
+                .join(acceptLog).on(classTeacher.acceptNo.eq(acceptLog.acceptNo))
+                .where(acceptLog.acceptStatus.eq(AcceptStatusEnum.ACCEPT.getStatus()),
+                        classTeacher.classTeacherId.eq(id))
+                .fetch();
+
+        return classes;
+    }
+
+    @Override
+    public List<ClassDto> findAddableClassByTeacherId(Long id, List<ClassDto> assignedClasses) {
+//        List<Long> numlist = {1, 2, 3};
+
+        List<ClassDto> classes = jpaQueryFactory
+                .select(Projections.constructor(ClassDto.class,
+                        clazz.classNo,
+                        clazz.className,
+                        classTeacher.classTeacherId.count().as("assignedCnt")
+                        ))
+                .from(clazz)
+                .join(classTeacher).on(clazz.classNo.eq(classTeacher.classNo))
+                .join(acceptLog).on(classTeacher.acceptNo.eq(acceptLog.acceptNo))
+//                .where(clazz.classNo.notIn(assignedClasses))
+                .groupBy(clazz.classNo,
+                        clazz.className
+                        )
+                .having(classTeacher.classTeacherId.count().lt(3L))
+                .fetch();
+
+        return classes;
+    }
+
+
 }
