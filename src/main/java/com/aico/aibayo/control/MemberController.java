@@ -52,6 +52,13 @@ public class MemberController {
 
 
 
+    @GetMapping("/passwordExist")
+    public String passwordExist() {
+        
+
+
+        return null;
+    }
 
 
 }
