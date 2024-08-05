@@ -17,6 +17,22 @@ $(document).ready(function () {
        alertConfirmModify(modifyInfo);
     });
 
+    $('#modifyKidGender').on('click', function () {
+        function modifyInfo(result) {
+            console.log("원생성별 변경 함수");
+            let param = {
+                kidNo : $('#kidProfile').data('kid-no'),
+                kidGender : $('input[id^="kidGender"]:checked').val()
+            }
+
+            let url = "/kid/modifyOk";
+
+            commonAjax(url, 'PUT', param);
+        }
+
+        alertConfirmModify(modifyInfo);
+    });
+
    $('#modifyKidBirth').on('click', function () {
        function modifyInfo(result) {
            // console.log("원생생일 변경 함수")
@@ -236,8 +252,10 @@ function afterSuccess(response, method) {
     // console.log(`response: ${response}`);
 
     if (method === 'PUT') {
-        if (response.kidName != null || response.kidBirth != null) {
+        if (response.kidName != null || response.kidBirth != null ||
+            response.kidGender != null) {
             $('#kidName').val(response.kidName);
+            $('#kidGender' + response.kidGender).prop('checked', true);
             $('#kidBirth').val(moment(response.kidBirth).format('YYYY.MM.DD'));
         }
     }

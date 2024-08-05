@@ -63,6 +63,40 @@ public class KidServiceImpl implements KidService {
     }
 
     @Override
+    @Transactional
+    public KidDto insertKid(KidDto kidDto) {
+        // 원생 insert
+        KidEntity kidEntity = KidEntity.builder()
+                .kinderNo(kidDto.getKinderNo())
+                .kidName(kidDto.getKidName())
+                .kidBirth(kidDto.getKidBirth())
+                .kidGender(kidDto.getKidGender())
+                .admissionDate(LocalDateTime.now())
+                .dischargeFlag(BooleanEnum.FALSE.getBool())
+                .build();
+        KidEntity insertedKid = kidRepository.save(kidEntity);
+
+        // 반_원생 insert
+        for (Long classNo : kidDto.getClassNoList()) {
+            AcceptLogEntity acceptLogEntity = AcceptLogEntity.builder()
+                    .acceptType(AcceptTypeEnum.CLASS_KID.getType())
+                    .acceptStatus(AcceptStatusEnum.ACCEPT.getStatus())
+                    .acceptDate(LocalDateTime.now())
+                    .build();
+            AcceptLogEntity insertedAcceptLog = acceptLogRepository.save(acceptLogEntity);
+
+            ClassKidEntity classKidEntity = ClassKidEntity.builder()
+                    .classNo(classNo)
+                    .kidNo(insertedKid.getKidNo())
+                    .acceptNo(insertedAcceptLog.getAcceptNo())
+                    .build();
+            classKidRepository.save(classKidEntity);
+        }
+
+        return KidDto.toDto(insertedKid);
+    }
+
+    @Override
     public KidDto updateKid(KidDto kidDto) {
         KidEntity target = kidRepository.findById(kidDto.getKidNo()).orElse(null);
 
@@ -70,6 +104,7 @@ public class KidServiceImpl implements KidService {
 
         // 원생 기본정보 업데이트
         if (kidDto.getKidName() != null) { target.setKidName(kidDto.getKidName()); }
+        if (kidDto.getKidGender() != null) { target.setKidGender(kidDto.getKidGender()); }
         if (kidDto.getKidBirth() != null) { target.setKidBirth(kidDto.getKidBirth()); }
 
         target.setModifyDate(LocalDateTime.now());
