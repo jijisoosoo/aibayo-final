@@ -1,37 +1,86 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // 모달 요소 선택
-    var passwordModal = document.getElementById('passwordModal');
-    var cancelButton = passwordModal.querySelector('.btn-secondary');
-    var passwordForm = document.getElementById('passwordForm');
-    var currentPassword = document.getElementById('currentPassword');
-    var newPassword = document.getElementById('newPassword');
-    var confirmPassword = document.getElementById('confirmPassword');
+window.onload = function() {
+    function closeModal() {
+        let passwordModal = document.getElementById('passwordModal');
+        let cancelButton = passwordModal.querySelector('.btn-secondary');
+        cancelButton.addEventListener('click', function() {
+            let modalInstance = bootstrap.Modal.getInstance(passwordModal);
+            if (modalInstance) {
+                modalInstance.hide();
+            }
+        });
+    }
 
-    // '취소' 버튼 클릭 시 모달 닫기
-    cancelButton.addEventListener('click', function() {
-        $('#passwordModal').modal('hide');
-    });
+    function resetInputs(currentPassword, newPassword, confirmPassword) {
+        currentPassword.value = '';
+        newPassword.value = '';
+        confirmPassword.value = '';
+    }
 
-
-    // 비밀번호 검증 및 폼 제출 처리
-    passwordForm.addEventListener('submit', function(event) {
+    function validatePasswords(currentPassword, newPassword, confirmPassword) {
         if (currentPassword.value === newPassword.value) {
-            event.preventDefault();  // 폼 제출 방지
             alert('이전 비밀번호와 일치합니다.');
-            currentPassword.value = '';
-            newPassword.value = '';
-            confirmPassword.value = '';
-            return false; // 추가된 return 문
+            resetInputs(currentPassword, newPassword, confirmPassword);
+            return false;
         }
 
         if (newPassword.value !== confirmPassword.value) {
-            event.preventDefault();  // 폼 제출 방지
             alert('비밀번호가 일치하지 않습니다.');
-            newPassword.value = '';
-            confirmPassword.value = '';
-            return false; // 추가된 return 문
+            resetInputs(currentPassword, newPassword, confirmPassword);
+            return false;
         }
 
+        return true;
+    }
 
-    });
-});
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        console.log('Submit event triggered');
+
+        let passwordForm = event.target;
+        let currentPassword = document.getElementById('currentPassword');
+        let newPassword = document.getElementById('newPassword');
+        let confirmPassword = document.getElementById('confirmPassword');
+
+        if (validatePasswords(currentPassword, newPassword, confirmPassword)) {
+            $.ajax({
+                method: 'GET',
+                url: '/passwordExist',
+                data: {
+                    password: currentPassword.value
+                },
+                success: function(response) {
+                    if (response.exists) {
+                        passwordForm.submit();
+                        alert("비밀번호를 수정했습니다.")
+                    } else {
+                        alert('존재하지 않는 비밀번호입니다.');
+                        resetInputs(currentPassword, newPassword, confirmPassword);
+                    }
+                },
+                error: function() {
+                    alert('서버 요청 중 오류가 발생했습니다.');
+                    resetInputs(currentPassword, newPassword, confirmPassword);
+                }
+            });
+        }
+    }
+
+    function initPasswordForm() {
+        let passwordForm = document.getElementById('passwordForm');
+        // 기존 이벤트 리스너를 모두 제거
+        let newPassword = document.getElementById('newPassword');
+        let confirmPassword = document.getElementById('confirmPassword');
+
+        passwordForm.replaceWith(passwordForm.cloneNode(true));
+
+        passwordForm = document.getElementById('passwordForm');
+        passwordForm.addEventListener('submit', handleFormSubmit);
+    }
+
+    function initialize() {
+        closeModal();
+        initPasswordForm();
+    }
+
+    initialize();
+};
