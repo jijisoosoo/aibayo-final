@@ -71,3 +71,22 @@ h2 {
 .btn-ab {
     margin-top: 50px;
 }
+
+
+/* 모달창 트랜지션 효과 */
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    transform: translateY(-100px);
+    opacity: 0;
+}
+
+.modal.show .modal-dialog {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* 비밀번호 수정 버튼 색상 변경 */
+/*.btn-outline-ab {*/
+/*    color: #4b3c0c;*/
+/*    border-color: #ffc107;*/
+/*}*/
