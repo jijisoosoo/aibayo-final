@@ -33,7 +33,7 @@ public class TeacherRepositoryCustomImpl implements TeacherRepositoryCustom{
                         member.phone,
                         member.profilePicture,
                         kinderAcceptLog.acceptRegDate,
-                        kinderAcceptLog.acceptNo))
+                        kinderAcceptLog.acceptNo)).distinct()
                 .from(member)
                 .join(teacherKinder).on(member.id.eq(teacherKinder.teacherId))
                 .join(kinderAcceptLog).on(teacherKinder.acceptNo.eq(kinderAcceptLog.acceptNo))
@@ -56,9 +56,7 @@ public class TeacherRepositoryCustomImpl implements TeacherRepositoryCustom{
                         member.phone,
                         member.profilePicture,
                         kinderAcceptLog.acceptRegDate,
-                        teacherKinder.acceptNo,
-                        classTeacher.classNo,
-                        classTeacher.acceptNo))
+                        teacherKinder.acceptNo)).distinct()
                 .from(member)
                 .join(teacherKinder).on(member.id.eq(teacherKinder.teacherId))
                 .join(kinderAcceptLog).on(teacherKinder.acceptNo.eq(kinderAcceptLog.acceptNo))
@@ -71,6 +69,13 @@ public class TeacherRepositoryCustomImpl implements TeacherRepositoryCustom{
                 )
                 .fetch();
         return teachers;
+    }
+
+    @Override
+    public teacherDto findTeacherById(Long id) {
+        
+
+        return null;
     }
 
 

@@ -1,6 +1,7 @@
 $(document).ready(function() {
     initStatus();
     changeByStatus();
+    ifResultNull();
 
     // 반에 따라 list 보여주기
     $(document).on('change', '#selectClass', function () {
@@ -42,6 +43,8 @@ function changeByStatus(){
 
         // 선택된 값에 따라 해당 div 보이기
         $('#teacherStatus' + selectedValue + 'Div').show();
+
+        // ifResultNull();
     });
 }
 
@@ -56,7 +59,7 @@ function afterSuccess(response) {
     initStatus();
     changeByStatus();
 
-    // 선택된 옵션에 selected 속성 추가
+    // dropdown - 선택된 옵션에 selected 속성 추가
     $('#selectClass option').each(function() {
         if ($(this).val() === classNo) {
             $(this).prop('selected', true);
@@ -65,7 +68,28 @@ function afterSuccess(response) {
         }
     });
 
+    ifResultNull();
 
+}
 
+function ifResultNull(){
 
+    // 모든 상태 div 숨기기
+    $('.ifResultNull').hide();
+
+    // 선택된 값에 따라 해당 div 보이기
+
+    console.log($('#teacherStatus1Div .profile').find().prevObject.length);
+    console.log($('#teacherStatus0Div .profile').find().prevObject.length);
+    console.log($('#teacherStatus2Div .profile').find().prevObject.length);
+
+    if($('#teacherStatus1Div .profile').find().prevObject.length == 0){
+        $('#teacherStatus1Div .ifResultNull').show();
+    }
+    if($('#teacherStatus0Div .profile').find().prevObject.length == 0){
+        $('#teacherStatus0Div .ifResultNull').show();
+    }
+    if($('#teacherStatus2Div .profile').find().prevObject.length == 0){
+        $('#teacherStatus2Div .ifResultNull').show();
+    }
 }
