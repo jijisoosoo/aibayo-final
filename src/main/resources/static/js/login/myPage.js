@@ -44,7 +44,7 @@ window.onload = function() {
         if (validatePasswords(currentPassword, newPassword, confirmPassword)) {
             $.ajax({
                 method: 'GET',
-                url: '/passwordExist',
+                url: '/member/passwordExist',
                 data: {
                     password: currentPassword.value
                 },
