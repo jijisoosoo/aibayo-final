@@ -32,23 +32,6 @@ window.onload = function() {
         return true;
     }
 
-    function checkPasswordExistence(currentPassword, newPassword, confirmPassword, callback) {
-        $.ajax({
-            method: 'GET',
-            url: '/passwordExist',
-            data: {
-                password: currentPassword.value
-            },
-            success: function(response) {
-                callback(response.exists);
-            },
-            error: function() {
-                alert('서버 요청 중 오류가 발생했습니다.');
-                resetInputs(currentPassword, newPassword, confirmPassword);
-            }
-        });
-    }
-
     function handleFormSubmit(event) {
         event.preventDefault();
         console.log('Submit event triggered');
@@ -59,11 +42,23 @@ window.onload = function() {
         let confirmPassword = document.getElementById('confirmPassword');
 
         if (validatePasswords(currentPassword, newPassword, confirmPassword)) {
-            checkPasswordExistence(currentPassword, newPassword, confirmPassword, function(exists) {
-                if (exists) {
-                    passwordForm.submit();
-                } else {
-                    alert('존재하지 않는 비밀번호입니다.');
+            $.ajax({
+                method: 'GET',
+                url: '/passwordExist',
+                data: {
+                    password: currentPassword.value
+                },
+                success: function(response) {
+                    if (response.exists) {
+                        passwordForm.submit();
+                        alert("비밀번호를 수정했습니다.")
+                    } else {
+                        alert('존재하지 않는 비밀번호입니다.');
+                        resetInputs(currentPassword, newPassword, confirmPassword);
+                    }
+                },
+                error: function() {
+                    alert('서버 요청 중 오류가 발생했습니다.');
                     resetInputs(currentPassword, newPassword, confirmPassword);
                 }
             });
