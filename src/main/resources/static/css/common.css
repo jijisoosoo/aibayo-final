@@ -205,3 +205,14 @@ body {
     background-image: none !important;
     background-color: #0080ff !important;
 }
+
+/* 빈 값 확인 안내메시지 */
+.msg {
+    color: red;
+    display: none;
+}
+
+.msg_box {
+    display: flex;
+    gap: 10px;
+}

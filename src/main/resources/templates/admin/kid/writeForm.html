@@ -13,6 +13,7 @@
 <th:block layout:fragment="javascript">
     <th:block th:replace="~{common/datepicker :: js}"/>
     <script src="/js/modal.js"></script>
+    <script src="/js/kidPage/writeForm.js"></script>
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
@@ -28,7 +29,11 @@
             </a>
 
             <div class="btn btn-ab discharge_btn">
-                <div class="discharge_btn_text">등록</div>
+                <div class="discharge_btn_text"
+                     id="admissionKid"
+                     th:data-kinder-no="${loginInfo.kinderNo}">
+                    등록
+                </div>
             </div>
         </div>
 
@@ -49,79 +54,94 @@
                 </div>
 
                 <div class="kid_info_box kid_info_box_form">
-                    <div class="kid_item_box_form">
-                        <label class="kid_name_text" for="kidName">원생 이름</label>
-                        <input type="text" class="form-control kid_info_text_input" name="kidName" id="kidName">
+
+                    <div class="kid_info_box">
+                        <div class="kid_item_box_form">
+                            <label class="kid_name_text" for="kidName">원생 이름</label>
+                            <input type="text" class="form-control kid_info_text_input" name="kidName" id="kidName">
+                        </div>
+
+                        <div class="msg_box">
+                            <div class="msg">원생 이름을 입력해 주세요</div>
+                        </div>
                     </div>
 
-                    <div class="kid_item_box_form">
 
-                        <label class="kid_birth_text" for="kidBirth">원생 생일</label>
-                        <input type="text" class="form-control kid_info_text_input kid_birth_text_input datepicker"
-                               name="kidBirth" id="kidBirth" placeholder="연도. 월. 일" readonly>
+                    <div class="kid_info_box">
+
+                        <div class="msg_box">
+                            <div class="msg">원생 성별을 선택해 주세요</div>
+                        </div>
+
+
+                        <div class="btn-group" id="kidGenderRadioBox">
+                            <input type="radio" class="btn-check" name="kidGenderRd" id="kidGender1"
+                                   value="1" autocomplete="off">
+                            <label class="btn btn-outline-ab kid_radio kid_radio_text"
+                                   for="kidGender1">
+                                남아
+                            </label>
+
+                            <input type="radio" class="btn-check" name="kidGenderRd" id="kidGender2"
+                                   value="2" autocomplete="off">
+                            <label class="btn btn-outline-ab kid_radio kid_radio_text"
+                                   for="kidGender2">
+                                여아
+                            </label>
+                        </div>
 
                     </div>
+
+
+                    <div class="kid_info_box">
+
+                        <div class="kid_item_box_form">
+                            <label class="kid_birth_text" for="kidBirth">원생 생일</label>
+                            <input type="text" class="form-control kid_info_text_input kid_birth_text_input datepicker"
+                                   name="kidBirth" id="kidBirth" placeholder="연도. 월. 일" readonly>
+                        </div>
+
+                        <div class="msg_box">
+                            <div class="msg">원생 생일을 선택해 주세요</div>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
 
         </div>
 
-        <div class="parent_info_box">
-
-            <div class="classes_info_top_box">
-
-                <div class="parent_info_title_box">
-
-                <div class="info_title_svg">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
-                        <path d="M20.6246 5.62489C20.6246 2.51831 18.1063 0 14.9997 0C11.8931 0 9.37482 2.51831 9.37482 5.62489C9.37482 8.73147 11.8931 11.2498 14.9997 11.2498C18.1063 11.2498 20.6246 8.73147 20.6246 5.62489ZM13.6866 14.1267C10.2103 11.9986 4.5796 11.4138 1.74606 11.2527C0.79393 11.1988 0 11.9242 0 12.84V25.8944C0 26.7341 0.679088 27.4342 1.55212 27.4793C4.11027 27.6135 9.28576 28.1051 12.8628 29.9068C13.4118 30.1834 14.0628 29.8066 14.0628 29.2113V14.7981C14.0622 14.5245 13.9269 14.2737 13.6866 14.1267ZM28.2534 11.2527C25.4204 11.4133 19.7891 11.9986 16.3134 14.1267C16.0731 14.2737 15.9378 14.5345 15.9378 14.8081V29.2096C15.9378 29.8066 16.5905 30.184 17.1413 29.9068C20.7178 28.1069 25.8903 27.6153 28.4479 27.4811C29.3209 27.4354 30 26.7352 30 25.8956V12.84C29.9994 11.9242 29.2055 11.1988 28.2534 11.2527Z" fill="white"/>
-                    </svg>
-                </div>
-
-                <div class="info_text_box">
-                    <div class="info_text">보호자 정보</div>
-                </div>
-
-            </div>
-
-
-                <div class="add_class_btn btn btn-ab">
-                    <div class="add_class_btn_text" data-bs-toggle="modal" data-bs-target="#addParentModal">+ 학부모 초대하기</div>
-                </div>
-
-            </div>
-
-            <div class="info_content_box">
-
-                <div class="info_row">
-
-                </div>
-
-            </div>
-
-        </div>
 
         <div class="classes_info_box">
 
             <div class="classes_info_top_box">
 
-                <div class="classes_info_title_box">
+                <div class="msg_box">
 
-                    <div class="info_title_svg">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
-                            <path d="M20.6246 5.62489C20.6246 2.51831 18.1063 0 14.9997 0C11.8931 0 9.37482 2.51831 9.37482 5.62489C9.37482 8.73147 11.8931 11.2498 14.9997 11.2498C18.1063 11.2498 20.6246 8.73147 20.6246 5.62489ZM13.6866 14.1267C10.2103 11.9986 4.5796 11.4138 1.74606 11.2527C0.79393 11.1988 0 11.9242 0 12.84V25.8944C0 26.7341 0.679088 27.4342 1.55212 27.4793C4.11027 27.6135 9.28576 28.1051 12.8628 29.9068C13.4118 30.1834 14.0628 29.8066 14.0628 29.2113V14.7981C14.0622 14.5245 13.9269 14.2737 13.6866 14.1267ZM28.2534 11.2527C25.4204 11.4133 19.7891 11.9986 16.3134 14.1267C16.0731 14.2737 15.9378 14.5345 15.9378 14.8081V29.2096C15.9378 29.8066 16.5905 30.184 17.1413 29.9068C20.7178 28.1069 25.8903 27.6153 28.4479 27.4811C29.3209 27.4354 30 26.7352 30 25.8956V12.84C29.9994 11.9242 29.2055 11.1988 28.2534 11.2527Z" fill="white"/>
-                        </svg>
+                    <div class="classes_info_title_box">
+
+                        <div class="info_title_svg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                                <path d="M20.6246 5.62489C20.6246 2.51831 18.1063 0 14.9997 0C11.8931 0 9.37482 2.51831 9.37482 5.62489C9.37482 8.73147 11.8931 11.2498 14.9997 11.2498C18.1063 11.2498 20.6246 8.73147 20.6246 5.62489ZM13.6866 14.1267C10.2103 11.9986 4.5796 11.4138 1.74606 11.2527C0.79393 11.1988 0 11.9242 0 12.84V25.8944C0 26.7341 0.679088 27.4342 1.55212 27.4793C4.11027 27.6135 9.28576 28.1051 12.8628 29.9068C13.4118 30.1834 14.0628 29.8066 14.0628 29.2113V14.7981C14.0622 14.5245 13.9269 14.2737 13.6866 14.1267ZM28.2534 11.2527C25.4204 11.4133 19.7891 11.9986 16.3134 14.1267C16.0731 14.2737 15.9378 14.5345 15.9378 14.8081V29.2096C15.9378 29.8066 16.5905 30.184 17.1413 29.9068C20.7178 28.1069 25.8903 27.6153 28.4479 27.4811C29.3209 27.4354 30 26.7352 30 25.8956V12.84C29.9994 11.9242 29.2055 11.1988 28.2534 11.2527Z" fill="white"/>
+                            </svg>
+                        </div>
+
+                        <div class="info_text_box">
+                            <div class="info_text">소속 반 정보</div>
+                        </div>
+
                     </div>
 
-                    <div class="info_text_box">
-                        <div class="info_text">소속 반 정보</div>
+                    <div class="msg py-3">
+                        최소 1개 이상의 반에 추가해 주세요
                     </div>
 
                 </div>
 
                 <div class="add_class_btn btn btn-ab">
-                    <div class="add_class_btn_text" data-bs-toggle="modal" data-bs-target="#addClassModal">+ 반 추가하기</div>
+                    <div class="add_class_btn_text" id="addClassBtn"
+                         data-bs-toggle="modal" data-bs-target="#addClassModal">+ 반 추가하기</div>
                 </div>
 
             </div>
@@ -129,7 +149,7 @@
 
             <div class="info_content_box">
 
-                <div class="info_row">
+                <div class="info_row" id="selectedClassDiv">
 
 
                 </div>
@@ -208,7 +228,9 @@
 
                 <div class="modal-body modal_body">
                     <div class="modal_body_title_box">
-                        <div class="modal_body_text">선택 가능 반 총 10개</div>
+                        <div class="modal_body_text" th:text="|선택 가능 반 총 ${allClass.size()}개|">
+                            선택 가능 반 총 10개
+                        </div>
                     </div>
 
 
@@ -216,11 +238,17 @@
 
                         <div class="modal_body_classes_row">
 
-                            <div class="modal_class_item text_div">
+                            <div class="modal_class_item text_div"
+                                 th:each="class : ${allClass}" th:object="${class}"
+                                 th:data-class-info="${class}">
 
-                                <input type="checkbox" name="classCheckbox" id="classCheck2" class="btn-check" autocomplete="off">
+                                <input type="checkbox" name="classCheckbox"
+                                       th:id="|classCheck*{classNo}|" class="btn-check"
+                                       th:value="*{classNo}"
+                                       autocomplete="off">
 
-                                <label for="classCheck2" class="btn btn-outline-ab checkbox_label">
+                                <label th:for="|classCheck*{classNo}|"
+                                       class="btn btn-outline-ab checkbox_label">
                                     <div class="modal_class_svg_box">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                             <path d="M13.7497 3.74993C13.7497 1.67887 12.0709 0 9.9998 0C7.92875 0 6.24988 1.67887 6.24988 3.74993C6.24988 5.82098 7.92875 7.49985 9.9998 7.49985C12.0709 7.49985 13.7497 5.82098 13.7497 3.74993ZM9.12443 9.41779C6.8069 7.99906 3.05307 7.60923 1.16404 7.50181C0.529287 7.46587 0 7.94945 0 8.55999V17.2629C0 17.8227 0.452726 18.2895 1.03475 18.3196C2.74018 18.409 6.1905 18.7367 8.57522 19.9379C8.94123 20.1223 9.37521 19.8711 9.37521 19.4742V9.86543C9.37482 9.68301 9.28458 9.51583 9.12443 9.41779ZM18.8356 7.50181C16.9469 7.60884 13.1927 7.99906 10.8756 9.41779C10.7154 9.51583 10.6252 9.68966 10.6252 9.87207V19.4731C10.6252 19.8711 11.0603 20.1227 11.4275 19.9379C13.8118 18.7379 17.2602 18.4102 18.9653 18.3207C19.5473 18.2903 20 17.8235 20 17.2637V8.55999C19.9996 7.94945 19.4703 7.46587 18.8356 7.50181Z" fill="white"/>
@@ -229,185 +257,14 @@
 
                                     <div class="modal_class_text_box">
                                         <div class="modal_body_text text-compact"
-                                             title="튤립반">튤립반</div>
+                                             th:title="*{className}" th:text="*{className}">
+                                            반이름
+                                        </div>
                                     </div>
                                 </label>
 
                             </div>
 
-
-                            <div class="modal_class_item text_div">
-
-                                <input type="checkbox" name="classCheckbox" id="classCheck3" class="btn-check" autocomplete="off">
-
-                                <label for="classCheck3" class="btn btn-outline-ab checkbox_label">
-                                    <div class="modal_class_svg_box">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                            <path d="M13.7497 3.74993C13.7497 1.67887 12.0709 0 9.9998 0C7.92875 0 6.24988 1.67887 6.24988 3.74993C6.24988 5.82098 7.92875 7.49985 9.9998 7.49985C12.0709 7.49985 13.7497 5.82098 13.7497 3.74993ZM9.12443 9.41779C6.8069 7.99906 3.05307 7.60923 1.16404 7.50181C0.529287 7.46587 0 7.94945 0 8.55999V17.2629C0 17.8227 0.452726 18.2895 1.03475 18.3196C2.74018 18.409 6.1905 18.7367 8.57522 19.9379C8.94123 20.1223 9.37521 19.8711 9.37521 19.4742V9.86543C9.37482 9.68301 9.28458 9.51583 9.12443 9.41779ZM18.8356 7.50181C16.9469 7.60884 13.1927 7.99906 10.8756 9.41779C10.7154 9.51583 10.6252 9.68966 10.6252 9.87207V19.4731C10.6252 19.8711 11.0603 20.1227 11.4275 19.9379C13.8118 18.7379 17.2602 18.4102 18.9653 18.3207C19.5473 18.2903 20 17.8235 20 17.2637V8.55999C19.9996 7.94945 19.4703 7.46587 18.8356 7.50181Z" fill="white"/>
-                                        </svg>
-                                    </div>
-
-                                    <div class="modal_class_text_box">
-                                        <div class="modal_body_text text-compact"
-                                             title="프리지아반">프리지아반</div>
-                                    </div>
-                                </label>
-
-                            </div>
-
-
-                            <div class="modal_class_item text_div">
-
-                                <input type="checkbox" name="classCheckbox" id="classCheck4" class="btn-check" autocomplete="off">
-
-                                <label for="classCheck4" class="btn btn-outline-ab checkbox_label">
-                                    <div class="modal_class_svg_box">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                            <path d="M13.7497 3.74993C13.7497 1.67887 12.0709 0 9.9998 0C7.92875 0 6.24988 1.67887 6.24988 3.74993C6.24988 5.82098 7.92875 7.49985 9.9998 7.49985C12.0709 7.49985 13.7497 5.82098 13.7497 3.74993ZM9.12443 9.41779C6.8069 7.99906 3.05307 7.60923 1.16404 7.50181C0.529287 7.46587 0 7.94945 0 8.55999V17.2629C0 17.8227 0.452726 18.2895 1.03475 18.3196C2.74018 18.409 6.1905 18.7367 8.57522 19.9379C8.94123 20.1223 9.37521 19.8711 9.37521 19.4742V9.86543C9.37482 9.68301 9.28458 9.51583 9.12443 9.41779ZM18.8356 7.50181C16.9469 7.60884 13.1927 7.99906 10.8756 9.41779C10.7154 9.51583 10.6252 9.68966 10.6252 9.87207V19.4731C10.6252 19.8711 11.0603 20.1227 11.4275 19.9379C13.8118 18.7379 17.2602 18.4102 18.9653 18.3207C19.5473 18.2903 20 17.8235 20 17.2637V8.55999C19.9996 7.94945 19.4703 7.46587 18.8356 7.50181Z" fill="white"/>
-                                        </svg>
-                                    </div>
-
-                                    <div class="modal_class_text_box">
-                                        <div class="modal_body_text text-compact"
-                                             title="국화반">국화반</div>
-                                    </div>
-                                </label>
-
-                            </div>
-
-
-                            <div class="modal_class_item text_div">
-
-                                <input type="checkbox" name="classCheckbox" id="classCheck5" class="btn-check" autocomplete="off">
-
-                                <label for="classCheck5" class="btn btn-outline-ab checkbox_label">
-                                    <div class="modal_class_svg_box">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                            <path d="M13.7497 3.74993C13.7497 1.67887 12.0709 0 9.9998 0C7.92875 0 6.24988 1.67887 6.24988 3.74993C6.24988 5.82098 7.92875 7.49985 9.9998 7.49985C12.0709 7.49985 13.7497 5.82098 13.7497 3.74993ZM9.12443 9.41779C6.8069 7.99906 3.05307 7.60923 1.16404 7.50181C0.529287 7.46587 0 7.94945 0 8.55999V17.2629C0 17.8227 0.452726 18.2895 1.03475 18.3196C2.74018 18.409 6.1905 18.7367 8.57522 19.9379C8.94123 20.1223 9.37521 19.8711 9.37521 19.4742V9.86543C9.37482 9.68301 9.28458 9.51583 9.12443 9.41779ZM18.8356 7.50181C16.9469 7.60884 13.1927 7.99906 10.8756 9.41779C10.7154 9.51583 10.6252 9.68966 10.6252 9.87207V19.4731C10.6252 19.8711 11.0603 20.1227 11.4275 19.9379C13.8118 18.7379 17.2602 18.4102 18.9653 18.3207C19.5473 18.2903 20 17.8235 20 17.2637V8.55999C19.9996 7.94945 19.4703 7.46587 18.8356 7.50181Z" fill="white"/>
-                                        </svg>
-                                    </div>
-
-                                    <div class="modal_class_text_box">
-                                        <div class="modal_body_text text-compact"
-                                             title="장미반">장미반</div>
-                                    </div>
-                                </label>
-
-                            </div>
-
-                            <div class="modal_class_item text_div">
-
-                                <input type="checkbox" name="classCheckbox" id="classCheck6" class="btn-check" autocomplete="off" checked>
-
-                                <label for="classCheck6" class="btn btn-outline-ab checkbox_label">
-                                    <div class="modal_class_svg_box">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                            <path d="M13.7497 3.74993C13.7497 1.67887 12.0709 0 9.9998 0C7.92875 0 6.24988 1.67887 6.24988 3.74993C6.24988 5.82098 7.92875 7.49985 9.9998 7.49985C12.0709 7.49985 13.7497 5.82098 13.7497 3.74993ZM9.12443 9.41779C6.8069 7.99906 3.05307 7.60923 1.16404 7.50181C0.529287 7.46587 0 7.94945 0 8.55999V17.2629C0 17.8227 0.452726 18.2895 1.03475 18.3196C2.74018 18.409 6.1905 18.7367 8.57522 19.9379C8.94123 20.1223 9.37521 19.8711 9.37521 19.4742V9.86543C9.37482 9.68301 9.28458 9.51583 9.12443 9.41779ZM18.8356 7.50181C16.9469 7.60884 13.1927 7.99906 10.8756 9.41779C10.7154 9.51583 10.6252 9.68966 10.6252 9.87207V19.4731C10.6252 19.8711 11.0603 20.1227 11.4275 19.9379C13.8118 18.7379 17.2602 18.4102 18.9653 18.3207C19.5473 18.2903 20 17.8235 20 17.2637V8.55999C19.9996 7.94945 19.4703 7.46587 18.8356 7.50181Z" fill="white"/>
-                                        </svg>
-                                    </div>
-
-                                    <div class="modal_class_text_box">
-                                        <div class="modal_body_text text-compact"
-                                             title="도레미반넘침확인용">도레미반넘침확인용</div>
-                                    </div>
-                                </label>
-
-                            </div>
-
-                            <div class="modal_class_item text_div">
-
-                                <input type="checkbox" name="classCheckbox" id="classCheck7" class="btn-check" autocomplete="off" checked>
-
-                                <label for="classCheck7" class="btn btn-outline-ab checkbox_label">
-                                    <div class="modal_class_svg_box">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                            <path d="M13.7497 3.74993C13.7497 1.67887 12.0709 0 9.9998 0C7.92875 0 6.24988 1.67887 6.24988 3.74993C6.24988 5.82098 7.92875 7.49985 9.9998 7.49985C12.0709 7.49985 13.7497 5.82098 13.7497 3.74993ZM9.12443 9.41779C6.8069 7.99906 3.05307 7.60923 1.16404 7.50181C0.529287 7.46587 0 7.94945 0 8.55999V17.2629C0 17.8227 0.452726 18.2895 1.03475 18.3196C2.74018 18.409 6.1905 18.7367 8.57522 19.9379C8.94123 20.1223 9.37521 19.8711 9.37521 19.4742V9.86543C9.37482 9.68301 9.28458 9.51583 9.12443 9.41779ZM18.8356 7.50181C16.9469 7.60884 13.1927 7.99906 10.8756 9.41779C10.7154 9.51583 10.6252 9.68966 10.6252 9.87207V19.4731C10.6252 19.8711 11.0603 20.1227 11.4275 19.9379C13.8118 18.7379 17.2602 18.4102 18.9653 18.3207C19.5473 18.2903 20 17.8235 20 17.2637V8.55999C19.9996 7.94945 19.4703 7.46587 18.8356 7.50181Z" fill="white"/>
-                                        </svg>
-                                    </div>
-
-                                    <div class="modal_class_text_box">
-                                        <div class="modal_body_text text-compact"
-                                             title="토마토반">토마토반</div>
-                                    </div>
-                                </label>
-
-                            </div>
-
-                            <div class="modal_class_item text_div">
-
-                                <input type="checkbox" name="classCheckbox" id="classCheck8" class="btn-check" autocomplete="off" checked>
-
-                                <label for="classCheck8" class="btn btn-outline-ab checkbox_label">
-                                    <div class="modal_class_svg_box">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                            <path d="M13.7497 3.74993C13.7497 1.67887 12.0709 0 9.9998 0C7.92875 0 6.24988 1.67887 6.24988 3.74993C6.24988 5.82098 7.92875 7.49985 9.9998 7.49985C12.0709 7.49985 13.7497 5.82098 13.7497 3.74993ZM9.12443 9.41779C6.8069 7.99906 3.05307 7.60923 1.16404 7.50181C0.529287 7.46587 0 7.94945 0 8.55999V17.2629C0 17.8227 0.452726 18.2895 1.03475 18.3196C2.74018 18.409 6.1905 18.7367 8.57522 19.9379C8.94123 20.1223 9.37521 19.8711 9.37521 19.4742V9.86543C9.37482 9.68301 9.28458 9.51583 9.12443 9.41779ZM18.8356 7.50181C16.9469 7.60884 13.1927 7.99906 10.8756 9.41779C10.7154 9.51583 10.6252 9.68966 10.6252 9.87207V19.4731C10.6252 19.8711 11.0603 20.1227 11.4275 19.9379C13.8118 18.7379 17.2602 18.4102 18.9653 18.3207C19.5473 18.2903 20 17.8235 20 17.2637V8.55999C19.9996 7.94945 19.4703 7.46587 18.8356 7.50181Z" fill="white"/>
-                                        </svg>
-                                    </div>
-
-                                    <div class="modal_class_text_box">
-                                        <div class="modal_body_text text-compact"
-                                             title="당근반">당근반</div>
-                                    </div>
-                                </label>
-
-                            </div>
-
-                            <div class="modal_class_item text_div">
-
-                                <input type="checkbox" name="classCheckbox" id="classCheck9" class="btn-check" autocomplete="off" checked>
-
-                                <label for="classCheck9" class="btn btn-outline-ab checkbox_label">
-                                    <div class="modal_class_svg_box">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                            <path d="M13.7497 3.74993C13.7497 1.67887 12.0709 0 9.9998 0C7.92875 0 6.24988 1.67887 6.24988 3.74993C6.24988 5.82098 7.92875 7.49985 9.9998 7.49985C12.0709 7.49985 13.7497 5.82098 13.7497 3.74993ZM9.12443 9.41779C6.8069 7.99906 3.05307 7.60923 1.16404 7.50181C0.529287 7.46587 0 7.94945 0 8.55999V17.2629C0 17.8227 0.452726 18.2895 1.03475 18.3196C2.74018 18.409 6.1905 18.7367 8.57522 19.9379C8.94123 20.1223 9.37521 19.8711 9.37521 19.4742V9.86543C9.37482 9.68301 9.28458 9.51583 9.12443 9.41779ZM18.8356 7.50181C16.9469 7.60884 13.1927 7.99906 10.8756 9.41779C10.7154 9.51583 10.6252 9.68966 10.6252 9.87207V19.4731C10.6252 19.8711 11.0603 20.1227 11.4275 19.9379C13.8118 18.7379 17.2602 18.4102 18.9653 18.3207C19.5473 18.2903 20 17.8235 20 17.2637V8.55999C19.9996 7.94945 19.4703 7.46587 18.8356 7.50181Z" fill="white"/>
-                                        </svg>
-                                    </div>
-
-                                    <div class="modal_class_text_box">
-                                        <div class="modal_body_text text-compact"
-                                             title="피망반">피망반</div>
-                                    </div>
-                                </label>
-
-                            </div>
-
-                            <div class="modal_class_item text_div">
-
-                                <input type="checkbox" name="classCheckbox" id="classCheck10" class="btn-check" autocomplete="off">
-
-                                <label for="classCheck10" class="btn btn-outline-ab checkbox_label">
-                                    <div class="modal_class_svg_box">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                            <path d="M13.7497 3.74993C13.7497 1.67887 12.0709 0 9.9998 0C7.92875 0 6.24988 1.67887 6.24988 3.74993C6.24988 5.82098 7.92875 7.49985 9.9998 7.49985C12.0709 7.49985 13.7497 5.82098 13.7497 3.74993ZM9.12443 9.41779C6.8069 7.99906 3.05307 7.60923 1.16404 7.50181C0.529287 7.46587 0 7.94945 0 8.55999V17.2629C0 17.8227 0.452726 18.2895 1.03475 18.3196C2.74018 18.409 6.1905 18.7367 8.57522 19.9379C8.94123 20.1223 9.37521 19.8711 9.37521 19.4742V9.86543C9.37482 9.68301 9.28458 9.51583 9.12443 9.41779ZM18.8356 7.50181C16.9469 7.60884 13.1927 7.99906 10.8756 9.41779C10.7154 9.51583 10.6252 9.68966 10.6252 9.87207V19.4731C10.6252 19.8711 11.0603 20.1227 11.4275 19.9379C13.8118 18.7379 17.2602 18.4102 18.9653 18.3207C19.5473 18.2903 20 17.8235 20 17.2637V8.55999C19.9996 7.94945 19.4703 7.46587 18.8356 7.50181Z" fill="white"/>
-                                        </svg>
-                                    </div>
-
-                                    <div class="modal_class_text_box">
-                                        <div class="modal_body_text text-compact"
-                                             title="딸기반">딸기반</div>
-                                    </div>
-                                </label>
-
-                            </div>
-
-                            <div class="modal_class_item text_div">
-
-                                <input type="checkbox" name="classCheckbox" id="classCheck11" class="btn-check" autocomplete="off" checked>
-
-                                <label for="classCheck11" class="btn btn-outline-ab checkbox_label">
-                                    <div class="modal_class_svg_box">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                            <path d="M13.7497 3.74993C13.7497 1.67887 12.0709 0 9.9998 0C7.92875 0 6.24988 1.67887 6.24988 3.74993C6.24988 5.82098 7.92875 7.49985 9.9998 7.49985C12.0709 7.49985 13.7497 5.82098 13.7497 3.74993ZM9.12443 9.41779C6.8069 7.99906 3.05307 7.60923 1.16404 7.50181C0.529287 7.46587 0 7.94945 0 8.55999V17.2629C0 17.8227 0.452726 18.2895 1.03475 18.3196C2.74018 18.409 6.1905 18.7367 8.57522 19.9379C8.94123 20.1223 9.37521 19.8711 9.37521 19.4742V9.86543C9.37482 9.68301 9.28458 9.51583 9.12443 9.41779ZM18.8356 7.50181C16.9469 7.60884 13.1927 7.99906 10.8756 9.41779C10.7154 9.51583 10.6252 9.68966 10.6252 9.87207V19.4731C10.6252 19.8711 11.0603 20.1227 11.4275 19.9379C13.8118 18.7379 17.2602 18.4102 18.9653 18.3207C19.5473 18.2903 20 17.8235 20 17.2637V8.55999C19.9996 7.94945 19.4703 7.46587 18.8356 7.50181Z" fill="white"/>
-                                        </svg>
-                                    </div>
-
-                                    <div class="modal_class_text_box">
-                                        <div class="modal_body_text text-compact"
-                                             title="브로콜리반">브로콜리반</div>
-                                    </div>
-                                </label>
-
-                            </div>
 
 
                         </div>
@@ -419,6 +276,7 @@
 
                 <div class="modal-footer">
                     <input type="button"
+                           id="modalAddClassWrite"
                            class="btn btn-ab modal_add_btn_box modal_add_btn_text" value="추가">
                 </div>
 

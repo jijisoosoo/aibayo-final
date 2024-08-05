@@ -125,7 +125,16 @@ public class KidController {
     }
 
     @GetMapping("/write")
-    public String writeForm() {
+    public String writeForm(Model model) {
+        MemberDto loginInfo = (MemberDto) model.getAttribute("loginInfo");
+        if (loginInfo == null) {
+            throw new IllegalArgumentException("유효하지 않은 접근입니다.");
+        }
+
+        List<ClassDto> classAllDtos = classService.getByKinderNo(loginInfo.getKinderNo());
+        model.addAttribute("allClass", classAllDtos);
+
+
         return "/admin/kid/writeForm";
     }
 
