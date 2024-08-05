@@ -1,5 +1,6 @@
 package com.aico.aibayo.service.teacher;
 
+import com.aico.aibayo.dto.ClassDto;
 import com.aico.aibayo.dto.teacher.TeacherSearchCondition;
 import com.aico.aibayo.dto.teacher.teacherDto;
 import com.aico.aibayo.repository.teacher.TeacherRepository;

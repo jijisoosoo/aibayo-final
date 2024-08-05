@@ -101,7 +101,7 @@
         <div class="carousel" >
 
             <div class="profile" th:each="teacher:${acceptedTeacherList}" th:object="${teacher}">
-                <a class="img-2" th:href="@{|/teacherAccept/*{id}|}">
+                <a class="img-2" th:href="@{|/teacher/teacherProfileAccept/*{id}|}">
                     <th:block th:if="${teacher.profilePicture != null}">
                         <img th:src="*{profilePicture}" alt="">
                     </th:block>

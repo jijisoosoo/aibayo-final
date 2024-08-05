@@ -1,5 +1,6 @@
 package com.aico.aibayo.repository.teacher;
 
+import com.aico.aibayo.dto.ClassDto;
 import com.aico.aibayo.dto.teacher.TeacherSearchCondition;
 import com.aico.aibayo.dto.teacher.teacherDto;
 import com.aico.aibayo.entity.*;
@@ -73,9 +74,24 @@ public class TeacherRepositoryCustomImpl implements TeacherRepositoryCustom{
 
     @Override
     public teacherDto findTeacherById(Long id) {
-        
+        teacherDto teacher = jpaQueryFactory
+                .select(Projections.constructor(teacherDto.class,
+                        member.id,
+                        member.username,
+                        member.name,
+                        member.phone,
+                        member.profilePicture,
+                        kinderAcceptLog.acceptRegDate,
+                        teacherKinder.acceptNo
+                        ))
+                .from(member)
+                .join(teacherKinder).on(member.id.eq(teacherKinder.teacherId))
+                .join(kinderAcceptLog).on(teacherKinder.acceptNo.eq(kinderAcceptLog.acceptNo))
+                .where(kinderAcceptLog.acceptStatus.eq(1),
+                        member.id.eq(id)
+                ).fetchOne();
 
-        return null;
+        return teacher;
     }
 
 
