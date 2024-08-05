@@ -1,5 +1,6 @@
 package com.aico.aibayo.service.teacher;
 
+import com.aico.aibayo.dto.ClassDto;
 import com.aico.aibayo.dto.teacher.TeacherSearchCondition;
 import com.aico.aibayo.dto.teacher.teacherDto;
 import com.querydsl.core.Tuple;
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Service
 public interface teacherService {
-    public List<teacherDto> getAllByKinderNo(TeacherSearchCondition condition);
-    public List<teacherDto> getAcceptedTeacherByKinderNoAndClassNo(TeacherSearchCondition condition);
-    public teacherDto getTeacherById(Long id);
+    List<teacherDto> getAllByKinderNo(TeacherSearchCondition condition);
+    List<teacherDto> getAcceptedTeacherByKinderNoAndClassNo(TeacherSearchCondition condition);
+    teacherDto getTeacherById(Long id);
 }

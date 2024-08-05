@@ -4,7 +4,7 @@ import com.aico.aibayo.common.BooleanEnum;
 import com.aico.aibayo.dto.ClassDto;
 import com.aico.aibayo.entity.ClassEntity;
 import com.aico.aibayo.repository.classManage.ClassRepository;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -33,5 +33,15 @@ public class ClassServiceImpl implements ClassService{
     @Override
     public List<ClassDto> getAllByKidNo(Long kidNo) {
         return classRepository.findAllByKidNo(kidNo);
+    }
+
+    @Override
+    public List<ClassDto> getClassByTeacherId(Long id) {
+        return classRepository.findClassByTeacherId(id);
+    }
+
+    @Override
+    public List<ClassDto> getAddableClassByTeacherId(Long id, List<ClassDto> assignedClasses) {
+        return classRepository.findAddableClassByTeacherId(id, assignedClasses);
     }
 }
