@@ -105,6 +105,7 @@ public class TeacherController {
 
     @GetMapping ("/teacherProfileAccept/{id}")
     public String acceptedTeacherProfile(Model model, @PathVariable Long id) {
+        MemberDto loginInfo = (MemberDto)model.getAttribute("loginInfo");
 
         teacherDto teacher = teacherService.getTeacherById(id);
         model.addAttribute("teacher", teacher);
@@ -112,7 +113,7 @@ public class TeacherController {
         List<ClassDto> assignedClassList = classService.getClassByTeacherId(id);
         model.addAttribute("assignedClassList", assignedClassList);
 
-        List<ClassDto> addableClassList = classService.getAddableClassByTeacherId(id, assignedClassList);
+        List<ClassDto> addableClassList = classService.getAddableClassByTeacherId(id, loginInfo.getKinderNo(), assignedClassList);
         model.addAttribute("addableClassList", addableClassList);
 
         return "/admin/teacher/teacherProfileAccept";

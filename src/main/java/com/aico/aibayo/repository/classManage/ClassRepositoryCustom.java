@@ -9,5 +9,5 @@ public interface ClassRepositoryCustom {
     List<ClassDto> findClassByTeacherId(Long id);
 //    List<ClassDto> findAddableClassByTeacherId(Long id);
 
-    List<ClassDto> findAddableClassByTeacherId(Long id, List<ClassDto> assignedClasses);
+    List<ClassDto> findAddableClassByTeacherId(Long id, Long kinderNo, List<ClassDto> assignedClasses);
 }

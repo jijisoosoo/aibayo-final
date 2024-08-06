@@ -9,6 +9,7 @@ import com.aico.aibayo.entity.QClassKidEntity;
 import com.aico.aibayo.entity.QClassTeacherEntity;
 import com.aico.aibayo.entity.QMemberEntity;
 import com.querydsl.core.types.Projections;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -97,8 +98,7 @@ public class ClassRepositoryCustomImpl implements ClassRepositoryCustom{
     }
 
     @Override
-    public List<ClassDto> findAddableClassByTeacherId(Long id, List<ClassDto> assignedClasses) {
-//        List<Long> numlist = {1, 2, 3};
+    public List<ClassDto> findAddableClassByTeacherId(Long id, Long kinderNo, List<ClassDto> assignedClasses) {
 
         List<ClassDto> classes = jpaQueryFactory
                 .select(Projections.constructor(ClassDto.class,
@@ -109,7 +109,14 @@ public class ClassRepositoryCustomImpl implements ClassRepositoryCustom{
                 .from(clazz)
                 .join(classTeacher).on(clazz.classNo.eq(classTeacher.classNo))
                 .join(acceptLog).on(classTeacher.acceptNo.eq(acceptLog.acceptNo))
-//                .where(clazz.classNo.notIn(assignedClasses))
+                .where(clazz.classNo.notIn(
+                        JPAExpressions.select(clazz.classNo)
+                                .from(clazz)
+                                .join(classTeacher).on(clazz.classNo.eq(classTeacher.classNo))
+                                .join(acceptLog).on(classTeacher.acceptNo.eq(acceptLog.acceptNo))
+                                .where(acceptLog.acceptStatus.eq(AcceptStatusEnum.ACCEPT.getStatus()),
+                                        classTeacher.classTeacherId.eq(id))),
+                        clazz.kinderNo.eq(kinderNo))
                 .groupBy(clazz.classNo,
                         clazz.className
                         )
