@@ -11,4 +11,5 @@ import java.util.List;
 public interface teacherService {
     public List<teacherDto> getAllByKinderNo(TeacherSearchCondition condition);
     public List<teacherDto> getAcceptedTeacherByKinderNoAndClassNo(TeacherSearchCondition condition);
+    public teacherDto getTeacherById(Long id);
 }

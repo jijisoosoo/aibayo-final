@@ -5,7 +5,9 @@ import com.aico.aibayo.service.inviteCode.InviteCodeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,5 +28,24 @@ public class InviteCodeController {
 
         return saved == null ? ResponseEntity.badRequest().build() :
                                ResponseEntity.ok(saved);
+    }
+
+    @PutMapping("/resendMail")
+    public ResponseEntity<InviteCodeDto> modifyOk(@RequestBody InviteCodeDto inviteCodeDto) {
+        log.info("target: {}", inviteCodeDto);
+        InviteCodeDto modified = inviteCodeService.sendAndUpdateInviteCode(inviteCodeDto);
+        log.info("modified: {}", modified);
+
+        return modified == null ? ResponseEntity.badRequest().build()
+                                : ResponseEntity.ok(modified);
+    }
+
+    @DeleteMapping("/deleteOk")
+    public ResponseEntity<InviteCodeDto> deleteOk(@RequestBody InviteCodeDto inviteCodeDto) {
+        InviteCodeDto deleted = inviteCodeService.deleteInviteCode(inviteCodeDto);
+        log.info("deleted: {}", deleted);
+
+        return deleted == null ? ResponseEntity.badRequest().build() :
+                                 ResponseEntity.ok(deleted);
     }
 }

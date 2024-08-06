@@ -310,7 +310,7 @@ INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationsh
 INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(54,25,15,1,'father');
 INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(270,16,1,0,'father');
 INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(271,14,3,0,'mother');
-INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(272,15,2,0,'');
+INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(272,15,7,0,'');
 INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(273,17,4,0,'');
 INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(274,18,5,0,'');
 INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(275,19,6,0,'');

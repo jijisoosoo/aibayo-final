@@ -26,4 +26,9 @@ public class teacherServiceImpl implements teacherService{
     public List<teacherDto> getAcceptedTeacherByKinderNoAndClassNo(TeacherSearchCondition condition) {
         return teacherRepository.findAcceptedTeacherByKinderNoAndClassNo(condition);
     }
+
+    @Override
+    public teacherDto getTeacherById(Long id) {
+        return teacherRepository.findTeacherById(id);
+    }
 }

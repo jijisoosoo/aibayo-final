@@ -53,8 +53,47 @@ public class KidServiceImpl implements KidService {
     }
 
     @Override
+    public List<KidDto> getAllWithInviteByClassNoAndAcceptStatus(KidSearchCondition condition) {
+        return kidRepository.findAllWithInviteByClassNoAndAcceptStatus(condition);
+    }
+
+    @Override
     public KidDto getByKidNo(Long kidNo) {
         return KidDto.toDto(Objects.requireNonNull(kidRepository.findById(kidNo).orElse(null)));
+    }
+
+    @Override
+    @Transactional
+    public KidDto insertKid(KidDto kidDto) {
+        // 원생 insert
+        KidEntity kidEntity = KidEntity.builder()
+                .kinderNo(kidDto.getKinderNo())
+                .kidName(kidDto.getKidName())
+                .kidBirth(kidDto.getKidBirth())
+                .kidGender(kidDto.getKidGender())
+                .admissionDate(LocalDateTime.now())
+                .dischargeFlag(BooleanEnum.FALSE.getBool())
+                .build();
+        KidEntity insertedKid = kidRepository.save(kidEntity);
+
+        // 반_원생 insert
+        for (Long classNo : kidDto.getClassNoList()) {
+            AcceptLogEntity acceptLogEntity = AcceptLogEntity.builder()
+                    .acceptType(AcceptTypeEnum.CLASS_KID.getType())
+                    .acceptStatus(AcceptStatusEnum.ACCEPT.getStatus())
+                    .acceptDate(LocalDateTime.now())
+                    .build();
+            AcceptLogEntity insertedAcceptLog = acceptLogRepository.save(acceptLogEntity);
+
+            ClassKidEntity classKidEntity = ClassKidEntity.builder()
+                    .classNo(classNo)
+                    .kidNo(insertedKid.getKidNo())
+                    .acceptNo(insertedAcceptLog.getAcceptNo())
+                    .build();
+            classKidRepository.save(classKidEntity);
+        }
+
+        return KidDto.toDto(insertedKid);
     }
 
     @Override
@@ -65,6 +104,7 @@ public class KidServiceImpl implements KidService {
 
         // 원생 기본정보 업데이트
         if (kidDto.getKidName() != null) { target.setKidName(kidDto.getKidName()); }
+        if (kidDto.getKidGender() != null) { target.setKidGender(kidDto.getKidGender()); }
         if (kidDto.getKidBirth() != null) { target.setKidBirth(kidDto.getKidBirth()); }
 
         target.setModifyDate(LocalDateTime.now());
@@ -74,7 +114,7 @@ public class KidServiceImpl implements KidService {
 
     @Override
     @Transactional
-    public void updateKidRelation(KidDto kidDto) {
+    public void updateClassKid(KidDto kidDto) {
         // 반_원생 관계 업데이트
         // 1. 승인이력 insert
         // 2. 반_원생 insert
@@ -96,6 +136,23 @@ public class KidServiceImpl implements KidService {
 
             classKidRepository.save(classKidEntity);
         }
+
+    }
+
+    @Override
+    public KidDto updateParentKid(KidDto kidDto) {
+        if (kidDto.getParentKidAcceptNo() != null) {
+            acceptLogRepository.findById(kidDto.getParentKidAcceptNo()).ifPresent(target -> {
+                target.setAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
+                target.setAcceptModifyDate(LocalDateTime.now());
+                target.setAcceptDate(LocalDateTime.now());
+
+                acceptLogRepository.save(target);
+            });
+
+            return kidDto;
+        }
+        return null;
     }
 
     @Override
@@ -114,6 +171,21 @@ public class KidServiceImpl implements KidService {
             }
         }
 
+        // 보호자_원생 관계 승인거부
+        if (kidDto.getParentKidAcceptNo() != null) {
+            acceptLogRepository.findById(kidDto.getParentKidAcceptNo()).ifPresent(target -> {
+                target.setAcceptStatus(AcceptStatusEnum.REJECT.getStatus());
+                target.setAcceptDeleteDate(LocalDateTime.now());
+                target.setAcceptDeleteFlag(BooleanEnum.TRUE.getBool());
+
+                acceptLogRepository.save(target);
+            });
+
+            return kidDto;
+        }
+
+
+        // 원생 퇴소
         if (kidDto.getKidNo() != null) {
             KidEntity target = kidRepository.findById(kidDto.getKidNo()).orElse(null);
             if (target != null) {
