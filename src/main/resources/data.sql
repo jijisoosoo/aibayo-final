@@ -2115,6 +2115,8 @@ INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(19,44,19
 INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(19,51,198);
 INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(20,52,199);
 INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(20,53,200);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(3,5,201);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(5,40,202);
 
 INSERT INTO comment (comment_writer,comment_group_no , board_no, comment_reg_date, comment_class, comment_content, comment_delete_flag, invisible_flag)
 VALUES
