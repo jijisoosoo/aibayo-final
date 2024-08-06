@@ -17,12 +17,16 @@ public class MemberEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column
     private String username; // email
+
     @Column
     private String name;
+
     @Column
     private String password;
+
     @Column
     private String phone;
 
@@ -33,12 +37,16 @@ public class MemberEntity {
 
     @Column
     private Integer status;
+
     @Column(name = "reg_date")
     private LocalDateTime regDate;
+
     @Column(name = "modify_date")
     private LocalDateTime modifyDate;
+
     @Column(name = "inactivate_date")
     private LocalDateTime inactivateDate;
+
     @Column(name = "latest_log_date")
     private LocalDateTime latestLogDate;
 
