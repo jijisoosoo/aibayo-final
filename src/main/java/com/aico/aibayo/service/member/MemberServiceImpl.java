@@ -5,6 +5,8 @@ import com.aico.aibayo.dto.member.MemberSearchCondition;
 import com.aico.aibayo.entity.MemberEntity;
 import com.aico.aibayo.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
+    private static final Logger log = LoggerFactory.getLogger(MemberServiceImpl.class);
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -68,5 +71,37 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberDto findByUsername(String username) {
         return MemberDto.toDto(memberRepository.findByUsername(username));
+    }
+
+    @Override  // username으로 멤버가 존재하는지 확인하고, 입력받은 password가 존재하는지 검사
+    public boolean checkPassword(String username, String password) {
+        MemberEntity member = memberRepository.findByUsername(username);
+
+
+        if (member == null) {
+            return false;
+        }
+
+        // 저장된 해시처리한 비밀번호
+        String storedPassword = member.getPassword();
+        // 입력된 비밀번호와 비교
+        boolean isPasswordMatch = bCryptPasswordEncoder.matches(password, storedPassword);
+
+        log.info("Stored password : " + storedPassword);
+        log.info("Input password : " + password);
+        log.info("Password match: " + isPasswordMatch);
+
+        return isPasswordMatch;
+    }
+
+    @Override
+    public void updatePassword(String username, String newPassword) {
+        MemberEntity member = memberRepository.findByUsername(username);
+        if (member != null) {
+            log.info("newPassword : " + newPassword);
+            log.info("hashed newPassword : " + bCryptPasswordEncoder.encode(newPassword));
+            member.setPassword(bCryptPasswordEncoder.encode(newPassword));
+            memberRepository.save(member);
+        }
     }
 }
