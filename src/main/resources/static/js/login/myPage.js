@@ -43,11 +43,12 @@ window.onload = function() {
 
         if (validatePasswords(currentPassword, newPassword, confirmPassword)) {
             $.ajax({
-                method: 'GET',
+                method: 'POST',
                 url: '/member/passwordExist',
-                data: {
+                contentType: 'application/json',
+                data: JSON.stringify({
                     password: currentPassword.value
-                },
+                }),
                 success: function(response) {
                     if (response.exists) {
                         passwordForm.submit();
