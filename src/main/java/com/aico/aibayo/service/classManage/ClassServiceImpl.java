@@ -36,12 +36,12 @@ public class ClassServiceImpl implements ClassService{
     }
 
     @Override
-    public List<ClassDto> getClassByTeacherId(Long id) {
-        return classRepository.findClassByTeacherId(id);
-    }
+    public List<ClassDto> getAllByKinderNo(Long kinderNo) {return classRepository.findAllByKinderNo(kinderNo); }
 
     @Override
-    public List<ClassDto> getAddableClassByTeacherId(Long id, Long kinderNo, List<ClassDto> assignedClasses) {
-        return classRepository.findAddableClassByTeacherId(id, kinderNo, assignedClasses);
-    }
+    public List<ClassDto> getAddableClassByKinderNo(Long kinderNo) {return classRepository.findAddableClassByKinderNo(kinderNo); }
+
+    @Override
+    public List<ClassDto> getClassByKinderNoAndTeacherId(Long kinderNo, Long id) {return classRepository.findClassByKinderNoAndTeacherId(kinderNo, id); }
+
 }

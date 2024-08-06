@@ -310,7 +310,7 @@ INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationsh
 INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(54,25,15,1,'father');
 INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(270,16,1,0,'father');
 INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(271,14,3,0,'mother');
-INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(272,15,7,0,'');
+INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(272,15,2,0,'');
 INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(273,17,4,0,'');
 INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(274,18,5,0,'');
 INSERT INTO parent_kid (accept_no, id, kid_no, is_main_parent, parent_relationship) VALUES(275,19,6,0,'');
@@ -2115,6 +2115,8 @@ INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(19,44,19
 INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(19,51,198);
 INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(20,52,199);
 INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(20,53,200);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(3,5,201);
+INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(5,40,202);
 
 INSERT INTO comment (comment_writer,comment_group_no , board_no, comment_reg_date, comment_class, comment_content, comment_delete_flag, invisible_flag)
 VALUES

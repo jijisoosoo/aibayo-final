@@ -24,6 +24,11 @@ public class ClassDto {
 
     private Long assignedCnt;
 
+    public ClassDto(Long classNo, String className) {
+        this.classNo = classNo;
+        this.className = className;
+    }
+
     public ClassDto(Long classNo, String className, Long assignedCnt) {
         this.classNo = classNo;
         this.className = className;

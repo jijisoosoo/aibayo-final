@@ -110,11 +110,14 @@ public class TeacherController {
         teacherDto teacher = teacherService.getTeacherById(id);
         model.addAttribute("teacher", teacher);
 
-        List<ClassDto> assignedClassList = classService.getClassByTeacherId(id);
-        model.addAttribute("assignedClassList", assignedClassList);
+        List<ClassDto> classList = classService.getAllByKinderNo(loginInfo.getKinderNo());
+        model.addAttribute("classList", classList);
 
-        List<ClassDto> addableClassList = classService.getAddableClassByTeacherId(id, loginInfo.getKinderNo(), assignedClassList);
+        List<ClassDto> addableClassList = classService.getAddableClassByKinderNo(loginInfo.getKinderNo());
         model.addAttribute("addableClassList", addableClassList);
+
+        List<ClassDto> assignedClassList = classService.getClassByKinderNoAndTeacherId(loginInfo.getKinderNo(), id);
+        model.addAttribute("assignedClassList", assignedClassList);
 
         return "/admin/teacher/teacherProfileAccept";
     }

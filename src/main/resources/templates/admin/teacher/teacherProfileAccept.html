@@ -13,7 +13,7 @@
 </th:block>
 
 <th:block layout:fragment="javascript">
-    <script src="/js/teacher/teacherMain.js"></script>
+    <script src="/js/teacher/teacherProfile.js"></script>
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
@@ -135,7 +135,17 @@
                                         </div>
                                     </div>
                                     <div class="form-check carousel">
-                                        <label class="class-selected" th:each="class:${addableClassList}" th:object="${addableClassList}" th:for="${class.className}">
+                                        <label class="class-selected" th:each="class:${classList}" th:object="${classList}" th:for="${class.className}">
+                                            <div class="text-wrapper-3" th:text="${class.className}">반이름</div>
+                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" th:value="${class.className}" th:id="${class.className}" autocomplete="off" >
+                                        </label>
+
+                                        <label class="class-selected" th:each="class:${addableClassList}" th:object="${addableClassList}" th:for="${class.className}" style="background-color: #52addb">
+                                            <div class="text-wrapper-3" th:text="${class.className}">반이름</div>
+                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" th:value="${class.className}" th:id="${class.className}" autocomplete="off" >
+                                        </label>
+
+                                        <label class="class-selected" th:each="class:${assignedClassList}" th:object="${assignedClassList}" th:for="${class.className}" style="background-color: #ece1be">
                                             <div class="text-wrapper-3" th:text="${class.className}">반이름</div>
                                             <input class="form-check-input" type="checkbox" name="classCheckedCb" th:value="${class.className}" th:id="${class.className}" autocomplete="off" >
                                         </label>
