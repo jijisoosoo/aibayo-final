@@ -59,12 +59,49 @@
                                class="form-control kid_info_box_form kid_info_text_input kid_name_text kid_name_input"
                                name="kidName" id="kidName"
                                th:value="*{kidName}"
-                               th:attrappend="disabled=${isMainParent == '0'} ? 'disabled' : ''">
+                               th:attrappend="disabled=${isMainParent == '0'} ? 'disabled' : ''"
+                               th:attrprepend="data-kid-gender=${isMainParent == '0'} ? *{kidGender} : ''">
 
                         <input type="button" th:if="${isMainParent == '1'}"
                                class="btn btn-outline-ab" id="modifyKidName" value="수정">
 
                     </div>
+
+
+                    <div class="kid_info_box kid_info_box_form" th:if="${isMainParent == '1'}">
+
+                        <!--                        <div class="msg_box">-->
+                        <!--                            <div class="msg">원생 성별을 선택해 주세요</div>-->
+                        <!--                        </div>-->
+
+
+                        <div class="kid_name_box kid_info_box_detail">
+
+                            <div class="btn-group kid_gender_group" id="kidGenderRadioBox">
+                                <input type="radio" class="btn-check" name="kidGenderRd" id="kidGender1"
+                                       value="1" autocomplete="off"
+                                       th:checked="*{kidGender == 1}">
+                                <label class="btn btn-outline-ab kid_radio kid_radio_text"
+                                       for="kidGender1">
+                                    남아
+                                </label>
+
+                                <input type="radio" class="btn-check" name="kidGenderRd" id="kidGender2"
+                                       value="2" autocomplete="off"
+                                       th:checked="*{kidGender == 2}">
+                                <label class="btn btn-outline-ab kid_radio kid_radio_text"
+                                       for="kidGender2">
+                                    여아
+                                </label>
+                            </div>
+
+
+                            <input type="button" class="btn btn-outline-ab" id="modifyKidGender" value="수정">
+
+                        </div>
+
+                    </div>
+
 
                     <div class="kid_birth_box">
 
@@ -74,7 +111,7 @@
                             </svg>
                         </div>
 
-                        <input type="text" class="form-control kid_info_box_form kid_info_text_input kid_name_text datepicker"
+                        <input type="text" class="form-control kid_info_box_form kid_info_text_input kid_name_text datepicker kid_name_input"
                                name="kidBirth" id="kidBirth"
                                th:value="*{#temporals.format(kidBirth, 'yyyy.MM.dd')}"
                                th:attrappend="disabled=${isMainParent == '0'} ? 'disabled' : ''"

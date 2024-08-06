@@ -240,6 +240,18 @@ $(document).ready(function () {
        alertConfirmModify(modifyInfo);
    });
 
+    if ($('#kidName').is(':disabled')) {
+        let kidName = $('#kidName').val();
+        let kidGender = $('#kidName').data('kid-gender');
+
+        if (kidGender === 1) {
+            $('#kidName').val(`${kidName}(남아)`);
+        } else if (kidGender === 2) {
+            $('#kidName').val(`${kidName}(여아)`);
+        }
+
+    }
+
 });
 
 function initMsg() {
