@@ -1,10 +1,29 @@
 $(document).ready(function () {
     $('#modifyKidName').on('click', function () {
+        initMsg();
+
+        let kidName = $('#kidName').val().trim();
+        let kidBirth = $('#kidBirth').val().trim();
+
+        if (kidName === '') {
+            $('#kidName').closest('.kid_info_box')
+                .find('.msg').show();
+            $('#kidName').focus();
+            return false;
+        }
+
+        if (kidBirth === '') {
+            $('#kidBirth').closest('.kid_info_box')
+                .find('.msg').show();
+            $('#kidBirth').focus();
+            return false;
+        }
+
         function modifyInfo(result) {
             // console.log("원생명 변경 함수")
             let param = {
                 kidNo : $('#kidProfile').data('kid-no'),
-                kidName : $('#kidName').val().trim()
+                kidName : kidName
             }
 
             // console.log(`param: ${JSON.stringify(param)}`);
