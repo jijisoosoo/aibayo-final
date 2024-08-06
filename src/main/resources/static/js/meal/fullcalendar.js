@@ -1,7 +1,7 @@
 $(document).ready(function() {
-    var calendarEl = document.getElementById('calendar');
+    let calendarEl = document.getElementById('calendar');
 
-    var calendar = new FullCalendar.Calendar(calendarEl, {
+    let calendar = new FullCalendar.Calendar(calendarEl, {
         themeSystem: 'bootstrap5',
         headerToolbar: {
             left: '',
@@ -18,9 +18,9 @@ $(document).ready(function() {
             list: '목록'
         },
         eventClick: function (info) {
-            var date = new Date(info.event.start);
+            let date = new Date(info.event.start);
             date.setHours(date.getHours() + 9);  // 9시간을 추가(KST)
-            var formattedDate = date.toISOString().split('T')[0];
+            let formattedDate = date.toISOString().split('T')[0];
             console.log("formattedDate: " + formattedDate);
 
             // // 상세조회에 필요한 값들 세팅
@@ -42,9 +42,11 @@ $(document).ready(function() {
         locale: 'ko',
         datesSet: function (dateInfo) {
             // 달력에 표시 중인 달 확인
-            var currentDate = dateInfo.view.currentStart;
-            var currentMonth = currentDate.getMonth() + 1;
-            console.log("현재 표시중인 일: " + currentDate);
+            let currentStartDate = dateInfo.view.currentStart;
+            let currentEndDate = dateInfo.view.currentEnd;
+            let currentMonth = currentStartDate.getMonth() + 1;
+            console.log("현재 표시중인 시작일: " + currentStartDate);
+            console.log("현재 표시중인 말일: " + currentEndDate);
             console.log("현재 표시중인 달: " + currentMonth);
 
             // datesRender 이벤트가 발생할 때 버튼 스타일을 변경하고 보이도록 설정
@@ -58,6 +60,8 @@ $(document).ready(function() {
             if (dayGridMonthButton) {
                 dayGridMonthButton.classList.add('disabled');
             }
+
+            // 현재 표시 중인 달 기준으로
         },
         events: [
             {
