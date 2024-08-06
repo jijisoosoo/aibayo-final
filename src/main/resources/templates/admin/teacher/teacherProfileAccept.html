@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{/layout/layout}">
 
-<title layout:fragment="title">teacherMain</title>
+<title layout:fragment="title">teacherProfileAccept</title>
 
 <th:block layout:fragment="css">
     <link rel="stylesheet" th:href="@{/css/teacher/teacherProfile.css}" />
@@ -18,18 +18,23 @@
 
 <div class="container main_container" layout:fragment="content">
     <div class="title-flow2">
-        <a class="icon-back" th:href="@{/admin/teacherMain}">
+        <a class="icon-back" th:href="@{/teacher/list}">
             <img src="/images/common/back.png" alt=""/>
         </a>
         <div class="div-wrapper"><div class="text-wrapper-title">교사 정보</div></div>
     </div>
-    <div class="profile">
+    <div class="profile" th:object="${teacher}">
         <div class="blank"></div>
         <div class="div-profile">
             <div class="img-2">
-                <img src="/images/common/teacher.png" alt=""/>
+                <th:block th:if="${teacher.profilePicture != null}">
+                    <img th:src="*{profilePicture}" alt="">
+                </th:block>
+                <th:block th:unless="${teacher.profilePicture != null}">
+                    <img src="/images/common/default.png" alt="">
+                </th:block>
             </div>
-            <div class="id"><div class="text-wrapper-5">김가나</div></div>
+            <div class="id"><div class="text-wrapper-5" th:text="*{name}">선생님명</div></div>
         </div>
         <a class="btn button-cancel" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             <div class="text-cancel">퇴사</div>
@@ -48,8 +53,8 @@
                             <img src="/images/common/x.png" alt=""/>
                         </button>
                     </div>
-                    <div class="modalform" th:action="@{/admin/teacherMain}" th:method="post">
-                        <div>김가나 선생님의 퇴사를 승인하시겠습니까?</div>
+                    <div class="modalform" th:action="@{/admin/teacherMain}" th:method="post" th:object="${teacher}">
+                        <div th:text="*{name} + ' 선생님의 퇴사를 승인하시겠습니까?'"></div>
                         <div class="buttonarea">
                             <input type="reset" class="button-cancel" value="취소" data-bs-dismiss="modal">
                             <input type="submit" class="button-resign" value="퇴사" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
@@ -86,29 +91,27 @@
 
 
     </div>
-    <div class="info">
+    <div class="info" th:object="${teacher}">
         <div class="div-1">
             <div class="div-wrapper-2"><div class="text-wrapper-7">휴대폰 번호</div></div>
-            <div class="inputarea"><div class="text-wrapper-8">01012345678</div></div>
+            <div class="inputarea"><div class="text-wrapper-8" th:text="*{phone}">01012345678</div></div>
         </div>
         <div class="div-1">
             <div class="div-wrapper-2"><div class="text-wrapper-7">이메일</div></div>
-            <div class="inputarea"><div class="text-wrapper-8">teacher1@aibayo.co.kr</div></div>
+            <div class="inputarea"><div class="text-wrapper-8" th:text="*{username}">teacher1@aibayo.co.kr</div></div>
         </div>
         <div class="div-1">
             <div class="select-class">
                 <div class="title-class">
                     <div class="title-class-text">
                         <div class="text-wrapper-9">소속 반 정보</div>
-                        <div class="n">
-                            <div class="text-wrapper-10">(</div>
-                            <div class="text-wrapper-10">3</div>
-                            <div class="text-wrapper-10">개)</div>
+                        <div class="n" th:object="${assignedClassList}">
+                            <div class="text-wrapper-10" th:text="'(' + ${assignedClassList.size() + '개)'}">n</div>
                         </div>
                     </div>
-                <a class="btn btn-ab resign" data-bs-toggle="modal" data-bs-target="#staticBackdrop3">
-                    <div class="text-modify">소속 반 수정</div>
-                </a>
+                    <a class="btn btn-ab resign" data-bs-toggle="modal" data-bs-target="#staticBackdrop3">
+                        <div class="text-modify">소속 반 수정</div>
+                    </a>
                 </div>
 
                 <!-- Modal -->
@@ -132,40 +135,40 @@
                                         </div>
                                     </div>
                                     <div class="form-check carousel">
-                                        <label class="class-selected" for="broccoli">
-                                            <div class="text-wrapper-3">브로콜리반</div>
-                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" value="broccoli" id="broccoli" autocomplete="off" >
+                                        <label class="class-selected" th:each="class:${addableClassList}" th:object="${addableClassList}" th:for="${class.className}">
+                                            <div class="text-wrapper-3" th:text="${class.className}">반이름</div>
+                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" th:value="${class.className}" th:id="${class.className}" autocomplete="off" >
                                         </label>
 
-                                        <label class="class-selected" for="tomato">
-                                            <div class="text-wrapper-3">토마토반</div>
-                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" value="tomato" id="tomato" autocomplete="off" >
-                                        </label>
+<!--                                        <label class="class-selected" for="tomato">-->
+<!--                                            <div class="text-wrapper-3">토마토반</div>-->
+<!--                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" value="tomato" id="tomato" autocomplete="off" >-->
+<!--                                        </label>-->
 
-                                        <label class="class-selected" for="paprica">
-                                            <div class="text-wrapper-3">파프리카반</div>
-                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" value="paprica" id="paprica" autocomplete="off" >
-                                        </label>
+<!--                                        <label class="class-selected" for="paprica">-->
+<!--                                            <div class="text-wrapper-3">파프리카반</div>-->
+<!--                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" value="paprica" id="paprica" autocomplete="off" >-->
+<!--                                        </label>-->
 
-                                        <label class="class-selected" for="eggplant">
-                                            <div class="text-wrapper-3">가지반</div>
-                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" value="eggplant" id="eggplant" autocomplete="off" >
-                                        </label>
+<!--                                        <label class="class-selected" for="eggplant">-->
+<!--                                            <div class="text-wrapper-3">가지반</div>-->
+<!--                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" value="eggplant" id="eggplant" autocomplete="off" >-->
+<!--                                        </label>-->
 
-                                        <label class="class-selected" for="cabbage">
-                                            <div class="text-wrapper-3">양배추반</div>
-                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" value="cabbage" id="cabbage" autocomplete="off" >
-                                        </label>
+<!--                                        <label class="class-selected" for="cabbage">-->
+<!--                                            <div class="text-wrapper-3">양배추반</div>-->
+<!--                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" value="cabbage" id="cabbage" autocomplete="off" >-->
+<!--                                        </label>-->
 
-                                        <label class="class-selected" for="cucumber">
-                                            <div class="text-wrapper-3">오이반</div>
-                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" value="cucumber" id="cucumber" autocomplete="off" >
-                                        </label>
+<!--                                        <label class="class-selected" for="cucumber">-->
+<!--                                            <div class="text-wrapper-3">오이반</div>-->
+<!--                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" value="cucumber" id="cucumber" autocomplete="off" >-->
+<!--                                        </label>-->
 
-                                        <label class="class-selected" for="pimento">
-                                            <div class="text-wrapper-3">피망반</div>
-                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" value="pimento" id="pimento" autocomplete="off" >
-                                        </label>
+<!--                                        <label class="class-selected" for="pimento">-->
+<!--                                            <div class="text-wrapper-3">피망반</div>-->
+<!--                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" value="pimento" id="pimento" autocomplete="off" >-->
+<!--                                        </label>-->
 
                                     </div>
                                 </div>
@@ -181,21 +184,15 @@
 
             </div>
             <div class="selectedclasses">
-                <div class="class">
-                    <div class="text-class" id="class_broccoli">브로콜리반</div>
-                </div>
-                <div class="class">
-                    <div class="text-class" id="class_tomato">토마토반</div>
-                </div>
-                <div class="class">
-                    <div class="text-class" id="class_cucumber">오이반</div>
+                <div class="class" th:each="class:${assignedClassList}" th:object="${assignedClassList}">
+                    <div class="text-class" id="class_broccoli" th:text="${class.className}">반이름</div>
                 </div>
             </div>
         </div>
         <div class="div-3">
             <div class="div-wrapper-2"><div class="text-wrapper-7">입사일</div></div>
             <div class="inputarea">
-                <div class="text-wrapper-8">2024.06.28</div>
+                <div class="text-wrapper-8" th:text="*{acceptRegDate}">2024.06.28</div>
             </div>
         </div>
     </div>

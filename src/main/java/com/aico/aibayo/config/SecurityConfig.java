@@ -1,5 +1,6 @@
 package com.aico.aibayo.config;
 
+import com.aico.aibayo.dto.member.CustomOAuth2Member;
 import com.aico.aibayo.jwt.CustomLogoutFilter;
 import com.aico.aibayo.jwt.JWTFilter;
 import com.aico.aibayo.jwt.JWTUtil;
@@ -7,6 +8,8 @@ import com.aico.aibayo.jwt.LoginFilter;
 import com.aico.aibayo.oauth2.CustomSuccessHandler;
 import com.aico.aibayo.service.member.CustomOAuth2MemberService;
 import com.aico.aibayo.service.member.TokenService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -17,13 +20,17 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import jakarta.servlet.http.Cookie;
+
+import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
@@ -48,7 +55,7 @@ public class SecurityConfig {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring()
-                .requestMatchers("/chat/**", "/inc/**", "/layout/**", "/vendor/**");
+                .requestMatchers("/chat/**", "/inc/**", "/layout/**", "/vendor/**", "/css/**", "/js/**");
     }
 
     @Bean
@@ -68,12 +75,27 @@ public class SecurityConfig {
                 .loginPage("/member/signIn")
                 .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint
                         .userService(customOAuth2MemberService))
-                .successHandler(customSuccessHandler));
+                .successHandler(new AuthenticationSuccessHandler() {
+                    @Override
+                    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
+                        CustomOAuth2Member oAuth2Member = (CustomOAuth2Member) authentication.getPrincipal();
+                        if (oAuth2Member.isNewMember()) {
+                            response.sendRedirect("/register-child"); // 원아정보입력페이지로 리디렉션
+                        } else {
+                            response.sendRedirect("/main"); // 메인페이지로 리디렉션
+                        }
+                    }
+                }));
 
         // JWT 검증
+//        http.addFilterAfter(new JWTFilter(jwtUtil), OAuth2LoginAuthenticationFilter.class);
+//        http.addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, tokenService), UsernamePasswordAuthenticationFilter.class);
+//        http.addFilterBefore(new CustomLogoutFilter(jwtUtil, tokenService), UsernamePasswordAuthenticationFilter.class);
         http.addFilterAfter(new JWTFilter(jwtUtil), OAuth2LoginAuthenticationFilter.class);
-        http.addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, tokenService), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, tokenService), UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(new CustomLogoutFilter(jwtUtil, tokenService), UsernamePasswordAuthenticationFilter.class);
+
+
 
         // 커스텀 로그아웃 핸들러 추가
         http.logout(logoutConfigurer -> logoutConfigurer                                       // 로그아웃 기능이 동작
@@ -86,9 +108,9 @@ public class SecurityConfig {
 
         // 경로별 인가 설정
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/member/**", "/", "/login", "/logout", "/css/**", "/images/**", "/js/**").permitAll()
+                .requestMatchers("/member/**", "/", "/login", "/users/login", "/logout", "/css/**", "/images/**", "/js/**").permitAll()
                 .requestMatchers("/chat/**", "/inc/**", "/layout/**", "/vendor/**").permitAll()
-                .requestMatchers("/main/admin").hasRole("ADMIN")
+                .requestMatchers("/main/admin").hasAnyRole("ADMIN", "PRINCIPAL", "TEACHER")
                 .requestMatchers("/main/user").hasRole("USER")
                 .anyRequest().authenticated());
 

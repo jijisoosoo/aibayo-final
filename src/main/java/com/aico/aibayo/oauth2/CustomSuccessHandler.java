@@ -37,7 +37,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         String role = auth.getAuthority();
 
         // JWT를 생성합니다.
-        String token = jwtUtil.createJwt(username, role, 60 * 60 * 10L);
+        String token = jwtUtil.createJwt(username, role, 86400000L);
         LOGGER.info("Generated JWT Token: " + token);
 
         // JWT를 서버에 저장
@@ -55,14 +55,14 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         } else if (role.equals("ROLE_USER")) {
             response.sendRedirect("/main/user");
         } else {
-            response.sendRedirect("/login?error");
+            response.sendRedirect("/member?error");
         }
 
     }
 
     private Cookie createCookie(String key, String value) {
         Cookie cookie = new Cookie(key, value);
-        cookie.setMaxAge(60 * 60 * 10); // 쿠키 유효 기간 설정 (초 단위)
+        cookie.setMaxAge(86400000); // 쿠키 유효 기간 설정 (초 단위)
         cookie.setSecure(false); // 로컬 환경에서는 false로 설정, 프로덕션에서는 true로 설정
         cookie.setPath("/"); // 쿠키의 경로 설정
         cookie.setHttpOnly(true); // HTTP 전용 쿠키로 설정 (자바스크립트에서 접근 불가)

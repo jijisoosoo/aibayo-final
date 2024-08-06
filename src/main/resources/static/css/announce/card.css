@@ -285,7 +285,11 @@
   text-decoration: none; /* 링크의 기본 텍스트 데코레이션 제거 */
   color: inherit; /* 텍스트 색상 상속 */
 }
-
+.ann-list .opt{
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
 
 .ann-list .frame-3 {
   align-items: center;
@@ -295,7 +299,8 @@
   flex: 0 0 auto;
   overflow: hidden;
   position: relative;
-  width: 100%;
+  /*width: 100%;*/
+  margin: 0px 20px;
 }
 
 .ann-list .p {
@@ -308,8 +313,8 @@
   /*line-height: var(--body-text-line-height);*/
   position: relative;
   width: 100%;
-  margin: 15px;
-  text-align: center;
+  margin: 15px 10px;
+  /*text-align: center;*/
 }
 
 .ann-list .frame-wrapper {
@@ -596,8 +601,27 @@
   cursor: pointer;
 }
 
-/* 추가적인 스타일링이 필요하다면 여기에 작성 */
 .announce:hover {
   background-color: #f0f0f0; /* 마우스를 올렸을 때 배경색 변경 예시 */
 }
+.ann-list .teacher{
+  text-align: center;
+  width: 95px;
+  font-weight:bold;
+}
 
+.ann-list .schedule{
+  text-align: center;
+  width: 125px;
+  font-weight:bold;
+}
+.ann-list .edu{
+  text-align: center;
+  width:45px;
+  font-weight:bold;
+}
+.ann-list .pay ,.ann-list .notice{
+  text-align: center;
+  width: 75px;
+  font-weight:bold;
+}

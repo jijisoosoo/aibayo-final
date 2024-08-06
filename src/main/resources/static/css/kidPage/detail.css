@@ -141,6 +141,10 @@
     border-bottom: 1px rgb(195 195 195 / 30%) solid;
 }
 
+.kid_gender_group {
+    width: 79%;
+}
+
 .kid_birth_text_input {
     text-align: center;
 }
@@ -168,6 +172,10 @@
     font-weight: 400;
     line-height: 35px;
     word-wrap: break-word;
+}
+
+.kid_radio {
+    border: 1px rgb(195 195 195 / 30%) solid;
 }
 
 /* .class_17 { width: 144px; height: 47px; position: relative } */
@@ -618,4 +626,13 @@
     font-size: 20px;
     line-height: 30px;
     word-wrap: break-word;
+}
+
+#kidGenderRadioBox:focus {
+    border-radius: 15px;
+    box-shadow: 0 0 0 .25rem rgba(243, 199, 56, 0.5);
+}
+
+#kidGenderRadioBox:focus-visible {
+    outline: none;
 }

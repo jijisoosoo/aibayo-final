@@ -13,96 +13,108 @@
     <script src="/js/announce/detail.js"></script></th:block>
 
 <div class="container main_container" layout:fragment="content">
-    <form action="">
+    <form action="" >
         <div class="screen">
-            <div class="frame">
-                <div class="div">
-                    <div class="frame-2">
-                        <div class="div-wrapper">
-                            <div class="text-wrapper">[부모 교육]</div>
-                        </div>
-                        <div class="div-wrapper">
-                            <div class="text-wrapper"> 가족사진 찍으세요 </div>
-                        </div>
-                    </div>
-                    <div class="frame-3">
-                        <a href="#" class="frame-4">
-                            <div class="avatar-wrapper">
-                                <div class="avatar">
-                                    <img class="rectangle" alt="Rectangle" src="/announce/img/image-4.png">
+            <div th:object="${announce}">
+                <div class="frame">
+                    <div class="div">
+                        <div class="frame-2">
+                            <div class="div-wrapper">
+                                <div class="text-wrapper">
+                                    [
+                                    <span th:if="${announce.announceType == 2}">원 공지</span>
+                                    <span th:if="${announce.announceType == 3}">일정 / 행사</span>
+                                    <span th:if="${announce.announceType == 4}">교육</span>
+                                    <span th:if="${announce.announceType == 5}">보육료</span>
+                                    ]
                                 </div>
                             </div>
-                            <div class="frame-wrapper">
-                                <div class="frame-5">
-                                    <div class="text-wrapper-2">김원장 원장선생님</div>
-                                    <p class="p">2024년 06월 23일 오후 08:27</p>
-                                </div>
+                            <div class="div-wrapper">
+                                <div class="text-wrapper" th:text="*{boardTitle}"> 가족사진 찍으세요 </div>
                             </div>
-                        </a>
-                        <div>
-                            <a href="" class="BTN">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/>
-                                </svg>이전글
+                        </div>
+                        <div class="frame-3">
+                            <a href="#" class="frame-4">
+                                <div class="avatar-wrapper">
+                                    <div class="avatar">
+                                        <img class="rectangle" alt="Rectangle" src="/announce/img/image-4.png">
+                                    </div>
+                                </div>
+                                <div class="frame-wrapper">
+                                    <div class="frame-5">
+                                        <div class="text-wrapper-2">
+                                            <span th:text="*{name}">[Name]</span>
+                                            <span th:if="*{roleNo == 1}" th:text="' 원장 선생님'">[Principal Teacher]</span>
+                                            <span th:if="*{roleNo == 2}" th:text="' 선생님'">[Teacher]</span>
+                                        </div>
+                                        <p class="p"
+                                           th:text ="*{#temporals.format(boardRegDate, 'yyyy년 MM월 dd일 a hh:mm')}"
+                                        >2024년 06월 23일 오후 08:27</p>
+                                    </div>
+                                </div>
                             </a>
-                            <a href="" class="BTN">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
-                                </svg>다음글
-                            </a>
-                            <a href="/announce/user/card" class="listbtn">목록</a>
+                            <div>
+                                <a th:href="@{/announce/user/{announceNo}(announceNo=${announce.announceNo - 1})}" class="BTN">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/>
+                                    </svg>
+                                    이전글
+                                </a>
+                                <a th:href="@{/announce/user/{announceNo}(announceNo=${announce.announceNo + 1})}" class="BTN">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                                    </svg>다음글
+                                </a>
+                                <a href="/announce/user/list" class="listbtn">목록</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="frame-9">
-                <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2F20141105_159%2Fkbrkjs_1415113969662tMGMt_JPEG%2F17287670_480x427.jpg&type=sc960_832" alt="" srcset="">
-                <div class="frame-10">
-                    <p class="text-wrapper-5">
-                        여기는 본문입니다 <br />
-                        본문 내용 <br />
-                        어쩌구 저쩌구 <br />
-                        집에 가고싶어
-                        <br />
-                        이;ㄴ이ㅏㄴㅇ
-                        <br />
-                        ㅇ나ㅣㄷ여ㅓㅐ쟈겨 ㅐㅑㅈ러치;ㄴ아ㅔㅐ냐ㅕㅓㄱㄷ에ㅐㄴ어ㅡ나
-                        <br />
-                        ㄹ어 쟈ㅐㅔ어 ㅣㅑ나ㅡㅇ치나ㅓ이ㅏ너이나ㅓ아ㅢ나어ㅣㅑㄷ너랴ㅓㅣㅏ눌ㄴㄷ
-                        <br />러 냐ㅐ여ㅗ냐ㅗㅓㄷ야ㅏ느티ㅏㄴ아ㅣㄷ에자갸ㅐㅓ라ㅣ늘ㅇ치ㅏ너ㅡ이ㅏ너이ㅏ
-                    </p>
+                <div class="frame-9">
+                    <div class="frame-10">
+                        <p class="text-wrapper-5" th:text="*{boardContents}">
+                            여기는 본문입니다 <br />
+                        </p>
+                    </div>
                 </div>
             </div>
-            <div class="commnet">
+
+
+            <!--댓글 시작 -->
+            <div>
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                 <span>댓글</span>
-                                <span class="count">3</span>
+                                <span class="count" th:text="${commentCount}">3</span>
                                 <span>개</span>
                             </button>
                         </h2>
                         <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <div class="view">
-                                    <div class="frame-16">
+                                    <!-- 댓글 -->
+                                    <div class="comment" th:each="comment : ${comments}" th:if="${comment.commentClass == '0'}">
                                         <div class="rectangle-wrapper">
                                             <img class="img" alt="Rectangle" src="/announce/img/image-5.png">
                                         </div>
                                         <div class="frame-17">
                                             <div class="frame-18">
                                                 <div class="frame-19">
-                                                    <div class="text-wrapper-10">짱구 아빠</div>
+                                                    <div class="text-wrapper-10">
+                                                        <span th:text="${comment.name}">짱구 아빠</span>
+                                                        <span th:if="${comment.roleNo == 1}" th:text="' 원장 선생님'">[Principal Teacher]</span>
+                                                        <span th:if="${comment.roleNo == 2}" th:text="' 선생님'">[Teacher]</span>
+                                                    </div>
                                                 </div>
                                                 <div class="frame-19">
                                                     <div class="text-wrapper-6">
                                                         <div class="dropdown" id="drop2">
-                                                            <button class="btn dropdown-toggle" id="dd22" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                            </button>
+                                                            <button class="btn dropdown-toggle" id="dd22" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
                                                             <ul class="dropdown-menu dmenu">
                                                                 <li>
-                                                                    <input type="button" value="수정" class="dropdown-item ditem"  data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                                                                    <input type="button" value="수정" class="dropdown-item ditem" data-bs-toggle="modal" data-bs-target="#exampleModal1">
                                                                 </li>
                                                                 <li>
                                                                     <button type="button" class="dropdown-item ditem" onclick="button_event();">삭제</button>
@@ -131,11 +143,11 @@
                                                 </div>
                                             </div>
                                             <div class="frame-20">
-                                                <div class="text-wrapper-11">댓글</div>
+                                                <div class="text-wrapper-11" th:text="${comment.commentContent}">댓글</div>
                                             </div>
                                             <div class="frame-21">
                                                 <div class="frame-22">
-                                                    <div class="text-wrapper-12">2024.06.29 14:00:36</div>
+                                                    <div class="text-wrapper-12" th:text="${#temporals.format(comment.commentRegDate, 'yyyy년 MM월 dd일 a hh:mm')}">2024.06.29 14:00:36</div>
                                                 </div>
                                                 <a href="#" class="frame-19">
                                                     <!-- Button trigger modal -->
@@ -164,14 +176,21 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="frame-23">
+                                    <!-- 댓글 끝 -->
+
+                                    <div class="reply" th:each="comment : ${comments}" th:if="${comment.commentClass == '1'}">
                                         <div class="img-wrapper">
                                             <img class="img" alt="Rectangle" src="/announce/img/image-6.png">
                                         </div>
                                         <div class="frame-24">
                                             <div class="frame-18">
                                                 <div class="frame-19">
-                                                    <div class="text-wrapper-10">짱구 엄마</div>
+                                                    <div class="text-wrapper-10">
+                                                        <span th:text="${comment.name}">짱구 아빠</span>
+                                                        <span th:if="${comment.roleNo == 1}" th:text="' 원장 선생님'">[Principal Teacher]</span>
+                                                        <span th:if="${comment.roleNo == 2}" th:text="' 선생님'">[Teacher]</span>
+                                                    </div>
+
                                                 </div>
                                                 <div class="frame-19">
                                                     <div class="text-wrapper-6">
@@ -209,11 +228,11 @@
                                                 </div>
                                             </div>
                                             <div class="frame-20">
-                                                <div class="text-wrapper-11">대댓글</div>
+                                                <div class="text-wrapper-11" th:text="${comment.commentContent}">대댓글</div>
                                             </div>
                                             <div class="frame-25">
                                                 <div class="frame-19">
-                                                    <div class="text-wrapper-12">2024.06.29 14:00:36</div>
+                                                    <div class="text-wrapper-12"  th:text="${#temporals.format(comment.commentRegDate, 'yyyy년 MM월 dd일 a hh:mm')}"> 2024.06.29 14:00:36</div>
                                                 </div>
                                                 <a href="#" class="frame-19" data-bs-toggle="modal" data-bs-target="#exampleModal4">
                                                     <div class="text-wrapper-12">답글쓰기</div>
@@ -257,6 +276,39 @@
                     </div>
                 </div>
             </div>
+            <!-- 댓글 끝-->
+            <ul class="pagination class_2">
+
+                <li class="page-item class_3"
+                    th:classappend="${currentPage - 5 < 0 ? 'disabled' : ''}">
+                    <a class="page-link page-link-ab page-text-ab"
+                       th:href="@{|/user/announce/detail?page=${currentPage - 5 + 1}|}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
+                            <path d="M19.6771 24.7674L34.9896 40.0799C35.5104 40.6008 35.7625 41.2084 35.7458 41.9029C35.7292 42.5973 35.4597 43.2049 34.9375 43.7258C34.4153 44.2466 33.8076 44.507 33.1146 44.507C32.4215 44.507 31.8139 44.2466 31.2917 43.7258L15.25 27.7362C14.8333 27.3195 14.5208 26.8508 14.3125 26.3299C14.1042 25.8091 14 25.2883 14 24.7674C14 24.2466 14.1042 23.7258 14.3125 23.2049C14.5208 22.6841 14.8333 22.2154 15.25 21.7987L31.2917 5.75702C31.8125 5.23619 32.4292 4.98411 33.1417 5.00078C33.8542 5.01744 34.4701 5.28689 34.9896 5.80911C35.509 6.33133 35.7694 6.93897 35.7708 7.63203C35.7722 8.32508 35.5118 8.93272 34.9896 9.45494L19.6771 24.7674Z" fill="black"/>
+                        </svg>
+                    </a>
+                </li>
+
+
+                <th:block th:each="i : ${#numbers.sequence(startPage + 1, endPage + 1)}">
+                    <li class="page-item class_3" th:classappend="${currentPage + 1 == i ? 'active disabled' : ''}">
+                        <a class="page-link page-link-ab page-text-ab"
+                           th:text="${i}"
+                           th:href="@{|/user/announce/detail?page=${i}|}">Page</a>
+                    </li>
+                </th:block>
+
+
+                <li class="page-item class_3"
+                    th:classappend="${announces.totalPages < currentPage + 5 ? 'disabled' : ''}">
+                    <a class="page-link page-link-ab page-text-ab"
+                       th:href="@{|/user/announce/detail?page=${currentPage + 5 + 1}|}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
+                            <path d="M30.1563 24.9997L14.8438 9.68718C14.3229 9.16635 14.0708 8.54968 14.0875 7.83718C14.1042 7.12468 14.3736 6.50871 14.8958 5.98926C15.4181 5.46982 16.0347 5.2094 16.7458 5.20801C17.457 5.20662 18.0729 5.46704 18.5938 5.98926L34.5833 22.0309C35 22.4476 35.3125 22.9163 35.5208 23.4372C35.7292 23.958 35.8333 24.4788 35.8333 24.9997C35.8333 25.5205 35.7292 26.0413 35.5208 26.5622C35.3125 27.083 35 27.5518 34.5833 27.9684L18.5417 44.0101C18.0208 44.5309 17.4132 44.783 16.7188 44.7663C16.0243 44.7497 15.4167 44.4802 14.8958 43.958C14.375 43.4358 14.1146 42.8191 14.1146 42.108C14.1146 41.3969 14.375 40.7809 14.8958 40.2601L30.1563 24.9997Z" fill="black"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
         </div>
     </form>
 </div>

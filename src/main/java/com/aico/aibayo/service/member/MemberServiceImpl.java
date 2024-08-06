@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -17,7 +18,7 @@ public class MemberServiceImpl implements MemberService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
-    public void signUpProcess(MemberDto memberDto) {
+    public MemberDto signUpProcess(MemberDto memberDto) {
 
         String name = memberDto.getName();
         String role = memberDto.getRole();
@@ -28,7 +29,7 @@ public class MemberServiceImpl implements MemberService {
         Boolean isExist = memberRepository.existsByUsername(username); // email이 있으면
 
         if (isExist) { // 이미 존재하는 이메일이 있으면 종료 (회원가입 실패)
-            return;
+            return null;
         }
 
         MemberEntity memberEntity = new MemberEntity();
@@ -37,8 +38,21 @@ public class MemberServiceImpl implements MemberService {
         memberEntity.setUsername(username);
         memberEntity.setPassword(bCryptPasswordEncoder.encode(password));
         memberEntity.setPhone(phone);
+        memberEntity.setRegDate(LocalDateTime.now());
+        memberEntity.setLatestLogDate(LocalDateTime.now());
 
         memberRepository.save(memberEntity);
+
+        // 새로운 DTO 생성 및 반환
+        MemberDto newMemberDto = new MemberDto();
+        newMemberDto.setName(name);
+        newMemberDto.setRole("ROLE_ADMIN");
+        newMemberDto.setUsername(username);
+        newMemberDto.setPhone(phone);
+        newMemberDto.setRegDate(LocalDateTime.now());
+        newMemberDto.setLatestLogDate(LocalDateTime.now());
+
+        return newMemberDto;
     }
 
     @Override
@@ -49,5 +63,10 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberDto getByIdAndKidNo(MemberSearchCondition condition) {
         return memberRepository.findByIdAndKidNo(condition);
+    }
+
+    @Override
+    public MemberDto findByUsername(String username) {
+        return MemberDto.toDto(memberRepository.findByUsername(username));
     }
 }

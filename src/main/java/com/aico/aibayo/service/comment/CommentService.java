@@ -10,4 +10,6 @@ import java.util.HashMap;
 @Service
 public interface CommentService {
     Page<CommentDto>findAllByBoardNo(CommentSearchCondition condition, HashMap<String, Object> hashMap);
+
+    long countByBoardNo(Long boardNo);
 }

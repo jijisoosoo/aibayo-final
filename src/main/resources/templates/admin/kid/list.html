@@ -130,7 +130,7 @@
 
                         <div class="text_div">
                             <div class="kid_item_text text-compact"
-                                 th:title="*{email}" th:text="*{email}">
+                                 th:title="*{username}" th:text="*{username}">
                                 학부모이메일
                             </div>
                         </div>
@@ -145,11 +145,12 @@
 
                     </div>
 
-                    <div class="kid_item_btns">
-                        <input type="button"
+                    <div class="kid_item_btns"
+                         th:data-parent-kid-accept-no="*{parentKidAcceptNo}">
+                        <input type="button" id="waitAccept"
                                class="btn btn-outline-ab kid_item_btn"
                                value="승인">
-                        <input type="button"
+                        <input type="button" id="waitReject"
                                class="btn btn-outline-danger kid_item_btn"
                                value="삭제">
                     </div>
@@ -187,7 +188,7 @@
 
                         <div class="text_div">
                             <div class="kid_item_text text-compact"
-                                 th:title="*{email}" th:text="*{email}">
+                                 th:title="*{inviteEmail}" th:text="*{inviteEmail}">
                                 학부모이메일
                             </div>
                         </div>
@@ -202,11 +203,13 @@
 
                     </div>
 
-                    <div class="kid_item_btns">
-                        <input type="button"
+                    <div class="kid_item_btns"
+                         th:data-invite-id="*{inviteId}"
+                         th:data-invite-code-accept-no="*{inviteCodeAcceptNo}">
+                        <input type="button" id="inviteDelete"
                                class="btn btn-outline-danger kid_item_btn"
                                value="취소">
-                        <input type="button"
+                        <input type="button" id="inviteResend"
                                class="btn btn-outline-ab kid_item_btn"
                                value="다시 초대">
                     </div>

@@ -20,6 +20,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
+import static com.querydsl.core.types.dsl.Wildcard.count;
+
 @RequiredArgsConstructor
 public class AnnounceRepositoryCustomImpl implements AnnounceRepositoryCustom {
     private final JPAQueryFactory jpaQueryFactory;
@@ -62,6 +64,63 @@ public class AnnounceRepositoryCustomImpl implements AnnounceRepositoryCustom {
     }
 
     @Override
+    public Page<AnnounceDto> findKeywordByKinderNoList(AnnounceSearchCondition condition, Pageable pageable) {
+        // 검색어를 얻어오고, `LIKE` 패턴을 추가합니다.
+        String keyword = condition.getKeyword() != null ? "%" + condition.getKeyword() + "%" : null;
+
+        // 메인 쿼리
+        List<AnnounceDto> announces = jpaQueryFactory
+                .select(Projections.constructor(AnnounceDto.class,
+                        announce.announceType,
+                        announce.announceNo,
+                        announce.announcePrimary,
+                        announce.canComment,
+                        board.boardType,
+                        board.boardNo,
+                        board.writer,
+                        board.boardContents,
+                        board.boardTitle,
+                        board.invisibleFlag,
+                        board.boardRegDate,
+                        board.kinderNo,
+                        member.roleNo,
+                        member.id,
+                        member.name))
+                .from(announce)
+                .join(board).on(board.boardNo.eq(announce.boardNo))
+                .join(member).on(board.writer.eq(member.id))
+                .where(
+                        getInvisibleFlagEq(board),
+                        getKinderNoEq(condition.getKinderNo(), member),
+                        getBoardRegDateEq(condition.getBoardRegDate(), board),
+                        getAnnouncePrimaryEq(condition.getAnnouncePrimary(), announce),
+                        keyword != null ? board.boardTitle.like(keyword) : null
+                )
+                .orderBy(board.boardRegDate.desc())
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        // 카운트 쿼리
+        JPAQuery<Long> countQuery = jpaQueryFactory
+                .select(board.count())
+                .from(announce)
+                .join(board).on(board.boardNo.eq(announce.boardNo))
+                .join(member).on(board.writer.eq(member.id))
+                .where(
+                        getInvisibleFlagEq(board),
+                        getKinderNoEq(condition.getKinderNo(), member),
+                        getBoardRegDateEq(condition.getBoardRegDate(), board),
+                        getAnnouncePrimaryEq(condition.getAnnouncePrimary(), announce),
+                        keyword != null ? board.boardTitle.like(keyword) : null
+                );
+
+        // 페이지 결과 반환
+        return PageableExecutionUtils.getPage(announces, pageable, countQuery::fetchOne);
+    }
+
+
+    @Override
     public Page<AnnounceDto> findAllByKinderNoList(AnnounceSearchCondition condition, Pageable pageable) {
         List<AnnounceDto>announces=jpaQueryFactory
                 .select(Projections.constructor(AnnounceDto.class,
@@ -87,7 +146,8 @@ public class AnnounceRepositoryCustomImpl implements AnnounceRepositoryCustom {
                         getInvisibleFlagEq(board),
                         getKinderNoEq(condition.getKinderNo(), member),
                         getBoardRegDateEq(condition.getBoardRegDate(), board),
-                        getAnnouncePrimaryEq(condition.getAnnouncePrimary(), announce)
+                        getAnnouncePrimaryEq(condition.getAnnouncePrimary(), announce),
+                        getAnnounceTypeGt(condition.getAnnounceType())
                 )
                 .orderBy(
 //                        announce.announcePrimary.desc(),
@@ -103,7 +163,8 @@ public class AnnounceRepositoryCustomImpl implements AnnounceRepositoryCustom {
                         getInvisibleFlagEq(board),
                         getKinderNoEq(condition.getKinderNo(), member),
                         getBoardRegDateEq(condition.getBoardRegDate(), board),
-                        getAnnouncePrimaryEq(condition.getAnnouncePrimary(), announce)
+                        getAnnouncePrimaryEq(condition.getAnnouncePrimary(), announce),
+                        getAnnounceTypeGt(condition.getAnnounceType())
                 );
 
         return PageableExecutionUtils.getPage(announces, pageable, count::fetchOne);
@@ -134,7 +195,9 @@ public class AnnounceRepositoryCustomImpl implements AnnounceRepositoryCustom {
                 .where(
                         getInvisibleFlagEq(board),
                         getKinderNoEq(condition.getKinderNo(), member),
-                        getBoardRegDateEq(condition.getBoardRegDate(), board)
+                        getBoardRegDateEq(condition.getBoardRegDate(), board),
+                        getAnnounceTypeGt(condition.getAnnounceType())
+
                 )
                 .orderBy(board.boardRegDate.desc())
                 .offset(pageable.getOffset())
@@ -146,16 +209,25 @@ public class AnnounceRepositoryCustomImpl implements AnnounceRepositoryCustom {
                 .join(member).on(board.writer.eq(member.id))
                 .where(
                         getInvisibleFlagEq(board),
-                        getKinderNoEq(condition.getKinderNo(), member)
+                        getKinderNoEq(condition.getKinderNo(), member),
+                        getBoardRegDateEq(condition.getBoardRegDate(), board),
+                        getAnnounceTypeGt(condition.getAnnounceType())
                 );
 
         return PageableExecutionUtils.getPage(announces, pageable, count::fetchOne);
+    }
+
+    private BooleanExpression getAnnounceTypeGt(Integer announceType) {
+        return announceType == null ? null :
+                announce.announceType.gt(announceType);
     }
 
     private BooleanExpression getAnnouncePrimaryEq(String announcePrimary, QAnnounceEntity announce) {
         return announcePrimary == null ? null :
                 announce.announcePrimary.eq(announcePrimary);
     }
+
+
     private BooleanExpression isValidAcceptStatus() {
         return acceptLog.acceptStatus.eq(AcceptStatusEnum.ACCEPT.getStatus());
     }
