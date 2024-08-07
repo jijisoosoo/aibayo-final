@@ -1,8 +1,6 @@
 package com.aico.aibayo.control;
 
-import com.aico.aibayo.dto.SignUpFinalFormDto;
 import com.aico.aibayo.dto.member.MemberDto;
-import com.aico.aibayo.dto.member.SignUpFormDto;
 import com.aico.aibayo.jwt.JWTUtil;
 import com.aico.aibayo.service.member.MemberServiceImpl;
 import jakarta.servlet.http.Cookie;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpSession;
-
 
 
 import java.util.HashMap;
@@ -56,8 +53,6 @@ public class MemberController {
     }
 
 
-
-
     @GetMapping("/signIn")
     public String signIn() {
         return "member/signIn";
@@ -68,12 +63,15 @@ public class MemberController {
         return "member/signUp";
     }
 
+    @GetMapping("/signUpInviteTeacher")
+    public String signUpInviteTeacher() {
+        return "/member/signUpInviteTeacher";
+    }
 
 
     @PostMapping("/signUp")
     @ResponseBody
-    public String signUpProcess(MemberDto memberDto) {
-        MemberDto dto = memberService.signUpProcess(memberDto);
+    public String signUpProcess(MemberDto member) {
 
         return "ok";
     }
@@ -81,55 +79,53 @@ public class MemberController {
 
     @GetMapping("/signUpKid")
     public String signUpKidForm(HttpSession session, Model model) {
-        SignUpFormDto form = (SignUpFormDto) session.getAttribute("form");
-        model.addAttribute("form", form);
+        MemberDto member = (MemberDto) session.getAttribute("member");
+        model.addAttribute("member", member);
         return "member/signUpKid";
     }
 
     @PostMapping("/signUpKid")
     @ResponseBody
-    public String signUpKid(@RequestBody SignUpFormDto form, HttpSession session) {
-        // 세션에 데이터를 저장하거나 다른 방법으로 저장할 수 있습니다.
-        // 여기서는 간단하게 모델에 추가하겠습니다.
-        session.setAttribute("form", form);
-
-        System.out.println("form.getUsername : " + form.getUsername());
-        System.out.println("form.getPassword : " + form.getPassword());
-        System.out.println("form.getRole : " + form.getRole());
+    public String signUpKid(@RequestBody MemberDto member, HttpSession session) {
+        session.setAttribute("member", member);
         return "success";
     }
 
     @PostMapping("/signUpKinder")
     @ResponseBody
-    public String signUpKinder(@RequestBody SignUpFormDto form) {
-        // 세션에 데이터를 저장하거나 다른 방법으로 저장할 수 있습니다.
+    public String signUpKinder(@RequestBody MemberDto member, HttpSession session) {
+        session.setAttribute("member", member);
         // 여기서는 간단하게 모델에 추가하겠습니다.
         return "success";
     }
 
 
     @PostMapping("/finalSignUp")
-    public String finalSignUp(@ModelAttribute SignUpFinalFormDto form) {
+    public String finalSignUp(@ModelAttribute MemberDto member) {
+
         // 회원가입 처리 로직 (예: 데이터베이스에 저장)
-        log.info("Username: " + form.getUsername());
-        log.info("Password: " + form.getPassword());
-        log.info("Phone: " + form.getPhone());
-        log.info("Name: " + form.getName());
-        log.info("Role: " + form.getRole());
-        log.info("Birth: " + form.getKidBirth());
-        log.info("Gender: " + form.getKidGender());
-        log.info("KinderNo: " + form.getKinderNo());
-        log.info("ClassNo: " + form.getClassNo());
-        log.info("KidName: " + form.getKidName());
-        log.info("Relationship: " + form.getRelationship());
+        log.info("Username: {}", member.getUsername());
+        log.info("Password: {}", member.getPassword());
+        log.info("Phone: {}", member.getPhone());
+        log.info("Name: {}", member.getName());
+        log.info("Role: {}", member.getRole());
+        log.info("Birth: {}", member.getKidBirth());
+        log.info("Gender: {}", member.getKidGender());
+        log.info("KinderNo: {}", member.getKinderNo());
+        log.info("ClassNo: {}", member.getClassNo());
+        log.info("KidName: {}", member.getKidName());
+        log.info("Relationship: {}", member.getRelationship());
 
+        MemberDto memberDto = new MemberDto();
+        memberDto.setUsername(member.getUsername());
 
+        if (member.getInvite() == null) {
+//            memberService.signUpProcess(); memberdto -> SignUpFormDto
+        }
 
 
         return "redirect:/member/signIn";
     }
-
-
 
 
     @GetMapping("/signInFindPw")
@@ -138,7 +134,9 @@ public class MemberController {
     }
 
     @GetMapping("signInResetPw")
-    public String singInResetPw() { return "member/signInResetPw"; }
+    public String singInResetPw() {
+        return "member/signInResetPw";
+    }
 
     @GetMapping("/myPage")
     public String myPage() {
@@ -146,14 +144,13 @@ public class MemberController {
     }
 
 
-
     @PostMapping("/passwordExist")
     public ResponseEntity<Map<String, Boolean>> passwordExist(@RequestBody Map<String, String> request, @ModelAttribute("loginInfo") MemberDto loginInfo) {
         String username = loginInfo.getUsername(); // 토큰에서 가져온 username
         String password = request.get("password");
 
-        log.info("passwordExist / username : " + username);
-        log.info("passwordExist / password : " + password);
+        log.info("passwordExist / username : {}", username);
+        log.info("passwordExist / password : {}", password);
 
         boolean passwordExists = memberService.checkPassword(username, password);
 
@@ -174,11 +171,10 @@ public class MemberController {
     public String updatepassword(@RequestParam("newPassword") String newPassword, @ModelAttribute("loginInfo") MemberDto loginInfo) {
         String username = loginInfo.getUsername();
 
-        log.info("updatePassword / username : " + username);
-        log.info("updatePassword / newPassword : " + newPassword);
+        log.info("updatePassword / username : {}", username);
+        log.info("updatePassword / newPassword : {}", newPassword);
 
         memberService.updatePassword(username, newPassword);
-//        return "member/myPage";
 
         if (loginInfo.getRole().equals("ROLE_ADMIN")) {
             return "/admin/main/main";

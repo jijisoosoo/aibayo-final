@@ -1,6 +1,7 @@
 package com.aico.aibayo.service.member;
 
 import com.aico.aibayo.common.MemberStatusEnum;
+import com.aico.aibayo.dto.SignUpFinalFormDto;
 import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.dto.member.MemberSearchCondition;
 import com.aico.aibayo.entity.MemberEntity;
@@ -22,7 +23,7 @@ public class MemberServiceImpl implements MemberService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
-    public MemberDto signUpProcess(MemberDto memberDto) {
+    public MemberDto signUpProcess(MemberDto memberDto) {  // 일반 로그인 (초대X)
 
         String name = memberDto.getName();
         String role = memberDto.getRole();
@@ -61,16 +62,9 @@ public class MemberServiceImpl implements MemberService {
         return newMemberDto;
     }
 
-//    public void acceptMember(String username) {
-//        MemberEntity member = memberRepository.findByUsername(username);
-//        member.setStatus(MemberStatusEnum.ACTIVE.getStatus()); // accept
-//        memberRepository.save(member);
-
-//        AcceptLogEntity acceptLog = acceptLogRepository.findByMemberId(memberId);
-//        acceptLog.setAcceptStatus(1);
-//        acceptLog.setAcceptModifyDate(LocalDateTime.now());
-//        acceptLogRepository.save(acceptLog);
-//    }
+    public MemberDto signUpInviteProcess(MemberDto memberDto) {  // 일반 로그인 초대코드 버전
+        return memberDto;
+    }
 
     @Override
     public List<MemberDto> getAllByKidNo(Long kidNo) {
