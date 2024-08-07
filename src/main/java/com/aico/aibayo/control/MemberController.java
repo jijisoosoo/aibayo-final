@@ -65,6 +65,8 @@ public class MemberController {
         return "member/signUp";
     }
 
+
+
     @PostMapping("/signUp")
     @ResponseBody
     public String signUpProcess(MemberDto memberDto) {
@@ -72,6 +74,7 @@ public class MemberController {
 
         return "ok";
     }
+
 
     @GetMapping("/signUpKid")
     public String signUpKid() {

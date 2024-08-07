@@ -89,8 +89,8 @@ public class SecurityConfig {
         // JWT 검증
         http.addFilterAfter(new JWTFilter(jwtUtil), OAuth2LoginAuthenticationFilter.class);
         http.addFilterBefore(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, tokenService), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new CustomMemberStatusFilter(memberRepository), UsernamePasswordAuthenticationFilter.class); // member의 status (accept_log -> accept_status)
         http.addFilterBefore(new CustomLogoutFilter(jwtUtil, tokenService), UsernamePasswordAuthenticationFilter.class);
-        http.addFilterBefore(new CustomAcceptStatusFilter(memberRepository), UsernamePasswordAuthenticationFilter.class); // member의 status (accept_log -> accept_status)
 
 
 
