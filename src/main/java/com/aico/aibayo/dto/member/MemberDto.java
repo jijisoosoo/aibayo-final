@@ -1,5 +1,6 @@
 package com.aico.aibayo.dto.member;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.aico.aibayo.entity.MemberEntity;
@@ -29,12 +30,22 @@ public class MemberDto {
     private LocalDateTime latestLogDate;
     private String profilePicture;
     private Long kinderNo;
+    private Long classNo;
 
     private Long kidNo;
 
     private Long acceptNo;
 
     private String isMainParent;
+
+    private String kidName;
+    private LocalDate kidBirth;
+    private String kidGender; // 1:남자, 2:여자
+
+    private String relationship;
+
+    private String invite; // 초대코드 유무
+
 
     public MemberDto(Long id, String username, String name, String password, String phone, Integer roleNo, String role,
                      Integer status, LocalDateTime regDate, LocalDateTime modifyDate, LocalDateTime inactivateDate,

@@ -17,28 +17,55 @@
                     <div class="text-wrapper-2">원아등록</div>
 
                     <form action="/member/finalSignUp" method="post">
-                        <input type="hidden" name="username" th:value="${form.username}">
-                        <input type="hidden" name="password" th:value="${form.password}">
-                        <input type="hidden" name="phone" th:value="${form.phone}">
-                        <input type="hidden" name="name" th:value="${form.name}">
-                        <input type="hidden" name="role" th:value="${form.role}">
-
-
+                        <input type="hidden" name="username" th:value="${member.username}">
+                        <input type="hidden" name="password" th:value="${member.password}">
+                        <input type="hidden" name="phone" th:value="${member.phone}">
+                        <input type="hidden" name="name" th:value="${member.name}">
+                        <input type="hidden" name="role" th:value="${member.role}">
+                        <input type="hidden" name="invite" th:value="${member.invite}">
 
                         <div class="group-2">
                             <div class="group-3">
                                 <label for="birth-input" style="font-size: small">원아 생일
-                                    <input type="date" class="overlap-group-3" name="kidBirth" id="birth-input" max="2024-12-31" min="2000-01-01" value="2024-01-01">
+                                    <input type="date" class="overlap-group-5" name="kidBirth" id="birth-input" max="2024-12-31" min="2000-01-01" value="2024-01-01">
                                 </label>
                             </div>
+
+
                             <div class="group-4">
-                                <label for="gender-input" class="text-wrapper-5" style="font-size: small">원아 성별</label>
+                                <label for="gender-input" style="font-size: small">원아 성별</label>
                                 <select class="overlap-group-3" name="kidGender" id="gender-input">
                                     <option value="">성별을 선택하세요</option>
                                     <option value="1">Male</option>
                                     <option value="2">Female</option>
                                     <option value="3">Non-Binary</option>
                                 </select>
+                            </div>
+                            <div class="group-6">
+                                <div class="group-7">
+                                    <div class="overlap-group-4">
+                                        <label  for="name-input" style="font-size: small">원아 이름</label>
+                                        <select  id="name-input" name="kidName">
+                                            <option value="">이름을 선택하세요</option>
+                                            <option value="kim">kim</option>
+                                            <option value="yun">yun</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="group-8">
+                                    <div class="overlap-group-6">
+                                        <label  for="relationship-input" style="font-size: small">원아와의 관계</label>
+                                        <select  id="relationship-input" name="relationship">
+                                            <option value="">관계를 선택하세요</option>
+                                            <option value="father">father</option>
+                                            <option value="mother">mother</option>
+                                            <option value="grandparents">grandparents</option>
+                                            <option value="uncle">uncle</option>
+                                            <option value="aunt">aunt</option>
+                                        </select>
+
+                                    </div>
+                                </div>
                             </div>
                             <div class="group-5">
                                 <div class="group-9">
@@ -56,21 +83,6 @@
                                         <option value="1">1반</option>
                                         <option value="2">2반</option>
                                     </select>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="group-6">
-                                <div class="group-7">
-                                    <div class="overlap-group-4">
-                                        <div class="text-wrapper-5" style="font-size: small">원아 이름</div>
-                                        <input class="text-wrapper-6" type="text" name="kidName" id="name-input">
-                                    </div>
-                                </div>
-                                <div class="group-8">
-                                    <div class="overlap-group-4">
-                                        <div class="text-wrapper-5" style="font-size: small">원아와의 관계</div>
-                                        <input class="text-wrapper-6" type="text" name="relationship" id="relationship-input">
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -81,17 +93,16 @@
                     </form>
                 </div>
             </div>
-<!--            <div class="text-wrapper-7">Welcome to aibayo</div>-->
+
         </div>
 
         <div class="logo h_class_78">
             <div class="h_class_79"><a th:href="@{/main/admin}" style="text-decoration: none; color: inherit;">aibayo</a></div>
         </div>
 
-        <a th:href="@{/member/signIn}" class="span">로그인</a>
+<!--        <a th:href="@{/member/signIn}" class="span">로그인</a>-->
     </div>
 </div>
-
 
 </body>
 </html>
