@@ -42,29 +42,29 @@ public class KidController {
 //    private int roleNo = 3;
 //    private Long id = 14L;
 
-    @ModelAttribute
-    public void addAttributes(HttpServletRequest request, Model model) {
-//        String username = (String) request.getAttribute("username");
-//        String username = "admin";
-        String token = getTokenFromCookies(request.getCookies());
-        String username = jwtUtil.getUsername(token);
-        log.info("loginUser: {}", username);
-        MemberDto memberDto = memberService.findByUsername(username);
-//        memberDto.setKinderNo(1L);
-
-        model.addAttribute("loginInfo", memberDto);
-    }
-
-    private String getTokenFromCookies(Cookie[] cookies) {
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("jwt".equals(cookie.getName())) {
-                    return cookie.getValue();
-                }
-            }
-        }
-        return null;
-    }
+//    @ModelAttribute
+//    public void addAttributes(HttpServletRequest request, Model model) {
+////        String username = (String) request.getAttribute("username");
+////        String username = "admin";
+//        String token = getTokenFromCookies(request.getCookies());
+//        String username = jwtUtil.getUsername(token);
+//        log.info("loginUser: {}", username);
+//        MemberDto memberDto = memberService.findByUsername(username);
+////        memberDto.setKinderNo(1L);
+//
+//        model.addAttribute("loginInfo", memberDto);
+//    }
+//
+//    private String getTokenFromCookies(Cookie[] cookies) {
+//        if (cookies != null) {
+//            for (Cookie cookie : cookies) {
+//                if ("jwt".equals(cookie.getName())) {
+//                    return cookie.getValue();
+//                }
+//            }
+//        }
+//        return null;
+//    }
 
     @GetMapping("/list")
     public String list(Model model) {
@@ -88,8 +88,10 @@ public class KidController {
     }
 
     @GetMapping("/user/{kidNo}")
-    public String userDetail(@PathVariable Long kidNo, Model model) {
-        MemberDto loginInfo = (MemberDto) model.getAttribute("loginInfo");
+    public String userDetail(@PathVariable Long kidNo,
+                             @ModelAttribute("loginInfo") MemberDto loginInfo,
+                             Model model) {
+//        MemberDto loginInfo = (MemberDto) model.getAttribute("loginInfo");
 
         // 주보호자 여부 확인
         MemberSearchCondition condition = new MemberSearchCondition();
@@ -106,8 +108,10 @@ public class KidController {
     }
 
     @PostMapping("/modifyOk")
-    public String modifyOk(@RequestBody KidDto kidDto, Model model) {
-        MemberDto loginInfo = (MemberDto) model.getAttribute("loginInfo");
+    public String modifyOk(@RequestBody KidDto kidDto,
+                           @ModelAttribute("loginInfo") MemberDto loginInfo,
+                           Model model) {
+//        MemberDto loginInfo = (MemberDto) model.getAttribute("loginInfo");
         int roleNo = loginInfo.getRoleNo();
 
         kidService.updateClassKid(kidDto);
@@ -125,8 +129,9 @@ public class KidController {
     }
 
     @GetMapping("/write")
-    public String writeForm(Model model) {
-        MemberDto loginInfo = (MemberDto) model.getAttribute("loginInfo");
+    public String writeForm(@ModelAttribute("loginInfo") MemberDto loginInfo,
+                            Model model) {
+//        MemberDto loginInfo = (MemberDto) model.getAttribute("loginInfo");
         if (loginInfo == null) {
             throw new IllegalArgumentException("유효하지 않은 접근입니다.");
         }
