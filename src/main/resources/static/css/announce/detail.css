@@ -280,7 +280,6 @@
   display: flex;
   gap: 10px;
   height: fit-content;
-  min-height: 300px;
   padding: 20px;
   position: relative;
   width: 100%;
@@ -467,8 +466,8 @@
   justify-content: flex-end;
   position: relative;
   width: 100%;
-  padding : 10px 40px;
-  border-bottom:1px solid #DFDFDF ;
+  /*padding : 10px 40px;*/
+  /*border-bottom:1px solid #DFDFDF ;*/
 }
 .screen .rectangle-wrapper {
   align-items: center;
@@ -494,9 +493,8 @@
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  padding: 0px 10px;
   position: relative;
-  width: 1140px;
+  width: 1054px;
 }
 
 .screen .frame-18 {
@@ -590,30 +588,23 @@
 }
 
 .screen .reply {
+  background-color: #f5f5f542;
   align-items: flex-start;
   align-self: stretch;
-  background-color: #f5f5f542;
   display: flex;
   flex: 0 0 auto;
   position: relative;
-  width: 100%;
+  width: 1054px;
   justify-content: center;
-  padding: 10px 40px 10px 80px;
-  border-bottom:1px solid #DFDFDF ;
+  padding: 10px 40px;
+  border-bottom: 1px solid #DFDFDF;
+  align-content: flex-start;
+  flex-direction: row;
+
 }
 
-.screen .img-wrapper {
-  align-items: center;
-  display: flex;
-  gap: 10px;
-  height: 80px;
-  justify-content: flex-end;
-  padding: 17px 4px;
-  position: relative;
-  width: 120px;
-}
 
-.screen .frame-24 {
+.screen .frame-24 , .screen .AAA{
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -854,9 +845,9 @@
   padding: 0px;
 }
 .accordion-item:last-of-type .accordion-button.collapsed {
-  border-bottom-right-radius: calc(.25rem - 1px);
-  border-bottom-left-radius: calc(.25rem - 1px);
-  width: 1054px;
+  /*border-bottom-right-radius: calc(.25rem - 1px);*/
+  /*border-bottom-left-radius: calc(.25rem - 1px);*/
+  width: 1053px;
 }
 
 .accordion-button:not(.collapsed) {
@@ -868,7 +859,8 @@
 .accordion-button:focus {
   z-index: 3;
   border-color: #fff;
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .125);
+  /*box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .125);*/
+  box-shadow: none;
 }
 .reply{
   /*border:1px solid #828282 ;*/
@@ -892,4 +884,36 @@
   color: #000000; /* 호버 시 글자 색상 */
 
 }
+.screen .CCC {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  position: relative;
+  width: 100%;
+  justify-content: center;
+  padding: 10px 40px;
+  border-bottom: 1px solid #DFDFDF;
+  align-content: flex-start;
+  flex-direction: row;
+}
+.accordion-item {
+  background-color: #fff;
+   border: none ;
+}
 
+.accordion-button::after {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-left: 10px;
+  content: "";
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='black' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-size: 1.25rem;
+  transition: transform .2s ease-in-out;
+}
+.accordion-button:not(.collapsed)::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='gray' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  transform: rotate(-180deg);
+}

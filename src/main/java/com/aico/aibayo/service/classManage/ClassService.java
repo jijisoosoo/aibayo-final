@@ -9,8 +9,9 @@ public interface ClassService {
     List<ClassDto> getByKinderNo(Long kinderNo);
     List<ClassDto> getByMemberId(Long id);
     List<ClassDto> getAllByKidNo(Long kidNo);
-    List<ClassDto> getClassByTeacherId(Long id);
-//    List<ClassDto> getAddableClassByTeacherId(Long id);
 
-    List<ClassDto> getAddableClassByTeacherId(Long id, List<ClassDto> assignedClasses);
+    List<ClassDto> getAllByKinderNo(Long kinderNo);
+    List<ClassDto> getAddableClassByKinderNo(Long kinderNo);
+    List<ClassDto> getClassByKinderNoAndTeacherId(Long kinderNo, Long id);
+
 }
