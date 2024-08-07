@@ -131,25 +131,19 @@
                                     <div class="text-addable">
                                         <div class="div-2">
                                             <img class="icon" src="/images/common/default-yellow.png" />
-                                            <div class="text-wrapper-2">선택 가능 반 총 7개</div>
+                                            <div class="text-wrapper-2" id="checkboxCount"></div>
                                         </div>
                                     </div>
                                     <div class="form-check carousel">
-                                        <label class="class-selected classList" th:each="class:${classList}" th:object="${classList}" th:for="${class.className}" th:id="${class.classNo}">
+                                        <label class="class-selected classList" th:each="class:${classList}" th:object="${classList}" th:for="${class.classNo}" th:id="${class.classNo}">
                                             <div class="text-wrapper-3" th:text="${class.className}">반이름</div>
-                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" th:value="${class.className}" th:id="${class.className}" autocomplete="off" >
+                                            <input class="form-check-input" type="checkbox" th:name="${class.classNo}" th:value="${class.className}" th:id="${class.classNo}" autocomplete="off" >
                                         </label>
 
-                                        <label class="class-selected addableClassList" th:each="class:${addableClassList}" th:object="${addableClassList}" th:for="${class.className}" th:id="${class.classNo}" style="background-color: #52addb">
-                                            <div class="text-wrapper-3" th:text="${class.className}">반이름</div>
-                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" th:value="${class.className}" th:id="${class.className}" autocomplete="off" >
-                                        </label>
-
-                                        <label class="class-selected assignedClassList" th:each="class:${assignedClassList}" th:object="${assignedClassList}" th:for="${class.className}" th:id="${class.classNo}" style="background-color: #ece1be">
-                                            <div class="text-wrapper-3" th:text="${class.className}">반이름</div>
-                                            <input class="form-check-input" type="checkbox" name="classCheckedCb" th:value="${class.className}" th:id="${class.className}" autocomplete="off" >
-                                        </label>
+                                        <div class="class-selected addableClassList" th:each="class:${addableClassList}" th:id="${class.classNo}" ></div>
+                                        <div class="class-selected assignedClassList" th:each="class:${assignedClassList}" th:id="${class.classNo}" ></div>
                                     </div>
+                                    <div class="wrapper-notice">※ 배정된 교사가 최대인원(3명)에 도달한 반은 선택할 수 없습니다.</div>
                                 </div>
                                 <div class="buttonarea">
                                     <input type="submit" class="btn btn-ab button-send" value="적용" data-bs-dismiss="modal">
