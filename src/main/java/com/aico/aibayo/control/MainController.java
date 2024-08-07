@@ -1,22 +1,30 @@
 package com.aico.aibayo.control;
 
+import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.jwt.JWTUtil;
+import com.aico.aibayo.service.member.MemberService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/main")
+@RequiredArgsConstructor
 public class MainController {
-
     private final JWTUtil jwtUtil;
+    private final MemberService memberService;
+    private final HttpSession session;
 
-    public MainController(JWTUtil jwtUtil) {
-        this.jwtUtil = jwtUtil;
-    }
+//    public MainController(JWTUtil jwtUtil, @Qualifier("memberService") MemberService memberService) {
+//        this.jwtUtil = jwtUtil;
+//        this.memberService = memberService;
+//    }
 
     @GetMapping("/")
     public String mainPage() {
@@ -51,7 +59,8 @@ public class MainController {
     }
 
     @GetMapping("/user")
-    public String userMain(HttpServletRequest request, HttpServletResponse response) {
+    public String userMain(HttpServletRequest request, HttpServletResponse response,
+                           @ModelAttribute("loginInfo") MemberDto loginInfo) {
         System.out.println("userMain()=======================================");
 
 
@@ -76,6 +85,14 @@ public class MainController {
         // 사용자 정보를 request에 저장 (필요 시 사용)
         request.setAttribute("username", username);
         request.setAttribute("role", role);
+
+        // 사용자가 학부모인 원생번호, 유치원번호 세팅
+        // 여러개일 경우, 유효한 상태이며, accept_log의 accept_date가 가장 옛날인 것부터
+        // 나중에 로직 처리할 것
+        loginInfo = memberService.getByUsernameWithParentKid(username);
+        session.setAttribute("loginInfo", loginInfo);
+
+
 
         return "/user/main/main";
     }

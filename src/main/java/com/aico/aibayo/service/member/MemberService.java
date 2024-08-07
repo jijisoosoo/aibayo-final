@@ -10,4 +10,5 @@ public interface MemberService {
     List<MemberDto> getAllByKidNo(Long kidNo);
     MemberDto getByIdAndKidNo(MemberSearchCondition condition);
     MemberDto findByUsername(String username);
+    MemberDto getByUsernameWithParentKid(String username);
 }

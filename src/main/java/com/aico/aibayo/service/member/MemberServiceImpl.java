@@ -69,4 +69,9 @@ public class MemberServiceImpl implements MemberService {
     public MemberDto findByUsername(String username) {
         return MemberDto.toDto(memberRepository.findByUsername(username));
     }
+
+    @Override
+    public MemberDto getByUsernameWithParentKid(String username) {
+        return memberRepository.findByUsernameWithParentKid(username);
+    }
 }
