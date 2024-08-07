@@ -42,6 +42,9 @@ public class JWTUtil {
 
     // jwt 검증
     public String getUsername(String token) {
+        if (token == null || token.trim().isEmpty()) {
+            throw new IllegalArgumentException("JWT token cannot be null or empty");
+        }
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().get("username", String.class);
     }
     public String getRole(String token) {

@@ -125,4 +125,5 @@ public class MemberRepositoryCustomImpl implements MemberRepositoryCustom{
                 .orderBy(acceptLog1.acceptDate.asc())
                 .fetchFirst();
     }
+
 }
