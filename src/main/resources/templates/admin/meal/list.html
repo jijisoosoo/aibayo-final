@@ -12,6 +12,7 @@
 <th:block layout:fragment="javascript">
     <th:block th:replace="~{/common/fullcalendar :: js}"/>
     <script src="/js/meal/fullcalendar.js"></script>
+<!--    <script src="https://apis.google.com/js/api.js?onload=handleClientLoad"></script>-->
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
@@ -41,7 +42,7 @@
 
 
     <div class="calendar_box">
-        <div id="calendar"></div>
+        <div id="calendar" th:data-kinder-no="${loginInfo.kinderNo}"></div>
     </div>
 
     <!-- Modal -->
