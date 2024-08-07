@@ -25,7 +25,7 @@ public class AcceptLogEntity {
     @Column(name = "accept_date")
     private LocalDateTime acceptDate;
     @Column(name = "accept_reg_date")
-    private LocalDateTime  acceptRegDate;
+    private LocalDateTime acceptRegDate;
     @Column(name = "accept_modify_date")
     private LocalDateTime acceptModifyDate; ;
     @Column(name = "accept_delete_date")

@@ -10,4 +10,8 @@ public interface MemberService {
     List<MemberDto> getAllByKidNo(Long kidNo);
     MemberDto getByIdAndKidNo(MemberSearchCondition condition);
     MemberDto findByUsername(String username);
+
+    boolean checkPassword(String username, String password);
+
+    void updatePassword(String username, String newPassword);
 }
