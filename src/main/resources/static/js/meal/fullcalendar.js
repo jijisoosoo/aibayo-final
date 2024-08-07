@@ -41,14 +41,6 @@ $(document).ready(function() {
         },
         locale: 'ko',
         datesSet: function (dateInfo) {
-            // 달력에 표시 중인 달 확인
-            let currentStartDate = dateInfo.view.currentStart;
-            let currentEndDate = dateInfo.view.currentEnd;
-            let currentMonth = currentStartDate.getMonth() + 1;
-            console.log("현재 표시중인 시작일: " + currentStartDate);
-            console.log("현재 표시중인 말일: " + currentEndDate);
-            console.log("현재 표시중인 달: " + currentMonth);
-
             // datesRender 이벤트가 발생할 때 버튼 스타일을 변경하고 보이도록 설정
             $('.fc-toolbar button').each(function() {
                 $(this).removeClass('btn-primary')
@@ -56,12 +48,13 @@ $(document).ready(function() {
             });
 
             // 'dayGridMonth' 버튼을 비활성화
-            var dayGridMonthButton = document.querySelector('.fc-dayGridMonth-button');
+            let dayGridMonthButton = document.querySelector('.fc-dayGridMonth-button');
             if (dayGridMonthButton) {
                 dayGridMonthButton.classList.add('disabled');
             }
 
-            // 현재 표시 중인 달 기준으로
+            // 현재 표시 중인 달 기준으로 식단표 목록 조회하여 event에 추가
+            loadEvents(dateInfo);
         },
         events: [
             {
@@ -75,3 +68,21 @@ $(document).ready(function() {
     calendar.render();
 
 });
+
+function loadEvents(dateInfo) {
+    // 달력에 표시 중인 달 확인
+    let currentStartDate = dateInfo.view.currentStart;
+    let currentEndDate = dateInfo.view.currentEnd;
+    let currentMonth = currentStartDate.getMonth() + 1;
+    console.log("현재 표시중인 시작일: " + currentStartDate);
+    console.log("현재 표시중인 말일: " + currentEndDate);
+    console.log("현재 표시중인 달: " + currentMonth);
+
+    let url = "/meal/getByMonth";
+
+    let param = {
+        startDate : currentEndDate,
+        endDate : currentEndDate,
+        // kinderNo :
+    }
+}
