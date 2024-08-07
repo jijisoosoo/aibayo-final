@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/member/signInGuide.css}" />
 
     <script th:src="@{/js/login/signUpKid.js}" ></script>
+
 </head>
 <body>
 <div class="screen">
@@ -15,16 +16,24 @@
                 <div class="overlap-group">
                     <div class="text-wrapper-2">원아등록</div>
 
-                    <form th:action="@{/registerKid}" method="post">
+                    <form action="/member/finalSignUp" method="post">
+                        <input type="hidden" name="username" th:value="${form.username}">
+                        <input type="hidden" name="password" th:value="${form.password}">
+                        <input type="hidden" name="phone" th:value="${form.phone}">
+                        <input type="hidden" name="name" th:value="${form.name}">
+                        <input type="hidden" name="role" th:value="${form.role}">
+
+
+
                         <div class="group-2">
                             <div class="group-3">
                                 <label for="birth-input" style="font-size: small">원아 생일
-                                    <input type="date" class="overlap-group-3" name="birth" id="birth-input" max="2024-12-31" min="2000-01-01" value="2024-01-01">
+                                    <input type="date" class="overlap-group-3" name="kidBirth" id="birth-input" max="2024-12-31" min="2000-01-01" value="2024-01-01">
                                 </label>
                             </div>
                             <div class="group-4">
                                 <label for="gender-input" class="text-wrapper-5" style="font-size: small">원아 성별</label>
-                                <select class="overlap-group-3" name="gender" id="gender-input" onchange="toggleRelationshipField()">
+                                <select class="overlap-group-3" name="kidGender" id="gender-input">
                                     <option value="">성별을 선택하세요</option>
                                     <option value="1">Male</option>
                                     <option value="2">Female</option>
@@ -34,7 +43,7 @@
                             <div class="group-5">
                                 <div class="group-9">
                                     <label for="kindergarten-input" style="font-size: small">소속 유치원</label>
-                                    <select id="kindergarten-input">
+                                    <select id="kindergarten-input" name="kinderNo">
                                         <option value="">유치원을 선택하세요</option>
                                         <option value="1">유치원 1</option>
                                         <option value="2">유치원 2</option>
@@ -42,7 +51,7 @@
                                 </div>
                                 <div class="group-10">
                                     <label for="class-input" style="font-size: small">소속 반</label>
-                                    <select id="class-input">
+                                    <select id="class-input" name="classNo">
                                         <option value="">반을 선택하세요</option>
                                         <option value="1">1반</option>
                                         <option value="2">2반</option>
@@ -54,7 +63,7 @@
                                 <div class="group-7">
                                     <div class="overlap-group-4">
                                         <div class="text-wrapper-5" style="font-size: small">원아 이름</div>
-                                        <input class="text-wrapper-6" type="text" name="name" id="name-input">
+                                        <input class="text-wrapper-6" type="text" name="kidName" id="name-input">
                                     </div>
                                 </div>
                                 <div class="group-8">

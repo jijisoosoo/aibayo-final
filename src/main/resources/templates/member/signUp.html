@@ -4,7 +4,49 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" th:href="@{/css/member/signUp.css}" />
     <link rel="stylesheet" th:href="@{/css/member/signInGuide.css}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function sendFormData() {
+            const formData = {
+                username: $("#email-input").val(),
+                password: $("#password-input").val(),
+                phone: $("#phone-input").val(),
+                name: $("#name-input").val(),
+                role: $("#role-input").val()
+            };
 
+            if (formData.role === "ROLE_USER") {
+                $.ajax({
+                    type: "POST",
+                    url: "/member/signUpKid",
+                    contentType: "application/json",
+                    data: JSON.stringify(formData),
+                    success: function(response) {
+                        window.location.href = "/member/signUpKid";
+                    },
+                    error: function(error) {
+                        console.log("Error:", error);
+                    }
+                });
+            } else {
+                const actionUrl = formData.role === "ROLE_PRINCIPAL" || formData.role === "ROLE_TEACHER"
+                    ? "/member/signUpKinder"
+                    : "/member/signUp";
+                $.ajax({
+                    type: "POST",
+                    url: actionUrl,
+                    contentType: "application/json",
+                    data: JSON.stringify(formData),
+                    success: function(response) {
+                        window.location.href = "member/signUpKinder";
+                    },
+                    error: function(error) {
+                        console.log("Error:", error);
+                    }
+                });
+            }
+        }
+    </script>
 </head>
 <body>
 <div class="screen">
@@ -14,7 +56,8 @@
                 <div class="overlap-group">
                     <div class="text-wrapper-2">회원가입</div>
 
-                    <form action="http://localhost:8080/signUp" method="post">
+                    <form id="sign-up-form" onsubmit="event.preventDefault(); sendFormData();">
+
                         <div class="group-2">
                             <div class="group-3">
                                 <div class="enter-your-username" style="font-size: small">이메일</div>
