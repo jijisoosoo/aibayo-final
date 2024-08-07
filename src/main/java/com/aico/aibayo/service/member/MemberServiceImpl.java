@@ -123,4 +123,9 @@ public class MemberServiceImpl implements MemberService {
             memberRepository.save(member);
         }
     }
+
+    @Override
+    public MemberDto getByUsernameWithParentKid(String username) {
+        return memberRepository.findByUsernameWithParentKid(username);
+    }
 }

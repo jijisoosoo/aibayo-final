@@ -61,11 +61,9 @@ public class KidController {
         // 주보호자 여부 확인
         MemberSearchCondition condition = new MemberSearchCondition();
         condition.setId(loginInfo.getId());
-        condition.setKidNo(kidNo);
+        condition.setKidNo(loginInfo.getKidNo());
 
-        MemberDto loginUser = memberService.getByIdAndKidNo(condition);
-
-        model.addAttribute("isMainParent", loginUser.getIsMainParent());
+        model.addAttribute("isMainParent", loginInfo.getIsMainParent());
 
         getConditionAndGoDetail(kidNo, loginInfo, model);
 

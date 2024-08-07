@@ -14,4 +14,6 @@ public interface MemberService {
     boolean checkPassword(String username, String password);
 
     void updatePassword(String username, String newPassword);
+
+    MemberDto getByUsernameWithParentKid(String username);
 }
