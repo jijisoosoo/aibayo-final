@@ -42,10 +42,10 @@ $(document).ready(function() {
                 return;
             }
 
-            let date = new Date(info.event.start);
-            date.setHours(date.getHours() + 9);  // 9시간을 추가(KST)
-            let formattedDate = date.toISOString().split('T')[0];
-            console.log("formattedDate: " + formattedDate);
+            // let date = new Date(info.event.start);
+            // date.setHours(date.getHours() + 9);  // 9시간을 추가(KST)
+            // let formattedDate = date.toISOString().split('T')[0];
+            // console.log("formattedDate: " + formattedDate);
 
             // // 상세조회에 필요한 값들 세팅
             // $("#meal_date").val(formattedDate);
@@ -55,7 +55,7 @@ $(document).ready(function() {
             //
             // $("#detailForm").submit();
 
-            // 모달의 내용을 설정합니다.
+            // 모달의 내용 세팅
             $('#mealDetailLabel').text("2024년 07월 14일 식단표");
             console.log(info.event.title);
 
@@ -117,24 +117,27 @@ $(document).ready(function() {
 });
 
 function afterSuccess(response) {
-    // console.log(`response: ${JSON.stringify(response)}`);
-    calendar.removeAllEvents();
+    // 전체조회일 경우
+    if (response.isDetail == null) {
+        // console.log(`response: ${JSON.stringify(response)}`);
+        calendar.removeAllEvents();
 
-    let events = [];
-    let title = "식단 조회하기";
+        let events = [];
+        let title = "식단 조회하기";
 
 
-    $.each(response, function (index, meal) {
-        events.push({
-            title : title,
-            start : meal.mealDate,
-            mealNo : meal.mealNo
+        $.each(response, function (index, meal) {
+            events.push({
+                title: title,
+                start: meal.mealDate,
+                mealNo: meal.mealNo
+            });
+
         });
 
-    });
-
-    // console.log(`events: ${JSON.stringify(events)}`);
-    calendar.addEventSource(events);
+        // console.log(`events: ${JSON.stringify(events)}`);
+        calendar.addEventSource(events);
+    }
 }
 
 function loadEvents(dateInfo) {
