@@ -38,8 +38,5 @@ public class CommentEntity {
     private String commentClass;//댓글 구분 (0:댓글 1:대댓글)
     @Column(name="comment_group_no")
     private Integer commentGroupNo;//댓글그룹(댓글-댓글번호/ 대댓글-부모 댓글번호 저장)
-    @Column(name="comment_delete_flag")
-    private String commentDeleteFlag; //댓글 삭제 여부
-
 
 }

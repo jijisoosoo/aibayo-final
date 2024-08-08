@@ -49,15 +49,6 @@ $(document).ready(function () {
         }
     });
 
-
-
-
-
-
-
-
-
-
 });
 
 function afterSuccess(response) {
@@ -72,3 +63,4 @@ function afterSuccess(response) {
         window.location.href = window.location.origin + '/announce/admin/list';
     });
 }
+

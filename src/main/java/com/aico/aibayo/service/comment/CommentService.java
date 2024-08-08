@@ -12,4 +12,12 @@ public interface CommentService {
     Page<CommentDto>findAllByBoardNo(CommentSearchCondition condition, HashMap<String, Object> hashMap);
 
     long countByBoardNo(Long boardNo);
+
+    CommentDto insertComment(CommentDto commentDto);
+
+    void deleteComment (CommentDto commentDto);
+
+
+
+
 }

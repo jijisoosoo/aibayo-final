@@ -59,7 +59,7 @@ $(document).ready(function () {
             })
             .then(data => {
                 alert('공지사항이 작성되었습니다.');
-                window.location.href = '/announce/admin/card'; // 성공 시 이동할 페이지
+                window.location.href = '/admin/announce/card'; // 성공 시 이동할 페이지
             })
             .catch((error) => {
                 console.error('Error:', error);
