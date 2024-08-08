@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface MemberRepository extends JpaRepository<MemberEntity, Long>, MemberRepositoryCustom {
     Boolean existsByUsername(String username);
-    MemberEntity findByUsername(String username);
+    Optional<MemberEntity> findByUsername(String username);
 }

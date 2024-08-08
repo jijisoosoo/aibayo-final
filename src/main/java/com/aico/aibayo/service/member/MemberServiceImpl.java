@@ -10,6 +10,7 @@ import com.aico.aibayo.entity.AcceptLogEntity;
 import com.aico.aibayo.entity.KidEntity;
 import com.aico.aibayo.entity.MemberEntity;
 import com.aico.aibayo.entity.ParentKidEntity;
+import com.aico.aibayo.exception.MemberNotFoundException;
 import com.aico.aibayo.repository.AcceptLogRepository;
 import com.aico.aibayo.repository.ClassKidRepository;
 import com.aico.aibayo.repository.ParentKidRepository;
@@ -139,12 +140,14 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public MemberDto findByUsername(String username) {
-        return MemberDto.toDto(memberRepository.findByUsername(username));
+        return MemberDto.toDto(memberRepository.findByUsername(username)
+                .orElseThrow(() -> new MemberNotFoundException("username으로 검색한 member 값이 없습니다.")));
     }
 
     @Override  // username으로 멤버가 존재하는지 확인하고, 입력받은 password가 존재하는지 검사
     public boolean checkPassword(String username, String password) {
-        MemberEntity member = memberRepository.findByUsername(username);
+        MemberEntity member = memberRepository.findByUsername(username)
+                .orElseThrow(() -> new MemberNotFoundException("username으로 검색한 member 값이 없습니다."));;
 
 
         if (member == null) {
@@ -165,7 +168,8 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void updatePassword(String username, String newPassword) {
-        MemberEntity member = memberRepository.findByUsername(username);
+        MemberEntity member = memberRepository.findByUsername(username)
+                .orElseThrow(() -> new MemberNotFoundException("username으로 검색한 member 값이 없습니다."));;
         if (member != null) {
             log.info("newPassword : " + newPassword);
             log.info("hashed newPassword : " + bCryptPasswordEncoder.encode(newPassword));

@@ -2,6 +2,7 @@ package com.aico.aibayo.jwt;
 
 import com.aico.aibayo.common.MemberStatusEnum;
 import com.aico.aibayo.entity.MemberEntity;
+import com.aico.aibayo.exception.MemberNotFoundException;
 import com.aico.aibayo.repository.member.MemberRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -20,7 +21,8 @@ public class CustomMemberStatusFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String username = request.getParameter("username");
         if (username != null) {
-            MemberEntity member = memberRepository.findByUsername(username);
+            MemberEntity member = memberRepository.findByUsername(username)
+                    .orElseThrow(() -> new MemberNotFoundException("username으로 검색한 member 값이 없습니다."));;
             if (member != null && !member.getStatus().equals(MemberStatusEnum.ACTIVE.getStatus())) {
                 response.sendError(HttpServletResponse.SC_FORBIDDEN, "관리자의 승인이 필요합니다.");
                 return;
