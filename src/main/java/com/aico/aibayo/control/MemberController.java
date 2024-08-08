@@ -1,5 +1,7 @@
 package com.aico.aibayo.control;
 
+import com.aico.aibayo.common.BooleanEnum;
+import com.aico.aibayo.common.MemberStatusEnum;
 import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.jwt.JWTUtil;
 import com.aico.aibayo.service.member.MemberServiceImpl;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpSession;
 
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -72,7 +75,6 @@ public class MemberController {
     @PostMapping("/signUp")
     @ResponseBody
     public String signUpProcess(MemberDto member) {
-
         return "ok";
     }
 
@@ -81,6 +83,7 @@ public class MemberController {
     public String signUpKidForm(HttpSession session, Model model) {
         MemberDto member = (MemberDto) session.getAttribute("member");
         model.addAttribute("member", member);
+        System.out.println("signUpKid GetMapping");
         return "member/signUpKid";
     }
 
@@ -88,6 +91,7 @@ public class MemberController {
     @ResponseBody
     public String signUpKid(@RequestBody MemberDto member, HttpSession session) {
         session.setAttribute("member", member);
+        System.out.println("signUpKid PostMapping");
         return "success";
     }
 
@@ -105,23 +109,43 @@ public class MemberController {
 
         // 회원가입 처리 로직 (예: 데이터베이스에 저장)
         log.info("Username: {}", member.getUsername());
+        log.info("Name: {}", member.getName());
         log.info("Password: {}", member.getPassword());
         log.info("Phone: {}", member.getPhone());
-        log.info("Name: {}", member.getName());
         log.info("Role: {}", member.getRole());
-        log.info("Birth: {}", member.getKidBirth());
-        log.info("Gender: {}", member.getKidGender());
+//        log.info("KidName: {}", member.getKidName());
+//        log.info("Birth: {}", member.getKidBirth());
+//        log.info("Gender: {}", member.getKidGender());
         log.info("KinderNo: {}", member.getKinderNo());
         log.info("ClassNo: {}", member.getClassNo());
-        log.info("KidName: {}", member.getKidName());
         log.info("Relationship: {}", member.getRelationship());
 
         MemberDto memberDto = new MemberDto();
         memberDto.setUsername(member.getUsername());
+        memberDto.setName(member.getName());
+        memberDto.setPassword(member.getPassword());
+        memberDto.setPhone(member.getPhone());
+        memberDto.setRole(member.getRole());
 
-        if (member.getInvite() == null) {
-//            memberService.signUpProcess(); memberdto -> SignUpFormDto
-        }
+        memberDto.setKidNo(member.getKidNo());
+//        memberDto.setKidName(member.getKidName());
+//        memberDto.setKidBirth(member.getKidBirth());
+//        memberDto.setKidGender(member.getKidGender());
+
+        memberDto.setKinderNo(member.getKinderNo());
+        memberDto.setClassNo(member.getClassNo());
+        memberDto.setRelationship(member.getRelationship());
+
+
+        memberDto.setStatus(MemberStatusEnum.INACTIVE.getStatus()); // 승인 해줘야 로그인 가능
+        memberDto.setRegDate(LocalDateTime.now());
+        memberDto.setLatestLogDate(LocalDateTime.now());
+        memberDto.setIsMainParent(BooleanEnum.FALSE.getBool());
+
+        memberDto.setInvite(member.getInvite());
+
+
+        memberService.signUpProcessUser(memberDto);
 
 
         return "redirect:/member/signIn";
