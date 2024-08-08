@@ -8,6 +8,41 @@ document.addEventListener('DOMContentLoaded', () => {
     addCheckboxEventListeners();
 });
 
+$(document).ready(function() {
+
+    // 소속 반 수정하고 보여주기
+    $(document).on('click', '#classModify', function () {
+
+        let teacherId = $('.profile').val();
+
+        // 기존 반 불러오기
+        let assignedElements = document.querySelectorAll('.assignedClassList');
+        let assignedClassIds = Array.from(assignedElements).map(element => element.id);
+
+        // 체크된 반 불러오기
+        let checkedClassIds  = $('.form-check-input:checked').map(function() {
+            return this.id;
+        }).get();
+
+        let oldClassIds = assignedClassIds.filter(id => !checkedClassIds.includes(id));
+        let newClassIds = checkedClassIds.filter(id => !assignedClassIds.includes(id));
+
+
+
+        let param = {
+            oldClassIds: oldClassIds,
+            newClassIds: newClassIds
+        };
+
+        console.log("checkedClassIds  : " + JSON.stringify(param));
+
+        let url = "/teacher/teacherProfileAccept/{" + teacherId + "}";
+        commonAjax(url, 'POST', param);
+
+
+    });
+});
+
 
 
 

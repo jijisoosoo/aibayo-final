@@ -220,6 +220,7 @@
 }
 
 .wrapper-notice{
+  padding-left: 12px;
   font-size: 14px;
   color: darkgrey;
 }
@@ -383,10 +384,6 @@
 .assignedClassList {
   background-color: #ece1be !important;
   display: none !important;
-}
-
-.carouselCover{
-
 }
 
 :root {
