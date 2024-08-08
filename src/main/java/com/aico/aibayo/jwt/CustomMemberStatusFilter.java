@@ -30,15 +30,22 @@ public class CustomMemberStatusFilter extends OncePerRequestFilter {
 
         // 회원가입 URL은 필터에서 제외
 //        if (requestUri.equals("/member/finalSignUp") || requestUri.equals("/member/signUpInviteTeacher") || requestUri.equals("/member/signUpKinder")) {
+//            log.info("회원가입 요청을 필터에서 제외: {}", requestUri);
 //            filterChain.doFilter(request, response);
 //            return;
 //        }
 
+
+
+        // 로그인 시 여기까지 안옴 status 체크를 안함
         log.info("CustomMemberStatusFilter: username = {}", username);
         if (username != null) {
             MemberEntity member = memberRepository.findByUsername(username)
                     .orElseThrow(() -> new MemberNotFoundException("username으로 검색한 member 값이 없습니다."));;
-            if (member != null && !member.getStatus().equals(MemberStatusEnum.ACTIVE.getStatus())) {
+
+                    log.info("member : {}", member);
+                    log.info("MemberStatusEnum.ACTIVE.getStatus() : {}", MemberStatusEnum.ACTIVE.getStatus());
+            if (member != null && member.getStatus() != MemberStatusEnum.ACTIVE.getStatus()) {
                 response.sendError(HttpServletResponse.SC_FORBIDDEN, "관리자의 승인이 필요합니다.");
                 return;
             }

@@ -105,10 +105,10 @@ public class MemberController {
 
 
     @PostMapping("/finalSignUp")
-    public String finalSignUp(@ModelAttribute MemberDto member) {
+    public String finalSignUp(@RequestBody MemberDto member) {
         if (member == null) {
             log.error("MemberDto is null");
-            return "errorPage"; // 적절한 에러 페이지로 리다이렉트
+            return "/member/signIn"; // 적절한 에러 페이지로 리다이렉트
         }
 
         // 회원가입 처리 로직 (예: 데이터베이스에 저장)
