@@ -11,4 +11,7 @@ public interface TeacherRepositoryCustom {
     List<teacherDto> findAllByKinderNo(TeacherSearchCondition condition);
     List<teacherDto> findAcceptedTeacherByKinderNoAndClassNo(TeacherSearchCondition condition);
     teacherDto findTeacherById(Long id);
+
+    void addNewClass(List<Long> newClassIds, Long id);
+    void removeOldClass(List<Long> oldClassIds, Long id);
 }

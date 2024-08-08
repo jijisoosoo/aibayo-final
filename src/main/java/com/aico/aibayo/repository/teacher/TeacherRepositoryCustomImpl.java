@@ -94,6 +94,16 @@ public class TeacherRepositoryCustomImpl implements TeacherRepositoryCustom{
         return teacher;
     }
 
+    @Override
+    public void addNewClass(List<Long> newClassIds, Long id) {
+
+    }
+
+    @Override
+    public void removeOldClass(List<Long> oldClassIds, Long id) {
+
+    }
+
 
     private BooleanExpression getClassNoEq(Long classNo) {
         return classNo == null ? null : classTeacher.classNo.eq(classNo);

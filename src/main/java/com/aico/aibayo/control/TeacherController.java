@@ -126,8 +126,8 @@ public class TeacherController {
     public String assignClassesAndGetAcceptedTeacherProfile(@RequestBody List<Long> oldClassIds, @RequestBody List<Long> newClassIds, Model model, @PathVariable Long id) {
         MemberDto loginInfo = (MemberDto)model.getAttribute("loginInfo");
 
-//        teacherService.assignNewClass(newClassIds, id);
-//        teacherService.deleteExistingClass(oldClassIds);
+        teacherService.assignNewClass(newClassIds, id);
+        teacherService.deleteExistingClass(oldClassIds, id);
 
         teacherDto teacher = teacherService.getTeacherById(id);
         model.addAttribute("teacher", teacher);

@@ -32,4 +32,14 @@ public class teacherServiceImpl implements teacherService{
     public teacherDto getTeacherById(Long id) {
         return teacherRepository.findTeacherById(id);
     }
+
+    @Override
+    public void assignNewClass(List<Long> newClassIds, Long id) {
+        teacherRepository.addNewClass(newClassIds, id);
+    }
+
+    @Override
+    public void deleteExistingClass(List<Long> oldClassIds, Long id) {
+        teacherRepository.removeOldClass(oldClassIds, id);
+    }
 }
