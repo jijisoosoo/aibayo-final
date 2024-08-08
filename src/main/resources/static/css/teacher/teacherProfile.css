@@ -385,6 +385,9 @@
   display: none !important;
 }
 
+.carouselCover{
+
+}
 
 :root {
   --x-1: rgba(133, 199, 233, 1);
