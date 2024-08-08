@@ -4,7 +4,6 @@
     float: left;
     margin-left: 20px;
 }
-
 .h_class_79 {
     color: #FFDB21 !important;
     font-size: 80px;
@@ -13,8 +12,6 @@
     word-wrap: break-word;
     text-decoration-line : none;
 }
-
-
 .screen {
     background-color: #fffcf0;
     display: flex;
@@ -22,19 +19,15 @@
     justify-content: center;
     width: 100%;
 }
-
-
 body {
     margin: 0px !important;
 }
-
 .screen .div {
     background-color: #fffcf0;
     width: 1440px;
     height: 957px;
     position: relative;
 }
-
 .screen .overlap {
     position: absolute;
     width: 541px;
@@ -42,7 +35,6 @@ body {
     top: 80px;
     left: 451px;
 }
-
 .screen .group {
     position: absolute;
     width: 541px;
@@ -50,7 +42,6 @@ body {
     top: 0;
     left: 0;
 }
-
 .screen .overlap-group {
     position: relative;
     width: 539px;
@@ -59,7 +50,6 @@ body {
     border-radius: 40px;
     box-shadow: 0px 4px 35px #00000014;
 }
-
 .screen .div-wrapper {
     position: absolute;
     width: 108px;
@@ -67,7 +57,6 @@ body {
     top: 50px;
     left: 373px;
 }
-
 .screen .p {
     top: 0;
     left: 0;
@@ -79,11 +68,9 @@ body {
     letter-spacing: 0;
     line-height: normal;
 }
-
 .screen .text-wrapper {
     color: #8d8d8d;
 }
-
 .screen .span {
     color: #028021;
     position: absolute;
@@ -91,8 +78,6 @@ body {
     left: 854px;
     text-decoration: none;
 }
-
-
 .screen .text-wrapper-2 {
     top: 77px;
     left: 37px;
@@ -104,7 +89,6 @@ body {
     letter-spacing: 0;
     line-height: normal;
 }
-
 .screen .overlap-group-wrapper {
     position: absolute;
     width: 453px;
@@ -112,27 +96,21 @@ body {
     top: 608px;
     left: 44px;
 }
-
 .screen .overlap-group-2 {
     position: relative;
     width: 451px;
     height: 54px;
     border-radius: 10px;
-    box-shadow: 0px 4px 19px #7793414c;
-
+    box-shadow: 0 4px 19px #7793414c;
     font-family: "Noto Sans KR", Helvetica;
     /*font-weight: 500;*/
     color: #000000;
     font-size: 16px;
     letter-spacing: 0;
     line-height: normal;
-
     background-color: #ffd700;
     border: none !important;
-
 }
-
-
 .screen .text-wrapper-3 {
     position: absolute;
     width: 74px;
@@ -145,7 +123,6 @@ body {
     letter-spacing: 0;
     line-height: normal;
 }
-
 .screen .group-2 {
     position: absolute;
     width: 453px;
@@ -153,7 +130,6 @@ body {
     top: 192px;
     left: 41px;
 }
-
 .screen .enter-your-username {
     position: absolute;
     top: -3px;
@@ -165,21 +141,16 @@ body {
     letter-spacing: 0;
     line-height: normal;
 }
-
 .screen .overlap-group-3 {
     position: absolute;
-
     top: 27px;
     left: 0px;
     background-color: #ffffff;
     border-radius: 9px;
-    border: 1px solid;
-    border-color: #adadad;
-
+    border: 1px solid #adabad;
     padding: 0px 10px;
     width: 430px;
     height: 50px;
-
     font-family: "Noto Sans KR", Helvetica;
     font-weight: 300;
     color: #5f5c5c;
@@ -188,7 +159,6 @@ body {
     line-height: normal;
     white-space: nowrap;
 }
-
 .screen .text-wrapper-4 {
     position: absolute;
     width: 302px;
@@ -202,8 +172,6 @@ body {
     line-height: normal;
     white-space: nowrap;
 }
-
-
 .screen .group-3 {
     position: absolute;
     width: 440px;
@@ -211,8 +179,6 @@ body {
     top: 88px;
     left: 2px;
 }
-
-
 .screen .group-4 {
     position: absolute;
     width: 440px;
@@ -220,7 +186,6 @@ body {
     top: 184px;
     left: 2px;
 }
-
 .screen .group-5 {
     position: absolute;
     width: 440px;
@@ -228,7 +193,6 @@ body {
     top: 280px;
     left: 0;
 }
-
 .screen .group-6 {
     position: absolute;
     width: 402px;
@@ -236,7 +200,6 @@ body {
     top: 0;
     left: 0;
 }
-
 .screen .group-7 {
     position: absolute;
     width: 167px;
@@ -244,14 +207,12 @@ body {
     top: 0;
     left: 0;
 }
-
 .screen .overlap-group-4 {
     position: relative;
     width: 216px;
     height: 57px;
     top: -1px;
 }
-
 .screen .text-wrapper-5 {
     position: absolute;
     width: 216px;
@@ -264,7 +225,6 @@ body {
     letter-spacing: 0;
     line-height: normal;
 }
-
 .screen .rectangle {
     position: absolute;
     width: 216px;
@@ -273,23 +233,8 @@ body {
     left: 0;
     background-color: #ffffff;
     border-radius: 9px;
-    border: 1px solid;
-    border-color: #adadad;
+    border: 1px solid #adadad;
 }
-
-/* .screen .text-wrapper-6 {
-  position: absolute;
-  width: 203px;
-  top: 32px;
-  left: 13px;
-  font-family: "Poppins-Light", Helvetica;
-  font-weight: 300;
-  color: #7f7f7f;
-  font-size: 14px;
-  letter-spacing: 0;
-  line-height: normal;
-} */
-
 .screen .text-wrapper-6 {
     position: absolute;
     width: 216px;
@@ -302,13 +247,10 @@ body {
     font-size: 14px;
     letter-spacing: 0;
     line-height: normal;
-
     background-color: #ffffff;
     border-radius: 9px;
-    border: 1px solid;
-    border-color: #adadad;
+    border: 1px solid #adadad;
 }
-
 .screen .overlap-wrapper {
     position: absolute;
     width: 167px;
@@ -316,7 +258,6 @@ body {
     top: 0;
     left: 235px;
 }
-
 .screen .text-wrapper-7 {
     position: absolute;
     top: 48px;
@@ -328,7 +269,6 @@ body {
     letter-spacing: 0;
     line-height: normal;
 }
-
 .screen .text-wrapper-8 {
     /*position: absolute;*/
     /*top: 30px;*/
@@ -352,10 +292,9 @@ body {
     letter-spacing: 0;
     line-height: normal;
 }
-
 .screen .text-wrapper-9 {
     position: absolute;
-    width: 210px;
+    width: 218px;
     height: 40px;
     top: 20px;
     left: 0;
@@ -365,14 +304,10 @@ body {
     font-size: 14px;
     letter-spacing: 0;
     line-height: normal;
-
     background-color: #ffffff;
     border-radius: 9px;
-    border: 1px solid;
-    border-color: #adadad;
+    border: 1px solid #adadad;
 }
-
-
 .screen .text-wrapper-10 {
     position: absolute;
     top: 30px;
@@ -385,6 +320,3 @@ body {
     line-height: 57.6px;
     white-space: nowrap;
 }
-
-
-

@@ -2,6 +2,7 @@ package com.aico.aibayo.service.member;
 
 import com.aico.aibayo.dto.member.CustomMemberDetails;
 import com.aico.aibayo.entity.MemberEntity;
+import com.aico.aibayo.exception.MemberNotFoundException;
 import com.aico.aibayo.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,10 +17,9 @@ public class CustomMemberDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        MemberEntity memberEntity = memberRepository.findByUsername(username);
-        if (memberEntity != null) {
-            return new CustomMemberDetails(memberEntity);
-        }
-        return null;
+        MemberEntity memberEntity = memberRepository.findByUsername(username)
+                .orElseThrow(() -> new MemberNotFoundException("username으로 검색한 member 값이 없습니다."));
+
+        return new CustomMemberDetails(memberEntity);
     }
 }

@@ -1,6 +1,7 @@
 package com.aico.aibayo.repository.member;
 
 import com.aico.aibayo.common.AcceptStatusEnum;
+import com.aico.aibayo.common.BooleanEnum;
 import com.aico.aibayo.common.MemberStatusEnum;
 import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.dto.member.MemberSearchCondition;
@@ -84,4 +85,45 @@ public class MemberRepositoryCustomImpl implements MemberRepositoryCustom{
                 )
                 .fetchOne();
     }
+
+    @Override
+    public MemberDto findByUsernameWithParentKid(String username) {
+        return jpaQueryFactory
+                .select(Projections.constructor(MemberDto.class,
+                        member.id,
+                        member.username,
+                        member.name,
+                        member.password,
+                        member.phone,
+                        member.roleNo,
+                        member.role,
+                        member.status,
+                        member.regDate,
+                        member.modifyDate,
+                        member.inactivateDate,
+                        member.latestLogDate,
+                        member.profilePicture,
+                        kid.kinderNo,
+                        kid.kidNo,
+                        acceptLog1.acceptNo,
+                        parentKid.isMainParent
+                ))
+                .from(member)
+                .join(parentKid).on(member.id.eq(parentKid.id))
+                .join(kid).on(
+                        kid.kidNo.eq(parentKid.kidNo)
+                        .and(kid.dischargeFlag.eq(BooleanEnum.FALSE.getBool()))
+                )
+                .join(acceptLog1).on(
+                        acceptLog1.acceptNo.eq(parentKid.acceptNo)
+                        .and(acceptLog1.acceptStatus.eq(AcceptStatusEnum.ACCEPT.getStatus()))
+                )
+                .where(
+                        member.status.eq(MemberStatusEnum.ACTIVE.getStatus()),
+                        member.username.eq(username)
+                )
+                .orderBy(acceptLog1.acceptDate.asc())
+                .fetchFirst();
+    }
+
 }

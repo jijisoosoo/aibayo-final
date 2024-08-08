@@ -30,89 +30,55 @@ public class KidController {
     private final MemberService memberService;
     private final JWTUtil jwtUtil;
 
-    // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
-
-//    private int roleNo = 1;
-//    private Long id = 2L;
-//    private Long kinderNo = 1L;
-
-//    private int roleNo = 2;
-//    private Long id = 31L;
-
-//    private int roleNo = 3;
-//    private Long id = 14L;
-
-    @ModelAttribute
-    public void addAttributes(HttpServletRequest request, Model model) {
-//        String username = (String) request.getAttribute("username");
-//        String username = "admin";
-        String token = getTokenFromCookies(request.getCookies());
-        String username = jwtUtil.getUsername(token);
-        log.info("loginUser: {}", username);
-        MemberDto memberDto = memberService.findByUsername(username);
-//        memberDto.setKinderNo(1L);
-
-        model.addAttribute("loginInfo", memberDto);
-    }
-
-    private String getTokenFromCookies(Cookie[] cookies) {
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if ("jwt".equals(cookie.getName())) {
-                    return cookie.getValue();
-                }
-            }
-        }
-        return null;
-    }
-
     @GetMapping("/list")
-    public String list(Model model) {
+    public String list(@ModelAttribute("loginInfo") MemberDto loginInfo, Model model) {
         KidSearchCondition condition = new KidSearchCondition();
-        return getConditionAndGoList(model, condition);
+        return getConditionAndGoList(model, loginInfo, condition);
     }
 
     @PostMapping("/searchByClass")
     public String searchByClass(@RequestBody KidSearchCondition condition,
+                                @ModelAttribute("loginInfo") MemberDto loginInfo,
                                 Model model) {
         log.info("search: {}", condition);
 
-        return getConditionAndGoList(model, condition);
+        return getConditionAndGoList(model, loginInfo, condition);
     }
 
     @GetMapping("/{kidNo}")
-    public String detail(@PathVariable Long kidNo, Model model) {
-        getConditionAndGoDetail(kidNo, model);
+    public String detail(@PathVariable Long kidNo,
+                         @ModelAttribute("loginInfo") MemberDto loginInfo,
+                         Model model) {
+        getConditionAndGoDetail(kidNo, loginInfo, model);
 
         return "/admin/kid/detail";
     }
 
     @GetMapping("/user/{kidNo}")
-    public String userDetail(@PathVariable Long kidNo, Model model) {
-        MemberDto loginInfo = (MemberDto) model.getAttribute("loginInfo");
-
+    public String userDetail(@PathVariable Long kidNo,
+                             @ModelAttribute("loginInfo") MemberDto loginInfo,
+                             Model model) {
         // 주보호자 여부 확인
         MemberSearchCondition condition = new MemberSearchCondition();
         condition.setId(loginInfo.getId());
-        condition.setKidNo(kidNo);
+        condition.setKidNo(loginInfo.getKidNo());
 
-        MemberDto loginUser = memberService.getByIdAndKidNo(condition);
+        model.addAttribute("isMainParent", loginInfo.getIsMainParent());
 
-        model.addAttribute("isMainParent", loginUser.getIsMainParent());
-
-        getConditionAndGoDetail(kidNo, model);
+        getConditionAndGoDetail(kidNo, loginInfo, model);
 
         return "/user/kid/detail";
     }
 
     @PostMapping("/modifyOk")
-    public String modifyOk(@RequestBody KidDto kidDto, Model model) {
-        MemberDto loginInfo = (MemberDto) model.getAttribute("loginInfo");
+    public String modifyOk(@RequestBody KidDto kidDto,
+                           @ModelAttribute("loginInfo") MemberDto loginInfo,
+                           Model model) {
         int roleNo = loginInfo.getRoleNo();
 
         kidService.updateClassKid(kidDto);
 
-        getConditionAndGoDetail(kidDto.getKidNo(), model);
+        getConditionAndGoDetail(kidDto.getKidNo(), loginInfo, model);
 
         if (roleNo < 2) {
             return "/admin/kid/detail";
@@ -125,8 +91,8 @@ public class KidController {
     }
 
     @GetMapping("/write")
-    public String writeForm(Model model) {
-        MemberDto loginInfo = (MemberDto) model.getAttribute("loginInfo");
+    public String writeForm(@ModelAttribute("loginInfo") MemberDto loginInfo,
+                            Model model) {
         if (loginInfo == null) {
             throw new IllegalArgumentException("유효하지 않은 접근입니다.");
         }
@@ -139,8 +105,9 @@ public class KidController {
     }
 
     private void getConditionAndGoDetail(@PathVariable Long kidNo,
+                                         @ModelAttribute("loginInfo") MemberDto loginInfo,
                                          Model model) {
-        MemberDto loginInfo = (MemberDto) model.getAttribute("loginInfo");
+//        MemberDto loginInfo = (MemberDto) model.getAttribute("loginInfo");
 
         KidDto kidDto = kidService.getByKidNo(kidNo);
         List<MemberDto> memberDtos = memberService.getAllByKidNo(kidNo);
@@ -153,8 +120,9 @@ public class KidController {
         model.addAttribute("allClass", classAllDtos);
     }
 
-    private String getConditionAndGoList(Model model, KidSearchCondition condition) {
-        MemberDto loginInfo = (MemberDto) model.getAttribute("loginInfo");
+    private String getConditionAndGoList(Model model,
+                                         @ModelAttribute("loginInfo") MemberDto loginInfo,
+                                         KidSearchCondition condition) {
 
         condition.setKinderNo(loginInfo.getKinderNo());
 

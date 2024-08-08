@@ -1,11 +1,9 @@
 package com.aico.aibayo.config;
 
 import com.aico.aibayo.dto.member.CustomOAuth2Member;
-import com.aico.aibayo.jwt.CustomLogoutFilter;
-import com.aico.aibayo.jwt.JWTFilter;
-import com.aico.aibayo.jwt.JWTUtil;
-import com.aico.aibayo.jwt.LoginFilter;
+import com.aico.aibayo.jwt.*;
 import com.aico.aibayo.oauth2.CustomSuccessHandler;
+import com.aico.aibayo.repository.member.MemberRepository;
 import com.aico.aibayo.service.member.CustomOAuth2MemberService;
 import com.aico.aibayo.service.member.TokenService;
 import jakarta.servlet.ServletException;
@@ -41,6 +39,7 @@ public class SecurityConfig {
     private final JWTUtil jwtUtil;
     private final AuthenticationConfiguration authenticationConfiguration;
     private final TokenService tokenService;
+    private final MemberRepository memberRepository;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
@@ -88,11 +87,9 @@ public class SecurityConfig {
                 }));
 
         // JWT 검증
-//        http.addFilterAfter(new JWTFilter(jwtUtil), OAuth2LoginAuthenticationFilter.class);
-//        http.addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, tokenService), UsernamePasswordAuthenticationFilter.class);
-//        http.addFilterBefore(new CustomLogoutFilter(jwtUtil, tokenService), UsernamePasswordAuthenticationFilter.class);
         http.addFilterAfter(new JWTFilter(jwtUtil), OAuth2LoginAuthenticationFilter.class);
         http.addFilterBefore(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, tokenService), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new CustomMemberStatusFilter(memberRepository), UsernamePasswordAuthenticationFilter.class); // member의 status (accept_log -> accept_status)
         http.addFilterBefore(new CustomLogoutFilter(jwtUtil, tokenService), UsernamePasswordAuthenticationFilter.class);
 
 
