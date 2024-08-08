@@ -14,7 +14,7 @@ import lombok.*;
 @IdClass(ParentKidId.class)
 public class ParentKidEntity {
     @Id
-    @Column(name = "id")
+    @Column(name = "id") // member_id
     private Long id;
     @Id
     @Column(name = "kid_no")
