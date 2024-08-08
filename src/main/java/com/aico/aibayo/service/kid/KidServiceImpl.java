@@ -9,7 +9,7 @@ import com.aico.aibayo.entity.AcceptLogEntity;
 import com.aico.aibayo.entity.ClassKidEntity;
 import com.aico.aibayo.entity.KidEntity;
 import com.aico.aibayo.repository.AcceptLogRepository;
-import com.aico.aibayo.repository.ClassKidRepository;
+import com.aico.aibayo.repository.classKid.ClassKidRepository;
 import com.aico.aibayo.repository.kid.KidRepository;
 
 import java.time.LocalDateTime;
