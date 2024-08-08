@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" th:href="@{/css/member/signUp.css}" />
+    <link rel="stylesheet" th:href="@{/css/member/signInGuide.css}" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function sendFormData() {
+            const formData = {
+                username: $("#email-input").val(),
+                password: $("#password-input").val(),
+                phone: $("#phone-input").val(),
+                name: $("#name-input").val(),
+                role: "ROLE_USER",  // 역할을 고정값으로 설정
+                invite: "yes",
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/member/signUpKid",
+                contentType: "application/json",
+                data: JSON.stringify(formData),
+                success: function(response) {
+                    window.location.href = "/member/signUpKid";
+                },
+                error: function(error) {
+                    console.log("Error:", error);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<div class="screen">
+    <div class="div">
+        <div class="overlap">
+            <div class="group">
+                <div class="overlap-group">
+                    <div class="text-wrapper-2">회원가입</div>
+
+                    <form id="sign-up-form" onsubmit="event.preventDefault(); sendFormData();">
+
+                        <div class="group-2">
+                            <div class="group-3">
+                                <div class="enter-your-username" style="font-size: small">이메일</div>
+                                <input class="overlap-group-3" type="email" name="username" id="email-input">
+                            </div>
+                            <div class="group-4">
+                                <div class="enter-your-username" style="font-size: small">비밀번호</div>
+                                <input class="overlap-group-3" type="password" name="password" id="password-input">
+                            </div>
+                            <div class="group-5">
+                                <div class="enter-your-username" style="font-size: small">전화번호</div>
+                                <input type="text" class="overlap-group-3" name="phone" id="phone-input">
+                            </div>
+                            <div class="group-6">
+                                <div class="group-7">
+                                    <div class="overlap-group-4">
+                                        <div class="text-wrapper-5" style="font-size: small">이름</div>
+                                        <input class="text-wrapper-6" type="text" name="name" id="name-input" th:value="${name}" readonly>
+                                    </div>
+                                </div>
+                                <div class="overlap-wrapper">
+                                    <div class="overlap-group-4">
+                                        <div class="text-wrapper-5" style="font-size: small">역할</div>
+                                        <input type="text" class="text-wrapper-9" name="role" id="role-input" value="ROLE_USER" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="overlap-group-wrapper">
+                            <input class="overlap-group-2" type="submit" value="회원가입">
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="logo h_class_78">
+            <div class="h_class_79"><a th:href="@{/main/admin}" style="text-decoration: none; color: inherit; font-family: 'Noto Sans KR', sans-serif;">aibayo</a></div>
+        </div>
+
+        <a th:href="@{/member/signIn}" class="span">소셜 로그인</a>
+
+    </div>
+</div>
+</body>
+</html>
