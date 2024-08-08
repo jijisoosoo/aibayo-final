@@ -106,6 +106,10 @@ public class MemberController {
 
     @PostMapping("/finalSignUp")
     public String finalSignUp(@ModelAttribute MemberDto member) {
+        if (member == null) {
+            log.error("MemberDto is null");
+            return "errorPage"; // 적절한 에러 페이지로 리다이렉트
+        }
 
         // 회원가입 처리 로직 (예: 데이터베이스에 저장)
         log.info("Username: {}", member.getUsername());
@@ -113,9 +117,9 @@ public class MemberController {
         log.info("Password: {}", member.getPassword());
         log.info("Phone: {}", member.getPhone());
         log.info("Role: {}", member.getRole());
-//        log.info("KidName: {}", member.getKidName());
-//        log.info("Birth: {}", member.getKidBirth());
-//        log.info("Gender: {}", member.getKidGender());
+        log.info("KidName: {}", member.getKidName());
+        log.info("Birth: {}", member.getKidBirth());
+        log.info("Gender: {}", member.getKidGender());
         log.info("KinderNo: {}", member.getKinderNo());
         log.info("ClassNo: {}", member.getClassNo());
         log.info("Relationship: {}", member.getRelationship());
@@ -128,9 +132,9 @@ public class MemberController {
         memberDto.setRole(member.getRole());
 
         memberDto.setKidNo(member.getKidNo());
-//        memberDto.setKidName(member.getKidName());
-//        memberDto.setKidBirth(member.getKidBirth());
-//        memberDto.setKidGender(member.getKidGender());
+        memberDto.setKidName(member.getKidName());
+        memberDto.setKidBirth(member.getKidBirth());
+        memberDto.setKidGender(member.getKidGender());
 
         memberDto.setKinderNo(member.getKinderNo());
         memberDto.setClassNo(member.getClassNo());

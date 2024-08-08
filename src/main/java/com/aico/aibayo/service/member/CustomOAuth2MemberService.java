@@ -2,6 +2,7 @@ package com.aico.aibayo.service.member;
 
 import com.aico.aibayo.dto.member.*;
 import com.aico.aibayo.entity.MemberEntity;
+import com.aico.aibayo.exception.MemberNotFoundException;
 import com.aico.aibayo.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -34,7 +35,8 @@ public class CustomOAuth2MemberService extends DefaultOAuth2UserService {
 
         String username = oAuth2Response.getProvider() + " " + oAuth2Response.getProviderId();
 
-        MemberEntity existData = memberRepository.findByUsername(username);
+        MemberEntity existData = memberRepository.findByUsername(username)
+                .orElseThrow(() -> new MemberNotFoundException("username으로 검색한 member 값이 없습니다."));;
         if (existData == null) {
             MemberEntity memberEntity = new MemberEntity();
             memberEntity.setUsername(username);
