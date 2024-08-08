@@ -5,7 +5,8 @@ import lombok.Getter;
 @Getter
 public enum MemberStatusEnum {
     INACTIVE(0),
-    ACTIVE(1);
+    ACTIVE(1),
+    TEMP(2); // 관리자 승인 전
 
     private final Integer status;
 

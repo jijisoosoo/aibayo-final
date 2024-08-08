@@ -1,8 +1,8 @@
 package com.aico.aibayo.service.member;
 
+import com.aico.aibayo.common.MemberStatusEnum;
 import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.dto.member.MemberSearchCondition;
-import com.aico.aibayo.entity.AcceptLogEntity;
 import com.aico.aibayo.entity.MemberEntity;
 import com.aico.aibayo.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -44,14 +44,9 @@ public class MemberServiceImpl implements MemberService {
         memberEntity.setPhone(phone);
         memberEntity.setRegDate(LocalDateTime.now());
         memberEntity.setLatestLogDate(LocalDateTime.now());
-        memberEntity.setStatus(0); // wait
+        memberEntity.setStatus(MemberStatusEnum.TEMP.getStatus()); // wait
         memberRepository.save(memberEntity);
 
-//        AcceptLogEntity acceptLog = new AcceptLogEntity();
-//        acceptLog.setMemberId(memberEntity.getId());
-//        acceptLog.setAcceptStatus(0);
-//        acceptLog.setAcceptRegDate(LocalDateTime.now());
-//        acceptLogRepository.save(acceptLog);
 
         // 새로운 DTO 생성 및 반환
         MemberDto newMemberDto = new MemberDto();
@@ -66,16 +61,16 @@ public class MemberServiceImpl implements MemberService {
         return newMemberDto;
     }
 
-    public void acceptMember(String username) {
-        MemberEntity member = memberRepository.findByUsername(username);
-        member.setStatus(1); // accept
-        memberRepository.save(member);
+//    public void acceptMember(String username) {
+//        MemberEntity member = memberRepository.findByUsername(username);
+//        member.setStatus(MemberStatusEnum.ACTIVE.getStatus()); // accept
+//        memberRepository.save(member);
 
 //        AcceptLogEntity acceptLog = acceptLogRepository.findByMemberId(memberId);
 //        acceptLog.setAcceptStatus(1);
 //        acceptLog.setAcceptModifyDate(LocalDateTime.now());
 //        acceptLogRepository.save(acceptLog);
-    }
+//    }
 
     @Override
     public List<MemberDto> getAllByKidNo(Long kidNo) {
