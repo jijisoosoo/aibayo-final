@@ -1,5 +1,4 @@
 let calendar;
-let events = [];
 
 let startDate = null;
 let endDate = null;
@@ -9,6 +8,18 @@ $(document).ready(function() {
 
     calendar = new FullCalendar.Calendar(calendarEl, {
         googleCalendarApiKey: 'AIzaSyCP6SR1SXMeU1HuXRVzKjMWpzZmlwCBvfE',
+        events: {
+            googleCalendarId: 'ko.south_korea#holiday@group.v.calendar.google.com',
+            backgroundColor: 'transparent',
+            color: 'transparent',
+            textColor: 'red',
+            className: 'google-cal',
+            eventDataTransform: function(eventData) {
+                // URL 속성 제거
+                delete eventData.url;
+                return eventData;
+            }
+        },
         themeSystem: 'bootstrap5',
         headerToolbar: {
             left: '',
@@ -25,6 +36,12 @@ $(document).ready(function() {
             list: '목록'
         },
         eventClick: function (info) {
+            let classNames = JSON.stringify(info.el.fcSeg.eventRange.ui.classNames);
+
+            if (classNames.includes('google-cal')) {
+                return;
+            }
+
             let date = new Date(info.event.start);
             date.setHours(date.getHours() + 9);  // 9시간을 추가(KST)
             let formattedDate = date.toISOString().split('T')[0];
@@ -62,6 +79,36 @@ $(document).ready(function() {
 
             // 현재 표시 중인 달 기준으로 식단표 목록 조회하여 event에 추가
             loadEvents(dateInfo);
+
+            //
+        },
+        eventOrder: "className,-start,-id",
+        loading: function (isLoading) {
+            if (isLoading) {
+                $('#calendar').addClass('loading-cal');
+                $('#loading-spinner').show();
+            } else {
+                $('#loading-spinner').hide();
+                $('#calendar').removeClass('loading-cal');
+            }
+        },
+        eventDidMount: function(info) {
+            let classNames = JSON.stringify(info.el.fcSeg.eventRange.ui.classNames);
+            // console.log(`info: ${JSON.stringify(info)}`);
+            // console.log(`info.el.fcSeg.eventRange.ui.classNames: ${JSON.stringify(classNames)}`);
+
+            // console.log(`className includes 'google-cal' ? ${classNames.includes('google-cal')}`);
+            if (classNames.includes('google-cal')) {
+                let aTag = info.el.querySelector('a');
+                if (aTag) {
+                    aTag.href = 'javascript:void(0);';  // href 속성을 무효화
+                    aTag.onclick = function(e) { e.preventDefault(); }; // 클릭 이벤트를 무효화
+                }
+            }
+
+            // console.log(`info.event: ${JSON.stringify(info.event)}`);
+            // console.log(`info.event.url: ${JSON.stringify(info.event.url)}`);
+            // console.log(`info.event.extendedProps.mealNo: ${JSON.stringify(info.event.extendedProps.mealNo)}`);
         }
     });
 
@@ -71,10 +118,9 @@ $(document).ready(function() {
 
 function afterSuccess(response) {
     // console.log(`response: ${JSON.stringify(response)}`);
+    calendar.removeAllEvents();
 
-    // api 연동하여 해당 달의 공휴일 불러오기
-
-
+    let events = [];
     let title = "식단 조회하기";
 
 
@@ -88,39 +134,28 @@ function afterSuccess(response) {
     });
 
     // console.log(`events: ${JSON.stringify(events)}`);
-    // calendar.removeAllEvents();
-
-    let calendarId = "8ba78b243a9cc492f02ecf15ce54f7db5f2a554d4ccabefcdcc799b7292b5611@group.calendar.google.com"
-    let url=`https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events`
-
-    $.ajax({
-        url: url,
-        data: {
-            'timeMin': startDate,
-            'timeMax': endDate,
-            'singleEvents': true,
-            // 'orderBy': 'startTime',
-        },
-        success: function (response) {
-            console.log(`api response: ${response}`);
-        }
-    });
-
-
-    // calendar.addEventSource(events);
+    calendar.addEventSource(events);
 }
 
 function loadEvents(dateInfo) {
+    // console.log(`dateInfo: ${JSON.stringify(dateInfo)}`);
+    // console.log(`dateInfo.view: ${JSON.stringify(dateInfo.view)}`);
+    // console.log(`dateInfo.view.activeStart: ${JSON.stringify(dateInfo.view.activeStart)}`)
+    // console.log(`dateInfo.view.activeEnd: ${JSON.stringify(dateInfo.view.activeEnd)}`)
+
     // 달력에 표시 중인 달 확인
-    let currentStartDate = dateInfo.view.currentStart;
-    let currentEndDate = dateInfo.view.currentEnd;
+    let activeStartDate = dateInfo.view.activeStart;
+    let activeEndDate = dateInfo.view.activeEnd;
+
+    // let currentStartDate = dateInfo.view.currentStart;
+    // let currentEndDate = dateInfo.view.currentEnd;
     // let currentMonth = currentStartDate.getMonth() + 1;
     // console.log("현재 표시중인 시작일: " + currentStartDate);
     // console.log("현재 표시중인 말일: " + currentEndDate);
     // console.log("현재 표시중인 달: " + currentMonth);
 
-    startDate = moment(currentStartDate).format('YYYY-MM-DD');
-    endDate = moment(currentEndDate).subtract(1, 'days').format('YYYY-MM-DD');
+    startDate = moment(activeStartDate).format('YYYY-MM-DD');
+    endDate = moment(activeEndDate).subtract(1, 'd').format('YYYY-MM-DD');
 
     let url = "/meal/getByMonth";
 
@@ -129,48 +164,7 @@ function loadEvents(dateInfo) {
         endDate : endDate,
         kinderNo: $('#calendar').data('kinder-no')
     }
-    console.log(`param: ${JSON.stringify(param)}`);
+    // console.log(`param: ${JSON.stringify(param)}`);
 
     commonAjax(url, 'POST', param);
 }
-
-
-// function fetchHolidays(startDate, endDate) {
-//     return new Promise(function(resolve, reject) {
-//         $.ajax({
-//             url: '/calendars/ko.south_korea#holiday@group.v.calendar.google.com/events',
-//             data: {
-//                 'timeMin': startDate,
-//                 'timeMax': endDate,
-//                 'singleEvents': true,
-//                 // 'orderBy': 'startTime',
-//                 'calendarId': 'AIzaSyCP6SR1SXMeU1HuXRVzKjMWpzZmlwCBvfE'
-//             },
-//             success: function(response) {
-//                 resolve(response.items);
-//             },
-//             error: function(error) {
-//                 reject(error);
-//             }
-//         });
-//     });
-// }
-
-// function initClient() {
-//     gapi.client.init({
-//         'apiKey': 'AIzaSyCP6SR1SXMeU1HuXRVzKjMWpzZmlwCBvfE'
-//     }).then(function() {
-//
-//         fetchHolidays(startDate, endDate).then(function(returnedEvents) {
-//             // timeMin = startDate.toISOString();
-//             // timeMax = endDate.toISOString();
-//             console.log('Updated timeMin:', startDate);
-//             console.log('Updated timeMax:', endDate);
-//
-//             // FullCalendar에 이벤트 추가
-//             events.add(...returnedEvents);
-//         });
-//     }).catch(function(error) {
-//         console.log('Error initializing Google API client: ', error);
-//     });
-// }
