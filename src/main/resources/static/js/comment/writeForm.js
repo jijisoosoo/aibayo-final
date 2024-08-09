@@ -43,7 +43,7 @@ $(document).ready(function () {
             })
         Swal.fire({
             title: "등록 완료",
-            text: "창을 닫으면 목록 화면으로 돌아갑니다.",
+            text: "창을 닫으면 상세 화면으로 돌아갑니다.",
             icon: "success",
             customClass: {
                 confirmButton: 'btn-ab btn-ab-swal'
@@ -84,20 +84,3 @@ $(document).ready(function () {
         });
     });
 });
-function afterSuccess(response, method) {
-    if (method === 'DELETE' && response.invisibleFlag === '1') {
-        Swal.fire({
-            title: "삭제 완료",
-            text: "창을 닫으면 이전 화면으로 돌아갑니다.",
-            icon: "success",
-            customClass: {
-                confirmButton: 'btn-ab btn-ab-swal'
-            }
-        }).then((result) => {
-            let announceNo = $('#detail').data('announce-no');
-            console.log(`announceNo : ${announceNo}`);
-            window.location.href = `${window.location.origin}/announce/user/${announceNo}`;
-
-        });
-    }
-}

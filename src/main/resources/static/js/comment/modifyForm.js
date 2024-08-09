@@ -42,18 +42,35 @@ $(document).ready(function () {
 
 function afterSuccess(response,method) {
     console.log("comment modify")
-    if(method === 'PUT' && response. comment)
+    if (method === 'PUT' && response.comment)
         Swal.fire({
-            title: " 완료",
-            text: "창을 닫으면 이전 화면으로 돌아갑니다. (댓글)",
+            title: " 수정 완료",
+            text: "창을 닫으면 이전 화면으로 돌아갑니다.",
             icon: "success",
             customClass: {
                 confirmButton: 'btn-ab btn-ab-swal'
 
             }
 
-        }).then((result) => {let announceNo =$('#detail').data('announce-no');
+        }).then((result) => {
+            let announceNo = $('#detail').data('announce-no');
             console.log("announceNo : {}", announceNo);
-            window.location.href = window.location.origin + '/announce/user/'+announceNo;
+            window.location.href = window.location.origin + '/announce/user/' + announceNo;
         });
+
+    if (method === 'DELETE' && response.invisibleFlag === '1') {
+        Swal.fire({
+            title: "삭제 완료",
+            text: "창을 닫으면 이전 화면으로 돌아갑니다.",
+            icon: "success",
+            customClass: {
+                confirmButton: 'btn-ab btn-ab-swal'
+            }
+        }).then((result) => {
+            let announceNo = $('#detail').data('announce-no');
+            console.log(`announceNo : ${announceNo}`);
+            window.location.href = `${window.location.origin}/announce/user/${announceNo}`;
+
+        });
+    }
 }
