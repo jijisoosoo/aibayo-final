@@ -3,6 +3,8 @@ let calendar;
 let startDate = null;
 let endDate = null;
 
+const delimiter = "::";
+
 $(document).ready(function() {
     let calendarEl = document.getElementById('calendar');
 
@@ -37,30 +39,21 @@ $(document).ready(function() {
         },
         eventClick: function (info) {
             let classNames = JSON.stringify(info.el.fcSeg.eventRange.ui.classNames);
+            let mealNo = JSON.stringify(info.event.extendedProps.mealNo);
 
             if (classNames.includes('google-cal')) {
                 return;
             }
 
-            // let date = new Date(info.event.start);
-            // date.setHours(date.getHours() + 9);  // 9시간을 추가(KST)
-            // let formattedDate = date.toISOString().split('T')[0];
-            // console.log("formattedDate: " + formattedDate);
+            let param = {
+                mealNo : mealNo,
+                isDetail : true
+            }
+            console.log(`param: ${JSON.stringify(param)}`);
 
-            // // 상세조회에 필요한 값들 세팅
-            // $("#meal_date").val(formattedDate);
-            // $("#kinder_no").val("${kinderNo}");
-            // // event 객체 생성 시 설정한 사용자 정의 속성 불러오기
-            // $("#meal_no_for_detail").val(info.event.extendedProps.mealNo);
-            //
-            // $("#detailForm").submit();
+            let url = `/meal/admin/detail`;
 
-            // 모달의 내용 세팅
-            $('#mealDetailLabel').text("2024년 07월 14일 식단표");
-            console.log(info.event.title);
-
-            // 모달 팝업
-            $('#mealDetail').modal('show');
+            commonAjax(url, 'POST', param);
 
         },
         locale: 'ko',
@@ -117,8 +110,11 @@ $(document).ready(function() {
 });
 
 function afterSuccess(response) {
+    // console.log(`response: ${response}`);
+    // console.log(`response: ${JSON.stringify(response)}`);
+
     // 전체조회일 경우
-    if (response.isDetail == null) {
+    if (response.detail == null) {
         // console.log(`response: ${JSON.stringify(response)}`);
         calendar.removeAllEvents();
 
@@ -137,6 +133,89 @@ function afterSuccess(response) {
 
         // console.log(`events: ${JSON.stringify(events)}`);
         calendar.addEventSource(events);
+    }
+
+    if (response.detail) {
+        console.log(`상세조회 모달 세팅..`);
+        console.log(`response: ${JSON.stringify(response)}`)
+
+        // 모달의 내용 세팅
+        let modalDetailTag = `<div class="modal fade fixed-width-modal" id="mealDetail"
+         tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h1 class="modal-title modal_header_title" id="mealDetailLabel"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+
+                <div class="modal-body modal_body">
+
+                    <div class="modal_meals_box">
+
+`;
+
+            // detail 수만큼 추가
+            for (let detail of response.mealDetails) {
+                console.log(`detail: ${JSON.stringify(detail)}`);
+
+                let menuNames = detail.mealMenu.replaceAll(delimiter, `<br>`);
+                console.log(`menuNames: ${menuNames}`);
+
+                modalDetailTag += `<div class="modal_meal_item_box">
+
+                            <div class="modal_meal_title_box">
+                                <div class="modal_meal_title">${detail.mealTypeName}</div>
+                            </div>
+
+
+                            <div class="modal_meal_img_box">
+                                <img class="modal_meal_img" src="http://via.placeholder.com/330x300">
+                            </div>
+
+                            <div class="modal_meal_menu_box">
+                                <div class="modal_meal_menu">
+                                    ${menuNames}
+                                </div>
+                            </div>
+
+                        </div>
+
+                    
+`;
+            }
+
+        modalDetailTag += `</div>
+
+                </div>
+
+
+                <div class="modal-footer modal_meal_detail_footer">
+                    <div class="modal_btns_box">
+
+                        <a class="btn btn-ab modal_btn_box" href="/meal/admin/modify" alt="수정">
+                            <div class="modal_btn_text">수정</div>
+                        </a>
+
+
+                        <div class="btn btn-danger modal_btn_box">
+                            <div class="modal_btn_text">삭제</div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>`
+
+        // 기존 html에 추가
+        $('.calendar_box').after(modalDetailTag);
+
+        // 모달 팝업
+        $('#mealDetail').modal('show');
     }
 }
 

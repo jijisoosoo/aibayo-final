@@ -132,6 +132,7 @@
     border-radius: 4px;
     gap: 10px 0;
     justify-content: space-between;
+    width: 100%;
 }
 
 .modal_meal_item_box {
