@@ -19,3 +19,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add event listener to kindergarten select
     kindergartenSelect.addEventListener('change', toggleClassField);
 });
+
+function submitForm() {
+    var formData = $("#signUpKidForm").serialize();
+
+    $.ajax({
+        type: "POST",
+        url: "/member/finalSignUp",
+        data: formData,
+        success: function(response) {
+            // 성공 시 처리
+            console.log("회원가입 성공");
+            window.location.href = "/member/signIn"; // 성공 페이지로 리다이렉트
+        },
+        error: function(error) {
+            // 에러 시 처리
+            console.log("회원가입 실패");
+            window.location.href = "/member/signIn"; // 에러 페이지로 리다이렉트
+        }
+    });
+}
