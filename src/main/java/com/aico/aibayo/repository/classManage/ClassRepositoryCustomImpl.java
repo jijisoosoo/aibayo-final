@@ -115,7 +115,8 @@ public class ClassRepositoryCustomImpl implements ClassRepositoryCustom{
         List<ClassDto> classes = jpaQueryFactory
                 .select(Projections.constructor(ClassDto.class,
                         clazz.classNo,
-                        clazz.className))
+                        clazz.className,
+                        acceptLog.acceptNo))
                 .from(clazz)
                 .join(classTeacher).on(clazz.classNo.eq(classTeacher.classNo))
                 .join(acceptLog).on(classTeacher.acceptNo.eq(acceptLog.acceptNo))

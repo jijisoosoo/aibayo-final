@@ -23,7 +23,7 @@
         </a>
         <div class="div-wrapper"><div class="text-wrapper-title">교사 정보</div></div>
     </div>
-    <div class="profile" th:object="${teacher}" th:value="*{id}">
+    <div class="profile" th:object="${teacher}" th:id="*{id}">
         <div class="blank"></div>
         <div class="div-profile">
             <div class="img-2">
@@ -141,7 +141,7 @@
                                         </label>
 
                                         <div class="class-selected addableClassList" th:each="class:${addableClassList}" th:id="${class.classNo}" ></div>
-                                        <div class="class-selected assignedClassList" th:each="class:${assignedClassList}" th:id="${class.classNo}" ></div>
+                                        <div class="class-selected assignedClassList" th:each="class:${assignedClassList}" th:id="${class.classNo}" th:data-accept-no="${class.assignedCntOrAcceptNo}" ></div>
                                     </div>
                                     <div class="wrapper-notice">※ 배정된 교사가 최대인원(3명)에 도달한 반은 선택할 수 없습니다.</div>
                                 </div>
@@ -158,7 +158,7 @@
             </div>
             <div class="selectedclasses">
                 <div class="class" th:each="class:${assignedClassList}" th:object="${assignedClassList}">
-                    <div class="text-class" id="class_broccoli" th:text="${class.className}">반이름</div>
+                    <div class="text-class" th:id="${class.classNo}" th:text="${class.className}">반이름</div>
                 </div>
             </div>
         </div>

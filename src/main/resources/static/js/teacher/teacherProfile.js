@@ -13,7 +13,7 @@ $(document).ready(function() {
     // 소속 반 수정하고 보여주기
     $(document).on('click', '#classModify', function () {
 
-        let teacherId = $('.profile').val();
+        let teacherId = $('.profile').attr('id');
 
         // 기존 반 불러오기
         let assignedElements = document.querySelectorAll('.assignedClassList');
@@ -24,24 +24,27 @@ $(document).ready(function() {
             return this.id;
         }).get();
 
-        let oldClassIds = assignedClassIds.filter(id => !checkedClassIds.includes(id));
-        let newClassIds = checkedClassIds.filter(id => !assignedClassIds.includes(id));
+        let oldClassElements = Array.from(assignedElements).filter(element => !checkedClassIds.includes(element.id));
+        let oldClassAcceptNos = oldClassElements.map(element => parseInt(element.getAttribute('data-accept-no')));
 
-
+        let newClassIds = Array.from(checkedClassIds).filter(id => !assignedClassIds.includes(id));
 
         let param = {
-            oldClassIds: oldClassIds,
+            oldClassAcceptNos: oldClassAcceptNos,
             newClassIds: newClassIds
         };
 
         console.log("checkedClassIds  : " + JSON.stringify(param));
 
         let url = "/teacher/teacherProfileAccept/{" + teacherId + "}";
+        console.log(url);
         commonAjax(url, 'POST', param);
-
-
     });
 });
+
+function afterSuccess(response) {
+    $('.selectedclasses').replaceWith($(response).find('.selectedclasses'));
+}
 
 
 

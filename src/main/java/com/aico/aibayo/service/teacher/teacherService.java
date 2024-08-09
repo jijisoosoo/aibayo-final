@@ -13,7 +13,6 @@ public interface teacherService {
     List<teacherDto> getAllByKinderNo(TeacherSearchCondition condition);
     List<teacherDto> getAcceptedTeacherByKinderNoAndClassNo(TeacherSearchCondition condition);
     teacherDto getTeacherById(Long id);
+    void updateClassTeacher(List<Long> newClassIds, List<Long> oldClassAcceptNos, Long id);
 
-    void assignNewClass(List<Long> newClassIds, Long id);
-    void deleteExistingClass(List<Long> oldClassIds, Long id);
 }
