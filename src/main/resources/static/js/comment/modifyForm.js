@@ -2,7 +2,6 @@ $(document).ready(function () {
     let modifyForm = $('#modifyCommentForm');
     function initializeForm() {
         $('#modifiedComment').val(modifyForm.data('comment-content'));
-        $('#content').summernote('code', modifyForm.data('board-contents'));
     }
     initializeForm();
 
@@ -21,13 +20,12 @@ $(document).ready(function () {
             }
         }).then((result) => {
             if (result.isConfirmed) {
-                // 폼 데이터 설정 함수 호출
-                setData(modifyForm);
 
                 // 폼 데이터 수집
                 let param = {
                     commentNo : modifyForm.data('comment-no'),
-                    commentContent : modifyForm.data('comment-content')
+                    commentContent :$('#modifiedComment').val(),
+                    isComment : true
                 };
 
                 console.log('param: ' + JSON.stringify(param));
@@ -42,20 +40,9 @@ $(document).ready(function () {
     });
 });
 
-
-
-
-
-
-
-
-
-
-
-
 function afterSuccess(response,method) {
-
-    if(method === 'PUT' && response.invisibleFlag === '1')
+    console.log("comment modify")
+    if(method === 'PUT' && response. comment)
         Swal.fire({
             title: " 완료",
             text: "창을 닫으면 이전 화면으로 돌아갑니다. (댓글)",
@@ -65,11 +52,8 @@ function afterSuccess(response,method) {
 
             }
 
-        }).then((result) => {
-            let announceNo =$('#detail').data('announce-no');
+        }).then((result) => {let announceNo =$('#detail').data('announce-no');
             console.log("announceNo : {}", announceNo);
             window.location.href = window.location.origin + '/announce/user/'+announceNo;
         });
 }
-
-

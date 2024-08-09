@@ -34,6 +34,8 @@ public class CommentDto {
     private String commentContent;
     private String invisibleFlag;
 
+    private boolean isComment;
+
     public CommentDto(
             Integer roleNo, String name, Long kinderNo, Long boardNo,Long commentNo,
             Integer commentGroupNo,LocalDateTime commentRegDate, Long commentWriter,

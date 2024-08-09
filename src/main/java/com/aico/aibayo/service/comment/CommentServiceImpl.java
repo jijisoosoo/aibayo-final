@@ -95,7 +95,10 @@ public class CommentServiceImpl implements CommentService{
         commentEntity.setCommentModifyDate(LocalDateTime.now());
 
         CommentEntity save = commentRepository.save(commentEntity);
-        return CommentDto.toDto(save);
+        CommentDto dto = CommentDto.toDto(save);
+        dto.setComment(true);
+        return dto;
+
     }
 
 
