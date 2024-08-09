@@ -13,29 +13,24 @@
     <th:block layout:fragment="javascript">
         <script th:src="@{/js/login/myPage.js}" defer></script>
     </th:block>
-
-
 </head>
 
 <body>
 
-
 <div class="container main_container" layout:fragment="content">
     <div class="user-info">
         <h2>내 정보</h2>
-        <form th:action="@{/member/myPageUpdate}" method="post">
+        <form id="myPageForm" th:action="@{/member/myPageUpdate}" method="post">
             <input type="hidden" name="username" th:value="${username}" id="username">
 
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" th:value="${name}">
-<!--                <a href="#" class="btn btn-outline-ab">수정</a>-->
             </div>
 
             <div class="form-group">
                 <label for="phone">Phone</label>
                 <input type="text" id="phone" name="phone" th:value="${phone}">
-<!--                <a href="#" class="btn btn-outline-ab">수정</a>-->
             </div>
 
             <div class="form-group">
@@ -45,9 +40,13 @@
                 </button>
             </div>
 
-            <button type="submit" class="btn btn-save">저장</button>
-<!--            <a th:href="@{/member/deleteMember}" class="btn btn-remove">계정 삭제</a>-->
+            <!-- 저장 버튼 -->
+            <button type="button" class="btn btn-save" id="saveBtn">저장</button>
+
+            <!-- 계정 삭제 버튼 -->
             <a href="#" class="btn btn-remove" onclick="confirmDelete()">계정 삭제</a>
+
+            <!-- 서명 등록 버튼 -->
             <a th:href="@{/member/signature}" class="btn btn-ab">서명 등록</a>
         </form>
     </div>
@@ -58,7 +57,6 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="passwordModalLabel">비밀번호 수정</h5>
-
                 </div>
                 <div class="modal-body">
                     <form id="passwordForm" th:action="@{/member/updatePassword}" method="post">
@@ -81,14 +79,7 @@
             </div>
         </div>
     </div>
-
-
-
-
-
 </div>
-
 
 </body>
 </html>
-
