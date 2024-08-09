@@ -3,7 +3,9 @@ package com.aico.aibayo.control;
 import com.aico.aibayo.common.BooleanEnum;
 import com.aico.aibayo.common.MemberStatusEnum;
 import com.aico.aibayo.dto.member.MemberDto;
+import com.aico.aibayo.entity.MemberEntity;
 import com.aico.aibayo.jwt.JWTUtil;
+import com.aico.aibayo.repository.member.MemberRepository;
 import com.aico.aibayo.service.member.MemberServiceImpl;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,6 +29,7 @@ import java.util.Map;
 public class MemberController {
     private final MemberServiceImpl memberService;
     private final JWTUtil jwtUtil;
+    private final MemberRepository memberRepository;
 
     @ModelAttribute
     public void addAttributes(HttpServletRequest request, Model model) {
@@ -105,10 +108,10 @@ public class MemberController {
 
 
     @PostMapping("/finalSignUp")
-    public String finalSignUp(@ModelAttribute MemberDto member) {
+    public String finalSignUp(@RequestBody MemberDto member) {
         if (member == null) {
             log.error("MemberDto is null");
-            return "errorPage"; // 적절한 에러 페이지로 리다이렉트
+            return "/member/signIn"; // 적절한 에러 페이지로 리다이렉트
         }
 
         // 회원가입 처리 로직 (예: 데이터베이스에 저장)
@@ -167,14 +170,47 @@ public class MemberController {
     }
 
     @GetMapping("/myPage")
-    public String myPage() {
+    public String myPage(@ModelAttribute("loginInfo") MemberDto memberDto, Model model) {
+        String name = memberDto.getName();
+        String phone = memberDto.getPhone();
+        String username = memberDto.getUsername();
+
+        model.addAttribute("name", name);
+        model.addAttribute("phone", phone);
+        model.addAttribute("username", username);
+
         return "member/myPage";
+    }
+
+    @PostMapping("/myPageUpdate")
+    public String myPageUpdate(@ModelAttribute MemberDto memberDto) {
+        String name = memberDto.getName();
+        String phone = memberDto.getPhone();
+        String username = memberDto.getUsername();
+
+        MemberEntity memberEntity = memberRepository.findByUsername(username).orElse(null);
+        if (memberEntity != null) {
+            memberEntity.setName(name);
+            memberEntity.setPhone(phone);
+            memberRepository.save(memberEntity);
+        }
+        return "redirect:/member/myPage";
+    }
+
+    @GetMapping("/deleteMember")
+    public String deleteMember(@ModelAttribute("loginInfo") MemberDto memberDto) {
+        String username = memberDto.getUsername();
+        String role = memberDto.getRole();
+
+        memberService.deleteMember(username, role);
+
+        return "/member/signIn";
     }
 
 
     @PostMapping("/passwordExist")
-    public ResponseEntity<Map<String, Boolean>> passwordExist(@RequestBody Map<String, String> request, @ModelAttribute("loginInfo") MemberDto loginInfo) {
-        String username = loginInfo.getUsername(); // 토큰에서 가져온 username
+    public ResponseEntity<Map<String, Boolean>> passwordExist(@RequestBody Map<String, String> request, @ModelAttribute("loginInfo") MemberDto memberDto) {
+        String username = memberDto.getUsername(); // 토큰에서 가져온 username
         String password = request.get("password");
 
         log.info("passwordExist / username : {}", username);
@@ -196,15 +232,15 @@ public class MemberController {
     }
 
     @PostMapping("/updatePassword")
-    public String updatepassword(@RequestParam("newPassword") String newPassword, @ModelAttribute("loginInfo") MemberDto loginInfo) {
-        String username = loginInfo.getUsername();
+    public String updatepassword(@RequestParam("newPassword") String newPassword, @ModelAttribute("loginInfo") MemberDto memberDto) {
+        String username = memberDto.getUsername();
 
         log.info("updatePassword / username : {}", username);
         log.info("updatePassword / newPassword : {}", newPassword);
 
         memberService.updatePassword(username, newPassword);
 
-        if (loginInfo.getRole().equals("ROLE_ADMIN")) {
+        if (memberDto.getRole().equals("ROLE_ADMIN")) {
             return "/admin/main/main";
         } else {
             return "/user/main/main";

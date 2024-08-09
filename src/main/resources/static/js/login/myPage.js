@@ -1,8 +1,8 @@
-window.onload = function() {
+window.onload = function () {
     function closeModal() {
         let passwordModal = document.getElementById('passwordModal');
         let cancelButton = passwordModal.querySelector('.btn-secondary');
-        cancelButton.addEventListener('click', function() {
+        cancelButton.addEventListener('click', function () {
             let modalInstance = bootstrap.Modal.getInstance(passwordModal);
             if (modalInstance) {
                 modalInstance.hide();
@@ -49,7 +49,7 @@ window.onload = function() {
                 data: JSON.stringify({
                     password: currentPassword.value
                 }),
-                success: function(response) {
+                success: function (response) {
                     if (response.exists) {
                         passwordForm.submit();
                         alert("비밀번호를 수정했습니다.")
@@ -58,7 +58,7 @@ window.onload = function() {
                         resetInputs(currentPassword, newPassword, confirmPassword);
                     }
                 },
-                error: function() {
+                error: function () {
                     alert('서버 요청 중 오류가 발생했습니다.');
                     resetInputs(currentPassword, newPassword, confirmPassword);
                 }
@@ -85,3 +85,12 @@ window.onload = function() {
 
     initialize();
 };
+
+
+function confirmDelete() {
+    if (confirm("계정을 삭제하시겠습니까?")) {
+        window.location.href = "/member/deleteMember";
+        // window.location.href = /*[[@{/member/deleteMember}]]*/ '/member/deleteMember';
+    }
+    // '아니요'를 선택하면 아무 일도 하지 않습니다.
+}
