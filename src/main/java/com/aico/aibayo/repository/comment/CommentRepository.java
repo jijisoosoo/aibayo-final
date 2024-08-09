@@ -4,5 +4,5 @@ import com.aico.aibayo.entity.CommentEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CommentRepository extends JpaRepository<CommentEntity,Long>,CommentRepositoryCustom {
-    long countByBoardNo(Long boardNo);
+    long countByBoardNoAndInvisibleFlag(Long boardNo , String invisibleFlag);
 }

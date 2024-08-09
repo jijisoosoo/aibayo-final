@@ -9,6 +9,10 @@ import com.aico.aibayo.dto.comment.CommentDto;
 import com.aico.aibayo.dto.comment.CommentSearchCondition;
 import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.dto.member.MemberSearchCondition;
+import com.aico.aibayo.dto.notepad.NotepadDto;
+import com.aico.aibayo.entity.BoardEntity;
+import com.aico.aibayo.entity.CommentEntity;
+import com.aico.aibayo.repository.comment.CommentRepository;
 import com.aico.aibayo.service.announce.AnnounceService;
 import com.aico.aibayo.service.classManage.ClassService;
 import com.aico.aibayo.service.comment.CommentService;
@@ -23,9 +27,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 
 @Slf4j
@@ -37,6 +39,7 @@ public class AnnounceController {
     private final ClassService classService;
     private final MemberService memberService;
     private final CommentService commentService;
+    private final CommentRepository commentRepository;
 
     // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
     private int roleNo = 1;
@@ -184,9 +187,6 @@ public class AnnounceController {
         model.addAttribute("announce",announceDto);
         return "/admin/announce/detail";
     }
-
-
-
     @GetMapping("/admin/modify/{announceNo}")
     public String modifyForm(@PathVariable Long announceNo, Model model){
         HashMap<String, Object> memberDto = new HashMap<>();
@@ -211,15 +211,10 @@ public class AnnounceController {
     }
     @DeleteMapping("/delete")
     @ResponseBody
-    public void delete(@RequestBody AnnounceDto announceDto) {
+    public AnnounceDto delete(@RequestBody AnnounceDto announceDto) {
         log.info("delete: {}", announceDto);
-        announceService.deleteAnnounce(announceDto);
+        return announceService.deleteAnnounce(announceDto);
     }
-
-
-
-
-
     //    user
     @GetMapping("/user/card")
     public String usercard(@RequestParam(defaultValue = "1") int page, Model model){
@@ -235,7 +230,6 @@ public class AnnounceController {
         hashMap.put("page",page);
         hashMap.put("type","card");
         Page<AnnounceDto>announces= announceService.findAllByKinderNoCard(condition,hashMap);
-
 
         return getPageInfoAndGoView(model, announces, "/user/announce/card");
     }
@@ -256,7 +250,6 @@ public class AnnounceController {
         condition2.setAnnouncePrimary("1");
         condition2.setAnnounceType(AnnounceTypeEnum.TEACHER.getNum());
 
-
         model.addAttribute("KinderNo",kinderNo);
         hashMap1.put("page",page);
         hashMap1.put("type","list");
@@ -266,10 +259,18 @@ public class AnnounceController {
         Page<AnnounceDto>announces= announceService.findAllByKinderNoList(condition1,hashMap1);
         Page<AnnounceDto>primaryAnnounces= announceService.findAllByKinderNoList(condition2,hashMap2);
 
+        //댓글 카운트 담기
+        AnnounceDto announceDto = new AnnounceDto();
+        long commentCount = commentService.countByBoardNoAndInvisibleFlag(announceDto.getBoardNo(),"0");
+        model.addAttribute("commentCount",commentCount);
+        System.out.println("BoardNo: " + announceDto.getBoardNo());
+        condition1.setBoardNo(announceDto.getBoardNo());
+        condition2.setBoardNo(announceDto.getBoardNo());
+
         return getPageInfoAndGoView(model, announces, primaryAnnounces, "/user/announce/list");
     }
     @GetMapping("/user/{announceNo}")
-    public String userdetail(@PathVariable Long announceNo, @RequestParam(defaultValue = "1") int page, Model model){
+    public String userDetail(@PathVariable Long announceNo, @RequestParam(defaultValue = "1") int page, Model model){
         AnnounceDto announceDto = announceService.findByAnnounceNo(announceNo);
 
         HashMap<String, Object> hashMap = new HashMap<>();
@@ -284,8 +285,22 @@ public class AnnounceController {
         hashMap.put("type", "list");
 
 
+        HashMap<String, Object> commentInfo = new HashMap<>();
+        commentInfo.put("boardType", BoardTypeEnum.ANNOUNCE.getNum());
+        commentInfo.put("commentWriter", id);
+        commentInfo.put("boardKinderNo", kinderNo);
+        commentInfo.put("announceNo",announceNo);
+        commentInfo.put("commentRegDate", LocalDateTime.now());
+        commentInfo.put("boardNo",announceDto.getBoardNo());
+        commentInfo.put("commentDeleteFlag",announceDto.getCommentDeleteFlag());;
+        commentInfo.put("invisibleFlag",announceDto.getInvisibleFlag());
+        commentInfo.put("commentNo",announceDto.getCommentNo());
+
+        model.addAttribute("commentInfo",commentInfo);
+        System.out.println();
+
         Page<CommentDto> comments = commentService.findAllByBoardNo(condition, hashMap);
-        long commentCount = commentService.countByBoardNo(announceDto.getBoardNo());
+        long commentCount = commentService.countByBoardNoAndInvisibleFlag(announceDto.getBoardNo(),"0");
         model.addAttribute("commentCount",commentCount);
         return getPageInfoAndGoViewComment(model, comments,"/user/announce/detail");
     }
@@ -319,6 +334,46 @@ public class AnnounceController {
         model.addAttribute("endPage", endPage);
 
         return view;
+    }
+
+    @PostMapping("/comment/writeOk")
+    @ResponseBody
+    public Map<String,Object> writeCommentOk(@RequestBody CommentDto commentDto) {
+        log.info("insert comment: {}", commentDto);
+
+        CommentDto commentDto1 = commentService.insertComment(commentDto);
+
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("success",true);
+        return result;
+    }
+
+    @DeleteMapping("/comment/delete")
+    @ResponseBody
+    public CommentDto deleteComment(@RequestBody CommentDto commentDto) {
+        log.info("delete Comment: {}", commentDto);
+        return commentService.deleteComment(commentDto);
+    }
+
+
+    @PutMapping("/comment/user/modify/{commentNo}")
+    public String commentModifyForm(@PathVariable Long commentNo , Model model){
+        HashMap<String, Object> memberDto = new HashMap<>();
+        memberDto.put("roleNo", roleNo);
+        memberDto.put("id", id);
+
+        Optional<CommentEntity> modifiedComment = commentRepository.findById(commentNo);
+        model.addAttribute("member",memberDto);
+        model.addAttribute("comment",modifiedComment);
+        model.addAttribute("commentModifyDate",LocalDateTime.now());
+
+        return "/user/announce/detail";
+    }
+    @PutMapping("/comment/modifyOk")
+    @ResponseBody
+    public CommentDto commentModify(@RequestBody CommentDto commentDto){
+        log.info("modify comment : {}",commentDto);
+        return commentService.updateComment(commentDto);
     }
 
 }
