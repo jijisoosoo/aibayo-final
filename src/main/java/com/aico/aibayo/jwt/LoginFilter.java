@@ -20,8 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.Iterator;
+
 
 @Slf4j
 @RequiredArgsConstructor
@@ -36,8 +35,21 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String username = obtainUsername(request);
         String password = obtainPassword(request);
 
+        // 사용자의 인증 정보를 바탕으로 인증을 시도합니다.
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
-        return authenticationManager.authenticate(authenticationToken);
+        Authentication authentication = authenticationManager.authenticate(authenticationToken);
+
+
+        // 인증이 성공한 후, 사용자의 상태를 확인합니다.
+        CustomMemberDetails customMemberDetails = (CustomMemberDetails) authentication.getPrincipal();
+
+        // 사용자의 상태가 INACTIVE(0)라면, 계정이 잠겨있다는 예외를 발생시킵니다.
+        if (!customMemberDetails.isAccountNonLocked()) {
+            log.warn("계정이 비활성화된 상태입니다: {}", username);
+            throw new AuthenticationException("계정이 비활성화되었습니다.") {};
+        }
+
+        return authentication;
     }
 
     @Override
