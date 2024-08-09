@@ -31,12 +31,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
     private static final Logger log = LoggerFactory.getLogger(MemberServiceImpl.class);
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final MemberRepository memberRepository;
     private final KidRepository kidRepository;
     private final ParentKidRepository parentKidRepository;
     private final ClassKidRepository classKidRepository;
     private final AcceptLogRepository acceptLogRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     @Transactional
@@ -195,5 +195,36 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberDto getByUsernameWithParentKid(String username) {
         return memberRepository.findByUsernameWithParentKid(username);
+    }
+
+    // 계정 삭제
+    // ROLE_USER : PARENT_KID 엔티티와 엮어서 ACCEPT_LOG 가져와서 MEMBER와 같이 상태값 변경
+    // ROLE_TEACHER : CLASS_TEACHER 엔티티와 엮어서 ACCEPT_LOG 가져와서 MEMBER와 같이 상태값 변경
+    @Override
+    public void deleteMember(String username, String role) {
+        if (!role.equals("ROLE_USER")) {
+            System.out.println("hi user");
+            MemberEntity memberEntity = memberRepository.findByUsername(username).orElse(null);
+            Long id = memberEntity.getId();
+
+            ParentKidEntity parentKidEntity = parentKidRepository.findById(id);
+            Long acceptNo = parentKidEntity.getAcceptNo();
+
+            AcceptLogEntity acceptLogEntity = acceptLogRepository.findByAcceptNo(acceptNo);
+            Integer acceptStatus = acceptLogEntity.getAcceptStatus();
+
+//            log.info("deleteMember / memberEntity.getStatus : {} / memberEneity.getInactivateDate : {} / acceptLogEntity.getAcceptStatus : {} / acceptLogEntity.getAcceptDeleteFlag : {} / acceptLogEntity.acceptDeleteDate : {] ", memberEntity.getStatus(), memberEntity.getInactivateDate(), acceptLogEntity.getAcceptStatus(), acceptLogEntity.getAcceptDeleteFlag(), acceptLogEntity.getAcceptDeleteDate());
+            memberEntity.setStatus(MemberStatusEnum.INACTIVE.getStatus());
+            memberEntity.setInactivateDate(LocalDateTime.now());
+            memberRepository.save(memberEntity);
+            acceptLogEntity.setAcceptStatus(AcceptStatusEnum.DELETE.getStatus());
+            acceptLogEntity.setAcceptDeleteFlag(BooleanEnum.TRUE.getBool());
+            acceptLogEntity.setAcceptDeleteDate(LocalDateTime.now());
+            acceptLogRepository.save(acceptLogEntity);
+//            log.info("deleteMember / memberEntity.getStatus : {} / memberEneity.getInactivateDate : {} / acceptLogEntity.getAcceptStatus : {} / acceptLogEntity.getAcceptDeleteFlag : {} / acceptLogEntity.acceptDeleteDate : {] ", memberEntity.getStatus(), memberEntity.getInactivateDate(), acceptLogEntity.getAcceptStatus(), acceptLogEntity.getAcceptDeleteFlag(), acceptLogEntity.getAcceptDeleteDate());
+
+        } else {
+            System.out.println("hi admin");
+        }
     }
 }
