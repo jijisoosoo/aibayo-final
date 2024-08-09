@@ -277,6 +277,7 @@
   align-self: stretch;
   width: 100%;
   flex: 0 0 auto;
+  padding-left: 12px;
 }
 
 .modal-dialog .class-selected {

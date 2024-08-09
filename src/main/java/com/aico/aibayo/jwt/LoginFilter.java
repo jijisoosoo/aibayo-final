@@ -1,5 +1,7 @@
 package com.aico.aibayo.jwt;
 
+import com.aico.aibayo.entity.MemberEntity;
+import com.aico.aibayo.repository.member.MemberRepository;
 import com.aico.aibayo.service.member.TokenService;
 import jakarta.servlet.http.Cookie;
 import com.aico.aibayo.dto.member.CustomMemberDetails;
@@ -8,6 +10,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,23 +19,37 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Iterator;
+import java.time.LocalDateTime;
 
 
+@Slf4j
 @RequiredArgsConstructor
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
     private final JWTUtil jwtUtil;
     private final TokenService tokenService;
+    private final MemberRepository memberRepository;
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         String username = obtainUsername(request);
         String password = obtainPassword(request);
 
+        // 사용자의 인증 정보를 바탕으로 인증을 시도합니다.
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
-        return authenticationManager.authenticate(authenticationToken);
+        Authentication authentication = authenticationManager.authenticate(authenticationToken);
+
+
+        // 인증이 성공한 후, 사용자의 상태를 확인합니다.
+        CustomMemberDetails customMemberDetails = (CustomMemberDetails) authentication.getPrincipal();
+
+        // 사용자의 상태가 INACTIVE(0)라면, 계정이 잠겨있다는 예외를 발생시킵니다.
+        if (!customMemberDetails.isAccountNonLocked()) {
+            log.warn("계정이 비활성화된 상태입니다: {}", username);
+            throw new AuthenticationException("계정이 비활성화되었습니다.") {};
+        }
+
+        return authentication;
     }
 
     @Override
@@ -40,6 +57,13 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         CustomMemberDetails customMemberDetails = (CustomMemberDetails) authResult.getPrincipal();
         String username = customMemberDetails.getUsername();
         String role = customMemberDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).findFirst().orElse("ROLE_USER");
+
+        MemberEntity memberEntity = memberRepository.findByUsername(username).orElse(null);
+        if (memberEntity != null) {
+            memberEntity.setLatestLogDate(LocalDateTime.now());
+            log.info("loginfilter setLatestLogDate : {}", LocalDateTime.now());
+            memberRepository.save(memberEntity);
+        }
 
         String token = jwtUtil.createJwt(username, role, 86400000L);
 

@@ -29,4 +29,6 @@ public class MealEntity {
     private LocalDateTime mealModifyDate;
     @Column(name = "meal_delete_date")
     private LocalDateTime mealDeleteDate;
+    @Column(name = "meal_delete_flag")
+    private String mealDeleteFlag;
 }

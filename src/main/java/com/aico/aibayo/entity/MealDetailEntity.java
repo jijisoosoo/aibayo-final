@@ -26,4 +26,6 @@ public class MealDetailEntity {
     private String mealPic;
     @Column(name = "meal_pic_original_name")
     private String mealPicOriginalName;
+    @Column(name = "meal_invisible_flag")
+    private String mealInvisibleFlag;
 }

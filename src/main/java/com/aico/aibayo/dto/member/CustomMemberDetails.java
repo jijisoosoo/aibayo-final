@@ -41,7 +41,8 @@ public class CustomMemberDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        // member의 status가 2(INACTIVE)일 경우 계정을 잠금 상태로 처리
+        return memberEntity.getStatus() != 0;
     }
 
     @Override
@@ -51,6 +52,7 @@ public class CustomMemberDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        // status가 2(INACTIVE)일 경우 계정을 비활성화 상태로 처리
+        return memberEntity.getStatus() == 1;
     }
 }
