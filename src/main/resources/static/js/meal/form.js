@@ -94,3 +94,27 @@ $(document).ready(function(){
         }
     });
 });
+
+function fileCheck(obj) {
+    let pathPoint = obj.value.lastIndexOf('.');
+    let filePoint = obj.value.substring(pathPoint+1,obj.length);
+    let fileType = filePoint.toLowerCase();
+    if(fileType === 'jpg' || fileType === 'gif' || fileType === 'png' ||
+        fileType === 'jpeg' || fileType === 'bmp') {
+
+        // 정상적인 이미지 확장자 파일일 경우 로직 처리
+
+    } else {
+        // swal로 바꿀것
+        alert('이미지 파일만 선택할 수 있습니다.');
+
+        let parentObj  = obj.parentNode
+        let node = parentObj.replaceChild(obj.cloneNode(true),obj);
+
+        return false;
+    }
+    if(fileType === 'bmp') {
+        let upload = confirm('BMP 파일은 웹상에서 사용하기엔 적절한 이미지 포맷이 아닙니다.\n그래도 계속 하시겠습니까?');
+        if(!upload) return false;
+    }
+}
