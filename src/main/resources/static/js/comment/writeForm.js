@@ -56,7 +56,7 @@ $(document).ready(function (){
         console.log("댓글 삭제 버튼 클릭");
             Swal.fire({
                 title: "정말로 삭제하시겠습니까?",
-                text: "삭제한 공지사항은 복구할 수 없습니다.",
+                text: "삭제한 댓글은 복구할 수 없습니다.",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#dc3545",
@@ -79,22 +79,24 @@ $(document).ready(function (){
                 }
             });
         });
-    function afterSuccess(response) {
+});
+
+function afterSuccess(response,method) {
+
+    if(method === 'DELETE' && response.invisibleFlag === '1')
         Swal.fire({
             title: "삭제 완료",
-            text: "창을 닫으면 목록 화면으로 돌아갑니다.",
+            text: "창을 닫으면 이전 화면으로 돌아갑니다. (댓글)",
             icon: "success",
             customClass: {
                 confirmButton: 'btn-ab btn-ab-swal'
+
             }
+
         }).then((result) => {
-            window.location.href = window.location.origin + '/announce/user/'+announceNo;;
-        })
-    }
+            let announceNo =$('#detail').data('announce-no');
+            console.log("announceNo : {}", announceNo);
+            window.location.href = window.location.origin + '/announce/user/'+announceNo;
+        });
+}
 
-
-
-
-
-
-});

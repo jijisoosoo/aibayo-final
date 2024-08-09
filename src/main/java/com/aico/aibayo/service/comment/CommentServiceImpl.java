@@ -45,8 +45,8 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    public long countByBoardNo(Long boardNo) {
-        return commentRepository.countByBoardNo(boardNo);
+    public long countByBoardNoAndInvisibleFlag(Long boardNo,String invisibleFlag) {
+        return commentRepository.countByBoardNoAndInvisibleFlag(boardNo,"0");
     }
 
     @Override
@@ -74,14 +74,28 @@ public class CommentServiceImpl implements CommentService{
     }
 
     @Override
-    public void deleteComment(CommentDto commentDto) {
+    public CommentDto deleteComment(CommentDto commentDto) {
         CommentEntity commentEntity = commentRepository.findById(commentDto.getCommentNo()).orElse(null);
         assert commentEntity != null;
         commentEntity.setInvisibleFlag(BooleanEnum.TRUE.getBool());
         commentEntity.setCommentDeleteDate(LocalDateTime.now());
-        log.info("update comment : "+commentEntity);
+        log.info("delete comment : "+commentEntity);
 
-        commentRepository.save(commentEntity);
+        CommentEntity save = commentRepository.save(commentEntity);
+        return CommentDto.toDto(save);
+    }
+
+    @Override
+    @Transactional
+    public CommentDto updateComment(CommentDto commentDto) {
+        CommentEntity commentEntity =
+        commentRepository.findById(commentDto.getCommentNo()).orElse(null);
+        assert commentEntity != null;
+        commentEntity.setCommentContent(commentDto.getCommentContent());
+        commentEntity.setCommentModifyDate(LocalDateTime.now());
+
+        CommentEntity save = commentRepository.save(commentEntity);
+        return CommentDto.toDto(save);
     }
 
 

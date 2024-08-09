@@ -12,6 +12,7 @@
 <th:block layout:fragment="javascript">
     <script src="/js/announce/detail.js"></script>
     <script src="/js/comment/writeForm.js"></script>
+    <script src="/js/comment/modifyForm.js"></script>
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
@@ -118,7 +119,7 @@
                                                                     <button class="btn dropdown-toggle" id="dd22" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
                                                                     <ul class="dropdown-menu dmenu">
                                                                         <li>
-                                                                            <input type="button" value="수정" class="dropdown-item ditem" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                                                                            <input type="button" value="수정" class="dropdown-item ditem" data-bs-toggle="modal" data-bs-target="#modifyModal">
                                                                         </li>
                                                                         <li>
                                                                             <button type="button" class="dropdown-item ditem deleteComment" data-comment-no="${comment.commentNo}">삭제</button>
@@ -126,19 +127,34 @@
                                                                     </ul>
                                                                 </div>
                                                                 <!-- Modal -->
-                                                                <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                                                                <div class="modal fade" id="modifyModal" tabindex="-1" aria-labelledby="modifyModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
-                                                                                <h1 class="modal-title fs-5" id="exampleModalLabel1">수정 하기</h1>
+                                                                                <h1 class="modal-title fs-5" id="modifyModalLabel">댓글수정</h1>
+                                                                                    <span>수정일-></span>
+                                                                                    <span th:text="${comment.commentModifyDate}"></span>
+<!--                                                                                <span>공지 넘버-></span>-->
+<!--                                                                                <span th:text="${announce.announceNo}"></span>-->
+<!--                                                                                <span>-> 댓글 넘버//</span>-->
+<!--                                                                                <span th:text="${comment.commentNo}">22</span>-->
+<!--                                                                                <span>-> 댓글 내용</span>-->
+<!--                                                                                <span th:text="${comment.commentContent}">33</span>-->
                                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                             </div>
-                                                                            <div class="modal-body">
-                                                                                <textarea class="modify"></textarea>
+                                                                            <div class="modal-body"  id="modifyCommentForm"
+                                                                                 th:object="${comment}"
+                                                                                 th:data-announce-no="${announce.announceNo}"
+                                                                                 th:data-comment-no="${comment.commentNo}"
+                                                                                 th:data-comment-content="${comment.commentContent}">
+                                                                                <textarea class="modify" id="modifiedComment"
+                                                                                    th:text="${comment.commentContent}"
+
+                                                                                ></textarea>
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <button type="button" class="close" data-bs-dismiss="modal">닫기</button>
-                                                                                <button type="button" class="save">저장</button>
+                                                                                <button type="button" class="save" id="saveBtn">저장</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -215,7 +231,7 @@
                                                                         <div class="modal-dialog">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header">
-                                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel3">수정하기</h1>
+                                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel3">수정 하기</h1>
                                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                                 </div>
                                                                                 <div class="modal-body">
