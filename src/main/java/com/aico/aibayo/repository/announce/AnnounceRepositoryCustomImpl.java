@@ -188,7 +188,8 @@ public class AnnounceRepositoryCustomImpl implements AnnounceRepositoryCustom {
                         board.kinderNo,
                         member.roleNo,
                         member.id,
-                        member.name ))
+                        member.name
+                        ))
                 .from(announce)
                 .join(board).on(board.boardNo.eq(announce.boardNo))
                 .join(member).on(board.writer.eq(member.id))

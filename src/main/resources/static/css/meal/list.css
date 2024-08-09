@@ -132,6 +132,7 @@
     border-radius: 4px;
     gap: 10px 0;
     justify-content: space-between;
+    width: 100%;
 }
 
 .modal_meal_item_box {
@@ -397,6 +398,7 @@
 .spinner-text {
     text-align: center;
     width: 150px;
+    font-weight: 500;
 }
 
 @keyframes spin {
@@ -404,10 +406,6 @@
     100% { transform: rotate(360deg); }
 }
 
-.loading-cal {
-    opacity: 0.7;
-}
-
-.fc-day-other .fc-daygrid-day-events {
+.loading-cal, .fc-day-other .fc-daygrid-day-events {
     opacity: 0.3;
 }

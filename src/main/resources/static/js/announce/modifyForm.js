@@ -76,6 +76,7 @@ $(document).ready(function () {
 });
 
 function afterSuccess(response) {
+    console.log("announce modify")
     Swal.fire({
         title: "수정 완료",
         text: "창을 닫으면 상세 화면으로 돌아갑니다.",

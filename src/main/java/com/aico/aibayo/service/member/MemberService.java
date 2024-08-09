@@ -16,4 +16,6 @@ public interface MemberService {
     void updatePassword(String username, String newPassword);
 
     MemberDto getByUsernameWithParentKid(String username);
+
+    void deleteMember(String username, String role);
 }

@@ -40,6 +40,7 @@ public class SecurityConfig {
     private final AuthenticationConfiguration authenticationConfiguration;
     private final TokenService tokenService;
     private final MemberRepository memberRepository;
+    private final CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
@@ -87,9 +88,16 @@ public class SecurityConfig {
                 }));
 
         // JWT 검증
-        http.addFilterAfter(new JWTFilter(jwtUtil), OAuth2LoginAuthenticationFilter.class);
-        http.addFilterBefore(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, tokenService), UsernamePasswordAuthenticationFilter.class);
+//        http.addFilterAfter(new JWTFilter(jwtUtil), OAuth2LoginAuthenticationFilter.class);
+//        http.addFilterBefore(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, tokenService, memberRepository), UsernamePasswordAuthenticationFilter.class);
+//        http.addFilterBefore(new CustomMemberStatusFilter(memberRepository), UsernamePasswordAuthenticationFilter.class); // member의 status (accept_log -> accept_status)
+//        http.addFilterBefore(new CustomLogoutFilter(jwtUtil, tokenService), UsernamePasswordAuthenticationFilter.class);
+        LoginFilter loginFilter = new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil, tokenService, memberRepository);
+        loginFilter.setAuthenticationFailureHandler(customAuthenticationFailureHandler); // 실패 핸들러 설정
+
+        http.addFilterBefore(loginFilter, UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(new CustomMemberStatusFilter(memberRepository), UsernamePasswordAuthenticationFilter.class); // member의 status (accept_log -> accept_status)
+        http.addFilterAfter(new JWTFilter(jwtUtil), OAuth2LoginAuthenticationFilter.class);
         http.addFilterBefore(new CustomLogoutFilter(jwtUtil, tokenService), UsernamePasswordAuthenticationFilter.class);
 
 

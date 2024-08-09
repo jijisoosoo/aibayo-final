@@ -1,5 +1,6 @@
 package com.aico.aibayo.control;
 
+import com.aico.aibayo.dto.meal.MealDetailDto;
 import com.aico.aibayo.dto.meal.MealDto;
 import com.aico.aibayo.dto.meal.MealSearchCondition;
 import com.aico.aibayo.service.meal.MealService;
@@ -23,5 +24,13 @@ public class ApiMealController {
 
         return mealDtos == null ? ResponseEntity.badRequest().build() :
                                   ResponseEntity.ok(mealDtos);
+    }
+
+    @PostMapping("/admin/detail")
+    public ResponseEntity<MealDto> adminDetail(@RequestBody MealDto dto) {
+        MealDto result = mealService.getWithDetailByMealNo(dto);
+
+        return result == null ? ResponseEntity.badRequest().build() :
+                                ResponseEntity.ok(result);
     }
 }

@@ -49,26 +49,22 @@ $(document).ready(function () {
         }
     });
 
-
-
-
-
-
-
-
-
-
 });
 
-function afterSuccess(response) {
-    Swal.fire({
-        title: "삭제 완료",
-        text: "창을 닫으면 목록 화면으로 돌아갑니다.",
-        icon: "success",
-        customClass: {
-            confirmButton: 'btn-ab btn-ab-swal'
-        }
-    }).then((result) => {
-        window.location.href = window.location.origin + '/announce/admin/list';
-    });
+function afterSuccess(response,method) {
+
+    if(method === 'DELETE' && response.invisibleFlag === '1')
+        Swal.fire({
+            title: "삭제 완료",
+            text: "창을 닫으면 목록 화면으로 돌아갑니다.",
+            icon: "success",
+            customClass: {
+                confirmButton: 'btn-ab btn-ab-swal'
+            }
+        }).then((result) => {
+            window.location.href = window.location.origin + '/announce/admin/list';
+        });
 }
+
+
+

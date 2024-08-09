@@ -1,7 +1,9 @@
 package com.aico.aibayo.oauth2;
 
 import com.aico.aibayo.dto.member.CustomOAuth2Member;
+import com.aico.aibayo.entity.MemberEntity;
 import com.aico.aibayo.jwt.JWTUtil;
+import com.aico.aibayo.repository.member.MemberRepository;
 import com.aico.aibayo.service.member.TokenService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,6 +15,7 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.logging.Logger;
@@ -24,11 +27,21 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     private final JWTUtil jwtUtil;
     private final TokenService tokenService;
 
+    private final MemberRepository memberRepository;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         // 인증된 사용자 정보를 가져옵니다.
         CustomOAuth2Member customOAuth2User = (CustomOAuth2Member) authentication.getPrincipal();
         String username = customOAuth2User.getUsername();
+
+        // latestLogDate Update
+        MemberEntity memberEntity = memberRepository.findByUsername(username).orElse(null);
+        if (memberEntity != null) {
+            memberEntity.setLatestLogDate(LocalDateTime.now());
+            memberRepository.save(memberEntity);
+        }
+
 
         // 사용자 권한을 가져옵니다.
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
