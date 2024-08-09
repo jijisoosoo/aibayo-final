@@ -104,8 +104,30 @@ public class TeacherController {
 
 
     @GetMapping ("/teacherProfileAccept/{id}")
-    public String acceptedTeacherProfile(Model model, @PathVariable Long id) {
+    public String getAcceptedTeacherProfile(Model model, @PathVariable Long id) {
         MemberDto loginInfo = (MemberDto)model.getAttribute("loginInfo");
+
+        teacherDto teacher = teacherService.getTeacherById(id);
+        model.addAttribute("teacher", teacher);
+
+        List<ClassDto> classList = classService.getAllByKinderNo(loginInfo.getKinderNo());
+        model.addAttribute("classList", classList);
+
+        List<ClassDto> addableClassList = classService.getAddableClassByKinderNo(loginInfo.getKinderNo());
+        model.addAttribute("addableClassList", addableClassList);
+
+        List<ClassDto> assignedClassList = classService.getClassByKinderNoAndTeacherId(loginInfo.getKinderNo(), id);
+        model.addAttribute("assignedClassList", assignedClassList);
+
+        return "/admin/teacher/teacherProfileAccept";
+    }
+
+    @PostMapping ("/teacherProfileAccept/{id}")
+    public String assignClassesAndGetAcceptedTeacherProfile(@RequestBody List<Long> oldClassIds, @RequestBody List<Long> newClassIds, Model model, @PathVariable Long id) {
+        MemberDto loginInfo = (MemberDto)model.getAttribute("loginInfo");
+
+//        teacherService.assignNewClass(newClassIds, id);
+//        teacherService.deleteExistingClass(oldClassIds);
 
         teacherDto teacher = teacherService.getTeacherById(id);
         model.addAttribute("teacher", teacher);
