@@ -107,6 +107,10 @@ $(document).ready(function() {
 
     calendar.render();
 
+    $(document).on('hidden.bs.modal', '#mealDetail', function () {
+        $('#mealDetail').remove();
+    });
+
 });
 
 function afterSuccess(response) {
