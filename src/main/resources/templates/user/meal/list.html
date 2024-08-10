@@ -15,7 +15,6 @@
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
-<!--    <input type="hidden" id="mealList" value="<c:out value='${ mealList }'></c:out>" />-->
 
     <div class="meal_top_box">
 
@@ -25,13 +24,20 @@
 
 
     <div class="calendar_box">
-        <div id="calendar"></div>
+        <div id="loading-spinner">
+            <div class="spinner"></div>
+            <div class="spinner-text">불러오는중...</div>
+        </div>
+        <div id="calendar"
+             th:data-kinder-no="${loginInfo.kinderNo}"
+             th:data-role-no="${loginInfo.roleNo}">
+        </div>
     </div>
 
 
     <!-- Modal -->
     <div class="modal fade fixed-width-modal" id="mealDetail" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-dialog modal-dialog-scrollable" th:if="${detail}">
             <div class="modal-content">
 
                 <div class="modal-header">

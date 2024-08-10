@@ -26,7 +26,7 @@ public class ApiMealController {
                                   ResponseEntity.ok(mealDtos);
     }
 
-    @PostMapping("/admin/detail")
+    @PostMapping("/detail")
     public ResponseEntity<MealDto> adminDetail(@RequestBody MealDto dto) {
         MealDto result = mealService.getWithDetailByMealNo(dto);
 
