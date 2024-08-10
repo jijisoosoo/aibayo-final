@@ -24,7 +24,8 @@ public class MealController {
     }
 
     @GetMapping("/user/list")
-    public String userList() {
+    public String userList(@ModelAttribute("loginInfo") MemberDto loginInfo) {
+
         return "/user/meal/list";
     }
 
