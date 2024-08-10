@@ -32,24 +32,39 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        String username = obtainUsername(request);
-        String password = obtainPassword(request);
+        try {
+            String username = obtainUsername(request);
+            String password = obtainPassword(request);
 
-        // 사용자의 인증 정보를 바탕으로 인증을 시도합니다.
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
-        Authentication authentication = authenticationManager.authenticate(authenticationToken);
+            // 사용자의 인증 정보를 바탕으로 인증을 시도합니다.
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
+            Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
+            // 인증이 성공한 후, 사용자의 상태를 확인합니다.
+            CustomMemberDetails customMemberDetails = (CustomMemberDetails) authentication.getPrincipal();
 
-        // 인증이 성공한 후, 사용자의 상태를 확인합니다.
-        CustomMemberDetails customMemberDetails = (CustomMemberDetails) authentication.getPrincipal();
+            // 사용자의 상태가 INACTIVE(0)라면, 계정이 잠겨있다는 예외를 발생시킵니다.
+            if (!customMemberDetails.isAccountNonLocked()) {
+                log.warn("계정이 비활성화된 상태입니다: {}", username);
+                throw new AuthenticationException("계정이 비활성화되었습니다.") {
+                };
+            }
 
-        // 사용자의 상태가 INACTIVE(0)라면, 계정이 잠겨있다는 예외를 발생시킵니다.
-        if (!customMemberDetails.isAccountNonLocked()) {
-            log.warn("계정이 비활성화된 상태입니다: {}", username);
-            throw new AuthenticationException("계정이 비활성화되었습니다.") {};
+            return authentication;
+        } catch (AuthenticationException e) {
+            log.error("Authentication failed for user: {}", obtainUsername(request));
+
+            try {
+                // 실패 핸들러를 명시적으로 호출하여 실패 처리를 수행
+                super.unsuccessfulAuthentication(request, response, e);
+            } catch (IOException | ServletException ex) {
+                // 예외 처리 - 로그를 추가하거나 적절히 처리
+                log.error("Error during unsuccessful authentication handling", ex);
+            }
+
+            // 예외를 다시 던지지 않음
+            return null;
         }
-
-        return authentication;
     }
 
     @Override
