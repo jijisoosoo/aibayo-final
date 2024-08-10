@@ -1,3 +1,4 @@
+//댓글 작성
 $(document).ready(function () {
     $('#writeBtn').on('click', function (event) {
         console.log("작성버튼 클릭");
@@ -84,3 +85,52 @@ $(document).ready(function () {
         });
     });
 });
+//대댓글 작성
+    $(document).ready(function () {
+        $('.save').on('click', function (event) {
+            event.preventDefault(); // 기본 폼 제출 방지
+
+            // Modal에서 ID와 데이터 속성 값 가져오기
+            const replyId = $('#replyId').data('comment-no');
+            const commentContent = $('.replyContent').val();
+            const commentWriter = 2; // 나중에 실제값으로 받아와야함
+            const kinderNo = 1; // 나중에 실제값으로 받아와야함
+            const announceNo = $('#detail').data('announce-no');
+            const boardNo = $('#boardNo').val();
+            const commentClass = '1';
+            const commentDeleteFlag = '0';
+            const invisibleFlag = '0';
+
+            const replyData = {
+                commentContent: commentContent,
+                commentWriter: commentWriter,
+                kinderNo: kinderNo,
+                announceNo: announceNo,
+                boardNo: boardNo,
+                commentGroupNo: replyId,
+                commentClass: commentClass,
+                commentDeleteFlag: commentDeleteFlag,
+                invisibleFlag: invisibleFlag,
+            };
+
+            console.log("replyData: ", replyData);
+            let url = "/announce/comment/writeOk";
+            commonAjax(url, 'POST', replyData);
+        });
+    });
+function afterSuccess(response){
+    console.log("comment.writeForm.js afterSuccess")
+    if(response.comment === '1'){
+        Swal.fire({
+            title: "등록 완료",
+            text: "창을 닫으면 상세 화면으로 돌아갑니다.",
+            icon: "success",
+            customClass: {
+                confirmButton: 'btn-ab btn-ab-swal'
+            }
+        }).then((result) => {
+            window.location.href = '/announce/user/' + announceNo; // 성공 시 이동할 페이지
+        });
+    }
+}
+
