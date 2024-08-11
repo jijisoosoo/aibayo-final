@@ -29,7 +29,7 @@ $(document).ready(function(){
     const today = new Date(Date.now() - offset);
 
     $('.datepicker').val(today.toISOString().substring(0,10).replaceAll('-','.'));
-    console.log($('.datepicker').val());
+    // console.log($('.datepicker').val());
 
 
     // + 클릭 시 메뉴명 input 추가
@@ -58,24 +58,47 @@ $(document).ready(function(){
     });
 
 
-    // 파일 등록 시 이미지 미리보기
+    // 파일 등록 시 이미지 미리보기 및 형식 검증
     $('[id^=mealPic]').on('change', function(event) {
-        var files = event.target.files;
+        let files = event.target.files;
         // var previewId = $(this).attr('id') + 'Preview';
-        var label = $(this).closest('label');
+        let label = $(this).closest('label');
         label.find('img').remove(); // 이전 미리보기 삭제
         label.find('svg').hide(); // SVG 숨기기
 
         if (files.length > 0) {
-            var file = files[0];
-            var reader = new FileReader();
+            let file = files[0];
+            let reader = new FileReader();
+            const maxSizeInMB = 10; // 최대 파일 크기 제한 (MB 단위)
+            const maxSizeInBytes = maxSizeInMB * 1024 * 1024; // 바이트 단위로 변환
 
             reader.onload = function(e) {
+                console.log(`file type: ${file.type}`);
                 if (file.type.startsWith('image/')) {
+                    // 용량 확인
+                    let fileSize = file.size; // 파일 크기 (바이트 단위)
+                    if (fileSize > maxSizeInBytes) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "업로드 실패",
+                            text: "10MB 이하의 사진만 등록 가능합니다.",
+                        });
+                        event.target.value = ""; // 파일 선택 취소
+                        label.find('svg').show();
+                        return false;
+                    }
+
                     label.append('<img src="' + e.target.result + '" alt="사진 미리보기" ' +
                         ' class="modal_meal_img">');
-                } else {
-                    label.append('<p>' + file.name + '</p>');
+                } else { // 이미지 파일이 아닐 경우
+                    Swal.fire({
+                        icon: "error",
+                        title: "업로드 실패",
+                        text: "이미지 파일만 선택할 수 있습니다.",
+                    });
+                    event.target.value = ""; // 파일 선택 취소
+                    label.find('svg').show();
+                    // label.append('<p>' + file.name + '</p>');
                 }
             };
 
@@ -93,9 +116,77 @@ $(document).ready(function(){
 
         }
     });
+
+    // writeForm 등록 클릭
+    $('#writeMealBtn').on('click', function () {
+        // console.log(`등록 버튼 클릭`);
+
+        initMsg();
+
+        // 식단상세 빈 값 체크
+        let checkedMealTypes = [];
+        $('input[id^="mealType"]:checked').each(function () {
+            checkedMealTypes.push($(this).val());
+        });
+        // console.log(`checkedMealTypes : ${checkedMealTypes}`);
+        // console.log(`length: ${checkedMealTypes.length}`);
+
+        if (checkedMealTypes.length < 1) {
+            $('.meal_time_checkbox').siblings('.msg').show();
+            return false;
+        }
+
+        let datepicker = $('#mealDate').val().trim();
+
+        if (datepicker === '') {
+            $('.meal_datepicker').siblings('.msg').show();
+            return false;
+        }
+
+        let mealDate = moment(datepicker).format('YYYY-MM-DD');
+        // console.log(`mealDate: ${mealDate}`);
+
+        for (let num of checkedMealTypes) { // 상세 빈 값 확인
+            // console.dir($('#mealPic'+ num));
+            let mealPic = $('#mealPic' + num);
+
+            if (mealPic.val().trim() === '') { // 사진 빈 값 확인
+                // console.log(`사진 미등록`);
+
+                let picBox = mealPic.closest('.modal_meal_img_box');
+                picBox.find('.msg').show();
+                // console.log(`scrollTop: ${mealPic.offset().top}`);
+                // console.dir(mealPic);
+                // console.log(`${JSON.stringify(mealPic.offset())}`);
+                // console.log(`${JSON.stringify(picBox.offset())}`);
+
+                picBox[0].scrollIntoView({ behavior: 'smooth' });
+
+                return false;
+            }
+
+            // // 사진 형식 확인
+            // if (!fileCheck(mealPic[0])) {
+            //     return false;
+            // }
+
+            let menuBox = $('#meal_menu_box_form' + num);
+            let target = menuBox.find('.menu_input_text');
+            let menu = Array.from(target).map(target => target.value).join('::');
+            // console.log(`menu: ${menu}`);
+
+            if (menu.replaceAll('::', '') === '') {
+                menuBox.find('.msg').show();
+                menuBox.find('input').first().focus();
+                return false;
+            }
+        }
+    });
 });
 
 function fileCheck(obj) {
+    console.dir(obj);
+    console.log(`value: ${obj.value}`);
     let pathPoint = obj.value.lastIndexOf('.');
     let filePoint = obj.value.substring(pathPoint+1,obj.length);
     let fileType = filePoint.toLowerCase();
@@ -103,6 +194,8 @@ function fileCheck(obj) {
         fileType === 'jpeg' || fileType === 'bmp') {
 
         // 정상적인 이미지 확장자 파일일 경우 로직 처리
+        // 용량 확인
+        return true;
 
     } else {
         // swal로 바꿀것
