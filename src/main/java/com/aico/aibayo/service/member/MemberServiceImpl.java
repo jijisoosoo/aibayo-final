@@ -10,6 +10,7 @@ import com.aico.aibayo.dto.member.MemberSearchCondition;
 import com.aico.aibayo.entity.*;
 import com.aico.aibayo.exception.MemberNotFoundException;
 import com.aico.aibayo.repository.AcceptLogRepository;
+import com.aico.aibayo.repository.TeacherKinderRepository;
 import com.aico.aibayo.repository.classKid.ClassKidRepository;
 import com.aico.aibayo.repository.ParentKidRepository;
 import com.aico.aibayo.repository.kid.KidRepository;
@@ -37,109 +38,264 @@ public class MemberServiceImpl implements MemberService {
     private final ParentKidRepository parentKidRepository;
     private final ClassKidRepository classKidRepository;
     private final AcceptLogRepository acceptLogRepository;
+    private final TeacherKinderRepository teacherKinderRepository;
 
+
+//    @Transactional
+//    public void signUpProcess(MemberDto memberDto) {  // 일반 회원가입 (초대X)
+//        String username = memberDto.getUsername();
+//        log.info("signUpProcess / username = {}", username);
+//
+//        Boolean isExist = memberRepository.existsByUsername(username);
+//        if (isExist) {
+//            log.warn("회원가입 실패: 이미 존재하는 이메일 = {}", username);
+//            return;
+//        }
+//
+//        String role = memberDto.getRole();
+//        log.info("signUpProcess / role = {}", role);
+//
+//        if (role.equals("ROLE_USER")) {
+//            try {
+//                MemberEntity memberEntity = new MemberEntity();
+//                memberEntity.setUsername(memberDto.getUsername());
+//                memberEntity.setName(memberDto.getName());
+//                memberEntity.setRole(memberDto.getRole());
+//                memberEntity.setPassword(bCryptPasswordEncoder.encode(memberDto.getPassword()));
+//                memberEntity.setPhone(memberDto.getPhone());
+//                memberEntity.setRegDate(LocalDateTime.now());
+//                memberEntity.setLatestLogDate(LocalDateTime.now());
+//                memberEntity.setStatus(MemberStatusEnum.TEMP.getStatus());
+//                MemberEntity newMemberEntity = memberRepository.save(memberEntity);
+//                log.info("회원 정보 저장 완료: username = {}", username);
+//
+//                Long checkKinderNo = memberDto.getKinderNo();
+//                String checkKidName = memberDto.getKidName();
+//                LocalDate checkKidBirth = memberDto.getKidBirth();
+//                Integer checkKidGender = Integer.valueOf(memberDto.getKidGender());
+//
+//                log.info("아이 정보 확인: kinderNo = {}, kidName = {}, kidBirth = {}, kidGender = {}", checkKinderNo, checkKidName, checkKidBirth, checkKidGender);
+//                KidEntity checkKid = kidRepository.findByKinderNoAndKidNameAndKidBirthAndKidGenderAndDischargeFlag(checkKinderNo, checkKidName, checkKidBirth, checkKidGender, BooleanEnum.FALSE.getBool())
+//                        .orElseGet(() -> {
+//                            KidEntity kidEntity = new KidEntity();
+//                            kidEntity.setKinderNo(memberDto.getKinderNo());
+//                            kidEntity.setKidName(memberDto.getKidName());
+//                            kidEntity.setKidBirth(memberDto.getKidBirth());
+//                            kidEntity.setKidGender(Integer.valueOf(memberDto.getKidGender()));
+//                            kidEntity.setAdmissionDate(LocalDateTime.now());
+//                            log.info("새 아이 정보 저장: {}", kidEntity);
+//                            return kidRepository.save(kidEntity);
+//                        });
+//
+//                log.info("아이 정보 확인 완료: kidNo = {}", checkKid.getKidNo());
+//
+//                List<ClassKidDto> allByClassNoAndKidNo = classKidRepository.findAllByClassNoAndKidNo(memberDto.getClassNo(), checkKid.getKidNo());
+//                if (allByClassNoAndKidNo.isEmpty()) {
+//                    AcceptLogEntity kidAcceptLogEntity = new AcceptLogEntity();
+//                    kidAcceptLogEntity.setAcceptType(AcceptTypeEnum.CLASS_KID.getType());
+//                    kidAcceptLogEntity.setAcceptStatus(AcceptStatusEnum.WAIT.getStatus());
+//                    kidAcceptLogEntity.setAcceptRegDate(LocalDateTime.now());
+//                    kidAcceptLogEntity.setAcceptDeleteFlag(BooleanEnum.FALSE.getBool());
+//                    AcceptLogEntity acceptLogEntity = acceptLogRepository.save(kidAcceptLogEntity);
+//                    log.info("아이 수락 로그 저장: {}", acceptLogEntity);
+//
+//                    ClassKidEntity classKidEntity = new ClassKidEntity();
+//                    classKidEntity.setClassNo(memberDto.getClassNo());
+//                    classKidEntity.setKidNo(checkKid.getKidNo());
+//                    classKidEntity.setAcceptNo(acceptLogEntity.getAcceptNo());
+//                    classKidRepository.save(classKidEntity);
+//                    log.info("클래스-아이 정보 저장: classNo = {}, kidNo = {}", memberDto.getClassNo(), checkKid.getKidNo());
+//                }
+//
+//                Long memberAcceptNo = 0L;
+//                if (memberDto.getInvite() == null) {
+//                    AcceptLogEntity acceptLogEntity = new AcceptLogEntity();
+//                    acceptLogEntity.setAcceptType(AcceptTypeEnum.PARENT_KID.getType());
+//                    acceptLogEntity.setAcceptStatus(AcceptStatusEnum.WAIT.getStatus());
+//                    acceptLogEntity.setAcceptRegDate(LocalDateTime.now());
+//                    acceptLogEntity.setAcceptDeleteFlag(BooleanEnum.FALSE.getBool());
+//                    AcceptLogEntity saveAcceptLogEntity = acceptLogRepository.save(acceptLogEntity);
+//                    memberAcceptNo = saveAcceptLogEntity.getAcceptNo();
+//                    log.info("부모-아이 수락 로그 저장: {}", saveAcceptLogEntity);
+//                } else {
+//                    AcceptLogEntity acceptLogEntity = new AcceptLogEntity();
+//                    acceptLogEntity.setAcceptType(AcceptTypeEnum.PARENT_KID.getType());
+//                    acceptLogEntity.setAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
+//                    acceptLogEntity.setAcceptDate(LocalDateTime.now());
+//                    acceptLogEntity.setAcceptRegDate(LocalDateTime.now());
+//                    acceptLogEntity.setAcceptDeleteFlag(BooleanEnum.FALSE.getBool());
+//                    AcceptLogEntity saveAcceptLogEntity = acceptLogRepository.save(acceptLogEntity);
+//                    memberAcceptNo = saveAcceptLogEntity.getAcceptNo();
+//                    log.info("부모-아이 수락 로그 저장 (초대): {}", saveAcceptLogEntity);
+//                }
+//
+//                ParentKidEntity parentKidEntity = new ParentKidEntity();
+//                parentKidEntity.setId(newMemberEntity.getId());
+//                parentKidEntity.setKidNo(checkKid.getKidNo());
+//                parentKidEntity.setAcceptNo(memberAcceptNo);
+//                parentKidEntity.setIsMainParent(BooleanEnum.FALSE.getBool());
+//                parentKidEntity.setParentRelationship(memberDto.getRelationship());
+//                parentKidRepository.save(parentKidEntity);
+//                log.info("부모-아이 정보 저장 완료: memberId = {}, kidNo = {}", newMemberEntity.getId(), checkKid.getKidNo());
+//            } catch (Exception e) {
+//                log.error("회원가입 처리 중 오류 발생: {}", e.getMessage(), e);
+//                throw e;
+//            }
+//
+//        } else { // 위의 코드는 학부모 회원가입, 아래는 교사, 원장 회원가입
+//            try {
+//                MemberEntity memberEntity = new MemberEntity();
+//                memberEntity.setUsername(memberDto.getUsername());
+//                memberEntity.setName(memberDto.getName());
+//                memberEntity.setRole(memberDto.getRole());
+//                memberEntity.setPassword(bCryptPasswordEncoder.encode(memberDto.getPassword()));
+//                memberEntity.setPhone(memberDto.getPhone());
+//                memberEntity.setRegDate(LocalDateTime.now());
+//                memberEntity.setLatestLogDate(LocalDateTime.now());
+//                memberEntity.setStatus(MemberStatusEnum.TEMP.getStatus());
+//                MemberEntity newMemberEntity = memberRepository.save(memberEntity);
+//                log.info("회원 정보 저장 완료: username = {}", username);
+//
+//                Long memberAcceptNo = 0L;
+//                if (memberDto.getInvite() == null) {
+//                    AcceptLogEntity acceptLogEntity = new AcceptLogEntity();
+//                    acceptLogEntity.setAcceptType(AcceptTypeEnum.PARENT_KID.getType());
+//                    acceptLogEntity.setAcceptStatus(AcceptStatusEnum.WAIT.getStatus());
+//                    acceptLogEntity.setAcceptRegDate(LocalDateTime.now());
+//                    acceptLogEntity.setAcceptDeleteFlag(BooleanEnum.FALSE.getBool());
+//                    AcceptLogEntity saveAcceptLogEntity = acceptLogRepository.save(acceptLogEntity);
+//                    memberAcceptNo = saveAcceptLogEntity.getAcceptNo();
+//                    log.info("교사 수락 로그 저장: {}", saveAcceptLogEntity);
+//                } else {
+//                    AcceptLogEntity acceptLogEntity = new AcceptLogEntity();
+//                    acceptLogEntity.setAcceptType(AcceptTypeEnum.PARENT_KID.getType());
+//                    acceptLogEntity.setAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
+//                    acceptLogEntity.setAcceptDate(LocalDateTime.now());
+//                    acceptLogEntity.setAcceptRegDate(LocalDateTime.now());
+//                    acceptLogEntity.setAcceptDeleteFlag(BooleanEnum.FALSE.getBool());
+//                    AcceptLogEntity saveAcceptLogEntity = acceptLogRepository.save(acceptLogEntity);
+//                    memberAcceptNo = saveAcceptLogEntity.getAcceptNo();
+//                    log.info("교사 수락 로그 저장 (초대): {}", saveAcceptLogEntity);
+//                }
+//
+//                TeacherKinderEntity teacherKinderEntity = new TeacherKinderEntity();
+//                teacherKinderEntity.setTeacherId(newMemberEntity.getId());
+//                teacherKinderEntity.setKinderNo(memberDto.getKinderNo());
+//                teacherKinderEntity.setAcceptNo(memberAcceptNo);
+//                teacherKinderRepository.save(teacherKinderEntity);
+//
+//            } catch (Exception e) {
+//                log.error("회원가입 처리 중 오류 발생: {}", e.getMessage(), e);
+//                throw e;
+//            }
+//        }
+//
+//    }
 
     @Transactional
-    public void signUpProcessUser(MemberDto memberDto) {  // 일반 로그인 (초대X)
+    public void signUpProcess(MemberDto memberDto) {
         String username = memberDto.getUsername();
-        log.info("회원가입 진행: username = {}", username);
+        log.info("signUpProcess / username = {}", username);
 
-        Boolean isExist = memberRepository.existsByUsername(username);
-        if (isExist) {
+        if (memberRepository.existsByUsername(username)) {
             log.warn("회원가입 실패: 이미 존재하는 이메일 = {}", username);
             return;
         }
 
-        try {
-            MemberEntity memberEntity = new MemberEntity();
-            memberEntity.setUsername(memberDto.getUsername());
-            memberEntity.setName(memberDto.getName());
-            memberEntity.setRole(memberDto.getRole());
-            memberEntity.setPassword(bCryptPasswordEncoder.encode(memberDto.getPassword()));
-            memberEntity.setPhone(memberDto.getPhone());
-            memberEntity.setRegDate(LocalDateTime.now());
-            memberEntity.setLatestLogDate(LocalDateTime.now());
-            memberEntity.setStatus(MemberStatusEnum.TEMP.getStatus());
-            MemberEntity newMemberEntity = memberRepository.save(memberEntity);
-            log.info("회원 정보 저장 완료: username = {}", username);
+        MemberEntity memberEntity = createMemberEntity(memberDto);
+        MemberEntity newMemberEntity = memberRepository.save(memberEntity);
+        log.info("회원 정보 저장 완료: username = {}", username);
 
-            Long checkKinderNo = memberDto.getKinderNo();
-            String checkKidName = memberDto.getKidName();
-            LocalDate checkKidBirth = memberDto.getKidBirth();
-            Integer checkKidGender = Integer.valueOf(memberDto.getKidGender());
-
-            log.info("아이 정보 확인: kinderNo = {}, kidName = {}, kidBirth = {}, kidGender = {}", checkKinderNo, checkKidName, checkKidBirth, checkKidGender);
-            KidEntity checkKid = kidRepository.findByKinderNoAndKidNameAndKidBirthAndKidGenderAndDischargeFlag(checkKinderNo, checkKidName, checkKidBirth, checkKidGender, BooleanEnum.FALSE.getBool())
-                    .orElseGet(() -> {
-                        KidEntity kidEntity = new KidEntity();
-                        kidEntity.setKinderNo(memberDto.getKinderNo());
-                        kidEntity.setKidName(memberDto.getKidName());
-                        kidEntity.setKidBirth(memberDto.getKidBirth());
-                        kidEntity.setKidGender(Integer.valueOf(memberDto.getKidGender()));
-                        kidEntity.setAdmissionDate(LocalDateTime.now());
-                        log.info("새 아이 정보 저장: {}", kidEntity);
-                        return kidRepository.save(kidEntity);
-                    });
-
-            log.info("아이 정보 확인 완료: kidNo = {}", checkKid.getKidNo());
-
-            List<ClassKidDto> allByClassNoAndKidNo = classKidRepository.findAllByClassNoAndKidNo(memberDto.getClassNo(), checkKid.getKidNo());
-            if (allByClassNoAndKidNo.isEmpty()) {
-                AcceptLogEntity kidAcceptLogEntity = new AcceptLogEntity();
-                kidAcceptLogEntity.setAcceptType(AcceptTypeEnum.CLASS_KID.getType());
-                kidAcceptLogEntity.setAcceptStatus(AcceptStatusEnum.WAIT.getStatus());
-                kidAcceptLogEntity.setAcceptRegDate(LocalDateTime.now());
-                kidAcceptLogEntity.setAcceptDeleteFlag(BooleanEnum.FALSE.getBool());
-                AcceptLogEntity acceptLogEntity = acceptLogRepository.save(kidAcceptLogEntity);
-                log.info("아이 수락 로그 저장: {}", acceptLogEntity);
-
-                ClassKidEntity classKidEntity = new ClassKidEntity();
-                classKidEntity.setClassNo(memberDto.getClassNo());
-                classKidEntity.setKidNo(checkKid.getKidNo());
-                classKidEntity.setAcceptNo(acceptLogEntity.getAcceptNo());
-                classKidRepository.save(classKidEntity);
-                log.info("클래스-아이 정보 저장: classNo = {}, kidNo = {}", memberDto.getClassNo(), checkKid.getKidNo());
-            }
-
-            Long memberAcceptNo = 0L;
-            if (memberDto.getInvite() == null) {
-                AcceptLogEntity acceptLogEntity = new AcceptLogEntity();
-                acceptLogEntity.setAcceptType(AcceptTypeEnum.PARENT_KID.getType());
-                acceptLogEntity.setAcceptStatus(AcceptStatusEnum.WAIT.getStatus());
-                acceptLogEntity.setAcceptRegDate(LocalDateTime.now());
-                acceptLogEntity.setAcceptDeleteFlag(BooleanEnum.FALSE.getBool());
-                AcceptLogEntity saveAcceptLogEntity = acceptLogRepository.save(acceptLogEntity);
-                memberAcceptNo = saveAcceptLogEntity.getAcceptNo();
-                log.info("부모-아이 수락 로그 저장: {}", saveAcceptLogEntity);
-            } else {
-                AcceptLogEntity acceptLogEntity = new AcceptLogEntity();
-                acceptLogEntity.setAcceptType(AcceptTypeEnum.PARENT_KID.getType());
-                acceptLogEntity.setAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
-                acceptLogEntity.setAcceptDate(LocalDateTime.now());
-                acceptLogEntity.setAcceptRegDate(LocalDateTime.now());
-                acceptLogEntity.setAcceptDeleteFlag(BooleanEnum.FALSE.getBool());
-                AcceptLogEntity saveAcceptLogEntity = acceptLogRepository.save(acceptLogEntity);
-                memberAcceptNo = saveAcceptLogEntity.getAcceptNo();
-                log.info("부모-아이 수락 로그 저장 (초대): {}", saveAcceptLogEntity);
-            }
-
-            ParentKidEntity parentKidEntity = new ParentKidEntity();
-            parentKidEntity.setId(newMemberEntity.getId());
-            parentKidEntity.setKidNo(checkKid.getKidNo());
-            parentKidEntity.setAcceptNo(memberAcceptNo);
-            parentKidEntity.setIsMainParent(BooleanEnum.FALSE.getBool());
-            parentKidEntity.setParentRelationship(memberDto.getRelationship());
-            parentKidRepository.save(parentKidEntity);
-            log.info("부모-아이 정보 저장 완료: memberId = {}, kidNo = {}", newMemberEntity.getId(), checkKid.getKidNo());
-        } catch (Exception e) {
-            log.error("회원가입 처리 중 오류 발생: {}", e.getMessage(), e);
-            throw e;
+        if (memberDto.getRole().equals("ROLE_USER")) {
+            processParentSignUp(memberDto, newMemberEntity);
+        } else {
+            processTeacherSignUp(memberDto, newMemberEntity);
         }
     }
 
-    public void signUpProcessUserInvite(MemberDto memberDto) {  // 일반 로그인 초대코드 버전
-
+    private MemberEntity createMemberEntity(MemberDto memberDto) {
+        MemberEntity memberEntity = new MemberEntity();
+        memberEntity.setUsername(memberDto.getUsername());
+        memberEntity.setName(memberDto.getName());
+        memberEntity.setRole(memberDto.getRole());
+        memberEntity.setPassword(bCryptPasswordEncoder.encode(memberDto.getPassword()));
+        memberEntity.setPhone(memberDto.getPhone());
+        memberEntity.setRegDate(LocalDateTime.now());
+        memberEntity.setLatestLogDate(LocalDateTime.now());
+        memberEntity.setStatus(MemberStatusEnum.TEMP.getStatus());
+        return memberEntity;
     }
+
+    private void processParentSignUp(MemberDto memberDto, MemberEntity newMemberEntity) {
+        KidEntity checkKid = findOrCreateKid(memberDto);
+        log.info("아이 정보 확인 완료: kidNo = {}", checkKid.getKidNo());
+
+        if (classKidRepository.findAllByClassNoAndKidNo(memberDto.getClassNo(), checkKid.getKidNo()).isEmpty()) {
+            AcceptLogEntity acceptLogEntity = createAcceptLog(AcceptTypeEnum.CLASS_KID, AcceptStatusEnum.WAIT);
+            ClassKidEntity classKidEntity = new ClassKidEntity();
+            classKidEntity.setClassNo(memberDto.getClassNo());
+            classKidEntity.setKidNo(checkKid.getKidNo());
+            classKidEntity.setAcceptNo(acceptLogEntity.getAcceptNo());
+            classKidRepository.save(classKidEntity);
+            log.info("클래스-아이 정보 저장: classNo = {}, kidNo = {}", memberDto.getClassNo(), checkKid.getKidNo());
+        }
+
+        Long memberAcceptNo = createAcceptLogForParent(memberDto);
+        ParentKidEntity parentKidEntity = new ParentKidEntity();
+        parentKidEntity.setId(newMemberEntity.getId());
+        parentKidEntity.setKidNo(checkKid.getKidNo());
+        parentKidEntity.setAcceptNo(memberAcceptNo);
+        parentKidEntity.setIsMainParent(BooleanEnum.FALSE.getBool());
+        parentKidEntity.setParentRelationship(memberDto.getRelationship());
+        parentKidRepository.save(parentKidEntity);
+        log.info("부모-아이 정보 저장 완료: memberId = {}, kidNo = {}", newMemberEntity.getId(), checkKid.getKidNo());
+    }
+
+    private KidEntity findOrCreateKid(MemberDto memberDto) {
+        return kidRepository.findByKinderNoAndKidNameAndKidBirthAndKidGenderAndDischargeFlag(
+                memberDto.getKinderNo(), memberDto.getKidName(), memberDto.getKidBirth(),
+                Integer.valueOf(memberDto.getKidGender()), BooleanEnum.FALSE.getBool()
+        ).orElseGet(() -> {
+            KidEntity kidEntity = new KidEntity();
+            kidEntity.setKinderNo(memberDto.getKinderNo());
+            kidEntity.setKidName(memberDto.getKidName());
+            kidEntity.setKidBirth(memberDto.getKidBirth());
+            kidEntity.setKidGender(Integer.valueOf(memberDto.getKidGender()));
+            kidEntity.setAdmissionDate(LocalDateTime.now());
+            log.info("새 아이 정보 저장: {}", kidEntity);
+            return kidRepository.save(kidEntity);
+        });
+    }
+
+    private Long createAcceptLogForParent(MemberDto memberDto) {
+        AcceptStatusEnum status = memberDto.getInvite() == null ? AcceptStatusEnum.WAIT : AcceptStatusEnum.ACCEPT;
+        AcceptLogEntity acceptLogEntity = createAcceptLog(AcceptTypeEnum.PARENT_KID, status);
+        return acceptLogEntity.getAcceptNo();
+    }
+
+    private AcceptLogEntity createAcceptLog(AcceptTypeEnum type, AcceptStatusEnum status) {
+        AcceptLogEntity acceptLogEntity = new AcceptLogEntity();
+        acceptLogEntity.setAcceptType(type.getType());
+        acceptLogEntity.setAcceptStatus(status.getStatus());
+        acceptLogEntity.setAcceptRegDate(LocalDateTime.now());
+        acceptLogEntity.setAcceptDeleteFlag(BooleanEnum.FALSE.getBool());
+        if (status == AcceptStatusEnum.ACCEPT) {
+            acceptLogEntity.setAcceptDate(LocalDateTime.now());
+        }
+        return acceptLogRepository.save(acceptLogEntity);
+    }
+
+    private void processTeacherSignUp(MemberDto memberDto, MemberEntity newMemberEntity) {
+        Long memberAcceptNo = createAcceptLogForParent(memberDto);
+        TeacherKinderEntity teacherKinderEntity = new TeacherKinderEntity();
+        teacherKinderEntity.setTeacherId(newMemberEntity.getId());
+        teacherKinderEntity.setKinderNo(memberDto.getKinderNo());
+        teacherKinderEntity.setAcceptNo(memberAcceptNo);
+        teacherKinderRepository.save(teacherKinderEntity);
+        log.info("교사-유치원 정보 저장 완료: teacherId = {}, kinderNo = {}", newMemberEntity.getId(), memberDto.getKinderNo());
+    }
+
+
 
     @Override
     public List<MemberDto> getAllByKidNo(Long kidNo) {
