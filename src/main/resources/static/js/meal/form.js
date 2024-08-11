@@ -121,6 +121,13 @@ $(document).ready(function(){
     $('#writeMealBtn').on('click', function () {
         // console.log(`등록 버튼 클릭`);
 
+        $('#writeMealForm').submit();
+    });
+
+    $('#writeMealForm').on('submit', function (e) {
+        console.log(`write 폼 제출`);
+        e.preventDefault(); // 폼의 기본 제출을 막음
+
         initMsg();
 
         // 식단상세 빈 값 체크
@@ -146,9 +153,11 @@ $(document).ready(function(){
         let mealDate = moment(datepicker).format('YYYY-MM-DD');
         // console.log(`mealDate: ${mealDate}`);
 
+        let mealDetails = [];
         for (let num of checkedMealTypes) { // 상세 빈 값 확인
             // console.dir($('#mealPic'+ num));
             let mealPic = $('#mealPic' + num);
+            // console.dir(mealPic);
 
             if (mealPic.val().trim() === '') { // 사진 빈 값 확인
                 // console.log(`사진 미등록`);
@@ -156,7 +165,6 @@ $(document).ready(function(){
                 let picBox = mealPic.closest('.modal_meal_img_box');
                 picBox.find('.msg').show();
                 // console.log(`scrollTop: ${mealPic.offset().top}`);
-                // console.dir(mealPic);
                 // console.log(`${JSON.stringify(mealPic.offset())}`);
                 // console.log(`${JSON.stringify(picBox.offset())}`);
 
@@ -165,14 +173,15 @@ $(document).ready(function(){
                 return false;
             }
 
-            // // 사진 형식 확인
-            // if (!fileCheck(mealPic[0])) {
-            //     return false;
-            // }
+            let filePath = mealPic.val();
+            let fileName = filePath.substring(filePath.lastIndexOf('\\') + 1);
 
             let menuBox = $('#meal_menu_box_form' + num);
             let target = menuBox.find('.menu_input_text');
-            let menu = Array.from(target).map(target => target.value).join('::');
+            let menu = Array.from(target)
+                .map(target => target.value.trim())
+                .filter(value => value !== '')
+                .join('::');
             // console.log(`menu: ${menu}`);
 
             if (menu.replaceAll('::', '') === '') {
@@ -180,34 +189,66 @@ $(document).ready(function(){
                 menuBox.find('input').first().focus();
                 return false;
             }
+
+            let mealDetail = {
+                mealType : num,
+                mealMenu : menu,
+                mealOriginalName : fileName
+            }
+
+            mealDetails.push(mealDetail);
         }
+        // console.log(`mealDetails: ${JSON.stringify(mealDetails)}`);
+
+
+
+        // 데이터 세팅
+        const formData = new FormData();
+        let param = {
+            kinderNo : $('#writeMealForm').data('kinder-no'),
+            mealDate : mealDate,
+            mealDetails : mealDetails
+        }
+
+        // 파일 전송
+        let fileInput = $('.meal_input_file');
+        for (let i = 0; i < fileInput.length; i++) {
+            if (fileInput[i].files.length > 0) {
+                for (let j = 0; j < fileInput[i].files.length; j++) {
+                    formData.append('files', fileInput[i].files[j]);
+                }
+            }
+        }
+
+        // 폼에 dto 저장
+        formData.append("mealDto",
+            new Blob([JSON.stringify(param)], {type: "application/json"}));
+
+        $.ajax({
+            url: "/meal/writeOk",
+            type: "POST",
+            processData: false,
+            contentType: false,
+            enctype: "multipart/form-data",
+            data: formData,
+            success: function(response) {
+                // 서버로부터의 응답 처리
+                console.log(response);
+                Swal.fire({
+                    title: "등록 완료",
+                    text: "창을 닫으면 목록 화면으로 돌아갑니다.",
+                    icon: "success",
+                    customClass: {
+                        confirmButton: 'btn-ab btn-ab-swal'
+                    }
+                }).then((result) => {
+                    window.location.href = window.location.origin + '/meal/admin/list';
+                });
+            },
+            error: function(err) {
+                // 에러 처리
+                console.log(err);
+            }
+        });
     });
 });
-
-function fileCheck(obj) {
-    console.dir(obj);
-    console.log(`value: ${obj.value}`);
-    let pathPoint = obj.value.lastIndexOf('.');
-    let filePoint = obj.value.substring(pathPoint+1,obj.length);
-    let fileType = filePoint.toLowerCase();
-    if(fileType === 'jpg' || fileType === 'gif' || fileType === 'png' ||
-        fileType === 'jpeg' || fileType === 'bmp') {
-
-        // 정상적인 이미지 확장자 파일일 경우 로직 처리
-        // 용량 확인
-        return true;
-
-    } else {
-        // swal로 바꿀것
-        alert('이미지 파일만 선택할 수 있습니다.');
-
-        let parentObj  = obj.parentNode
-        let node = parentObj.replaceChild(obj.cloneNode(true),obj);
-
-        return false;
-    }
-    if(fileType === 'bmp') {
-        let upload = confirm('BMP 파일은 웹상에서 사용하기엔 적절한 이미지 포맷이 아닙니다.\n그래도 계속 하시겠습니까?');
-        if(!upload) return false;
-    }
-}

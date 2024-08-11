@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @RestController
@@ -32,5 +33,19 @@ public class ApiMealController {
 
         return result == null ? ResponseEntity.badRequest().build() :
                                 ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/writeOk")
+    public ResponseEntity<MealDto> writeOk(@RequestPart(value = "mealDto") MealDto mealDto,
+                                           @RequestPart(value = "files") List<MultipartFile> files){
+        log.info("mealDto: {}", mealDto);
+        for (MultipartFile file : files) {
+            log.info("file: {}", file.getOriginalFilename());
+        }
+
+        MealDto inserted = mealService.insertMeal(mealDto, files);
+
+        return inserted == null ? ResponseEntity.badRequest().build() :
+                                  ResponseEntity.ok(inserted);
     }
 }
