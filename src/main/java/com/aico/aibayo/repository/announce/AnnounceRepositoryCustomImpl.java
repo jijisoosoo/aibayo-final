@@ -28,7 +28,6 @@ public class AnnounceRepositoryCustomImpl implements AnnounceRepositoryCustom {
     private final QBoardEntity board = QBoardEntity.boardEntity;
     private final QAnnounceEntity announce =QAnnounceEntity.announceEntity;
     private final QMemberEntity member =QMemberEntity.memberEntity;
-    private final QMemberEntity member2 =QMemberEntity.memberEntity;
     private final QAcceptLogEntity acceptLog=QAcceptLogEntity.acceptLogEntity;
     private final QCommentEntity comment = QCommentEntity.commentEntity;
 

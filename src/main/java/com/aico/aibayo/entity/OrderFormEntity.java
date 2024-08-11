@@ -20,11 +20,11 @@ public class OrderFormEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderNo; //의뢰 번호
     @Column(name="order_type")
-    private Integer orderType; //의뢰 분류
+    private Integer orderType; //의뢰 분류 0: 투약 1: 귀가
     @Column(name="order_requester")
     private String orderRequester; //의뢰자
     @Column(name="request_date")
-    private LocalDateTime requestDate; //의뢰일자
+    private LocalDateTime requestDate; //의뢰일자 (작성일)
     @Column(name="run_date")
     private LocalDateTime runDate; //실행일자
     @Column(name="kid_no")
