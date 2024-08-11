@@ -1,7 +1,7 @@
 package com.aico.aibayo.service.medication;
 
-import com.aico.aibayo.dto.Medication.MedicationDto;
-import com.aico.aibayo.dto.Medication.MedicationSearchCondition;
+import com.aico.aibayo.dto.medication.MedicationDto;
+import com.aico.aibayo.dto.medication.MedicationSearchCondition;
 import org.springframework.data.domain.Page;
 
 import java.util.HashMap;

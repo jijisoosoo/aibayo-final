@@ -1,4 +1,4 @@
-package com.aico.aibayo.dto.Medication;
+package com.aico.aibayo.dto.medication;
 
 import lombok.*;
 
@@ -15,12 +15,14 @@ public class MedicationDto {
     private Integer orderChecked;
     private Integer orderType;
     private LocalDateTime orderDeleteDate;
-    private LocalDateTime requestDate;
+    private LocalDateTime orderRequestDate;
     private LocalDateTime runDate;
     private String orderDeleteFlag;
     private String orderParentSign;
     private String orderRequester;
     private String orderSpecific;
+
+    private Long kinderNo;
 
     private Long mediOrderNo;
     private String symptoms;

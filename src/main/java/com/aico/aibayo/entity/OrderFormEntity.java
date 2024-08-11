@@ -23,12 +23,12 @@ public class OrderFormEntity {
     private Integer orderType; //의뢰 분류 0: 투약 1: 귀가
     @Column(name="order_requester")
     private String orderRequester; //의뢰자
-    @Column(name="request_date")
-    private LocalDateTime requestDate; //의뢰일자 (작성일)
+    @Column(name="order_request_date")
+    private LocalDateTime orderRequestDate; //의뢰일자 (작성일)
     @Column(name="run_date")
     private LocalDateTime runDate; //실행일자
     @Column(name="kid_no")
-    private Integer kidNo; //원생번호
+    private Long kidNo; //원생번호
     @Column(name="order_checked")
     private Integer orderChecked; //의뢰확인여부
     @Column(name="order_specific")
