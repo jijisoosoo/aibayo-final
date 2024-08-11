@@ -51,6 +51,42 @@ $(document).ready(function() {
         console.log(url);
         commonAjax(url, 'POST', param);
     });
+
+    $('#resignTeacher').on('click', function () {
+        Swal.fire({
+            title: "퇴사를 승인하시겠습니까?",
+            text: "승인 후 취소할 수 없습니다.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#dc3545",
+            confirmButtonText: "승인",
+            cancelButtonText: "취소"
+
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let url = "/teacher/deleteOk"
+
+                // // 모든 관계 제거
+                // $('.info_item').each(function () {
+                //     let param = {
+                //         acceptNo : $(this).data('accept-no')
+                //     }
+                //     // console.log(`remove_relation param: ${JSON.stringify(param)}`);
+                //
+                //     commonAjax(url, 'DELETE', param);
+                // });
+                //
+                // let param = {
+                //     kidNo : $('#kidProfile').data('kid-no')
+                // }
+                // // console.log(`kidNo param: ${JSON.stringify(param)}`)
+                //
+                // commonAjax(url, 'DELETE', param);
+
+            }
+        });
+    });
+
 });
 
 function afterSuccess(response) {

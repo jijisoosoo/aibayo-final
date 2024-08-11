@@ -2,10 +2,9 @@ package com.aico.aibayo.control;
 
 import com.aico.aibayo.common.AcceptStatusEnum;
 import com.aico.aibayo.dto.ClassDto;
-import com.aico.aibayo.dto.kid.KidSearchCondition;
 import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.dto.teacher.TeacherSearchCondition;
-import com.aico.aibayo.dto.teacher.teacherDto;
+import com.aico.aibayo.dto.teacher.TeacherDto;
 import com.aico.aibayo.jwt.JWTUtil;
 import com.aico.aibayo.service.classManage.ClassService;
 import com.aico.aibayo.service.member.MemberService;
@@ -78,7 +77,7 @@ public class TeacherController {
         condition.setKinderNo(loginInfo.getKinderNo());
 
         condition.setAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
-        List<teacherDto> acceptedTeacherList = teacherService.getAcceptedTeacherByKinderNoAndClassNo(condition);
+        List<TeacherDto> acceptedTeacherList = teacherService.getAcceptedTeacherByKinderNoAndClassNo(condition);
         model.addAttribute("acceptedTeacherList", acceptedTeacherList);
         model.addAttribute("condition", condition);
         log.info("ACCEPT: {}", condition);
@@ -88,13 +87,13 @@ public class TeacherController {
         condition.setClassNo(null);
 
         condition.setAcceptStatus(AcceptStatusEnum.WAIT.getStatus());
-        List<teacherDto> waitingTeacherList = teacherService.getAllByKinderNo(condition);
+        List<TeacherDto> waitingTeacherList = teacherService.getAllByKinderNo(condition);
         model.addAttribute("waitingTeacherList", waitingTeacherList);
         log.info("WAIT: {}", condition);
 
 
         condition.setAcceptStatus(AcceptStatusEnum.INVITE.getStatus());
-        List<teacherDto> invitedTeacherList = teacherService.getAllByKinderNo(condition);
+        List<TeacherDto> invitedTeacherList = teacherService.getAllByKinderNo(condition);
         model.addAttribute("invitedTeacherList", invitedTeacherList);
         log.info("INVITE: {}", condition);
 
@@ -127,7 +126,7 @@ public class TeacherController {
     public String getAcceptedTeacherProfile(Model model,Long id) {
         MemberDto loginInfo = (MemberDto)model.getAttribute("loginInfo");
 
-        teacherDto teacher = teacherService.getTeacherById(id);
+        TeacherDto teacher = teacherService.getTeacherById(id);
         model.addAttribute("teacher", teacher);
 
         List<ClassDto> classList = classService.getAllByKinderNo(loginInfo.getKinderNo());
