@@ -94,7 +94,6 @@ public class TeacherRepositoryCustomImpl implements TeacherRepositoryCustom{
         return teacher;
     }
 
-
     private BooleanExpression getClassNoEq(Long classNo) {
         return classNo == null ? null : classTeacher.classNo.eq(classNo);
     }

@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -65,6 +66,7 @@ public class TeacherController {
     @PostMapping("/listByClass")
     public String mainByClass(@RequestBody TeacherSearchCondition condition,
                               Model model) {
+        System.out.println("post:mainByClass실행");
         log.info("search: {}", condition);
 
         return getConditionAndGoMain(model, condition);
@@ -104,30 +106,26 @@ public class TeacherController {
 
 
     @GetMapping ("/teacherProfileAccept/{id}")
-    public String getAcceptedTeacherProfile(Model model, @PathVariable Long id) {
-        MemberDto loginInfo = (MemberDto)model.getAttribute("loginInfo");
-
-        teacherDto teacher = teacherService.getTeacherById(id);
-        model.addAttribute("teacher", teacher);
-
-        List<ClassDto> classList = classService.getAllByKinderNo(loginInfo.getKinderNo());
-        model.addAttribute("classList", classList);
-
-        List<ClassDto> addableClassList = classService.getAddableClassByKinderNo(loginInfo.getKinderNo());
-        model.addAttribute("addableClassList", addableClassList);
-
-        List<ClassDto> assignedClassList = classService.getClassByKinderNoAndTeacherId(loginInfo.getKinderNo(), id);
-        model.addAttribute("assignedClassList", assignedClassList);
-
-        return "/admin/teacher/teacherProfileAccept";
+    public String TeacherProfile(Model model, @PathVariable Long id) {
+        return getAcceptedTeacherProfile(model, id);
     }
 
     @PostMapping ("/teacherProfileAccept/{id}")
-    public String assignClassesAndGetAcceptedTeacherProfile(@RequestBody List<Long> oldClassIds, @RequestBody List<Long> newClassIds, Model model, @PathVariable Long id) {
-        MemberDto loginInfo = (MemberDto)model.getAttribute("loginInfo");
+    public String assignClassOk(@RequestBody Map<String, List<Long>> requestBody, Model model, @PathVariable Long id) {
+        List<Long> oldClassAcceptNos = requestBody.get("oldClassAcceptNos");
+        List<Long> newClassIds = requestBody.get("newClassIds");
 
-//        teacherService.assignNewClass(newClassIds, id);
-//        teacherService.deleteExistingClass(oldClassIds);
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>oldClassAcceptNos, newClassIds");
+        System.out.println("oldClassAcceptNos" + oldClassAcceptNos);
+        System.out.println("newClassIds" + newClassIds);
+
+        teacherService.updateClassTeacher(newClassIds, oldClassAcceptNos, id);
+
+        return getAcceptedTeacherProfile(model, id);
+    }
+
+    public String getAcceptedTeacherProfile(Model model,Long id) {
+        MemberDto loginInfo = (MemberDto)model.getAttribute("loginInfo");
 
         teacherDto teacher = teacherService.getTeacherById(id);
         model.addAttribute("teacher", teacher);
@@ -143,6 +141,8 @@ public class TeacherController {
 
         return "/admin/teacher/teacherProfileAccept";
     }
+
+
 
     @GetMapping("/admin/teacherProfileWait/{id}")
     public String adminTeacherProfileWait() {
