@@ -10,6 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 $(document).ready(function() {
 
+    // 소속 반 수정 버튼 누를 때마다 초기화
+    $(document).on('click', '#modifyClass', function () {
+        classListFilter();
+    });
+
+
     // 소속 반 수정하고 보여주기
     $(document).on('click', '#classModify', function () {
 
@@ -24,29 +30,40 @@ $(document).ready(function() {
             return this.id;
         }).get();
 
+        // 기존 반에는 있고 체크된 반에는 없음 : 삭제할 반
         let oldClassElements = Array.from(assignedElements).filter(element => !checkedClassIds.includes(element.id));
         let oldClassAcceptNos = oldClassElements.map(element => parseInt(element.getAttribute('data-accept-no')));
 
-        let newClassIds = Array.from(checkedClassIds).filter(id => !assignedClassIds.includes(id));
+        // 기존 반에는 없고 체크된 반에는 있음 : 추가할 반
+        // let newClassIds = Array.from(checkedClassIds).filter(id => !assignedClassIds.includes(id));
+        let newClassIds = checkedClassIds.filter(id => !assignedClassIds.includes(id));
 
         let param = {
             oldClassAcceptNos: oldClassAcceptNos,
             newClassIds: newClassIds
         };
 
+        console.log("assignedElements : " + assignedElements)
+        console.log("assignedClassIds : " + assignedClassIds)
         console.log("checkedClassIds  : " + JSON.stringify(param));
 
-        let url = "/teacher/teacherProfileAccept/{" + teacherId + "}";
+        let url = "/teacher/teacherProfileAccept/" + teacherId;
         console.log(url);
         commonAjax(url, 'POST', param);
     });
 });
 
 function afterSuccess(response) {
-    $('.selectedclasses').replaceWith($(response).find('.selectedclasses'));
+    $('#assignedClasses').replaceWith($(response).find('#assignedClasses'));
+    $('#staticBackdrop3').replaceWith($(response).find('#staticBackdrop3'));
+    classListFilter();
+    getCheckboxValue();
+    updateLabelBackgroundColor();
+    addLabelClickListeners();
+    addInputClickListeners();
+    addCheckboxEventListeners();
+
 }
-
-
 
 
 

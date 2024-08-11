@@ -100,7 +100,7 @@
             <div class="div-wrapper-2"><div class="text-wrapper-7">이메일</div></div>
             <div class="inputarea"><div class="text-wrapper-8" th:text="*{username}">teacher1@aibayo.co.kr</div></div>
         </div>
-        <div class="div-1">
+        <div class="div-1" id="assignedClasses">
             <div class="select-class">
                 <div class="title-class">
                     <div class="title-class-text">
@@ -109,51 +109,10 @@
                             <div class="text-wrapper-10" th:text="'(' + ${assignedClassList.size() + '개)'}">n</div>
                         </div>
                     </div>
-                    <a class="btn btn-ab resign" data-bs-toggle="modal" data-bs-target="#staticBackdrop3">
+                    <a class="btn btn-ab resign" id="modifyClass" data-bs-toggle="modal" data-bs-target="#staticBackdrop3">
                         <div class="text-modify">소속 반 수정</div>
                     </a>
                 </div>
-
-                <!-- Modal -->
-                <div class="modal fade" id="staticBackdrop3"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="title">
-                                <div class="textarea">
-                                    <div class="text-wrapper">소속 반 수정</div>
-                                </div>
-                                <button class="button-x" href="" data-bs-dismiss="modal" aria-label="Close">
-                                    <img src="/images/common/x.png" alt=""/>
-                                </button>
-                            </div>
-                            <div class="modalform">
-                                <div class="row-input">
-                                    <div class="text-addable">
-                                        <div class="div-2">
-                                            <img class="icon" src="/images/common/default-yellow.png" />
-                                            <div class="text-wrapper-2" id="checkboxCount"></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-check carousel">
-                                        <label class="class-selected classList" th:each="class:${classList}" th:object="${classList}" th:for="${class.classNo}" th:id="${class.classNo}">
-                                            <div class="text-wrapper-3" th:text="${class.className}">반이름</div>
-                                            <input class="form-check-input" type="checkbox" th:name="${class.classNo}" th:value="${class.className}" th:id="${class.classNo}" autocomplete="off" >
-                                        </label>
-
-                                        <div class="class-selected addableClassList" th:each="class:${addableClassList}" th:id="${class.classNo}" ></div>
-                                        <div class="class-selected assignedClassList" th:each="class:${assignedClassList}" th:id="${class.classNo}" th:data-accept-no="${class.assignedCntOrAcceptNo}" ></div>
-                                    </div>
-                                    <div class="wrapper-notice">※ 배정된 교사가 최대인원(3명)에 도달한 반은 선택할 수 없습니다.</div>
-                                </div>
-                                <div class="buttonarea">
-                                    <input type="button" class="btn btn-ab button-send" id="classModify" value="적용" data-bs-dismiss="modal">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Modal end -->
-
 
             </div>
             <div class="selectedclasses">
@@ -165,9 +124,50 @@
         <div class="div-3">
             <div class="div-wrapper-2"><div class="text-wrapper-7">입사일</div></div>
             <div class="inputarea">
-                <div class="text-wrapper-8" th:text="*{acceptRegDate}">2024.06.28</div>
+                <div class="text-wrapper-8" th:text="*{#temporals.format(acceptRegDate, 'yyyy년 MM월 dd일')}">yyyy.mm.dd</div>
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop3"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="title">
+                    <div class="textarea">
+                        <div class="text-wrapper">소속 반 수정</div>
+                    </div>
+                    <button class="button-x" href="" data-bs-dismiss="modal" aria-label="Close">
+                        <img src="/images/common/x.png" alt=""/>
+                    </button>
+                </div>
+                <div class="modalform">
+                    <div class="row-input">
+                        <div class="text-addable">
+                            <div class="div-2">
+                                <img class="icon" src="/images/common/default-yellow.png" />
+                                <div class="text-wrapper-2" id="checkboxCount"></div>
+                            </div>
+                        </div>
+                        <div class="form-check carousel">
+                            <label class="class-selected classList" th:each="class:${classList}" th:object="${classList}" th:for="${class.classNo}" th:id="${class.classNo}">
+                                <div class="text-wrapper-3" th:text="${class.className}">반이름</div>
+                                <input class="form-check-input" type="checkbox" th:name="${class.classNo}" th:value="${class.className}" th:id="${class.classNo}" autocomplete="off" >
+                            </label>
+
+                            <div class="class-selected addableClassList" th:each="class:${addableClassList}" th:id="${class.classNo}" ></div>
+                            <div class="class-selected assignedClassList" th:each="class:${assignedClassList}"  th:object="${assignedClassList}" th:id="${class.classNo}" th:data-accept-no="${class.assignedCntOrAcceptNo}" ></div>
+                        </div>
+                        <div class="wrapper-notice">※ 배정된 교사가 최대인원(3명)에 도달한 반은 선택할 수 없습니다.</div>
+                    </div>
+                    <div class="buttonarea">
+                        <input type="button" class="btn btn-ab button-send" id="classModify" value="적용" data-bs-dismiss="modal">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal end -->
+
 </div>
 </html>

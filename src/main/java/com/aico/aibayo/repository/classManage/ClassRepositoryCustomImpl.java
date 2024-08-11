@@ -101,7 +101,8 @@ public class ClassRepositoryCustomImpl implements ClassRepositoryCustom{
                 .join(classTeacher).on(clazz.classNo.eq(classTeacher.classNo))
                 .join(acceptLog).on(classTeacher.acceptNo.eq(acceptLog.acceptNo))
                 .where(clazz.kinderNo.eq(kinderNo),
-                        clazz.classDeleteFlag.eq(BooleanEnum.FALSE.getBool()))
+                        clazz.classDeleteFlag.eq(BooleanEnum.FALSE.getBool()),
+                        acceptLog.acceptStatus.eq(AcceptStatusEnum.ACCEPT.getStatus()))
                 .groupBy(clazz.classNo,
                         clazz.className)
                 .having(classTeacher.classTeacherId.count().lt(3L))

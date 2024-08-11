@@ -66,6 +66,7 @@ public class TeacherController {
     @PostMapping("/listByClass")
     public String mainByClass(@RequestBody TeacherSearchCondition condition,
                               Model model) {
+        System.out.println("post:mainByClass실행");
         log.info("search: {}", condition);
 
         return getConditionAndGoMain(model, condition);
