@@ -29,16 +29,16 @@
                     }
                 });
             } else {
-                const actionUrl = formData.role === "ROLE_PRINCIPAL" || formData.role === "ROLE_TEACHER"
-                    ? "/member/signUpKinder"
-                    : "/member/signUp";
+                // const actionUrl = formData.role === "ROLE_PRINCIPAL" || formData.role === "ROLE_TEACHER"
+                //     ? "/member/signUpKinder"
+                //     : "/member/signUp";
                 $.ajax({
                     type: "POST",
-                    url: actionUrl,
+                    url: "/member/signUpTeacher",
                     contentType: "application/json",
                     data: JSON.stringify(formData),
                     success: function(response) {
-                        window.location.href = "member/signUpKinder";
+                        window.location.href = "/member/signUpTeacher";
                     },
                     error: function(error) {
                         console.log("Error:", error);
