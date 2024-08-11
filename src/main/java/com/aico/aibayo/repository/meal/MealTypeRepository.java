@@ -1,4 +1,4 @@
-package com.aico.aibayo.repository;
+package com.aico.aibayo.repository.meal;
 
 import com.aico.aibayo.entity.MealTypeEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

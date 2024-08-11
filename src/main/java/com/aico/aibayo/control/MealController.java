@@ -30,7 +30,8 @@ public class MealController {
     }
 
     @GetMapping("/admin/write")
-    public String writeForm() {
+    public String writeForm(@ModelAttribute("loginInfo") MemberDto loginInfo) {
+
         return "/admin/meal/writeForm";
     }
 
