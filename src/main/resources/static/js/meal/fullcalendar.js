@@ -49,7 +49,7 @@ $(document).ready(function() {
                 mealNo : mealNo,
                 isDetail : true
             }
-            console.log(`param: ${JSON.stringify(param)}`);
+            // console.log(`param: ${JSON.stringify(param)}`);
 
             let url = `/meal/detail`;
 
@@ -115,7 +115,7 @@ $(document).ready(function() {
 
 function afterSuccess(response) {
     // console.log(`response: ${response}`);
-    console.log(`response: ${JSON.stringify(response)}`);
+    // console.log(`response: ${JSON.stringify(response)}`);
 
     // 전체조회일 경우
     if (response.detail == null) {
@@ -140,11 +140,11 @@ function afterSuccess(response) {
     }
 
     if (response.detail) {
-        console.log(`상세조회 모달 세팅..`);
-        console.log(`response: ${JSON.stringify(response)}`);
+        // console.log(`상세조회 모달 세팅..`);
+        // console.log(`response: ${JSON.stringify(response)}`);
 
         let roleNo = $('#calendar').data('role-no');
-        console.log(`roleNo: ${roleNo}`);
+        // console.log(`roleNo: ${roleNo}`);
 
         // 모달의 내용 세팅
         let modalDetailTag = `<div class="modal fade fixed-width-modal" id="mealDetail"
@@ -166,10 +166,10 @@ function afterSuccess(response) {
 
         // detail 수만큼 추가
         for (let detail of response.mealDetails) {
-            console.log(`detail: ${JSON.stringify(detail)}`);
+            // console.log(`detail: ${JSON.stringify(detail)}`);
 
             let menuNames = detail.mealMenu.replaceAll(delimiter, `<br>`);
-            console.log(`menuNames: ${menuNames}`);
+            // console.log(`menuNames: ${menuNames}`);
 
             modalDetailTag += `<div class="modal_meal_item_box">
 
