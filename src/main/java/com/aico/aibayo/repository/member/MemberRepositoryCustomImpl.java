@@ -126,4 +126,23 @@ public class MemberRepositoryCustomImpl implements MemberRepositoryCustom{
                 .fetchFirst();
     }
 
+    @Override
+    public MemberDto findDtoById(Long id) {
+        return jpaQueryFactory
+        .select(Projections.constructor(MemberDto.class,
+                member.id,
+                member.username,
+                member.name,
+                member.password,
+                member.phone,
+                member.roleNo,
+                member.role,
+                member.status,
+                member.kinderNo
+        ))
+                .from(member)
+                .where(member.id.eq(id))
+                .fetchOne();
+    }
+
 }

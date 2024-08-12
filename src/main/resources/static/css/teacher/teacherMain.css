@@ -347,6 +347,29 @@
   font-size: 14px;
 }
 
+.container .button-delete {
+  display: flex;
+  width: 60px;
+  height: 35px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0px 16px;
+  position: relative;
+  background-color: #bdbdbd;
+  color: white;
+  border-radius: 8px;
+  text-decoration-line : none;
+  border: none !important;
+  font-size: 14px;
+}
+
+.button-delete:hover {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
 .container .text-wrapper-12 {
   position: relative;
   /*font-family: "Inter-Medium", Helvetica;*/
@@ -408,6 +431,35 @@
 .ifResultNullInner .icon {
   width: 23px;
   height: 23px;
+}
+
+.carousel_wait{
+  display: flex;
+  gap: 20px;
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  flex: 0 0 auto;
+  flex-direction: column;
+}
+
+.profile_wait{
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  flex: 0 0 auto;
+  width: 100%;
+  justify-content: space-between;
+  background: white;
+  padding: 12px 12px 12px 25px;
+  border-radius: 10px;
+}
+
+.wait_buttons{
+  display: flex;
+  width: fit-content;
+  gap: 15px;
 }
 
 

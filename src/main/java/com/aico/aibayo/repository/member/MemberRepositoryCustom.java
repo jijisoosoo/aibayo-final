@@ -8,4 +8,5 @@ public interface MemberRepositoryCustom {
     List<MemberDto> findAllByKidNo(Long kidNo);
     MemberDto findByIdAndKidNo(MemberSearchCondition condition);
     MemberDto findByUsernameWithParentKid(String username);
+    MemberDto findDtoById(Long id);
 }

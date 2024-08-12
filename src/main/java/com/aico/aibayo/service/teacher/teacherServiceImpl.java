@@ -3,13 +3,15 @@ package com.aico.aibayo.service.teacher;
 import com.aico.aibayo.common.AcceptStatusEnum;
 import com.aico.aibayo.common.AcceptTypeEnum;
 import com.aico.aibayo.common.BooleanEnum;
-import com.aico.aibayo.dto.kid.KidDto;
+import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.dto.teacher.TeacherSearchCondition;
 import com.aico.aibayo.dto.teacher.TeacherDto;
 import com.aico.aibayo.entity.AcceptLogEntity;
 import com.aico.aibayo.entity.ClassTeacherEntity;
+import com.aico.aibayo.entity.MemberEntity;
 import com.aico.aibayo.repository.AcceptLogRepository;
 import com.aico.aibayo.repository.ClassTeacher.ClassTeacherRepository;
+import com.aico.aibayo.repository.member.MemberRepository;
 import com.aico.aibayo.repository.teacher.TeacherRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -26,6 +30,7 @@ public class teacherServiceImpl implements teacherService{
     private final TeacherRepository teacherRepository;
     private final AcceptLogRepository acceptLogRepository;
     private final ClassTeacherRepository classTeacherRepository;
+    private final MemberRepository memberRepository;
 
     @Override
     public List<TeacherDto> getAllByKinderNo(TeacherSearchCondition condition) {
@@ -76,7 +81,64 @@ public class teacherServiceImpl implements teacherService{
     }
 
     @Override
-    public KidDto deleteTeacher(TeacherDto teacherDto) {
-        return null;
+    public MemberDto deleteTeacher(Map<String, Object> requestBody) {
+
+        Long id = ((Number) requestBody.get("id")).longValue();
+        System.out.println("id" + id);
+        MemberDto memberDto = null;
+
+        // class_teacher 삭제
+        if (requestBody.get("classAcceptNos") != null) {
+            List<Integer> classAcceptNosInt = (List<Integer>) requestBody.get("classAcceptNos");
+            List<Long> classAcceptNos = classAcceptNosInt.stream()
+                    .map(Integer::longValue)
+                    .collect(Collectors.toList());
+            System.out.println("classAcceptNos" + classAcceptNos);
+
+            for(long classAcceptNo : classAcceptNos){
+                AcceptLogEntity target = acceptLogRepository.findById(classAcceptNo).orElse(null);
+                if (target != null) {
+                    target.setAcceptStatus(AcceptStatusEnum.DELETE.getStatus());
+                    target.setAcceptDeleteFlag(BooleanEnum.TRUE.getBool());
+                    target.setAcceptDeleteDate(LocalDateTime.now());
+
+                    acceptLogRepository.save(target);
+                    memberDto = memberRepository.findDtoById(id);
+                    System.out.println("memberDto 1 : " + memberDto);
+                }
+            }
+        }
+
+        // teacher_kinder 삭제
+        if (requestBody.get("kinderAcceptNo") != null) {
+            Long kinderAcceptNo = ((Number) requestBody.get("kinderAcceptNo")).longValue();
+            System.out.println("kinderAcceptNo" + kinderAcceptNo);
+
+            AcceptLogEntity target = acceptLogRepository.findById(kinderAcceptNo).orElse(null);
+            if (target != null) {
+                target.setAcceptStatus(AcceptStatusEnum.DELETE.getStatus());
+                target.setAcceptDeleteFlag(BooleanEnum.TRUE.getBool());
+                target.setAcceptDeleteDate(LocalDateTime.now());
+
+                acceptLogRepository.save(target);
+                memberDto = memberRepository.findDtoById(id);
+                System.out.println("memberDto 2 : " + memberDto);
+            }
+        }
+
+        // member에서 유치원 번호 삭제
+        if (requestBody.get("id") != null) {
+            MemberEntity target = teacherRepository.findById(id).orElse(null);
+            if (target != null) {
+                target.setKinderNo(null);
+                target.setModifyDate(LocalDateTime.now());
+
+                memberRepository.save(target);
+                memberDto = memberRepository.findDtoById(id);
+                System.out.println("memberDto 3 : " + memberDto);
+            }
+        }
+        System.out.println("memberDto return : " + memberDto);
+        return memberDto;
     }
 }

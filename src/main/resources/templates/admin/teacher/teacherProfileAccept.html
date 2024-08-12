@@ -23,7 +23,7 @@
         </a>
         <div class="div-wrapper"><div class="text-wrapper-title">교사 정보</div></div>
     </div>
-    <div class="profile" th:object="${teacher}" th:id="*{id}">
+    <div class="profile" th:object="${teacher}" th:id="*{id}" th:data-kinder-accept-no="*{kinderAcceptNo}">
         <div class="blank"></div>
         <div class="div-profile">
             <div class="img-2">
@@ -36,61 +36,11 @@
             </div>
             <div class="id"><div class="text-wrapper-5" th:text="*{name}">선생님명</div></div>
         </div>
-        <a class="btn button-cancel" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <a class="btn button-cancel">
             <div class="text-cancel" id="resignTeacher">퇴사</div>
         </a>
-
-
-        <!-- Modal -->
-        <div class="modal fade" id="staticBackdrop"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content modal-content-resign">
-                    <div class="title">
-                        <div class="textarea">
-                            <div class="text-wrapper">퇴사 확인</div>
-                        </div>
-                        <button class="button-x" href="" data-bs-dismiss="modal" aria-label="Close">
-                            <img src="/images/common/x.png" alt=""/>
-                        </button>
-                    </div>
-                    <div class="modalform" th:action="@{/admin/teacherMain}" th:method="post" th:object="${teacher}">
-                        <div th:text="*{name} + ' 선생님의 퇴사를 승인하시겠습니까?'"></div>
-                        <div class="buttonarea">
-                            <input type="reset" class="button-cancel" value="취소" data-bs-dismiss="modal">
-                            <input type="submit" class="button-resign" value="퇴사" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal end -->
-
-
-
-        <!-- Modal 2nd -->
-        <div class="modal fade" id="staticBackdrop2"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content modal-content-resign">
-                    <div class="title">
-                        <div class="textarea"></div>
-                        <button class="button-x" href="" data-bs-dismiss="modal" aria-label="Close">
-                            <img src="/images/common/x.png" alt=""/>
-                        </button>
-                    </div>
-                    <form class="modalform" th:action="@{/admin/teacherMain}" th:method="post">
-                        <div>퇴사 처리가 완료되었습니다.</div>
-                        <div class="buttonarea">
-                            <input type="submit" class="button-cancel" value="확인" data-bs-dismiss="modal">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- Modal 2nd end -->
-
-
-
     </div>
+
     <div class="info" th:object="${teacher}">
         <div class="div-1">
             <div class="div-wrapper-2"><div class="text-wrapper-7">휴대폰 번호</div></div>
@@ -116,7 +66,7 @@
 
             </div>
             <div class="selectedclasses">
-                <div class="class" th:each="class:${assignedClassList}" th:object="${assignedClassList}">
+                <div class="class" th:each="class:${assignedClassList}" th:object="${assignedClassList}" th:data-class-accept-no="${class.assignedCntOrAcceptNo}">
                     <div class="text-class" th:id="${class.classNo}" th:text="${class.className}">반이름</div>
                 </div>
             </div>
