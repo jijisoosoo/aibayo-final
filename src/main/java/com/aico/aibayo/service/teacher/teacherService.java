@@ -15,5 +15,7 @@ public interface teacherService {
     List<TeacherDto> getAcceptedTeacherByKinderNoAndClassNo(TeacherSearchCondition condition);
     TeacherDto getTeacherById(Long id);
     void updateClassTeacher(List<Long> newClassIds, List<Long> oldClassAcceptNos, Long id);
+    MemberDto updateTeacher(Map<String, Number> requestBody);
     MemberDto deleteTeacher(Map<String, Object> requestBody);
+
 }

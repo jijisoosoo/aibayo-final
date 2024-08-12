@@ -141,11 +141,12 @@
             </div>
         </div>
         <div class="carousel_wait">
-            <div class="profile_wait" th:each="teacher:${waitingTeacherList}" th:object="${teacher}">
-                <div class="text-wrapper-11" th:title="*{name}" th:text="*{name} + '(' + *{username} + ')'">교사명</div>
+            <div class="profile_wait" th:each="teacher:${waitingTeacherList}" th:object="${teacher}" th:id="${teacher.id}"
+                 th:data-teacher-kinder-accept-no="${teacher.kinderAcceptNo}">
+                <div class="text-wrapper-11" th:title="*{name}" th:text="*{name} + ' (' + *{username} + ')'">교사명</div>
                 <div class="wait_buttons">
-                    <a class="btn btn-ab button-approve">승인</a>
-                    <a class="btn button-delete">삭제</a>
+                    <a class="btn btn-ab button-approve" id="waitAccept">승인</a>
+                    <a class="btn button-delete" id="waitReject">삭제</a>
                 </div>
             </div>
 
@@ -178,7 +179,7 @@
         <div class="carousel-container">
             <div class="carousel_wait">
                 <div class="profile_wait" th:each="teacher:${invitedTeacherList}" th:object="${teacher}">
-                    <div class="text-wrapper-11" th:title="*{name}" th:text="*{name} + '(' + *{username} + ')'">교사명</div>
+                    <div class="text-wrapper-11" th:title="*{name}" th:text="*{name} + ' (' + *{username} + ')'">교사명</div>
                     <div class="wait_buttons">
                         <a class="btn btn-ab button-approve">승인</a>
                         <a class="btn button-delete">삭제</a>
