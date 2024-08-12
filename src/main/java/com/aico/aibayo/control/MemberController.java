@@ -198,6 +198,8 @@ public class MemberController {
         String name = memberDto.getName();
         String phone = memberDto.getPhone();
         String username = memberDto.getUsername();
+        String role = memberDto.getRole();
+
 
         MemberEntity memberEntity = memberRepository.findByUsername(username).orElse(null);
         if (memberEntity != null) {
@@ -205,13 +207,22 @@ public class MemberController {
             memberEntity.setPhone(phone);
             memberRepository.save(memberEntity);
         }
-        return "redirect:/member/myPage";
+
+        if (role.equals("ROLE_USER")) {
+            return "user/main/main";
+        } else {
+            return "admin/main/main";
+        }
     }
 
-    @GetMapping("/deleteMember")
+    @PostMapping("/deleteMember")
     public String deleteMember(@ModelAttribute("loginInfo") MemberDto memberDto) {
         String username = memberDto.getUsername();
         String role = memberDto.getRole();
+
+        if (role.equals("ROLE_PRINCIPAL") && role.equals("ROLE_ADMIN")) {
+            return null; // 선생, 학부모만 계정 삭제 가능
+        }
 
         memberService.deleteMember(username, role);
 
