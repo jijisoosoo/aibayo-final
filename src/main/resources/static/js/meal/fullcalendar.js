@@ -178,8 +178,12 @@ function afterSuccess(response) {
                             </div>
 
 
+<!--                            <div class="modal_meal_img_box">-->
+<!--                                <img class="modal_meal_img" src="http://via.placeholder.com/330x300">-->
+<!--                            </div>-->
+                            
                             <div class="modal_meal_img_box">
-                                <img class="modal_meal_img" src="http://via.placeholder.com/330x300">
+                                <img class="modal_meal_img" src="${detail.mealPic}">
                             </div>
 
                             <div class="modal_meal_menu_box">
