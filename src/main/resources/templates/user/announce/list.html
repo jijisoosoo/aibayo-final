@@ -43,7 +43,7 @@
                             </a>
                         </div>
                         <div class="element-secondary-button-wrapper">
-                            <a href="/announce/user/write" class="element-secondary-button-2">작성</a>
+                            <a href="/announce/user/write" class="element-secondary-button-2" th:if="${roleNo>2}">작성</a>
                         </div>
                     </div>
                 </div>
@@ -76,7 +76,9 @@
                             <th>작성일</th>
                             <th>댓글</th>
                         </tr>
-                        <tr class="announce" th:each="announce : ${primaryAnnounces}" th:object="${announce}" th:onclick="|location.href='/announce/user/${announce.announceNo}'|">
+                        <tr class="announce"
+                            th:if="${announce.announceType > 1}"
+                            th:each="announce : ${primaryAnnounces}" th:object="${announce}" th:onclick="|location.href='/announce/user/${announce.announceNo}'|">
                             <td th:text="*{announceNo}"></td>
                             <!--                            <td th:text="*{announcePrimary}"></td>-->
                             <td>
@@ -95,9 +97,11 @@
 
                             <td th:text="*{#temporals.format(boardRegDate, 'yyyy년 MM월 dd일')}">2024.07.11.</td>
                             <td>0</td>
+                            <td th:text="${commentCount}">0</td>
                         </tr>
 
-                        <tr class="announce" th:each="announce : ${announces}" th:object="${announce}" th:onclick="|location.href='/announce/user/${announce.announceNo}'|">
+                        <tr class="announce"
+                            th:each="announce : ${announces}" th:object="${announce}" th:onclick="|location.href='/announce/user/${announce.announceNo}'|">
                             <td th:text="*{announceNo}"></td>
                             <!--                            <td th:text="*{announcePrimary}"></td>-->
                             <td>

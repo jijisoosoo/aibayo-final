@@ -20,7 +20,6 @@
                 </div>
                 <div class="div">
                     <div class="div-wrapper">
-
                         <div  class="element-dropdown">
                             <select class="category">
                                 <option value="0" selected>말머리</option>
@@ -45,7 +44,7 @@
                             </a>
                         </div>
                         <div class="element-secondary-button-wrapper">
-                            <a href="/announce/user/write" class="element-secondary-button-2">작성</a>
+                            <a href="/announce/user/write" class="element-secondary-button-2" th:if="${roleNo>2}">작성</a>
                         </div>
                     </div>
                 </div>

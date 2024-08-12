@@ -160,10 +160,9 @@ public class AnnounceController {
         announceInfo.put("boardType", BoardTypeEnum.ANNOUNCE.getNum());
         announceInfo.put("writer", id);
         announceInfo.put("boardKinderNo", kinderNo);
-
         model.addAttribute("classDtos", classDtos);
         model.addAttribute("announceInfo",announceInfo);
-
+        log.info("writeAnnounce : {} ", announceInfo);
         return "/admin/announce/writeForm";
     }
     @PostMapping("/writeOk")
@@ -246,6 +245,7 @@ public class AnnounceController {
         condition1.setKinderNo(loginInfo.getKinderNo());
         condition1.setAnnounceType(AnnounceTypeEnum.TEACHER.getNum());
 
+
         condition2.setKinderNo(loginInfo.getKinderNo());
         condition2.setAnnouncePrimary("1");
         condition2.setAnnounceType(AnnounceTypeEnum.TEACHER.getNum());
@@ -277,6 +277,7 @@ public class AnnounceController {
         CommentSearchCondition condition = new CommentSearchCondition();
         condition.setKinderNo(kinderNo);
         condition.setBoardNo(announceDto.getBoardNo());
+
         log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>announceDto>>>>>{}",announceDto);
 
         model.addAttribute("announce",announceDto);
@@ -323,15 +324,17 @@ public class AnnounceController {
             }
         }
 
-        log.info(">>>>>>>>>>>>>>>>>>>>>>pagination");
+        log.info(">>>>>>>>>>>>>>>>>>>>>>댓글 pagination");
         log.info("startPage: {}", startPage);
         log.info("endPage: {}", endPage);
+        log.info("totalPages: {}", totalPages);
         log.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 
         model.addAttribute("comments", comments);
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
+        model.addAttribute("totalPages", totalPages);
 
         return view;
     }
@@ -375,6 +378,5 @@ public class AnnounceController {
         log.info("modify comment : {}",commentDto);
         return commentService.updateComment(commentDto);
     }
-
 }
 
