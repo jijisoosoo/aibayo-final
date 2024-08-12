@@ -73,6 +73,29 @@
                     </div>
                 </div>
                 <div class="frame-9">
+                    <div class="edit" th:if="${loginInfo.getRoleNo() == 0 or loginInfo.getRoleNo() == 1 or loginInfo.getId() == writer}">
+<!--                        <p> 로그인 한 사람의 롤넘버</p>-->
+<!--                        <p th:text="${loginInfo.getRoleNo()}">//</p>-->
+
+<!--                        <p> 로그인 한 사람의 아이디 넘버</p>-->
+<!--                        <p th:text="${loginInfo.getId()}">//</p>-->
+
+<!--                        <p>작성자 아이디(넘버)</p>-->
+<!--                        <p th:text="*{writer}"></p>-->
+
+                        <div class="dropdown" id="drop1">
+                            <button class="btn dropdown-toggle" id="dd1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            </button>
+                            <ul class="dropdown-menu dmenu">
+                                <li><a class="dropdown-item ditem" th:href="@{|/announce/admin/modify/${announceNo}|}">수정</a></li>
+                                <li>
+                                    <!--                                <button type="button" class="dropdown-item ditem" id="deleteBtn" onclick="button_event();">삭제</button>-->
+                                    <button type="button" class="dropdown-item ditem" id="deleteBtn"
+                                            th:data-board-no="${announce.boardNo}">삭제</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="frame-10">
                         <p class="text-wrapper-5" th:text="*{boardContents}">
                             여기는 본문입니다 <br />
