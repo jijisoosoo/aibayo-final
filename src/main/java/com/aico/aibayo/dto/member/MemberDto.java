@@ -39,6 +39,7 @@ public class MemberDto {
     private Long kidNo;
 
     private Long acceptNo;
+    private Integer acceptStatus;
 
     private String isMainParent;
 
@@ -149,7 +150,8 @@ public class MemberDto {
         this.kinderNo = kinderNo;
     }
 
-    public MemberDto(Long id, String username, String name, String password, String phone, Integer roleNo, String role,
+
+ public MemberDto(Long id, String username, String name, String password, String phone, Integer roleNo, String role,
                      Integer status, LocalDateTime regDate, LocalDateTime modifyDate, LocalDateTime inactivateDate,
                      LocalDateTime latestLogDate, String profilePicture,Long kidNo,
                      Long kinderNo, Long acceptNo, String isMainParent) {
@@ -171,10 +173,6 @@ public class MemberDto {
         this.acceptNo = acceptNo;
         this.isMainParent = isMainParent;
     }
-
-
-
-
 
     public static MemberDto toDto(MemberEntity entity) {
         return new MemberDto(
