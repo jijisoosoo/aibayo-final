@@ -30,6 +30,7 @@ public class ApiMealController {
     @PostMapping("/detail")
     public ResponseEntity<MealDto> adminDetail(@RequestBody MealDto dto) {
         MealDto result = mealService.getWithDetailByMealNo(dto);
+        log.info("selected: {}", result);
 
         return result == null ? ResponseEntity.badRequest().build() :
                                 ResponseEntity.ok(result);

@@ -7,4 +7,6 @@ import java.util.List;
 public interface ClassKidRepositoryCustom {
 
     List<ClassKidDto> findAllByClassNoAndKidNo(Long classNo, Long kidNo);
+
+    List<ClassKidDto> findAllByClassNo(Long classNo);
 }

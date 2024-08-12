@@ -11,4 +11,7 @@ public class ClassKidDto {
     private Long classNo;
     private Long kidNo;
     private Long acceptNo;
+
+    private String kidName;
+    private Integer acceptStatus;
 }

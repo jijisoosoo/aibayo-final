@@ -10,7 +10,7 @@ import com.aico.aibayo.entity.AcceptLogEntity;
 import com.aico.aibayo.entity.ClassTeacherEntity;
 import com.aico.aibayo.entity.MemberEntity;
 import com.aico.aibayo.repository.AcceptLogRepository;
-import com.aico.aibayo.repository.ClassTeacher.ClassTeacherRepository;
+import com.aico.aibayo.repository.classTeacher.ClassTeacherRepository;
 import com.aico.aibayo.repository.member.MemberRepository;
 import com.aico.aibayo.repository.teacher.TeacherRepository;
 import jakarta.transaction.Transactional;
