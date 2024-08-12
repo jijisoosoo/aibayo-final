@@ -26,4 +26,6 @@ public interface ClassService {
     List<ClassTeacherDto> getClassTeacher(Long classNo);
 
     void updateClassName(Long classNo, String newClassName);
+
+    void deleteClass(Long classNo);
 }

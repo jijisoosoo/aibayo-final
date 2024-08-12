@@ -92,7 +92,6 @@ public class ClassManageController {
 
     @PostMapping("/updateClassName")
     public ResponseEntity<String> updateClassName(@RequestBody Map<String, Object> request) {
-//        Long classNo = (Long) request.get("classNo");
         Long classNo = ((Number) request.get("classNo")).longValue();
         String newClassName = (String) request.get("newClassName");
 
@@ -104,6 +103,21 @@ public class ClassManageController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("반 이름 수정을 실패했습니다.");
         }
+    }
+
+    @PostMapping("/deleteClass")
+    public ResponseEntity<String> deleteClass(@RequestBody Map<String, Object> request) {
+        Long classNo = Long.valueOf(request.get("classNo").toString());
+
+        List<ClassKidDto> classKid = classService.getClassKid(classNo);
+        List<ClassTeacherDto> classTeacher = classService.getClassTeacher(classNo);
+
+//        if ((!classKid.isEmpty()) && (!classTeacher.isEmpty())) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("반에 소속된 교사 또는 원생이 존재합니다.");
+//        }
+        classService.deleteClass(classNo);
+        return ResponseEntity.ok("반이 삭제되었습니다.");
+
     }
 
 }
