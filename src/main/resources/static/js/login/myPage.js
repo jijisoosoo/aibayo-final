@@ -20,11 +20,11 @@ $(document).ready(function () {
         $('#defecation_status' + defecationStatus).attr('checked', 'true');
     }
 
-    // 계정 삭제 버튼 클릭 시 확인 알림 띄우기
+// 계정 삭제 버튼 클릭 시 확인 알림 띄우기
     $('#deleteBtn').on('click', function () {
         Swal.fire({
             title: "정말로 삭제하시겠습니까?",
-            text: "삭제한 알림장은 복구할 수 없습니다.",
+            text: "계정을 삭제하면 복구할 수 없습니다.",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#dc3545",
@@ -32,17 +32,21 @@ $(document).ready(function () {
             cancelButtonText: "취소"
         }).then((result) => {
             if (result.isConfirmed) {
-                let boardNo = $('#deleteBtn').data('boardNo');
-
-                let param = {
-                    boardNo : boardNo
-                };
-
-                console.log(`param: ${JSON.stringify(param)}`);
-
-                let url = "/notepad/delete";
-
-                commonAjax(url, 'DELETE', param);
+                // AJAX 요청을 통해 서버로 삭제 요청을 보냄
+                $.ajax({
+                    url: "/member/deleteMember",
+                    type: "POST", // POST 메서드를 사용 (DELETE 메서드도 사용 가능)
+                    success: function(response) {
+                        Swal.fire('삭제되었습니다!', '', 'success').then(() => {
+                            // 계정 삭제 후 리디렉션 또는 추가 작업을 수행
+                            window.location.href = '/member/signIn'; // 예: 로그아웃 페이지로 이동
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.log('Error:', error);
+                        Swal.fire('오류가 발생했습니다.', xhr.responseText, 'error');
+                    }
+                });
             }
         });
     });
@@ -187,3 +191,10 @@ function afterSuccess(response) {
         window.location.href = window.location.origin + '/notepad/admin/list';
     });
 }
+
+// function confirmDelete() {
+//     if (confirm("계정을 삭제하시겠습니까?")) {
+//         window.location.href = "/member/deleteMember";
+//         // window.location.href = /*[[@{/member/deleteMember}]]*/ '/member/deleteMember';
+//     }
+// }
