@@ -1,5 +1,7 @@
 package com.aico.aibayo.repository.classKid;
 
+import com.aico.aibayo.common.AcceptTypeEnum;
+import com.aico.aibayo.common.BooleanEnum;
 import com.aico.aibayo.dto.classKid.ClassKidDto;
 import com.aico.aibayo.entity.QAcceptLogEntity;
 import com.aico.aibayo.entity.QClassKidEntity;
@@ -18,6 +20,7 @@ public class ClassKidRepositoryCustomImpl implements ClassKidRepositoryCustom {
 //    private final QKidEntity kid = QKidEntity.kidEntity;
     private final QAcceptLogEntity acceptLog = QAcceptLogEntity.acceptLogEntity;
     private final QClassKidEntity classKid = QClassKidEntity.classKidEntity;
+    private final QKidEntity kid = QKidEntity.kidEntity;
 
 
     @Override
@@ -36,4 +39,26 @@ public class ClassKidRepositoryCustomImpl implements ClassKidRepositoryCustom {
                         .and(classKid.kidNo.eq(kidNo)))
                 .fetch();
     }
+
+    @Override
+    public List<ClassKidDto> findAllByClassNo(Long classNo) {
+        return jpaQueryFactory
+                .select(Projections.constructor(ClassKidDto.class,
+                        classKid.classNo,
+                        classKid.kidNo,
+                        classKid.acceptNo,
+                        kid.kidName,
+                        acceptLog.acceptStatus
+                        ))
+                .from(classKid)
+                .join(acceptLog).on(acceptLog.acceptNo.eq(classKid.acceptNo)
+                        .and(acceptLog.acceptStatus.eq(1))
+                        .and(acceptLog.acceptType.eq(AcceptTypeEnum.CLASS_KID.getType())))
+                .join(kid).on(kid.kidNo.eq(classKid.kidNo)
+                        .and(kid.dischargeFlag.eq(BooleanEnum.FALSE.getBool())))
+                .where(classKid.classNo.eq(classNo))
+                .fetch();
+    }
+
+
 }
