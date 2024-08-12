@@ -178,8 +178,12 @@ function afterSuccess(response) {
                             </div>
 
 
+<!--                            <div class="modal_meal_img_box">-->
+<!--                                <img class="modal_meal_img" src="http://via.placeholder.com/330x300">-->
+<!--                            </div>-->
+                            
                             <div class="modal_meal_img_box">
-                                <img class="modal_meal_img" src="http://via.placeholder.com/330x300">
+                                <img class="modal_meal_img" src="${detail.mealPic}">
                             </div>
 
                             <div class="modal_meal_menu_box">
@@ -231,12 +235,17 @@ function afterSuccess(response) {
         </div>
     </div>`
 
-
         // 기존 html에 추가
         $('.calendar_box').after(modalDetailTag);
 
         // 모달 팝업
         $('#mealDetail').modal('show');
+
+        // 이미지 로드 실패 시 placeholder로 대체
+        $('.modal_meal_img').on('error', function () {
+            // console.log("이미지 못읽음");
+            $(this).attr('src', 'http://via.placeholder.com/330x300');
+        });
     }
 }
 
