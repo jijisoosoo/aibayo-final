@@ -466,7 +466,7 @@
   justify-content: flex-end;
   position: relative;
   width: 100%;
-  /*padding : 10px 40px;*/
+  padding : 0px 40px;
   /*border-bottom:1px solid #DFDFDF ;*/
 }
 .screen .rectangle-wrapper {
@@ -573,7 +573,7 @@
 .screen .text-wrapper-12 , .replyBtn {
   color: #828282;
   /* font-family: "Inter-Medium", Helvetica; */
-  /* font-size: 16px; */
+   font-size: 14px;
   /* font-weight: 500; */
   letter-spacing: 0;
   line-height: 24px;
@@ -664,7 +664,7 @@
   justify-content: center;
   padding: 12px 0px;
   position: relative;
-  width: 984px;
+  width: 1054px;
   flex-wrap: wrap;
   text-decoration-line : none;
 }
@@ -873,7 +873,7 @@
   border-radius: 10px;
   border: none;
 }
-.save{
+.saveReple , .saveComment, .save{
   width: 60px;
   height: 35px;
   background-color:#FFE668 ;
@@ -892,8 +892,8 @@
   flex: 0 0 auto;
   position: relative;
   width: 100%;
-  padding: 10px 40px;
-  /*border-bottom: 1px solid #DFDFDF;*/
+  padding: 0px 40px;
+  /*border=bottom: 1px solid #DFDFDF;*/
   align-content: flex-start;
   flex-direction: column;
   justify-content: flex-start;
@@ -951,4 +951,15 @@
   border-bottom: 1px solid #DFDFDF;
   align-content: flex-start;
   flex-direction: row;
+}
+.cn{
+  display:  none;
+}
+.deletedComment{
+  width: 1054px;
+  height: 101px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #DFDFDF;
+  padding: 0px 40px;
 }
