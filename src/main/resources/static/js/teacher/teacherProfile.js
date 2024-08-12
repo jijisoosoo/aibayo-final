@@ -10,10 +10,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 $(document).ready(function() {
 
+    // 소속 반 수정 버튼 누를 때마다 초기화
+    $(document).on('click', '#modifyClass', function () {
+        classListFilter();
+    });
+
+
     // 소속 반 수정하고 보여주기
     $(document).on('click', '#classModify', function () {
 
-        let teacherId = $('.profile').val();
+        let teacherId = $('.profile').attr('id');
 
         // 기존 반 불러오기
         let assignedElements = document.querySelectorAll('.assignedClassList');
@@ -24,26 +30,76 @@ $(document).ready(function() {
             return this.id;
         }).get();
 
-        let oldClassIds = assignedClassIds.filter(id => !checkedClassIds.includes(id));
+        // 기존 반에는 있고 체크된 반에는 없음 : 삭제할 반
+        let oldClassElements = Array.from(assignedElements).filter(element => !checkedClassIds.includes(element.id));
+        let oldClassAcceptNos = oldClassElements.map(element => parseInt(element.getAttribute('data-accept-no')));
+
+        // 기존 반에는 없고 체크된 반에는 있음 : 추가할 반
+        // let newClassIds = Array.from(checkedClassIds).filter(id => !assignedClassIds.includes(id));
         let newClassIds = checkedClassIds.filter(id => !assignedClassIds.includes(id));
 
-
-
         let param = {
-            oldClassIds: oldClassIds,
+            oldClassAcceptNos: oldClassAcceptNos,
             newClassIds: newClassIds
         };
 
+        console.log("assignedElements : " + assignedElements)
+        console.log("assignedClassIds : " + assignedClassIds)
         console.log("checkedClassIds  : " + JSON.stringify(param));
 
-        let url = "/teacher/teacherProfileAccept/{" + teacherId + "}";
+        let url = "/teacher/teacherProfileAccept/" + teacherId;
+        console.log(url);
         commonAjax(url, 'POST', param);
-
-
     });
+
+    $('#resignTeacher').on('click', function () {
+        Swal.fire({
+            title: "퇴사를 승인하시겠습니까?",
+            text: "승인 후 취소할 수 없습니다.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#dc3545",
+            confirmButtonText: "승인",
+            cancelButtonText: "취소"
+
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let url = "/teacher/deleteOk"
+
+                // // 모든 관계 제거
+                // $('.info_item').each(function () {
+                //     let param = {
+                //         acceptNo : $(this).data('accept-no')
+                //     }
+                //     // console.log(`remove_relation param: ${JSON.stringify(param)}`);
+                //
+                //     commonAjax(url, 'DELETE', param);
+                // });
+                //
+                // let param = {
+                //     kidNo : $('#kidProfile').data('kid-no')
+                // }
+                // // console.log(`kidNo param: ${JSON.stringify(param)}`)
+                //
+                // commonAjax(url, 'DELETE', param);
+
+            }
+        });
+    });
+
 });
 
+function afterSuccess(response) {
+    $('#assignedClasses').replaceWith($(response).find('#assignedClasses'));
+    $('#staticBackdrop3').replaceWith($(response).find('#staticBackdrop3'));
+    classListFilter();
+    getCheckboxValue();
+    updateLabelBackgroundColor();
+    addLabelClickListeners();
+    addInputClickListeners();
+    addCheckboxEventListeners();
 
+}
 
 
 

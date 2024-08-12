@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class teacherDto {
+public class TeacherDto {
     private Long id;
     private String username;
     private String name;
@@ -25,7 +25,7 @@ public class teacherDto {
     private List<Long> oldClassIds;
     private List<Long> newClassIds;
 
-    public teacherDto(Long id, String username, String name, String phone, String profilePicture,
+    public TeacherDto(Long id, String username, String name, String phone, String profilePicture,
                       LocalDateTime acceptRegDate, Long kinderAcceptNo, Long classNo, Long classAcceptNo) {
         this.id = id;
         this.username = username;
@@ -38,7 +38,7 @@ public class teacherDto {
         this.classAcceptNo = classAcceptNo;
     }
 
-    public teacherDto(Long id, String username, String name, String phone,
+    public TeacherDto(Long id, String username, String name, String phone,
                       String profilePicture, LocalDateTime acceptRegDate, Long KinderAcceptNo) {
         this.id = id;
         this.username = username;
