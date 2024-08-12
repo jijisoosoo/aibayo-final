@@ -75,16 +75,7 @@ public class MealServiceImpl implements MealService {
 
                 List<MealDetailDto> mealDetailDtos =
                         mealDetailEntities.stream()
-                                .map(entity -> {
-                                    MealDetailDto detailDto = MealDetailDto.toDto(entity);
-
-//                                    if (detailDto.getMealPic() != null) {
-//                                        String filePath = uploadDirectory + File.separator + detailDto.getMealPic();
-//                                        detailDto.setMealPic(filePath);
-//                                    }
-
-                                    return detailDto;
-                                })
+                                .map(MealDetailDto::toDto)
                                 .toList();
 
                 MealDto result = MealDto.toDto(target);
