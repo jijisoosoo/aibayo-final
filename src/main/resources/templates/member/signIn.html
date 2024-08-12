@@ -43,7 +43,12 @@
 
                     <div th:if="${param.error}">
                         <script>
-                            alert('존재하지 않는 아이디입니다.');
+                            Swal.fire({
+                                icon: 'error',
+                                title: '로그인 실패',
+                                text: '존재하지 않는 아이디입니다.',
+                                confirmButtonText: '확인'
+                            });
                         </script>
                     </div>
 
@@ -52,11 +57,7 @@
             </div>
             <div class="text-wrapper-7">로그인</div>
 
-<!--            <div class="group-wrapper">-->
-<!--                <div class="overlap-group-wrapper">-->
-<!--                    <div class="overlap-group-2"><div class="text-wrapper-8">Sign in with KaKao</div></div>-->
-<!--                </div>-->
-<!--            </div>-->
+
             <div class="group-wrapper">
                 <button class="login-button" id="naver-logo" onclick="location.href='http://localhost:8080/oauth2/authorization/naver'">
                     <img src="/images/member/logo_naver.png" alt="Naver Login"> 네이버 로그인
@@ -68,7 +69,6 @@
 
 
         </div>
-<!--        <a th:href="@{/main/admin}" class="text-wrapper-10" style="text-decoration: none; color: inherit;">aibayo</a>-->
         <div class="logo h_class_78">
             <div class="h_class_79"><a th:href="@{/main/admin}" style="text-decoration: none; color: inherit; font-family: 'Noto Sans KR', sans-serif;'">aibayo</a></div>
         </div>
