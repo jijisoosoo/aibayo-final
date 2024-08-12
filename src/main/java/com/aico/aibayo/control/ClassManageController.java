@@ -112,12 +112,28 @@ public class ClassManageController {
         List<ClassKidDto> classKid = classService.getClassKid(classNo);
         List<ClassTeacherDto> classTeacher = classService.getClassTeacher(classNo);
 
-//        if ((!classKid.isEmpty()) && (!classTeacher.isEmpty())) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("반에 소속된 교사 또는 원생이 존재합니다.");
-//        }
+        if ((!classKid.isEmpty()) && (!classTeacher.isEmpty())) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("반에 소속된 교사 또는 원생이 존재합니다.");
+        }
         classService.deleteClass(classNo);
         return ResponseEntity.ok("반이 삭제되었습니다.");
 
+    }
+
+    @PostMapping("/createClass")
+    public ResponseEntity<String> createClass(@ModelAttribute("loginInfo") MemberDto memberDto, @RequestBody Map<String, String> request) {
+        try {
+            String className = request.get("className");
+            Long kinderNo = memberDto.getKinderNo();
+
+            if (className == null || className.trim().isEmpty()) {
+                return ResponseEntity.badRequest().body("반 이름을 입력해주세요.");
+            }
+            classService.createClass(className, kinderNo);
+            return ResponseEntity.ok("반을 성공적으로 추가했습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("반 추가에 실패했습니다.");
+        }
     }
 
 }

@@ -22,7 +22,8 @@
     font-size: 18px;
 }
 .class-list {
-    max-height: 400px;
+    /*max-height: 400px;*/
+    max-height: none;
     overflow-y: scroll;
 }
 .class-item {
