@@ -24,12 +24,14 @@ public class MealController {
     }
 
     @GetMapping("/user/list")
-    public String userList() {
+    public String userList(@ModelAttribute("loginInfo") MemberDto loginInfo) {
+
         return "/user/meal/list";
     }
 
     @GetMapping("/admin/write")
-    public String writeForm() {
+    public String writeForm(@ModelAttribute("loginInfo") MemberDto loginInfo) {
+
         return "/admin/meal/writeForm";
     }
 

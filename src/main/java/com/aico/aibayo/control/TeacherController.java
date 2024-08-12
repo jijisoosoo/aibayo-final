@@ -2,10 +2,9 @@ package com.aico.aibayo.control;
 
 import com.aico.aibayo.common.AcceptStatusEnum;
 import com.aico.aibayo.dto.ClassDto;
-import com.aico.aibayo.dto.kid.KidSearchCondition;
 import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.dto.teacher.TeacherSearchCondition;
-import com.aico.aibayo.dto.teacher.teacherDto;
+import com.aico.aibayo.dto.teacher.TeacherDto;
 import com.aico.aibayo.jwt.JWTUtil;
 import com.aico.aibayo.service.classManage.ClassService;
 import com.aico.aibayo.service.member.MemberService;
@@ -19,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -65,6 +65,7 @@ public class TeacherController {
     @PostMapping("/listByClass")
     public String mainByClass(@RequestBody TeacherSearchCondition condition,
                               Model model) {
+        System.out.println("post:mainByClass실행");
         log.info("search: {}", condition);
 
         return getConditionAndGoMain(model, condition);
@@ -76,7 +77,7 @@ public class TeacherController {
         condition.setKinderNo(loginInfo.getKinderNo());
 
         condition.setAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
-        List<teacherDto> acceptedTeacherList = teacherService.getAcceptedTeacherByKinderNoAndClassNo(condition);
+        List<TeacherDto> acceptedTeacherList = teacherService.getAcceptedTeacherByKinderNoAndClassNo(condition);
         model.addAttribute("acceptedTeacherList", acceptedTeacherList);
         model.addAttribute("condition", condition);
         log.info("ACCEPT: {}", condition);
@@ -86,13 +87,13 @@ public class TeacherController {
         condition.setClassNo(null);
 
         condition.setAcceptStatus(AcceptStatusEnum.WAIT.getStatus());
-        List<teacherDto> waitingTeacherList = teacherService.getAllByKinderNo(condition);
+        List<TeacherDto> waitingTeacherList = teacherService.getAllByKinderNo(condition);
         model.addAttribute("waitingTeacherList", waitingTeacherList);
         log.info("WAIT: {}", condition);
 
 
         condition.setAcceptStatus(AcceptStatusEnum.INVITE.getStatus());
-        List<teacherDto> invitedTeacherList = teacherService.getAllByKinderNo(condition);
+        List<TeacherDto> invitedTeacherList = teacherService.getAllByKinderNo(condition);
         model.addAttribute("invitedTeacherList", invitedTeacherList);
         log.info("INVITE: {}", condition);
 
@@ -104,32 +105,28 @@ public class TeacherController {
 
 
     @GetMapping ("/teacherProfileAccept/{id}")
-    public String getAcceptedTeacherProfile(Model model, @PathVariable Long id) {
-        MemberDto loginInfo = (MemberDto)model.getAttribute("loginInfo");
-
-        teacherDto teacher = teacherService.getTeacherById(id);
-        model.addAttribute("teacher", teacher);
-
-        List<ClassDto> classList = classService.getAllByKinderNo(loginInfo.getKinderNo());
-        model.addAttribute("classList", classList);
-
-        List<ClassDto> addableClassList = classService.getAddableClassByKinderNo(loginInfo.getKinderNo());
-        model.addAttribute("addableClassList", addableClassList);
-
-        List<ClassDto> assignedClassList = classService.getClassByKinderNoAndTeacherId(loginInfo.getKinderNo(), id);
-        model.addAttribute("assignedClassList", assignedClassList);
-
-        return "/admin/teacher/teacherProfileAccept";
+    public String TeacherProfile(Model model, @PathVariable Long id) {
+        return getAcceptedTeacherProfile(model, id);
     }
 
     @PostMapping ("/teacherProfileAccept/{id}")
-    public String assignClassesAndGetAcceptedTeacherProfile(@RequestBody List<Long> oldClassIds, @RequestBody List<Long> newClassIds, Model model, @PathVariable Long id) {
+    public String assignClassOk(@RequestBody Map<String, List<Long>> requestBody, Model model, @PathVariable Long id) {
+        List<Long> oldClassAcceptNos = requestBody.get("oldClassAcceptNos");
+        List<Long> newClassIds = requestBody.get("newClassIds");
+
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>oldClassAcceptNos, newClassIds");
+        System.out.println("oldClassAcceptNos" + oldClassAcceptNos);
+        System.out.println("newClassIds" + newClassIds);
+
+        teacherService.updateClassTeacher(newClassIds, oldClassAcceptNos, id);
+
+        return getAcceptedTeacherProfile(model, id);
+    }
+
+    public String getAcceptedTeacherProfile(Model model,Long id) {
         MemberDto loginInfo = (MemberDto)model.getAttribute("loginInfo");
 
-//        teacherService.assignNewClass(newClassIds, id);
-//        teacherService.deleteExistingClass(oldClassIds);
-
-        teacherDto teacher = teacherService.getTeacherById(id);
+        TeacherDto teacher = teacherService.getTeacherById(id);
         model.addAttribute("teacher", teacher);
 
         List<ClassDto> classList = classService.getAllByKinderNo(loginInfo.getKinderNo());
@@ -143,6 +140,8 @@ public class TeacherController {
 
         return "/admin/teacher/teacherProfileAccept";
     }
+
+
 
     @GetMapping("/admin/teacherProfileWait/{id}")
     public String adminTeacherProfileWait() {

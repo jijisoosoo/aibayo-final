@@ -106,6 +106,23 @@ public class MemberController {
         return "success";
     }
 
+    @GetMapping("/signUpTeacher")
+    public String signUpTeacher(HttpSession session, Model model) {
+        System.out.println("signUpTeacher GetMapping");
+        MemberDto member = (MemberDto) session.getAttribute("member");
+        model.addAttribute("member", member);
+        return "/member/signUpTeacher";
+    }
+
+    @PostMapping("/signUpTeacher")
+    @ResponseBody
+    public String signUpTeacher(@RequestBody MemberDto member, HttpSession session) {
+        System.out.println("signUpTeacher PostMapping");
+        session.setAttribute("member", member);
+        return "seccess";
+
+    }
+
 
     @PostMapping("/finalSignUp")
     public String finalSignUp(@RequestBody MemberDto member) {
@@ -133,27 +150,20 @@ public class MemberController {
         memberDto.setPassword(member.getPassword());
         memberDto.setPhone(member.getPhone());
         memberDto.setRole(member.getRole());
-
         memberDto.setKidNo(member.getKidNo());
         memberDto.setKidName(member.getKidName());
         memberDto.setKidBirth(member.getKidBirth());
         memberDto.setKidGender(member.getKidGender());
-
         memberDto.setKinderNo(member.getKinderNo());
         memberDto.setClassNo(member.getClassNo());
         memberDto.setRelationship(member.getRelationship());
-
-
         memberDto.setStatus(MemberStatusEnum.INACTIVE.getStatus()); // 승인 해줘야 로그인 가능
         memberDto.setRegDate(LocalDateTime.now());
         memberDto.setLatestLogDate(LocalDateTime.now());
         memberDto.setIsMainParent(BooleanEnum.FALSE.getBool());
-
         memberDto.setInvite(member.getInvite());
 
-
-        memberService.signUpProcessUser(memberDto);
-
+        memberService.signUpProcess(memberDto);
 
         return "redirect:/member/signIn";
     }

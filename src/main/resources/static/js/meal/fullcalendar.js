@@ -49,9 +49,9 @@ $(document).ready(function() {
                 mealNo : mealNo,
                 isDetail : true
             }
-            console.log(`param: ${JSON.stringify(param)}`);
+            // console.log(`param: ${JSON.stringify(param)}`);
 
-            let url = `/meal/admin/detail`;
+            let url = `/meal/detail`;
 
             commonAjax(url, 'POST', param);
 
@@ -140,8 +140,11 @@ function afterSuccess(response) {
     }
 
     if (response.detail) {
-        console.log(`상세조회 모달 세팅..`);
-        console.log(`response: ${JSON.stringify(response)}`)
+        // console.log(`상세조회 모달 세팅..`);
+        // console.log(`response: ${JSON.stringify(response)}`);
+
+        let roleNo = $('#calendar').data('role-no');
+        // console.log(`roleNo: ${roleNo}`);
 
         // 모달의 내용 세팅
         let modalDetailTag = `<div class="modal fade fixed-width-modal" id="mealDetail"
@@ -161,14 +164,14 @@ function afterSuccess(response) {
 
 `;
 
-            // detail 수만큼 추가
-            for (let detail of response.mealDetails) {
-                console.log(`detail: ${JSON.stringify(detail)}`);
+        // detail 수만큼 추가
+        for (let detail of response.mealDetails) {
+            // console.log(`detail: ${JSON.stringify(detail)}`);
 
-                let menuNames = detail.mealMenu.replaceAll(delimiter, `<br>`);
-                console.log(`menuNames: ${menuNames}`);
+            let menuNames = detail.mealMenu.replaceAll(delimiter, `<br>`);
+            // console.log(`menuNames: ${menuNames}`);
 
-                modalDetailTag += `<div class="modal_meal_item_box">
+            modalDetailTag += `<div class="modal_meal_item_box">
 
                             <div class="modal_meal_title_box">
                                 <div class="modal_meal_title">${detail.mealTypeName}</div>
@@ -189,8 +192,9 @@ function afterSuccess(response) {
 
                     
 `;
-            }
+        }
 
+        // admin/user에 따라 버튼 다르게 표시
         modalDetailTag += `</div>
 
                 </div>
@@ -199,7 +203,10 @@ function afterSuccess(response) {
                 <div class="modal-footer modal_meal_detail_footer">
                     <div class="modal_btns_box">
 
-                        <a class="btn btn-ab modal_btn_box" href="/meal/admin/modify" alt="수정">
+                `;
+
+        if (roleNo <= 2) {
+            modalDetailTag += `<a class="btn btn-ab modal_btn_box" href="/meal/admin/modify" alt="수정">
                             <div class="modal_btn_text">수정</div>
                         </a>
 
@@ -208,12 +215,22 @@ function afterSuccess(response) {
                             <div class="modal_btn_text">삭제</div>
                         </div>
 
-                    </div>
+`
+        }
+
+        if (roleNo === 3) {
+            modalDetailTag += `<div class="btn btn-ab modal_btn_box">
+                            <div class="modal_btn_text" data-bs-dismiss="modal" aria-label="Close">닫기</div>
+                        </div>`
+        }
+
+        modalDetailTag += `</div>
                 </div>
 
             </div>
         </div>
     </div>`
+
 
         // 기존 html에 추가
         $('.calendar_box').after(modalDetailTag);

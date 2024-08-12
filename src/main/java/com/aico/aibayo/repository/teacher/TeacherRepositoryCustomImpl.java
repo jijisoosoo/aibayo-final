@@ -1,8 +1,7 @@
 package com.aico.aibayo.repository.teacher;
 
-import com.aico.aibayo.dto.ClassDto;
 import com.aico.aibayo.dto.teacher.TeacherSearchCondition;
-import com.aico.aibayo.dto.teacher.teacherDto;
+import com.aico.aibayo.dto.teacher.TeacherDto;
 import com.aico.aibayo.entity.*;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -25,9 +24,9 @@ public class TeacherRepositoryCustomImpl implements TeacherRepositoryCustom{
 
 
     @Override
-    public List<teacherDto> findAllByKinderNo(TeacherSearchCondition condition) {
-        List<teacherDto> teachers = jpaQueryFactory
-                .select(Projections.constructor(teacherDto.class,
+    public List<TeacherDto> findAllByKinderNo(TeacherSearchCondition condition) {
+        List<TeacherDto> teachers = jpaQueryFactory
+                .select(Projections.constructor(TeacherDto.class,
                         member.id,
                         member.username,
                         member.name,
@@ -48,9 +47,9 @@ public class TeacherRepositoryCustomImpl implements TeacherRepositoryCustom{
     }
 
     @Override
-    public List<teacherDto> findAcceptedTeacherByKinderNoAndClassNo(TeacherSearchCondition condition) {
-        List<teacherDto> teachers = jpaQueryFactory
-                .select(Projections.constructor(teacherDto.class,
+    public List<TeacherDto> findAcceptedTeacherByKinderNoAndClassNo(TeacherSearchCondition condition) {
+        List<TeacherDto> teachers = jpaQueryFactory
+                .select(Projections.constructor(TeacherDto.class,
                         member.id,
                         member.username,
                         member.name,
@@ -73,9 +72,9 @@ public class TeacherRepositoryCustomImpl implements TeacherRepositoryCustom{
     }
 
     @Override
-    public teacherDto findTeacherById(Long id) {
-        teacherDto teacher = jpaQueryFactory
-                .select(Projections.constructor(teacherDto.class,
+    public TeacherDto findTeacherById(Long id) {
+        TeacherDto teacher = jpaQueryFactory
+                .select(Projections.constructor(TeacherDto.class,
                         member.id,
                         member.username,
                         member.name,
@@ -93,7 +92,6 @@ public class TeacherRepositoryCustomImpl implements TeacherRepositoryCustom{
 
         return teacher;
     }
-
 
     private BooleanExpression getClassNoEq(Long classNo) {
         return classNo == null ? null : classTeacher.classNo.eq(classNo);
