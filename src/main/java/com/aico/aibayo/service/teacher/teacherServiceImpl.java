@@ -9,7 +9,7 @@ import com.aico.aibayo.dto.teacher.TeacherDto;
 import com.aico.aibayo.entity.AcceptLogEntity;
 import com.aico.aibayo.entity.ClassTeacherEntity;
 import com.aico.aibayo.repository.AcceptLogRepository;
-import com.aico.aibayo.repository.ClassTeacher.ClassTeacherRepository;
+import com.aico.aibayo.repository.classTeacher.ClassTeacherRepository;
 import com.aico.aibayo.repository.teacher.TeacherRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

@@ -1,11 +1,9 @@
 function initializeMarquee($text_div) {
     var $textCompact = $text_div.find('.text-compact');
 
-
     // 이미 초기화된 경우에는 다시 초기화하지 않음
     // 모달 팝업 시 텍스트 무한 복제 방지
     if ($textCompact.find('.js-marquee').length > 0) {
-        // console.log("초기화 생략")
         return;
     }
 
@@ -29,7 +27,6 @@ function initializeMarquee($text_div) {
                 // 마우스를 떼면 text-overflow: ellipsis 다시 설정
                 $textCompact.css('text-overflow', 'ellipsis');
                 $textCompact.marquee('pause');
-                $textCompact.css('outerText')
             }
         );
 
@@ -43,7 +40,7 @@ function commonAjax(url, type, param) {
     $.ajax({
         url: url,
         type: type,
-        data:  JSON.stringify(param),
+        data: JSON.stringify(param),
         contentType: 'application/json',
         success: function(response) {
             afterSuccess(response, type);
@@ -51,7 +48,7 @@ function commonAjax(url, type, param) {
         error: function(xhr, status, error) {
             console.error("AJAX 요청 오류:", status, error);
         }
-    })
+    });
 }
 
 $(document).ready(function() {
@@ -74,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function initMsg() {
     $('.msg').each(function () {
         $(this).hide();
-    })
+    });
 }
 
 $(document).ready(function() {
@@ -89,11 +86,23 @@ $(document).ready(function() {
                 // 쿠키에서 'jwt' 토큰을 삭제합니다.
                 var domain = window.location.hostname;
                 document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain + ';';
-                alert('로그아웃이 완료되었습니다.');
-                window.location.href = '/member'; // 로그아웃 후 리디렉션 할 페이지
+
+                Swal.fire({
+                    icon: 'success',
+                    title: '로그아웃 성공',
+                    text: '로그아웃이 완료되었습니다.',
+                    confirmButtonText: '확인'
+                }).then(() => {
+                    window.location.href = '/member'; // 로그아웃 후 리디렉션 할 페이지
+                });
             },
             error: function(xhr, status, error) {
-                alert('Logout failed');
+                Swal.fire({
+                    icon: 'error',
+                    title: '로그아웃 실패',
+                    text: 'Logout failed. 다시 시도해주세요.',
+                    confirmButtonText: '확인'
+                });
                 console.error('Error:', error);
             }
         });

@@ -2,6 +2,8 @@ package com.aico.aibayo.service.classManage;
 
 import com.aico.aibayo.dto.ClassDto;
 import java.util.List;
+
+import com.aico.aibayo.entity.ClassEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,4 +16,5 @@ public interface ClassService {
     List<ClassDto> getAddableClassByKinderNo(Long kinderNo);
     List<ClassDto> getClassByKinderNoAndTeacherId(Long kinderNo, Long id);
 
+    List<ClassEntity> getClassList(Long kinderNo);
 }
