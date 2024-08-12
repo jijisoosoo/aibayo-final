@@ -46,7 +46,7 @@ public class CommentRepositoryCustomImpl implements CommentRepositoryCustom {
                 .join(board).on(board.boardNo.eq(comment.boardNo))
                 .leftJoin(member).on(comment.commentWriter.eq(member.id))
                 .where(
-                        getInvisibleFlagEq(comment),
+//                        getInvisibleFlagEq(comment),
                         getCommentEq(condition.getBoardNo(),comment)
                 )
                 .orderBy(
