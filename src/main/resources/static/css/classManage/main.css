@@ -5,6 +5,19 @@
     font-size: 24px;
     font-weight: bold;
 }
+
+.container-2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px; /* 필요에 따라 조정 */
+}
+
+#addClassBtn {
+    font-size: 16px; /* 버튼의 폰트 크기 조정 */
+    padding: 8px 16px; /* 버튼의 패딩 조정 */
+}
+
 .title-2 {
     font-size: 18px;
 }

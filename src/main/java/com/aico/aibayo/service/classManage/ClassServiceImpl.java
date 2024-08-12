@@ -11,6 +11,7 @@ import com.aico.aibayo.repository.classKid.ClassKidRepository;
 import com.aico.aibayo.repository.classKid.ClassKidRepositoryCustom;
 import com.aico.aibayo.repository.classManage.ClassRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -76,8 +77,17 @@ public class ClassServiceImpl implements ClassService{
     public void updateClassName(Long classNo, String newClassName) {
         ClassEntity classEntity = classRepository.findByClassNo(classNo);
         classEntity.setClassName(newClassName);
+        classEntity.setClassModifyDate(LocalDateTime.now());
         ClassEntity save = classRepository.save(classEntity);
         System.out.println("save.getClassName()" + save.getClassName());
+    }
+
+    @Override
+    public void deleteClass(Long classNo) {
+        ClassEntity classEntity = classRepository.findByClassNo(classNo);
+        classEntity.setClassDeleteFlag(BooleanEnum.TRUE.getBool());
+        classEntity.setClassDeleteDate(LocalDateTime.now());
+        classRepository.save(classEntity);
     }
 
 
