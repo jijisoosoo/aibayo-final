@@ -1,9 +1,13 @@
 package com.aico.aibayo.control;
 
+import com.aico.aibayo.dto.classKid.ClassKidDto;
+import com.aico.aibayo.dto.classTeacher.ClassTeacherDto;
 import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.entity.ClassEntity;
 import com.aico.aibayo.jwt.JWTUtil;
+import com.aico.aibayo.repository.classKid.ClassKidRepository;
 import com.aico.aibayo.repository.classManage.ClassRepository;
+import com.aico.aibayo.repository.classTeacher.ClassTeacherRepository;
 import com.aico.aibayo.service.classManage.ClassService;
 import com.aico.aibayo.service.classManage.ClassServiceImpl;
 import com.aico.aibayo.service.member.MemberService;
@@ -11,23 +15,27 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/classManage")
 @RequiredArgsConstructor
 @Slf4j
 public class ClassManageController {
-    private final ClassRepository classRepository;
     private final ClassService classService;
     private final JWTUtil jwtUtil;
     private final MemberService memberService;
+
 
 
     @ModelAttribute
@@ -68,6 +76,19 @@ public class ClassManageController {
         model.addAttribute("kinderNo", kinderNo);
 
         return "/admin/classManage/main";
+    }
+
+    @GetMapping("/detail/{classNo}")
+    public ResponseEntity<Map<String, Object>> detailPage(@PathVariable Long classNo) {
+
+        List<ClassKidDto> classKid = classService.getClassKid(classNo);
+        List<ClassTeacherDto> classTeacher = classService.getClassTeacher(classNo);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("classKid", classKid);
+        response.put("classTeacher", classTeacher);
+
+        return ResponseEntity.ok(response);
     }
 
 }
