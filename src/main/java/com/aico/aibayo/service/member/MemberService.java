@@ -18,4 +18,6 @@ public interface MemberService {
     MemberDto getByUsernameWithParentKid(String username);
 
     void deleteMember(String username, String role);
+
+    void signUpProcess(MemberDto memberDto);
 }
