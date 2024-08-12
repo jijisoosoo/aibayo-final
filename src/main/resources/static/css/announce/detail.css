@@ -3,7 +3,7 @@
   background-color: #ffffff;
   display: inline-flex;
   flex-direction: column;
-  overflow: hidden;
+  /*overflow: hidden;*/
   position: relative;
   width: 100%;
 }
@@ -570,7 +570,7 @@
   position: relative;
 }
 
-.screen .text-wrapper-12 {
+.screen .text-wrapper-12 , .replyBtn {
   color: #828282;
   /* font-family: "Inter-Medium", Helvetica; */
   /* font-size: 16px; */
@@ -586,6 +586,7 @@
   border: none;
   background: none;
 }
+
 
 .screen .reply {
   background-color: #f5f5f542;
@@ -891,11 +892,11 @@
   flex: 0 0 auto;
   position: relative;
   width: 100%;
-  justify-content: center;
   padding: 10px 40px;
-  border-bottom: 1px solid #DFDFDF;
+  /*border-bottom: 1px solid #DFDFDF;*/
   align-content: flex-start;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 .accordion-item {
   background-color: #fff;
@@ -929,7 +930,7 @@
   color: darkgray;
   font-size: 10px;
 }
-.insert , .modify{
+.replyContent , .modify{
   background-color: #ffffff;
   border-color: #e0e0e0;
   border-radius: 8px;
@@ -937,4 +938,17 @@
   position: relative;
   width: 100%;
   padding: 8px 10px;
+}
+.COMMENT{
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  position: relative;
+  width: 1054px;
+  justify-content: center;
+  padding: 10px 40px;
+  border-bottom: 1px solid #DFDFDF;
+  align-content: flex-start;
+  flex-direction: row;
 }

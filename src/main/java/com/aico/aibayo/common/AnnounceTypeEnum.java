@@ -4,11 +4,11 @@ import lombok.Getter;
 
 @Getter
 public enum AnnounceTypeEnum {
-    TEACHER(0),
-    NOTICE(1),
-    SCHEDULE(2),
-    EDUCATION(3),
-    PAYMENT(4);
+    TEACHER(1),
+    NOTICE(2),
+    SCHEDULE(3),
+    EDUCATION(4),
+    PAYMENT(5);
 
     private int num;
 

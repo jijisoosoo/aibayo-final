@@ -52,8 +52,8 @@ $(document).ready(function () {
 });
 
 function afterSuccess(response,method) {
-
-    if(method === 'DELETE' && response.invisibleFlag === '1')
+    console.log("announce.detail.js afterSuccess")
+    if(method === 'DELETE' && response.invisibleFlag === '1'){
         Swal.fire({
             title: "삭제 완료",
             text: "창을 닫으면 목록 화면으로 돌아갑니다.",
@@ -64,6 +64,8 @@ function afterSuccess(response,method) {
         }).then((result) => {
             window.location.href = window.location.origin + '/announce/admin/list';
         });
+    }
+
 }
 
 

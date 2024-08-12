@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -139,4 +140,6 @@ public class AnnounceServiceImpl implements AnnounceService {
         Pageable pageable = PageRequest.of(page - 1, pagesize);
         return announceRepository.findKeywordByKinderNoList(condition,pageable);
     }
+
+
 }

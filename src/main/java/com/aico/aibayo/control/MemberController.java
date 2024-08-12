@@ -6,6 +6,7 @@ import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.entity.MemberEntity;
 import com.aico.aibayo.jwt.JWTUtil;
 import com.aico.aibayo.repository.member.MemberRepository;
+import com.aico.aibayo.service.member.MemberService;
 import com.aico.aibayo.service.member.MemberServiceImpl;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,7 +28,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Slf4j
 public class MemberController {
-    private final MemberServiceImpl memberService;
+    private final MemberService memberService;
     private final JWTUtil jwtUtil;
     private final MemberRepository memberRepository;
 

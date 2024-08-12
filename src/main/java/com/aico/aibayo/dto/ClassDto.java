@@ -22,17 +22,23 @@ public class ClassDto {
 
     private Long acceptNo;
 
-    private Long assignedCnt;
+    private Long assignedCntOrAcceptNo;
 
     public ClassDto(Long classNo, String className) {
         this.classNo = classNo;
         this.className = className;
     }
 
-    public ClassDto(Long classNo, String className, Long assignedCnt) {
+//    public ClassDto(Long classNo, String className, Long acceptNo) {
+//        this.classNo = classNo;
+//        this.className = className;
+//        this.acceptNo = acceptNo;
+//    }
+
+    public ClassDto(Long classNo, String className, Long assignedCntOrAcceptNo) {
         this.classNo = classNo;
         this.className = className;
-        this.assignedCnt = assignedCnt;
+        this.assignedCntOrAcceptNo = assignedCntOrAcceptNo;
     }
 
     public ClassDto(Long classNo, String className, String classAge, Long kinderNo,

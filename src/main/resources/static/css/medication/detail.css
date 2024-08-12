@@ -55,9 +55,8 @@
     position: relative;
 }
 
-.frame .element-secondary-button {
+.frame .element-secondary-button , .deleteBtn{
     align-items: center;
-    background-color: #f7f7f7;
     border-radius: 8px;
     display: flex;
     gap: 8px;
@@ -69,9 +68,17 @@
     text-decoration-line : none;
 }
 
+.element-secondary-button{
+    background-color: #f7f7f7;
+}
+
+.deleteBtn{
+    background-color: #FFDB21 ;
+}
+
 .frame .text-wrapper-2 {
     color: #000000;
-    font-family: "Inter-Medium", Helvetica;
+    /*font-family: "Inter-Medium", Helvetica;*/
     font-size: 16px;
     font-weight: 500;
     letter-spacing: 0;
@@ -99,7 +106,7 @@
 
 .frame .text-wrapper-3 {
     color: #000000;
-    font-family: "Inter-Medium", Helvetica;
+    /*font-family: "Inter-Medium", Helvetica;*/
     font-size: 16px;
     font-weight: 500;
     letter-spacing: 0;
@@ -162,7 +169,7 @@
 
 .frame .text-wrapper-4 {
     color: #000000;
-    font-family: "Inter-Medium", Helvetica;
+    /*font-family: "Inter-Medium", Helvetica;*/
     font-size: 20px;
     font-weight: 500;
     letter-spacing: 0;
@@ -249,7 +256,7 @@
 
 .frame .text-wrapper-5 {
     color: #000000;
-    font-family: "Inter-Medium", Helvetica;
+    /*font-family: "Inter-Medium", Helvetica;*/
     font-size: 16px;
     font-weight: 500;
     letter-spacing: 0;
@@ -273,7 +280,7 @@
 
 .frame .text-wrapper-6 {
     color: #5b5b5b;
-    font-family: "Inter-Medium", Helvetica;
+    /*font-family: "Inter-Medium", Helvetica;*/
     font-size: 16px;
     font-weight: 500;
     letter-spacing: 0;
@@ -453,7 +460,7 @@
 
 .frame .text-wrapper-8 {
     color: #000000;
-    font-family: "Inter-Regular", Helvetica;
+    /*font-family: "Inter-Regular", Helvetica;*/
     font-size: 16px;
     font-weight: 400;
     letter-spacing: 0;
@@ -701,7 +708,7 @@
 
 .frame .text-wrapper-11 {
     color: #000000;
-    font-family: "Inter-Medium", Helvetica;
+    /*font-family: "Inter-Medium", Helvetica;*/
     font-size: 16px;
     font-weight: 500;
     letter-spacing: 0;
@@ -754,10 +761,10 @@
 
 .frame .label {
     color: #828282;
-    font-family: var(--small-text-font-family);
-    font-size: var(--small-text-font-size);
-    font-style: var(--small-text-font-style);
-    font-weight: var(--small-text-font-weight);
+    /*font-family: var(--small-text-font-family);*/
+    /*font-size: var(--small-text-font-size);*/
+    /*font-style: var(--small-text-font-style);*/
+    /*font-weight: var(--small-text-font-weight);*/
     height: 119px;
     letter-spacing: var(--small-text-letter-spacing);
     line-height: var(--small-text-line-height);
@@ -847,18 +854,14 @@ a {
     flex-direction: column;
     float: left;
 }
-.promise{
+.promise , .date , .parent{
     display: flex;
     justify-content: flex-end;
+    width: 100%;
+    flex: 0 0 auto;
+    position: relative;
 }
-.date{
-    display: flex;
-    justify-content: flex-end;
-}
-.parent{
-    display: flex;
-    justify-content: flex-end;
-}
+
 .parentSign{
     margin-left: 20px;
 }

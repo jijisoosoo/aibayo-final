@@ -44,4 +44,9 @@ public class ClassServiceImpl implements ClassService{
     @Override
     public List<ClassDto> getClassByKinderNoAndTeacherId(Long kinderNo, Long id) {return classRepository.findClassByKinderNoAndTeacherId(kinderNo, id); }
 
+    @Override
+    public List<ClassEntity> getClassList(Long kinderNo) {
+        return classRepository.findAllByKinderNoAndClassDeleteFlagEquals(kinderNo, BooleanEnum.FALSE.getBool());
+    }
+
 }

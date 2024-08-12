@@ -41,30 +41,9 @@ public class AnnounceDto {
     private String commentClass;
     private String commentContent;
     private String commentDeleteFlag;
+    private Long commentCount;
 
-//    private Long commentNo;
-//
-//    public AnnounceDto(
-//                Integer announceType,Long announceNo,String announcePrimary,String canComment,Integer boardType,
-//                Long boardNo, Long writer, String boardContents, String boardTitle, String invisibleFlag,
-//                LocalDateTime boardRegDate, Long kinderNo, Integer roleNo, Long id, String name, Long commentNo){
-//                    this.announceType=announceType;
-//                    this.announceNo=announceNo;
-//                    this.announcePrimary=announcePrimary;
-//                    this.canComment=canComment;
-//                    this.boardType=boardType;
-//                    this.boardNo=boardNo;
-//                    this.writer=writer;
-//                    this.boardContents=boardContents;
-//                    this.boardTitle=boardTitle;
-//                    this.invisibleFlag=invisibleFlag;
-//                    this.boardRegDate=boardRegDate;
-//                    this.kinderNo=kinderNo;
-//                    this.roleNo=roleNo;
-//                    this.id=id;
-//                    this.name=name;
-//                    this.commentNo=commentNo;
-//    }
+
     public AnnounceDto(
             Integer announceType,Long announceNo,String announcePrimary,String canComment,Integer boardType,
             Long boardNo, Long writer, String boardContents, String boardTitle, String invisibleFlag,
