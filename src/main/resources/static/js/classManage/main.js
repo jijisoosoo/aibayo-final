@@ -62,10 +62,10 @@ document.addEventListener('DOMContentLoaded', function () {
     $.fn.modal.Constructor.prototype._enforceFocus = function () {
     }; // Bootstrap 모달이 포커스를 강제하지 않도록 설정
     new bootstrap.Modal(document.getElementById('classModal'), {focus: false}); // Bootstrap 모달이 로드될 때 자동으로 포커스를 받지 않도록 설정
-    //
     $('#editClassNameBtn').on('click', async function () {
-        console.log('Edit Class Name button clicked');
         const currentClassName = $('#className').text(); // 현재 반 이름을 가져옵니다.
+        const classNo = $(this).data('classNo'); // 버튼의 data-classNo 속성에서 classNo를 가져옵니다
+        console.log('Class No:', classNo); // 가져온 classNo를 로그로 출력
 
         Swal.fire({
             title: '새 반 이름을 입력하세요',
@@ -81,7 +81,27 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }).then((result) => {
             if (result.isConfirmed) {
-                $('#className').text(result.value);
+                const newClassName = result.value;
+                $('#className').text(newClassName);
+
+                // AJAX 요청을 통해 서버에 새로운 반 이름을 전달
+                $.ajax({
+                    url: '/classManage/updateClassName', // 컨트롤러의 URL
+                    method: 'POST', // POST 메서드 사용
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        classNo: classNo, // classNo를 보냅니다
+                        newClassName: newClassName // 새 반 이름을 보냅니다
+                    }),
+                    success: function (response) {
+                        window.location.href = '/classManage/main';
+
+                    },
+                    error: function (error) {
+                        console.log('Error:', error);
+                        Swal.fire('오류가 발생했습니다.', '', 'error');
+                    }
+                });
             }
         });
     });
@@ -100,6 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // data.classTeacher에서 className을 가져와서 설정
                 if (data.classTeacher.length > 0) {
                     $('#className').text(data.classTeacher[0].className);
+                    $('#editClassNameBtn').data('classNo', classNo);
                 } else {
                     $('#className').text('No class name available');
                 }

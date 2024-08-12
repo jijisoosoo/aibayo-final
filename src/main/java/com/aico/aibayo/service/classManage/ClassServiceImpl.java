@@ -72,5 +72,13 @@ public class ClassServiceImpl implements ClassService{
         return classTeacherRepository.findAllByClassNo(classNo);
     }
 
+    @Override
+    public void updateClassName(Long classNo, String newClassName) {
+        ClassEntity classEntity = classRepository.findByClassNo(classNo);
+        classEntity.setClassName(newClassName);
+        ClassEntity save = classRepository.save(classEntity);
+        System.out.println("save.getClassName()" + save.getClassName());
+    }
+
 
 }
