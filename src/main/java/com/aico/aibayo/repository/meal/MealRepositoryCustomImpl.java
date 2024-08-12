@@ -1,5 +1,6 @@
 package com.aico.aibayo.repository.meal;
 
+import com.aico.aibayo.common.BooleanEnum;
 import com.aico.aibayo.entity.MealDetailEntity;
 import com.aico.aibayo.entity.MealEntity;
 import com.aico.aibayo.entity.QMealDetailEntity;
@@ -17,14 +18,28 @@ public class MealRepositoryCustomImpl implements MealRepositoryCustom {
     private final QMealEntity meal = QMealEntity.mealEntity;
     private final QMealDetailEntity mealDetail = QMealDetailEntity.mealDetailEntity;
 
+//    @Override
+//    public List<MealDetailEntity> findAllWithDetailByMealNo(Long mealNo) {
+//        return jpaQueryFactory
+//                .selectFrom(mealDetail)
+//                .join(meal).on(meal.eq(mealDetail.meal))
+//                .where(meal.mealNo.eq(mealNo))
+//                .orderBy(mealDetail.mealType.asc())
+//                .fetchJoin()
+//                .fetch();
+//    }
+
     @Override
-    public List<MealDetailEntity> findAllWithDetailByMealNo(Long mealNo) {
+    public MealEntity findByMealNo(Long mealNo) {
         return jpaQueryFactory
-                .selectFrom(mealDetail)
-                .join(meal).on(meal.eq(mealDetail.meal))
-                .where(meal.mealNo.eq(mealNo))
-                .orderBy(mealDetail.mealType.asc())
+                .selectFrom(meal)
+                .join(meal.mealDetails, mealDetail)
+                .where(
+                        meal.mealNo.eq(mealNo),
+                        meal.mealDeleteFlag.eq(BooleanEnum.FALSE.getBool()),
+                        mealDetail.mealInvisibleFlag.eq(BooleanEnum.FALSE.getBool())
+                )
                 .fetchJoin()
-                .fetch();
+                .fetchOne();
     }
 }

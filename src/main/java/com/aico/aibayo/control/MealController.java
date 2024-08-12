@@ -1,6 +1,10 @@
 package com.aico.aibayo.control;
 
+import com.aico.aibayo.common.MealTypeEnum;
+import com.aico.aibayo.dto.meal.MealDetailDto;
+import com.aico.aibayo.dto.meal.MealDto;
 import com.aico.aibayo.dto.member.MemberDto;
+import com.aico.aibayo.service.meal.MealService;
 import com.aico.aibayo.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -16,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class MealController {
     private final MemberService memberService;
+    private final MealService mealService;
 
     @GetMapping("/admin/list")
     public String adminList(@ModelAttribute("loginInfo") MemberDto loginInfo) {
@@ -35,8 +43,16 @@ public class MealController {
         return "/admin/meal/writeForm";
     }
 
-    @GetMapping("/admin/modify")
-    public String modifyForm() {
+    @GetMapping("/admin/modify/{mealNo}")
+    public String modifyForm(@PathVariable Long mealNo, Model model) {
+        MealDto meal = mealService.getByMealNo(mealNo);
+//        List<MealDetailDto> mealDetails = mealService.getAllByMealNo(mealNo);
+        List<Integer> selectedTypes = meal.getMealDetails().stream().map(MealDetailDto::getMealType).toList();
+        log.info("selectedTypes: {}", selectedTypes);
+        model.addAttribute("meal", meal);
+        model.addAttribute("selectedTypes", selectedTypes);
+        model.addAttribute("mealTypes", MealTypeEnum.values());
+
         return "/admin/meal/modifyForm";
     }
 }

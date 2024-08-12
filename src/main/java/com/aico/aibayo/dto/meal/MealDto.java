@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Setter
 @Getter
@@ -40,7 +41,7 @@ public class MealDto {
             return null;
         }
 
-        return new MealDto(
+        MealDto mealDto = new MealDto(
                 entity.getMealNo(),
                 entity.getKinderNo(),
                 entity.getMealDate(),
@@ -48,6 +49,19 @@ public class MealDto {
                 entity.getMealModifyDate(),
                 entity.getMealDeleteDate()
         );
+
+        // MealDetail이 있는 경우, 리스트를 추가
+        if (entity.getMealDetails() != null && !entity.getMealDetails().isEmpty()) {
+            List<MealDetailDto> mealDetailDtos = entity.getMealDetails().stream()
+                    .map(MealDetailDto::toDto)  // MealDetailEntity -> MealDetailDto 변환
+                    .collect(Collectors.toList());
+            mealDto.setMealDetails(mealDetailDtos);
+            mealDto.setDetail(true);
+        } else {
+            mealDto.setDetail(false);
+        }
+
+        return mealDto;
     }
 
 }

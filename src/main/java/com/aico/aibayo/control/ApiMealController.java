@@ -29,7 +29,13 @@ public class ApiMealController {
 
     @PostMapping("/detail")
     public ResponseEntity<MealDto> adminDetail(@RequestBody MealDto dto) {
-        MealDto result = mealService.getWithDetailByMealNo(dto);
+        log.info("dto: {}", dto);
+
+        if (dto == null || dto.getMealNo() == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        MealDto result = mealService.getByMealNo(dto.getMealNo());
         log.info("selected: {}", result);
 
         return result == null ? ResponseEntity.badRequest().build() :

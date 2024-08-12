@@ -13,12 +13,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -65,31 +67,31 @@ public class MealServiceImpl implements MealService {
                            .collect(Collectors.toList());
     }
 
-    @Override
-    public MealDto getWithDetailByMealNo(MealDto dto) {
-        if (dto != null && dto.getMealNo() != null) {
-
-            return mealRepository.findById(dto.getMealNo()).map(target -> {
-                List<MealDetailEntity> mealDetailEntities =
-                        mealRepository.findAllWithDetailByMealNo(dto.getMealNo());
-
-                List<MealDetailDto> mealDetailDtos =
-                        mealDetailEntities.stream()
-                                .map(MealDetailDto::toDto)
-                                .toList();
-
-                MealDto result = MealDto.toDto(target);
-
-                result.setDetail(true);
-                result.getMealDetails().addAll(mealDetailDtos);
-
-                return result;
-            }).orElse(null);
-        }
-
-        return null;
-
-    }
+//    @Override
+//    public MealDto getWithDetailByMealNo(MealDto dto) {
+//        if (dto != null && dto.getMealNo() != null) {
+//
+//            return mealRepository.findById(dto.getMealNo()).map(target -> {
+//                List<MealDetailEntity> mealDetailEntities =
+//                        mealRepository.findAllWithDetailByMealNo(dto.getMealNo());
+//
+//                List<MealDetailDto> mealDetailDtos =
+//                        mealDetailEntities.stream()
+//                                .map(MealDetailDto::toDto)
+//                                .toList();
+//
+//                MealDto result = MealDto.toDto(target);
+//
+//                result.setDetail(true);
+//                result.getMealDetails().addAll(mealDetailDtos);
+//
+//                return result;
+//            }).orElse(null);
+//        }
+//
+//        return null;
+//
+//    }
 
     @Override
     @Transactional
@@ -161,4 +163,11 @@ public class MealServiceImpl implements MealService {
 
         return MealDto.toDto(saved);
     }
+
+    @Override
+    public MealDto getByMealNo(Long mealNo) {
+        MealEntity target = mealRepository.findByMealNo(mealNo);
+        return MealDto.toDto(target);
+    }
+
 }

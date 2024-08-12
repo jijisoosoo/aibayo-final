@@ -63,7 +63,8 @@ $(document).ready(function(){
         let files = event.target.files;
         // var previewId = $(this).attr('id') + 'Preview';
         let label = $(this).closest('label');
-        label.find('img').remove(); // 이전 미리보기 삭제
+        console.dir(label.find('.meal_pic_origin'));
+        label.find('.meal_pic_origin').hide(); // 이전 미리보기 숨기기
         label.find('svg').hide(); // SVG 숨기기
 
         if (files.length > 0) {
@@ -89,7 +90,7 @@ $(document).ready(function(){
                     }
 
                     label.append('<img src="' + e.target.result + '" alt="사진 미리보기" ' +
-                        ' class="modal_meal_img">');
+                        ' class="modal_meal_img modify_meal_pic">');
                 } else { // 이미지 파일이 아닐 경우
                     Swal.fire({
                         icon: "error",
@@ -110,8 +111,10 @@ $(document).ready(function(){
             if (url.includes('/meal/admin/write')) {
                 label.find('svg').show();
             } else if (url.includes('/meal/admin/modify')) {
-                label.append('<img src="' + "http://via.placeholder.com/330x300" + '" alt="사진 미리보기" ' +
-                    ' class="modal_meal_img">');
+                // label.append('<img src="' + "http://via.placeholder.com/330x300" + '" alt="사진 미리보기" ' +
+                //     ' class="modal_meal_img">');
+                label.find('.modify_meal_pic').remove();
+                label.find('.meal_pic_origin').show();
             }
 
         }

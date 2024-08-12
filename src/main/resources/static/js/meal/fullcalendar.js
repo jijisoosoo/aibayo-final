@@ -210,7 +210,7 @@ function afterSuccess(response) {
                 `;
 
         if (roleNo <= 2) {
-            modalDetailTag += `<a class="btn btn-ab modal_btn_box" href="/meal/admin/modify" alt="수정">
+            modalDetailTag += `<a class="btn btn-ab modal_btn_box" href="/meal/admin/modify/${response.mealNo}" alt="수정">
                             <div class="modal_btn_text">수정</div>
                         </a>
 
