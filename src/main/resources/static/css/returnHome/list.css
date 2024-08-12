@@ -261,19 +261,19 @@
 .list .avatar {
     background-color: #f7f7f7;
     border-radius: 1000px;
-    height: 40px;
+    height: 200px;
     overflow: hidden;
     position: relative;
-    width: 40px;
+    width: 200px;
 }
 
 .list .rectangle {
-    height: 40px;
+    height: 200px;
     left: 0;
     object-fit: cover;
     position: absolute;
     top: 0;
-    width: 40px;
+    width: 200px;
 }
 
 .list .frame-7 {

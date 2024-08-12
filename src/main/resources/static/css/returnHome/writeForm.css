@@ -983,7 +983,12 @@
     border-radius: .25rem;
     width: 438px;
     height: 38px;
+    padding : 0px 10px;
 }
+#time{
+    text-align: center;
+}
+
 
 .pic{
     display: flex;
@@ -1054,6 +1059,7 @@
 #selectbox{
     width: 438px;
     height: 38px;
+    text-align: center;
 }
 #name1 , #name2{
     border: none;

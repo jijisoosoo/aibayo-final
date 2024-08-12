@@ -20,7 +20,7 @@ public class CommentSearchCondition {
     private Long commentWriter;
     private String commentClass;
     private String commentContent;
-
+    private Long commentNo;
 
 
 }

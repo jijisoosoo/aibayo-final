@@ -66,22 +66,17 @@ $(document).ready(function() {
             if (result.isConfirmed) {
                 let url = "/teacher/deleteOk"
 
-                // // 모든 관계 제거
-                // $('.info_item').each(function () {
-                //     let param = {
-                //         acceptNo : $(this).data('accept-no')
-                //     }
-                //     // console.log(`remove_relation param: ${JSON.stringify(param)}`);
-                //
-                //     commonAjax(url, 'DELETE', param);
-                // });
-                //
-                // let param = {
-                //     kidNo : $('#kidProfile').data('kid-no')
-                // }
-                // // console.log(`kidNo param: ${JSON.stringify(param)}`)
-                //
-                // commonAjax(url, 'DELETE', param);
+                let classes = document.querySelectorAll('.class');
+                let classAcceptNos = Array.from(classes).map(element => parseInt(element.dataset.classAcceptNo));
+
+                let param = {
+                    id : parseInt($('.profile').attr('id')),
+                    classAcceptNos : classAcceptNos,
+                    kinderAcceptNo : $('.profile').data('kinder-accept-no')
+                }
+                console.log(`param: ${JSON.stringify(param)}`);
+
+                commonAjax(url, 'DELETE', param);
 
             }
         });
@@ -89,16 +84,33 @@ $(document).ready(function() {
 
 });
 
-function afterSuccess(response) {
-    $('#assignedClasses').replaceWith($(response).find('#assignedClasses'));
-    $('#staticBackdrop3').replaceWith($(response).find('#staticBackdrop3'));
-    classListFilter();
-    getCheckboxValue();
-    updateLabelBackgroundColor();
-    addLabelClickListeners();
-    addInputClickListeners();
-    addCheckboxEventListeners();
+function afterSuccess(response, method) {
+    console.log("method : " + method);
+    console.log("response : " + response.kinderNo);
 
+    if (method === 'DELETE' && response.kinderNo === null) {
+        console.log("afterSuccess : DELETE");
+        Swal.fire({
+            title: "퇴사 승인 완료",
+            text: "창을 닫으면 목록 화면으로 돌아갑니다.",
+            icon: "success",
+            customClass: {
+                confirmButton: 'btn-ab btn-ab-swal'
+            }
+        }).then((result) => {
+
+            window.location.href = window.location.origin + '/teacher/list';
+        });
+    } else if (method === null){
+        $('#assignedClasses').replaceWith($(response).find('#assignedClasses'));
+        $('#staticBackdrop3').replaceWith($(response).find('#staticBackdrop3'));
+        classListFilter();
+        getCheckboxValue();
+        updateLabelBackgroundColor();
+        addLabelClickListeners();
+        addInputClickListeners();
+        addCheckboxEventListeners();
+    }
 }
 
 

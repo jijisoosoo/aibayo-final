@@ -38,7 +38,7 @@ public class CommentServiceImpl implements CommentService{
     public Page<CommentDto> findAllByBoardNo(CommentSearchCondition condition, HashMap<String, Object> hashMap) {
         int page = (int) hashMap.get("page");
         String type = (String) hashMap.get("type");
-        int pagesize=30;
+        int pagesize=10;
 
         Pageable pageable = PageRequest.of(page - 1, pagesize);
         return commentRepository.findAllByBoardNo(condition,pageable);
@@ -57,7 +57,9 @@ public class CommentServiceImpl implements CommentService{
             throw new IllegalArgumentException("BoardNo must not be null");
         }
 
+       log.info("commentDto : "+ commentDto);
         CommentEntity commentEntity = CommentEntity.builder()
+                .commentWriter(commentDto.getCommentWriter())
                 .commentNo(commentDto.getCommentNo())
                 .boardNo(commentDto.getBoardNo())
                 .commentWriter(commentDto.getCommentWriter())

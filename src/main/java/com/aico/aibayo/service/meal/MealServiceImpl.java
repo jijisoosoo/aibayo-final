@@ -10,10 +10,17 @@ import com.aico.aibayo.repository.meal.MealDetailRepository;
 import com.aico.aibayo.repository.meal.MealRepository;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
+
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -22,14 +29,22 @@ import java.util.stream.Collectors;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MealServiceImpl implements MealService {
+    private final AmazonS3Client amazonS3Client;
+
     private final MealRepository mealRepository;
     private final MealDetailRepository mealDetailRepository;
 
+    @Value("${cloud.aws.s3.bucket}")
+    private String bucket;
     @Value("${file.upload-dir}")
     private String uploadDirectory;
+
+    private final String MEAL_IMG_DIR = "meal";
 
     @Override
     public List<MealDto> getAllByMealDateAndKinderNoAndMealDeleteFlag(MealSearchCondition condition) {
@@ -94,35 +109,52 @@ public class MealServiceImpl implements MealService {
         for (int i = 0; i < mealDetails.size(); i++) {
             MealDetailDto mealDetailDto = mealDetails.get(i);
 
+            MultipartFile multipartFile = files.get(i);
             File uploadDir = new File(uploadDirectory);
-            MultipartFile file = files.get(i);
 
-            // 서버에 파일 등록
+            // 로컬에 파일 등록
             if (!uploadDir.exists()) {
                 uploadDir.mkdirs();
             }
 
-            String fileName = UUID.randomUUID() + "-" + file.getOriginalFilename();
-            String filePath = uploadDirectory + "/" + fileName;
-            File upload = new File(filePath);
+            String fileName = UUID.randomUUID() + "-" + multipartFile.getName();
+            String filePathLocal = uploadDirectory + File.separator + fileName;
+            String filePathS3 = MEAL_IMG_DIR + "/" + fileName;
+
 
             try {
-                file.transferTo(upload);
+                File uploadLocal = new File(filePathLocal);
+                multipartFile.transferTo(uploadLocal);
 
-                MealDetailEntity mealDetailEntity = MealDetailEntity.builder()
-                        .mealType(mealDetailDto.getMealType())
-                        .mealMenu(mealDetailDto.getMealMenu())
-                        .mealPic(fileName)
-                        .mealPicOriginalName(file.getOriginalFilename())
-                        .mealInvisibleFlag(BooleanEnum.FALSE.getBool())
-                        .meal(saved)
-                        .build();
+                // s3 파일 등록
+                amazonS3Client.putObject(new PutObjectRequest(bucket, filePathS3, uploadLocal));
 
-                MealDetailEntity savedDetail = mealDetailRepository.save(mealDetailEntity);
-                savedDetails.add(savedDetail);
+                // 로컬 파일 삭제
+                if (uploadLocal.delete()) {
+                    log.info(">>>>>>>>>>> local meal file delete succeed");
+                } else {
+                    log.info(">>>>>>>>>>> local meal file delete failed");
+                }
+
             } catch (IOException e) {
-                throw new RuntimeException();
+                throw new RuntimeException("Failed to upload file", e);
             }
+
+            String uploadUrl = amazonS3Client.getUrl(bucket, filePathS3).toString();
+            log.info(">>>>>>>>> meal file saved in {}", uploadUrl);
+
+
+            MealDetailEntity mealDetailEntity = MealDetailEntity.builder()
+                    .mealType(mealDetailDto.getMealType())
+                    .mealMenu(mealDetailDto.getMealMenu())
+                    .mealPic(uploadUrl)
+                    .mealPicOriginalName(multipartFile.getOriginalFilename())
+                    .mealInvisibleFlag(BooleanEnum.FALSE.getBool())
+                    .meal(saved)
+                    .build();
+
+            MealDetailEntity savedDetail = mealDetailRepository.save(mealDetailEntity);
+            savedDetails.add(savedDetail);
 
             saved.setMealDetails(savedDetails);
         }

@@ -12,6 +12,7 @@ import com.aico.aibayo.dto.member.MemberSearchCondition;
 import com.aico.aibayo.dto.notepad.NotepadDto;
 import com.aico.aibayo.entity.BoardEntity;
 import com.aico.aibayo.entity.CommentEntity;
+import com.aico.aibayo.jwt.JWTUtil;
 import com.aico.aibayo.repository.comment.CommentRepository;
 import com.aico.aibayo.service.announce.AnnounceService;
 import com.aico.aibayo.service.classManage.ClassService;
@@ -40,18 +41,19 @@ public class AnnounceController {
     private final MemberService memberService;
     private final CommentService commentService;
     private final CommentRepository commentRepository;
+    private JWTUtil jwtUtil;
 
     // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
-    private int roleNo = 1;
-    private Long id = 2L;
-    private Long kinderNo = 1L;
+//    private int roleNo = 1;
+//    private Long id = 2L;
+//    private Long kinderNo = null;
 
     @GetMapping("/admin/card")
-    public String admincard(@RequestParam(defaultValue = "1") int page, Model model){
+    public String admincard(@ModelAttribute("loginInfo") MemberDto loginInfo, @RequestParam(defaultValue = "1") int page, Model model){
         HashMap<String, Object> hashMap = new HashMap<>();
         AnnounceSearchCondition condition = new AnnounceSearchCondition();
-        condition.setKinderNo(kinderNo);
-        model.addAttribute("KinderNo",kinderNo);
+        condition.setKinderNo(loginInfo.getKinderNo());
+        model.addAttribute("KinderNo",loginInfo.getKinderNo());
         hashMap.put("page",page);
         hashMap.put("type","card");
         Page<AnnounceDto>announces= announceService.findAllByKinderNoCard(condition,hashMap);
@@ -90,7 +92,8 @@ public class AnnounceController {
 
         return view;
     }
-    private String getPageInfoAndGoView(Model model, Page<AnnounceDto> announces,Page<AnnounceDto> primaryAnnounces, String view) {
+    private String getPageInfoAndGoView(Model model,
+                                        Page<AnnounceDto> announces,Page<AnnounceDto> primaryAnnounces, String view) {
         int totalPages = announces.getTotalPages();
         int currentPage = announces.getNumber();
         int startPage = Math.max(0, currentPage - 2);
@@ -123,17 +126,19 @@ public class AnnounceController {
         return view;
     }
     @GetMapping("/admin/list")
-        public String adminList(@RequestParam(defaultValue = "1") int page, Model model){
+        public String adminList(@RequestParam(defaultValue = "1") int page,
+                                @ModelAttribute("loginInfo") MemberDto loginInfo,
+                                Model model){
             HashMap<String, Object> hashMap1 = new HashMap<>();
             HashMap<String, Object> hashMap2 = new HashMap<>();
             AnnounceSearchCondition condition1 = new AnnounceSearchCondition();
             AnnounceSearchCondition condition2 = new AnnounceSearchCondition();
-            condition1.setKinderNo(kinderNo);
+            condition1.setKinderNo(loginInfo.getKinderNo());
 
-            condition2.setKinderNo(kinderNo);
+            condition2.setKinderNo(loginInfo.getKinderNo());
             condition2.setAnnouncePrimary("1");
 
-            model.addAttribute("KinderNo",kinderNo);
+            model.addAttribute("KinderNo",loginInfo.getKinderNo());
             hashMap1.put("page",page);
             hashMap1.put("type","list");
             hashMap2.put("page",1);
@@ -146,24 +151,24 @@ public class AnnounceController {
         }
 
     @GetMapping("/admin/write")
-    public String writeForm(Model model){
+    public String writeForm(Model model ,
+                            @ModelAttribute("loginInfo") MemberDto loginInfo){
         // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
         List<ClassDto> classDtos = new ArrayList<>();
 
-        if (roleNo < 2) { // 사이트 관리자/원장
-            classDtos = classService.getByKinderNo(kinderNo);
+        if (loginInfo.getRoleNo() < 2) { // 사이트 관리자/원장
+            classDtos = classService.getByKinderNo(loginInfo.getKinderNo());
 
-        } else if (roleNo == 2) { // 교사
-            classDtos = classService.getByMemberId(id);
+        } else if (loginInfo.getRoleNo() == 2) { // 교사
+            classDtos = classService.getByMemberId(loginInfo.getId());
         }
         HashMap<String, Object> announceInfo = new HashMap<>();
         announceInfo.put("boardType", BoardTypeEnum.ANNOUNCE.getNum());
-        announceInfo.put("writer", id);
-        announceInfo.put("boardKinderNo", kinderNo);
-
+        announceInfo.put("writer", loginInfo.getId());
+        announceInfo.put("boardKinderNo", loginInfo.getKinderNo());
         model.addAttribute("classDtos", classDtos);
         model.addAttribute("announceInfo",announceInfo);
-
+        log.info("writeAnnounce : {} ", announceInfo);
         return "/admin/announce/writeForm";
     }
     @PostMapping("/writeOk")
@@ -188,10 +193,12 @@ public class AnnounceController {
         return "/admin/announce/detail";
     }
     @GetMapping("/admin/modify/{announceNo}")
-    public String modifyForm(@PathVariable Long announceNo, Model model){
+    public String modifyForm(@PathVariable Long announceNo,
+                             @ModelAttribute("loginInfo") MemberDto loginInfo,
+                             Model model){
         HashMap<String, Object> memberDto = new HashMap<>();
-        memberDto.put("roleNo", roleNo);
-        memberDto.put("id", id);
+        memberDto.put("roleNo", loginInfo.getRoleNo());
+        memberDto.put("id", loginInfo.getId());
 
         AnnounceDto announceDto = announceService.findByAnnounceNo(announceNo);
         model.addAttribute("member",memberDto);
@@ -217,16 +224,18 @@ public class AnnounceController {
     }
     //    user
     @GetMapping("/user/card")
-    public String usercard(@RequestParam(defaultValue = "1") int page, Model model){
+    public String usercard(@RequestParam(defaultValue = "1") int page,
+                           @ModelAttribute("loginInfo") MemberDto loginInfo,
+                           Model model){
         MemberSearchCondition memberSearchCondition = new MemberSearchCondition();
         memberSearchCondition.setId(14L);
         memberSearchCondition.setKidNo(1L);
-        MemberDto loginInfo=  memberService.getByIdAndKidNo(memberSearchCondition);
+//        MemberDto loginInfo=  memberService.getByIdAndKidNo(memberSearchCondition);
         HashMap<String, Object> hashMap = new HashMap<>();
         AnnounceSearchCondition condition = new AnnounceSearchCondition();
         condition.setKinderNo(loginInfo.getKinderNo());
         condition.setAnnounceType(AnnounceTypeEnum.TEACHER.getNum());
-        model.addAttribute("KinderNo",kinderNo);
+        model.addAttribute("KinderNo",loginInfo.getKinderNo());
         hashMap.put("page",page);
         hashMap.put("type","card");
         Page<AnnounceDto>announces= announceService.findAllByKinderNoCard(condition,hashMap);
@@ -234,11 +243,13 @@ public class AnnounceController {
         return getPageInfoAndGoView(model, announces, "/user/announce/card");
     }
     @GetMapping("/user/list")
-    public String userList(@RequestParam(defaultValue = "1") int page, Model model){
+    public String userList(@RequestParam(defaultValue = "1") int page,
+                           @ModelAttribute("loginInfo") MemberDto loginInfo,
+                           Model model){
         MemberSearchCondition memberSearchCondition = new MemberSearchCondition();
         memberSearchCondition.setId(14L);
         memberSearchCondition.setKidNo(1L);
-        MemberDto loginInfo=  memberService.getByIdAndKidNo(memberSearchCondition);
+//        MemberDto loginInfo=  memberService.getByIdAndKidNo(memberSearchCondition);
         HashMap<String, Object> hashMap1 = new HashMap<>();
         HashMap<String, Object> hashMap2 = new HashMap<>();
         AnnounceSearchCondition condition1 = new AnnounceSearchCondition();
@@ -246,11 +257,12 @@ public class AnnounceController {
         condition1.setKinderNo(loginInfo.getKinderNo());
         condition1.setAnnounceType(AnnounceTypeEnum.TEACHER.getNum());
 
+
         condition2.setKinderNo(loginInfo.getKinderNo());
         condition2.setAnnouncePrimary("1");
         condition2.setAnnounceType(AnnounceTypeEnum.TEACHER.getNum());
 
-        model.addAttribute("KinderNo",kinderNo);
+        model.addAttribute("KinderNo",loginInfo.getKinderNo());
         hashMap1.put("page",page);
         hashMap1.put("type","list");
         hashMap2.put("page",1);
@@ -269,41 +281,7 @@ public class AnnounceController {
 
         return getPageInfoAndGoView(model, announces, primaryAnnounces, "/user/announce/list");
     }
-    @GetMapping("/user/{announceNo}")
-    public String userDetail(@PathVariable Long announceNo, @RequestParam(defaultValue = "1") int page, Model model){
-        AnnounceDto announceDto = announceService.findByAnnounceNo(announceNo);
 
-        HashMap<String, Object> hashMap = new HashMap<>();
-        CommentSearchCondition condition = new CommentSearchCondition();
-        condition.setKinderNo(kinderNo);
-        condition.setBoardNo(announceDto.getBoardNo());
-        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>announceDto>>>>>{}",announceDto);
-
-        model.addAttribute("announce",announceDto);
-        model.addAttribute("KinderNo", kinderNo);
-        hashMap.put("page", page);
-        hashMap.put("type", "list");
-
-
-        HashMap<String, Object> commentInfo = new HashMap<>();
-        commentInfo.put("boardType", BoardTypeEnum.ANNOUNCE.getNum());
-        commentInfo.put("commentWriter", id);
-        commentInfo.put("boardKinderNo", kinderNo);
-        commentInfo.put("announceNo",announceNo);
-        commentInfo.put("commentRegDate", LocalDateTime.now());
-        commentInfo.put("boardNo",announceDto.getBoardNo());
-        commentInfo.put("commentDeleteFlag",announceDto.getCommentDeleteFlag());;
-        commentInfo.put("invisibleFlag",announceDto.getInvisibleFlag());
-        commentInfo.put("commentNo",announceDto.getCommentNo());
-
-        model.addAttribute("commentInfo",commentInfo);
-        System.out.println();
-
-        Page<CommentDto> comments = commentService.findAllByBoardNo(condition, hashMap);
-        long commentCount = commentService.countByBoardNoAndInvisibleFlag(announceDto.getBoardNo(),"0");
-        model.addAttribute("commentCount",commentCount);
-        return getPageInfoAndGoViewComment(model, comments,"/user/announce/detail");
-    }
     private String getPageInfoAndGoViewComment(Model model, Page<CommentDto> comments, String view) {
         int totalPages = comments.getTotalPages();
         int currentPage = comments.getNumber();
@@ -323,30 +301,72 @@ public class AnnounceController {
             }
         }
 
-        log.info(">>>>>>>>>>>>>>>>>>>>>>pagination");
+        log.info(">>>>>>>>>>>>>>>>>>>>>>댓글 pagination");
         log.info("startPage: {}", startPage);
         log.info("endPage: {}", endPage);
+        log.info("totalPages: {}", totalPages);
         log.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 
         model.addAttribute("comments", comments);
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
+        model.addAttribute("totalPages", totalPages);
 
         return view;
     }
 
+    @GetMapping("/user/{announceNo}")
+    public String userDetail(@PathVariable Long announceNo,
+                             @RequestParam(defaultValue = "1") int page,
+                             @ModelAttribute("loginInfo") MemberDto loginInfo,
+                             Model model){
+        AnnounceDto announceDto = announceService.findByAnnounceNo(announceNo);
+
+        HashMap<String, Object> hashMap = new HashMap<>();
+        CommentSearchCondition condition = new CommentSearchCondition();
+        condition.setKinderNo(loginInfo.getKinderNo());
+        condition.setBoardNo(announceDto.getBoardNo());
+
+        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>announceDto>>>>>{}",announceDto);
+
+        model.addAttribute("announce",announceDto);
+        model.addAttribute("KinderNo", loginInfo.getKinderNo());
+        hashMap.put("page", page);
+        hashMap.put("type", "list");
+
+
+        HashMap<String, Object> commentInfo = new HashMap<>();
+        commentInfo.put("boardType", BoardTypeEnum.ANNOUNCE.getNum());
+        commentInfo.put("commentWriter", loginInfo.getId());
+        commentInfo.put("announceNo",announceNo);
+        commentInfo.put("commentRegDate", LocalDateTime.now());
+        commentInfo.put("boardNo",announceDto.getBoardNo());
+        commentInfo.put("commentDeleteFlag",announceDto.getCommentDeleteFlag());;
+        commentInfo.put("invisibleFlag",announceDto.getInvisibleFlag());
+        commentInfo.put("commentNo",announceDto.getCommentNo());
+
+        model.addAttribute("commentInfo",commentInfo);
+        System.out.println("commentInfo!"+commentInfo);
+
+        Page<CommentDto> comments = commentService.findAllByBoardNo(condition, hashMap);
+        long commentCount = commentService.countByBoardNoAndInvisibleFlag(announceDto.getBoardNo(),"0");
+        model.addAttribute("commentCount",commentCount);
+        return getPageInfoAndGoViewComment(model, comments,"/user/announce/detail");
+    }
+
+
     @PostMapping("/comment/writeOk")
     @ResponseBody
-    public Map<String,Object> writeCommentOk(@RequestBody CommentDto commentDto) {
-        log.info("insert comment: {}", commentDto);
+    public CommentDto writeCommentOk(@RequestBody CommentDto commentDto) {
+        log.info("Received commentDto: {}", commentDto); // 추가된 로그
 
         CommentDto commentDto1 = commentService.insertComment(commentDto);
 
-        HashMap<String,Object> result = new HashMap<>();
-        result.put("success",true);
-        return result;
+        log.info("Inserted commentDto: {}", commentDto1); // 추가된 로그
+        return commentDto1;
     }
+
 
     @DeleteMapping("/comment/delete")
     @ResponseBody
@@ -357,10 +377,12 @@ public class AnnounceController {
 
 
     @PutMapping("/comment/user/modify/{commentNo}")
-    public String commentModifyForm(@PathVariable Long commentNo , Model model){
+    public String commentModifyForm(@PathVariable Long commentNo ,
+                                    @ModelAttribute("loginInfo") MemberDto loginInfo,
+                                    Model model){
         HashMap<String, Object> memberDto = new HashMap<>();
-        memberDto.put("roleNo", roleNo);
-        memberDto.put("id", id);
+        memberDto.put("roleNo", loginInfo.getRoleNo());
+        memberDto.put("id", loginInfo.getId());
 
         Optional<CommentEntity> modifiedComment = commentRepository.findById(commentNo);
         model.addAttribute("member",memberDto);
@@ -375,6 +397,5 @@ public class AnnounceController {
         log.info("modify comment : {}",commentDto);
         return commentService.updateComment(commentDto);
     }
-
 }
 
