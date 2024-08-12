@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const classData = getClassByNo(classNo);
 
         if (classData) {
-            $('#classModalLabel').text(classData.className + ' 정보');
+            // $('#classModalLabel').text(classData.className + ' 정보');
             $('#className').text(classData.className);
 
             // Populate teacher list
@@ -97,12 +97,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Event listener for adding a class
-    $('#addClassBtn').on('click', function () {
-        console.log('Add Class button clicked');
-        alert('반 추가 기능은 구현되지 않았습니다.');
-    });
-
     // Event listener for editing the class name
     // Bootstrap 모달이 기본적으로 포커스를 강제하는 기능을 가지고 있어서 sweetalert2과 충돌남
     $.fn.modal.Constructor.prototype._enforceFocus = function () {
@@ -143,6 +137,43 @@ document.addEventListener('DOMContentLoaded', function () {
                     success: function (response) {
                         window.location.href = '/classManage/main';
 
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error:', error);
+                        Swal.fire('오류 발생.', xhr.responseText, 'error');
+                    }
+                });
+            }
+        });
+    });
+
+    $('#createClassBtn').on('click', function () {
+        Swal.fire({
+            title: '새 반 이름을 입력하세요',
+            input: 'text',
+            inputPlaceholder: '반 이름',
+            showCancelButton: true,
+            confirmButtonText: '저장',
+            cancelButtonText: '취소',
+            inputValidator: (value) => {
+                if (!value) {
+                    return '반 이름을 입력해야 합니다!';
+                }
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const newClassName = result.value;
+
+                // AJAX 요청을 통해 서버에 새로운 반 이름을 전달
+                $.ajax({
+                    url: '/classManage/createClass', // 컨트롤러의 URL
+                    method: 'POST', // POST 메서드 사용
+                    contentType: 'application/json',
+                    data: JSON.stringify({ className: newClassName }), // 새 반 이름을 JSON 형식으로 보냄
+                    success: function(response) {
+                        Swal.fire('반이 성공적으로 추가되었습니다!', '', 'success').then(() => {
+                            window.location.reload(); // 성공적으로 추가되면 페이지를 새로고침하여 반 목록을 업데이트
+                        });
                     },
                     error: function (xhr, status, error) {
                         console.log('Error:', error);

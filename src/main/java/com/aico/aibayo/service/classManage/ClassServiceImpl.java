@@ -90,5 +90,15 @@ public class ClassServiceImpl implements ClassService{
         classRepository.save(classEntity);
     }
 
+    @Override
+    public void createClass(String className, Long kinderNo) {
+        ClassEntity classEntity = new ClassEntity();
+        classEntity.setClassName(className);
+        classEntity.setKinderNo(kinderNo);
+        classEntity.setClassRegDate(LocalDateTime.now());
+        classEntity.setClassDeleteFlag(BooleanEnum.FALSE.getBool());
+        classRepository.save(classEntity);
+    }
+
 
 }

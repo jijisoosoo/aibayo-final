@@ -28,4 +28,6 @@ public interface ClassService {
     void updateClassName(Long classNo, String newClassName);
 
     void deleteClass(Long classNo);
+
+    void createClass(String className, Long kinderNo);
 }
