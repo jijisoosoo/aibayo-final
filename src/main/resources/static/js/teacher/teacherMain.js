@@ -18,8 +18,125 @@ $(document).ready(function() {
 
         commonAjax(url, 'POST', param);
 
-
     });
+
+    $(document).on('click', '#waitAccept', function () {
+        Swal.fire({
+            title: "정말로 승인하시겠습니까?",
+            showCancelButton: true,
+            confirmButtonText: "네",
+            cancelButtonText: "아니오",
+            customClass: {
+                confirmButton: 'btn-ab btn-ab-swal'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let target = $(this).closest('.kid_item_btns');
+
+                let url = "/kid/modifyOk";
+
+                let param = {
+                    parentKidAcceptNo : target.data('parent-kid-accept-no')
+                }
+                // console.log(`param : ${JSON.stringify(param)}`);
+
+                target.closest('.kid_item_parent').remove();
+
+                commonAjax(url, 'PUT', param);
+            }
+        });
+    });
+
+    $(document).on('click', '#waitReject', function () {
+        Swal.fire({
+            title: "정말로 삭제하시겠습니까?",
+            showCancelButton: true,
+            confirmButtonColor: "#dc3545",
+            confirmButtonText: "네",
+            cancelButtonText: "아니오"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let target = $(this).closest('.kid_item_btns');
+
+                let url = "/kid/deleteOk";
+
+                let param = {
+                    parentKidAcceptNo : target.data('parent-kid-accept-no')
+                }
+                // console.log(`param : ${JSON.stringify(param)}`);
+
+                target.closest('.kid_item_parent').remove();
+
+                commonAjax(url, 'DELETE', param);
+            }
+        });
+    });
+
+
+    // 초대중 처리
+    $(document).on('click', '#inviteDelete', function () {
+        Swal.fire({
+            title: "정말로 취소하시겠습니까?",
+            showCancelButton: true,
+            confirmButtonColor: "#dc3545",
+            confirmButtonText: "네",
+            cancelButtonText: "아니오"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let target = $(this).closest('.kid_item_btns');
+
+                let url = "/inviteCode/deleteOk";
+
+                let param = {
+                    inviteId: target.data('invite-id'),
+                    acceptNo : target.data('invite-code-accept-no')
+                }
+                // console.log(`param : ${JSON.stringify(param)}`);
+
+                target.closest('.kid_item_parent').remove();
+
+                commonAjax(url, 'DELETE', param);
+            }
+        });
+    });
+
+    $(document).on('click', '#inviteResend', function () {
+        Swal.fire({
+            title: "초대 메일을 재전송 하시겠습니까?",
+            showCancelButton: true,
+            confirmButtonText: "네",
+            cancelButtonText: "아니오",
+            customClass: {
+                confirmButton: 'btn-ab btn-ab-swal'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let target = $(this).closest('.kid_item_btns');
+
+                let url = "/inviteCode/resendMail";
+
+                let param = {
+                    inviteId: target.data('invite-id'),
+                    acceptNo : target.data('invite-code-accept-no')
+                }
+                console.log(`param : ${JSON.stringify(param)}`);
+
+                Swal.fire({
+                    title: '전송 중...',
+                    text: '초대 메일을 전송하고 있습니다.',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+
+                commonAjax(url, 'PUT', param);
+            }
+        });
+    });
+
+
+
 });
 
 
@@ -86,10 +203,10 @@ function ifResultNull(){
     if($('#teacherStatus1Div .profile').find().prevObject.length == 0){
         $('#teacherStatus1Div .ifResultNull').show();
     }
-    if($('#teacherStatus0Div .profile').find().prevObject.length == 0){
+    if($('#teacherStatus0Div .profile_wait').find().prevObject.length == 0){
         $('#teacherStatus0Div .ifResultNull').show();
     }
-    if($('#teacherStatus2Div .profile').find().prevObject.length == 0){
+    if($('#teacherStatus2Div .profile_wait').find().prevObject.length == 0){
         $('#teacherStatus2Div .ifResultNull').show();
     }
 }

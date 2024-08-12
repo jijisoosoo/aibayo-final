@@ -81,7 +81,8 @@ public class TeacherRepositoryCustomImpl implements TeacherRepositoryCustom{
                         member.phone,
                         member.profilePicture,
                         kinderAcceptLog.acceptRegDate,
-                        teacherKinder.acceptNo
+                        teacherKinder.acceptNo,
+                        member.kinderNo
                         ))
                 .from(member)
                 .join(teacherKinder).on(member.id.eq(teacherKinder.teacherId))
