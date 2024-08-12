@@ -7,10 +7,7 @@ import com.aico.aibayo.service.teacher.teacherService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -23,9 +20,19 @@ import java.util.stream.Collectors;
 public class ApiTeacherController {
     private final teacherService teacherService;
 
+    @PutMapping("/modifyOk")
+    public ResponseEntity<MemberDto> modifyOk(@RequestBody Map<String, Number> requestBody) {
+        System.out.println("requestBody : " + requestBody);
+        MemberDto updated = teacherService.updateTeacher(requestBody);
+        log.info("modify: {}", requestBody);
+
+        return updated == null ? ResponseEntity.badRequest().build() :
+                ResponseEntity.ok(updated);
+    }
+
+
     @DeleteMapping("/deleteOk")
     public ResponseEntity<MemberDto> deleteOk(@RequestBody Map<String, Object> requestBody) {
-        System.out.println("requestBody : " + requestBody);
 
         MemberDto deleted = teacherService.deleteTeacher(requestBody);
         log.info("deleted: {}", deleted);

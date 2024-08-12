@@ -81,10 +81,32 @@ public class teacherServiceImpl implements teacherService{
     }
 
     @Override
+    public MemberDto updateTeacher(Map<String, Number> requestBody) {
+        Long id = requestBody.get("id").longValue();
+        System.out.println("id" + id);
+        MemberDto memberDto = null;
+
+        if (requestBody.get("teacherKinderAcceptNo") != null) {
+            Long kinderAcceptNo = requestBody.get("teacherKinderAcceptNo").longValue();
+            System.out.println("kinderAcceptNo" + kinderAcceptNo);
+
+            AcceptLogEntity target = acceptLogRepository.findById(kinderAcceptNo).orElse(null);
+            if (target != null) {
+                target.setAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
+                target.setAcceptModifyDate(LocalDateTime.now());
+
+                acceptLogRepository.save(target);
+                memberDto = memberRepository.findDtoById(id);
+            }
+        }
+
+        return memberDto;
+    }
+
+    @Override
     public MemberDto deleteTeacher(Map<String, Object> requestBody) {
 
         Long id = ((Number) requestBody.get("id")).longValue();
-        System.out.println("id" + id);
         MemberDto memberDto = null;
 
         // class_teacher 삭제
@@ -93,7 +115,6 @@ public class teacherServiceImpl implements teacherService{
             List<Long> classAcceptNos = classAcceptNosInt.stream()
                     .map(Integer::longValue)
                     .collect(Collectors.toList());
-            System.out.println("classAcceptNos" + classAcceptNos);
 
             for(long classAcceptNo : classAcceptNos){
                 AcceptLogEntity target = acceptLogRepository.findById(classAcceptNo).orElse(null);
@@ -104,7 +125,6 @@ public class teacherServiceImpl implements teacherService{
 
                     acceptLogRepository.save(target);
                     memberDto = memberRepository.findDtoById(id);
-                    System.out.println("memberDto 1 : " + memberDto);
                 }
             }
         }
@@ -112,7 +132,6 @@ public class teacherServiceImpl implements teacherService{
         // teacher_kinder 삭제
         if (requestBody.get("kinderAcceptNo") != null) {
             Long kinderAcceptNo = ((Number) requestBody.get("kinderAcceptNo")).longValue();
-            System.out.println("kinderAcceptNo" + kinderAcceptNo);
 
             AcceptLogEntity target = acceptLogRepository.findById(kinderAcceptNo).orElse(null);
             if (target != null) {
@@ -122,7 +141,6 @@ public class teacherServiceImpl implements teacherService{
 
                 acceptLogRepository.save(target);
                 memberDto = memberRepository.findDtoById(id);
-                System.out.println("memberDto 2 : " + memberDto);
             }
         }
 
@@ -135,10 +153,8 @@ public class teacherServiceImpl implements teacherService{
 
                 memberRepository.save(target);
                 memberDto = memberRepository.findDtoById(id);
-                System.out.println("memberDto 3 : " + memberDto);
             }
         }
-        System.out.println("memberDto return : " + memberDto);
         return memberDto;
     }
 }
