@@ -41,20 +41,20 @@
       </select>
 
       <div class="div-2">
-        <img class="search" src="/schedule/img/search.png" />
+        <img class="search" src="/images/common/search.png" />
         <input type="text" class="text-wrapper-5" placeholder="검색어 입력"></input>
       </div>
 
       <div class="buttonarea">
         <input type="submit" class="button-cancel" value="조회하기">
         <a class="view" th:href="@{/admin/scheduleMain}" th:method="get">
-          <img class="img-3" src="/schedule/img/reset.png" />
+          <img class="img-3" src="/images/common/reset.png" />
           <div class="text-wrapper-7">초기화</div>
         </a>
       </div>
     </form>
     <a class="button-modify" th:href="@{/admin/scheduleWrite}" th:method="get">
-      <img class="icon-pencil" src="/schedule/img/pencil.png" />
+      <img class="icon-pencil" src="/images/common/pencil.png" />
       <div class="text-modify">일정 추가</div>
     </a>
   </div>
@@ -69,7 +69,7 @@
     <div class="schedule">
       <div class="date-schedulecnt">
         <a  th:href="@{/admin/scheduleMain}" th:method="get">
-          <img class="img-2" src="/schedule/img/left.png" />
+          <img class="img-2" src="/images/common/left.png" />
         </a>
         <div class="text">
           <div class="day-2">
@@ -85,8 +85,8 @@
             </div>
           </div>
         </div>
-        <a th:href="@{/admin/scheduleMain}" th:method="get">
-          <img class="img-2" src="/schedule/img/right.png" />
+        <a th:href="@{schedule/admin/scheduleMain}" th:method="get">
+          <img class="img-2" src="/images/common/right.png" />
         </a>
       </div>
 

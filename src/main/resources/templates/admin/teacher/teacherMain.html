@@ -18,7 +18,7 @@
 <div class="container main_container" layout:fragment="content">
     <div class="title">
         <div class="text-wrapper-4">교사 관리</div>
-        <a class="btn btn-ab button-invite" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <a class="btn btn-ab button-invite" id="send_invite" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             <btn class="text-wrapper-5">초대하기</btn>
         </a>
 
@@ -36,27 +36,29 @@
                             <img src="/images/common/x.png" alt=""/>
                         </button>
                     </div>
-                    <form class="modalform" th:action="@{/admin/mainDone}" th:method="post">
+                    <div class="modalform" th:action="@{/admin/mainDone}" th:method="post">
                         <div class="row-input">
                             <div class="div">
                                 <div class="div-2">
                                     <img class="icon" src="/images/common/default-yellow.png" />
                                     <div class="text-wrapper-2">선생님 이름</div>
+                                    <div class="msg">선생님 이름을 입력해 주세요.</div>
                                 </div>
-                                <input type="text" class="form-control" placeholder="초대할 교사의 이름을 입력해주세요.">
+                                <input type="text" class="form-control" id="teacher_name" placeholder="초대할 교사의 이름을 입력해주세요.">
                             </div>
                             <div class="div">
                                 <div class="div-2">
                                     <img class="icon" src="/images/common/default-yellow.png" />
                                     <div class="text-wrapper-2">선생님 Email</div>
+                                    <div class="msg">선생님 이메일을 입력해 주세요.</div>
                                 </div>
-                                <input type="text" class="form-control" placeholder="초대할 교사의 Email을 입력해주세요.">
+                                <input type="text" class="form-control" id="teacher_email" placeholder="초대할 교사의 Email을 입력해주세요.">
                             </div>
                         </div>
                         <div class="buttonarea">
-                            <input type="submit" class="btn btn-ab button-send" value="인증번호 발송" data-bs-dismiss="modal">
+                            <input type="button" class="btn btn-ab button-send" id="send_email" value="인증번호 발송" data-bs-dismiss="modal">
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -94,7 +96,8 @@
 
             <select id="selectClass" class="dropdown-class" th:name="className_hidden">
                 <option value="">반 선택</option>
-                <option th:each="class : ${classList}" th:value="${class.classNo}" th:text="${class.className}">반이름</option>
+                <option class="classList" th:each="class : ${classList}" th:value="${class.classNo}" th:text="${class.className}"
+                        th:data-kinder-no="${class.kinderNo}">반이름</option>
             </select>
 
         </div>
@@ -140,11 +143,11 @@
                 <div class="text-wrapper-10">명</div>
             </div>
         </div>
-        <div class="carousel_wait">
-            <div class="profile_wait" th:each="teacher:${waitingTeacherList}" th:object="${teacher}" th:id="${teacher.id}"
+        <div class="carousel_waitInvite carousel_wait">
+            <div class="profile_waitInvite profile_wait" th:each="teacher:${waitingTeacherList}" th:object="${teacher}" th:id="${teacher.id}"
                  th:data-teacher-kinder-accept-no="${teacher.kinderAcceptNo}">
                 <div class="text-wrapper-11" th:title="*{name}" th:text="*{name} + ' (' + *{username} + ')'">교사명</div>
-                <div class="wait_buttons">
+                <div class="waitInvite_buttons wait_buttons">
                     <a class="btn btn-ab button-approve" id="waitAccept">승인</a>
                     <a class="btn button-delete" id="waitReject">삭제</a>
                 </div>
@@ -177,12 +180,13 @@
             </div>
         </div>
         <div class="carousel-container">
-            <div class="carousel_wait">
-                <div class="profile_wait" th:each="teacher:${invitedTeacherList}" th:object="${teacher}">
-                    <div class="text-wrapper-11" th:title="*{name}" th:text="*{name} + ' (' + *{username} + ')'">교사명</div>
-                    <div class="wait_buttons">
-                        <a class="btn btn-ab button-approve">승인</a>
-                        <a class="btn button-delete">삭제</a>
+            <div class="carousel_waitInvite carousel_invite">
+                <div class="profile_waitInvite profile_invite" th:each="teacher:${invitedTeacherList}" th:object="${teacher}"
+                    th:data-invite-id="${teacher.username}" th:data-invite-code-accept-no="${teacher.kinderAcceptNo}">
+                    <div class="text-wrapper-11" th:title="*{username}" th:text="*{username}">교사명</div>
+                    <div class="waitInvite_buttons invite_buttons">
+                        <a class="btn btn-ab button-resend" id="inviteResend">재전송</a>
+                        <a class="btn button-delete" id="inviteDelete">삭제</a>
                     </div>
                 </div>
 

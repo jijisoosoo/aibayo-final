@@ -2,6 +2,7 @@ package com.aico.aibayo.dto;
 
 import com.aico.aibayo.entity.ClassEntity;
 import lombok.*;
+import lombok.extern.java.Log;
 
 import java.time.LocalDateTime;
 
@@ -24,9 +25,10 @@ public class ClassDto {
 
     private Long assignedCntOrAcceptNo;
 
-    public ClassDto(Long classNo, String className) {
+    public ClassDto(Long classNo, String className, Long kinderNo) {
         this.classNo = classNo;
         this.className = className;
+        this.kinderNo = kinderNo;
     }
 
 //    public ClassDto(Long classNo, String className, Long acceptNo) {
@@ -35,9 +37,10 @@ public class ClassDto {
 //        this.acceptNo = acceptNo;
 //    }
 
-    public ClassDto(Long classNo, String className, Long assignedCntOrAcceptNo) {
+    public ClassDto(Long classNo, String className, Long kinderNo, Long assignedCntOrAcceptNo) {
         this.classNo = classNo;
         this.className = className;
+        this.kinderNo = kinderNo;
         this.assignedCntOrAcceptNo = assignedCntOrAcceptNo;
     }
 
