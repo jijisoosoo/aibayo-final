@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class SettingController {
     @GetMapping("/menu")
     public String menu(){
-        return "/setting/menu";
+        return "/admin/setting/menu";
     }
 //    @GetMapping("/function")
 //    public String function(){
@@ -18,15 +18,20 @@ public class SettingController {
     //펑션은 안하기로 했음요 !
     @GetMapping("/add")
     public String add(){
-        return "/setting/add";
+        return "/admin/setting/add";
     }
     @GetMapping("/modify")
     public String modify(){
-        return "/setting/modify";
+        return "/admin/setting/modify";
     }
     @GetMapping("/info")
     public String info(){
-        return "/setting/info";
+        return "/admin/setting/info";
+    }
+
+    @GetMapping("/test")
+    public String test(){
+        return "/admin/setting/copy";
     }
 
 

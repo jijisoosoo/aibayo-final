@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "meal")
@@ -13,7 +15,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString
+@ToString(of = {"mealNo", "kinderNo", "mealDate", "mealRegDate",
+        "mealModifyDate", "mealDeleteDate", "mealDeleteFlag"})
 public class MealEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,4 +32,9 @@ public class MealEntity {
     private LocalDateTime mealModifyDate;
     @Column(name = "meal_delete_date")
     private LocalDateTime mealDeleteDate;
+    @Column(name = "meal_delete_flag")
+    private String mealDeleteFlag;
+
+    @OneToMany(mappedBy = "meal")
+    private List<MealDetailEntity> mealDetails = new ArrayList<>();
 }

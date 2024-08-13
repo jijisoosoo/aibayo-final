@@ -10,4 +10,7 @@ public interface NotepadService {
     Page<NotepadDto> getAllByKinderNo(NotepadSearchCondition condition, int page);
     Page<NotepadDto> getAllByKidNo(NotepadSearchCondition condition, int page);
     NotepadDto getByNotepadNo(Long notepadNo);
+    void insertNotepad(NotepadDto notepadDto);
+    void updateNotepad(NotepadDto notepadDto);
+    void deleteNotepad(NotepadDto notepadDto);
 }

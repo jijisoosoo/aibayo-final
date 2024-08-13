@@ -9,31 +9,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MedicationController {
     @GetMapping("/admin/card")
     public String admincard(){
-        return "/medication/admin/card";
+        return "/admin/medication/card";
     }
     @GetMapping("/admin/list")
     public String adminlist(){
-        return "/medication/admin/list";
+        return "/admin/medication/list";
     }
     @GetMapping("/admin/detail")
     public String admindetail(){
-        return "/medication/admin/detail";
+        return "/admin/medication/detail";
     }
     @GetMapping("/user/writeform")
     public String write() {
-        return "/medication/user/writeForm";
+        return "/user/medication/writeForm";
     }
     @GetMapping("/user/detail")
     public String userdetail(){
-        return "/medication/user/detail";
+        return "/user/medication/detail";
     }
     @GetMapping("/user/card")
     public String usercard(){
-        return "/medication/user/card";
+        return "/user/medication/card";
     }
     @GetMapping("/user/list")
     public String userlist(){
-        return "/medication/user/list";
+        return "/user/medication/list";
     }
 
 }

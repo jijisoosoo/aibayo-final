@@ -1,0 +1,77 @@
+.user-info {
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #444;
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    flex: 1;
+    color: #666;
+}
+
+.form-group input {
+    flex: 2;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-right: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    margin-right: 10px;
+    /*border: none;*/
+    border-radius: 5px;
+    /*background: #007bff;*/
+    /*color: #fff;*/
+    cursor: pointer;
+
+}
+
+.btn-remove {
+    margin-top: 50px;
+    background: #dc3545;
+}
+
+.btn-save {
+    margin-top: 50px;
+    background: #28a745;
+}
+
+.btn-edit {
+    margin-top: 50px;
+    background: #ffc107;
+}
+
+.btn-ab {
+    margin-top: 50px;
+}
+
+
+/* 모달창 트랜지션 효과 */
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    transform: translateY(-100px);
+    opacity: 0;
+}
+
+.modal.show .modal-dialog {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* 비밀번호 수정 버튼 색상 변경 */
+/*.btn-outline-ab {*/
+/*    color: #4b3c0c;*/
+/*    border-color: #ffc107;*/
+/*}*/

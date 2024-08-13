@@ -55,5 +55,8 @@ $RECYCLE.BIN/
 ## Linux ##
 *~
 
+## docker compose ##
+docker-compose.yml
+
 ## 환경 변수 파일 ##
 .env

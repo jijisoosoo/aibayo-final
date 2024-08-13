@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+
+    <link rel="stylesheet" th:href="@{/css/member/signInFindPw.css}"/>
+    <link rel="stylesheet" th:href="@{/css/member/signInGuide.css}"/>
+
+    <script th:src="@{/js/login/signInFindPw.js}"></script>
+</head>
+<body>
+<div class="login-page">
+    <div class="div">
+        <div class="overlap">
+            <div class="group">
+                <div class="overlap-group">
+                    <div class="group-2">
+<!--                        <div class="group-3">-->
+<!--                            <div class="text-wrapper">Welcome to aibayo</div>-->
+<!--                        </div>-->
+                    </div>
+
+
+                    <form action="#" method="post">
+                        <div class="group-4">
+
+                            <div class="text-wrapper-3">이메일</div>
+                            <!-- <div class="username-or-email-wrapper"><div class="text-wrapper-4">email address</div></div> -->
+                            <input class="username-or-email-wrapper" name="username" id="email-input" type="email"
+                                   required></input>
+                        </div>
+
+                        <div class="group-5">
+                            <div class="text-wrapper-3">인증번호</div>
+                            <input type="password" class="div-wrapper" name="password" id="certification-number">
+                        </div>
+
+
+                        <div class="overlap-wrapper">
+                            <!-- <div class="overlap-2"><div class="text-wrapper-6">Sign in</div></div> -->
+                            <input id="certification-number-submit" class="overlap-2 text-wrapper-1" type="submit" value="인증번호 보내기">
+                        </div>
+
+
+                        <div class="group-wrapper">
+                            <div class="overlap-group-wrapper">
+                                <div class="overlap-group-2"><a th:href="@{/member/signInResetPw}" class="text-wrapper-8">인증완료</a></div>
+                            </div>
+                        </div>
+
+                    </form>
+
+
+                </div>
+            </div>
+            <div class="text-wrapper-7">비밀번호 찾기</div>
+
+
+        </div>
+        <div class="logo h_class_78">
+            <div class="h_class_79"><a th:href="@{/main/admin}"
+                                       style="text-decoration: none; color: inherit; font-family: 'Noto Sans KR', sans-serif;">aibayo</a></div>
+        </div>
+
+        <!-- <div class="text-wrapper-2">회원가입</div>
+        <div class="text-wrapper-5">비밀번호 찾기</div> -->
+        <a th:href="@{/member/signIn}" class="span">로그인</a>
+
+    </div>
+</div>
+</body>
+</html>

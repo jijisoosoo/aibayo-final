@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout}">
+
+<title layout:fragment="title">식단표</title>
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" href="/css/meal/list.css" />
+</th:block>
+
+<th:block layout:fragment="javascript">
+    <th:block th:replace="~{/common/fullcalendar :: js}"/>
+    <script src="/js/meal/meal.js"></script>
+    <script src="/js/meal/fullcalendar.js"></script>
+</th:block>
+
+<div class="container main_container" layout:fragment="content">
+
+    <div class="meal_top_box">
+
+        <div class="meal_top_title">식단표</div>
+
+    </div>
+
+
+    <div class="calendar_box">
+        <div id="loading-spinner">
+            <div class="spinner"></div>
+            <div class="spinner-text">불러오는중...</div>
+        </div>
+        <div id="calendar"
+             th:data-kinder-no="${loginInfo.kinderNo}"
+             th:data-role-no="${loginInfo.roleNo}">
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade fixed-width-modal" id="mealDetail" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" th:if="${detail}">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h1 class="modal-title modal_header_title" id="mealDetailLabel"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+
+                <div class="modal-body modal_body">
+
+                    <div class="modal_meals_box">
+
+                        <div class="modal_meal_item_box">
+
+                            <div class="modal_meal_title_box">
+                                <div class="modal_meal_title">오전 간식</div>
+                            </div>
+
+
+                            <div class="modal_meal_img_box">
+                                <img class="modal_meal_img" src="http://via.placeholder.com/330x300">
+                            </div>
+
+                            <div class="modal_meal_menu_box">
+                                <div class="modal_meal_menu">
+                                    요구르트<br>딸기<br>복숭아
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="modal_meal_item_box">
+
+                            <div class="modal_meal_title_box">
+                                <div class="modal_meal_title">점심</div>
+                            </div>
+
+
+                            <div class="modal_meal_img_box">
+                                <img class="modal_meal_img" src="http://via.placeholder.com/330x300">
+                            </div>
+
+                            <div class="modal_meal_menu_box">
+                                <div class="modal_meal_menu">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="modal_meal_item_box">
+
+                            <div class="modal_meal_title_box">
+                                <div class="modal_meal_title">오후 간식</div>
+                            </div>
+
+
+                            <div class="modal_meal_img_box">
+                                <img class="modal_meal_img" src="http://via.placeholder.com/330x300">
+                            </div>
+
+                            <div class="modal_meal_menu_box">
+                                <div class="modal_meal_menu">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="modal-footer modal_meal_detail_footer">
+                    <div class="modal_btns_box">
+
+                        <div class="btn btn-ab modal_btn_box">
+                            <div class="modal_btn_text" data-bs-dismiss="modal" aria-label="Close">닫기</div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

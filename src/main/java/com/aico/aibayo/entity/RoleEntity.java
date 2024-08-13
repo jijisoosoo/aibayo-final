@@ -13,9 +13,10 @@ import lombok.*;
 @ToString
 public class RoleEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_no")
     private Long roleNo;
-    @Column(name = "role_name")
-    private String roleName;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role_name", nullable = false)
+    private Role roleName;
 }

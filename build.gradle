@@ -29,6 +29,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
 
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -57,12 +59,25 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-aop'
 
 //    implementation 'org.springframework.boot:spring-boot-starter-mail'
-//    implementation 'org.springframework.boot:spring-boot-starter-security'
-//    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
-//    testImplementation 'org.springframework.security:spring-security-test'
+
+    // security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    testImplementation 'org.springframework.security:spring-security-test'
+
+    // jwt
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
+    implementation 'io.jsonwebtoken:jjwt-impl:0.12.3'
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.12.3'
 
     // https://mvnrepository.com/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter
     implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
+
+    // aws s3
+    // https://mvnrepository.com/artifact/io.awspring.cloud/spring-cloud-starter-aws
+    implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+    implementation 'javax.xml.bind:jaxb-api:2.3.1' // AWS S3
+    implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1' // AWS S3
+    implementation 'com.sun.xml.bind:jaxb-impl:2.3.2' // AWS S3
 
 }
 

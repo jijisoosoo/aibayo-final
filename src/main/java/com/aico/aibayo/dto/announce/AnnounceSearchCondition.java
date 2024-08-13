@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class AnnounceSearchCondition {
+    private Long KinderNo;
     private Long boardNo;
     private String invisibleFlag;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -16,4 +17,6 @@ public class AnnounceSearchCondition {
     private Integer announceType;
     private String canComment;
     private String announcePrimary;
+
+    private String keyword;
 }

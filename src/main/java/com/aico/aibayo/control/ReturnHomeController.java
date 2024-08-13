@@ -9,30 +9,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
     public class ReturnHomeController {
         @GetMapping("/admin/card")
         public String admincard(){
-            return "/returnHome/admin/card";
+            return "/admin/returnHome/card";
         }
         @GetMapping("/admin/list")
         public String adminlist(){
-            return "/returnHome/admin/list";
+            return "/admin/returnHome/list";
         }
         @GetMapping("/admin/detail")
         public String admindetail(){
-            return "/returnHome/admin/detail";
+            return "/admin/returnHome/detail";
         }
         @GetMapping("/user/writeform")
         public String write() {
-            return "/returnHome/user/writeForm";
+            return "/user/returnHome/writeForm";
         }
         @GetMapping("/user/detail")
         public String userdetail(){
-            return "/returnHome/user/detail";
+            return "/user/returnHome/detail";
         }
         @GetMapping("/user/card")
         public String usercard(){
-            return "/returnHome/user/card";
+            return "/user/returnHome/card";
         }
         @GetMapping("/user/list")
         public String userlist(){
-            return "/returnHome/user/list";
+            return "/user/returnHome/list";
         }
 }

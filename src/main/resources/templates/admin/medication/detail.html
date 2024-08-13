@@ -1,0 +1,208 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout}">
+
+<link rel="stylesheet" href="../../../static/css/medication/detail.css">
+<title layout:fragment="title">투약동의서 메인</title>
+
+<th:block layout:fragment="css">
+  <link rel="stylesheet" href="/css/medication/detail.css" />
+</th:block>
+<div class="container main_container" layout:fragment="content">
+  <form action="">
+    <div class="frame">
+      <div class="div">
+        <div class="div-wrapper">
+          <div class="text-wrapper">투약 의뢰서</div>
+        </div>
+        <div class="view">
+          <a href="/admin/medication/card" class="element-secondary-button">
+            목록
+          </a>
+          <button type="button" class="deleteBtn">삭제</button>
+
+        </div>
+      </div>
+      <div class="frame-wrapper">
+        <div class="div-3">
+          <div class="div-4">
+            <div class="div-wrapper-2">
+              <div class="text-wrapper-4">흰둥이</div>
+            </div>
+          </div>
+          <div class="frame-wrapper-2">
+            <div class="div-wrapper-2">
+              <div class="text-wrapper-4">원아의 투약의뢰서</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="frame-wrapper-3">
+        <div class="div-4">
+          <div class="frame-wrapper-4">
+            <div class="frame-wrapper-5">
+              <div class="avatar-wrapper">
+                <img class="avatar" alt="Avatar" src="/medication/img/1.png" />
+              </div>
+            </div>
+          </div>
+          <div class="div-5">
+            <div class="div-6" style="background-color:#ffffff;">
+              <div class="div-wrapper-2">
+                <div class="text-wrapper-5">흰둥이</div>
+              </div>
+              <div class="div-wrapper-2">
+                <div class="text-wrapper-5">원아</div>
+              </div>
+            </div>
+            <div class="frame-wrapper-6">
+              <div class="div-6" style="background-color:#ffffff;">
+                <div class="text-wrapper-6">새싹반</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="frame-wrapper-7">
+        <div class="div-3">
+          <div class="frame-wrapper-8">
+            <div class="div-wrapper-3">
+              <div class="text-wrapper-5">증상</div>
+            </div>
+          </div>
+          <div class="frame-wrapper-9">
+            <div class="div-7">
+              <div class="div-6">
+                <div class="text-wrapper-5">기침</div>
+              </div>
+              <div class="div-wrapper-2">
+                <div class="text-wrapper-5">,</div>
+              </div>
+              <div class="div-6">
+                <div class="text-wrapper-5">두통</div>
+              </div>
+              <div class="div-wrapper-2">
+                <div class="text-wrapper-5">,</div>
+              </div>
+              <div class="div-6">
+                <div class="text-wrapper-5">오한</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="frame-wrapper-10">
+        <div class="div-3">
+          <p class="text-wrapper-5">금일 자녀의 투약을 선생님께 의뢰 합니다.</p>
+        </div>
+      </div>
+      <div class="frame-wrapper-11">
+        <div class="div-wrapper-4">
+          <div class="text-wrapper-7">투약내용</div>
+        </div>
+      </div>
+
+
+      <div>
+        <img class="drugPic" src="/medication/img/drug.jpeg">
+      </div>
+      <table class="table">
+        <tr>
+          <th>투약 시간</th>
+          <td>점심 식사 후</td>
+        </tr>
+        <tr>
+          <th>약의 종류</th>
+          <td>물약</td>
+        </tr>
+        <tr>
+          <th>투약 횟수</th>
+          <td>1 회</td>
+        </tr>
+        <tr>
+          <th>투약 용량</th>
+          <td>10 cc</td>
+        </tr>
+        <tr>
+          <th>보관 방법</th>
+          <td>냉장</td>
+        </tr>
+        <tr>
+          <th>특이 사항</th>
+          <td>냉장 보관후 흔들어서 투약하여 주세요</td>
+        </tr>
+      </table>
+      <div class="sign">
+        <div class="promise">
+          투약으로 인한 책임은 의뢰자가 집니다.
+        </div>
+        <div class="date">
+          2024년 6월 30 일
+        </div>
+        <div class="parent">
+          <div class="name">
+            김엄마
+          </div>
+          <div class="parentSign">
+            (인)
+          </div>
+        </div>
+      </div>
+      <div class="frame-wrapper-16">
+        <div class="div-10">
+          <div class="div-wrapper-5">
+            <div class="text-wrapper-9">투약 보고서</div>
+          </div>
+          <div class="frame-wrapper-17">
+            <div class="frame-wrapper-18">
+              <div class="frame-wrapper-19">
+                <div class="div-11">
+                  <div class="div-6">
+                    <div class="div-6">
+                      <div class="text-wrapper-8">금일 본 원의</div>
+                    </div>
+                    <p>&nbsp</p>
+                    <div class="div-6">
+                      <div class="text-wrapper-8">하하하</div>
+                    </div>
+                    <p>&nbsp</p>
+                    <div class="div-6">
+                      <div class="text-wrapper-8">원아에 대해 의뢰하신 내용대로 투약 하였음을 보고 합니다.</div>
+                    </div>
+                  </div>
+                  <div class="div-6">
+                    <div class="text-wrapper-8">여기는 특이사항 추가한다면 들어가는 내용 </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="frame-wrapper-20">
+            <div class="div-12">
+              <div class="frame-wrapper-5">
+                <div class="avatar-wrapper">
+                  <img class="avatar" alt="Avatar" src="/medication/img/image-4.png" />
+                </div>
+              </div>
+              <div class="div-13">
+                <div class="div-14">
+                  <div class="div-6">
+                    <div class="text-wrapper-5">김원장</div>
+                  </div>
+                  <div class="div-6">
+                    <div class="text-wrapper-5">원장 선생님</div>
+                  </div>
+                </div>
+                <div class="div-wrapper-7">
+                  <div class="text-wrapper-5">2024년 06월 30일</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

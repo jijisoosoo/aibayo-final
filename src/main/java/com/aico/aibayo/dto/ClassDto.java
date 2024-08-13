@@ -20,6 +20,54 @@ public class ClassDto {
     private LocalDateTime classDeleteDate;
     private String classDeleteFlag;
 
+    private Long acceptNo;
+
+    private Long assignedCntOrAcceptNo;
+
+    public ClassDto(Long classNo, String className) {
+        this.classNo = classNo;
+        this.className = className;
+    }
+
+//    public ClassDto(Long classNo, String className, Long acceptNo) {
+//        this.classNo = classNo;
+//        this.className = className;
+//        this.acceptNo = acceptNo;
+//    }
+
+    public ClassDto(Long classNo, String className, Long assignedCntOrAcceptNo) {
+        this.classNo = classNo;
+        this.className = className;
+        this.assignedCntOrAcceptNo = assignedCntOrAcceptNo;
+    }
+
+    public ClassDto(Long classNo, String className, String classAge, Long kinderNo,
+                    LocalDateTime classRegDate, LocalDateTime classModifyDate, LocalDateTime classDeleteDate,
+                    String classDeleteFlag, Long acceptNo) {
+        this.classNo = classNo;
+        this.className = className;
+        this.classAge = classAge;
+        this.kinderNo = kinderNo;
+        this.classRegDate = classRegDate;
+        this.classModifyDate = classModifyDate;
+        this.classDeleteDate = classDeleteDate;
+        this.classDeleteFlag = classDeleteFlag;
+        this.acceptNo = acceptNo;
+    }
+
+    public ClassDto(Long classNo, String className, String classAge, Long kinderNo,
+                    LocalDateTime classRegDate, LocalDateTime classModifyDate, LocalDateTime classDeleteDate,
+                    String classDeleteFlag) {
+        this.classNo = classNo;
+        this.className = className;
+        this.classAge = classAge;
+        this.kinderNo = kinderNo;
+        this.classRegDate = classRegDate;
+        this.classModifyDate = classModifyDate;
+        this.classDeleteDate = classDeleteDate;
+        this.classDeleteFlag = classDeleteFlag;
+    }
+
     public static ClassDto toDto(ClassEntity entity) {
         return new ClassDto(
                 entity.getClassNo(),

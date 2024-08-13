@@ -22,11 +22,11 @@ public class AttendanceEntity {
     @Column(name = "attendance_date")
     private LocalDateTime attendanceDate; // 출석 날짜
     @Column(name = "class_no")
-    private int classNo; // 반 번호
+    private Integer classNo; // 반 번호
     @Column(name = "kid_no")
-    private int kidNo; // 원생 번호
+    private Integer kidNo; // 원생 번호
     @Column(name = "kinder_no")
-    private int kinderNo; // 유치원 번호
+    private Integer kinderNo; // 유치원 번호
     @Column(name = "kid_drop")
     private LocalDateTime kidDrop; // 등원시간
     @Column(name = "kid_pickup")

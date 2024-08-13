@@ -26,7 +26,7 @@ public class BoardEntity {
     private Long writer;
     @Column(name = "board_title")
     private String boardTitle;
-    @Column(name = "board_contents")
+    @Column(name = "board_contents", columnDefinition = "LONGTEXT")
     private String boardContents;
     @Column(name = "board_pic")
     private String boardPic;
@@ -36,4 +36,6 @@ public class BoardEntity {
     private LocalDateTime boardDeleteDate;
     @Column(name = "board_modify_date")
     private LocalDateTime boardModifyDate;
+    @Column(name = "kinder_no")
+    private Long kinderNo;
 }

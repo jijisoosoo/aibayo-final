@@ -1,7 +1,8 @@
 package com.aico.aibayo.control;
 
+import com.aico.aibayo.common.BoardTypeEnum;
 import com.aico.aibayo.dto.ClassDto;
-import com.aico.aibayo.dto.KidDto;
+import com.aico.aibayo.dto.kid.KidDto;
 import com.aico.aibayo.dto.notepad.NotepadDto;
 //import com.aico.aibayo.service.notepad.NotepadService;
 import com.aico.aibayo.dto.notepad.NotepadSearchCondition;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Slf4j
@@ -27,19 +29,27 @@ public class NotepadController {
     private final ClassService classService;
     private final KidService kidService;
 
+    // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
+    private int roleNo = 1;
+    private Long id = 2L;
+    private Long kinderNo = 1L;
+
+//    private int roleNo = 2;
+//    private Long id = 31L;
+
     @GetMapping("/admin/list")
     public String adminList(@RequestParam(defaultValue = "1") int page, Model model) {
         // 역할에 따라 사용자/관리자 구분하여 이동
         // 사용자의 유치원번호의 사용자가 등록한 모든 알림장 조회
         NotepadSearchCondition condition = new NotepadSearchCondition();
-        condition.setKinderNo(1L);
+        condition.setKinderNo(kinderNo);
 
         model.addAttribute("kinderNo", 1L);
 
         Page<NotepadDto> notepads = notepadService.getAllByKinderNo(condition, page);
 
         // 페이지네이션에 필요한 정보
-        return getPageInfoAndGoView(model, notepads, "/notepad/admin/list");
+        return getPageInfoAndGoView(model, notepads, "/admin/notepad/list");
     }
 
     @PostMapping("/admin/searchDate")
@@ -50,19 +60,19 @@ public class NotepadController {
         Page<NotepadDto> notepads = notepadService.getAllByKinderNo(condition, 1);
 
         // 페이지네이션에 필요한 정보
-        return getPageInfoAndGoView(model, notepads, "/notepad/admin/list");
+        return getPageInfoAndGoView(model, notepads, "/admin/notepad/list");
     }
 
     @GetMapping("/user/list")
     public String userList(@RequestParam(defaultValue = "1") int page, Model model) {
         NotepadSearchCondition condition = new NotepadSearchCondition();
-        condition.setKidNo(1L);
+        condition.setKidNo(kinderNo);
 
         model.addAttribute("kidNo", 1L);
 
         Page<NotepadDto> notepads = notepadService.getAllByKidNo(condition, page);
 
-        return getPageInfoAndGoView(model, notepads, "/notepad/user/list");
+        return getPageInfoAndGoView(model, notepads, "/user/notepad/list");
     }
 
     @PostMapping("/user/searchDate")
@@ -73,52 +83,93 @@ public class NotepadController {
         Page<NotepadDto> notepads = notepadService.getAllByKidNo(condition, 1);
 
         // 페이지네이션에 필요한 정보
-        return getPageInfoAndGoView(model, notepads, "/notepad/user/list");
+        return getPageInfoAndGoView(model, notepads, "/user/notepad/list");
     }
 
     // 나중에 detail 대신 notepadNo 대신 가져오기
     @GetMapping("/admin/{notepadNo}")
     public String adminDetail(@PathVariable Long notepadNo, Model model) {
+        // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
+        HashMap<String, Object> memberDto = new HashMap<>();
+        memberDto.put("roleNo", roleNo);
+        memberDto.put("id", id);
+
         NotepadDto notepadDto = notepadService.getByNotepadNo(notepadNo);
+
+        model.addAttribute("member", memberDto);
         model.addAttribute("notepad", notepadDto);
-        return "/notepad/admin/detail";
+
+        return "/admin/notepad/detail";
     }
 
     @GetMapping("/user/{notepadNo}")
     public String userDetail(@PathVariable Long notepadNo, Model model) {
         NotepadDto notepadDto = notepadService.getByNotepadNo(notepadNo);
         model.addAttribute("notepad", notepadDto);
-        return "/notepad/user/detail";
+        return "/user/notepad/detail";
     }
 
-    // 나중에는 post(put)로
-    @GetMapping("/admin/modify")
-    public String modifyForm() {
-        return "/notepad/admin/modifyForm";
+    @GetMapping("/admin/modify/{notepadNo}")
+    public String modifyForm(@PathVariable Long notepadNo, Model model) {
+        // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
+        HashMap<String, Object> memberDto = new HashMap<>();
+        memberDto.put("roleNo", roleNo);
+        memberDto.put("id", id);
+
+        NotepadDto notepadDto = notepadService.getByNotepadNo(notepadNo);
+
+        model.addAttribute("member", memberDto);
+        model.addAttribute("notepad", notepadDto);
+
+        return "/admin/notepad/modifyForm";
+    }
+
+    @PutMapping("/modifyOk")
+    @ResponseBody
+    public void modify(@RequestBody NotepadDto notepadDto) {
+        log.info("modify: {}", notepadDto);
+        notepadService.updateNotepad(notepadDto);
     }
 
     @GetMapping("/admin/write")
     public String writeForm(Model model) {
-//        int roleNo = 1;
-        int roleNo = 2;
+        // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
         List<ClassDto> classDtos = new ArrayList<>();
         List<KidDto> kidDtos = new ArrayList<>();
 
         if (roleNo < 2) { // 사이트 관리자/원장
-            Long kinderNo = 1L;
             classDtos = classService.getByKinderNo(kinderNo);
             kidDtos = kidService.getByKinderNo(kinderNo);
 
         } else if (roleNo == 2) { // 교사
-            Long id = 31L;
             classDtos = classService.getByMemberId(id);
             kidDtos = kidService.getByMemberId(id);
         }
 
+        HashMap<String, Object> notepadInfo = new HashMap<>();
+        notepadInfo.put("boardType", BoardTypeEnum.NOTEPAD.getNum());
+        notepadInfo.put("writer", id);
+        notepadInfo.put("boardKinderNo", kinderNo);
+
         model.addAttribute("classDtos", classDtos);
         model.addAttribute("kidDtos", kidDtos);
+        model.addAttribute("notepadInfo", notepadInfo);
 
-        return "/notepad/admin/writeForm";
+        return "/admin/notepad/writeForm";
+    }
+
+    @PostMapping("/writeOk")
+    @ResponseBody
+    public void writeOk(@RequestBody NotepadDto notepadDto) {
+        log.info("create: {}", notepadDto);
+        notepadService.insertNotepad(notepadDto);
+    }
+
+    @DeleteMapping("/delete")
+    @ResponseBody
+    public void delete(@RequestBody NotepadDto notepadDto) {
+        log.info("delete: {}", notepadDto);
+        notepadService.deleteNotepad(notepadDto);
     }
 
     private String getPageInfoAndGoView(Model model, Page<NotepadDto> notepads, String view) {

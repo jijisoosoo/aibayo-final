@@ -19,6 +19,10 @@ public class InviteCodeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "invite_id")
     private Long inviteId;
+    @Column(name="accept_no")
+    private Long acceptNo;
+    @Column(name = "verify_code")
+    private String verifyCode;
     @Column(name = "invite_type")
     private Integer inviteType;
     @Column(name = "invite_email")
@@ -29,4 +33,8 @@ public class InviteCodeEntity {
     private LocalDate inviteExpireDate;
     @Column(name = "invite_expire_flag")
     private String inviteExpireFlag;
+    @Column(name = "kinder_no")
+    private Long kinderNo;
+    @Column(name = "kid_no")
+    private Long kidNo;
 }
