@@ -112,9 +112,6 @@ public class MemberDto {
     }
 
 
-
-
-
     public MemberDto(Long id, String username, String name, String password, String phone, Integer roleNo, String role,
                      Integer status, LocalDateTime regDate, LocalDateTime modifyDate, LocalDateTime inactivateDate,
                      LocalDateTime latestLogDate, String profilePicture,
@@ -150,11 +147,10 @@ public class MemberDto {
         this.kinderNo = kinderNo;
     }
 
-
- public MemberDto(Long id, String username, String name, String password, String phone, Integer roleNo, String role,
+    public MemberDto(Long id, String username, String name, String password, String phone, Integer roleNo, String role,
                      Integer status, LocalDateTime regDate, LocalDateTime modifyDate, LocalDateTime inactivateDate,
-                     LocalDateTime latestLogDate, String profilePicture,Long kidNo,
-                     Long kinderNo, Long acceptNo, String isMainParent) {
+                     LocalDateTime latestLogDate, String profilePicture, Long kinderNo, Long kidNo, Long acceptNo, Integer acceptStatus,
+                     String isMainParent) {
         this.id = id;
         this.username = username;
         this.name = name;
@@ -171,7 +167,28 @@ public class MemberDto {
         this.kinderNo = kinderNo;
         this.kidNo = kidNo;
         this.acceptNo = acceptNo;
+        this.acceptStatus = acceptStatus;
         this.isMainParent = isMainParent;
+    }
+
+    public MemberDto(Long id, String username, String name, String password, String phone, Integer roleNo, String role,
+                     Integer status, LocalDateTime regDate, LocalDateTime modifyDate, LocalDateTime inactivateDate,
+                     LocalDateTime latestLogDate, String profilePicture, Long acceptNo, Integer acceptStatus) {
+        this.id = id;
+        this.username = username;
+        this.name = name;
+        this.password = password;
+        this.phone = phone;
+        this.roleNo = roleNo;
+        this.role = role;
+        this.status = status;
+        this.regDate = regDate;
+        this.modifyDate = modifyDate;
+        this.inactivateDate = inactivateDate;
+        this.latestLogDate = latestLogDate;
+        this.profilePicture = profilePicture;
+        this.acceptNo = acceptNo;
+        this.acceptStatus = acceptStatus;
     }
 
     public static MemberDto toDto(MemberEntity entity) {
