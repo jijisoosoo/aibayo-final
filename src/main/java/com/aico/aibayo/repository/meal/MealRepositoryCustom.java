@@ -8,6 +8,6 @@ import com.aico.aibayo.entity.MealEntity;
 import java.util.List;
 
 public interface MealRepositoryCustom {
-    MealEntity gutfindByMealNo(Long mealNo);
+    MealEntity findByMealNo(Long mealNo);
     List<MealDto> findAllByMealDate(MealSearchCondition condition);
 }
