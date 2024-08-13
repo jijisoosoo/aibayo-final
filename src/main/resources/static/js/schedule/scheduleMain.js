@@ -5,6 +5,8 @@ $(document).ready(function() {
 
     var calendarEl = document.getElementById('calendar');
 
+    var eventsData = getEvents();
+
     var calendar = new FullCalendar.Calendar(calendarEl, {
         googleCalendarApiKey: "AIzaSyAKURukCy6rYdcfKAFsNYhY6wpn7XLzRqA",
         height: "700px",
@@ -84,32 +86,54 @@ $(document).ready(function() {
                 dayGridMonthButton.classList.add('disabled');
             }
         },
-        events: [
-            {
-                title: '학부모 심폐소생술 교육',
-                start: '2024-07-15',
-                classNo: 0,
-                contents: '유치원 3층 대강당에서 학부모 심폐소생술 교육을 실시합니다.',
-                location: ''
-            },
-            {
-                title: '여름 피크닉',
-                start: '2024-07-15',
-                classNo: 0,
-                contents: '종로 3가 탑골공원으로 현장학습 진행 예정입니다.',
-                location: ''
-            },
-            {
-                title: '화채 만들기',
-                start: '2024-07-16',
-                end: '2024-07-19',
-                classNo: 0,
-                contents: '각 반마다 화채 만들기 실습이 있을 예정입니다.',
-                location: ''
-            }
-        ]
+
+
+        events: eventsData
+        // events: [
+        //     {
+        //         title: '학부모 심폐소생술 교육',
+        //         start: '2024-07-15',
+        //         classNo: 0,
+        //         contents: '유치원 3층 대강당에서 학부모 심폐소생술 교육을 실시합니다.',
+        //         location: ''
+        //     },
+        //     {
+        //         title: '여름 피크닉',
+        //         start: '2024-07-15',
+        //         classNo: 0,
+        //         contents: '종로 3가 탑골공원으로 현장학습 진행 예정입니다.',
+        //         location: ''
+        //     },
+        //     {
+        //         title: '화채 만들기',
+        //         start: '2024-07-16',
+        //         end: '2024-07-19',
+        //         classNo: 0,
+        //         contents: '각 반마다 화채 만들기 실습이 있을 예정입니다.',
+        //         location: ''
+        //     }
+        // ]
     });
 
     calendar.render();
 
 });
+
+function getEvents() {
+    const scheduleElements = document.querySelectorAll('.schedule_values');
+    const events = [];
+
+    scheduleElements.forEach(element => {
+        const event = {
+            title: element.getAttribute('data-board-title'),
+            start: element.getAttribute('data-schedule-start-date').split('T')[0], // 날짜만 추출
+            end: element.getAttribute('data-schedule-end-date') ? element.getAttribute('data-schedule-end-date').split('T')[0] : null, // 종료 날짜가 있을 경우에만 추가
+            classNo: parseInt(element.getAttribute('data-class-no'), 10),
+            contents: element.getAttribute('data-board-contents'),
+            location: '' // location 값이 없으므로 빈 문자열로 설정
+        };
+        events.push(event);
+    });
+
+    return events;
+}
