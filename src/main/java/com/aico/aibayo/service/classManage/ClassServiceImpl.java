@@ -11,6 +11,7 @@ import com.aico.aibayo.repository.classKid.ClassKidRepository;
 import com.aico.aibayo.repository.classKid.ClassKidRepositoryCustom;
 import com.aico.aibayo.repository.classManage.ClassRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -70,6 +71,33 @@ public class ClassServiceImpl implements ClassService{
     @Override
     public List<ClassTeacherDto> getClassTeacher(Long classNo) {
         return classTeacherRepository.findAllByClassNo(classNo);
+    }
+
+    @Override
+    public void updateClassName(Long classNo, String newClassName) {
+        ClassEntity classEntity = classRepository.findByClassNo(classNo);
+        classEntity.setClassName(newClassName);
+        classEntity.setClassModifyDate(LocalDateTime.now());
+        ClassEntity save = classRepository.save(classEntity);
+        System.out.println("save.getClassName()" + save.getClassName());
+    }
+
+    @Override
+    public void deleteClass(Long classNo) {
+        ClassEntity classEntity = classRepository.findByClassNo(classNo);
+        classEntity.setClassDeleteFlag(BooleanEnum.TRUE.getBool());
+        classEntity.setClassDeleteDate(LocalDateTime.now());
+        classRepository.save(classEntity);
+    }
+
+    @Override
+    public void createClass(String className, Long kinderNo) {
+        ClassEntity classEntity = new ClassEntity();
+        classEntity.setClassName(className);
+        classEntity.setKinderNo(kinderNo);
+        classEntity.setClassRegDate(LocalDateTime.now());
+        classEntity.setClassDeleteFlag(BooleanEnum.FALSE.getBool());
+        classRepository.save(classEntity);
     }
 
 

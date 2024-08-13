@@ -58,8 +58,14 @@ INSERT INTO member(role_no, status, kinder_no, role, reg_date, username, name, p
 
 
 #등록 유치원 추가
-INSERT INTO register_kinder (kinder_open_time, kinder_close_time, kinder_reg_date, announce_status, notepad_status, meal_status, medication_status, return_home_status, attendance_status, schedule_status, pick_drop_status, life_record_status, chat_status) VALUES('09:00','16:00','2020-01-01',1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
-INSERT INTO register_kinder (kinder_open_time, kinder_close_time, kinder_reg_date, announce_status, notepad_status, meal_status, medication_status, return_home_status, attendance_status, schedule_status, pick_drop_status, life_record_status, chat_status) VALUES('10:00','18:00','2021-01-01',1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+INSERT INTO register_kinder
+(kinder_open_time, kinder_close_time, kinder_reg_date, announce_status, notepad_status, meal_status, medication_status, return_home_status, attendance_status, schedule_status, pick_drop_status, life_record_status, chat_status,sido_list,sgg_list)
+VALUES('09:00','16:00','2020-01-01',1, 1, 1, 1, 1, 1, 1, 1, 1, 1,'27','27140');
+
+
+INSERT INTO register_kinder
+(kinder_open_time, kinder_close_time, kinder_reg_date, announce_status, notepad_status, meal_status, medication_status, return_home_status, attendance_status, schedule_status, pick_drop_status, life_record_status, chat_status,sido_list,sgg_list)
+VALUES('10:00','18:00','2021-01-01',1, 1, 1, 1, 1, 1, 1, 1, 1, 1,'27','27140');
 
 
 # 원생 추가
@@ -2688,7 +2694,7 @@ INSERT INTO meal_detail(meal_no, meal_type, meal_menu, meal_invisible_flag) VALU
 
 ##### 의뢰서 #####
 
-INSERT INTO order_form (kid_no, order_type, request_date, order_requester, order_specific, order_delete_flag)
+INSERT INTO order_form (kid_no, order_type, order_request_date, order_requester, order_specific, order_delete_flag)
 VALUES
     (1, 0, '2024-03-14', '엄마', '식전 복용해야하는 약이있어요','0'),
     (2, 0, '2024-03-16', '엄마', '자몽 주스랑 함께 먹지않게 해주세요','0'),
@@ -2717,60 +2723,27 @@ VALUES
 
 INSERT INTO medication_order (order_no, symptoms)
 VALUES
-    (1, '감기'),
-    (2, '복통'),
-    (3, '설사'),
-    (4, '구토'),
-    (6, '복통, 구토'),
-    (8, '구토'),
-    (9, '고열, 감기'),
-    (10, '감기'),
-    (11, '복통'),
-    (13, '구토, 설사'),
-    (14, '감기'),
-    (16, '설사'),
-    (17, '구토'),
-    (18, '아토피'),
-    (21, '설사'),
-    (22, '구토'),
-    (23, '아토피'),
-    (24, '복통, 구토'),
-    (25, '설사'),
-    (26, '구토'),
-    (28, '감기'),
-    (30, '설사'),
-    (31, '구토');
-#####
-INSERT INTO medication_detail (medi_order_no, dosage, dose_count, dose_time, medi_type, storage_type)
-VALUES
-    (1, '1포', '1', '식사 후', 0, 0),
-    (2, '1포', '1', '식사 후', 0, 0),
-    (3, '1회', '1', '식사 후', 0, 0),
-    (4, '1포', '1', '식사 후', 0, 0),
-    (6, '15ml', '1', '식사 후', 1, 1),
-    (8, '1포', '1', '식사 후', 0, 0),
-    (9, '1포', '1', '식사 후', 0, 0),
-    (10, '1포', '1', '식사 후', 0, 0),
-    (11, '10ml', '1', '식사 후', 1, 1),
-    (13, '5cc', '1', '식사 후', 1, 1),
-    (14, '1회', '1', '식사 후', 0, 0),
-    (16, '1포', '1', '식사 후', 0, 0),
-    (17, '10cc', '1', '식사 후', 1, 1),
-    (18, '1포', '1', '식사 후', 3, 2),
-    (21, '1포', '1', '식사 후', 0, 0),
-    (22, '10ml', '1', '식사 후', 1, 1),
-    (23, '1첩', '1', '식사 후', 3, 2),
-    (24, '1포', '1', '식사 후', 0, 0),
-    (25, '10ml', '1', '식사 후', 1, 0),
-    (26, '1포', '1', '식사 후', 0, 0),
-    (28, '1포', '1', '식사 후', 0, 0),
-    (30, '1포', '1', '식사 후', 0, 0),
-    (31, '1포', '1', '식사 후', 0, 0),
-    (1, '10cc', '1', '식사 후', 1, 1),
-    (2, '10ml', '1', '식사 후', 1, 1),
-    (3, '10ml', '1', '식사 후', 1, 1),
-    (4, '적당히', '1', '식사 후', 2, 0),
-    (6, '적당히', '1', '식사 후', 2, 0),
-    (18, '적당히', '1', '식사 후', 2, 2),
-    (23, '적당히', '1', '식사 후', 2, 2);
+  (1, '감기'),
+(2, '복통'),
+(3, '설사'),
+(4, '구토'),
+(5, '복통, 구토'),
+(6, '구토'),
+(7, '고열, 감기'),
+(8, '감기'),
+(9, '복통'),
+(10, '구토, 설사'),
+(11, '감기'),
+(12, '설사'),
+(13, '구토'),
+(14, '아토피'),
+(15, '구토'),
+(16, '설사'),
+(17, '구토'),
+(18, '아토피'),
+(19, '복통, 구토'),
+(20, '설사'),
+(21, '구토'),
+(22, '감기'),
+(23, '설사');
 

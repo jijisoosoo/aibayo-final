@@ -24,4 +24,10 @@ public interface ClassService {
     List<ClassKidDto> getClassKid(Long classNo);
 
     List<ClassTeacherDto> getClassTeacher(Long classNo);
+
+    void updateClassName(Long classNo, String newClassName);
+
+    void deleteClass(Long classNo);
+
+    void createClass(String className, Long kinderNo);
 }

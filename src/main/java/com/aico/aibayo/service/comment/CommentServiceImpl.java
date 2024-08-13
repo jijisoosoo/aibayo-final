@@ -57,7 +57,9 @@ public class CommentServiceImpl implements CommentService{
             throw new IllegalArgumentException("BoardNo must not be null");
         }
 
+       log.info("commentDto : "+ commentDto);
         CommentEntity commentEntity = CommentEntity.builder()
+                .commentWriter(commentDto.getCommentWriter())
                 .commentNo(commentDto.getCommentNo())
                 .boardNo(commentDto.getBoardNo())
                 .commentWriter(commentDto.getCommentWriter())

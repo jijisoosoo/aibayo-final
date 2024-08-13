@@ -113,14 +113,14 @@
                     <div class="text-wrapper-11" th:title="*{name}" th:text="*{name}">교사명</div>
                 </div>
             </div>
-        </div>
 
-        <div class="ifResultNull">
-            <div class="ifResultNullInner">
-                <div class="icon">
-                    <img src="/images/common/!.jpg" alt=""/>
+            <div class="ifResultNull">
+                <div class="ifResultNullInner">
+                    <div class="icon">
+                        <img src="/images/common/!.jpg" alt=""/>
+                    </div>
+                    해당하는 교사가 없습니다.
                 </div>
-                해당하는 교사가 없습니다.
             </div>
         </div>
 
@@ -140,32 +140,25 @@
                 <div class="text-wrapper-10">명</div>
             </div>
         </div>
-        <div class="carousel">
-            <div class="profile" th:each="teacher:${waitingTeacherList}" th:object="${teacher}">
-                <a class="img-2" th:href="@{|/teacher/*{id}|}">
-                    <th:block th:if="${teacher.profilePicture != null}">
-                        <img th:src="*{profilePicture}" alt="">
-                    </th:block>
-                    <th:block th:unless="${teacher.profilePicture != null}">
-                        <img src="/images/common/default.png" alt="">
-                    </th:block>
-                </a>
-                <div class="id">
-                    <div class="text-wrapper-11" th:title="*{name}" th:text="*{name}">교사명</div>
+        <div class="carousel_wait">
+            <div class="profile_wait" th:each="teacher:${waitingTeacherList}" th:object="${teacher}" th:id="${teacher.id}"
+                 th:data-teacher-kinder-accept-no="${teacher.kinderAcceptNo}">
+                <div class="text-wrapper-11" th:title="*{name}" th:text="*{name} + ' (' + *{username} + ')'">교사명</div>
+                <div class="wait_buttons">
+                    <a class="btn btn-ab button-approve" id="waitAccept">승인</a>
+                    <a class="btn button-delete" id="waitReject">삭제</a>
                 </div>
-                <a class="btn btn-ab button-approve">승인</a>
+            </div>
+
+            <div class="ifResultNull">
+                <div class="ifResultNullInner">
+                    <div class="icon">
+                        <img src="/images/common/!.jpg" alt=""/>
+                    </div>
+                    해당하는 교사가 없습니다.
+                </div>
             </div>
         </div>
-
-        <div class="ifResultNull">
-            <div class="ifResultNullInner">
-                <div class="icon">
-                    <img src="/images/common/!.jpg" alt=""/>
-                </div>
-                해당하는 교사가 없습니다.
-            </div>
-        </div>
-
     </div>
 
 
@@ -184,24 +177,22 @@
             </div>
         </div>
         <div class="carousel-container">
-            <div class="carousel">
-                <div class="profile" th:each="teacher:${invitedTeacherList}" th:object="${teacher}">
-                    <div class="img-2">
-                        <img src="/images/common/default.png" alt="">
+            <div class="carousel_wait">
+                <div class="profile_wait" th:each="teacher:${invitedTeacherList}" th:object="${teacher}">
+                    <div class="text-wrapper-11" th:title="*{name}" th:text="*{name} + ' (' + *{username} + ')'">교사명</div>
+                    <div class="wait_buttons">
+                        <a class="btn btn-ab button-approve">승인</a>
+                        <a class="btn button-delete">삭제</a>
                     </div>
-                    <div class="id">
-                        <div class="text-wrapper-11" th:title="*{name}" th:text="*{name}">교사명</div>
-                    </div>
-                    <a class="btn button-cancel-mini">삭제</a>
                 </div>
-            </div>
 
-            <div class="ifResultNull">
-                <div class="ifResultNullInner">
-                    <div class="icon">
-                        <img src="/images/common/!.jpg" alt=""/>
+                <div class="ifResultNull">
+                    <div class="ifResultNullInner">
+                        <div class="icon">
+                            <img src="/images/common/!.jpg" alt=""/>
+                        </div>
+                        해당하는 교사가 없습니다.
                     </div>
-                    해당하는 교사가 없습니다.
                 </div>
             </div>
         </div>

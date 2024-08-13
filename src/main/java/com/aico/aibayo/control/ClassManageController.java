@@ -15,13 +15,11 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -89,6 +87,53 @@ public class ClassManageController {
         response.put("classTeacher", classTeacher);
 
         return ResponseEntity.ok(response);
+    }
+
+
+    @PostMapping("/updateClassName")
+    public ResponseEntity<String> updateClassName(@RequestBody Map<String, Object> request) {
+        Long classNo = ((Number) request.get("classNo")).longValue();
+        String newClassName = (String) request.get("newClassName");
+
+        System.out.println("updateClassName classNo " + classNo);
+        System.out.println("updateClassName newClassName " + newClassName);
+        try {
+            classService.updateClassName(classNo, newClassName);
+            return ResponseEntity.ok("반 이름이 성공적으로 수정되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("반 이름 수정을 실패했습니다.");
+        }
+    }
+
+    @PostMapping("/deleteClass")
+    public ResponseEntity<String> deleteClass(@RequestBody Map<String, Object> request) {
+        Long classNo = Long.valueOf(request.get("classNo").toString());
+
+        List<ClassKidDto> classKid = classService.getClassKid(classNo);
+        List<ClassTeacherDto> classTeacher = classService.getClassTeacher(classNo);
+
+        if ((!classKid.isEmpty()) && (!classTeacher.isEmpty())) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("반에 소속된 교사 또는 원생이 존재합니다.");
+        }
+        classService.deleteClass(classNo);
+        return ResponseEntity.ok("반이 삭제되었습니다.");
+
+    }
+
+    @PostMapping("/createClass")
+    public ResponseEntity<String> createClass(@ModelAttribute("loginInfo") MemberDto memberDto, @RequestBody Map<String, String> request) {
+        try {
+            String className = request.get("className");
+            Long kinderNo = memberDto.getKinderNo();
+
+            if (className == null || className.trim().isEmpty()) {
+                return ResponseEntity.badRequest().body("반 이름을 입력해주세요.");
+            }
+            classService.createClass(className, kinderNo);
+            return ResponseEntity.ok("반을 성공적으로 추가했습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("반 추가에 실패했습니다.");
+        }
     }
 
 }
