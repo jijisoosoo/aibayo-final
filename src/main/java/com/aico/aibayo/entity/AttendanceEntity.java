@@ -2,6 +2,7 @@ package com.aico.aibayo.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.joda.time.LocalDate;
 
 import java.time.LocalDateTime;
 
@@ -20,7 +21,7 @@ public class AttendanceEntity {
     @Column(name = "attendance_no")
     private Long attendanceNo; // 출석부 번호
     @Column(name = "attendance_date")
-    private LocalDateTime attendanceDate; // 출석 날짜
+    private LocalDate attendanceDate; // 출석 날짜
     @Column(name = "class_no")
     private Integer classNo; // 반 번호
     @Column(name = "kid_no")
@@ -31,12 +32,12 @@ public class AttendanceEntity {
     private LocalDateTime kidDrop; // 등원시간
     @Column(name = "kid_pickup")
     private LocalDateTime kidPickup; // 하원시간
-    @Column(name = "attendance_modify_date")
-    private LocalDateTime attendanceModifyDate; // 출석 수정 일자
-    @Column(name = "attendance_delete_date")
-    private LocalDateTime attendanceDeleteDate; // 출석 삭제 일자
-    @Column(name = "excused_absence")
-    private String excusedAbsence; // 결석 사유
+//    @Column(name = "attendance_modify_date")
+//    private LocalDateTime attendanceModifyDate; // 출석 수정 일자
+//    @Column(name = "attendance_delete_date")
+//    private LocalDateTime attendanceDeleteDate; // 출석 삭제 일자
+//    @Column(name = "excused_absence")
+//    private String excusedAbsence; // 결석 사유
     @Column
     private String note; // 비고
 }
