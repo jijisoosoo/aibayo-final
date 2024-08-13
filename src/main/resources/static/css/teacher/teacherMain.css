@@ -347,6 +347,22 @@
   font-size: 14px;
 }
 
+.container .button-resend {
+  display: flex;
+  width: 75px;
+  height: 35px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0px 16px;
+  position: relative;
+  /*background-color: #ffe668;*/
+  border-radius: 8px;
+  text-decoration-line : none;
+  border: none !important;
+  font-size: 14px;
+}
+
 .container .button-delete {
   display: flex;
   width: 60px;
@@ -433,7 +449,7 @@
   height: 23px;
 }
 
-.carousel_wait{
+.carousel_waitInvite{
   display: flex;
   gap: 20px;
   position: relative;
@@ -443,7 +459,7 @@
   flex-direction: column;
 }
 
-.profile_wait{
+.profile_waitInvite{
   display: inline-flex;
   flex-direction: row;
   align-items: center;
@@ -456,10 +472,15 @@
   border-radius: 10px;
 }
 
-.wait_buttons{
+.waitInvite_buttons{
   display: flex;
   width: fit-content;
   gap: 15px;
+}
+
+.msg {
+  font-size: 14px;
+  color: darkred;
 }
 
 

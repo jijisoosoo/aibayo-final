@@ -22,7 +22,6 @@ public class ApiTeacherController {
 
     @PutMapping("/modifyOk")
     public ResponseEntity<MemberDto> modifyOk(@RequestBody Map<String, Number> requestBody) {
-        System.out.println("requestBody : " + requestBody);
         MemberDto updated = teacherService.updateTeacher(requestBody);
         log.info("modify: {}", requestBody);
 
@@ -30,10 +29,9 @@ public class ApiTeacherController {
                 ResponseEntity.ok(updated);
     }
 
-
     @DeleteMapping("/deleteOk")
     public ResponseEntity<MemberDto> deleteOk(@RequestBody Map<String, Object> requestBody) {
-
+        System.out.println("delete requestBody : " + requestBody);
         MemberDto deleted = teacherService.deleteTeacher(requestBody);
         log.info("deleted: {}", deleted);
 
