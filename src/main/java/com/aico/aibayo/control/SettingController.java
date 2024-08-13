@@ -29,6 +29,11 @@ public class SettingController {
         return "/admin/setting/info";
     }
 
+    @GetMapping("/test")
+    public String test(){
+        return "/admin/setting/copy";
+    }
+
 
 
 }

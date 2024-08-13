@@ -7,9 +7,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface MealRepository extends JpaRepository<MealEntity, Long>, MealRepositoryCustom {
-    List<MealEntity> findAllByMealDateBetweenAndKinderNoAndMealDeleteFlag(
-            LocalDate startDate,
-            LocalDate endDate,
-            Long kinderNo,
-            String deleteFlag);
+//    List<MealEntity> findAllByMealDateBetweenAndKinderNoAndMealDeleteFlag(
+//            LocalDate startDate,
+//            LocalDate endDate,
+//            Long kinderNo,
+//            String deleteFlag);
 }

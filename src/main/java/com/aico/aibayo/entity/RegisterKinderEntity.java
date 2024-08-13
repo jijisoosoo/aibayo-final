@@ -51,4 +51,8 @@ public class RegisterKinderEntity {
     private Integer lifeRecordStatus; //생활 기록 상태
     @Column(name="chat_status")
     private Integer chatStatus; //열린소통 상태
+    @Column (name="sido_list")
+    private String sidoList; //API 시도 리스트
+    @Column (name="sgg_list")
+    private String sggList; //API 시군구 리스트
 }
