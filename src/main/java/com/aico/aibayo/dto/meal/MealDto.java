@@ -1,6 +1,5 @@
 package com.aico.aibayo.dto.meal;
 
-import com.aico.aibayo.entity.MealDetailEntity;
 import com.aico.aibayo.entity.MealEntity;
 import lombok.*;
 

@@ -46,12 +46,12 @@ public class MealController {
     @GetMapping("/admin/modify/{mealNo}")
     public String modifyForm(@PathVariable Long mealNo, Model model) {
         MealDto meal = mealService.getByMealNo(mealNo);
-//        List<MealDetailDto> mealDetails = mealService.getAllByMealNo(mealNo);
         List<Integer> selectedTypes = meal.getMealDetails().stream().map(MealDetailDto::getMealType).toList();
         log.info("selectedTypes: {}", selectedTypes);
         model.addAttribute("meal", meal);
         model.addAttribute("selectedTypes", selectedTypes);
         model.addAttribute("mealTypes", MealTypeEnum.values());
+//        meal.getMealDetails().get(meal.getMealDetails().indexOf())
 
         return "/admin/meal/modifyForm";
     }

@@ -174,7 +174,7 @@
     align-items: center;
 }
 
-.modal_meal_img {
+.modal_meal_img, .meal_img {
     width: 330px;
     height: 300px;
 }
