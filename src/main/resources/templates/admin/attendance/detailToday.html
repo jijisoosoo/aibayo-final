@@ -27,9 +27,9 @@
             <div>
                 <select class="form-select" aria-label="Select Class" name="classDetail" id="classSelect">
                     <option selected>전체 반</option>
-                    <!-- Assuming you will replace the below with dynamic content -->
-                    <option value="1">반 1</option>
-                    <option value="2">반 2</option>
+                    <th:block th:each="classEntity : ${classList}">
+                        <option th:value="${classEntity.classNo}" th:text="${classEntity.className}">반 ${classEntity.classNo}</option>
+                    </th:block>
                 </select>
             </div>
             <div>
