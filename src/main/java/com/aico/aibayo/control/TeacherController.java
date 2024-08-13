@@ -58,7 +58,8 @@ public class TeacherController {
     @GetMapping("/list")
     public String teacherMain(Model model) {
         TeacherSearchCondition condition = new TeacherSearchCondition();
-        return getConditionAndGoMain(model, condition);
+
+        return simpleAcceptCondition(model, condition);
     }
 
     // 반 별 조회 - condition에 classNo 추가
@@ -68,11 +69,30 @@ public class TeacherController {
         System.out.println("post:mainByClass실행");
         log.info("search: {}", condition);
 
+        if(condition.getClassNo() == null){
+            return simpleAcceptCondition(model, condition);
+        }else{
+            return getAcceptCondition(model, condition);
+        }
+    }
+
+    // Accept 반 별조회 - searchcondition 적용해서
+    public String simpleAcceptCondition(Model model, TeacherSearchCondition condition) {
+        MemberDto loginInfo = (MemberDto)model.getAttribute("loginInfo");
+        condition.setKinderNo(loginInfo.getKinderNo());
+
+        condition.setAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
+        List<TeacherDto> acceptedTeacherList = teacherService.getAllByKinderNo(condition);
+        model.addAttribute("acceptedTeacherList", acceptedTeacherList);
+        model.addAttribute("condition", condition);
+        log.info("ACCEPT: {}", condition);
+        log.info("ACCEPTlist: {}", acceptedTeacherList.toString());
+
         return getConditionAndGoMain(model, condition);
     }
 
-    // 일반조회 - searchcondition 적용해서
-    public String getConditionAndGoMain(Model model, TeacherSearchCondition condition) {
+    // Accept 반 별조회 - searchcondition 적용해서
+    public String getAcceptCondition(Model model, TeacherSearchCondition condition) {
         MemberDto loginInfo = (MemberDto)model.getAttribute("loginInfo");
         condition.setKinderNo(loginInfo.getKinderNo());
 
@@ -83,6 +103,11 @@ public class TeacherController {
         log.info("ACCEPT: {}", condition);
         log.info("ACCEPTlist: {}", acceptedTeacherList.toString());
 
+        return getConditionAndGoMain(model, condition);
+    }
+
+    // 일반조회 - searchcondition 적용해서
+    public String getConditionAndGoMain(Model model, TeacherSearchCondition condition) {
         // acceptStatus wait, invite에는 condition의 ClassNo = null로 재설정해서 addAttribute
         condition.setClassNo(null);
 
@@ -97,6 +122,7 @@ public class TeacherController {
         model.addAttribute("invitedTeacherList", invitedTeacherList);
         log.info("INVITE: {}", condition);
 
+        MemberDto loginInfo = (MemberDto)model.getAttribute("loginInfo");
         List<ClassDto> classList = classService.getByKinderNo(loginInfo.getKinderNo());
         model.addAttribute("classList", classList);
 
