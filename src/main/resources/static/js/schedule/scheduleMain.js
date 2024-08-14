@@ -1,6 +1,28 @@
 $(document).ready(function() {
 
-    // 선택한 날짜가 유지되도록
+    showCalendar();
+
+    $(document).on('change', '.dropdown-class', function () {
+        let classNo = $('.dropdown-class').val();
+        // console.log("반 변경:" + classNo);
+
+        let param = {
+            classNo: classNo
+        };
+
+        console.log("param:" + JSON.stringify(param));
+
+        let url = "/schedule/admin/scheduleMainByClass";
+
+        commonAjax(url, 'POST', param);
+
+    });
+
+});
+
+function showCalendar(initialSelectedValue, selectedValue){
+    // 변수가 유지되도록
+    var initialSelectedValue;
     var selectedValue;
 
     var calendarEl = document.getElementById('calendar');
@@ -40,23 +62,17 @@ $(document).ready(function() {
         dateClick: function(dateInfo) {
             //날짜 선택
             selectedValue = dateInfo.dateStr;
-
-            // 모든 상태 div 숨기기
-            $('.single-schedule').hide();
-
-            // 선택된 값에 따라 해당 div 보이기
-            $('.' + selectedValue).show();
-            var selectedValueStr = selectedValue.replace('-','년 ').replace('-','월 ').concat('일');
-            document.getElementById("selectedDate").innerHTML = selectedValueStr;
+            // console.log("selectedValue" + selectedValue);
+            showDaySchedule(selectedValue);
         },
 
-        // 날짜별 일정 출력
+        // 날짜 출력
         datesSet: function (dateInfo) {
             // 처음 calendar 로드 시 모든 div 숨기고
             $('.single-schedule').hide();
 
             // 오늘 날짜 설정
-            var initialSelectedValue = calendar.getDate().toISOString().substring(0, 10);
+            initialSelectedValue = calendar.getDate().toISOString().substring(0, 10);
             var initialSelectedValueStr = initialSelectedValue.replace('-','년 ').replace('-','월 ').concat('일');
 
             if (selectedValue) {    // 선택한 날짜가 있는 경우
@@ -71,8 +87,8 @@ $(document).ready(function() {
             // 달력에 표시 중인 달 확인
             var currentDate = dateInfo.view.currentStart;
             var currentMonth = currentDate.getMonth() + 1;
-            console.log("현재 표시중인 일: " + currentDate);
-            console.log("현재 표시중인 달: " + currentMonth);
+            // console.log("현재 표시중인 일: " + currentDate);
+            // console.log("현재 표시중인 달: " + currentMonth);
 
             // datesRender 이벤트가 발생할 때 버튼 스타일을 변경하고 보이도록 설정
             $('.fc-toolbar button').each(function() {
@@ -86,38 +102,12 @@ $(document).ready(function() {
                 dayGridMonthButton.classList.add('disabled');
             }
         },
-
-
         events: eventsData
-        // events: [
-        //     {
-        //         title: '학부모 심폐소생술 교육',
-        //         start: '2024-07-15',
-        //         classNo: 0,
-        //         contents: '유치원 3층 대강당에서 학부모 심폐소생술 교육을 실시합니다.',
-        //         location: ''
-        //     },
-        //     {
-        //         title: '여름 피크닉',
-        //         start: '2024-07-15',
-        //         classNo: 0,
-        //         contents: '종로 3가 탑골공원으로 현장학습 진행 예정입니다.',
-        //         location: ''
-        //     },
-        //     {
-        //         title: '화채 만들기',
-        //         start: '2024-07-16',
-        //         end: '2024-07-19',
-        //         classNo: 0,
-        //         contents: '각 반마다 화채 만들기 실습이 있을 예정입니다.',
-        //         location: ''
-        //     }
-        // ]
     });
 
     calendar.render();
-
-});
+    showDaySchedule(initialSelectedValue);
+}
 
 function getEvents() {
     const scheduleElements = document.querySelectorAll('.schedule_values');
@@ -136,4 +126,38 @@ function getEvents() {
     });
 
     return events;
+}
+
+let isFromShowDaySchedule = false
+
+function showDaySchedule(selectedValue){
+    // 선택된 값에 따라 해당 div 보이기
+    $('.' + selectedValue).show();
+    var selectedValueStr = selectedValue.replace('-','년 ').replace('-','월 ').concat('일');
+    document.getElementById("selectedDate").innerHTML = selectedValueStr;
+
+    let url = "/schedule/admin/scheduleMainByDay"
+
+    let param = {
+        selectedDate : selectedValue + 'T00:00:00',
+    }
+    // console.log("param : " + JSON.stringify(param));
+
+    commonAjax(url, 'POST', param);
+}
+
+function afterSuccess(response, method) {
+    $('.schedule-2').replaceWith($(response).find('.schedule-2'));
+    $('.schedules_data').replaceWith($(response).find('.schedules_data'));
+    // $('.ifClassNoExist').replaceWith($(response).find('.ifClassNoExist'));
+
+    var count = document.querySelectorAll('.single-schedule').length;
+    $('.text-wrapper-16').text("일정 " + count + "개");
+
+    var ifClassNoExist = (document.querySelectorAll('.ifClassNoExist').length);
+    if (ifClassNoExist === 1) {
+        console.log("reload by class");
+        showCalendar();
+        //지금은 없는 날짜 찍어도 이벤트 나옴ㅋㅋ
+    }
 }
