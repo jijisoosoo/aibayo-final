@@ -49,7 +49,10 @@ public class AnnounceController {
 //    private Long kinderNo = null;
 
     @GetMapping("/admin/card")
-    public String admincard(@ModelAttribute("loginInfo") MemberDto loginInfo, @RequestParam(defaultValue = "1") int page, Model model){
+    public String admincard(
+            @ModelAttribute("loginInfo") MemberDto loginInfo,
+            @RequestParam(defaultValue = "1") int page, Model model
+    ){
         HashMap<String, Object> hashMap = new HashMap<>();
         AnnounceSearchCondition condition = new AnnounceSearchCondition();
         condition.setKinderNo(loginInfo.getKinderNo());
@@ -57,7 +60,7 @@ public class AnnounceController {
         hashMap.put("page",page);
         hashMap.put("type","card");
         Page<AnnounceDto>announces= announceService.findAllByKinderNoCard(condition,hashMap);
-
+        log.info("announces!!!{}",announces);
 
         return getPageInfoAndGoView(model, announces, "/admin/announce/card");
     }
@@ -227,10 +230,6 @@ public class AnnounceController {
     public String usercard(@RequestParam(defaultValue = "1") int page,
                            @ModelAttribute("loginInfo") MemberDto loginInfo,
                            Model model){
-        MemberSearchCondition memberSearchCondition = new MemberSearchCondition();
-        memberSearchCondition.setId(14L);
-        memberSearchCondition.setKidNo(1L);
-//        MemberDto loginInfo=  memberService.getByIdAndKidNo(memberSearchCondition);
         HashMap<String, Object> hashMap = new HashMap<>();
         AnnounceSearchCondition condition = new AnnounceSearchCondition();
         condition.setKinderNo(loginInfo.getKinderNo());
