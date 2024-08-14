@@ -24,7 +24,8 @@
             </div>
             <div class="div"
                  th:data-login-id="${loginInfo.getId()}"
-                 th:data-kid-no="${loginInfo.kidNo}">
+                 th:data-kid-no="${loginInfo.kidNo}"
+            >
                 <div class="pick">
                     <div class="date-picker">
                         <div>
@@ -79,7 +80,7 @@
                             </tr>
                             <tr>
                                 <th>귀가 날짜</th>
-                                <td th:text="${#temporals.format(home.runDate, 'yyyy년 MM월 dd일')}"></td>
+                                <td th:text="${#temporals.format(home.runDate, 'MM월 dd일')}"></td>
                             </tr>
                             <tr>
                                 <th>귀가 시간</th>

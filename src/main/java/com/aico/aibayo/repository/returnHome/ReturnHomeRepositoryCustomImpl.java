@@ -24,7 +24,7 @@ public class ReturnHomeRepositoryCustomImpl implements ReturnHomeRepositoryCusto
     private final QReturnHomeAgreementParentEntity returnHomeAgreementParent = QReturnHomeAgreementParentEntity.returnHomeAgreementParentEntity;
 
     @Override
-    public Page<ReturnHomeDto> findAllByKinderNoCard(ReturnHomeSearchCondition condition, Pageable pageable) {
+    public Page<ReturnHomeDto> findAllByKinderNo(ReturnHomeSearchCondition condition, Pageable pageable) {
         List<ReturnHomeDto> Homeorder = jpaQueryFactory
                 .select(Projections.constructor(ReturnHomeDto.class,
                         kid.kidName,
@@ -68,12 +68,7 @@ public class ReturnHomeRepositoryCustomImpl implements ReturnHomeRepositoryCusto
     }
 
     @Override
-    public Page<ReturnHomeDto> findAllByKinderNoList(ReturnHomeSearchCondition condition, Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public Page<ReturnHomeDto> findAllByKidNoCard(ReturnHomeSearchCondition condition, Pageable pageable) {
+    public Page<ReturnHomeDto> findAllByKidNo(ReturnHomeSearchCondition condition, Pageable pageable) {
         List<ReturnHomeDto> Homeorder = jpaQueryFactory
                 .select(Projections.constructor(ReturnHomeDto.class,
                         kid.kidName,
@@ -117,12 +112,6 @@ public class ReturnHomeRepositoryCustomImpl implements ReturnHomeRepositoryCusto
                 );
         return PageableExecutionUtils.getPage(Homeorder, pageable, count::fetchOne);
     }
-
-    @Override
-    public Page<ReturnHomeDto> findAllByKidNoList(ReturnHomeSearchCondition condition, Pageable pageable) {
-        return null;
-    }
-
     @Override
     public ReturnHomeDto findByRhAgreeNo(Long rhAgreeNo) {
         return null;
