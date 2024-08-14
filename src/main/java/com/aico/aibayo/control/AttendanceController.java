@@ -12,6 +12,7 @@ import com.aico.aibayo.service.classManage.ClassService;
 import com.aico.aibayo.service.member.MemberService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -70,6 +71,8 @@ public class AttendanceController {
 
     @GetMapping("/admin/detailToday")
     public String detailToday(@ModelAttribute("loginInfo") MemberDto memberDto, Model model) {
+
+
         List<ClassEntity> classList = classService.getClassList(memberDto.getKinderNo());
 
         String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
@@ -132,7 +135,7 @@ public class AttendanceController {
 //    }
 
     @PostMapping("/admin/write")
-    public ResponseEntity<?> writePage(@RequestBody List<Map<String, Object>> attendanceList) {
+    public ResponseEntity<?> writePage(@RequestBody List<Map<String, Object>> attendanceList {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         for (Map<String, Object> attendance : attendanceList) {
@@ -160,8 +163,8 @@ public class AttendanceController {
             attendanceDto.setNote((String) attendance.get("note"));
             attendanceDto.setAttendanceStatus((String) attendance.get("attendanceStatus"));
 
-            // AttendanceService에 전달
-            attendanceService.createAttendance(attendanceDto);
+
+
         }
         return ResponseEntity.ok("Success");
     }
