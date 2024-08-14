@@ -10,5 +10,5 @@ import java.util.List;
 public interface AttendanceService {
     List<AttendanceDto> getKids(Long kinderNo, Long classNo);
 
-    void createAttendance(AttendanceDto dto);
+    Long createAttendance(AttendanceDto dto);
 }
