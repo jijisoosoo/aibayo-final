@@ -38,6 +38,9 @@ public class GlobalControllerAdvice {
             String username = jwtUtil.getUsername(token);
             log.info("loginUser: {}", username);
             memberDto = memberService.findByUsername(username);
+            if (memberDto.getRoleNo() > 2) {
+                memberDto = memberService.getByUsernameWithParentKid(username);
+            }
         }
 
         model.addAttribute("loginInfo", memberDto);
