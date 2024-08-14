@@ -31,7 +31,7 @@
 
   <div class="title"><div class="text-wrapper-4">일정표</div></div>
   <div class="buttons">
-    <form class="searchoptions" th:action="@{/admin/scheduleMain}" method="post">
+    <form class="searchoptions" th:action="@{/schedule/admin/scheduleMain}" method="post">
       <select class="dropdown-class">
         <option class="text-wrapper-5" value="">반 선택</option>
         <option class="text-wrapper-5" value="">1반</option>
@@ -41,20 +41,20 @@
       </select>
 
       <div class="div-2">
-        <img class="search" src="/schedule/img/search.png" />
+        <img class="search" src="/images/common/search.png" />
         <input type="text" class="text-wrapper-5" placeholder="검색어 입력"></input>
       </div>
 
       <div class="buttonarea">
         <input type="submit" class="button-cancel" value="조회하기">
-        <a class="view" th:href="@{/admin/scheduleMain}" th:method="get">
-          <img class="img-3" src="/schedule/img/reset.png" />
+        <a class="view" th:href="@{/schedule/admin/scheduleMain}" th:method="get">
+          <img class="img-3" src="/images/common/reset.png" />
           <div class="text-wrapper-7">초기화</div>
         </a>
       </div>
     </form>
-    <a class="button-modify" th:href="@{/admin/scheduleWrite}" th:method="get">
-      <img class="icon-pencil" src="/schedule/img/pencil.png" />
+    <a class="button-modify" th:href="@{/schedule/admin/scheduleWrite}" th:method="get">
+      <img class="icon-pencil" src="/images/common/pencil.png" />
       <div class="text-modify">일정 추가</div>
     </a>
   </div>
@@ -68,8 +68,8 @@
 
     <div class="schedule">
       <div class="date-schedulecnt">
-        <a  th:href="@{/admin/scheduleMain}" th:method="get">
-          <img class="img-2" src="/schedule/img/left.png" />
+        <a  th:href="@{/schedule/admin/scheduleMain}" th:method="get">
+          <img class="img-2" src="/images/common/left.png" />
         </a>
         <div class="text">
           <div class="day-2">
@@ -85,8 +85,8 @@
             </div>
           </div>
         </div>
-        <a th:href="@{/admin/scheduleMain}" th:method="get">
-          <img class="img-2" src="/schedule/img/right.png" />
+        <a th:href="@{schedule/admin/scheduleMain}" th:method="get">
+          <img class="img-2" src="/images/common/right.png" />
         </a>
       </div>
 
@@ -157,8 +157,15 @@
           </div>
         </div>
       </div>
-
+    </div>
+  </div>
+  <div class="schedules_div_hidden">
+    <div class="schedule_values" th:each="schedule:${schedules}" th:object="${schedule}"
+         th:data-board-no="${schedule.boardNo}" th:data-schedule-no="${schedule.scheduleNo}" th:data-kinder-no="${schedule.kinderNo}" th:data-class-no="${schedule.classNo}"
+         th:data-board-title="${schedule.boardTitle}" th:data-writer="${schedule.writer}" th:data-board-contents="${schedule.boardContents}"
+         th:data-schedule-start-date="${schedule.scheduleStartDate}" th:data-schedule-end-date="${schedule.scheduleEndDate}">
     </div>
   </div>
 </div>
+
 </html>

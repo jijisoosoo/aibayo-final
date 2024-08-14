@@ -1,30 +1,40 @@
 // $(document).ready(function() {
-//     // Handle class selection change
+//
 //     $('#classSelect').change(function() {
 //         var selectedClassNo = $(this).val();
-//         var currentUrl = window.location.href;
 //
-//         // Update classNo value
-//         var newUrl = currentUrl.replace(/classNo=\d+/, 'classNo=' + selectedClassNo);
+//         $.ajax({
+//             type: 'POST',
+//             url: '/attendance/getKidAttendance',
+//             data: { classNo: selectedClassNo },
+//             success: function(response) {
+//                 $('#studentList').empty();
 //
-//         // Update attendanceInsertStatus value, if not present add it
-//         if (/attendanceInsertStatus=\d+/.test(newUrl)) {
-//             newUrl = newUrl.replace(/attendanceInsertStatus=\d+/, 'attendanceInsertStatus=0');
-//         } else {
-//             newUrl += '&attendanceInsertStatus=1';
-//         }
+//                 response.forEach(function(attendance) {
+//                     console.log("kidDrop:", attendance.kidDrop);
+//                     console.log("kidPickup:", attendance.kidPickup);
 //
-//         // Update cmd value, if not present add it
-//         if (/cmd=[^&]+/.test(newUrl)) {
-//             newUrl = newUrl.replace(/cmd=[^&]+/, 'cmd=detailToday');
-//         } else {
-//             newUrl += '&cmd=detailToday';
-//         }
+//                     var formattedKidDrop = formatTimeToKoreanStyle(attendance.kidDrop);
+//                     var formattedKidPickup = formatTimeToKoreanStyle(attendance.kidPickup);
 //
-//         window.location.href = newUrl;
+//                     var row = '<tr data-kid-no="' + attendance.kidNo + '">' +
+//                         '<td>' + attendance.kidName + '</td>' +
+//                         '<td>' + attendance.attendanceStatus + '</td>' +
+//                         '<td>' + formattedKidDrop + '</td>' +
+//                         '<td>' + formattedKidPickup + '</td>' +
+//                         '<td>' + attendance.note + '</td>' +
+//                         '</tr>';
+//
+//                     $('#studentList').append(row);
+//                 });
+//             },
+//             error: function(xhr, status, error) {
+//                 console.error('Error:', error);
+//             }
+//         });
 //     });
 //
-//     // Handle attendance status change
+//
 //     $('#attendanceStatus').on('change', function() {
 //         var status = $(this).val();
 //         if (status === '결석') {
@@ -34,29 +44,27 @@
 //         }
 //     });
 //
-//     // Handle update button click
-//     $('a.attendance-update-one').on('click', function(e) {
-//         e.preventDefault();
-//         var row = $(this).closest('tr'); // Find closest tr tag
-//         var kidNo = row.data('kid-no'); // Get kid number from data attribute
-//         var attendanceStatus = row.find('td:nth-child(2)').text().trim(); // Get attendance status from second column
-//         var excusedAbsence = row.find('td:nth-child(3)').text().trim(); // Get excused absence from third column
-//         var kidDrop = row.find('td:nth-child(4)').text().trim(); // Get drop time from fourth column
-//         var kidPickup = row.find('td:nth-child(5)').text().trim(); // Get pickup time from fifth column
-//         var note = row.find('td:nth-child(6)').text().trim(); // Get note from sixth column
 //
-//         // Set values in the modal fields
+//     $('tr[data-kid-no]').on('click', function() {
+//         var row = $(this); // 현재 클릭된 행
+//         var kidNo = row.data('kid-no'); // data-kid-no 속성에서 아동 번호 가져옴
+//         var kidDrop = row.find('td:nth-child(2)').text().trim(); // 두 번째 열에서 등원 시간 가져옴
+//         var kidPickup = row.find('td:nth-child(3)').text().trim(); // 세 번째 열에서 하원 시간 가져옴
+//         var note = row.find('td:nth-child(4)').text().trim(); // 네 번째 열에서 비고 가져옴
+//
+//         // 모달 창에 값을 설정
 //         $('#updateModal #kidNo').val(kidNo);
-//         $('#updateModal #attendanceStatus').val(attendanceStatus).change(); // Trigger change event
-//         $('#updateModal #excusedAbsence').val(excusedAbsence);
 //         $('#updateModal #kidDrop').val(kidDrop);
 //         $('#updateModal #kidPickup').val(kidPickup);
 //         $('#updateModal #note').val(note);
 //
-//         // Show the modal
+//         // 모달 창 표시
 //         var myModal = new bootstrap.Modal(document.getElementById('updateModal'));
 //         myModal.show();
 //     });
+//
+//     // Remove the existing click event on the anchor tag
+//     $('a.attendance-update-one').off('click');
 //
 //     // Handle apply update button click
 //     $('#applyUpdate').on('click', function() {
@@ -100,45 +108,126 @@
 //                 console.error(xhr);
 //                 console.error(status);
 //                 console.error(error);
-//                 alert('Error updating attendance');
+//                 Swal.fire({
+//                     icon: 'warning',
+//                     title: '출석부 수정 실패',
+//                     text: '반을 선택해 주세요.',
+//                 });
 //             }
 //         });
 //     });
 //
 //     // Initialize DataTable
 //     new DataTable('#attendanceTable', {
-//         order: [[3, 'desc']]
+//         info: false,
+//         ordering: false,
+//         paging: false,
+//         searching: false
 //     });
+//
+//
+//     $('#writeBtn').click(function(event) {
+//         event.preventDefault(); // 기본 링크 동작을 막음
+//
+//         // 선택된 반 번호를 가져옴
+//         var selectedClassNo = $('#classSelect').val();
+//         console.log("선택된 classNo: " + selectedClassNo);
+//
+//         if (selectedClassNo) {
+//             // 선택된 classNo를 URL에 포함하여 페이지 이동
+//             window.location.href = '/attendance/admin/write/' + selectedClassNo;
+//         } else {
+//             // alert("반을 선택해 주세요.");
+//             Swal.fire({
+//                 icon: 'warning',
+//                 title: '반을 선택하세요',
+//
+//             });
+//         }
+//     });
+//
 // });
-
+//
+//
+// function formatTimeToKoreanStyle(dateTimeString) {
+//     // dateTimeString이 유효하지 않으면 빈 문자열 반환
+//     if (!dateTimeString || typeof dateTimeString !== 'string') {
+//         return '';
+//     }
+//
+//     // '2024-08-14T16:58:00' 형식에서 시간 부분만 추출
+//     var timePart = dateTimeString.split('T')[1]; // '16:58:00' 부분
+//     var timeParts = timePart.split(':'); // ['16', '58', '00']
+//
+//     if (timeParts.length < 2) {
+//         return '';
+//     }
+//
+//     var hours = parseInt(timeParts[0], 10); // 16
+//     var minutes = timeParts[1]; // 58
+//
+//     return hours + '시 ' + minutes + '분';
+// }
 
 $(document).ready(function() {
-    // Handle class selection change
+
+    // 반 선택시 데이터 가져오기
     $('#classSelect').change(function() {
         var selectedClassNo = $(this).val();
-        var currentUrl = window.location.href;
 
-        // Update classNo value
-        var newUrl = currentUrl.replace(/classNo=\d+/, 'classNo=' + selectedClassNo);
+        $.ajax({
+            type: 'POST',
+            url: '/attendance/getKidAttendance',
+            data: { classNo: selectedClassNo },
+            success: function(response) {
+                $('#studentList').empty();
 
-        // Update attendanceInsertStatus value, if not present add it
-        if (/attendanceInsertStatus=\d+/.test(newUrl)) {
-            newUrl = newUrl.replace(/attendanceInsertStatus=\d+/, 'attendanceInsertStatus=0');
-        } else {
-            newUrl += '&attendanceInsertStatus=1';
-        }
+                response.forEach(function(attendance) {
+                    var formattedKidDrop = formatTimeToKoreanStyle(attendance.kidDrop);
+                    var formattedKidPickup = formatTimeToKoreanStyle(attendance.kidPickup);
 
-        // Update cmd value, if not present add it
-        if (/cmd=[^&]+/.test(newUrl)) {
-            newUrl = newUrl.replace(/cmd=[^&]+/, 'cmd=detailToday');
-        } else {
-            newUrl += '&cmd=detailToday';
-        }
+                    var row = '<tr data-kid-no="' + attendance.kidNo + '">' +
+                        '<td>' + attendance.kidName + '</td>' +
+                        '<td>' + attendance.attendanceStatus + '</td>' +
+                        '<td>' + formattedKidDrop + '</td>' +
+                        '<td>' + formattedKidPickup + '</td>' +
+                        '<td>' + attendance.note + '</td>' +
+                        '</tr>';
 
-        window.location.href = newUrl;
+                    $('#studentList').append(row);
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
     });
 
-    // Handle attendance status change
+    // 모달 열기 - 이벤트 위임 방식으로 수정
+    $('#studentList').on('click', 'tr[data-kid-no]', function() {
+        var row = $(this); // 현재 클릭된 행
+        var kidNo = row.data('kid-no'); // data-kid-no 속성에서 아동 번호 가져옴
+        var kidName = row.find('td:nth-child(1)').text().trim(); // 첫 번째 열에서 이름 가져옴
+        var attendanceStatus = row.find('td:nth-child(2)').text().trim(); // 두 번째 열에서 출결 상태 가져옴
+        var kidDrop = row.find('td:nth-child(3)').text().trim(); // 세 번째 열에서 등원 시간 가져옴
+        var kidPickup = row.find('td:nth-child(4)').text().trim(); // 네 번째 열에서 하원 시간 가져옴
+        var note = row.find('td:nth-child(5)').text().trim(); // 다섯 번째 열에서 비고 가져옴
+
+        console.log("kidNo : " + kidNo);
+
+        // 모달 창에 값을 설정
+        $('#updateModal #kidNo').val(kidNo);
+        $('#updateModal #attendanceStatus').val(attendanceStatus);
+        $('#updateModal #kidDrop').val(kidDrop);
+        $('#updateModal #kidPickup').val(kidPickup);
+        $('#updateModal #note').val(note);
+
+        // 모달 창 표시
+        var myModal = new bootstrap.Modal(document.getElementById('updateModal'));
+        myModal.show();
+    });
+
+    // 출결 상태 변경 시 등원/하원 시간 입력 필드 활성화/비활성화
     $('#attendanceStatus').on('change', function() {
         var status = $(this).val();
         if (status === '결석') {
@@ -148,38 +237,12 @@ $(document).ready(function() {
         }
     });
 
-    // Handle row click for updating
-    $('tr[data-kid-no]').on('click', function() {
-        var row = $(this); // Current row
-        var kidNo = row.data('kid-no'); // Get kid number from data attribute
-        var attendanceStatus = row.find('td:nth-child(2)').text().trim(); // Get attendance status from second column
-        var excusedAbsence = row.find('td:nth-child(3)').text().trim(); // Get excused absence from third column
-        var kidDrop = row.find('td:nth-child(4)').text().trim(); // Get drop time from fourth column
-        var kidPickup = row.find('td:nth-child(5)').text().trim(); // Get pickup time from fifth column
-        var note = row.find('td:nth-child(6)').text().trim(); // Get note from sixth column
-
-        // Set values in the modal fields
-        $('#updateModal #kidNo').val(kidNo);
-        $('#updateModal #attendanceStatus').val(attendanceStatus).change(); // Trigger change event
-        $('#updateModal #excusedAbsence').val(excusedAbsence);
-        $('#updateModal #kidDrop').val(kidDrop);
-        $('#updateModal #kidPickup').val(kidPickup);
-        $('#updateModal #note').val(note);
-
-        // Show the modal
-        var myModal = new bootstrap.Modal(document.getElementById('updateModal'));
-        myModal.show();
-    });
-
-    // Remove the existing click event on the anchor tag
-    $('a.attendance-update-one').off('click');
-
-    // Handle apply update button click
+    // 수정 사항 적용 버튼 클릭 시
     $('#applyUpdate').on('click', function() {
         $('#updateForm').submit();
     });
 
-    // Handle form submission
+    // 폼 제출 처리
     $('#updateForm').on('submit', function(e) {
         e.preventDefault();
 
@@ -216,17 +279,59 @@ $(document).ready(function() {
                 console.error(xhr);
                 console.error(status);
                 console.error(error);
-                alert('Error updating attendance');
+                Swal.fire({
+                    icon: 'warning',
+                    title: '출석부 수정 실패',
+                    text: '반을 선택해 주세요.',
+                });
             }
         });
     });
 
-    // Initialize DataTable
+    // DataTable 초기화
     new DataTable('#attendanceTable', {
         info: false,
         ordering: false,
-        paging: false
+        paging: false,
+        searching: false
     });
 
+    // 작성 버튼 클릭 시
+    $('#writeBtn').click(function(event) {
+        event.preventDefault(); // 기본 링크 동작을 막음
+
+        // 선택된 반 번호를 가져옴
+        var selectedClassNo = $('#classSelect').val();
+        console.log("선택된 classNo: " + selectedClassNo);
+
+        if (selectedClassNo) {
+            // 선택된 classNo를 URL에 포함하여 페이지 이동
+            window.location.href = '/attendance/admin/write/' + selectedClassNo;
+        } else {
+            Swal.fire({
+                icon: 'warning',
+                title: '반을 선택하세요',
+            });
+        }
+    });
 
 });
+
+// 시간 포맷을 한국 스타일로 변환
+function formatTimeToKoreanStyle(dateTimeString) {
+    if (!dateTimeString || typeof dateTimeString !== 'string') {
+        return '';
+    }
+
+    var timePart = dateTimeString.split('T')[1]; // 시간 부분 추출
+    var timeParts = timePart.split(':'); // 시, 분, 초 분리
+
+    if (timeParts.length < 2) {
+        return '';
+    }
+
+    var hours = parseInt(timeParts[0], 10);
+    var minutes = timeParts[1];
+
+    return hours + '시 ' + minutes + '분';
+}
