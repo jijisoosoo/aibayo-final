@@ -77,33 +77,7 @@ public class MealServiceImpl implements MealService {
         List<MealDetailEntity> savedDetails = new ArrayList<>();
         List<MealDetailDto> mealDetails = mealDto.getMealDetails();
         for (MealDetailDto mealDetailDto : mealDetails) {
-            String uploadUrl = "";
-
-            // detail의 originalFileName과 동일한 이름을 가진 파일을 매칭
-            OptionalInt index = IntStream.range(0, files.size())
-                    .filter(inx -> mealDetailDto.getMealPicOriginalName()
-                            .equals(files.get(inx).getOriginalFilename()))
-                    .findFirst();
-
-            if (index.isPresent()) {
-                MultipartFile multipartFile = files.get(index.getAsInt());
-                uploadUrl = getUrlAfterUploadS3(multipartFile);
-                files.remove(multipartFile);
-            }
-
-            log.info(">>>>>>>>> meal file saved in {}", uploadUrl);
-
-            MealDetailEntity mealDetailEntity = MealDetailEntity.builder()
-                    .mealType(mealDetailDto.getMealType())
-                    .mealMenu(mealDetailDto.getMealMenu())
-                    .mealPic(uploadUrl)
-                    .mealPicOriginalName(mealDetailDto.getMealPicOriginalName())
-                    .mealInvisibleFlag(BooleanEnum.FALSE.getBool())
-                    .meal(saved)
-                    .build();
-
-            MealDetailEntity savedDetail = mealDetailRepository.save(mealDetailEntity);
-            savedDetails.add(savedDetail);
+            setMealDetail(files, saved, savedDetails, mealDetailDto);
 
         }
 
@@ -132,6 +106,7 @@ public class MealServiceImpl implements MealService {
                 .collect(Collectors.toMap(MealDetailEntity::getMealDetailNo, Function.identity()));
 
         Map<Long, MealDetailDto> modifyMap = modifyDetails.stream()
+                .filter(detail -> detail.getMealDetailNo() != null)
                 .collect(Collectors.toMap(MealDetailDto::getMealDetailNo, Function.identity()));
 
         // 2. 비교용 targetDetails와 modifyDetails의 mealDetailNo 구하기
@@ -166,19 +141,7 @@ public class MealServiceImpl implements MealService {
                     }
                     if (modifyDto.getMealPicOriginalName() != null &&
                             !modifyDto.getMealPicOriginalName().isEmpty()) {
-                        String uploadUrl = "";
-
-                        // detail의 originalFileName과 동일한 이름을 가진 파일을 매칭
-                        OptionalInt index = IntStream.range(0, files.size())
-                                .filter(inx -> modifyDto.getMealPicOriginalName()
-                                        .equals(files.get(inx).getOriginalFilename()))
-                                .findFirst();
-
-                        if (index.isPresent()) {
-                            MultipartFile multipartFile = files.get(index.getAsInt());
-                            uploadUrl = getUrlAfterUploadS3(multipartFile);
-                            files.remove(multipartFile);
-                        }
+                        String uploadUrl = getUploadUrl(files, modifyDto);
 
                         targetEntity.setMealPicOriginalName(modifyDto.getMealPicOriginalName());
                         targetEntity.setMealPic(uploadUrl);
@@ -193,33 +156,7 @@ public class MealServiceImpl implements MealService {
         modifyDetails.stream()
                 .filter(detail -> detail.getMealDetailNo() == null)
                 .forEach(dto -> {
-                    String uploadUrl = "";
-
-                    // detail의 originalFileName과 동일한 이름을 가진 파일을 매칭
-                    OptionalInt index = IntStream.range(0, files.size())
-                            .filter(inx -> dto.getMealPicOriginalName()
-                                    .equals(files.get(inx).getOriginalFilename()))
-                            .findFirst();
-
-                    if (index.isPresent()) {
-                        MultipartFile multipartFile = files.get(index.getAsInt());
-                        uploadUrl = getUrlAfterUploadS3(multipartFile);
-                        files.remove(multipartFile);
-                    }
-
-                    log.info(">>>>>>>>> meal file saved in {}", uploadUrl);
-
-                    MealDetailEntity mealDetailEntity = MealDetailEntity.builder()
-                            .mealType(dto.getMealType())
-                            .mealMenu(dto.getMealMenu())
-                            .mealPic(uploadUrl)
-                            .mealPicOriginalName(dto.getMealPicOriginalName())
-                            .mealInvisibleFlag(BooleanEnum.FALSE.getBool())
-                            .meal(target)
-                            .build();
-
-                    MealDetailEntity saved = mealDetailRepository.save(mealDetailEntity);
-                    targetDetails.add(saved);
+                    setMealDetail(files, target, targetDetails, dto);
                 });
 
         target.setMealDetails(targetDetails);
@@ -228,6 +165,58 @@ public class MealServiceImpl implements MealService {
         MealEntity modified = mealRepository.save(target);
 
         return MealDto.toDto(modified);
+    }
+
+    @Override
+    public MealDto deleteMeal(MealDto mealDto) {
+        if (mealDto == null || mealDto.getMealNo() == null) {
+            return null;
+        }
+
+        return mealRepository.findById(mealDto.getMealNo())
+                .map( target -> {
+                    target.setMealDeleteDate(LocalDateTime.now());
+                    target.setMealDeleteFlag(BooleanEnum.TRUE.getBool());
+
+                    MealEntity deleted = mealRepository.save(target);
+                    return MealDto.toDto(deleted);
+                }).orElse(null);
+    }
+
+    private void setMealDetail(List<MultipartFile> files, MealEntity target,
+                               List<MealDetailEntity> targetDetails, MealDetailDto dto) {
+        String uploadUrl = getUploadUrl(files, dto);
+
+        MealDetailEntity mealDetailEntity = MealDetailEntity.builder()
+                .mealType(dto.getMealType())
+                .mealMenu(dto.getMealMenu())
+                .mealPic(uploadUrl)
+                .mealPicOriginalName(dto.getMealPicOriginalName())
+                .mealInvisibleFlag(BooleanEnum.FALSE.getBool())
+                .meal(target)
+                .build();
+
+        MealDetailEntity saved = mealDetailRepository.save(mealDetailEntity);
+        targetDetails.add(saved);
+    }
+
+    private String getUploadUrl(List<MultipartFile> files, MealDetailDto dto) {
+        String uploadUrl = "";
+
+        // detail의 originalFileName과 동일한 이름을 가진 파일을 매칭
+        OptionalInt index = IntStream.range(0, files.size())
+                .filter(inx -> dto.getMealPicOriginalName()
+                        .equals(files.get(inx).getOriginalFilename()))
+                .findFirst();
+
+        if (index.isPresent()) {
+            MultipartFile multipartFile = files.get(index.getAsInt());
+            uploadUrl = getUrlAfterUploadS3(multipartFile);
+            files.remove(multipartFile);
+        }
+
+        log.info(">>>>>>>>> meal file saved in {}", uploadUrl);
+        return uploadUrl;
     }
 
     private String getUrlAfterUploadS3(MultipartFile multipartFile) {
