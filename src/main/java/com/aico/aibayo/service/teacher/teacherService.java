@@ -11,8 +11,9 @@ import java.util.Map;
 
 @Service
 public interface teacherService {
-    List<TeacherDto> getAllByKinderNo(TeacherSearchCondition condition);
     List<TeacherDto> getAcceptedTeacherByKinderNoAndClassNo(TeacherSearchCondition condition);
+    List<TeacherDto> getTeacherByKinderNo(TeacherSearchCondition condition);
+    List<TeacherDto> getInvitedTeacherByKinderNo(TeacherSearchCondition condition);
     TeacherDto getTeacherById(Long id);
     void updateClassTeacher(List<Long> newClassIds, List<Long> oldClassAcceptNos, Long id);
     MemberDto updateTeacher(Map<String, Number> requestBody);

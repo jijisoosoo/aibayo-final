@@ -33,13 +33,18 @@ public class teacherServiceImpl implements teacherService{
     private final MemberRepository memberRepository;
 
     @Override
-    public List<TeacherDto> getAllByKinderNo(TeacherSearchCondition condition) {
-        return teacherRepository.findAllByKinderNo(condition);
+    public List<TeacherDto> getAcceptedTeacherByKinderNoAndClassNo(TeacherSearchCondition condition) {
+        return teacherRepository.findAcceptedTeacherByKinderNoAndClassNo(condition);
     }
 
     @Override
-    public List<TeacherDto> getAcceptedTeacherByKinderNoAndClassNo(TeacherSearchCondition condition) {
-        return teacherRepository.findAcceptedTeacherByKinderNoAndClassNo(condition);
+    public List<TeacherDto> getTeacherByKinderNo(TeacherSearchCondition condition) {
+        return teacherRepository.findTeacherByKinderNo(condition);
+    }
+
+    @Override
+    public List<TeacherDto> getInvitedTeacherByKinderNo(TeacherSearchCondition condition) {
+        return teacherRepository.findInvitedTeacherByKinderNo(condition);
     }
 
     @Override
@@ -83,12 +88,11 @@ public class teacherServiceImpl implements teacherService{
     @Override
     public MemberDto updateTeacher(Map<String, Number> requestBody) {
         Long id = requestBody.get("id").longValue();
-        System.out.println("id" + id);
+        System.out.println("id : " + id);
         MemberDto memberDto = null;
 
         if (requestBody.get("teacherKinderAcceptNo") != null) {
             Long kinderAcceptNo = requestBody.get("teacherKinderAcceptNo").longValue();
-            System.out.println("kinderAcceptNo" + kinderAcceptNo);
 
             AcceptLogEntity target = acceptLogRepository.findById(kinderAcceptNo).orElse(null);
             if (target != null) {
@@ -107,11 +111,13 @@ public class teacherServiceImpl implements teacherService{
     public MemberDto deleteTeacher(Map<String, Object> requestBody) {
 
         Long id = ((Number) requestBody.get("id")).longValue();
+        log.info("id : " + id);
         MemberDto memberDto = null;
 
         // class_teacher 삭제
         if (requestBody.get("classAcceptNos") != null) {
             List<Integer> classAcceptNosInt = (List<Integer>) requestBody.get("classAcceptNos");
+            log.info("classAcceptNos : " + classAcceptNosInt);
             List<Long> classAcceptNos = classAcceptNosInt.stream()
                     .map(Integer::longValue)
                     .collect(Collectors.toList());
@@ -132,6 +138,7 @@ public class teacherServiceImpl implements teacherService{
         // teacher_kinder 삭제
         if (requestBody.get("kinderAcceptNo") != null) {
             Long kinderAcceptNo = ((Number) requestBody.get("kinderAcceptNo")).longValue();
+            log.info("kinderAcceptNo : " + kinderAcceptNo);
 
             AcceptLogEntity target = acceptLogRepository.findById(kinderAcceptNo).orElse(null);
             if (target != null) {
