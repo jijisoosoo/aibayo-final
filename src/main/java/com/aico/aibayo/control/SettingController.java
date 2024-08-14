@@ -1,6 +1,7 @@
 package com.aico.aibayo.control;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -28,7 +29,7 @@ public class SettingController {
     public String info(){
         return "/admin/setting/info";
     }
-
+    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/test")
     public String test(){
         return "/admin/setting/copy";
