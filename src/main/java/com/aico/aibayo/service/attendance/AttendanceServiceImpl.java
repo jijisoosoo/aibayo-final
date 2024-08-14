@@ -22,7 +22,7 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     @Override
-    public void createAttendance(AttendanceDto dto) {
+    public Long createAttendance(AttendanceDto dto) {
         AttendanceEntity attendanceEntity = new AttendanceEntity();
         attendanceEntity.setAttendanceDate(LocalDate.now());
         attendanceEntity.setKinderNo(dto.getKinderNo());
@@ -32,7 +32,8 @@ public class AttendanceServiceImpl implements AttendanceService {
         attendanceEntity.setKidDrop(dto.getKidDrop());
         attendanceEntity.setKidPickup(dto.getKidPickup());
         attendanceEntity.setNote(dto.getNote());
-        attendanceRepository.save(attendanceEntity);
+        AttendanceEntity save = attendanceRepository.save(attendanceEntity);
         System.out.println("create attendance done");
+        return save.getAttendanceNo();
     }
 }
