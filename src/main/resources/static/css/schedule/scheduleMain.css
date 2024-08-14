@@ -1,25 +1,11 @@
 .container .title {
   display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   gap: 10px;
   position: relative;
   flex: 0 0 auto;
 }
-
-/*.container .text-wrapper-4 {*/
-/*  position: relative;*/
-/*  width: 268px;*/
-/*  height: 58px;*/
-/*  !*font-family: var(--font-selected-menu-font-family);*!*/
-/*  font-weight: var(--font-selected-menu-font-weight);*/
-/*  color: #000000;*/
-/*  font-size: var(--font-selected-menu-font-size);*/
-/*  letter-spacing: var(--font-selected-menu-letter-spacing);*/
-/*  line-height: var(--font-selected-menu-line-height);*/
-/*  font-style: var(--font-selected-menu-font-style);*/
-/*}*/
 
 .container .cal-contents {
   display: flex;
@@ -34,10 +20,9 @@
 .container .buttons {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   position: relative;
   align-self: stretch;
-  width: 100%;
+  width: fit-content;
   flex: 0 0 auto;
 }
 
@@ -253,14 +238,6 @@
   position: relative;
   flex: 1;
   flex-grow: 1;
-}
-
-.container .div-3 {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  flex: 0 0 auto;
 }
 
 .container .text-wrapper-9 {
@@ -608,8 +585,16 @@
   box-shadow: none;
 }
 
-.accordion-collapse{
+.accordion_collapse_contents{
   padding-top: 20px;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.term {
+  font-size: 14px;
+  color: gray;
 }
 
 .container .single-schedule {
@@ -680,10 +665,21 @@ flex: 1;
   /*margin:20px auto;*/
 }
 
-.schedules_div_hidden {
+.div_hidden {
   display: none;
 }
 
+.fc-event-title{
+  font-size: 11px;
+}
+
+[role="row"] {
+  border-bottom: 1px solid #c3c3c3;
+}
+
+.fc th {
+  height: 30px;
+}
 
 :root {
   --x-1: rgba(133, 199, 233, 1);

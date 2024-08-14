@@ -24,18 +24,31 @@ public class ScheduleDto {
     private Long writer;
     private String boardContents;
 
-    public ScheduleDto(Long boardNo, Long scheduleNo, Long kinderNo, Long classNo,
+    public ScheduleDto(Long boardNo, Long scheduleNo, Long kinderNo,
                        String boardTitle, Long writer, String boardContents,
                        LocalDateTime scheduleStartDate, LocalDateTime scheduleEndDate){
         this.boardNo = boardNo;
         this.scheduleNo = scheduleNo;
         this.kinderNo = kinderNo;
-        this.classNo = classNo;
         this.boardTitle = boardTitle;
         this.writer = writer;
         this.boardContents = boardContents;
         this.scheduleStartDate = scheduleStartDate;
         this.scheduleEndDate = scheduleEndDate;
+    }
+
+    public ScheduleDto(Long boardNo, Long scheduleNo, Long kinderNo,
+                       String boardTitle, Long writer, String boardContents,
+                       LocalDateTime scheduleStartDate, LocalDateTime scheduleEndDate, Long classNo){
+        this.boardNo = boardNo;
+        this.scheduleNo = scheduleNo;
+        this.kinderNo = kinderNo;
+        this.boardTitle = boardTitle;
+        this.writer = writer;
+        this.boardContents = boardContents;
+        this.scheduleStartDate = scheduleStartDate;
+        this.scheduleEndDate = scheduleEndDate;
+        this.classNo = classNo;
     }
 
 }
