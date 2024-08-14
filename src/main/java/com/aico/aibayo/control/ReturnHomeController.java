@@ -44,7 +44,8 @@ import java.util.HashMap;
 
             hashMap.put("page",page);
             hashMap.put("type","card");
-            Page<ReturnHomeDto> homeList= returnHomeService.findAllByKinderNoCard(condition,hashMap);
+            Page<ReturnHomeDto> homeList= returnHomeService.findAllByKinderNo(condition,hashMap);
+            log.info("homeCard(admin){}",homeList);
             model.addAttribute("homeList",homeList);
             return getPageInfoAndGoView(model, homeList, "/admin/home/card");
         }
@@ -85,11 +86,16 @@ import java.util.HashMap;
                                 int page,
                                 Model model){
             HashMap<String, Object> hashMap = new HashMap<>();
-            AnnounceSearchCondition condition = new AnnounceSearchCondition();
+            ReturnHomeSearchCondition condition = new ReturnHomeSearchCondition();
             condition.setKinderNo(loginInfo.getKinderNo());
+            model.addAttribute("KinderNo",loginInfo.getKinderNo());
 
-
-            return "/admin/home/list";
+            hashMap.put("page",page);
+            hashMap.put("type","list");
+            Page<ReturnHomeDto> homeList= returnHomeService.findAllByKinderNo(condition,hashMap);
+            log.info("homeList(admin){}",homeList);
+            model.addAttribute("homeList",homeList);
+            return getPageInfoAndGoView(model, homeList, "/admin/home/list");
         }
         @GetMapping("/admin/detail")
         public String admindetail(){
@@ -117,9 +123,9 @@ import java.util.HashMap;
             model.addAttribute("kidNo", loginInfo.getKidNo());
             model.addAttribute("loginInfo", loginInfo);
             hashMap.put("page",page);
-            hashMap.put("type","list");
-            Page<ReturnHomeDto>homeList=returnHomeService.findAllByKidNoCard(condition,hashMap);
-            log.info("homeList(user){}",homeList);
+            hashMap.put("type","card");
+            Page<ReturnHomeDto>homeList=returnHomeService.findAllByKidNo(condition,hashMap);
+            log.info("homeCard(user){}",homeList);
             return getPageInfoAndGoViewCard(model, homeList, "/user/home/card");
         }
     private String getPageInfoAndGoViewCard(Model model, Page<ReturnHomeDto> homeList, String view) {
@@ -153,14 +159,26 @@ import java.util.HashMap;
 
         return view;
     }
-
-
-
-
-
         @GetMapping("/user/list")
-        public String userlist(){
-            return "/user/home/list";
+        public String userlist(
+                @RequestParam(defaultValue = "1") int page,
+                @ModelAttribute("loginInfo") MemberDto loginInfo,
+                Model model
+        ){
+            HashMap<String, Object> hashMap = new HashMap<>();
+
+            ReturnHomeSearchCondition condition = new ReturnHomeSearchCondition();
+            condition.setKidNo(loginInfo.getKidNo());
+            condition.setKinderNo(loginInfo.getKinderNo());
+            condition.setOrderType(OrderTypeEnum.RETURNHOME.getNum());
+            model.addAttribute("kinderNo",loginInfo.getKinderNo());
+            model.addAttribute("kidNo", loginInfo.getKidNo());
+            model.addAttribute("loginInfo", loginInfo);
+            hashMap.put("page",page);
+            hashMap.put("type","list");
+            Page<ReturnHomeDto>homeList=returnHomeService.findAllByKidNo(condition,hashMap);
+            log.info("homeList(user){}",homeList);
+            return getPageInfoAndGoViewCard(model, homeList, "/user/home/list");
         }
 
 
