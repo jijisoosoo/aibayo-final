@@ -101,16 +101,16 @@ function afterSuccess(response, method) {
 
             window.location.href = window.location.origin + '/teacher/list';
         });
-    } else if (method === null){
-        $('#assignedClasses').replaceWith($(response).find('#assignedClasses'));
-        $('#staticBackdrop3').replaceWith($(response).find('#staticBackdrop3'));
-        classListFilter();
-        getCheckboxValue();
-        updateLabelBackgroundColor();
-        addLabelClickListeners();
-        addInputClickListeners();
-        addCheckboxEventListeners();
     }
+
+    $('#assignedClasses').replaceWith($(response).find('#assignedClasses'));
+    $('#staticBackdrop3').replaceWith($(response).find('#staticBackdrop3'));
+    classListFilter();
+    getCheckboxValue();
+    updateLabelBackgroundColor();
+    addLabelClickListeners();
+    addInputClickListeners();
+    addCheckboxEventListeners();
 }
 
 

@@ -82,7 +82,7 @@ public class TeacherController {
         condition.setKinderNo(loginInfo.getKinderNo());
 
         condition.setAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
-        List<TeacherDto> acceptedTeacherList = teacherService.getAllByKinderNo(condition);
+        List<TeacherDto> acceptedTeacherList = teacherService.getTeacherByKinderNo(condition);
         model.addAttribute("acceptedTeacherList", acceptedTeacherList);
         model.addAttribute("condition", condition);
         log.info("ACCEPT: {}", condition);
@@ -112,13 +112,13 @@ public class TeacherController {
         condition.setClassNo(null);
 
         condition.setAcceptStatus(AcceptStatusEnum.WAIT.getStatus());
-        List<TeacherDto> waitingTeacherList = teacherService.getAllByKinderNo(condition);
+        List<TeacherDto> waitingTeacherList = teacherService.getTeacherByKinderNo(condition);
         model.addAttribute("waitingTeacherList", waitingTeacherList);
         log.info("WAIT: {}", condition);
 
 
         condition.setAcceptStatus(AcceptStatusEnum.INVITE.getStatus());
-        List<TeacherDto> invitedTeacherList = teacherService.getAllByKinderNo(condition);
+        List<TeacherDto> invitedTeacherList = teacherService.getInvitedTeacherByKinderNo(condition);
         model.addAttribute("invitedTeacherList", invitedTeacherList);
         log.info("INVITE: {}", condition);
 

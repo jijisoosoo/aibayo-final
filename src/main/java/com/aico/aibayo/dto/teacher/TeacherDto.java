@@ -26,6 +26,12 @@ public class TeacherDto {
     private List<Long> oldClassIds;
     private List<Long> newClassIds;
 
+
+    public TeacherDto(String username, Long kinderAcceptNo) {
+        this.username = username;
+        this.kinderAcceptNo = kinderAcceptNo;
+    }
+
     public TeacherDto(Long id, String username, String name, String phone, String profilePicture,
                       LocalDateTime acceptRegDate, Long kinderAcceptNo, Long classNo, Long classAcceptNo,
                       List<Long> oldClassIds, List<Long> newClassIds) {

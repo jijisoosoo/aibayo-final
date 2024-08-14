@@ -80,7 +80,8 @@ public class ClassRepositoryCustomImpl implements ClassRepositoryCustom{
         List<ClassDto> classes = jpaQueryFactory
                 .select(Projections.constructor(ClassDto.class,
                         clazz.classNo,
-                        clazz.className
+                        clazz.className,
+                        clazz.kinderNo
                 ))
                 .from(clazz)
                 .where(clazz.kinderNo.eq(kinderNo),
@@ -95,6 +96,7 @@ public class ClassRepositoryCustomImpl implements ClassRepositoryCustom{
                 .select(Projections.constructor(ClassDto.class,
                         clazz.classNo,
                         clazz.className,
+                        clazz.kinderNo,
                         classTeacher.classTeacherId.count().as("assignedCnt")
                 ))
                 .from(clazz)
@@ -117,6 +119,7 @@ public class ClassRepositoryCustomImpl implements ClassRepositoryCustom{
                 .select(Projections.constructor(ClassDto.class,
                         clazz.classNo,
                         clazz.className,
+                        clazz.kinderNo,
                         acceptLog.acceptNo))
                 .from(clazz)
                 .join(classTeacher).on(clazz.classNo.eq(classTeacher.classNo))

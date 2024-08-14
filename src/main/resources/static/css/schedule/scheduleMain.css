@@ -680,6 +680,11 @@ flex: 1;
   /*margin:20px auto;*/
 }
 
+.schedules_div_hidden {
+  display: none;
+}
+
+
 :root {
   --x-1: rgba(133, 199, 233, 1);
   --x-2: rgba(13, 17, 83, 1);
