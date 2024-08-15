@@ -6,7 +6,11 @@
 <title layout:fragment="title">메인페이지</title>
 
 <th:block layout:fragment="css">
-<link rel="stylesheet" href="/css/main/main.css" />
+    <link rel="stylesheet" href="/css/main/main.css" />
+</th:block>
+
+<th:block layout:fragment="javascript">
+    <script src="/js/main/main.js"></script>
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
@@ -281,7 +285,7 @@
         </div>
 
 
-        <div class="dust_box">
+        <div class="dust_box" th:data-station-name="${stationName}">
 
             <div class="fine_box">
                 <div class="fine_body">

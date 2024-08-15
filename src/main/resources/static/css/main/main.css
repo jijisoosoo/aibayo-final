@@ -511,11 +511,33 @@
 .fine_desc {
     height: 100%;
     color: black;
-    font-size: 60px;
+    font-size: 40px;
     font-weight: 400;
     word-wrap: break-word;
     text-align: center;
     display: flex;
     align-items: center;
+    justify-content: center;
+}
+
+.pm_grade_1 {
+    color: #3C83EF;
+}
+
+.pm_grade_2 {
+    color: #048A24;
+}
+
+.pm_grade_3 {
+    color: #FFB505;
+}
+
+.pm_grade_4 {
+    color: #EC1C1C;
+}
+
+.pm_svg_box {
+    display: flex;
+    text-align: center;
     justify-content: center;
 }
