@@ -94,4 +94,9 @@ public class ScheduleServiceImpl implements ScheduleService {
             scheduleClassRepository.save(scheduleClassEntity);
         }
     }
+
+    @Override
+    public ScheduleDto getOneByScheduleNo(ScheduleSearchCondition condition) {
+        return scheduleRepository.findOneByScheduleNo(condition);
+    }
 }

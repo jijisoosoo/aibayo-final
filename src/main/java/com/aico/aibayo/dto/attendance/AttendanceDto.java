@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -23,4 +24,5 @@ public class AttendanceDto {
     private LocalDateTime kidPickup; // 하원시간
     private String note; // 비고
     private String attendanceStatus;
+    private LocalDate attendanceDate;
 }

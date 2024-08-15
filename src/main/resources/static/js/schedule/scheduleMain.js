@@ -124,7 +124,6 @@ function showCalendar(initialSelectedValue, selectedValue){
         });
     });
 
-
     calendar.render();
     showDaySchedule(initialSelectedValue);
 }

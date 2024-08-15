@@ -93,6 +93,29 @@ public class ScheduleRepositoryCustomImpl implements ScheduleRepositoryCustom {
         return schedules;
     }
 
+    @Override
+    public ScheduleDto findOneByScheduleNo(ScheduleSearchCondition condition) {
+        ScheduleDto scheduleDto = jpaQueryFactory
+                .select(Projections.constructor(ScheduleDto.class,
+                        board.boardNo,
+                        schedule.scheduleNo,
+                        board.kinderNo,
+                        board.boardTitle,
+                        board.writer,
+                        board.boardContents,
+                        schedule.scheduleStartDate,
+                        schedule.scheduleEndDate
+                )).distinct()
+                .from(board)
+                .join(schedule).on(board.boardNo.eq(schedule.boardNo))
+                .join(scheduleClass).on(schedule.scheduleNo.eq(scheduleClass.scheduleNo))
+                .where(schedule.scheduleNo.eq(condition.getScheduleNo()),
+                        board.invisibleFlag.eq(BooleanEnum.FALSE.getBool())
+                )
+                .fetchOne();
+        return scheduleDto;
+    }
+
     private BooleanExpression getClassNoEq(Long classNo) {
         if (classNo == null) {
             return null; // null인 경우 전체 조건을 무시

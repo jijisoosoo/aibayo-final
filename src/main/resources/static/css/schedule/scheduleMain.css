@@ -702,6 +702,17 @@ flex: 0 0 auto;
   background-color: rgba(255, 220, 40, .15) !important;
 }
 
+.control-div{
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.control-wrapper{
+  font-size: 14px;
+  color: gray;
+}
+
 :root {
   --x-1: rgba(133, 199, 233, 1);
   --x-2: rgba(13, 17, 83, 1);

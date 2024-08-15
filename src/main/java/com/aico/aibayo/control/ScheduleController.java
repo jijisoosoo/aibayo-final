@@ -69,7 +69,6 @@ public class ScheduleController {
             schedule.setClassList(scheduledClass);
         }
         model.addAttribute("daySchedules", daySchedules);
-        log.info("daySchedules : " + daySchedules);
         return "/admin/schedule/scheduleMain";
     }
 
@@ -81,6 +80,23 @@ public class ScheduleController {
 
         return "/admin/schedule/scheduleWrite";
     }
+
+    @GetMapping("/admin/scheduleModify/{scheduleNo}")
+    public String adminScheduleByScheduleNo(@ModelAttribute("loginInfo") MemberDto loginInfo, Model model,
+                                            @PathVariable Long scheduleNo){
+        ScheduleSearchCondition condition = new ScheduleSearchCondition();
+        condition.setScheduleNo(scheduleNo);
+        ScheduleDto schedule = scheduleService.getOneByScheduleNo(condition);
+
+        List<ClassDto> scheduledClass = scheduleClassService.getClassByScheduleNo(scheduleNo);
+        schedule.setClassList(scheduledClass);
+        model.addAttribute("schedule", schedule);
+
+        List<ClassDto> classList = classService.getByKinderNo(loginInfo.getKinderNo());
+        model.addAttribute("classList", classList);
+        return "/admin/schedule/scheduleModify";
+    }
+
 
     @PostMapping("/admin/addSchedule")
     @ResponseBody

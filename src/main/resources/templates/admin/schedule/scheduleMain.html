@@ -109,6 +109,12 @@
                   </div>
                 </th:block>
                 <div class="schedule-contents" th:title="*{boardContents}" th:text="*{boardContents}">일정 내용</div>
+                <div class="control-div">
+                  <div th:text="*{scheduleNo}"></div>
+                  <a class="control-wrapper" th:href="@{'/schedule/admin/scheduleModify/' + *{scheduleNo}}">수정</a>
+                  <div class="control-wrapper" > | </div>
+                  <a class="control-wrapper" href="">삭제</a>
+                </div>
               </div>
             </div>
           </div>

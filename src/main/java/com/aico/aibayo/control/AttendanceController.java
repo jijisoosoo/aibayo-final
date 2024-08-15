@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Slf4j
 @Controller
 @RequiredArgsConstructor
@@ -36,6 +40,7 @@ public class AttendanceController {
     private final ClassService classService;
     private final AttendanceService attendanceService;
 
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @ModelAttribute
     public void addAttributes(HttpServletRequest request, Model model) {
@@ -69,39 +74,50 @@ public class AttendanceController {
         return "admin/attendance/main";
     }
 
-    @GetMapping("/admin/detailToday")
-    public String detailToday(@ModelAttribute("loginInfo") MemberDto memberDto, Model model) {
+    @GetMapping("/detailToday")
+    public String detailToday(@ModelAttribute("loginInfo") MemberDto memberDto, Model model, @RequestParam("date") String date) {
 
+        LocalDate selectedDate = LocalDate.parse(date);
 
         List<ClassEntity> classList = classService.getClassList(memberDto.getKinderNo());
 
-        String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
 
-        model.addAttribute("date", date);
+        model.addAttribute("date", selectedDate);
         model.addAttribute("classList", classList);
         log.info("day : detailToday");
         return "admin/attendance/detailToday";
     }
 
-    @GetMapping("/admin/detailBefore")
-    public String detailBefore(Model model) {
-        String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
-        model.addAttribute("date", date);
+    @GetMapping("/detailBefore")
+    public String detailBefore(@ModelAttribute("loginInfo") MemberDto memberDto, Model model, @RequestParam("date") String date) {
+        LocalDate selectedDate = LocalDate.parse(date);
+
+        // KinderNo에 따라 클래스 리스트를 가져옴
+        List<ClassEntity> classList = classService.getClassList(memberDto.getKinderNo());
+
+        model.addAttribute("date", selectedDate);
+        model.addAttribute("classList", classList);
         log.info("day : detailBefore");
         return "admin/attendance/detailBefore";
     }
 
-    @GetMapping("/admin/detailAfter")
-    public String detailAfter(Model model) {
-        // 현재 날짜와 시간 가져오기 -> 날짜 출력 포맷 -> 포매팅
-        String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
-        model.addAttribute("date", date);
+    @GetMapping("/detailAfter")
+    public String detailAfter(@ModelAttribute("loginInfo") MemberDto memberDto, Model model, @RequestParam("date") String date) {
+        LocalDate selectedDate = LocalDate.parse(date);
+        LocalDate todayDate = LocalDate.now(); // 현재 날짜 가져오기
 
+        // KinderNo에 따라 클래스 리스트를 가져옴
+        List<ClassEntity> classList = classService.getClassList(memberDto.getKinderNo());
+
+        model.addAttribute("selectedDate", selectedDate);
+        model.addAttribute("todayDate", todayDate);
+        model.addAttribute("classList", classList);
         log.info("day : detailAfter");
         return "admin/attendance/detailAfter";
     }
 
-    @GetMapping("/admin/write")
+
+    @GetMapping("/write")
     public String detailWrite(Model model) {
         String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
         model.addAttribute("date", date);
@@ -109,7 +125,7 @@ public class AttendanceController {
         return "admin/attendance/detailWrite";
     }
 
-    @GetMapping("/admin/write/{classNo}")
+    @GetMapping("/write/{classNo}")
     public String writePage(@PathVariable Long classNo, Model model, @ModelAttribute("loginInfo") MemberDto memberDto) {
         System.out.println("write classNo : " + classNo);
         model.addAttribute("classNo", classNo);
@@ -123,6 +139,7 @@ public class AttendanceController {
         return "admin/attendance/detailWrite"; // 이 경로는 작성 페이지의 템플릿 경로로 수정해 주세요.
     }
 
+//<<<<<<< HEAD
 //    @PostMapping("/admin/write")
 //    public String writePage(@RequestBody List<AttendanceDto> attendanceList) {
 //        System.out.println("write page post ok");
@@ -134,7 +151,10 @@ public class AttendanceController {
 //        return "admin/attendance/detailToday";
 //    }
 
-    @PostMapping("/admin/write")
+//    @PostMapping("/admin/write")
+//=======
+    @PostMapping("/write")
+//>>>>>>> develop
     public ResponseEntity<?> writePage(@RequestBody List<Map<String, Object>> attendanceList) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
@@ -163,7 +183,7 @@ public class AttendanceController {
             attendanceDto.setNote((String) attendance.get("note"));
             attendanceDto.setAttendanceStatus((String) attendance.get("attendanceStatus"));
 
-
+            attendanceService.createAttendance(attendanceDto);
 
         }
         return ResponseEntity.ok("Success");
@@ -172,13 +192,38 @@ public class AttendanceController {
 
     @PostMapping("/getKidAttendance")
     @ResponseBody
-    public List<AttendanceDto> getKidAttendance(@ModelAttribute("loginInfo") MemberDto memberDto, @RequestParam("classNo") Long classNo, Model model) {
+    public List<AttendanceDto> getKidAttendance(@ModelAttribute("loginInfo") MemberDto memberDto, @RequestParam("classNo") Long classNo, @RequestParam("date") String date, Model model) {
         Long kinderNo = memberDto.getKinderNo();
+        LocalDate selectedDate = LocalDate.parse(date); // String으로 받은 date를 LocalDate로 변환
 
-        System.out.println("getKidAttendance method");
-
-        List<AttendanceDto> attendanceList = attendanceService.getKids(kinderNo, classNo);
+        List<AttendanceDto> attendanceList = attendanceService.getKids(kinderNo, classNo, selectedDate);
 
         return attendanceList;
     }
+
+    @PostMapping("/updateAttendance")
+    @ResponseBody
+    public ResponseEntity<String> updateAttendance(@RequestBody AttendanceDto request,
+                                                   @ModelAttribute("loginInfo") MemberDto memberDto) {
+        try {
+            Long kidNo = request.getKidNo();
+            String attendanceStatus = request.getAttendanceStatus();
+            LocalDateTime kidDrop = request.getKidDrop();
+            LocalDateTime kidPickup = request.getKidPickup();
+            String note = request.getNote();
+            LocalDate attendanceDate = request.getAttendanceDate();
+            Long classNo = request.getClassNo();
+
+            logger.info("Update request received for kidNo: {}, attendanceDate: {}", kidNo, attendanceDate);
+
+            attendanceService.updateAttendance(kidNo, attendanceStatus, kidDrop, kidPickup, note, attendanceDate, classNo, memberDto);
+
+            return ResponseEntity.ok("출석부 수정 성공");
+        } catch (Exception e) {
+            logger.error("Error updating attendance for kidNo: {}, attendanceDate: {}", request.getKidNo(), request.getAttendanceDate(), e);
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("출석부 수정 실패");
+        }
+    }
+
 }

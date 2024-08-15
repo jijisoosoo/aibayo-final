@@ -16,4 +16,6 @@ public interface ScheduleService {
     List<ScheduleDto> getListByClass(ScheduleSearchCondition condition);
 
     void insertSchedule(Map<String, Object> requestBody);
+
+    ScheduleDto getOneByScheduleNo(ScheduleSearchCondition condition);
 }
