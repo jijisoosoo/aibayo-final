@@ -22,7 +22,7 @@
         <h4>[[${date}]]</h4>
     </div>
 
-    <form th:action="@{/attendance/admin/write/{classNo}(classNo=${classNo})}" method="post" id="attendanceForm">
+    <form th:action="@{/attendance/write/{classNo}(classNo=${classNo})}" method="post" id="attendanceForm">
         <input type="hidden" id="kinderNo" th:value="${kinderNo}" />
         <input type="hidden" id="classNo" th:value="${classNo}" />
 
