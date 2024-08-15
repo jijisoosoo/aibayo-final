@@ -6,6 +6,7 @@ import com.aico.aibayo.dto.schedule.ScheduleDto;
 import com.aico.aibayo.dto.schedule.ScheduleSearchCondition;
 import com.aico.aibayo.entity.*;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
@@ -15,13 +16,14 @@ import java.util.List;
 public class ScheduleRepositoryCustomImpl implements ScheduleRepositoryCustom {
     private final JPAQueryFactory jpaQueryFactory;
 
+    private final QClassEntity clazz = QClassEntity.classEntity;
     private final QBoardEntity board = QBoardEntity.boardEntity;
     private final QScheduleEntity schedule = QScheduleEntity.scheduleEntity;
     private final QScheduleClassEntity scheduleClass = QScheduleClassEntity.scheduleClassEntity;
-    private final QClassEntity classEntity = QClassEntity.classEntity;
 
     @Override
     public List<ScheduleDto> findAllByKinderNo(ScheduleSearchCondition condition) {
+
         List<ScheduleDto> schedules = jpaQueryFactory
                 .select(Projections.constructor(ScheduleDto.class,
                         board.boardNo,
@@ -31,7 +33,8 @@ public class ScheduleRepositoryCustomImpl implements ScheduleRepositoryCustom {
                         board.writer,
                         board.boardContents,
                         schedule.scheduleStartDate,
-                        schedule.scheduleEndDate))
+                        schedule.scheduleEndDate
+                ))
                 .from(board)
                 .join(schedule).on(board.boardNo.eq(schedule.boardNo))
                 .where(board.kinderNo.eq(condition.getKinderNo()),
@@ -53,11 +56,14 @@ public class ScheduleRepositoryCustomImpl implements ScheduleRepositoryCustom {
                         board.writer,
                         board.boardContents,
                         schedule.scheduleStartDate,
-                        schedule.scheduleEndDate))
+                        schedule.scheduleEndDate
+                )).distinct()
                 .from(board)
                 .join(schedule).on(board.boardNo.eq(schedule.boardNo))
+                .join(scheduleClass).on(schedule.scheduleNo.eq(scheduleClass.scheduleNo))
                 .where(schedule.scheduleStartDate.loe(condition.getSelectedDate()),
-                        schedule.scheduleEndDate.goe(condition.getSelectedDate())
+                        schedule.scheduleEndDate.goe(condition.getSelectedDate()),
+                        getClassNoEq(condition.getClassNo())
                 )
                 .fetch();
         return schedules;
@@ -74,16 +80,24 @@ public class ScheduleRepositoryCustomImpl implements ScheduleRepositoryCustom {
                         board.writer,
                         board.boardContents,
                         schedule.scheduleStartDate,
-                        schedule.scheduleEndDate,
-                        scheduleClass.classNo))
+                        schedule.scheduleEndDate
+                )).distinct()
                 .from(board)
                 .join(schedule).on(board.boardNo.eq(schedule.boardNo))
                 .join(scheduleClass).on(schedule.scheduleNo.eq(scheduleClass.scheduleNo))
-                .where(scheduleClass.classNo.eq(condition.getClassNo()),
+                .where(getClassNoEq(condition.getClassNo()),
                         board.boardType.eq(BoardTypeEnum.SCHEDULE.getNum()),
                         board.invisibleFlag.eq(BooleanEnum.FALSE.getBool())
                 )
                 .fetch();
         return schedules;
+    }
+
+    private BooleanExpression getClassNoEq(Long classNo) {
+        if (classNo == null) {
+            return null; // null인 경우 전체 조건을 무시
+        } else {
+            return scheduleClass.classNo.eq(classNo).or(scheduleClass.classNo.eq(0L));
+        }
     }
 }

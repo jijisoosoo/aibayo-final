@@ -1,20 +1,152 @@
 $(document).ready(function() {
 
-    // checkbox 전체 선택
+    // checkbox 전체 선택 + 체크된 개수 표시
     $("#checkAll").click(function() {
         if($("#checkAll").is(":checked")) $("input[class='form-check-input']").prop("checked", true);
         else $("input[class='form-check-input']").prop("checked", false);
     });
 
-    $("input[class=chk]").click(function() {
-        var total = $("input[class='form-check-input']").length;
+    $(".form-check-input").click(function() {
         var checked = $("input[class='form-check-input']:checked").length;
 
-        if(total != checked) $("#checkAll").prop("checked", false);
-        else $("#checkAll").prop("checked", true);
+        if($("#checkAll").is(":checked")){
+            checked--
+        }
+
+        if ($("input[class='form-check-input']").length - 1 != checked){
+            $("input[id='checkAll']").prop("checked", false)
+        }
+
+        document.getElementById('checkboxCnt').innerText
+            = '(' + checked + '개)';
     });
 
+    // startDate 오늘 이후로 설정 + endDate보다 뒤일 시 endDate = null
+    $('.startDate').on('change', function () {
+        var startDate = new Date($('.startDate').val()).setHours(0, 0, 0, 0);
+        // console.log(startDate);
+        var today = new Date().setHours(0, 0, 0, 0);
+        // console.log(today);
+        if(startDate <= today){
+            Swal.fire({
+                text: "오늘 이후의 일정만 추가할 수 있습니다.",
+                icon: "warning",
+                confirmButtonColor: "#dc3545",
+                confirmButtonText: "확인",
+
+            }).then((result) => {
+                $('.startDate').val(null);
+            });
+        }
+
+        var endDate = new Date($('.endDate').val()).setHours(0, 0, 0, 0);
+        // console.log(endDate);
+        if(endDate < startDate){
+            $('.endDate').val(null);
+        }
+    });
+
+    // endDate 오늘 이후로 설정
+    $('.endDate').on('change', function () {
+        var endDate = new Date($('.endDate').val()).setHours(0, 0, 0, 0);
+        // console.log(endDate);
+        var startDate = new Date($('.startDate').val()).setHours(0, 0, 0, 0);
+        // console.log(startDate);
+        if(endDate < startDate){
+            Swal.fire({
+                text: "종료일은 시작일 이후로 설정할 수 있습니다.",
+                icon: "warning",
+                confirmButtonColor: "#dc3545",
+                confirmButtonText: "확인",
+
+            }).then((result) => {
+                $('.endDate').val(null);
+            });
+        }
+    });
+
+    $(document).on('click', '.button-submit', function () {
+
+        if(!$('.startDate').val()){
+            Swal.fire({
+                text: "시작일을 입력해주세요.",
+                icon: "warning",
+                confirmButtonColor: "#dc3545",
+                confirmButtonText: "확인",
+
+            }).then((result) => {
+                $('.startDate').focus();
+            });
+        }else if($('.form-check-input:checked').length === 0){
+            Swal.fire({
+                text: "1개 이상의 반을 선택해 주세요.",
+                icon: "warning",
+                confirmButtonColor: "#dc3545",
+                confirmButtonText: "확인",
+
+            }).then((result) => {
+                $('.form-check-input').focus();
+            });
+        }else if(!$('.default-wrapper').val()){
+            Swal.fire({
+                text: "제목을 입력해주세요.",
+                icon: "warning",
+                confirmButtonColor: "#dc3545",
+                confirmButtonText: "확인",
+
+            }).then((result) => {
+                $('.default-wrapper').focus();
+            });
+        }else if(!$('.calendar-textarea').val()){
+            Swal.fire({
+                text: "내용을 입력해주세요.",
+                icon: "warning",
+                confirmButtonColor: "#dc3545",
+                confirmButtonText: "확인",
+
+            }).then((result) => {
+                $('.calendar-textarea').focus();
+            });
+        }else{
+            var startDate = $('.startDate').val()
+                    .replace('.','-').replace('.','-')
+                + 'T00:00';
+            // console.log(startDate);
+
+            var endDate = $('.endDate').val();
+            if(endDate === ''){
+                endDate = startDate;
+            }else{
+                endDate = endDate.replace('.','-').replace('.','-') + 'T00:00'
+            }
+            // console.log(endDate);
+
+            var classList = $('.form-check-input:checked').map(function() {
+                if(this.id !== 'checkAll')
+                    return this.id;
+            }).get();
+
+            if(classList.length === $("input[class='form-check-input']").length - 1){
+                var classList = []; // 배열 초기화 (비우기)
+                classList.push(0);
+            }
+
+            let param = {
+                startDate: startDate,
+                endDate: endDate,
+                classList : classList,
+                boardTitle : $('.default-wrapper').val(),
+                boardContents : $('.calendar-textarea').val()
+            };
+            console.log("param:" + JSON.stringify(param));
+
+            let url = "/schedule/admin/addSchedule";
+            commonAjax(url, 'POST', param);
+        }
+    });
 });
+
+
 
 // textarea 사이즈 자동조절
 function autoResize(textarea) {
@@ -82,4 +214,17 @@ function chkword(obj, maxWord) {
     }
 
     $('#textcnt').html("( " + strLen + " / " + maxWord + " )");
+}
+
+function afterSuccess(response) {
+    Swal.fire({
+        title: "추가 완료",
+        text: "창을 닫으면 일정표 화면으로 돌아갑니다.",
+        icon: "success",
+        customClass: {
+            confirmButton: 'btn-ab btn-ab-swal'
+        }
+    }).then((result) => {
+        window.location.href = window.location.origin + '/schedule/admin/scheduleMain';
+    });
 }
