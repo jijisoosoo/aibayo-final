@@ -7,6 +7,7 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -16,7 +17,7 @@ public class CustomAttendanceRepositoryImpl implements CustomAttendanceRepositor
     private final QKidEntity kid = QKidEntity.kidEntity;
 
     @Override
-    public List<AttendanceDto> findAllByKinderNoAndClassNo(Long kinderNo, Long classNo) {
+    public List<AttendanceDto> findAllByKinderNoAndClassNo(Long kinderNo, Long classNo, LocalDate selectedDate) {
         return jpaQueryFactory
                 .select(Projections.constructor(AttendanceDto.class,
                         attendance.kinderNo,
@@ -26,13 +27,15 @@ public class CustomAttendanceRepositoryImpl implements CustomAttendanceRepositor
                         attendance.kidDrop,
                         attendance.kidPickup,
                         attendance.note,
-                        attendance.attendanceStatus
+                        attendance.attendanceStatus,
+                        attendance.attendanceDate
                 ))
                 .from(attendance)
                 .join(kid).on(attendance.kidNo.eq(kid.kidNo)
                         .and(attendance.kinderNo.eq(kid.kinderNo)))
                 .where(attendance.kinderNo.eq(kinderNo)
-                        .and(attendance.classNo.eq(classNo)))
+                        .and(attendance.classNo.eq(classNo))
+                        .and(attendance.attendanceDate.eq(selectedDate)))
                 .fetch();
     }
 
