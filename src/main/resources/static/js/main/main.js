@@ -1,9 +1,69 @@
-
-
 $(document).ready(function () {
+    // 시각적으로 비활성화된 스타일 적용
+    $('.none-clickable').css({
+        'pointer-events': 'none'
+    });
+
+    // 초기 로딩 시 너비 설정
+    setMealItemEqualWidth();
+
+    // 윈도우 리사이즈 시에도 재설정
+    $(window).resize(function () {
+        setMealItemEqualWidth();
+    });
+
     setWeather();
     setDust();
+
+    $(document).on('click', '.select_kid', function () {
+        let url = "/main/user/changeKid";
+        let param = {
+            kidNo: $(this).data('kid-no')
+        }
+        console.log(`param: ${JSON.stringify(param)}`);
+
+        commonAjax(url, 'POST', param);
+    });
 });
+
+function afterSuccess(response) {
+    // console.log(`response: ${response}`);
+
+    $('.main_top_box').replaceWith($(response).find('.main_top_box'));
+    $('.recent_board_box').replaceWith($(response).find('.recent_board_box'));
+    $('.weather_dust_box').replaceWith($(response).find('.weather_dust_box'));
+
+    // 시각적으로 비활성화된 스타일 적용
+    $('.none-clickable').css({
+        'pointer-events': 'none'
+    });
+
+    // 초기 로딩 시 너비 설정
+    setMealItemEqualWidth();
+
+    // 윈도우 리사이즈 시에도 재설정
+    $(window).resize(function () {
+        setMealItemEqualWidth();
+    });
+
+    setWeather();
+    setDust();
+}
+
+function setMealItemEqualWidth() {
+    let meals = $('.meal_item');
+    if (meals.length > 3) {
+        let mealWidth = $('.meal_item:first-child').outerWidth();
+        // console.log(`mealWidth: ${mealWidth}`);
+
+        meals.each(function () {
+            $(this).css({
+                width : mealWidth + 'px',
+                flex : '0'
+            });
+        });
+    }
+}
 
 function setWeather() {
     const ptyDesc = ["없음", "비", "비/눈", "눈", "", "빗방울", "빗방울눈날림", "눈날림"];
@@ -36,8 +96,11 @@ function setWeather() {
     const checkPoint = 45;
 
     if (nowMinute < checkPoint) {
+        // 자정일 경우
+        base_date = moment(now).subtract('1', 'H').format('YYYYMMDD');
         base_time = moment(now).subtract('1', 'H').format('HH30');
     }
+    // console.log(`base_date final: ${base_date}`);
     // console.log(`base_time final: ${base_time}`);
 
     let nx = $('.weather_box').data('nx');
@@ -143,7 +206,7 @@ function setDust() {
         success: function (response) {
             let item = response.response.body.items[0];
             let pm10Grade1h = item.pm10Grade1h;
-            let pm25Grade1h = item.pm25Grade1h;
+            let pm25Grade1h = item.pm25Grade1h == null ? 1 : item.pm25Grade1h;
             // console.log(`item: ${JSON.stringify(response.response.body.items[0])}`);
             // console.log(`pm10Grade1h: ${pm10Grade1h}`)
             // console.log(`pm25Grade1h: ${pm25Grade1h}`)
