@@ -205,6 +205,11 @@ public class MemberServiceImpl implements MemberService {
         return memberRepository.findByUsernameWithParentKid(username).orElse(null);
     }
 
+    @Override
+    public MemberDto getByUsernameWithParentKid(MemberSearchCondition condition) {
+        return memberRepository.findByUsernameWithParentKid(condition).orElse(null);
+    }
+
     // 계정 삭제
     // ROLE_USER : PARENT_KID 엔티티와 엮어서 ACCEPT_LOG 가져와서 MEMBER와 같이 상태값 변경
     // ROLE_TEACHER : CLASS_TEACHER 엔티티와 엮어서 ACCEPT_LOG 가져와서 MEMBER와 같이 상태값 변경

@@ -130,7 +130,8 @@
                     <li><div class="dropdown-item none-clickable">원생 선택</div></li>
                     <li><hr class="dropdown-divider"></li>
                     <li th:each="kid : ${kids}" th:object="${kid}" th:if="${kid.kidName != nowKid.kidName}">
-                        <a class="dropdown-item" href="#" th:text="*{kidName}">
+                        <a class="dropdown-item select_kid"
+                           th:data-kid-no="*{kidNo}" th:text="*{kidName}">
                             원생명
                         </a>
                     </li>

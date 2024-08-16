@@ -4,7 +4,6 @@ $(document).ready(function () {
         'pointer-events': 'none'
     });
 
-
     // 초기 로딩 시 너비 설정
     setMealItemEqualWidth();
 
@@ -15,7 +14,23 @@ $(document).ready(function () {
 
     setWeather();
     setDust();
+
+    $(document).on('click', '.select_kid', function () {
+        let url = "/main/user/changeKid";
+        let param = {
+            kidNo: $(this).data('kid-no')
+        }
+        console.log(`param: ${JSON.stringify(param)}`);
+
+        commonAjax(url, 'POST', param);
+    });
 });
+
+function afterSuccess(response) {
+    console.log(`response: ${response}`);
+
+    $('.main_top_box').replaceWith($(response).find('.main_top_box'));
+}
 
 function setMealItemEqualWidth() {
     let meals = $('.meal_item');

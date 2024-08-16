@@ -8,6 +8,7 @@ import com.aico.aibayo.dto.kid.KidDto;
 import com.aico.aibayo.dto.meal.MealDto;
 import com.aico.aibayo.dto.meal.MealSearchCondition;
 import com.aico.aibayo.dto.member.MemberDto;
+import com.aico.aibayo.dto.member.MemberSearchCondition;
 import com.aico.aibayo.jwt.JWTUtil;
 import com.aico.aibayo.service.kid.KidService;
 import com.aico.aibayo.service.meal.MealService;
@@ -26,6 +27,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -104,16 +107,30 @@ public class MainController {
 
         setMeal(loginInfo, model);
 
-        // 사용자 정보를 통해 현재 바라보는 원생 정보 가져오기
-        KidDto nowKid = kidService.getByKidNo(loginInfo.getKidNo());
-        log.info("nowKid: {}", nowKid);
+        setKid(loginInfo, model);
 
-        // 사용자 정보를 통해 연관 있는 원생 정보 가져오기
-        List<KidDto> kids = kidService.getAllByParent(loginInfo.getId());
-        log.info("kids: {}", kids);
+        setKinderInfo(loginInfo, model);
 
-        model.addAttribute("nowKid", nowKid);
-        model.addAttribute("kids", kids);
+        setLoginInfo(loginInfo, model);
+
+        return "/user/main/main";
+    }
+
+    @PostMapping("/user/changeKid")
+    public String changeKid(@ModelAttribute("loginInfo") MemberDto loginInfo,
+                            @RequestBody MemberDto memberDto, Model model) {
+        MemberSearchCondition condition = new MemberSearchCondition();
+        condition.setUsername(loginInfo.getUsername());
+        condition.setKidNo(memberDto.getKidNo());
+        log.info("selectKid condition: {}", condition);
+        loginInfo = memberService.getByUsernameWithParentKid(condition);
+
+        session.setAttribute("loginInfo", loginInfo);
+        model.addAttribute("loginInfo", loginInfo);
+
+        setMeal(loginInfo, model);
+
+        setKid(loginInfo, model);
 
         setKinderInfo(loginInfo, model);
 
@@ -131,6 +148,19 @@ public class MainController {
             }
         }
         return null;
+    }
+
+    private void setKid(MemberDto loginInfo, Model model) {
+        // 사용자 정보를 통해 현재 바라보는 원생 정보 가져오기
+        KidDto nowKid = kidService.getByKidNo(loginInfo.getKidNo());
+        log.info("nowKid: {}", nowKid);
+
+        // 사용자 정보를 통해 연관 있는 원생 정보 가져오기
+        List<KidDto> kids = kidService.getAllByParent(loginInfo.getId());
+        log.info("kids: {}", kids);
+
+        model.addAttribute("nowKid", nowKid);
+        model.addAttribute("kids", kids);
     }
 
     private static void setLoginInfo(MemberDto loginInfo, Model model) {

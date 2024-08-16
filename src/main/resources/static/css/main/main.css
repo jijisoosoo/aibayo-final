@@ -252,6 +252,10 @@
     border-top: 1px rgb(195 195 195 / 95%) solid;
 }
 
+.select_kid {
+    cursor: pointer;
+}
+
 /* 현황 테이블 */
 .data_table {
     display: flex;
