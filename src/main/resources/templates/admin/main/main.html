@@ -23,59 +23,29 @@
             <div class="meal_today_title">오늘의 식단</div>
 
 
-            <div class="meal_content_box">
+            <div class="meal_content_box scrollable">
 
-                <div class="meal_item">
+                <th:block th:if="${meal != null}">
+                <div class="meal_item" th:each="detail : ${meal.mealDetails}"
+                     th:object="${detail}">
 
-                    <div class="meal_item_title">오전간식</div>
+                    <div class="meal_item_title" th:text="*{mealTypeName}">식단시간</div>
 
 
                     <div class="meal_item_body">
 
-                        <div class="meal_item_text">요구르트</div>
-
-                        <div class="meal_item_text">딸기</div>
-
-                        <div class="meal_item_text">복숭아</div>
+                        <div class="meal_item_text" th:each="menu : *{mealMenu.split('::')}"
+                             th:text="${menu}">
+                            메뉴명
+                        </div>
 
                     </div>
 
                 </div>
+                </th:block>
 
-
-                <div class="meal_item">
-
-                    <div class="meal_item_title">점심</div>
-
-
-                    <div class="meal_item_body">
-
-                        <div class="meal_item_text">잔치국수</div>
-
-                        <div class="meal_item_text">김치</div>
-
-                        <div class="meal_item_text">방울토마토</div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="meal_item">
-
-                    <div class="meal_item_title">오후간식</div>
-
-
-                    <div class="meal_item_body">
-
-                        <div class="meal_item_text">롤케이크</div>
-
-                        <div class="meal_item_text">우유</div>
-
-                        <div class="meal_item_text">요거트</div>
-
-                    </div>
-
+                <div class="meal_empty" th:if="${meal == null || meal.mealDetails.size() == 0}">
+                    식단이 등록되지 않았습니다.
                 </div>
 
             </div>
@@ -95,10 +65,12 @@
             </div>
 
 
-            <div class="login_user_name">원장A</div>
+            <div class="login_user_name" th:text="|${loginInfo.name} ${roleName}|">사용자</div>
 
 
-            <div class="login_kinder_name text_div text-compact">테스트어린이집</div>
+            <div class="login_kinder_name text_div text-compact" th:text="${kinderInfo.kinderName}">
+                유치원명
+            </div>
 
 
             <div class="login_setting_box">
