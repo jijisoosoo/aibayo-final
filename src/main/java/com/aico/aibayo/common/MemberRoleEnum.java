@@ -17,7 +17,7 @@ public enum MemberRoleEnum {
         this.name = name;
     }
 
-    static MemberRoleEnum findByType(int role) {
+    public static MemberRoleEnum findByType(int role) {
         for (MemberRoleEnum memberRole : MemberRoleEnum.values()) {
             if (role == memberRole.role) {
                 return memberRole;

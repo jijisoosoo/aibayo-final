@@ -67,7 +67,7 @@
                 </div>
 
 
-                <div class="login_user_name">학부모A</div>
+                <div class="login_user_name" th:text="|${loginInfo.name} ${roleName}|">사용자</div>
 
 
                 <div class="login_setting_box">
@@ -93,13 +93,21 @@
                     <div class="kid_info_box">
 
                         <div class="kid_info_row">
-                            <div class="kid_info_text text-compact">김원생</div>
-                            <div class="kid_info_text text-compact">(2020.06.23)</div>
+                            <div class="kid_info_text text-compact" th:text="${nowKid.kidName}">원생명</div>
+                            <div class="kid_info_text text-compact"
+                                 th:text="|(${#temporals.format(nowKid.kidBirth, 'yyyy.MM.dd')})|">
+                                (yyyy.MM.dd)
+                            </div>
                         </div>
 
                         <div class="kid_info_row">
-                            <div class="kid_info_text text-compact">테스트어린이집</div>
-                            <div class="kid_info_text text-compact">(A반)</div>
+                            <div class="kid_info_text text-compact"
+                                 th:text="${kinderInfo.kinderName}">
+                                유치원명
+                            </div>
+<!--                            <div class="kid_info_text text-compact">-->
+<!--                                (소속반)-->
+<!--                            </div>-->
                         </div>
 
                     </div>
@@ -112,13 +120,20 @@
 
                 </button>
 
-                <ul class="dropdown-menu kid_info_dropdown_menu">
-                    <li><a class="dropdown-item" href="/kid/user/detail">현재 원생 정보 확인</a></li>
+                <ul class="dropdown-menu kid_info_dropdown_menu" data-bs-auto-close="outside">
+                    <li>
+                        <a class="dropdown-item" th:href="@{|/kid/user/${loginInfo.kidNo}|}">
+                            현재 원생 정보 확인
+                        </a>
+                    </li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><button class="dropdown-item" type="button">원생 선택</button></li>
-                    <li><a class="dropdown-item" href="#">김원생</a></li>
-                    <li><a class="dropdown-item" href="#">박원생</a></li>
-                    <li><a class="dropdown-item" href="#">이원생</a></li>
+                    <li><div class="dropdown-item none-clickable">원생 선택</div></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li th:each="kid : ${kids}" th:object="${kid}" th:if="${kid.kidName != nowKid.kidName}">
+                        <a class="dropdown-item" href="#" th:text="*{kidName}">
+                            원생명
+                        </a>
+                    </li>
                 </ul>
 
             </div>

@@ -245,11 +245,4 @@ public class MemberServiceImpl implements MemberService {
             acceptLogRepository.save(acceptLogEntity);
         }
     }
-    @Override
-    public String getKinderSggListByKinderNo(Long kinderNo) {
-        return registerKinderRepository.findById(kinderNo)
-                .map(RegisterKinderEntity :: getSggList)
-                .orElseThrow(() -> new EntityNotFoundException("엔티티를 찾을 수 없습니다."));
-
-    }
 }

@@ -91,7 +91,7 @@ public class MealServiceImpl implements MealService {
     @Transactional
     public MealDto updateMeal(MealDto mealDto, List<MultipartFile> files) {
         MealEntity target = mealRepository.findById(mealDto.getMealNo())
-                .orElseThrow(() -> new EntityNotFoundException("존재하지 않는 엔티티입니다."));
+                .orElseThrow(() -> new EntityNotFoundException("엔티티를 찾을 수 없습니다."));
 
         target.setMealDate(mealDto.getMealDate() == null ? target.getMealDate() : mealDto.getMealDate());
         target.setMealModifyDate(LocalDateTime.now());

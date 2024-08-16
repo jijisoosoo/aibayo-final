@@ -20,6 +20,4 @@ public interface MemberService {
     void deleteMember(String username, String role);
 
     void signUpProcess(MemberDto memberDto);
-
-    String getKinderSggListByKinderNo(Long kinderNo);
 }
