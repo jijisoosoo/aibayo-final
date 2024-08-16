@@ -57,7 +57,6 @@
   position: relative;
   width: 100%;
   height: 70%;
-  /*font-family: var(--presets-body2-font-family);*/
   font-weight: var(--presets-body2-font-weight);
   color: #828282;
   font-size: var(--presets-body2-font-size);
@@ -129,7 +128,6 @@
 .container .text-wrapper-6 {
   position: relative;
   width: fit-content;
-  /*font-family: var(--small-text-font-family);*/
   font-weight: var(--small-text-font-weight);
   color: #ffffff;
   font-size: var(--small-text-font-size);
@@ -158,7 +156,6 @@
 .container .text-wrapper-7 {
   position: relative;
   width: fit-content;
-  /*font-family: var(--small-text-font-family);*/
   font-weight: var(--small-text-font-weight);
   color: #999999;
   font-size: var(--small-text-font-size);
@@ -185,7 +182,6 @@
 .container .text-wrapper-8 {
   position: relative;
   width: fit-content;
-  /*font-family: var(--small-text-font-family);*/
   font-weight: var(--small-text-font-weight);
   color: #000000;
   font-size: var(--small-text-font-size);
@@ -197,7 +193,6 @@
 
 .container .cal-schedule {
   display: flex;
-  height: 964px;
   align-items: center;
   justify-content: center;
   gap: 16px;
@@ -243,7 +238,6 @@
 .container .text-wrapper-9 {
   position: relative;
   width: fit-content;
-  /*font-family: "Lato-SemiBold", Helvetica;*/
   font-weight: 600;
   color: #000000;
   font-size: 22px;
@@ -302,7 +296,6 @@
 .container .text-wrapper-10 {
   position: relative;
   width: fit-content;
-  /*font-family: "Lato-Medium", Helvetica;*/
   font-weight: 500;
   color: #cd6969;
   font-size: 15px;
@@ -314,7 +307,6 @@
 .container .text-wrapper-11 {
   position: relative;
   width: fit-content;
-  /*font-family: "Lato-Medium", Helvetica;*/
   font-weight: 500;
   color: #000000;
   font-size: 15px;
@@ -326,7 +318,6 @@
 .container .text-wrapper-12 {
   position: relative;
   width: fit-content;
-  /*font-family: "Lato-Medium", Helvetica;*/
   font-weight: 500;
   color: #61a3f1;
   font-size: 15px;
@@ -375,7 +366,6 @@
   color: #b3b3b3;
   position: relative;
   width: fit-content;
-  /*font-family: "Lato-Medium", Helvetica;*/
   font-weight: 500;
   font-size: 18px;
   text-align: center;
@@ -399,7 +389,6 @@
   color: #61a3f1;
   position: relative;
   width: fit-content;
-  /*font-family: "Lato-Medium", Helvetica;*/
   font-weight: 500;
   font-size: 18px;
   text-align: center;
@@ -426,7 +415,6 @@
   color: #cd6969;
   position: relative;
   width: fit-content;
-  /*font-family: "Lato-Medium", Helvetica;*/
   font-weight: 500;
   font-size: 18px;
   text-align: center;
@@ -439,7 +427,6 @@
   color: #000000;
   position: relative;
   width: fit-content;
-  /*font-family: "Lato-Medium", Helvetica;*/
   font-weight: 500;
   font-size: 18px;
   text-align: center;
@@ -461,7 +448,7 @@
 
 .container .schedule {
   width: 40%;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 11px 32px 32px;
   background-color: #f5f5f5;
   border-radius: 20px;
@@ -510,7 +497,6 @@
 .container .text-wrapper-15 {
   position: relative;
   width: fit-content;
-  /*font-family: "Lato-Medium", Helvetica;*/
   font-weight: 500;
   color: #000000;
   font-size: 20px;
@@ -534,7 +520,6 @@
 .container .text-wrapper-16 {
   position: relative;
   width: fit-content;
-  /*font-family: "Lato-Medium", Helvetica;*/
   font-weight: 500;
   color: #7b7b7b;
   font-size: 18px;
@@ -544,14 +529,13 @@
 }
 
 .container .schedule-2 {
-  height: 828px;
   gap: 15px;
-  width: fill;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   align-self: stretch;
+  height: auto;
 }
 
 .container .accordion-header {
@@ -621,17 +605,25 @@ flex: 0 0 auto;
 }
 
 .container .ellipse {
-position: relative;
-width: 10px;
-height: 10px;
-background-color: #b4ff91;
-border-radius: 5px;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  align-self: flex-start;
+  margin-top: 7px;
+}
+
+.ellipse_all{
+  background-color: #3788d8;
+}
+
+.ellipse_class{
+  background-color: #ff85aa;
 }
 
 .container .text-wrapper-17 {
-position: relative;
-flex: 1;
-/*font-family: "Lato-Medium", Helvetica;*/
+  position: relative;
+  flex: 1;
   font-weight: 500;
   color: #747373;
   font-size: 16px;
@@ -640,10 +632,19 @@ flex: 1;
   width: fit-content;
 }
 
+.span-wrapper-17 {
+  position: relative;
+  font-weight: 500;
+  color: #747373;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 22px;
+  width: 12px;
+}
+
 .container .text-wrapper-18 {
   position: relative;
   width: 321px;
-  /*font-family: "Lato-Medium", Helvetica;*/
   font-weight: 500;
   color: #000000;
   font-size: 18px;
@@ -658,6 +659,10 @@ flex: 1;
   height: 10px;
   background-color: #ffaadd;
   border-radius: 5px;
+}
+
+.schedule-contents {
+  line-height: 20px;
 }
 
 #calendar{
@@ -681,30 +686,53 @@ flex: 1;
   height: 30px;
 }
 
+.classNamesDiv{
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 16px;
+}
+
+.classNames{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.fc-day-today{
+  border-radius: 15px;
+  background-color: rgba(255, 220, 40, .15) !important;
+}
+
+.control-div{
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.control-wrapper{
+  font-size: 14px;
+  color: gray;
+}
+
 :root {
   --x-1: rgba(133, 199, 233, 1);
   --x-2: rgba(13, 17, 83, 1);
   --x-3: rgba(255, 255, 255, 1);
   --blue-1: rgba(47, 128, 237, 1);
-  /*---font-family: "Noto Sans", Helvetica;*/
   ---font-weight: 500;
   ---font-size: 100px;
   ---letter-spacing: -5px;
   ---line-height: 89.99999761581421%;
   ---font-style: normal;
-  /*--font-selected-menu-font-family: "Inter", Helvetica;*/
   --font-selected-menu-font-weight: 600;
   --font-selected-menu-font-size: 48px;
   --font-selected-menu-letter-spacing: 0px;
   --font-selected-menu-line-height: normal;
   --font-selected-menu-font-style: normal;
-  /*--presets-body2-font-family: "Inter", Helvetica;*/
   --presets-body2-font-weight: 400;
   --presets-body2-font-size: 16px;
   --presets-body2-letter-spacing: 0px;
   --presets-body2-line-height: 24px;
   --presets-body2-font-style: normal;
-  /*--small-text-font-family: "Inter", Helvetica;*/
   --small-text-font-weight: 500;
   --small-text-font-size: 16px;
   --small-text-letter-spacing: 0px;
