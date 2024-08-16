@@ -43,10 +43,6 @@ public class AnnounceController {
     private final CommentRepository commentRepository;
     private JWTUtil jwtUtil;
 
-    // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
-//    private int roleNo = 1;
-//    private Long id = 2L;
-//    private Long kinderNo = null;
 
     @GetMapping("/admin/card")
     public String admincard(
@@ -82,7 +78,6 @@ public class AnnounceController {
                 }
             }
         }
-
         log.info(">>>>>>>>>>>>>>>>>>>>>>pagination");
         log.info("startPage: {}", startPage);
         log.info("endPage: {}", endPage);
