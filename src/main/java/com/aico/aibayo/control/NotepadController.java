@@ -30,14 +30,6 @@ public class NotepadController {
     private final ClassService classService;
     private final KidService kidService;
 
-    // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
-//    private int roleNo = 1;
-//    private Long id = 2L;
-//    private Long kinderNo = 1L;
-
-//    private int roleNo = 2;
-//    private Long id = 31L;
-
     @GetMapping("/admin/list")
     public String adminList(@ModelAttribute("loginInfo") MemberDto loginInfo,
                             @RequestParam(defaultValue = "1") int page, Model model) {
@@ -46,7 +38,7 @@ public class NotepadController {
         NotepadSearchCondition condition = new NotepadSearchCondition();
         condition.setKinderNo(loginInfo.getKinderNo());
 
-        model.addAttribute("kinderNo", 1L);
+        model.addAttribute("kinderNo", loginInfo.getKinderNo());
 
         Page<NotepadDto> notepads = notepadService.getAllByKinderNo(condition, page);
 
@@ -56,7 +48,7 @@ public class NotepadController {
 
     @PostMapping("/admin/searchDate")
     public String adminSearchDate(@RequestBody NotepadSearchCondition condition,
-                             Model model) {
+                                  Model model) {
         log.info("{}", condition);
 
         Page<NotepadDto> notepads = notepadService.getAllByKinderNo(condition, 1);
@@ -69,9 +61,9 @@ public class NotepadController {
     public String userList(@ModelAttribute("loginInfo") MemberDto loginInfo,
                            @RequestParam(defaultValue = "1") int page, Model model) {
         NotepadSearchCondition condition = new NotepadSearchCondition();
-        condition.setKidNo(loginInfo.getKinderNo());
+        condition.setKidNo(loginInfo.getKidNo());
 
-        model.addAttribute("kidNo", 1L);
+        model.addAttribute("kidNo", loginInfo.getKidNo());
 
         Page<NotepadDto> notepads = notepadService.getAllByKidNo(condition, page);
 
@@ -80,7 +72,7 @@ public class NotepadController {
 
     @PostMapping("/user/searchDate")
     public String userSearchDate(@RequestBody NotepadSearchCondition condition,
-                             Model model) {
+                                 Model model) {
         log.info("{}", condition);
 
         Page<NotepadDto> notepads = notepadService.getAllByKidNo(condition, 1);
