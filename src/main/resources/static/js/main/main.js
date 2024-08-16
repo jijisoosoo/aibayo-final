@@ -27,9 +27,27 @@ $(document).ready(function () {
 });
 
 function afterSuccess(response) {
-    console.log(`response: ${response}`);
+    // console.log(`response: ${response}`);
 
     $('.main_top_box').replaceWith($(response).find('.main_top_box'));
+    $('.recent_board_box').replaceWith($(response).find('.recent_board_box'));
+    $('.weather_dust_box').replaceWith($(response).find('.weather_dust_box'));
+
+    // 시각적으로 비활성화된 스타일 적용
+    $('.none-clickable').css({
+        'pointer-events': 'none'
+    });
+
+    // 초기 로딩 시 너비 설정
+    setMealItemEqualWidth();
+
+    // 윈도우 리사이즈 시에도 재설정
+    $(window).resize(function () {
+        setMealItemEqualWidth();
+    });
+
+    setWeather();
+    setDust();
 }
 
 function setMealItemEqualWidth() {
