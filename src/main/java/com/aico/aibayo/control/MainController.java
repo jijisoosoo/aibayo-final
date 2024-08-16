@@ -101,7 +101,7 @@ public class MainController {
 
     private void setStationName(MemberDto loginInfo, Model model) {
         String kinderSggCode = memberService.getKinderSggListByKinderNo(loginInfo.getKinderNo());
-        String stationName = SggInfoEnum.findByKinderSggCode(kinderSggCode).getStationName();
-        model.addAttribute("stationName", stationName);
+        SggInfoEnum sggInfo = SggInfoEnum.findByKinderSggCode(kinderSggCode);
+        model.addAttribute("sggInfo", sggInfo);
     }
 }

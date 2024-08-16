@@ -461,15 +461,15 @@
 
 .weather_temperature {
     color: black;
-    font-size: 70px;
+    font-size: 60px;
     font-weight: 400;
-    line-height: 70px;
+    line-height: 60px;
     word-wrap: break-word;
 }
 
 .weather_desc {
     color: black;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 500;
     word-wrap: break-word;
     padding-bottom: 17px;
