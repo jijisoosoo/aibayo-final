@@ -2,10 +2,8 @@ package com.aico.aibayo.repository.schedule;
 
 import com.aico.aibayo.common.BooleanEnum;
 import com.aico.aibayo.dto.ClassDto;
-import com.aico.aibayo.entity.QBoardEntity;
-import com.aico.aibayo.entity.QClassEntity;
-import com.aico.aibayo.entity.QScheduleClassEntity;
-import com.aico.aibayo.entity.QScheduleEntity;
+import com.aico.aibayo.dto.schedule.ScheduleClassDto;
+import com.aico.aibayo.entity.*;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -22,21 +20,21 @@ public class ScheduleClassRepositoryCustomImpl implements ScheduleClassRepositor
     private final QBoardEntity board = QBoardEntity.boardEntity;
 
     @Override
-    public List<ClassDto> findClassByScheduleNo(Long scheduleNo) {
-        List<ClassDto> classes = jpaQueryFactory
-                .select(Projections.constructor(ClassDto.class,
-                        clazz.classNo,
-                        clazz.className,
-                        clazz.kinderNo))
-                .from(clazz)
-                .join(scheduleClass).on(clazz.classNo.eq(scheduleClass.classNo))
+    public List<ScheduleClassDto> findClassByScheduleNo(Long scheduleNo) {
+        List<ScheduleClassDto> scheduleClassDtos = jpaQueryFactory
+                .select(Projections.constructor(ScheduleClassDto.class,
+                        scheduleClass.scheduleNo,
+                        scheduleClass.classNo,
+                        clazz.className))
+                .from(scheduleClass)
+                .leftJoin(clazz).on(scheduleClass.classNo.eq(clazz.classNo))
                 .join(schedule).on(scheduleClass.scheduleNo.eq(schedule.scheduleNo))
                 .join(board).on(schedule.boardNo.eq(board.boardNo))
                 .where(scheduleClass.scheduleNo.eq(scheduleNo),
                         board.invisibleFlag.eq(BooleanEnum.FALSE.getBool()))
                 .fetch();
 
-        return classes;
+        return scheduleClassDtos;
 
     }
 }

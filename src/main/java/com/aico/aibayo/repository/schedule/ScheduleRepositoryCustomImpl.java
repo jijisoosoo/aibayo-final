@@ -2,6 +2,7 @@ package com.aico.aibayo.repository.schedule;
 
 import com.aico.aibayo.common.BoardTypeEnum;
 import com.aico.aibayo.common.BooleanEnum;
+import com.aico.aibayo.dto.ClassDto;
 import com.aico.aibayo.dto.schedule.ScheduleDto;
 import com.aico.aibayo.dto.schedule.ScheduleSearchCondition;
 import com.aico.aibayo.entity.*;
@@ -46,7 +47,7 @@ public class ScheduleRepositoryCustomImpl implements ScheduleRepositoryCustom {
     }
 
     @Override
-    public List<ScheduleDto> findListByDay(ScheduleSearchCondition condition) {
+    public List<ScheduleDto> findAllByDay(ScheduleSearchCondition condition) {
         List<ScheduleDto> schedules = jpaQueryFactory
                 .select(Projections.constructor(ScheduleDto.class,
                         board.boardNo,
@@ -63,14 +64,15 @@ public class ScheduleRepositoryCustomImpl implements ScheduleRepositoryCustom {
                 .join(scheduleClass).on(schedule.scheduleNo.eq(scheduleClass.scheduleNo))
                 .where(schedule.scheduleStartDate.loe(condition.getSelectedDate()),
                         schedule.scheduleEndDate.goe(condition.getSelectedDate()),
-                        getClassNoEq(condition.getClassNo())
+                        getClassNoEq(condition.getClassNo()),
+                        board.invisibleFlag.eq(BooleanEnum.FALSE.getBool())
                 )
                 .fetch();
         return schedules;
     }
 
     @Override
-    public List<ScheduleDto> findListByClass(ScheduleSearchCondition condition) {
+    public List<ScheduleDto> findAllByClass(ScheduleSearchCondition condition) {
         List<ScheduleDto> schedules = jpaQueryFactory
                 .select(Projections.constructor(ScheduleDto.class,
                         board.boardNo,
@@ -114,6 +116,64 @@ public class ScheduleRepositoryCustomImpl implements ScheduleRepositoryCustom {
                 )
                 .fetchOne();
         return scheduleDto;
+    }
+
+    @Override
+    public List<ScheduleDto> findAllByClassList(ScheduleSearchCondition condition) {
+        List<Long> classNos = new java.util.ArrayList<>(condition.getClassDtos().stream()
+                .map(ClassDto::getClassNo).toList());
+        classNos.add(0L);
+
+        List<ScheduleDto> schedules = jpaQueryFactory
+                .select(Projections.constructor(ScheduleDto.class,
+                        board.boardNo,
+                        schedule.scheduleNo,
+                        board.kinderNo,
+                        board.boardTitle,
+                        board.writer,
+                        board.boardContents,
+                        schedule.scheduleStartDate,
+                        schedule.scheduleEndDate
+                )).distinct()
+                .from(board)
+                .join(schedule).on(board.boardNo.eq(schedule.boardNo))
+                .join(scheduleClass).on(schedule.scheduleNo.eq(scheduleClass.scheduleNo))
+                .where(scheduleClass.classNo.in(classNos),
+                        board.boardType.eq(BoardTypeEnum.SCHEDULE.getNum()),
+                        board.invisibleFlag.eq(BooleanEnum.FALSE.getBool())
+                )
+                .fetch();
+        return schedules;
+    }
+
+    @Override
+    public List<ScheduleDto> findAllByDayAndClassList(ScheduleSearchCondition condition) {
+        List<Long> classNos = new java.util.ArrayList<>(condition.getClassDtos().stream()
+                .map(ClassDto::getClassNo).toList());
+        classNos.add(0L);
+
+        List<ScheduleDto> schedules = jpaQueryFactory
+                .select(Projections.constructor(ScheduleDto.class,
+                        board.boardNo,
+                        schedule.scheduleNo,
+                        board.kinderNo,
+                        board.boardTitle,
+                        board.writer,
+                        board.boardContents,
+                        schedule.scheduleStartDate,
+                        schedule.scheduleEndDate
+                )).distinct()
+                .from(board)
+                .join(schedule).on(board.boardNo.eq(schedule.boardNo))
+                .join(scheduleClass).on(schedule.scheduleNo.eq(scheduleClass.scheduleNo))
+                .where(scheduleClass.classNo.in(classNos),
+                        schedule.scheduleStartDate.loe(condition.getSelectedDate()),
+                        schedule.scheduleEndDate.goe(condition.getSelectedDate()),
+                        board.boardType.eq(BoardTypeEnum.SCHEDULE.getNum()),
+                        board.invisibleFlag.eq(BooleanEnum.FALSE.getBool())
+                )
+                .fetch();
+        return schedules;
     }
 
     private BooleanExpression getClassNoEq(Long classNo) {
