@@ -11,6 +11,7 @@ import com.aico.aibayo.repository.meal.MealRepository;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -181,6 +182,13 @@ public class MealServiceImpl implements MealService {
                     MealEntity deleted = mealRepository.save(target);
                     return MealDto.toDto(deleted);
                 }).orElse(null);
+    }
+
+    @Override
+    public MealDto getByToday() {
+        return mealRepository.findTop1ByMealDateAndMealDeleteFlag(LocalDate.now(), BooleanEnum.FALSE.getBool())
+                .map(MealDto :: toDto)
+                .orElse(null);
     }
 
     private void setMealDetail(List<MultipartFile> files, MealEntity target,

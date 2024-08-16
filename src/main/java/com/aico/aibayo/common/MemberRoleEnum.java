@@ -1,15 +1,20 @@
 package com.aico.aibayo.common;
 
+import lombok.Getter;
+
+@Getter
 public enum MemberRoleEnum {
-    ADMIN(0),
-    PRINCIPAL(1),
-    TEACHER(2),
-    PARENT(3);
+    ADMIN(0, ""),
+    PRINCIPAL(1, "원장님"),
+    TEACHER(2, "선생님"),
+    PARENT(3, "학부모님");
 
     private final int role;
+    private final String name;
 
-    MemberRoleEnum(int role) {
+    MemberRoleEnum(int role, String name) {
         this.role = role;
+        this.name = name;
     }
 
     static MemberRoleEnum findByType(int role) {
