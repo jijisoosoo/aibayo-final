@@ -7,7 +7,7 @@ $(document).ready(function() {
         // console.log("반 변경:" + classNo);
 
         let param = {
-            classNo: classNo
+            classNo: classNo == null ? null : classNo
         };
 
         console.log("param:" + JSON.stringify(param));
@@ -15,6 +15,14 @@ $(document).ready(function() {
         let url = "/schedule/admin/scheduleMainByClass";
 
         commonAjax(url, 'POST', param);
+
+    });
+
+    $(document).on('click', '#scheduleWrite', function () {
+
+        let url = "/schedule/admin/scheduleWrite";
+
+        commonAjax(url, 'GET');
 
     });
 
@@ -47,7 +55,6 @@ function showCalendar(initialSelectedValue, selectedValue){
             // center: 'title today',
             center: 'title',
             right: 'next'
-            // right: 'dayGridMonth'
         },
         dayMaxEvents: true,
         buttonText: {
@@ -103,6 +110,18 @@ function showCalendar(initialSelectedValue, selectedValue){
             }
         },
         events: eventsData
+
+    });
+
+    $(document).on('click', '.fc-day', function () {
+        $('.fc-day').css({
+            'background-color': 'rgba(0,0,0,0)'
+        });
+
+        $(this).css({
+            'border-radius': '15px',
+            'background-color': 'rgba(55,55,55,0.15)'
+        });
     });
 
     calendar.render();
@@ -113,33 +132,57 @@ function getEvents() {
     const scheduleElements = document.querySelectorAll('.schedule_values');
     const events = [];
 
+
     scheduleElements.forEach(element => {
+        let endDate = element.getAttribute('data-schedule-end-date');
+
         const event = {
             title: element.getAttribute('data-board-title'),
             start: element.getAttribute('data-schedule-start-date').split('T')[0], // 날짜만 추출
-            end: element.getAttribute('data-schedule-end-date') ? element.getAttribute('data-schedule-end-date').split('T')[0] : null, // 종료 날짜가 있을 경우에만 추가
+            end: endDate ? addOneDayAndFormat(endDate) : null,
             classNo: parseInt(element.getAttribute('data-class-no'), 10),
             contents: element.getAttribute('data-board-contents'),
+            backgroundColor: element.getAttribute('data-class-list').length === 2 ? '#3788d8' : '#ff85aa',
+            borderColor : element.getAttribute('data-class-list').length === 2 ? '#3788d8' : '#ff85aa',
             location: '' // location 값이 없으므로 빈 문자열로 설정
         };
+
         events.push(event);
     });
 
     return events;
 }
 
-let isFromShowDaySchedule = false
+function addOneDayAndFormat(dateString) {
+    // T를 기준으로 분리하여 날짜 부분만 가져옴
+    var datePart = dateString.split('T')[0];
+
+    // Date 객체로 변환
+    var date = new Date(datePart);
+
+    // 하루를 추가
+    date.setDate(date.getDate() + 1);
+
+    // 날짜를 'yyyy-mm-dd' 형식으로 변환
+    var year = date.getFullYear();
+    var month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1 필요
+    var day = String(date.getDate()).padStart(2, '0');
+
+    return year + '-' + month + '-' + day;
+}
+
 
 function showDaySchedule(selectedValue){
     // 선택된 값에 따라 해당 div 보이기
-    $('.' + selectedValue).show();
     var selectedValueStr = selectedValue.replace('-','년 ').replace('-','월 ').concat('일');
     document.getElementById("selectedDate").innerHTML = selectedValueStr;
 
     let url = "/schedule/admin/scheduleMainByDay"
+    let classNo = $('.dropdown-class').val();
 
     let param = {
         selectedDate : selectedValue + 'T00:00:00',
+        classNo : classNo == null ? null : classNo
     }
     // console.log("param : " + JSON.stringify(param));
 
@@ -158,6 +201,5 @@ function afterSuccess(response, method) {
     if (ifClassNoExist === 1) {
         console.log("reload by class");
         showCalendar();
-        //지금은 없는 날짜 찍어도 이벤트 나옴ㅋㅋ
     }
 }

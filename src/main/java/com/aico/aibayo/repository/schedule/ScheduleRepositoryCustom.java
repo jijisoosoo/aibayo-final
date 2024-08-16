@@ -9,4 +9,5 @@ public interface ScheduleRepositoryCustom {
     List<ScheduleDto> findAllByKinderNo(ScheduleSearchCondition condition);
     List<ScheduleDto> findListByDay(ScheduleSearchCondition condition);
     List<ScheduleDto> findListByClass(ScheduleSearchCondition condition);
+    ScheduleDto findOneByScheduleNo(ScheduleSearchCondition condition);
 }
