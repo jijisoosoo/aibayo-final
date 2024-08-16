@@ -139,22 +139,7 @@ public class AttendanceController {
         return "admin/attendance/detailWrite"; // 이 경로는 작성 페이지의 템플릿 경로로 수정해 주세요.
     }
 
-//<<<<<<< HEAD
-//    @PostMapping("/admin/write")
-//    public String writePage(@RequestBody List<AttendanceDto> attendanceList) {
-//        System.out.println("write page post ok");
-//        // AttendanceDto 리스트 처리 로직
-//        for (AttendanceDto dto : attendanceList) {
-//            System.out.println("Received DTO: " + dto);
-//            attendanceService.createAttendance(dto);
-//        }
-//        return "admin/attendance/detailToday";
-//    }
-
-//    @PostMapping("/admin/write")
-//=======
     @PostMapping("/write")
-//>>>>>>> develop
     public ResponseEntity<?> writePage(@RequestBody List<Map<String, Object>> attendanceList) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
