@@ -1,7 +1,9 @@
 package com.aico.aibayo.control;
 
+import com.aico.aibayo.common.BooleanEnum;
 import com.aico.aibayo.common.SggInfoEnum;
 import com.aico.aibayo.dto.meal.MealDto;
+import com.aico.aibayo.dto.meal.MealSearchCondition;
 import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.jwt.JWTUtil;
 import com.aico.aibayo.service.meal.MealService;
@@ -10,6 +12,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.time.LocalDate;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,7 +61,7 @@ public class MainController {
         request.setAttribute("role", role);
 
         // 오늘 식단 정보 세팅
-        setMeal(model);
+        setMeal(loginInfo, model);
 
         // 유치원에 맞는 위치의 미세먼지 정보 세팅
         setStationName(loginInfo, model);
@@ -93,7 +96,7 @@ public class MainController {
         request.setAttribute("username", username);
         request.setAttribute("role", role);
 
-        setMeal(model);
+        setMeal(loginInfo, model);
 
         // 유치원에 맞는 미세먼지 정보 세팅
         setStationName(loginInfo, model);
@@ -114,8 +117,13 @@ public class MainController {
         return null;
     }
 
-    private void setMeal(Model model) {
-        MealDto mealDto = mealService.getByToday();
+    private void setMeal(MemberDto loginInfo, Model model) {
+        MealSearchCondition condition = new MealSearchCondition();
+        condition.setMealDate(LocalDate.now());
+        condition.setKinderNo(loginInfo.getKinderNo());
+        condition.setMealDeleteFlag(BooleanEnum.FALSE.getBool());
+
+        MealDto mealDto = mealService.getByToday(condition);
         model.addAttribute("meal", mealDto);
         log.info("today meal: {}", mealDto);
     }

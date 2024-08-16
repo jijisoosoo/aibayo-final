@@ -9,5 +9,5 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface MealRepository extends JpaRepository<MealEntity, Long>, MealRepositoryCustom {
-    Optional<MealEntity> findTop1ByMealDateAndMealDeleteFlag(LocalDate now, String bool);
+    Optional<MealEntity> findTop1ByMealDateAndKinderNoAndMealDeleteFlag(LocalDate now, Long kinderNo, String bool);
 }

@@ -185,9 +185,13 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public MealDto getByToday() {
-        return mealRepository.findTop1ByMealDateAndMealDeleteFlag(LocalDate.now(), BooleanEnum.FALSE.getBool())
-                .map(MealDto :: toDto)
+    public MealDto getByToday(MealSearchCondition condition) {
+        return mealRepository.findTop1ByMealDateAndKinderNoAndMealDeleteFlag(
+                        condition.getMealDate(),
+                        condition.getKinderNo(),
+                        condition.getMealDeleteFlag()
+                )
+                .map(MealDto::toDto)
                 .orElse(null);
     }
 
