@@ -10,9 +10,8 @@ import java.util.HashMap;
 
 @Service
 public interface ReturnHomeService {
-    Page<ReturnHomeDto> findAllByKinderNoCard(ReturnHomeSearchCondition condition, HashMap<String, Object> hashMap);
-    Page<ReturnHomeDto> findAllByKinderNoList(ReturnHomeSearchCondition condition, HashMap<String, Object> hashMap);
-    Page<ReturnHomeDto>findAllByKidNoCard(ReturnHomeSearchCondition condition, HashMap<String, Object> hashMap);
-    Page<ReturnHomeDto>findAllByKidNoList(ReturnHomeSearchCondition condition, HashMap<String, Object> hashMap);
+    Page<ReturnHomeDto> findAllByKinderNo(ReturnHomeSearchCondition condition, HashMap<String, Object> hashMap);
+    Page<ReturnHomeDto>findAllByKidNo(ReturnHomeSearchCondition condition, HashMap<String, Object> hashMap);
     ReturnHomeDto findByRhAgreeNo(Long rhAgreeNo);
+
 }

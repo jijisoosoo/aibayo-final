@@ -20,33 +20,34 @@ public class ReturnHomeServiceImpl implements ReturnHomeService{
     private final OrderFormRepository orderFormRepository;
     private final ReturnHomeRepository returnHomeRepository;
     private static final int PAGE_SIZE_CARD = 6;
-    private static final int PAGE_SIZE_LIST = 15;
+    private static final int PAGE_SIZE_LIST = 20;
 
     @Override
-    public Page<ReturnHomeDto> findAllByKinderNoCard(ReturnHomeSearchCondition condition, HashMap<String, Object> hashMap) {
+    public Page<ReturnHomeDto> findAllByKinderNo(ReturnHomeSearchCondition condition, HashMap<String, Object> hashMap) {
         int page = (int) hashMap.get("page");
         String type = (String) hashMap.get("type");
-        Pageable pageable = PageRequest.of(page - 1, PAGE_SIZE_CARD);
-        return returnHomeRepository.findAllByKinderNoCard(condition,pageable);
+        int pagesize=0;
+        if(type.equals("card")){
+            pagesize=PAGE_SIZE_CARD;
+        }else if(type.equals("list")){
+            pagesize=PAGE_SIZE_LIST;
+        }
+        Pageable pageable = PageRequest.of(page - 1, pagesize);
+        return returnHomeRepository.findAllByKinderNo(condition,pageable);
     }
 
     @Override
-    public Page<ReturnHomeDto> findAllByKinderNoList(ReturnHomeSearchCondition condition, HashMap<String, Object> hashMap) {
-        return null;
-    }
-
-    @Override
-    public Page<ReturnHomeDto> findAllByKidNoCard(ReturnHomeSearchCondition condition, HashMap<String, Object> hashMap) {
+    public Page<ReturnHomeDto> findAllByKidNo(ReturnHomeSearchCondition condition, HashMap<String, Object> hashMap) {
         int page = (int) hashMap.get("page");
         String type = (String) hashMap.get("type");
-        Pageable pageable = PageRequest.of(page - 1, PAGE_SIZE_CARD);
-        return returnHomeRepository.findAllByKidNoCard(condition,pageable);
-
-    }
-
-    @Override
-    public Page<ReturnHomeDto> findAllByKidNoList(ReturnHomeSearchCondition condition, HashMap<String, Object> hashMap) {
-        return null;
+        int pagesize=0;
+        if(type.equals("card")){
+            pagesize=PAGE_SIZE_CARD;
+        }else if(type.equals("list")){
+            pagesize=PAGE_SIZE_LIST;
+        }
+        Pageable pageable = PageRequest.of(page - 1, pagesize);
+        return returnHomeRepository.findAllByKidNo(condition,pageable);
     }
 
 
