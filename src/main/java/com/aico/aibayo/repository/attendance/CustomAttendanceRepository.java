@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface CustomAttendanceRepository {
     List<AttendanceDto> findAllByKinderNoAndClassNo(Long kinderNo, Long classNo, LocalDate selectedDate);
+
+    List<AttendanceDto> findAllByKinderNo(Long kinderNo, LocalDate selectedDate);
 }
