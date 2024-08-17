@@ -20,7 +20,7 @@ $(document).ready(function () {
         let param = {
             kidNo: $(this).data('kid-no')
         }
-        console.log(`param: ${JSON.stringify(param)}`);
+        // console.log(`param: ${JSON.stringify(param)}`);
 
         commonAjax(url, 'POST', param);
     });
