@@ -1,9 +1,11 @@
 package com.aico.aibayo.dto.schedule;
 
+import com.aico.aibayo.dto.ClassDto;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class ScheduleSearchCondition {
@@ -15,5 +17,7 @@ public class ScheduleSearchCondition {
 
     private Long scheduleNo;
     private Long classNo;
+
+    private List<ClassDto> classDtos;
 
 }

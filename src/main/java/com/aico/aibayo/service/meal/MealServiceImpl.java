@@ -11,6 +11,7 @@ import com.aico.aibayo.repository.meal.MealRepository;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -90,7 +91,7 @@ public class MealServiceImpl implements MealService {
     @Transactional
     public MealDto updateMeal(MealDto mealDto, List<MultipartFile> files) {
         MealEntity target = mealRepository.findById(mealDto.getMealNo())
-                .orElseThrow(() -> new EntityNotFoundException("존재하지 않는 엔티티입니다."));
+                .orElseThrow(() -> new EntityNotFoundException("엔티티를 찾을 수 없습니다."));
 
         target.setMealDate(mealDto.getMealDate() == null ? target.getMealDate() : mealDto.getMealDate());
         target.setMealModifyDate(LocalDateTime.now());
@@ -183,6 +184,17 @@ public class MealServiceImpl implements MealService {
                 }).orElse(null);
     }
 
+    @Override
+    public MealDto getByToday(MealSearchCondition condition) {
+        return mealRepository.findTop1ByMealDateAndKinderNoAndMealDeleteFlag(
+                        condition.getMealDate(),
+                        condition.getKinderNo(),
+                        condition.getMealDeleteFlag()
+                )
+                .map(MealDto::toDto)
+                .orElse(null);
+    }
+
     private void setMealDetail(List<MultipartFile> files, MealEntity target,
                                List<MealDetailEntity> targetDetails, MealDetailDto dto) {
         String uploadUrl = getUploadUrl(files, dto);
@@ -220,15 +232,18 @@ public class MealServiceImpl implements MealService {
     }
 
     private String getUrlAfterUploadS3(MultipartFile multipartFile) {
-        File uploadDir = new File(uploadDirectory);
+        // OS에 관계없이 현재 디렉토리 아래에 aibayo_upload 디렉토리 설정
+        String rootPath = System.getProperty("user.dir"); // 현재 디렉토리
+        String uploadPath = rootPath + uploadDirectory;
+        File uploadDir = new File(uploadPath);
 
         // 로컬에 파일 등록
         if (!uploadDir.exists()) {
             uploadDir.mkdirs();
         }
 
-        String fileName = UUID.randomUUID() + "-" + multipartFile.getName();
-        String filePathLocal = uploadDirectory + File.separator + fileName;
+        String fileName = UUID.randomUUID() + "-" + multipartFile.getOriginalFilename();
+        String filePathLocal = uploadPath + File.separator + fileName;
         String filePathS3 = MEAL_IMG_DIR + "/" + fileName;
 
 

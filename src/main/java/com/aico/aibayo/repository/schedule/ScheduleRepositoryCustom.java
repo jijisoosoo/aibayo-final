@@ -7,6 +7,9 @@ import java.util.List;
 
 public interface ScheduleRepositoryCustom {
     List<ScheduleDto> findAllByKinderNo(ScheduleSearchCondition condition);
-    List<ScheduleDto> findListByDay(ScheduleSearchCondition condition);
-    List<ScheduleDto> findListByClass(ScheduleSearchCondition condition);
+    List<ScheduleDto> findAllByDay(ScheduleSearchCondition condition);
+    List<ScheduleDto> findAllByClass(ScheduleSearchCondition condition);
+    ScheduleDto findOneByScheduleNo(ScheduleSearchCondition condition);
+    List<ScheduleDto> findAllByClassList(ScheduleSearchCondition condition);
+    List<ScheduleDto> findAllByDayAndClassList(ScheduleSearchCondition condition);
 }

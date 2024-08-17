@@ -1,8 +1,11 @@
 package com.aico.aibayo.dto.schedule;
 
+import com.aico.aibayo.dto.ClassDto;
+import com.aico.aibayo.entity.ScheduleClassEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Setter
 @Getter
@@ -24,6 +27,8 @@ public class ScheduleDto {
     private Long writer;
     private String boardContents;
 
+    private List<ScheduleClassDto> classList;
+
     public ScheduleDto(Long boardNo, Long scheduleNo, Long kinderNo,
                        String boardTitle, Long writer, String boardContents,
                        LocalDateTime scheduleStartDate, LocalDateTime scheduleEndDate){
@@ -39,6 +44,20 @@ public class ScheduleDto {
 
     public ScheduleDto(Long boardNo, Long scheduleNo, Long kinderNo,
                        String boardTitle, Long writer, String boardContents,
+                       LocalDateTime scheduleStartDate, LocalDateTime scheduleEndDate, List<ScheduleClassDto>classList){
+        this.boardNo = boardNo;
+        this.scheduleNo = scheduleNo;
+        this.kinderNo = kinderNo;
+        this.boardTitle = boardTitle;
+        this.writer = writer;
+        this.boardContents = boardContents;
+        this.scheduleStartDate = scheduleStartDate;
+        this.scheduleEndDate = scheduleEndDate;
+        this.classList = classList;
+    }
+
+    public ScheduleDto(Long boardNo, Long scheduleNo, Long kinderNo,
+                       String boardTitle, Long writer, String boardContents,
                        LocalDateTime scheduleStartDate, LocalDateTime scheduleEndDate, Long classNo){
         this.boardNo = boardNo;
         this.scheduleNo = scheduleNo;
@@ -48,7 +67,6 @@ public class ScheduleDto {
         this.boardContents = boardContents;
         this.scheduleStartDate = scheduleStartDate;
         this.scheduleEndDate = scheduleEndDate;
-        this.classNo = classNo;
     }
 
 }

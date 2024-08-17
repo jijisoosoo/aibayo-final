@@ -19,7 +19,7 @@ public class MedicationController {
     public String admindetail(){
         return "/admin/medication/detail";
     }
-    @GetMapping("/user/writeform")
+    @GetMapping("/user/write")
     public String write() {
         return "/user/medication/writeForm";
     }

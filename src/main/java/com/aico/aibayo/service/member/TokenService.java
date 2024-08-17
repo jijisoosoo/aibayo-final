@@ -36,8 +36,9 @@ public class TokenService {
     public void invalidateToken(String token) {
         TokenEntity tokenEntity = tokenRepository.findByToken(token);
         if (tokenEntity != null) {
-            tokenEntity.setToken(null); // 토큰 무효화
-            tokenRepository.save(tokenEntity);
+//            tokenEntity.setToken(null); // 토큰 무효화
+//            tokenRepository.save(tokenEntity);
+            tokenRepository.delete(tokenEntity);
         }
     }
 }

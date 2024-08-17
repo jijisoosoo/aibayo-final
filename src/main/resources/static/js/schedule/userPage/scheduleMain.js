@@ -1,26 +1,9 @@
 $(document).ready(function() {
-
     showCalendar();
-
-    $(document).on('change', '.dropdown-class', function () {
-        let classNo = $('.dropdown-class').val();
-        // console.log("반 변경:" + classNo);
-
-        let param = {
-            classNo: classNo
-        };
-
-        console.log("param:" + JSON.stringify(param));
-
-        let url = "/schedule/admin/scheduleMainByClass";
-
-        commonAjax(url, 'POST', param);
-
-    });
 
 });
 
-function showCalendar(initialSelectedValue, selectedValue){
+function showCalendar(){
     // 변수가 유지되도록
     var initialSelectedValue;
     var selectedValue;
@@ -47,7 +30,6 @@ function showCalendar(initialSelectedValue, selectedValue){
             // center: 'title today',
             center: 'title',
             right: 'next'
-            // right: 'dayGridMonth'
         },
         dayMaxEvents: true,
         buttonText: {
@@ -103,6 +85,18 @@ function showCalendar(initialSelectedValue, selectedValue){
             }
         },
         events: eventsData
+
+    });
+
+    $(document).on('click', '.fc-day', function () {
+        $('.fc-day').css({
+            'background-color': 'rgba(0,0,0,0)'
+        });
+
+        $(this).css({
+            'border-radius': '15px',
+            'background-color': 'rgba(55,55,55,0.15)'
+        });
     });
 
     calendar.render();
@@ -113,35 +107,61 @@ function getEvents() {
     const scheduleElements = document.querySelectorAll('.schedule_values');
     const events = [];
 
+
     scheduleElements.forEach(element => {
+        let endDate = element.getAttribute('data-schedule-end-date');
+        const dataClassList = element.getAttribute('data-class-list');
+
+        // classNo가 0인지를 확인하기 위해 정규식을 사용하여 추출
+        const classNoMatch = dataClassList.match(/classNo=0/);
+
         const event = {
             title: element.getAttribute('data-board-title'),
             start: element.getAttribute('data-schedule-start-date').split('T')[0], // 날짜만 추출
-            end: element.getAttribute('data-schedule-end-date') ? element.getAttribute('data-schedule-end-date').split('T')[0] : null, // 종료 날짜가 있을 경우에만 추가
-            classNo: parseInt(element.getAttribute('data-class-no'), 10),
+            end: endDate ? addOneDayAndFormat(endDate) : null,
+            classNo: parseInt(element.getAttribute('data-class-no'), 10),   // 10진수
             contents: element.getAttribute('data-board-contents'),
+            backgroundColor: classNoMatch !== null ? '#3788d8' : '#ff85aa',
+            borderColor : classNoMatch !== null ? '#3788d8' : '#ff85aa',
             location: '' // location 값이 없으므로 빈 문자열로 설정
         };
+
         events.push(event);
     });
 
     return events;
 }
 
-let isFromShowDaySchedule = false
+function addOneDayAndFormat(dateString) {
+    // T를 기준으로 분리하여 날짜 부분만 가져옴
+    var datePart = dateString.split('T')[0];
+
+    // Date 객체로 변환
+    var date = new Date(datePart);
+
+    // 하루를 추가
+    date.setDate(date.getDate() + 1);
+
+    // 날짜를 'yyyy-mm-dd' 형식으로 변환
+    var year = date.getFullYear();
+    var month = String(date.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1 필요
+    var day = String(date.getDate()).padStart(2, '0');
+
+    return year + '-' + month + '-' + day;
+}
+
 
 function showDaySchedule(selectedValue){
     // 선택된 값에 따라 해당 div 보이기
-    $('.' + selectedValue).show();
     var selectedValueStr = selectedValue.replace('-','년 ').replace('-','월 ').concat('일');
     document.getElementById("selectedDate").innerHTML = selectedValueStr;
 
-    let url = "/schedule/admin/scheduleMainByDay"
+    let url = "/schedule/user/scheduleMainByDay"
 
     let param = {
         selectedDate : selectedValue + 'T00:00:00',
     }
-    // console.log("param : " + JSON.stringify(param));
+    console.log("param : " + JSON.stringify(param));
 
     commonAjax(url, 'POST', param);
 }
@@ -149,15 +169,7 @@ function showDaySchedule(selectedValue){
 function afterSuccess(response, method) {
     $('.schedule-2').replaceWith($(response).find('.schedule-2'));
     $('.schedules_data').replaceWith($(response).find('.schedules_data'));
-    // $('.ifClassNoExist').replaceWith($(response).find('.ifClassNoExist'));
 
     var count = document.querySelectorAll('.single-schedule').length;
     $('.text-wrapper-16').text("일정 " + count + "개");
-
-    var ifClassNoExist = (document.querySelectorAll('.ifClassNoExist').length);
-    if (ifClassNoExist === 1) {
-        console.log("reload by class");
-        showCalendar();
-        //지금은 없는 날짜 찍어도 이벤트 나옴ㅋㅋ
-    }
 }
