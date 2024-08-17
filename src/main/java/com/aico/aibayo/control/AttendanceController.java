@@ -139,6 +139,7 @@ public class AttendanceController {
         return "admin/attendance/detailWrite"; // 이 경로는 작성 페이지의 템플릿 경로로 수정해 주세요.
     }
 
+
     @PostMapping("/write")
     public ResponseEntity<?> writePage(@RequestBody List<Map<String, Object>> attendanceList) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
