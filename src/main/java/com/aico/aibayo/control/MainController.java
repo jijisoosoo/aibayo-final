@@ -5,6 +5,7 @@ import com.aico.aibayo.common.BooleanEnum;
 import com.aico.aibayo.common.MemberRoleEnum;
 import com.aico.aibayo.common.SggInfoEnum;
 import com.aico.aibayo.dto.RegisterKinderDto;
+import com.aico.aibayo.dto.attendance.AttendanceDto;
 import com.aico.aibayo.dto.kid.KidDto;
 import com.aico.aibayo.dto.kid.KidSearchCondition;
 import com.aico.aibayo.dto.meal.MealDto;
@@ -14,6 +15,7 @@ import com.aico.aibayo.dto.member.MemberSearchCondition;
 import com.aico.aibayo.dto.teacher.TeacherDto;
 import com.aico.aibayo.dto.teacher.TeacherSearchCondition;
 import com.aico.aibayo.jwt.JWTUtil;
+import com.aico.aibayo.service.attendance.AttendanceService;
 import com.aico.aibayo.service.kid.KidService;
 import com.aico.aibayo.service.meal.MealService;
 import com.aico.aibayo.service.member.MemberService;
@@ -42,12 +44,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
     private static final Logger log = LoggerFactory.getLogger(MainController.class);
     private final JWTUtil jwtUtil;
+    private final HttpSession session;
     private final MemberService memberService;
     private final RegisterKinderService registerKinderService;
     private final MealService mealService;
     private final KidService kidService;
     private final teacherService teacherService;
-    private final HttpSession session;
+    private final AttendanceService attendanceService;
 
     @GetMapping("/")
     public String mainPage() {
@@ -83,31 +86,12 @@ public class MainController {
 
         setLoginInfo(loginInfo, model);
 
-        // 선생/학부모 승인상태 조회
-        TeacherSearchCondition teacherCondition = new TeacherSearchCondition();
-        teacherCondition.setKinderNo(loginInfo.getKinderNo());
+        getTeacherAcceptStatus(loginInfo, model);
 
-        teacherCondition.setAcceptStatus(AcceptStatusEnum.WAIT.getStatus());
-        List<TeacherDto> waitingTeacherList = teacherService.getTeacherByKinderNo(teacherCondition);
-        model.addAttribute("waitingTeachersCount", waitingTeacherList.size());
+        getParentAcceptStatus(loginInfo, model);
 
-        teacherCondition.setAcceptStatus(AcceptStatusEnum.INVITE.getStatus());
-        List<TeacherDto> invitedTeacherList = teacherService.getInvitedTeacherByKinderNo(teacherCondition);
-        model.addAttribute("invitedTeachersCount", invitedTeacherList.size());
-
-
-        KidSearchCondition kidCondition = new KidSearchCondition();
-        kidCondition.setKinderNo(loginInfo.getKinderNo());
-
-        kidCondition.setAcceptStatus(AcceptStatusEnum.WAIT.getStatus());
-        List<KidDto> kidWaitDtos = kidService.getAllWithParentByClassNoAndAcceptStatus(kidCondition);
-        model.addAttribute("waitedKidsCount", kidWaitDtos.size());
-        
-        kidCondition.setAcceptStatus(null);
-        kidCondition.setInviteAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
-        List<KidDto> kidInviteDtos = kidService.getAllWithInviteByClassNoAndAcceptStatus(kidCondition);
-        model.addAttribute("invitedKidsCount", kidInviteDtos.size());
-
+//        오늘 날짜에 대한 모든 소속 원생 출결 확인 정보 저장
+//        List<AttendanceDto> attendanceList = attendanceService.getKids(kinderNo, classNo, selectedDate);
 
         return "/admin/main/main";
     }
@@ -180,6 +164,35 @@ public class MainController {
             }
         }
         return null;
+    }
+
+    private void getTeacherAcceptStatus(MemberDto loginInfo, Model model) {
+        // 선생 승인상태 조회
+        TeacherSearchCondition teacherCondition = new TeacherSearchCondition();
+        teacherCondition.setKinderNo(loginInfo.getKinderNo());
+
+        teacherCondition.setAcceptStatus(AcceptStatusEnum.WAIT.getStatus());
+        List<TeacherDto> waitingTeacherList = teacherService.getTeacherByKinderNo(teacherCondition);
+        model.addAttribute("waitingTeachersCount", waitingTeacherList.size());
+
+        teacherCondition.setAcceptStatus(AcceptStatusEnum.INVITE.getStatus());
+        List<TeacherDto> invitedTeacherList = teacherService.getInvitedTeacherByKinderNo(teacherCondition);
+        model.addAttribute("invitedTeachersCount", invitedTeacherList.size());
+    }
+
+    private void getParentAcceptStatus(MemberDto loginInfo, Model model) {
+        // 학부모 승인상태 조회
+        KidSearchCondition kidCondition = new KidSearchCondition();
+        kidCondition.setKinderNo(loginInfo.getKinderNo());
+
+        kidCondition.setAcceptStatus(AcceptStatusEnum.WAIT.getStatus());
+        List<KidDto> kidWaitDtos = kidService.getAllWithParentByClassNoAndAcceptStatus(kidCondition);
+        model.addAttribute("waitedKidsCount", kidWaitDtos.size());
+
+        kidCondition.setAcceptStatus(null);
+        kidCondition.setInviteAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
+        List<KidDto> kidInviteDtos = kidService.getAllWithInviteByClassNoAndAcceptStatus(kidCondition);
+        model.addAttribute("invitedKidsCount", kidInviteDtos.size());
     }
 
     private void setKid(MemberDto loginInfo, Model model) {
