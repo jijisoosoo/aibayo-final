@@ -378,7 +378,8 @@
     justify-content: flex-start;
     align-items: flex-start;
     gap: 6px;
-    display: inline-flex
+    display: inline-flex;
+    flex: 1;
 }
 
 .data_attendance_content_row_box {

@@ -106,12 +106,18 @@
 
                             <div class="data_teacher_kid_waiting_box">
                                 <div class="data_teacher_kid_body_title">승인대기중</div>
-                                <div class="data_teacher_kid_body_count">0명</div>
+                                <div class="data_teacher_kid_body_count"
+                                     th:text="|${waitingTeachersCount}명|">
+                                    0명
+                                </div>
                             </div>
 
                             <div class="data_teacher_kid_invite_box">
                                 <div class="data_teacher_kid_body_title">초대중</div>
-                                <div class="data_teacher_kid_body_count">0명</div>
+                                <div class="data_teacher_kid_body_count"
+                                     th:text="|${invitedTeachersCount}명|">
+                                    0명
+                                </div>
                             </div>
 
                         </div>
@@ -134,12 +140,18 @@
 
                             <div class="data_teacher_kid_waiting_box">
                                 <div class="data_teacher_kid_body_title">승인대기중</div>
-                                <div class="data_teacher_kid_body_count">0명</div>
+                                <div class="data_teacher_kid_body_count"
+                                     th:text="|${waitedKidsCount}명|">
+                                    0명
+                                </div>
                             </div>
 
                             <div class="data_teacher_kid_invite_box">
                                 <div class="data_teacher_kid_body_title">초대중</div>
-                                <div class="data_teacher_kid_body_count">0명</div>
+                                <div class="data_teacher_kid_body_count"
+                                     th:text="|${invitedKidsCount}명|">
+                                    0명
+                                </div>
                             </div>
 
                         </div>
@@ -163,7 +175,8 @@
                     <div class="data_table_content_title">출석 현황</div>
 
                     <a class="text-decoration-none data_table_attendance_link_box"
-                       href="/attendance/admin/detailToday">
+                       th:with="date=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
+                       th:href="@{|/attendance/detailToday?date=${date}|}">
                         <div class="data_table_attendance_link_text">출석부</div>
                         <div class="data_table_attendance_link_svg">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25"
@@ -199,25 +212,25 @@
                         </div>
                     </div>
 
-                    <div class="data_attendance_content_row_box">
-                        <div class="data_attendance_content_row">
-                            <div class="data_attendance_content_text text-compact">1반</div>
-                            <div class="data_attendance_content_text text-compact">5명</div>
-                            <div class="data_attendance_content_text text-compact">0명</div>
-                            <div class="data_attendance_content_text text-compact">0/0명</div>
-                            <div class="data_attendance_content_text text-compact">0명</div>
-                        </div>
-                    </div>
+<!--                    <div class="data_attendance_content_row_box">-->
+<!--                        <div class="data_attendance_content_row">-->
+<!--                            <div class="data_attendance_content_text text-compact">1반</div>-->
+<!--                            <div class="data_attendance_content_text text-compact">5명</div>-->
+<!--                            <div class="data_attendance_content_text text-compact">0명</div>-->
+<!--                            <div class="data_attendance_content_text text-compact">0/0명</div>-->
+<!--                            <div class="data_attendance_content_text text-compact">0명</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                    <div class="data_attendance_content_row_box">
-                        <div class="data_attendance_content_row">
-                            <div class="data_attendance_content_text text-compact">2반</div>
-                            <div class="data_attendance_content_text text-compact">5명</div>
-                            <div class="data_attendance_content_text text-compact">0명</div>
-                            <div class="data_attendance_content_text text-compact">0/0명</div>
-                            <div class="data_attendance_content_text text-compact">0명</div>
-                        </div>
-                    </div>
+<!--                    <div class="data_attendance_content_row_box">-->
+<!--                        <div class="data_attendance_content_row">-->
+<!--                            <div class="data_attendance_content_text text-compact">2반</div>-->
+<!--                            <div class="data_attendance_content_text text-compact">5명</div>-->
+<!--                            <div class="data_attendance_content_text text-compact">0명</div>-->
+<!--                            <div class="data_attendance_content_text text-compact">0/0명</div>-->
+<!--                            <div class="data_attendance_content_text text-compact">0명</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
 
             </div>
