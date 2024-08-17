@@ -1,17 +1,21 @@
 package com.aico.aibayo.control;
 
+import com.aico.aibayo.common.MealTypeEnum;
+import com.aico.aibayo.dto.meal.MealDetailDto;
+import com.aico.aibayo.dto.meal.MealDto;
 import com.aico.aibayo.dto.member.MemberDto;
-import com.aico.aibayo.jwt.JWTUtil;
+import com.aico.aibayo.service.meal.MealService;
 import com.aico.aibayo.service.member.MemberService;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -19,30 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class MealController {
     private final MemberService memberService;
-    private final JWTUtil jwtUtil;
-
-//    @ModelAttribute
-//    public void addAttributes(HttpServletRequest request, Model model) {
-//        String token = getTokenFromCookies(request.getCookies());
-//        String username = jwtUtil.getUsername(token);
-//        log.info("loginUser: {}", username);
-//        MemberDto memberDto = memberService.findByUsername(username);
-//
-//        // 학부모일 경우 추가 작업(추가 수정 필요)
-//
-//        model.addAttribute("loginInfo", memberDto);
-//    }
-//
-//    private String getTokenFromCookies(Cookie[] cookies) {
-//        if (cookies != null) {
-//            for (Cookie cookie : cookies) {
-//                if ("jwt".equals(cookie.getName())) {
-//                    return cookie.getValue();
-//                }
-//            }
-//        }
-//        return null;
-//    }
+    private final MealService mealService;
 
     @GetMapping("/admin/list")
     public String adminList(@ModelAttribute("loginInfo") MemberDto loginInfo) {
@@ -51,17 +32,27 @@ public class MealController {
     }
 
     @GetMapping("/user/list")
-    public String userList() {
+    public String userList(@ModelAttribute("loginInfo") MemberDto loginInfo) {
+
         return "/user/meal/list";
     }
 
     @GetMapping("/admin/write")
-    public String writeForm() {
+    public String writeForm(@ModelAttribute("loginInfo") MemberDto loginInfo) {
+
         return "/admin/meal/writeForm";
     }
 
-    @GetMapping("/admin/modify")
-    public String modifyForm() {
+    @GetMapping("/admin/modify/{mealNo}")
+    public String modifyForm(@PathVariable Long mealNo, Model model) {
+        MealDto meal = mealService.getByMealNo(mealNo);
+        List<Integer> selectedTypes = meal.getMealDetails().stream().map(MealDetailDto::getMealType).toList();
+        log.info("selectedTypes: {}", selectedTypes);
+        model.addAttribute("meal", meal);
+        model.addAttribute("selectedTypes", selectedTypes);
+        model.addAttribute("mealTypes", MealTypeEnum.values());
+//        meal.getMealDetails().get(meal.getMealDetails().indexOf())
+
         return "/admin/meal/modifyForm";
     }
 }

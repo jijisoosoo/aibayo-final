@@ -28,7 +28,6 @@ public class AnnounceRepositoryCustomImpl implements AnnounceRepositoryCustom {
     private final QBoardEntity board = QBoardEntity.boardEntity;
     private final QAnnounceEntity announce =QAnnounceEntity.announceEntity;
     private final QMemberEntity member =QMemberEntity.memberEntity;
-    private final QMemberEntity member2 =QMemberEntity.memberEntity;
     private final QAcceptLogEntity acceptLog=QAcceptLogEntity.acceptLogEntity;
     private final QCommentEntity comment = QCommentEntity.commentEntity;
 
@@ -188,7 +187,8 @@ public class AnnounceRepositoryCustomImpl implements AnnounceRepositoryCustom {
                         board.kinderNo,
                         member.roleNo,
                         member.id,
-                        member.name ))
+                        member.name
+                        ))
                 .from(announce)
                 .join(board).on(board.boardNo.eq(announce.boardNo))
                 .join(member).on(board.writer.eq(member.id))

@@ -215,6 +215,37 @@ public class KidRepositoryCustomImpl implements KidRepositoryCustom {
                 .fetch();
     }
 
+    @Override
+    public List<KidDto> findAllByParent(Long id) {
+        return jpaQueryFactory
+                .select(Projections.constructor(KidDto.class,
+                        kid.kidNo,
+                        kid.kinderNo,
+                        kid.kidName,
+                        kid.kidBirth,
+                        kid.kidGender,
+                        kid.admissionDate,
+                        kid.modifyDate,
+                        kid.dischargeDate,
+                        kid.dischargeFlag
+                ))
+                .from(kid)
+                .join(parentKid).on(kid.kidNo.eq(parentKid.kidNo))
+                .join(member).on(
+                        member.id.eq(parentKid.id)
+                                .and(member.status.eq(MemberStatusEnum.ACTIVE.getStatus()))
+                )
+                .join(acceptLog1).on(
+                        acceptLog1.acceptNo.eq(parentKid.acceptNo)
+                                .and(acceptLog1.acceptStatus.eq(AcceptStatusEnum.ACCEPT.getStatus()))
+                )
+                .where(
+                        kid.dischargeFlag.eq(BooleanEnum.FALSE.getBool()),
+                        member.id.eq(id)
+                )
+                .fetch();
+    }
+
     private BooleanExpression getInviteAcceptTypeEq(Integer inviteAcceptStatus) {
         return inviteAcceptStatus == null ?
                 null : acceptLog3.acceptType.eq(AcceptTypeEnum.INVITE_CODE.getType());

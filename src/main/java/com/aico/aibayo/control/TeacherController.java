@@ -2,10 +2,9 @@ package com.aico.aibayo.control;
 
 import com.aico.aibayo.common.AcceptStatusEnum;
 import com.aico.aibayo.dto.ClassDto;
-import com.aico.aibayo.dto.kid.KidSearchCondition;
 import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.dto.teacher.TeacherSearchCondition;
-import com.aico.aibayo.dto.teacher.teacherDto;
+import com.aico.aibayo.dto.teacher.TeacherDto;
 import com.aico.aibayo.jwt.JWTUtil;
 import com.aico.aibayo.service.classManage.ClassService;
 import com.aico.aibayo.service.member.MemberService;
@@ -19,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -58,44 +58,71 @@ public class TeacherController {
     @GetMapping("/list")
     public String teacherMain(Model model) {
         TeacherSearchCondition condition = new TeacherSearchCondition();
-        return getConditionAndGoMain(model, condition);
+
+        return simpleAcceptCondition(model, condition);
     }
 
     // 반 별 조회 - condition에 classNo 추가
     @PostMapping("/listByClass")
     public String mainByClass(@RequestBody TeacherSearchCondition condition,
                               Model model) {
+        System.out.println("post:mainByClass실행");
         log.info("search: {}", condition);
+
+        if(condition.getClassNo() == null){
+            return simpleAcceptCondition(model, condition);
+        }else{
+            return getAcceptCondition(model, condition);
+        }
+    }
+
+    // Accept 반 별조회 - searchcondition 적용해서
+    public String simpleAcceptCondition(Model model, TeacherSearchCondition condition) {
+        MemberDto loginInfo = (MemberDto)model.getAttribute("loginInfo");
+        condition.setKinderNo(loginInfo.getKinderNo());
+
+        condition.setAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
+        List<TeacherDto> acceptedTeacherList = teacherService.getTeacherByKinderNo(condition);
+        model.addAttribute("acceptedTeacherList", acceptedTeacherList);
+        model.addAttribute("condition", condition);
+        log.info("ACCEPT: {}", condition);
+        log.info("ACCEPTlist: {}", acceptedTeacherList.toString());
+
+        return getConditionAndGoMain(model, condition);
+    }
+
+    // Accept 반 별조회 - searchcondition 적용해서
+    public String getAcceptCondition(Model model, TeacherSearchCondition condition) {
+        MemberDto loginInfo = (MemberDto)model.getAttribute("loginInfo");
+        condition.setKinderNo(loginInfo.getKinderNo());
+
+        condition.setAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
+        List<TeacherDto> acceptedTeacherList = teacherService.getAcceptedTeacherByKinderNoAndClassNo(condition);
+        model.addAttribute("acceptedTeacherList", acceptedTeacherList);
+        model.addAttribute("condition", condition);
+        log.info("ACCEPT: {}", condition);
+        log.info("ACCEPTlist: {}", acceptedTeacherList.toString());
 
         return getConditionAndGoMain(model, condition);
     }
 
     // 일반조회 - searchcondition 적용해서
     public String getConditionAndGoMain(Model model, TeacherSearchCondition condition) {
-        MemberDto loginInfo = (MemberDto)model.getAttribute("loginInfo");
-        condition.setKinderNo(loginInfo.getKinderNo());
-
-        condition.setAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
-        List<teacherDto> acceptedTeacherList = teacherService.getAcceptedTeacherByKinderNoAndClassNo(condition);
-        model.addAttribute("acceptedTeacherList", acceptedTeacherList);
-        model.addAttribute("condition", condition);
-        log.info("ACCEPT: {}", condition);
-        log.info("ACCEPTlist: {}", acceptedTeacherList.toString());
-
         // acceptStatus wait, invite에는 condition의 ClassNo = null로 재설정해서 addAttribute
         condition.setClassNo(null);
 
         condition.setAcceptStatus(AcceptStatusEnum.WAIT.getStatus());
-        List<teacherDto> waitingTeacherList = teacherService.getAllByKinderNo(condition);
+        List<TeacherDto> waitingTeacherList = teacherService.getTeacherByKinderNo(condition);
         model.addAttribute("waitingTeacherList", waitingTeacherList);
         log.info("WAIT: {}", condition);
 
 
         condition.setAcceptStatus(AcceptStatusEnum.INVITE.getStatus());
-        List<teacherDto> invitedTeacherList = teacherService.getAllByKinderNo(condition);
+        List<TeacherDto> invitedTeacherList = teacherService.getInvitedTeacherByKinderNo(condition);
         model.addAttribute("invitedTeacherList", invitedTeacherList);
         log.info("INVITE: {}", condition);
 
+        MemberDto loginInfo = (MemberDto)model.getAttribute("loginInfo");
         List<ClassDto> classList = classService.getByKinderNo(loginInfo.getKinderNo());
         model.addAttribute("classList", classList);
 
@@ -104,10 +131,28 @@ public class TeacherController {
 
 
     @GetMapping ("/teacherProfileAccept/{id}")
-    public String acceptedTeacherProfile(Model model, @PathVariable Long id) {
+    public String TeacherProfile(Model model, @PathVariable Long id) {
+        return getAcceptedTeacherProfile(model, id);
+    }
+
+    @PostMapping ("/teacherProfileAccept/{id}")
+    public String assignClassOk(@RequestBody Map<String, List<Long>> requestBody, Model model, @PathVariable Long id) {
+        List<Long> oldClassAcceptNos = requestBody.get("oldClassAcceptNos");
+        List<Long> newClassIds = requestBody.get("newClassIds");
+
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>oldClassAcceptNos, newClassIds");
+        System.out.println("oldClassAcceptNos" + oldClassAcceptNos);
+        System.out.println("newClassIds" + newClassIds);
+
+        teacherService.updateClassTeacher(newClassIds, oldClassAcceptNos, id);
+
+        return getAcceptedTeacherProfile(model, id);
+    }
+
+    public String getAcceptedTeacherProfile(Model model,Long id) {
         MemberDto loginInfo = (MemberDto)model.getAttribute("loginInfo");
 
-        teacherDto teacher = teacherService.getTeacherById(id);
+        TeacherDto teacher = teacherService.getTeacherById(id);
         model.addAttribute("teacher", teacher);
 
         List<ClassDto> classList = classService.getAllByKinderNo(loginInfo.getKinderNo());
@@ -121,6 +166,8 @@ public class TeacherController {
 
         return "/admin/teacher/teacherProfileAccept";
     }
+
+
 
     @GetMapping("/admin/teacherProfileWait/{id}")
     public String adminTeacherProfileWait() {

@@ -4,7 +4,6 @@ package com.aico.aibayo.service.announce;
 import com.aico.aibayo.common.BooleanEnum;
 import com.aico.aibayo.dto.announce.AnnounceDto;
 import com.aico.aibayo.dto.announce.AnnounceSearchCondition;
-import com.aico.aibayo.dto.notepad.NotepadSearchCondition;
 import com.aico.aibayo.entity.AnnounceEntity;
 import com.aico.aibayo.entity.BoardEntity;
 import com.aico.aibayo.repository.BoardRepository;
@@ -19,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
-import java.util.Objects;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -113,13 +112,15 @@ public class AnnounceServiceImpl implements AnnounceService {
     }
 
     @Override
-    public void deleteAnnounce(AnnounceDto announceNo) {
+    public AnnounceDto deleteAnnounce(AnnounceDto announceNo) {
         BoardEntity boardEntity =
-                boardRepository.findById(announceNo.getBoardNo()).orElse(null);
+        boardRepository.findById(announceNo.getBoardNo()).orElse(null);
         assert boardEntity != null;
+        boardEntity.setBoardDeleteDate(LocalDateTime.now());
         boardEntity.setInvisibleFlag(BooleanEnum.TRUE.getBool());
 
-        boardRepository.save(boardEntity);
+        BoardEntity save = boardRepository.save(boardEntity);
+        return AnnounceDto.toDto(save);
     }
 
     @Override
@@ -139,4 +140,6 @@ public class AnnounceServiceImpl implements AnnounceService {
         Pageable pageable = PageRequest.of(page - 1, pagesize);
         return announceRepository.findKeywordByKinderNoList(condition,pageable);
     }
+
+
 }

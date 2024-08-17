@@ -34,18 +34,19 @@ public class CommentRepositoryCustomImpl implements CommentRepositoryCustom {
                         member.name,
                         member.kinderNo,
                         comment.boardNo,
+                        comment.commentNo,
                         comment.commentGroupNo,
                         comment.commentRegDate,
                         comment.commentWriter,
                         comment.commentClass,
                         comment.commentContent,
-                        comment.commentDeleteFlag
+                        comment.invisibleFlag
                 ))
                 .from(comment)
                 .join(board).on(board.boardNo.eq(comment.boardNo))
                 .leftJoin(member).on(comment.commentWriter.eq(member.id))
                 .where(
-                        getInvisibleFlagEq(board),
+//                        getInvisibleFlagEq(comment),
                         getCommentEq(condition.getBoardNo(),comment)
                 )
                 .orderBy(
@@ -60,9 +61,9 @@ public class CommentRepositoryCustomImpl implements CommentRepositoryCustom {
                 .select(comment.count())
                 .from(comment)
                 .join(board).on(board.boardNo.eq(comment.boardNo))
-                .join(member).on(comment.commentWriter.eq(member.id))
+                .leftJoin(member).on(comment.commentWriter.eq(member.id))
                 .where(
-                        getInvisibleFlagEq(board),
+                        getInvisibleFlagEq(comment),
                         getCommentEq(condition.getBoardNo(),comment)
                 );
         return PageableExecutionUtils.getPage(comments, pageable, countQuery::fetchOne);
@@ -73,7 +74,7 @@ public class CommentRepositoryCustomImpl implements CommentRepositoryCustom {
     }
 
 
-    private BooleanExpression getInvisibleFlagEq(QBoardEntity board) {
-        return board.invisibleFlag.eq(BooleanEnum.FALSE.getBool());
+    private BooleanExpression getInvisibleFlagEq(QCommentEntity comment) {
+        return comment.invisibleFlag.eq(BooleanEnum.FALSE.getBool());
     }
 }

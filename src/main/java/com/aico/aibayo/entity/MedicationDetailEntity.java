@@ -28,5 +28,5 @@ public class MedicationDetailEntity {
     @Column(name="dose_time")
     private String doseTime; //투약 시간
     @Column(name="storage_type")
-    private String storageType; //보관 방법
+    private String storageType; //보관 방법 0: 실온 1:냉장
 }

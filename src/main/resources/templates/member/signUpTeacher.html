@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" th:href="@{/css/member/signUpKid.css}" />
+    <link rel="stylesheet" th:href="@{/css/member/signInGuide.css}" />
+<!--    <script th:src="@{/js/jquery.min.js}"></script> &lt;!&ndash; jQuery 추가 &ndash;&gt;-->
+<!--    <script th:src="@{/js/login/signUpKid.js}"></script>-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function toggleClassField() {
+            const kindergartenSelect = document.getElementById('kindergarten-input');
+            const classSelect = document.getElementById('class-input');
+
+            if (kindergartenSelect.value === "") {
+                classSelect.disabled = true;
+            } else {
+                classSelect.disabled = false;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const kindergartenSelect = document.getElementById('kindergarten-input');
+            const classSelect = document.getElementById('class-input');
+
+            // Initialize the class select as disabled
+            classSelect.disabled = true;
+
+            // Add event listener to kindergarten select
+            kindergartenSelect.addEventListener('change', toggleClassField);
+        });
+
+        function submitForm() {
+            var formData = {
+                username: $("#username").val(),
+                password: $("#password").val(),
+                phone: $("#phone").val(),
+                name: $("#name").val(),
+                role: $("#role").val(),
+                invite: $("#invite").val(),
+                kinderNo: $("#kindergarten-input").val(),
+                classNo: $("#class-input").val()
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/member/finalSignUp",
+                contentType: "application/json",
+                data: JSON.stringify(formData),
+                success: function(response) {
+                    // 성공 시 처리
+                    console.log("회원가입 성공");
+                    window.location.href = "/member/signIn"; // 성공 페이지로 리다이렉트
+                },
+                error: function(error) {
+                    // 에러 시 처리
+                    console.log("회원가입 실패");
+                    // window.location.href = "/member/signIn"; // 에러 페이지로 리다이렉트
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<div class="screen">
+    <div class="div">
+        <div class="overlap">
+            <div class="group">
+                <div class="overlap-group">
+                    <div class="text-wrapper-2">교사정보</div>
+
+                    <form id="signUpKidForm">
+                        <input type="hidden" name="username" th:value="${member.username}" id="username">
+                        <input type="hidden" name="password" th:value="${member.password}" id="password">
+                        <input type="hidden" name="phone" th:value="${member.phone}" id="phone">
+                        <input type="hidden" name="name" th:value="${member.name}" id="name">
+                        <input type="hidden" name="role" th:value="${member.role}" id="role">
+                        <input type="hidden" name="invite" th:value="${member.invite}" id="invite">
+
+                        <div class="group-2">
+                            <div class="group-5">
+                                <div class="group-9">
+                                    <label for="kindergarten-input" style="font-size: small">소속 유치원</label>
+                                    <select id="kindergarten-input" name="kinderNo">
+                                        <option value="">유치원을 선택하세요</option>
+                                        <option value="1">유치원 1</option>
+                                        <option value="2">유치원 2</option>
+                                    </select>
+                                </div>
+                                <div class="group-10">
+                                    <label for="class-input" style="font-size: small">소속 반</label>
+                                    <select id="class-input" name="classNo">
+                                        <option value="">반을 선택하세요</option>
+                                        <option value="1">1반</option>
+                                        <option value="2">2반</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="overlap-group-wrapper">
+                            <button type="button" class="overlap-group-2" onclick="submitForm()">회원가입</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="logo h_class_78">
+            <div class="h_class_79"><a th:href="@{/main/admin}" style="text-decoration: none; color: inherit;">aibayo</a></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

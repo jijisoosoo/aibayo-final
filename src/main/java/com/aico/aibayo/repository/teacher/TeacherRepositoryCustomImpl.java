@@ -1,8 +1,7 @@
 package com.aico.aibayo.repository.teacher;
 
-import com.aico.aibayo.dto.ClassDto;
 import com.aico.aibayo.dto.teacher.TeacherSearchCondition;
-import com.aico.aibayo.dto.teacher.teacherDto;
+import com.aico.aibayo.dto.teacher.TeacherDto;
 import com.aico.aibayo.entity.*;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
@@ -23,34 +22,10 @@ public class TeacherRepositoryCustomImpl implements TeacherRepositoryCustom{
     private final QAcceptLogEntity kinderAcceptLog = QAcceptLogEntity.acceptLogEntity;
     private final QAcceptLogEntity classAcceptLog = QAcceptLogEntity.acceptLogEntity;
 
-
     @Override
-    public List<teacherDto> findAllByKinderNo(TeacherSearchCondition condition) {
-        List<teacherDto> teachers = jpaQueryFactory
-                .select(Projections.constructor(teacherDto.class,
-                        member.id,
-                        member.username,
-                        member.name,
-                        member.phone,
-                        member.profilePicture,
-                        kinderAcceptLog.acceptRegDate,
-                        kinderAcceptLog.acceptNo)).distinct()
-                .from(member)
-                .join(teacherKinder).on(member.id.eq(teacherKinder.teacherId))
-                .join(kinderAcceptLog).on(teacherKinder.acceptNo.eq(kinderAcceptLog.acceptNo))
-                .where(
-                        kinderAcceptLog.acceptStatus.eq(condition.getAcceptStatus()),
-                        teacherKinder.kinderNo.eq(condition.getKinderNo())
-                )
-                .fetch();
-        System.out.println(teachers.toString());
-        return teachers;
-    }
-
-    @Override
-    public List<teacherDto> findAcceptedTeacherByKinderNoAndClassNo(TeacherSearchCondition condition) {
-        List<teacherDto> teachers = jpaQueryFactory
-                .select(Projections.constructor(teacherDto.class,
+    public List<TeacherDto> findAcceptedTeacherByKinderNoAndClassNo(TeacherSearchCondition condition) {
+        List<TeacherDto> teachers = jpaQueryFactory
+                .select(Projections.constructor(TeacherDto.class,
                         member.id,
                         member.username,
                         member.name,
@@ -73,16 +48,57 @@ public class TeacherRepositoryCustomImpl implements TeacherRepositoryCustom{
     }
 
     @Override
-    public teacherDto findTeacherById(Long id) {
-        teacherDto teacher = jpaQueryFactory
-                .select(Projections.constructor(teacherDto.class,
+    public List<TeacherDto> findTeacherByKinderNo(TeacherSearchCondition condition) {
+        List<TeacherDto> teachers = jpaQueryFactory
+                .select(Projections.constructor(TeacherDto.class,
                         member.id,
                         member.username,
                         member.name,
                         member.phone,
                         member.profilePicture,
                         kinderAcceptLog.acceptRegDate,
-                        teacherKinder.acceptNo
+                        kinderAcceptLog.acceptNo)).distinct()
+                .from(member)
+                .join(teacherKinder).on(member.id.eq(teacherKinder.teacherId))
+                .join(kinderAcceptLog).on(teacherKinder.acceptNo.eq(kinderAcceptLog.acceptNo))
+                .where(
+                        kinderAcceptLog.acceptStatus.eq(condition.getAcceptStatus()),
+                        teacherKinder.kinderNo.eq(condition.getKinderNo())
+                )
+                .fetch();
+        System.out.println(teachers.toString());
+        return teachers;
+    }
+
+    @Override
+    public List<TeacherDto> findInvitedTeacherByKinderNo(TeacherSearchCondition condition) {
+        List<TeacherDto> teachers = jpaQueryFactory
+                .select(Projections.constructor(TeacherDto.class,
+                        inviteCode.inviteEmail,
+                        inviteCode.acceptNo)).distinct()
+                .from(kinderAcceptLog)
+                .join(inviteCode).on(kinderAcceptLog.acceptNo.eq(inviteCode.acceptNo))
+                .where(
+                        kinderAcceptLog.acceptType.eq(4),
+                        inviteCode.kinderNo.eq(condition.getKinderNo())
+                )
+                .fetch();
+        System.out.println(teachers.toString());
+        return teachers;
+    }
+
+    @Override
+    public TeacherDto findTeacherById(Long id) {
+        TeacherDto teacher = jpaQueryFactory
+                .select(Projections.constructor(TeacherDto.class,
+                        member.id,
+                        member.username,
+                        member.name,
+                        member.phone,
+                        member.profilePicture,
+                        kinderAcceptLog.acceptRegDate,
+                        teacherKinder.acceptNo,
+                        member.kinderNo
                         ))
                 .from(member)
                 .join(teacherKinder).on(member.id.eq(teacherKinder.teacherId))
@@ -93,7 +109,6 @@ public class TeacherRepositoryCustomImpl implements TeacherRepositoryCustom{
 
         return teacher;
     }
-
 
     private BooleanExpression getClassNoEq(Long classNo) {
         return classNo == null ? null : classTeacher.classNo.eq(classNo);

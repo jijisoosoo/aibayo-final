@@ -132,6 +132,7 @@
     border-radius: 4px;
     gap: 10px 0;
     justify-content: space-between;
+    width: 100%;
 }
 
 .modal_meal_item_box {
@@ -173,7 +174,7 @@
     align-items: center;
 }
 
-.modal_meal_img {
+.modal_meal_img, .meal_img {
     width: 330px;
     height: 300px;
 }
@@ -354,4 +355,57 @@
     padding: 0;
     font-size: 26px;
     color: darkgray;
+}
+
+.google-cal {
+    font-weight: 500;
+    text-align: center;
+    /*cursor: default;*/
+}
+
+.google-cal .fc-event-main {
+    background-color: transparent;
+}
+
+.google-cal .fc-event-title.fc-sticky {
+    cursor: default;
+}
+
+#loading-spinner {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    height: 2em;
+    width: 2em;
+    overflow: visible;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.spinner {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    border: 10px solid #fdda21;
+    border-top: 10px solid rgb(195 195 195 / 30%);
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+.spinner-text {
+    text-align: center;
+    width: 150px;
+    font-weight: 500;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-cal, .fc-day-other .fc-daygrid-day-events {
+    opacity: 0.3;
 }

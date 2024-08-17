@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout}">
+
+<title layout:fragment="title">귀가 동의서 작성</title>
+
+<th:block layout:fragment="css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+  <link rel="stylesheet" href="/css/returnHome/writeForm.css" />
+</th:block>
+
+<th:block layout:fragment="javascript">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+  <script src="/js/returnHome/returnHome.js"></script>
+</th:block>
+
+<div class="container main_container" layout:fragment="content">
+  <div class="frame" th:object="${home}"
+       th:data-order-type="*{get('orderType')}"
+       th:data-order-requester="*{get('orderRequester')}"
+       th:data-rh-main-parent-name="*{get('rhMainParentName')}"
+       th:data-rh-main-parent-tel="*{get('rhMainParentTel')}"
+       th:data-kid-no="*{get('kidNo')}"
+       data-th-date
+       data-rh-time
+       data-rh-type
+       data-rh-minor-parent-name
+       data-rh-minor-parent-tel
+  >
+    <form action="">
+      <div class="div">
+        <div class="div-wrapper">
+          <div class="text-wrapper">귀가 동의서</div>
+        </div>
+        <div class="view">
+          <a href="/user/returnHome/card" class="element-secondary-button">
+            <div class="text-wrapper-2">취소</div>
+          </a>
+          <input type="submit" id="writeBtn" value="작성" class="element-secondary-button-2">
+        </div>
+      </div>
+      <div class="div-2">
+        <div class="div-3">
+          <div class="frame-wrapper">
+            <div class="div-4">
+              <div class="div-3">
+                <div class="frame-wrapper-2">
+                  <div class="div-5">
+<!--                    <div class="div-6">-->
+<!--                      <img class="avatar" alt="Avatar" src="/returnHome/img/1.png" />-->
+<!--                    </div>-->
+                    <div class="div-7">
+                      <div class="div-8">
+                        <div class="div-6">
+                          <div class="text-wrapper-4"></div>
+                        </div>
+<!--                        <div class="div-6">-->
+<!--                          <div class="text-wrapper-4">어린이</div>-->
+<!--                        </div>-->
+                      </div>
+<!--                      <div class="div-6">-->
+<!--                        <div class="text-wrapper-5">새싹반</div>-->
+<!--                      </div>-->
+                    </div>
+                  </div>
+                </div>
+                <div class="frame-wrapper-3">
+                  <div class="btn-group" id="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="date" id="today" value="2024-08-17" autocomplete="off" checked>
+                    <label class="btn btn-outline-ab custom-style" for="today" th:text="${#temporals.format(today, 'MM월 dd일')}">7월 1일</label>
+                    <input type="radio" class="btn-check" name="date" id="tomorrow" value="2024-08-18" autocomplete="off">
+                    <label class="btn btn-outline-ab custom-style" for="tomorrow" th:text="${#temporals.format(tomorrow, 'MM월 dd일')}">7월 2일</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="frame-wrapper-7">
+          <div class="frame-wrapper-8">
+            <div class="div-11">
+              <div class="div-13">
+                <div class="button">
+                </div>
+                <table class="table" id="home">
+                  <tr>
+                    <th>이름</th>
+                    <td th:text="${kidDto.getKidName()}"></td>
+                  </tr>
+                  <tr>
+                    <th>반</th>
+                    <td>
+                      <span  th:each="classDto : ${classDtos}" th:text="${classDto.className}"
+                      class="kidClass"></span>
+
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>귀가 시간</th>
+                    <td>
+                      <label for="time"></label><input id="time" type="text" class="rhtime">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>귀가 방법</th>
+                    <td>
+                      <select class="form-select" aria-label="rhtype" id="type">
+                        <option selected>선택</option>
+                        <option value="0">도보</option>
+                        <option value="1">자가용</option>
+                        <option value="2">기타</option>
+                      </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>연락처</th>
+                    <td>
+                      <span class="name" id="mainName" th:text="${loginInfo.getName()}">
+                      </span>
+                      <span>
+                        <p class="mainTel" id="mainTel" th:text="${loginInfo.getPhone()}"></p>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>비상 연락처</th>
+                    <td>
+                      <span><input type="text" class="name" name="minorName" id="minorName" placeholder="보호자명"></span>
+                        <span>
+                          <input type="text" class="minorTel" id="minorTel" placeholder="연락처를 입력해주세요.">
+                        </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>의뢰자</th>
+                    <td th:text="${loginInfo.getName()}">흰둥맘</td>
+                  </tr>
+                  <tr>
+                    <th>특이 사항</th>
+                    <td>
+                      <textarea name="" id="orderSpecific" class="orderSpecific" cols="30" rows="10"
+                                placeholder="특이사항을 입력해주세요."></textarea>
+
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sign">
+          <div class="promise">
+            영유아의 귀가 시 위 보호자에게 인도하여 주세요. <br>
+            위 보호자 이외의 다른 사람에게 인계할 때는 사전에 반드시 연락을 취하겠습니다. <br>
+            원에서는 부모가 희망하더라도 영유아를 혼자 귀가시키지 않습니다. <br>
+            금일 자녀의 귀가를 선생님께 의뢰합니다.
+          </div>
+          <div class="date" th:text="${#temporals.format(today, 'yyyy년 MM월 dd일')}">
+            2024년 6월 30 일
+          </div>
+          <div class="parent">
+            <div class="orderRequester" th:text="${loginInfo.getName()}">
+              김엄마
+            </div>
+            <div class="parentSign">
+              (인)
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

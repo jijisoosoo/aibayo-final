@@ -10,12 +10,14 @@
 </th:block>
 
 <th:block layout:fragment="javascript">
-    <script src="/js/announce/detail.js"></script></th:block>
+    <script src="/js/announce/detail.js"></script>
+    <script src="/js/comment/writeForm.js"></script>
+    <script src="/js/comment/modifyForm.js"></script>
+</th:block>
 
 <div class="container main_container" layout:fragment="content">
-    <form action="" >
         <div class="screen">
-            <div th:object="${announce}">
+            <div id="detail" th:object="${announce}" th:data-announce-no="*{announceNo}" th:data-login-id="${loginInfo.getId()}">
                 <div class="frame">
                     <div class="div">
                         <div class="frame-2">
@@ -79,8 +81,9 @@
                 </div>
             </div>
             <!-- 댓글 시작 -->
+            <!-- 댓글 시작 -->
             <div>
-                <div class="accordion" id="accordionExample">
+                <div class="accordion" id="accordionExample" th:if="${announce.canComment == '1'}">
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -92,132 +95,64 @@
                         <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <div class="view">
-                                    <!-- 댓글 -->
-                                    <div class="comment" th:each="comment : ${comments}" th:if="${comment.commentClass == '0'}">
+                                <!--여기서 부터-->
+                                    <div class="comment" th:each="comment : ${comments}" th:if="${comment.commentClass == '0'}" >
                                         <div class="frame-17">
-                                            <div class="CCC">
-                                                <div class="rectangle-wrapper">
-                                                    <img class="img" alt="Rectangle" src="/announce/img/image-5.png">
+                                            <div class="CCC" >
+                                                <div class="deletedComment" th:if="${comment.invisibleFlag == '1'}" >
+                                                    <div class=""> 작성자에 의해 삭제된 댓글입니다. </div>
                                                 </div>
-                                                <div class="AAA">
-                                                    <div class="frame-18">
-                                                        <div class="frame-19">
-                                                            <div class="text-wrapper-10">
-                                                                <span th:text="${comment.name}">짱구 아빠</span>
-                                                                <span th:if="${comment.roleNo == 1}" th:text="' 원장 선생님'">[Principal Teacher]</span>
-                                                                <span th:if="${comment.roleNo == 2}" th:text="' 선생님'">[Teacher]</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="frame-19">
-                                                            <div class="text-wrapper-6">
-                                                                <div class="dropdown" id="drop2">
-                                                                    <button class="btn dropdown-toggle" id="dd22" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
-                                                                    <ul class="dropdown-menu dmenu">
-                                                                        <li>
-                                                                            <input type="button" value="수정" class="dropdown-item ditem" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                                                                        </li>
-                                                                        <li>
-                                                                            <button type="button" class="dropdown-item ditem" onclick="button_event();">삭제</button>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <!-- Modal -->
-                                                                <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-                                                                    <div class="modal-dialog">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h1 class="modal-title fs-5" id="exampleModalLabel1">수정 하기</h1>
-                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <textarea class="reply"></textarea>
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <button type="button" class="close" data-bs-dismiss="modal">닫기</button>
-                                                                                <button type="button" class="save">저장</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="frame-20">
-                                                        <div class="text-wrapper-11" th:text="${comment.commentContent}">댓글</div>
-                                                    </div>
-                                                    <div class="frame-21">
-                                                        <div class="frame-22">
-                                                            <div class="text-wrapper-12" th:text="${#temporals.format(comment.commentRegDate, 'yyyy년 MM월 dd일 a hh:mm')}">2024.06.29 14:00:36</div>
-                                                        </div>
-                                                        <a href="#" class="frame-19">
-                                                            <!-- Button trigger modal -->
-                                                            <button type="button" class="text-wrapper-12" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                                                                답글쓰기
-                                                            </button>
-                                                        </a>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-                                                            <div class="modal-dialog">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h1 class="modal-title fs-5" id="exampleModalLabel2">답글 쓰기</h1>
-                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <textarea class="reply"></textarea>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="close" data-bs-dismiss="modal">닫기</button>
-                                                                        <button type="button" class="save">저장</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- 대댓글 시작 -->
-                                            <div class="replies">
-                                                <div class="reply" th:each="reply : ${comments}" th:if="${reply.commentClass == '1' && reply.commentGroupNo == comment.commentGroupNo}">
-                                                    <div class="rectangle-wrapper" style="margin-left: 50px">
+                                                <div class="COMMENT" th:if="${comment.invisibleFlag == '0'}" >
+                                                    <span class="rectangle-wrapper">
                                                         <img class="img" alt="Rectangle" src="/announce/img/image-5.png">
-                                                    </div>
-                                                    <div class="frame-24">
+                                                    </span>
+                                                    <div class="AAA">
+                                                        <input type="hidden" th:value="${comment.commentNo}" class="commentNo"/>
+                                                        <!--                                                    <span th:text="${comment.commentNo}"> /// //</span>-->
                                                         <div class="frame-18">
                                                             <div class="frame-19">
                                                                 <div class="text-wrapper-10">
-                                                                    <span th:text="${reply.name}">짱구 아빠</span>
-                                                                    <span th:if="${reply.roleNo == 1}" th:text="' 원장 선생님'">[Principal Teacher]</span>
-                                                                    <span th:if="${reply.roleNo == 2}" th:text="' 선생님'">[Teacher]</span>
+<!--                                                                    <div th:text="${loginInfo.id}" >//////</div>-->
+                                                                    <input type="hidden" id="commentWriterId" th:data-comment-writer="${loginInfo.id}">
+                                                                    <span id="commentWriter" th:text="${comment.name}" th:data-comment-wirter="${comment.name}">짱구 아빠</span>
+                                                                    <span th:if="${comment.roleNo == 1}" th:text="' 원장 선생님'">[Principal Teacher]</span>
+                                                                    <span th:if="${comment.roleNo == 2}" th:text="' 선생님'">[Teacher]</span>
+                                                                    <span th:if="${comment.commentWriter} == ${announce.writer}" class="writer">작성자</span>
                                                                 </div>
                                                             </div>
                                                             <div class="frame-19">
                                                                 <div class="text-wrapper-6">
-                                                                    <div class="dropdown" id="drop3">
-                                                                        <button class="btn dropdown-toggle" id="dd3" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                                                                    <div class="dropdown" id="drop2">
+                                                                        <button class="btn dropdown-toggle" id="dd22" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
                                                                         <ul class="dropdown-menu dmenu">
                                                                             <li>
-                                                                                <input type="button" value="수정" class="dropdown-item ditem" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                                                                                <input type="button" value="수정" class="dropdown-item ditem" data-bs-toggle="modal" th:attr="data-bs-target='#modifyModal'">
                                                                             </li>
                                                                             <li>
-                                                                                <button type="button" class="dropdown-item ditem" onclick="button_event();">삭제</button>
+                                                                                <button type="button" class="dropdown-item ditem deleteComment" id="deleteComment" data-comment-no="${comment.commentNo}">삭제</button>
                                                                             </li>
                                                                         </ul>
                                                                     </div>
                                                                     <!-- Modal -->
-                                                                    <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+                                                                    <div class="modal fade" th:attr="id='modifyModal'" tabindex="-1" aria-labelledby="modifyModalLabel" aria-hidden="true">
                                                                         <div class="modal-dialog">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header">
-                                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel3">수정하기</h1>
+                                                                                    <h1 class="modal-title fs-5" id="modifyModalLabel">수정하기</h1>
                                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                                 </div>
-                                                                                <div class="modal-body">
-                                                                                    <textarea class="reply"></textarea>
+                                                                                <div class="modal-body" id="modifyCommentForm"
+                                                                                     th:object="${comment}"
+                                                                                     th:data-announce-no="${announce.announceNo}"
+                                                                                     th:data-comment-no="${comment.commentNo}"
+                                                                                     th:data-comment-content="${comment.commentContent}">
+                                                                        <textarea class="modify" id="modifiedComment"
+                                                                                  th:text="${comment.commentContent}"
+                                                                        ></textarea>
                                                                                 </div>
                                                                                 <div class="modal-footer">
                                                                                     <button type="button" class="close" data-bs-dismiss="modal">닫기</button>
-                                                                                    <button type="button" class="save">저장</button>
+                                                                                    <button type="button" class="saveComment" id="saveBtn">저장</button>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -226,90 +161,188 @@
                                                             </div>
                                                         </div>
                                                         <div class="frame-20">
-                                                            <div class="text-wrapper-11" th:text="${reply.commentContent}">대댓글</div>
+                                                            <div class="text-wrapper-11" th:text="${comment.commentContent}">댓글</div>
+<!--                                                            <div th:text="${comment.invisibleFlag}"></div>-->
                                                         </div>
-                                                        <div class="frame-25">
-                                                            <div class="frame-19">
-                                                                <div class="text-wrapper-12" th:text="${#temporals.format(reply.commentRegDate, 'yyyy년 MM월 dd일 a hh:mm')}">2024.06.29 14:00:36</div>
+                                                        <div class="frame-21">
+                                                            <div class="frame-22">
+                                                                <div class="text-wrapper-12" th:text="${#temporals.format(comment.commentRegDate, 'yyyy년 MM월 dd일 a hh:mm')}">2024.06.29 14:00:36</div>
                                                             </div>
-                                                            <a href="#" class="frame-19" data-bs-toggle="modal" data-bs-target="#exampleModal4">
-                                                                <div class="text-wrapper-12">답글쓰기</div>
+                                                            <!--                                                        대댓 입력하는 모달 띄우기 ~~ -->
+                                                            <a href="#" class="frame-19">
+                                                                <!-- Button trigger modal -->
+                                                                <button type="button" class="replyBtn" data-bs-toggle="modal" th:attr="data-bs-target='#insertReple' + ${comment.commentNo}">
+                                                                    <span th:text="${comment.commentNo}" class="cn"></span> 답글쓰기
+                                                                </button>
                                                             </a>
                                                             <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel4" aria-hidden="true">
+                                                            <div class="modal fade"   th:attr="id='insertReple' + ${comment.commentNo}" tabindex="-1" aria-labelledby="insertRepleLabel" aria-hidden="true">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h1 class="modal-title fs-5" id="exampleModalLabel4">답글 쓰기</h1>
+                                                                            <h1 class="modal-title fs-5" id="insertRepleLabel">답글 쓰기</h1>
+                                                                            <input type="hidden" id="replyId" th:data-comment-no="${comment.commentNo}">
                                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                         </div>
-                                                                        <div class="modal-body">
-                                                                            <textarea class="reply"></textarea>
+                                                                        <div class="modal-body" id="insertReplyForm"
+                                                                             th:object="${comment}"
+                                                                             th:data-comment-no="${comment.commentNo}"
+                                                                             data-comment-content>
+                                                                            <textarea class="replyContent"
+                                                                            ></textarea>
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <button type="button" class="close" data-bs-dismiss="modal">닫기</button>
-                                                                            <button type="button" class="save">저장</button>
+                                                                            <button type="button" class="save" id="repleWriterId" th:data-reple-writer="${loginInfo.id}">저장</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <!--                                                        대댓 입력하는 모달 띄우기 ~~ -->
                                                 </div>
+                                                <!-- 대댓글 시작 -->
+                                                <div class="replies">
+                                                    <div class="reply" th:each="reply : ${comments}" th:if="${reply.commentClass == '1' && reply.commentGroupNo == comment.commentNo && reply.invisibleFlag == '0'}">
+                                                        <div class="rectangle-wrapper" style="margin-left: 50px">
+                                                            <img class="img" alt="Rectangle" src="">
+                                                        </div>
+                                                        <div class="AAA">
+                                                            <input type="hidden" th:value="${reply.commentNo}"/>
+                                                            <div class="frame-18">
+                                                                <div class="frame-19">
+                                                                    <div class="text-wrapper-10">
+<!--                                                                        <input type="hidden" id="repleWriterId" th:data-reple-writer="${loginInfo.id}">-->
+                                                                        <span th:text="${reply.name}">짱구 아빠</span>
+                                                                        <span th:if="${reply.roleNo == 1}" th:text="' 원장 선생님'">[Principal Teacher]</span>
+                                                                        <span th:if="${reply.roleNo == 2}" th:text="' 선생님'">[Teacher]</span>
+                                                                        <span th:if="${reply.commentWriter} == ${announce.writer}" class="writer">작성자</span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="frame-19">
+                                                                    <div class="text-wrapper-6">
+                                                                        <div class="dropdown" id="drop2">
+                                                                            <button class="btn dropdown-toggle" id="dd22" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                                                                            <ul class="dropdown-menu dmenu">
+                                                                                <li>
+                                                                                    <input type="button" value="수정" class="dropdown-item ditem" data-bs-toggle="modal" th:attr="data-bs-target='#modifyReple' + ${reply.commentNo}">
+                                                                                </li>
+                                                                                <li>
+                                                                                    <button type="button" class="dropdown-item ditem deleteReply" id="deleteReply" data-comment-no="${reply.commentNo}">삭제</button>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <!--대댓글 수정  Modal -->
+                                                                        <div class="modal fade" th:attr="id='modifyReple' + ${reply.commentNo}" tabindex="-1" aria-labelledby="modifyRepleLabel" aria-hidden="true">
+                                                                            <div class="modal-dialog">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                        <h1 class="modal-title fs-5" id="modifyRepleLabel">수정하기</h1>
+                                                                                        <span th:text="${reply.commentNo}" class="cn"></span>
+                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                    </div>
+                                                                                    <div class="modal-body" id="modifyRepleForm"
+                                                                                         th:object="${reply}"
+                                                                                         th:data-announce-no="${announce.announceNo}"
+                                                                                         th:data-comment-no="${reply.commentNo}"
+                                                                                         th:data-comment-content="${reply.commentContent}">
+                                                                            <textarea class="modify" id="modifiedReple"
+                                                                                      th:text="${reply.commentContent}"
+                                                                            ></textarea>
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="button" class="close" data-bs-dismiss="modal">닫기</button>
+                                                                                        <button type="button" class="saveReple" id="saveRepleBtn">저장</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="frame-20">
+                                                                <div class="text-wrapper-11" th:text="${reply.commentContent}">댓글</div>
+<!--                                                                <div th:text="${reply.invisibleFlag}"> // </div>-->
+                                                            </div>
+                                                            <div class="frame-21">
+                                                                <div class="frame-22">
+                                                                    <div class="text-wrapper-12" th:text="${#temporals.format(reply.commentRegDate, 'yyyy년 MM월 dd일 a hh:mm')}">2024.06.29 14:00:36</div>
+                                                                </div>
+                                                                <!--                                                                <a href="#" class="frame-19">-->
+                                                                <!--                                                                    &lt;!&ndash; Button trigger modal &ndash;&gt;-->
+                                                                <!--                                                                    <button type="button" class="replyBtn" data-bs-toggle="modal" th:attr="data-bs-target='#insertReple' + ${reply.commentNo}">-->
+                                                                <!--                                                                        (<span th:text="${reply.commentNo}"></span>) 답글쓰기-->
+                                                                <!--                                                                    </button>-->
+                                                                <!--                                                                </a>-->
+                                                                <!-- Modal -->
+                                                                <!--                                                                <div class="modal fade" th:attr="id='insertReple' + ${reply.commentNo}" tabindex="-1" aria-labelledby="insertRepleLabel" aria-hidden="true">-->
+                                                                <!--                                                                    <div class="modal-dialog">-->
+                                                                <!--                                                                        <div class="modal-content">-->
+                                                                <!--                                                                            <div class="modal-header">-->
+                                                                <!--                                                                                <h1 class="modal-title fs-5" id="insertRepleLabel">댓글 답글 쓰기</h1>-->
+                                                                <!--                                                                                <input type="hidden" id="replyId" th:text="${reply.commentNo}">-->
+                                                                <!--                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+                                                                <!--                                                                            </div>-->
+                                                                <!--                                                                            <div class="modal-body">-->
+                                                                <!--                                                                                <textarea class="replyContent"></textarea>-->
+                                                                <!--                                                                            </div>-->
+                                                                <!--                                                                            <div class="modal-footer">-->
+                                                                <!--                                                                                <button type="button" class="close" data-bs-dismiss="modal">닫기</button>-->
+                                                                <!--                                                                                <button type="button" class="save">저장</button>-->
+                                                                <!--                                                                            </div>-->
+                                                                <!--                                                                        </div>-->
+                                                                <!--                                                                    </div>-->
+                                                                <!--                                                                </div>-->
+                                                            </div>
+                                                        </div>
+                                                        <!-- 대댓글 끝 -->
+                                                    </div>
+                                                </div>
+                                                <!-- 댓글 끝 -->
                                             </div>
-                                            <!-- 대댓글 끝 -->
                                         </div>
                                     </div>
-                                    <!-- 댓글 끝 -->
 
+<!--                                    여기까지 -->
 
-                                    <!--페이징-->
-<!--                                    <ul class="pagination class_2">-->
-<!--                                        <li class="page-item class_3"-->
-<!--                                            th:classappend="${currentPage - 5 < 0 ? 'disabled' : ''}">-->
-<!--                                            <a class="page-link page-link-ab page-text-ab"-->
-<!--                                               th:href="@{|/user/announce/detail/list?page=${currentPage - 5 + 1}|}">-->
-<!--                                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">-->
-<!--                                                    <path d="M19.6771 24.7674L34.9896 40.0799C35.5104 40.6008 35.7625 41.2084 35.7458 41.9029C35.7292 42.5973 35.4597 43.2049 34.9375 43.7258C34.4153 44.2466 33.8076 44.507 33.1146 44.507C32.4215 44.507 31.8139 44.2466 31.2917 43.7258L15.25 27.7362C14.8333 27.3195 14.5208 26.8508 14.3125 26.3299C14.1042 25.8091 14 25.2883 14 24.7674C14 24.2466 14.1042 23.7258 14.3125 23.2049C14.5208 22.6841 14.8333 22.2154 15.25 21.7987L31.2917 5.75702C31.8125 5.23619 32.4292 4.98411 33.1417 5.00078C33.8542 5.01744 34.4701 5.28689 34.9896 5.80911C35.509 6.33133 35.7694 6.93897 35.7708 7.63203C35.7722 8.32508 35.5118 8.93272 34.9896 9.45494L19.6771 24.7674Z" fill="black"/>-->
-<!--                                                </svg>-->
-<!--                                            </a>-->
-<!--                                        </li>-->
+                                </div>
+                                <!--댓글 입력 시작-->
+                                <div class="frame-26"
+                                     id="writeFrm" th:object="${commentInfo}"
+                                     th:data-comment-writer="*{get('commentWriter')}"
+                                     th:data-board-kinder-no="*{get('boardKinderNo')}"
+                                     data-comment-group-no
+                                     data-comment-class
+                                     data-comment-content
+                                     data-comment-delete-flag
+                                     data-invisible-flag
+                                >
+                                    <input type="hidden" th:value="${announce.boardNo}" id="boardNo" />
 
-
-<!--                                        <th:block th:each="i : ${#numbers.sequence(startPage + 1, endPage + 1)}">-->
-<!--                                            <li class="page-item class_3" th:classappend="${currentPage + 1 == i ? 'active disabled' : ''}">-->
-<!--                                                <a class="page-link page-link-ab page-text-ab"-->
-<!--                                                   th:text="${i}"-->
-<!--                                                   th:href="@{|/announce/admin/list?page=${i}|}">Page</a>-->
-<!--                                            </li>-->
-<!--                                        </th:block>-->
-
-
-<!--                                        <li class="page-item class_3"-->
-<!--                                            th:classappend="${announces.totalPages < currentPage + 5 ? 'disabled' : ''}">-->
-<!--                                            <a class="page-link page-link-ab page-text-ab"-->
-<!--                                               th:href="@{|/user/announce/detail?page=${currentPage + 5 + 1}|}">-->
-<!--                                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">-->
-<!--                                                    <path d="M30.1563 24.9997L14.8438 9.68718C14.3229 9.16635 14.0708 8.54968 14.0875 7.83718C14.1042 7.12468 14.3736 6.50871 14.8958 5.98926C15.4181 5.46982 16.0347 5.2094 16.7458 5.20801C17.457 5.20662 18.0729 5.46704 18.5938 5.98926L34.5833 22.0309C35 22.4476 35.3125 22.9163 35.5208 23.4372C35.7292 23.958 35.8333 24.4788 35.8333 24.9997C35.8333 25.5205 35.7292 26.0413 35.5208 26.5622C35.3125 27.083 35 27.5518 34.5833 27.9684L18.5417 44.0101C18.0208 44.5309 17.4132 44.783 16.7188 44.7663C16.0243 44.7497 15.4167 44.4802 14.8958 43.958C14.375 43.4358 14.1146 42.8191 14.1146 42.108C14.1146 41.3969 14.375 40.7809 14.8958 40.2601L30.1563 24.9997Z" fill="black"/>-->
-<!--                                                </svg>-->
-<!--                                            </a>-->
-<!--                                        </li>-->
-<!--                                    </ul>-->
-                                    <!--페이징-->
-                                    <!--댓글 입력 시작-->
-                                    <div class="frame-26">
-                                        <div class="frame-27">
-                                            <div class="frame-28">
-                                                <div class="element-secondary-button-wrapper">
-                                                    <input type="submit" value="등록" class="element-secondary-button-3">
-                                                </div>
-                                            </div>
-                                            <div class="element-input-field">
-                                                <textarea class="element-input-field"></textarea>
+                                    <div class="frame-27">
+                                        <div class="frame-28">
+                                            <div class="element-secondary-button-wrapper">
+                                                <input type="submit" value="등록" id="writeBtn" class="element-secondary-button-3">
                                             </div>
                                         </div>
+                                        <div class="element-input-field">
+                                            <textarea class="element-input-field" id="commentContent"></textarea>
+                                        </div>
                                     </div>
-                                    <!--댓글 입력 끝-->
+                                </div>
+                                <!--댓글 입력 끝-->
+
+                            </div> <!--                            아코디언 바디 끝-->
+
+                        </div>
+                    </div>
+                </div>
+                <!-- 댓글 끝 -->
+
+            </div>
+
+
                                 </div>
                             </div>
                         </div>
@@ -317,53 +350,5 @@
                 </div>
             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <!--            <ul class="pagination class_2">-->
-
-            <!--                <li class="page-item class_3"-->
-            <!--                    th:classappend="${currentPage - 5 < 0 ? 'disabled' : ''}">-->
-            <!--                    <a class="page-link page-link-ab page-text-ab"-->
-            <!--                       th:href="@{|/user/anounce/detail?page=${currentPage - 5 + 1}|}">-->
-            <!--                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">-->
-            <!--                            <path d="M19.6771 24.7674L34.9896 40.0799C35.5104 40.6008 35.7625 41.2084 35.7458 41.9029C35.7292 42.5973 35.4597 43.2049 34.9375 43.7258C34.4153 44.2466 33.8076 44.507 33.1146 44.507C32.4215 44.507 31.8139 44.2466 31.2917 43.7258L15.25 27.7362C14.8333 27.3195 14.5208 26.8508 14.3125 26.3299C14.1042 25.8091 14 25.2883 14 24.7674C14 24.2466 14.1042 23.7258 14.3125 23.2049C14.5208 22.6841 14.8333 22.2154 15.25 21.7987L31.2917 5.75702C31.8125 5.23619 32.4292 4.98411 33.1417 5.00078C33.8542 5.01744 34.4701 5.28689 34.9896 5.80911C35.509 6.33133 35.7694 6.93897 35.7708 7.63203C35.7722 8.32508 35.5118 8.93272 34.9896 9.45494L19.6771 24.7674Z" fill="black"/>-->
-            <!--                        </svg>-->
-            <!--                    </a>-->
-            <!--                </li>-->
-
-
-            <!--                <th:block th:each="i : ${#numbers.sequence(startPage + 1, endPage + 1)}">-->
-            <!--                    <li class="page-item class_3" th:classappend="${currentPage + 1 == i ? 'active disabled' : ''}">-->
-            <!--                        <a class="page-link page-link-ab page-text-ab"-->
-            <!--                           th:text="${i}"-->
-            <!--                           th:href="@{|/user/announce/detail?page=${i}|}">Page</a>-->
-            <!--                    </li>-->
-            <!--                </th:block>-->
-
-
-            <!--                <li class="page-item class_3"-->
-            <!--                    th:classappend="${announces.totalPages < currentPage + 5 ? 'disabled' : ''}">-->
-            <!--                    <a class="page-link page-link-ab page-text-ab"-->
-            <!--                       th:href="@{|/user/announce/detail?page=${currentPage + 5 + 1}|}">-->
-            <!--                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">-->
-            <!--                            <path d="M30.1563 24.9997L14.8438 9.68718C14.3229 9.16635 14.0708 8.54968 14.0875 7.83718C14.1042 7.12468 14.3736 6.50871 14.8958 5.98926C15.4181 5.46982 16.0347 5.2094 16.7458 5.20801C17.457 5.20662 18.0729 5.46704 18.5938 5.98926L34.5833 22.0309C35 22.4476 35.3125 22.9163 35.5208 23.4372C35.7292 23.958 35.8333 24.4788 35.8333 24.9997C35.8333 25.5205 35.7292 26.0413 35.5208 26.5622C35.3125 27.083 35 27.5518 34.5833 27.9684L18.5417 44.0101C18.0208 44.5309 17.4132 44.783 16.7188 44.7663C16.0243 44.7497 15.4167 44.4802 14.8958 43.958C14.375 43.4358 14.1146 42.8191 14.1146 42.108C14.1146 41.3969 14.375 40.7809 14.8958 40.2601L30.1563 24.9997Z" fill="black"/>-->
-            <!--                        </svg>-->
-            <!--                    </a>-->
-            <!--                </li>-->
-            <!--            </ul>-->
         </div>
-    </form>
 </div>

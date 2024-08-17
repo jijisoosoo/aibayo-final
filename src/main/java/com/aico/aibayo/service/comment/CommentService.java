@@ -11,5 +11,15 @@ import java.util.HashMap;
 public interface CommentService {
     Page<CommentDto>findAllByBoardNo(CommentSearchCondition condition, HashMap<String, Object> hashMap);
 
-    long countByBoardNo(Long boardNo);
+    long countByBoardNoAndInvisibleFlag(Long boardNo , String invisibleFlag);
+
+    CommentDto insertComment(CommentDto commentDto);
+
+    CommentDto deleteComment (CommentDto commentDto);
+
+    CommentDto updateComment(CommentDto commentDto);
+
+
+
+
 }
