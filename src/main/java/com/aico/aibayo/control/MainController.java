@@ -4,8 +4,10 @@ import com.aico.aibayo.common.AcceptStatusEnum;
 import com.aico.aibayo.common.BooleanEnum;
 import com.aico.aibayo.common.MemberRoleEnum;
 import com.aico.aibayo.common.SggInfoEnum;
+import com.aico.aibayo.dto.ClassDto;
 import com.aico.aibayo.dto.RegisterKinderDto;
 import com.aico.aibayo.dto.attendance.AttendanceDto;
+import com.aico.aibayo.dto.attendance.MainAttendanceDto;
 import com.aico.aibayo.dto.kid.KidDto;
 import com.aico.aibayo.dto.kid.KidSearchCondition;
 import com.aico.aibayo.dto.meal.MealDto;
@@ -16,6 +18,7 @@ import com.aico.aibayo.dto.teacher.TeacherDto;
 import com.aico.aibayo.dto.teacher.TeacherSearchCondition;
 import com.aico.aibayo.jwt.JWTUtil;
 import com.aico.aibayo.service.attendance.AttendanceService;
+import com.aico.aibayo.service.classManage.ClassService;
 import com.aico.aibayo.service.kid.KidService;
 import com.aico.aibayo.service.meal.MealService;
 import com.aico.aibayo.service.member.MemberService;
@@ -26,6 +29,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -51,6 +56,7 @@ public class MainController {
     private final KidService kidService;
     private final teacherService teacherService;
     private final AttendanceService attendanceService;
+    private final ClassService classService;
 
     @GetMapping("/")
     public String mainPage() {
@@ -90,8 +96,7 @@ public class MainController {
 
         getParentAcceptStatus(loginInfo, model);
 
-//        오늘 날짜에 대한 모든 소속 원생 출결 확인 정보 저장
-//        List<AttendanceDto> attendanceList = attendanceService.getKids(kinderNo, classNo, selectedDate);
+        getAttendances(loginInfo, model);
 
         return "/admin/main/main";
     }
@@ -164,6 +169,57 @@ public class MainController {
             }
         }
         return null;
+    }
+
+    private void getAttendances(MemberDto loginInfo, Model model) {
+        // 오늘 날짜에 대한 모든 반의 원생 출결 확인 정보 저장
+        List<ClassDto> classDtos = classService.getByKinderNo(loginInfo.getKinderNo());
+        log.info("classDtos: {}", classDtos);
+
+        List<MainAttendanceDto> attendancesByClass = new ArrayList<>();
+
+        for (ClassDto clazz : classDtos) {
+            List<AttendanceDto> attendanceDtos =
+                    attendanceService.getKids(loginInfo.getKinderNo(), clazz.getClassNo(), LocalDate.now());
+
+            MainAttendanceDto mainAttendanceDto = new MainAttendanceDto();
+            mainAttendanceDto.setClassNo(clazz.getClassNo());
+            mainAttendanceDto.setClassName(clazz.getClassName());
+            mainAttendanceDto.setExist(false);
+
+            if (!attendanceDtos.isEmpty()) {
+                mainAttendanceDto.setExist(true);
+
+                int totalCount = attendanceDtos.size();
+                mainAttendanceDto.setTotalCount(totalCount);
+
+                int presentCount = (int) attendanceDtos.stream()
+                        .filter(dto -> dto.getAttendanceStatus().equals("출석"))
+                        .count();
+                mainAttendanceDto.setPresentCount(presentCount);
+
+                int kidDropCount = (int) attendanceDtos.stream()
+                        .filter(dto -> dto.getKidDrop() != null)
+                        .count();
+                mainAttendanceDto.setKidDropCount(kidDropCount);
+
+                int kidPickupCount = (int) attendanceDtos.stream()
+                        .filter(dto -> dto.getKidPickup() != null)
+                        .count();
+                mainAttendanceDto.setKidPickupCount(kidPickupCount);
+
+                int absentCount = (int) attendanceDtos.stream()
+                        .filter(dto -> dto.getAttendanceStatus().equals("결석"))
+                        .count();
+                mainAttendanceDto.setAbsentCount(absentCount);
+            }
+
+            attendancesByClass.add(mainAttendanceDto);
+
+        }
+        log.info("attendancesByClass: {}", attendancesByClass);
+
+        model.addAttribute("attendances", attendancesByClass);
     }
 
     private void getTeacherAcceptStatus(MemberDto loginInfo, Model model) {
