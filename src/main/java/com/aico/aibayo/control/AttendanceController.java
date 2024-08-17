@@ -1,324 +1,214 @@
 package com.aico.aibayo.control;
 
-import com.aico.aibayo.common.AnnounceTypeEnum;
-import com.aico.aibayo.common.BoardTypeEnum;
-import com.aico.aibayo.dto.ClassDto;
-    import com.aico.aibayo.dto.announce.AnnounceDto;
-import com.aico.aibayo.dto.announce.AnnounceSearchCondition;
-import com.aico.aibayo.dto.comment.CommentDto;
-import com.aico.aibayo.dto.comment.CommentSearchCondition;
+import com.aico.aibayo.dto.attendance.AttendanceDto;
+import com.aico.aibayo.dto.classKid.ClassKidDto;
 import com.aico.aibayo.dto.member.MemberDto;
-import com.aico.aibayo.dto.member.MemberSearchCondition;
-import com.aico.aibayo.service.announce.AnnounceService;
+import com.aico.aibayo.entity.AttendanceEntity;
+import com.aico.aibayo.entity.ClassEntity;
+import com.aico.aibayo.jwt.JWTUtil;
+import com.aico.aibayo.repository.attendance.AttendanceRepository;
+import com.aico.aibayo.service.attendance.AttendanceService;
 import com.aico.aibayo.service.classManage.ClassService;
-import com.aico.aibayo.service.comment.CommentService;
 import com.aico.aibayo.service.member.MemberService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Slf4j
 @Controller
-@RequestMapping("/announce")
 @RequiredArgsConstructor
-public class AnnounceController {
-    private final AnnounceService announceService;
-    private final ClassService classService;
+@RequestMapping("/attendance")
+public class AttendanceController {
+    private final JWTUtil jwtUtil;
     private final MemberService memberService;
-    private final CommentService commentService;
+    private final ClassService classService;
+    private final AttendanceService attendanceService;
 
-    // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
-    private int roleNo = 1;
-    private Long id = 2L;
-    private Long kinderNo = 1L;
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @GetMapping("/admin/card")
-    public String admincard(@RequestParam(defaultValue = "1") int page, Model model){
-        HashMap<String, Object> hashMap = new HashMap<>();
-        AnnounceSearchCondition condition = new AnnounceSearchCondition();
-        condition.setKinderNo(kinderNo);
-        model.addAttribute("KinderNo",kinderNo);
-        hashMap.put("page",page);
-        hashMap.put("type","card");
-        Page<AnnounceDto>announces= announceService.findAllByKinderNoCard(condition,hashMap);
+    @ModelAttribute
+    public void addAttributes(HttpServletRequest request, Model model) {
+        String token = getTokenFromCookies(request.getCookies());
+        if (token == null || token.isEmpty()) {
+            log.error("JWT token is missing");
+            // 여기서 예외를 던지거나, 적절히 처리합니다.
+            return;
+        }
 
+        String username = jwtUtil.getUsername(token);
+        log.info("loginUser: {}", username);
+        MemberDto memberDto = memberService.findByUsername(username);
 
-        return getPageInfoAndGoView(model, announces, "/admin/announce/card");
+        model.addAttribute("loginInfo", memberDto);
     }
-    private String getPageInfoAndGoView(Model model, Page<AnnounceDto> announces, String view) {
-        int totalPages = announces.getTotalPages();
-        int currentPage = announces.getNumber();
-        int startPage = Math.max(0, currentPage - 2);
-        int endPage = Math.min(totalPages - 1, currentPage + 2);
 
-        // 조회된 결과가 없을 때 endPage를 0으로 설정
-        if (totalPages == 0) {
-            endPage = 0;
-        } else {// 페이지 5개 범위 확인
-            if (endPage - startPage < 4) {
-                if (startPage == 0) {
-                    endPage = Math.min(4, totalPages - 1);
-                } else if (endPage == totalPages - 1) {
-                    startPage = Math.max(0, totalPages - 5);
+    private String getTokenFromCookies(Cookie[] cookies) {
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("jwt".equals(cookie.getName())) {
+                    return cookie.getValue();
                 }
             }
         }
-
-        log.info(">>>>>>>>>>>>>>>>>>>>>>pagination");
-        log.info("startPage: {}", startPage);
-        log.info("endPage: {}", endPage);
-        log.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-
-        model.addAttribute("announces", announces);
-        model.addAttribute("currentPage", currentPage);
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
-
-        return view;
+        return null;
     }
-    private String getPageInfoAndGoView(Model model, Page<AnnounceDto> announces,Page<AnnounceDto> primaryAnnounces, String view) {
-        int totalPages = announces.getTotalPages();
-        int currentPage = announces.getNumber();
-        int startPage = Math.max(0, currentPage - 2);
-        int endPage = Math.min(totalPages - 1, currentPage + 2);
 
-        // 조회된 결과가 없을 때 endPage를 0으로 설정
-        if (totalPages == 0) {
-            endPage = 0;
-        } else {// 페이지 5개 범위 확인
-            if (endPage - startPage < 4) {
-                if (startPage == 0) {
-                    endPage = Math.min(4, totalPages - 1);
-                } else if (endPage == totalPages - 1) {
-                    startPage = Math.max(0, totalPages - 5);
-                }
+    @GetMapping("/admin/main")
+    public String adminMain() {
+        return "admin/attendance/main";
+    }
+
+    @GetMapping("/detailToday")
+    public String detailToday(@ModelAttribute("loginInfo") MemberDto memberDto, Model model, @RequestParam("date") String date) {
+
+        LocalDate selectedDate = LocalDate.parse(date);
+
+        List<ClassEntity> classList = classService.getClassList(memberDto.getKinderNo());
+
+
+        model.addAttribute("date", selectedDate);
+        model.addAttribute("classList", classList);
+        log.info("day : detailToday");
+        return "admin/attendance/detailToday";
+    }
+
+    @GetMapping("/detailBefore")
+    public String detailBefore(@ModelAttribute("loginInfo") MemberDto memberDto, Model model, @RequestParam("date") String date) {
+        LocalDate selectedDate = LocalDate.parse(date);
+
+        // KinderNo에 따라 클래스 리스트를 가져옴
+        List<ClassEntity> classList = classService.getClassList(memberDto.getKinderNo());
+
+        model.addAttribute("date", selectedDate);
+        model.addAttribute("classList", classList);
+        log.info("day : detailBefore");
+        return "admin/attendance/detailBefore";
+    }
+
+    @GetMapping("/detailAfter")
+    public String detailAfter(@ModelAttribute("loginInfo") MemberDto memberDto, Model model, @RequestParam("date") String date) {
+        LocalDate selectedDate = LocalDate.parse(date);
+        LocalDate todayDate = LocalDate.now(); // 현재 날짜 가져오기
+
+        // KinderNo에 따라 클래스 리스트를 가져옴
+        List<ClassEntity> classList = classService.getClassList(memberDto.getKinderNo());
+
+        model.addAttribute("selectedDate", selectedDate);
+        model.addAttribute("todayDate", todayDate);
+        model.addAttribute("classList", classList);
+        log.info("day : detailAfter");
+        return "admin/attendance/detailAfter";
+    }
+
+
+    @GetMapping("/write")
+    public String detailWrite(Model model) {
+        String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
+        model.addAttribute("date", date);
+
+        return "admin/attendance/detailWrite";
+    }
+
+    @GetMapping("/write/{classNo}")
+    public String writePage(@PathVariable Long classNo, Model model, @ModelAttribute("loginInfo") MemberDto memberDto) {
+        System.out.println("write classNo : " + classNo);
+        model.addAttribute("classNo", classNo);
+        model.addAttribute("kinderNo", memberDto.getKinderNo());
+
+
+        List<ClassKidDto> classKid = classService.getClassKid(classNo);
+        model.addAttribute("classKid", classKid);
+
+
+        return "admin/attendance/detailWrite"; // 이 경로는 작성 페이지의 템플릿 경로로 수정해 주세요.
+    }
+
+    @PostMapping("/write")
+    public ResponseEntity<?> writePage(@RequestBody List<Map<String, Object>> attendanceList) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        for (Map<String, Object> attendance : attendanceList) {
+            AttendanceDto attendanceDto = new AttendanceDto();
+
+            // String으로 받은 후 Long으로 변환
+            attendanceDto.setKinderNo(Long.valueOf(attendance.get("kinderNo").toString()));
+            attendanceDto.setClassNo(Long.valueOf(attendance.get("classNo").toString()));
+            attendanceDto.setKidNo(Long.valueOf(attendance.get("kidNo").toString()));
+
+            attendanceDto.setKidName((String) attendance.get("kidName"));
+
+            // kidDrop 처리
+            String kidDropStr = (String) attendance.get("kidDrop");
+            if (kidDropStr != null && !kidDropStr.trim().isEmpty()) {
+                attendanceDto.setKidDrop(LocalDateTime.parse(kidDropStr, formatter));
             }
-        }
 
-        log.info(">>>>>>>>>>>>>>>>>>>>>>pagination");
-        log.info("startPage: {}", startPage);
-        log.info("endPage: {}", endPage);
-        log.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-
-        model.addAttribute("announces", announces);
-        model.addAttribute("primaryAnnounces", primaryAnnounces);
-        model.addAttribute("currentPage", currentPage);
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
-
-        return view;
-    }
-    @GetMapping("/admin/list")
-        public String adminList(@RequestParam(defaultValue = "1") int page, Model model){
-            HashMap<String, Object> hashMap1 = new HashMap<>();
-            HashMap<String, Object> hashMap2 = new HashMap<>();
-            AnnounceSearchCondition condition1 = new AnnounceSearchCondition();
-            AnnounceSearchCondition condition2 = new AnnounceSearchCondition();
-            condition1.setKinderNo(kinderNo);
-
-            condition2.setKinderNo(kinderNo);
-            condition2.setAnnouncePrimary("1");
-
-            model.addAttribute("KinderNo",kinderNo);
-            hashMap1.put("page",page);
-            hashMap1.put("type","list");
-            hashMap2.put("page",1);
-            hashMap2.put("type","listPrimary");
-
-            Page<AnnounceDto>announces= announceService.findAllByKinderNoList(condition1,hashMap1);
-            Page<AnnounceDto>primaryAnnounces= announceService.findAllByKinderNoList(condition2,hashMap2);
-
-            return getPageInfoAndGoView(model, announces, primaryAnnounces, "/admin/announce/list");
-        }
-
-    @GetMapping("/admin/write")
-    public String writeForm(Model model){
-        // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
-        List<ClassDto> classDtos = new ArrayList<>();
-
-        if (roleNo < 2) { // 사이트 관리자/원장
-            classDtos = classService.getByKinderNo(kinderNo);
-
-        } else if (roleNo == 2) { // 교사
-            classDtos = classService.getByMemberId(id);
-        }
-        HashMap<String, Object> announceInfo = new HashMap<>();
-        announceInfo.put("boardType", BoardTypeEnum.ANNOUNCE.getNum());
-        announceInfo.put("writer", id);
-        announceInfo.put("boardKinderNo", kinderNo);
-
-        model.addAttribute("classDtos", classDtos);
-        model.addAttribute("announceInfo",announceInfo);
-
-        return "/admin/announce/writeForm";
-    }
-    @PostMapping("/writeOk")
-    @ResponseBody
-    public void writeOk(@RequestBody AnnounceDto announceDto) {
-        log.info("create Announce: {}", announceDto);
-
-        announceService.insertAnnounce(announceDto);
-    }
-
-    @GetMapping("/admin/{announceNo}")
-    public String admindetail(@PathVariable Long announceNo, Model model){
-        AnnounceDto announceDto = announceService.findByAnnounceNo(announceNo);
-
-        CommentSearchCondition condition = new CommentSearchCondition();
-//        Page<CommentDto> commentDto=commentService.findAllByBoardNo(condition,1);
-
-        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>announceDto>>>>>{}",announceDto);
-//        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>commentDto>>>>>{}",commentDto);
-
-        model.addAttribute("announce",announceDto);
-        return "/admin/announce/detail";
-    }
-
-
-
-    @GetMapping("/admin/modify/{announceNo}")
-    public String modifyForm(@PathVariable Long announceNo, Model model){
-        HashMap<String, Object> memberDto = new HashMap<>();
-        memberDto.put("roleNo", roleNo);
-        memberDto.put("id", id);
-
-        AnnounceDto announceDto = announceService.findByAnnounceNo(announceNo);
-        model.addAttribute("member",memberDto);
-        model.addAttribute("announce",announceDto);
-        // 현재 시간 가져오기
-        LocalDateTime now = LocalDateTime.now();
-        // 모델에 추가
-        model.addAttribute("boardModifyDate", now);
-
-        return "/admin/announce/modifyForm";
-    }
-    @PutMapping("/modifyOk")
-    @ResponseBody
-    public void modify(@RequestBody AnnounceDto announceDto) {
-        log.info("modify announce: {}", announceDto);
-        announceService.updateAnnounce(announceDto);
-    }
-    @DeleteMapping("/delete")
-    @ResponseBody
-    public void delete(@RequestBody AnnounceDto announceDto) {
-        log.info("delete: {}", announceDto);
-        announceService.deleteAnnounce(announceDto);
-    }
-
-
-
-
-
-    //    user
-    @GetMapping("/user/card")
-    public String usercard(@RequestParam(defaultValue = "1") int page, Model model){
-        MemberSearchCondition memberSearchCondition = new MemberSearchCondition();
-        memberSearchCondition.setId(14L);
-        memberSearchCondition.setKidNo(1L);
-        MemberDto loginInfo=  memberService.getByIdAndKidNo(memberSearchCondition);
-        HashMap<String, Object> hashMap = new HashMap<>();
-        AnnounceSearchCondition condition = new AnnounceSearchCondition();
-        condition.setKinderNo(loginInfo.getKinderNo());
-        condition.setAnnounceType(AnnounceTypeEnum.TEACHER.getNum());
-        model.addAttribute("KinderNo",kinderNo);
-        hashMap.put("page",page);
-        hashMap.put("type","card");
-        Page<AnnounceDto>announces= announceService.findAllByKinderNoCard(condition,hashMap);
-
-
-        return getPageInfoAndGoView(model, announces, "/user/announce/card");
-    }
-    @GetMapping("/user/list")
-    public String userList(@RequestParam(defaultValue = "1") int page, Model model){
-        MemberSearchCondition memberSearchCondition = new MemberSearchCondition();
-        memberSearchCondition.setId(14L);
-        memberSearchCondition.setKidNo(1L);
-        MemberDto loginInfo=  memberService.getByIdAndKidNo(memberSearchCondition);
-        HashMap<String, Object> hashMap1 = new HashMap<>();
-        HashMap<String, Object> hashMap2 = new HashMap<>();
-        AnnounceSearchCondition condition1 = new AnnounceSearchCondition();
-        AnnounceSearchCondition condition2 = new AnnounceSearchCondition();
-        condition1.setKinderNo(loginInfo.getKinderNo());
-        condition1.setAnnounceType(AnnounceTypeEnum.TEACHER.getNum());
-
-        condition2.setKinderNo(loginInfo.getKinderNo());
-        condition2.setAnnouncePrimary("1");
-        condition2.setAnnounceType(AnnounceTypeEnum.TEACHER.getNum());
-
-
-        model.addAttribute("KinderNo",kinderNo);
-        hashMap1.put("page",page);
-        hashMap1.put("type","list");
-        hashMap2.put("page",1);
-        hashMap2.put("type","listPrimary");
-
-        Page<AnnounceDto>announces= announceService.findAllByKinderNoList(condition1,hashMap1);
-        Page<AnnounceDto>primaryAnnounces= announceService.findAllByKinderNoList(condition2,hashMap2);
-
-        return getPageInfoAndGoView(model, announces, primaryAnnounces, "/user/announce/list");
-    }
-    @GetMapping("/user/{announceNo}")
-    public String userdetail(@PathVariable Long announceNo, @RequestParam(defaultValue = "1") int page, Model model){
-        AnnounceDto announceDto = announceService.findByAnnounceNo(announceNo);
-
-        HashMap<String, Object> hashMap = new HashMap<>();
-        CommentSearchCondition condition = new CommentSearchCondition();
-        condition.setKinderNo(kinderNo);
-        condition.setBoardNo(announceDto.getBoardNo());
-        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>announceDto>>>>>{}",announceDto);
-
-        model.addAttribute("announce",announceDto);
-        model.addAttribute("KinderNo", kinderNo);
-        hashMap.put("page", page);
-        hashMap.put("type", "list");
-
-
-        Page<CommentDto> comments = commentService.findAllByBoardNo(condition, hashMap);
-        long commentCount = commentService.countByBoardNo(announceDto.getBoardNo());
-        model.addAttribute("commentCount",commentCount);
-        return getPageInfoAndGoViewComment(model, comments,"/user/announce/detail");
-    }
-    private String getPageInfoAndGoViewComment(Model model, Page<CommentDto> comments, String view) {
-        int totalPages = comments.getTotalPages();
-        int currentPage = comments.getNumber();
-        int startPage = Math.max(0, currentPage - 2);
-        int endPage = Math.min(totalPages - 1, currentPage + 2);
-
-        // 조회된 결과가 없을 때 endPage를 0으로 설정
-        if (totalPages == 0) {
-            endPage = 0;
-        } else { // 페이지 5개 범위 확인
-            if (endPage - startPage < 4) {
-                if (startPage == 0) {
-                    endPage = Math.min(4, totalPages - 1);
-                } else if (endPage == totalPages - 1) {
-                    startPage = Math.max(0, totalPages - 5);
-                }
+            // kidPickup 처리
+            String kidPickupStr = (String) attendance.get("kidPickup");
+            if (kidPickupStr != null && !kidPickupStr.trim().isEmpty()) {
+                attendanceDto.setKidPickup(LocalDateTime.parse(kidPickupStr, formatter));
             }
+
+            attendanceDto.setNote((String) attendance.get("note"));
+            attendanceDto.setAttendanceStatus((String) attendance.get("attendanceStatus"));
+
+            attendanceService.createAttendance(attendanceDto);
+
         }
+        return ResponseEntity.ok("Success");
+    }
 
-        log.info(">>>>>>>>>>>>>>>>>>>>>>pagination");
-        log.info("startPage: {}", startPage);
-        log.info("endPage: {}", endPage);
-        log.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 
-        model.addAttribute("comments", comments);
-        model.addAttribute("currentPage", currentPage);
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
+    @PostMapping("/getKidAttendance")
+    @ResponseBody
+    public List<AttendanceDto> getKidAttendance(@ModelAttribute("loginInfo") MemberDto memberDto, @RequestParam("classNo") Long classNo, @RequestParam("date") String date, Model model) {
+        Long kinderNo = memberDto.getKinderNo();
+        LocalDate selectedDate = LocalDate.parse(date); // String으로 받은 date를 LocalDate로 변환
 
-        return view;
+        List<AttendanceDto> attendanceList = attendanceService.getKids(kinderNo, classNo, selectedDate);
+
+        return attendanceList;
+    }
+
+    @PostMapping("/updateAttendance")
+    @ResponseBody
+    public ResponseEntity<String> updateAttendance(@RequestBody AttendanceDto request,
+                                                   @ModelAttribute("loginInfo") MemberDto memberDto) {
+        try {
+            Long kidNo = request.getKidNo();
+            String attendanceStatus = request.getAttendanceStatus();
+            LocalDateTime kidDrop = request.getKidDrop();
+            LocalDateTime kidPickup = request.getKidPickup();
+            String note = request.getNote();
+            LocalDate attendanceDate = request.getAttendanceDate();
+            Long classNo = request.getClassNo();
+
+            logger.info("Update request received for kidNo: {}, attendanceDate: {}", kidNo, attendanceDate);
+
+            attendanceService.updateAttendance(kidNo, attendanceStatus, kidDrop, kidPickup, note, attendanceDate, classNo, memberDto);
+
+            return ResponseEntity.ok("출석부 수정 성공");
+        } catch (Exception e) {
+            logger.error("Error updating attendance for kidNo: {}, attendanceDate: {}", request.getKidNo(), request.getAttendanceDate(), e);
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("출석부 수정 실패");
+        }
     }
 
 }
