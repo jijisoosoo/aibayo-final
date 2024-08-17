@@ -34,7 +34,7 @@
                             </svg>
                         </div>
                         <input type="text" class="form-control datepicker" placeholder="년/월/일" readonly>
-                        <a href="/user/home/writeForm" class="button-new">작성</a>
+                        <a href="/returnhome/user/write" class="button-new">작성</a>
                     </div>
                 </div>
             </div>
@@ -58,14 +58,12 @@
                 </div>
             </div>
 
-            <div class="card-list" >
-                <a href="/returnhome/user/detail" class="card" th:each="home : ${homeList}">
-                    <div class="tb">
+            <div class="card-list">
+                <a th:each="home : ${homeList}"
+                   th:href="@{|/returnhome/user/${home.rhAgreeNo}|}"
+                   class="card">
+                <div class="tb">
                         <table class="table">
-<!--                            <tr>-->
-<!--                                <th>의뢰번호</th>-->
-<!--                                <td th:text="${home.orderNo}">자녀이름</td>-->
-<!--                            </tr>-->
                             <tr>
                                 <th>이름</th>
                                 <td th:text="${home.kidName}">자녀이름</td>
