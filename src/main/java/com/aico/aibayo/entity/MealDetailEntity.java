@@ -20,7 +20,7 @@ public class MealDetailEntity {
     private Integer mealType;
     @Column(name = "meal_menu")
     private String mealMenu;
-    @Column(name = "meal_pic")
+    @Column(name = "meal_pic", columnDefinition = "LONGTEXT")
     private String mealPic;
     @Column(name = "meal_pic_original_name")
     private String mealPicOriginalName;

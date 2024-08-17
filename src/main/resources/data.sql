@@ -58,14 +58,8 @@ INSERT INTO member(role_no, status, kinder_no, role, reg_date, username, name, p
 
 
 #등록 유치원 추가
-INSERT INTO register_kinder
-(kinder_open_time, kinder_close_time, kinder_reg_date, announce_status, notepad_status, meal_status, medication_status, return_home_status, attendance_status, schedule_status, pick_drop_status, life_record_status, chat_status,sido_list,sgg_list)
-VALUES('09:00','16:00','2020-01-01',1, 1, 1, 1, 1, 1, 1, 1, 1, 1,'27','27140');
-
-
-INSERT INTO register_kinder
-(kinder_open_time, kinder_close_time, kinder_reg_date, announce_status, notepad_status, meal_status, medication_status, return_home_status, attendance_status, schedule_status, pick_drop_status, life_record_status, chat_status,sido_list,sgg_list)
-VALUES('10:00','18:00','2021-01-01',1, 1, 1, 1, 1, 1, 1, 1, 1, 1,'27','27140');
+INSERT INTO register_kinder (kinder_open_time, kinder_close_time, kinder_reg_date, announce_status, notepad_status, meal_status, medication_status, return_home_status, attendance_status, schedule_status, pick_drop_status, life_record_status, chat_status) VALUES('09:00','16:00','2020-01-01',1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+INSERT INTO register_kinder (kinder_open_time, kinder_close_time, kinder_reg_date, announce_status, notepad_status, meal_status, medication_status, return_home_status, attendance_status, schedule_status, pick_drop_status, life_record_status, chat_status) VALUES('10:00','18:00','2021-01-01',1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
 
 
 # 원생 추가
@@ -2123,6 +2117,24 @@ INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(20,52,19
 INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(20,53,200);
 INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(3,5,201);
 INSERT INTO class_teacher(class_no, class_teacher_id, accept_no) VALUES(5,40,202);
+
+INSERT INTO comment (comment_writer,comment_group_no , board_no, comment_reg_date, comment_class, comment_content, comment_delete_flag, invisible_flag)
+VALUES
+    (8, 1, 260, '2024-02-20', '0', '저는 그날 연차인데 어떻게 하나요?', '0', '0'),
+    (2, 1, 260, '2024-02-21 14:00:30', '1', '모든 전 교사 워크샵 필참입니다.', '0', '0'),
+    (8, 1, 260, '2024-02-21 16:10:40', '1', '네.. 그럼 기존에 사용한 연차는 반납 되나요?', '0', '0'),
+    (2, 1, 260, '2024-02-21 16:10:40', '1', '네 전자결의에 연차 반납 요청 올려주세요', '0', '0'),
+    (15, 1, 263,'2024-02-20 13:02:23', '0', '저희 아이는 개인적으로 병원에서 건강검진을 할건데, 원에서 또 해야하나요?', '0', '0'),
+    (17, 2,  263, '2024-02-20 14:09:12', '0', '건강검진 항목에는 어떤 검진 내용이 있나요?', '0', '0'),
+    (19, 3, 263, '2024-02-21 13:00:14', '0', '건강 검진날에 아침 먹고 등원해도 되나요?', '0', '0'),
+    (8, 1, 263, '2024-02-20 13:30:32', '1', '개인적으로 검사를 진행하시려면 검사서를 원에 제출해주시면 됩니다.', '0', '0'),
+    (8, 2, 263, '2024-02-21 09:10:32', '1', '이번 검진 항목에서는 신체발달 검사와 구강검진이 있을 예정입니다.', '0', '0'),
+    (9, 3, 263, '2024-02-21 13:10:37', '1', '정확한 검진을 위해서는 공복으로 등원 부탁드립니다. 물도 금지 해주세요', '0', '0'),
+    (15, 1, 263, '2024-02-20 14:00:05', '1', '네 답변 감사합니다.', '0', '0'),
+    (19, 2, 263, '2024-02-21 09:15:33', '1', '선생님 이번에는 예방접종은 하지않나요? 한다면 예정된 시기가 있을까요 ?', '0', '0'),
+    (8, 2, 263, '2024-02-22 18:00:12', '1', '이번 검진에 예방접종은 하지 않습니다. 다음 검진에는 예방접종이 있을 예정입니다.', '0', '0'),
+    (19, 2, 263, '2024-02-23 10:00:54', '1', '아 그렇군요.. 그럼 다음 검진은 언제쯤인지 알 수 있을까요 ?', '0', '0'),
+    (8, 2, 263, '2024-02-23 11:18:59', '1', '다음 검진 예상일은 6월 중순쯤으로 예정하고 있습니다..', '0', '0');
 
 
 # 초대코드 추가
