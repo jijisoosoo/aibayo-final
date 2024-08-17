@@ -17,7 +17,7 @@
 </th:block>
 
 <th:block layout:fragment="javascript">
-  <script src="/js/schedule/scheduleMain.js"></script>
+  <script src="/js/schedule/adminPage/scheduleMain.js"></script>
 
   <!-- FullCalendar and related modules -->
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
@@ -79,19 +79,21 @@
                 <div class="accordion-button-item">
                   <div class="scheduled-class">
 
-                    <th:block th:if="*{classList.size() == 0}">
+                    <!-- classList가 classNo가 0인 class 하나만 가질 경우 -->
+                    <th:block th:if="*{classList.size() == 1 and classList[0].classNo == 0}">
                       <div class="ellipse ellipse_all"></div>
                       <div class="classNamesDiv">
-                        <div class="text-wrapper-17">전체 반</div>
+                        <div class="text-wrapper-17 class_name" th:data-class-no="0">전체 반</div>
                       </div>
                     </th:block>
 
-                    <th:block th:if="*{classList.size() != 0}">
+                    <!-- classList가 classNo가 0이 아닌 여러 class를 가질 경우 -->
+                    <th:block th:if="*{classList.size() > 1 or (classList.size() == 1 and classList[0].classNo != 0)}">
                       <div class="ellipse ellipse_class"></div>
                       <div class="classNamesDiv">
                         <div class="classNames" th:each="classItem, iterStat : ${schedule.classList}">
-                          <div class="text-wrapper-17" th:text="${classItem.className}">반 이름</div>
-                          <span class="span-wrapper-17" th:if="!${iterStat.last}" >,  </span>
+                          <div class="text-wrapper-17 class_name" th:data-class-no="${classItem.classNo}" th:text="${classItem.className}">반 이름</div>
+                          <span class="span-wrapper-17" th:if="!${iterStat.last}">,  </span>
                         </div>
                       </div>
                     </th:block>
@@ -110,10 +112,9 @@
                 </th:block>
                 <div class="schedule-contents" th:title="*{boardContents}" th:text="*{boardContents}">일정 내용</div>
                 <div class="control-div">
-                  <div th:text="*{scheduleNo}"></div>
                   <a class="control-wrapper" th:href="@{'/schedule/admin/scheduleModify/' + *{scheduleNo}}">수정</a>
                   <div class="control-wrapper" > | </div>
-                  <a class="control-wrapper" href="">삭제</a>
+                  <a class="control-wrapper" id="delete_button" th:data-schedule-no="*{boardNo}">삭제</a>
                 </div>
               </div>
             </div>

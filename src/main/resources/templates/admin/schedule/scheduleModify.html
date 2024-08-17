@@ -14,7 +14,7 @@
 </th:block>
 
 <th:block layout:fragment="javascript">
-    <script src="/js/schedule/scheduleWrite.js"></script>
+    <script src="/js/schedule/adminPage/scheduleWrite.js"></script>
     <th:block th:replace="~{/common/datepicker :: js}"/>
     <th:block th:replace="~{/common/datepicker :: css}"/>
 </th:block>
@@ -32,17 +32,23 @@
         </div>
 
         <div class="calendar">
+
+            <div class="div_hidden" id="board_no_div" th:data-value="${schedule.boardNo}"></div>
+            <div class="div_hidden" id="schedule_no_div" th:data-value="${schedule.scheduleNo}"></div>
+
             <div class="input-name">
                 <div class="text-date"><div class="text-wrapper-7">날짜</div></div>
                 <div class="div-4">
                     <div class="calendar-pick">
-                        <img class="calendar-vector" src="/images/common/calendar_gray.png" />
-                        <input type="text" class="datepickerdiv datepicker startDate" placeholder="날짜 선택" readonly>
+                        <img class="calendar-vector start_date_div" th:id="${schedule.scheduleStartDate}" src="/images/common/calendar_gray.png" />
+                        <input type="text" class="datepickerdiv datepicker startDate" placeholder="날짜 선택" readonly
+                               th:value="${#temporals.format(schedule.scheduleStartDate, 'yyyy.MM.dd')}">
                     </div>
                     <div class="text-wrapper-8">-</div>
                     <div class="calendar-pick">
-                        <img class="calendar-vector" src="/images/common/calendar_gray.png" />
-                        <input type="text" class="datepickerdiv datepicker endDate" placeholder="날짜 선택" readonly>
+                        <img class="calendar-vector end_date_div" th:id="${schedule.scheduleEndDate}" src="/images/common/calendar_gray.png" />
+                        <input type="text" class="datepickerdiv datepicker endDate" placeholder="날짜 선택"
+                               th:value="${#temporals.format(schedule.scheduleEndDate, 'yyyy.MM.dd')}"readonly>
                     </div>
                 </div>
             </div>
@@ -68,18 +74,24 @@
                         </div>
                     </div>
 
+                    <div class="div_hidden" id="checked_class_div">
+                        <div class="origin_class" th:each="class:${schedule.classList}" th:id="${class.classNo}"></div>
+                    </div>
+
                 </div>
             </div>
             <div class="input-name-2">
                 <div class="text-date"><div class="text-wrapper-7">제목</div></div>
-                <input type="text" class="default-wrapper" placeholder="제목을 작성해주세요."></input>
+                <input type="text" class="default-wrapper" placeholder="제목을 작성해주세요." th:value="${schedule.boardTitle}">
             </div>
             <div class="input-name-2">
                 <div class="text-date"><div class="text-wrapper-7">내용</div></div>
                 <div class="inputarea-2">
-                    <textarea class="calendar-textarea" id="calendar-textarea" onkeyup="autoResize(this), chkword(this, 1000)" onkeydown="autoResize(this)" placeholder="일정표는 알림을 보내지 않습니다."></textarea>
+                    <textarea class="calendar-textarea" id="calendar-textarea"
+                              onkeyup="autoResize(this), chkword(this, 500)" onkeydown="autoResize(this)"
+                              placeholder="일정표는 알림을 보내지 않습니다." th:text="${schedule.boardContents}"></textarea>
                     <div class="grammar">
-                        <div class="textcnt" id="textcnt">( 0 / 2000 )</div>
+                        <div class="textcnt" id="textcnt">( 0 / 500 )</div>
                     </div>
                 </div>
             </div>
