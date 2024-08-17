@@ -135,7 +135,7 @@ public class AttendanceController {
 //    }
 
     @PostMapping("/admin/write")
-    public ResponseEntity<?> writePage(@RequestBody List<Map<String, Object>> attendanceList {
+    public ResponseEntity<?> writePage(@RequestBody List<Map<String, Object>> attendanceList) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         for (Map<String, Object> attendance : attendanceList) {
