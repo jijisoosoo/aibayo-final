@@ -232,15 +232,18 @@ public class MealServiceImpl implements MealService {
     }
 
     private String getUrlAfterUploadS3(MultipartFile multipartFile) {
-        File uploadDir = new File(uploadDirectory);
+        // OS에 관계없이 현재 디렉토리 아래에 aibayo_upload 디렉토리 설정
+        String rootPath = System.getProperty("user.dir"); // 현재 디렉토리
+        String uploadPath = rootPath + uploadDirectory;
+        File uploadDir = new File(uploadPath);
 
         // 로컬에 파일 등록
         if (!uploadDir.exists()) {
             uploadDir.mkdirs();
         }
 
-        String fileName = UUID.randomUUID() + "-" + multipartFile.getName();
-        String filePathLocal = uploadDirectory + File.separator + fileName;
+        String fileName = UUID.randomUUID() + "-" + multipartFile.getOriginalFilename();
+        String filePathLocal = uploadPath + File.separator + fileName;
         String filePathS3 = MEAL_IMG_DIR + "/" + fileName;
 
 

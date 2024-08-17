@@ -2,8 +2,10 @@ package com.aico.aibayo.control;
 
 import com.aico.aibayo.dto.ClassDto;
 import com.aico.aibayo.dto.member.MemberDto;
+import com.aico.aibayo.dto.schedule.ScheduleClassDto;
 import com.aico.aibayo.dto.schedule.ScheduleDto;
 import com.aico.aibayo.dto.schedule.ScheduleSearchCondition;
+import com.aico.aibayo.entity.ScheduleClassEntity;
 import com.aico.aibayo.service.ScheduleClassService;
 import com.aico.aibayo.service.classManage.ClassService;
 import com.aico.aibayo.service.member.MemberService;
@@ -36,7 +38,7 @@ public class ScheduleController {
         List<ScheduleDto> schedules = scheduleService.getAllByKinderNo(condition);
         model.addAttribute("schedules", schedules);
         for(ScheduleDto schedule : schedules){
-            List<ClassDto> scheduledClass = scheduleClassService.getClassByScheduleNo(schedule.getScheduleNo());
+            List<ScheduleClassDto> scheduledClass = scheduleClassService.getClassByScheduleNo(schedule.getScheduleNo());
             schedule.setClassList(scheduledClass);
         }
         List<ClassDto> classList = classService.getByKinderNo(loginInfo.getKinderNo());
@@ -50,9 +52,9 @@ public class ScheduleController {
                                          @RequestBody ScheduleSearchCondition condition){
 
         System.out.println("condition : " + condition);
-        List<ScheduleDto> classSchedules = scheduleService.getListByClass(condition);
+        List<ScheduleDto> classSchedules = scheduleService.getAllByClassNo(condition);
         for(ScheduleDto schedule : classSchedules){
-            List<ClassDto> scheduledClass = scheduleClassService.getClassByScheduleNo(schedule.getScheduleNo());
+            List<ScheduleClassDto> scheduledClass = scheduleClassService.getClassByScheduleNo(schedule.getScheduleNo());
             schedule.setClassList(scheduledClass);
         }
         model.addAttribute("classSchedules", classSchedules);
@@ -63,9 +65,9 @@ public class ScheduleController {
     @PostMapping("/admin/scheduleMainByDay")
     public String adminScheduleMainByDay(@ModelAttribute("loginInfo") MemberDto loginInfo, Model model,
                                          @RequestBody ScheduleSearchCondition condition){
-        List<ScheduleDto> daySchedules = scheduleService.getListByDay(condition);
+        List<ScheduleDto> daySchedules = scheduleService.getAllByDay(condition);
         for(ScheduleDto schedule : daySchedules){
-            List<ClassDto> scheduledClass = scheduleClassService.getClassByScheduleNo(schedule.getScheduleNo());
+            List<ScheduleClassDto> scheduledClass = scheduleClassService.getClassByScheduleNo(schedule.getScheduleNo());
             schedule.setClassList(scheduledClass);
         }
         model.addAttribute("daySchedules", daySchedules);
@@ -88,9 +90,10 @@ public class ScheduleController {
         condition.setScheduleNo(scheduleNo);
         ScheduleDto schedule = scheduleService.getOneByScheduleNo(condition);
 
-        List<ClassDto> scheduledClass = scheduleClassService.getClassByScheduleNo(scheduleNo);
+        List<ScheduleClassDto> scheduledClass = scheduleClassService.getClassByScheduleNo(scheduleNo);
         schedule.setClassList(scheduledClass);
         model.addAttribute("schedule", schedule);
+        log.info("scheduledClass : " + scheduledClass);
 
         List<ClassDto> classList = classService.getByKinderNo(loginInfo.getKinderNo());
         model.addAttribute("classList", classList);
@@ -108,7 +111,53 @@ public class ScheduleController {
         scheduleService.insertSchedule(requestBody);
     }
 
+    @PostMapping("/admin/modifySchedule")
+    @ResponseBody
+    public void modifyOk(@ModelAttribute("loginInfo") MemberDto loginInfo,
+                        @RequestBody Map<String, Object> requestBody) {
+
+        requestBody.put("writer", loginInfo.getId());
+        requestBody.put("kinderNo", loginInfo.getKinderNo());
+        scheduleService.updateSchedule(requestBody);
+    }
+
+    @PostMapping("/admin/scheduleDelete")
+    @ResponseBody
+    public void deleteOk(@ModelAttribute("loginInfo") MemberDto loginInfo,
+                        @RequestBody Map<String, Object> requestBody) {
+
+        scheduleService.deleteSchedule(requestBody);
+    }
 
     @GetMapping("/user/scheduleMain")
-    public String userScheduleWrite(){ return "/user/schedule/scheduleMain"; }
+    public String userScheduleMain(@ModelAttribute("loginInfo") MemberDto loginInfo, Model model){
+
+        ScheduleSearchCondition condition = new ScheduleSearchCondition();
+        List<ClassDto> classDtos = classService.getAllByKidNo(loginInfo.getKidNo());
+        condition.setClassDtos(classDtos);
+
+        List<ScheduleDto> schedules = scheduleService.getAllByClassList(condition);
+        for(ScheduleDto schedule : schedules){
+            List<ScheduleClassDto> scheduledClass = scheduleClassService.getClassByScheduleNo(schedule.getScheduleNo());
+            schedule.setClassList(scheduledClass);
+        }
+        model.addAttribute("schedules", schedules);
+
+        return "/user/schedule/scheduleMain";
+    }
+
+    @PostMapping("/user/scheduleMainByDay")
+    public String userScheduleMainByDay(@ModelAttribute("loginInfo") MemberDto loginInfo, Model model,
+                                         @RequestBody ScheduleSearchCondition condition){
+        List<ClassDto> classDtos = classService.getAllByKidNo(loginInfo.getKidNo());
+        condition.setClassDtos(classDtos);
+
+        List<ScheduleDto> daySchedules = scheduleService.getAllByDayAndClassList(condition);
+        for(ScheduleDto schedule : daySchedules){
+            List<ScheduleClassDto> scheduledClass = scheduleClassService.getClassByScheduleNo(schedule.getScheduleNo());
+            schedule.setClassList(scheduledClass);
+        }
+        model.addAttribute("daySchedules", daySchedules);
+        return "/admin/schedule/scheduleMain";
+    }
 }

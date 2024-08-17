@@ -1,34 +1,9 @@
 $(document).ready(function() {
-
     showCalendar();
-
-    $(document).on('change', '.dropdown-class', function () {
-        let classNo = $('.dropdown-class').val();
-        // console.log("반 변경:" + classNo);
-
-        let param = {
-            classNo: classNo == null ? null : classNo
-        };
-
-        console.log("param:" + JSON.stringify(param));
-
-        let url = "/schedule/admin/scheduleMainByClass";
-
-        commonAjax(url, 'POST', param);
-
-    });
-
-    $(document).on('click', '#scheduleWrite', function () {
-
-        let url = "/schedule/admin/scheduleWrite";
-
-        commonAjax(url, 'GET');
-
-    });
 
 });
 
-function showCalendar(initialSelectedValue, selectedValue){
+function showCalendar(){
     // 변수가 유지되도록
     var initialSelectedValue;
     var selectedValue;
@@ -135,15 +110,19 @@ function getEvents() {
 
     scheduleElements.forEach(element => {
         let endDate = element.getAttribute('data-schedule-end-date');
+        const dataClassList = element.getAttribute('data-class-list');
+
+        // classNo가 0인지를 확인하기 위해 정규식을 사용하여 추출
+        const classNoMatch = dataClassList.match(/classNo=0/);
 
         const event = {
             title: element.getAttribute('data-board-title'),
             start: element.getAttribute('data-schedule-start-date').split('T')[0], // 날짜만 추출
             end: endDate ? addOneDayAndFormat(endDate) : null,
-            classNo: parseInt(element.getAttribute('data-class-no'), 10),
+            classNo: parseInt(element.getAttribute('data-class-no'), 10),   // 10진수
             contents: element.getAttribute('data-board-contents'),
-            backgroundColor: element.getAttribute('data-class-list').length === 2 ? '#3788d8' : '#ff85aa',
-            borderColor : element.getAttribute('data-class-list').length === 2 ? '#3788d8' : '#ff85aa',
+            backgroundColor: classNoMatch !== null ? '#3788d8' : '#ff85aa',
+            borderColor : classNoMatch !== null ? '#3788d8' : '#ff85aa',
             location: '' // location 값이 없으므로 빈 문자열로 설정
         };
 
@@ -177,14 +156,12 @@ function showDaySchedule(selectedValue){
     var selectedValueStr = selectedValue.replace('-','년 ').replace('-','월 ').concat('일');
     document.getElementById("selectedDate").innerHTML = selectedValueStr;
 
-    let url = "/schedule/admin/scheduleMainByDay"
-    let classNo = $('.dropdown-class').val();
+    let url = "/schedule/user/scheduleMainByDay"
 
     let param = {
         selectedDate : selectedValue + 'T00:00:00',
-        classNo : classNo == null ? null : classNo
     }
-    // console.log("param : " + JSON.stringify(param));
+    console.log("param : " + JSON.stringify(param));
 
     commonAjax(url, 'POST', param);
 }
@@ -192,14 +169,7 @@ function showDaySchedule(selectedValue){
 function afterSuccess(response, method) {
     $('.schedule-2').replaceWith($(response).find('.schedule-2'));
     $('.schedules_data').replaceWith($(response).find('.schedules_data'));
-    // $('.ifClassNoExist').replaceWith($(response).find('.ifClassNoExist'));
 
     var count = document.querySelectorAll('.single-schedule').length;
     $('.text-wrapper-16').text("일정 " + count + "개");
-
-    var ifClassNoExist = (document.querySelectorAll('.ifClassNoExist').length);
-    if (ifClassNoExist === 1) {
-        console.log("reload by class");
-        showCalendar();
-    }
 }

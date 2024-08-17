@@ -10,12 +10,14 @@ import java.util.Map;
 @Service
 public interface ScheduleService {
     List<ScheduleDto> getAllByKinderNo(ScheduleSearchCondition condition);
-
-    List<ScheduleDto> getListByDay(ScheduleSearchCondition condition);
-
-    List<ScheduleDto> getListByClass(ScheduleSearchCondition condition);
-
+    List<ScheduleDto> getAllByDay(ScheduleSearchCondition condition);
+    List<ScheduleDto> getAllByClassNo(ScheduleSearchCondition condition);
     void insertSchedule(Map<String, Object> requestBody);
-
     ScheduleDto getOneByScheduleNo(ScheduleSearchCondition condition);
+    void updateSchedule(Map<String, Object> requestBody);
+    void deleteSchedule(Map<String, Object> requestBody);
+
+    // user
+    List<ScheduleDto> getAllByClassList(ScheduleSearchCondition condition);
+    List<ScheduleDto> getAllByDayAndClassList(ScheduleSearchCondition condition);
 }

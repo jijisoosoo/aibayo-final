@@ -6,6 +6,7 @@ import com.aico.aibayo.dto.schedule.ScheduleDto;
 import com.aico.aibayo.dto.schedule.ScheduleSearchCondition;
 import com.aico.aibayo.entity.BoardEntity;
 import com.aico.aibayo.entity.ScheduleClassEntity;
+import com.aico.aibayo.entity.ScheduleClassId;
 import com.aico.aibayo.entity.ScheduleEntity;
 import com.aico.aibayo.repository.BoardRepository;
 import com.aico.aibayo.repository.schedule.ScheduleClassRepository;
@@ -16,8 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -33,13 +33,13 @@ public class ScheduleServiceImpl implements ScheduleService {
     }
 
     @Override
-    public List<ScheduleDto> getListByDay(ScheduleSearchCondition condition) {
-        return scheduleRepository.findListByDay(condition);
+    public List<ScheduleDto> getAllByDay(ScheduleSearchCondition condition) {
+        return scheduleRepository.findAllByDay(condition);
     }
 
     @Override
-    public List<ScheduleDto> getListByClass(ScheduleSearchCondition condition) {
-        return scheduleRepository.findListByClass(condition);
+    public List<ScheduleDto> getAllByClassNo(ScheduleSearchCondition condition) {
+        return scheduleRepository.findAllByClass(condition);
     }
 
     @Override
@@ -58,6 +58,7 @@ public class ScheduleServiceImpl implements ScheduleService {
                 .map(element -> Long.parseLong(element.toString())) // String을 Long으로 변환
                 .toList();
 
+        // board insert
         BoardEntity boardEntity = BoardEntity.builder()
                 .invisibleFlag(BooleanEnum.FALSE.getBool())
                 .boardType(BoardTypeEnum.SCHEDULE.getNum())
@@ -70,6 +71,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
         BoardEntity savedBoard = boardRepository.save(boardEntity);
 
+        // schedule insert
         ScheduleEntity scheduleEntity = ScheduleEntity.builder()
                 .boardNo(savedBoard.getBoardNo())
                 .scheduleStartDate(startDate)
@@ -78,18 +80,11 @@ public class ScheduleServiceImpl implements ScheduleService {
 
         ScheduleEntity savedSchedule = scheduleRepository.save(scheduleEntity);
 
-        if(classList != null) {
-            for(Long classNo : classList){
-                ScheduleClassEntity scheduleClassEntity = ScheduleClassEntity.builder()
-                        .scheduleNo(savedSchedule.getScheduleNo())
-                        .classNo(classNo)
-                        .build();
-                scheduleClassRepository.save(scheduleClassEntity);
-            }
-        }else{
+        // scheduleClass insert
+        for(Long classNo : classList) {
             ScheduleClassEntity scheduleClassEntity = ScheduleClassEntity.builder()
                     .scheduleNo(savedSchedule.getScheduleNo())
-                    .classNo(0L)
+                    .classNo(classNo)
                     .build();
             scheduleClassRepository.save(scheduleClassEntity);
         }
@@ -98,5 +93,89 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public ScheduleDto getOneByScheduleNo(ScheduleSearchCondition condition) {
         return scheduleRepository.findOneByScheduleNo(condition);
+    }
+
+    @Override
+    public void updateSchedule(Map<String, Object> requestBody) {
+        Long boardNo = Long.parseLong(requestBody.get("boardNo").toString());
+        Long scheduleNo = Long.parseLong(requestBody.get("scheduleNo").toString());
+        Long writer = (Long)requestBody.get("writer");
+        String boardTitle = (String)requestBody.get("boardTitle");
+        String boardContents = (String)requestBody.get("boardContents");
+        LocalDateTime startDate = LocalDateTime.parse((String)(requestBody.get("startDate")));
+        LocalDateTime endDate = LocalDateTime.parse((String)(requestBody.get("endDate")));
+
+        List<?> classes = (List<?>) requestBody.get("classList");
+        List<Long> classList = classes.stream()
+                .map(element -> Long.parseLong(element.toString())) // String을 Long으로 변환
+                .toList();
+
+        // 기존 schedule_class 삭제
+        List<?> originClasses = (List<?>) requestBody.get("originClassList");
+        List<Long> originClassList = originClasses.stream()
+                .map(element -> Long.parseLong(element.toString())) // String을 Long으로 변환
+                .toList();
+
+        for(Long classNo : originClassList) {
+            ScheduleClassId scheduleClassId = new ScheduleClassId(scheduleNo, classNo);
+            ScheduleClassEntity scheduleClassEntity = scheduleClassRepository.findById(scheduleClassId).orElse(null);
+            assert scheduleClassEntity != null;
+            scheduleClassRepository.delete(scheduleClassEntity);
+        }
+
+        // board modify
+        BoardEntity boardEntity = boardRepository.findById(boardNo).orElse(null);
+        assert boardEntity != null;
+        boardEntity.setBoardTitle(boardTitle);
+        boardEntity.setBoardContents(boardContents);
+        boardEntity.setBoardModifyDate(LocalDateTime.now());
+        boardEntity.setWriter(writer);
+
+        boardRepository.save(boardEntity);
+
+        // schedule modify
+        ScheduleEntity scheduleEntity = scheduleRepository.findById(scheduleNo).orElse(null);
+        assert scheduleEntity != null;
+        scheduleEntity.setScheduleNo(scheduleNo);
+        scheduleEntity.setScheduleStartDate(startDate);
+        scheduleEntity.setScheduleEndDate(endDate);
+
+        scheduleRepository.save(scheduleEntity);
+
+        // scheduleClass insert
+        for(Long classNo : classList) {
+            ScheduleClassEntity scheduleClassEntity = ScheduleClassEntity.builder()
+                    .scheduleNo(scheduleNo)
+                    .classNo(classNo)
+                    .build();
+            scheduleClassRepository.save(scheduleClassEntity);
+        }
+    }
+
+    @Override
+    public void deleteSchedule(Map<String, Object> requestBody) {
+        Long boardNo = Long.parseLong(requestBody.get("boardNo").toString());
+//        List<?> classes = (List<?>) requestBody.get("classList");
+//        List<Long> classList = classes.stream()
+//                .map(element -> Long.parseLong(element.toString())) // String을 Long으로 변환
+//                .toList();
+
+        // board modify
+        BoardEntity boardEntity = boardRepository.findById(boardNo).orElse(null);
+        assert boardEntity != null;
+        boardEntity.setBoardDeleteDate(LocalDateTime.now());
+        boardEntity.setInvisibleFlag(BooleanEnum.TRUE.getBool());
+
+        boardRepository.save(boardEntity);
+    }
+
+    @Override
+    public List<ScheduleDto> getAllByClassList(ScheduleSearchCondition condition) {
+        return scheduleRepository.findAllByClassList(condition);
+    }
+
+    @Override
+    public List<ScheduleDto> getAllByDayAndClassList(ScheduleSearchCondition condition) {
+        return scheduleRepository.findAllByDayAndClassList(condition);
     }
 }
