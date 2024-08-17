@@ -78,7 +78,7 @@ function initMsg() {
 }
 
 $(document).ready(function() {
-    $('#logoutButton').on('click', function() {
+    $(document).on('click', '#logoutButton', function() {
         $.ajax({
             url: '/logout',
             type: 'POST',
