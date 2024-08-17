@@ -27,6 +27,11 @@ public class AttendanceServiceImpl implements AttendanceService {
         return attendanceRepository.findAllByKinderNoAndClassNo(kinderNo, classNo, selectedDate);
     }
 
+    @Override
+    public List<AttendanceDto> getKidsByKinderNo(Long kinderNo, LocalDate selectedDate) {
+        return attendanceRepository.findAllByKinderNo(kinderNo, selectedDate);
+    }
+
     // kidNo와 attendanceDate를 기준으로 AttendanceEntity를 가져오는 메서드
     public AttendanceEntity getAttendanceByKidNoAndDate(Long kidNo, LocalDate attendanceDate) {
         logger.info("Fetching AttendanceEntity for kidNo: {}, attendanceDate: {}", kidNo, attendanceDate);

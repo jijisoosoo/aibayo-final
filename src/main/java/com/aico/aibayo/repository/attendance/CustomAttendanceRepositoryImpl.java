@@ -39,4 +39,27 @@ public class CustomAttendanceRepositoryImpl implements CustomAttendanceRepositor
                 .fetch();
     }
 
+    @Override
+    public List<AttendanceDto> findAllByKinderNo(Long kinderNo, LocalDate selectedDate) {
+        return jpaQueryFactory
+                .select(Projections.constructor(AttendanceDto.class,
+                        attendance.kinderNo,
+                        attendance.classNo,
+                        kid.kidNo,
+                        kid.kidName,
+                        attendance.kidDrop,
+                        attendance.kidPickup,
+                        attendance.note,
+                        attendance.attendanceStatus,
+                        attendance.attendanceDate
+                ))
+                .from(attendance)
+                .join(kid).on(attendance.kidNo.eq(kid.kidNo)
+                        .and(attendance.kinderNo.eq(kid.kinderNo)))
+                .where(attendance.kinderNo.eq(kinderNo)
+                        .and(attendance.attendanceDate.eq(selectedDate)))
+                .fetch();
+    }
+
+
 }

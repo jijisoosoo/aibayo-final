@@ -12,6 +12,7 @@ import java.util.List;
 @Service
 public interface AttendanceService {
     List<AttendanceDto> getKids(Long kinderNo, Long classNo, LocalDate selectedDate);
+    List<AttendanceDto> getKidsByKinderNo(Long kinderNo, LocalDate selectedDate);
     Long createAttendance(AttendanceDto dto);
     AttendanceEntity getAttendanceByKidNoAndDate(Long kidNo, LocalDate attendanceDate);
 

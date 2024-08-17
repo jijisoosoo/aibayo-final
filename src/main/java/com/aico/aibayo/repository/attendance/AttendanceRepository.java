@@ -10,4 +10,6 @@ import java.util.Optional;
 
 public interface AttendanceRepository extends JpaRepository<AttendanceEntity, Integer>, CustomAttendanceRepository {
     Optional<AttendanceEntity> findByKidNoAndAttendanceDate(Long kidNo, LocalDate attendanceDate);
+
+
 }
