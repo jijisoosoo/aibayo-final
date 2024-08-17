@@ -106,12 +106,18 @@
 
                             <div class="data_teacher_kid_waiting_box">
                                 <div class="data_teacher_kid_body_title">승인대기중</div>
-                                <div class="data_teacher_kid_body_count">0명</div>
+                                <div class="data_teacher_kid_body_count"
+                                     th:text="|${waitingTeachersCount}명|">
+                                    0명
+                                </div>
                             </div>
 
                             <div class="data_teacher_kid_invite_box">
                                 <div class="data_teacher_kid_body_title">초대중</div>
-                                <div class="data_teacher_kid_body_count">0명</div>
+                                <div class="data_teacher_kid_body_count"
+                                     th:text="|${invitedTeachersCount}명|">
+                                    0명
+                                </div>
                             </div>
 
                         </div>
@@ -134,12 +140,18 @@
 
                             <div class="data_teacher_kid_waiting_box">
                                 <div class="data_teacher_kid_body_title">승인대기중</div>
-                                <div class="data_teacher_kid_body_count">0명</div>
+                                <div class="data_teacher_kid_body_count"
+                                     th:text="|${waitedKidsCount}명|">
+                                    0명
+                                </div>
                             </div>
 
                             <div class="data_teacher_kid_invite_box">
                                 <div class="data_teacher_kid_body_title">초대중</div>
-                                <div class="data_teacher_kid_body_count">0명</div>
+                                <div class="data_teacher_kid_body_count"
+                                     th:text="|${invitedKidsCount}명|">
+                                    0명
+                                </div>
                             </div>
 
                         </div>
