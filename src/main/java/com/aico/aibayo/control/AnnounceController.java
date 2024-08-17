@@ -167,6 +167,7 @@ public class AnnounceController {
         model.addAttribute("classDtos", classDtos);
         model.addAttribute("announceInfo",announceInfo);
         log.info("writeAnnounce : {} ", announceInfo);
+
         return "/admin/announce/writeForm";
     }
     @PostMapping("/writeOk")
