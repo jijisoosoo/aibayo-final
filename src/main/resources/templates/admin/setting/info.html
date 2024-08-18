@@ -16,7 +16,7 @@
 
 <div class="container main_container" layout:fragment="content">
     <form action="">
-        <div class="setting">
+        <div class="setting" th:value="${kinderDto}">
             <div class="menu">
                 <div class="frame">
                     <div class="text-wrapper">원 기본정보</div>
@@ -41,7 +41,7 @@
                         </tr>
                         <tr>
                             <th>원 이름</th>
-                            <td>세종 유치원</td>
+                            <td >세종 유치원</td>
                         </tr>
                         <tr>
                             <th>원 전화번호</th>
@@ -56,13 +56,13 @@
 
                         <tr>
                             <th>등원 시간</th>
-                            <td>
+                            <td th:text="${kinderDto.getKinderOpenTime()}">
                                 AM 08:00
                             </td>
                         </tr>
                         <tr>
                             <th>하원 시간</th>
-                            <td>
+                            <td th:text="${kinderDto.getKinderCloseTime()}">
                                 PM 18:30
                             </td>
                         </tr>

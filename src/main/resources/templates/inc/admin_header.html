@@ -28,7 +28,9 @@
                         <li><a class="dropdown-item h_class_75" th:href="@{/teacher/list}">교사 관리</a></li>
                         <li><a class="dropdown-item h_class_75" href="/kid/list">원생 관리</a></li>
                         <li><a class="dropdown-item h_class_75" th:href="@{/classManage/main}" href="/classManage/main">반 관리</a></li>
-                        <li><a class="dropdown-item h_class_75" href="/setting/info">원 관리</a></li>
+                        <li><a class="dropdown-item h_class_75" th:if="${loginInfo.roleNo <2}"
+                               th:href="@{|/setting/info/${loginInfo.kinderNo}|}"
+                        >원 관리</a></li>
                         <li><a class="dropdown-item h_class_75" th:href="@{/member/myPage}" href="#">내 정보 관리</a></li>
                     </ul>
                 </li>
