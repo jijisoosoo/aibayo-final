@@ -6,6 +6,7 @@ import com.aico.aibayo.common.MemberRoleEnum;
 import com.aico.aibayo.common.SggInfoEnum;
 import com.aico.aibayo.dto.ClassDto;
 import com.aico.aibayo.dto.RegisterKinderDto;
+import com.aico.aibayo.dto.announce.AnnounceDto;
 import com.aico.aibayo.dto.attendance.AttendanceDto;
 import com.aico.aibayo.dto.attendance.MainAttendanceDto;
 import com.aico.aibayo.dto.kid.KidDto;
@@ -14,14 +15,17 @@ import com.aico.aibayo.dto.meal.MealDto;
 import com.aico.aibayo.dto.meal.MealSearchCondition;
 import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.dto.member.MemberSearchCondition;
+import com.aico.aibayo.dto.notepad.NotepadDto;
 import com.aico.aibayo.dto.teacher.TeacherDto;
 import com.aico.aibayo.dto.teacher.TeacherSearchCondition;
 import com.aico.aibayo.jwt.JWTUtil;
+import com.aico.aibayo.service.announce.AnnounceService;
 import com.aico.aibayo.service.attendance.AttendanceService;
 import com.aico.aibayo.service.classManage.ClassService;
 import com.aico.aibayo.service.kid.KidService;
 import com.aico.aibayo.service.meal.MealService;
 import com.aico.aibayo.service.member.MemberService;
+import com.aico.aibayo.service.notepad.NotepadService;
 import com.aico.aibayo.service.registerKinder.RegisterKinderService;
 import com.aico.aibayo.service.teacher.teacherService;
 import jakarta.persistence.EntityNotFoundException;
@@ -58,6 +62,8 @@ public class MainController {
     private final teacherService teacherService;
     private final AttendanceService attendanceService;
     private final ClassService classService;
+    private final NotepadService notepadService;
+    private final AnnounceService announceService;
 
     @GetMapping("/")
     public String mainPage() {
@@ -99,7 +105,7 @@ public class MainController {
 
         getAttendances(loginInfo, model);
 
-        return "/admin/main/main";
+        return "admin/main/main";
     }
 
     @GetMapping("/user")
@@ -135,7 +141,10 @@ public class MainController {
 
         setLoginInfo(loginInfo, model);
 
-        return "/user/main/main";
+        getLatestBoard(loginInfo, model);
+
+
+        return "user/main/main";
     }
 
     @PostMapping("/user/changeKid")
@@ -158,7 +167,7 @@ public class MainController {
 
         setLoginInfo(loginInfo, model);
 
-        return "/user/main/main";
+        return "user/main/main";
     }
 
     private String getTokenFromCookies(Cookie[] cookies) {
@@ -170,6 +179,20 @@ public class MainController {
             }
         }
         return null;
+    }
+
+    private void getLatestBoard(MemberDto loginInfo, Model model) {
+        // 원생에 대한 개인 혹은 반 최신 알림장 하나 표시
+        NotepadDto notepad = notepadService.getTop1ByKidNo(loginInfo.getKidNo());
+//        notepad = null;
+        model.addAttribute("notepad", notepad);
+        log.info("notepad: {}", notepad);
+
+        // 원에 대한 최신 공지 2개 표시
+        List<AnnounceDto> announces = announceService.findAllByKinderNoMain(loginInfo.getKinderNo());
+//        announces = new ArrayList<>();
+        model.addAttribute("announces", announces);
+        log.info("announces: {}", announces);
     }
 
     private void getAttendances(MemberDto loginInfo, Model model) {

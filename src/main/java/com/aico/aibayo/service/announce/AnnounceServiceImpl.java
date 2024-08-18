@@ -1,6 +1,7 @@
 package com.aico.aibayo.service.announce;
 
 
+import com.aico.aibayo.common.AnnounceTypeEnum;
 import com.aico.aibayo.common.BooleanEnum;
 import com.aico.aibayo.dto.announce.AnnounceDto;
 import com.aico.aibayo.dto.announce.AnnounceSearchCondition;
@@ -30,6 +31,7 @@ public class AnnounceServiceImpl implements AnnounceService {
     private static final int PAGE_SIZE_CARD = 6;
     private static final int PAGE_SIZE_LIST = 15;
     private static final int PAGE_SIZE_PRIMARY = 5;
+    private static final int PAGE_SIZE_MAIN = 2;
 
     @Override
     public Page<AnnounceDto> findAllByKinderNoList(AnnounceSearchCondition condition, HashMap<String, Object>hashMap) {
@@ -139,6 +141,18 @@ public class AnnounceServiceImpl implements AnnounceService {
 
         Pageable pageable = PageRequest.of(page - 1, pagesize);
         return announceRepository.findKeywordByKinderNoList(condition,pageable);
+    }
+
+    @Override
+    public List<AnnounceDto> findAllByKinderNoMain(Long kinderNo) {
+        AnnounceSearchCondition condition = new AnnounceSearchCondition();
+        condition.setKinderNo(kinderNo);
+        condition.setAnnounceType(AnnounceTypeEnum.TEACHER.getNum());
+
+        Pageable pageable = PageRequest.of(0, PAGE_SIZE_MAIN);
+        Page<AnnounceDto> announceDtoPage = announceRepository.findAllByKinderNoCard(condition, pageable);
+
+        return announceDtoPage.getContent();
     }
 
 
