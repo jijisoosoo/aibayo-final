@@ -2,8 +2,8 @@ package com.aico.aibayo.control;
 
 import com.aico.aibayo.dto.kinder.KinderDto;
 import com.aico.aibayo.dto.member.MemberDto;
-import com.aico.aibayo.entity.RegisterKinderEntity;
-import com.aico.aibayo.service.settingKinder.SettingKinderService;
+import com.aico.aibayo.entity.KinderEntity;
+import com.aico.aibayo.service.kinder.KinderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SettingController {
 
-    private final SettingKinderService settingKinderService;
+    private final KinderService kinderService;
 
     @GetMapping("/menu")
     public String menu(){
@@ -26,9 +26,16 @@ public class SettingController {
     }
 
     @GetMapping("/add")
-    public String add(){
+    public String add(
+            @ModelAttribute("loginInfo") MemberDto loginInfo,
+            @ModelAttribute("kinderDto") KinderDto kinderDto,
+            Model model
+    ){
+        kinderService.insertKinder(kinderDto);
+
         return "/admin/setting/add";
     }
+
 
     @GetMapping("/modify/{kinderNo}")
     public String modify(
@@ -49,8 +56,8 @@ public class SettingController {
             Model model
     ){
         kinderNo = loginInfo.getKinderNo();
-        Optional<RegisterKinderEntity> kinderDto =
-                settingKinderService.getKinderById(kinderNo);
+        Optional<KinderEntity> kinderDto =
+                kinderService.getKinderById(kinderNo);
 
         model.addAttribute("kinderDto", kinderDto.get());
         log.info("kinderDto : {}",kinderDto);
