@@ -13,10 +13,20 @@ import org.springframework.stereotype.Service;
 public class RegisterKinderServiceImpl implements RegisterKinderService {
     private final RegisterKinderRepository registerKinderRepository;
 
+//    @Override
+//    public RegisterKinderDto getByKinderNo(Long kinderNo) {
+//        return registerKinderRepository.findById(kinderNo)
+//                .map(RegisterKinderDto::toDto)
+//                .orElseThrow(() -> new EntityNotFoundException("엔티티를 찾을 수 없습니다."));
+//    }
     @Override
     public RegisterKinderDto getByKinderNo(Long kinderNo) {
+        if (kinderNo == null) {
+            log.error("kinderNo 값이 null입니다.");
+            throw new IllegalArgumentException("유효한 kinderNo 값이 필요합니다.");
+        }
         return registerKinderRepository.findById(kinderNo)
                 .map(RegisterKinderDto::toDto)
-                .orElseThrow(() -> new EntityNotFoundException("엔티티를 찾을 수 없습니다."));
+                .orElseThrow(() -> new EntityNotFoundException("해당 ID의 유치원 정보를 찾을 수 없습니다."));
     }
 }

@@ -24,6 +24,7 @@ import com.aico.aibayo.service.meal.MealService;
 import com.aico.aibayo.service.member.MemberService;
 import com.aico.aibayo.service.registerKinder.RegisterKinderService;
 import com.aico.aibayo.service.teacher.teacherService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -281,13 +282,38 @@ public class MainController {
         log.info("today meal: {}", mealDto);
     }
 
+//    private void setKinderInfo(MemberDto loginInfo, Model model) {
+//        // 유치원 정보 세팅
+//        RegisterKinderDto kinderInfo = registerKinderService.getByKinderNo(loginInfo.getKinderNo());
+//        model.addAttribute("kinderInfo", kinderInfo);
+//
+//        String kinderSggCode = kinderInfo.getSggList();
+//        SggInfoEnum sggInfo = SggInfoEnum.findByKinderSggCode(kinderSggCode);
+//        model.addAttribute("sggInfo", sggInfo);
+//    }
     private void setKinderInfo(MemberDto loginInfo, Model model) {
-        // 유치원 정보 세팅
-        RegisterKinderDto kinderInfo = registerKinderService.getByKinderNo(loginInfo.getKinderNo());
-        model.addAttribute("kinderInfo", kinderInfo);
+        Long kinderNo = loginInfo.getKinderNo();
 
-        String kinderSggCode = kinderInfo.getSggList();
-        SggInfoEnum sggInfo = SggInfoEnum.findByKinderSggCode(kinderSggCode);
-        model.addAttribute("sggInfo", sggInfo);
+        if (kinderNo == null) {
+            log.error("로그인 정보에서 kinderNo 값이 null입니다.");
+            model.addAttribute("error", "유효한 kinderNo 값이 필요합니다.");
+            return;
+        }
+
+        try {
+            // 유치원 정보 세팅
+            RegisterKinderDto kinderInfo = registerKinderService.getByKinderNo(kinderNo);
+            model.addAttribute("kinderInfo", kinderInfo);
+
+            String kinderSggCode = kinderInfo.getSggList();
+            SggInfoEnum sggInfo = SggInfoEnum.findByKinderSggCode(kinderSggCode);
+            model.addAttribute("sggInfo", sggInfo);
+        } catch (EntityNotFoundException e) {
+            log.error("유치원 정보를 찾을 수 없습니다: " + e.getMessage());
+            model.addAttribute("error", "해당 유치원 정보를 찾을 수 없습니다.");
+        } catch (IllegalArgumentException e) {
+            log.error("유효하지 않은 kinderNo 값: " + e.getMessage());
+            model.addAttribute("error", e.getMessage());
+        }
     }
 }
