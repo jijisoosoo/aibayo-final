@@ -204,7 +204,7 @@ public class AttendanceController {
             LocalDate attendanceDate = request.getAttendanceDate();
             Long classNo = request.getClassNo();
 
-            logger.info("Update request received for kidNo: {}, attendanceDate: {}", kidNo, attendanceDate);
+            logger.info("updateAttendance received for kidNo: {}, attendanceDate: {}", kidNo, attendanceDate);
 
             attendanceService.updateAttendance(kidNo, attendanceStatus, kidDrop, kidPickup, note, attendanceDate, classNo, memberDto);
 
@@ -213,6 +213,26 @@ public class AttendanceController {
             logger.error("Error updating attendance for kidNo: {}, attendanceDate: {}", request.getKidNo(), request.getAttendanceDate(), e);
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("출석부 수정 실패");
+        }
+    }
+
+    @PostMapping("/deleteAttendance")
+    @ResponseBody
+    public ResponseEntity<String> deleteAttendance(@RequestBody AttendanceDto request,
+                                                   @ModelAttribute("loginInfo") MemberDto memberDto) {
+        try {
+            Long kidNo = request.getKidNo();
+            LocalDate attendanceDate = request.getAttendanceDate();
+
+            logger.info("deleteAttendance request received for kidNo: {}, attendanceDate: {}", kidNo, attendanceDate);
+
+            attendanceService.deleteAttendance(kidNo, attendanceDate);
+
+            return ResponseEntity.ok("출석부 수정 성공");
+        } catch (Exception e) {
+            logger.error("Error deleteAttendance for kidNo: {}, attendanceDate: {}", request.getKidNo(), request.getAttendanceDate(), e);
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("출석부 삭제 실패");
         }
     }
 

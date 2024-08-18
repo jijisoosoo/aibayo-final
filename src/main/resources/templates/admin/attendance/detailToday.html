@@ -41,7 +41,7 @@
 
     <div class="text-center mb-3">
 <!--        <h4>오늘날짜 - [[${date}]]</h4>-->
-        <h4 id="selectedDate">오늘날짜   [[${date}]]</h4>
+        <h4 id="selectedDate">오늘날짜 - [[${date}]]</h4>
     </div>
 
     <table class="table table-bordered" id="attendanceTable" style="width: 100%">
@@ -98,8 +98,9 @@
                     </form>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="applyUpdate">수정</button>
+                    <button type="button" class="btn btn-danger" id="deleteAttendance">삭제</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                    <button type="button" class="btn btn-primary" id="applyUpdate">적용</button>
                 </div>
             </div>
         </div>
