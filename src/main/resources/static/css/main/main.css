@@ -403,12 +403,9 @@
 }
 
 .data_attendance_content_row_box {
+    width: 100%;
     height: 60px;
     border-bottom: 1px rgb(195 195 195 / 30%) solid;
-}
-
-.attendance_info {
-    width: 100%;
 }
 
 .data_attendance_content_row {
