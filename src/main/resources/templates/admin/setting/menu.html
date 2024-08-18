@@ -7,16 +7,22 @@
 
 <th:block layout:fragment="css">
   <link rel="stylesheet" href="/css/setting/menu.css" /></th:block>
+
+<th:block layout:fragment="javascript">
+  <script src="/js/setting/menu.js"></script></th:block>
+
+
+
 <div class="container main_container" layout:fragment="content">
   <form action="">
-    <div class="setting">
+    <div class="setting" id="settingMenu">
 
         <div class="menu">
           <div class="frame">
             <div class="text-wrapper">메뉴 설정</div>
               <div class="element-secondary-button-wrapper">
                 <a href="/main/admin" class="element-secondary-button2">목록</a>
-                <input type="submit" class="element-secondary-button" value="저장">
+                <input type="submit" id="saveBtn" class="element-secondary-button" value="저장">
               </div>
           </div>
           <div class="frame-2">

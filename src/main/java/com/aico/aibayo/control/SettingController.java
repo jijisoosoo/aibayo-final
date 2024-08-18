@@ -1,51 +1,73 @@
 package com.aico.aibayo.control;
 
-import com.aico.aibayo.config.SSLUtilities;
-import org.springframework.http.ResponseEntity;
+import com.aico.aibayo.dto.kinder.KinderDto;
+import com.aico.aibayo.dto.member.MemberDto;
+import com.aico.aibayo.entity.KinderEntity;
+import com.aico.aibayo.service.kinder.KinderService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
+@Slf4j
 @Controller
 @RequestMapping("/setting")
+@RequiredArgsConstructor
 public class SettingController {
+
+    private final KinderService kinderService;
+
     @GetMapping("/menu")
     public String menu(){
         return "/admin/setting/menu";
     }
-//    @GetMapping("/function")
-//    public String function(){
-//        return "/setting/function";
-//    }
-    //펑션은 안하기로 했음요 !
+
     @GetMapping("/add")
-    public String add(){
+    public String add(
+            @ModelAttribute("loginInfo") MemberDto loginInfo,
+            @ModelAttribute("kinderDto") KinderDto kinderDto,
+            Model model
+    ){
+        kinderService.insertKinder(kinderDto);
+
         return "/admin/setting/add";
     }
-    @GetMapping("/modify")
-    public String modify(){
+
+
+    @GetMapping("/modify/{kinderNo}")
+    public String modify(
+            @PathVariable Long kinderNo,
+            @ModelAttribute("loginInfo") MemberDto loginInfo,
+            Model model
+    ){
+        kinderNo = loginInfo.getKinderNo();
+
         return "/admin/setting/modify";
     }
-    @GetMapping("/info")
-    public String info(){
+
+
+    @GetMapping("/info/{kinderNo}")
+    public String info(
+            @PathVariable Long kinderNo,
+            @ModelAttribute("loginInfo") MemberDto loginInfo,
+            Model model
+    ){
+        kinderNo = loginInfo.getKinderNo();
+        Optional<KinderEntity> kinderDto =
+                kinderService.getKinderById(kinderNo);
+
+        model.addAttribute("kinderDto", kinderDto.get());
+        log.info("kinderDto : {}",kinderDto);
         return "/admin/setting/info";
     }
-    @CrossOrigin(origins = "http://localhost:8080")
+
     @GetMapping("/test")
     public String test(){
         return "/admin/setting/copy";
     }
-
-//    @GetMapping("/api/proxy")
-//    public ResponseEntity<String> proxyApiCall() {
-//        SSLUtilities.disableSSLCertificateChecking();
-//        String url = "https://e-childschoolinfo.moe.go.kr/api/notice/basicInfo2.do?key=77e6a98ff03a4fa687221a817ce91948&sidoCode=27&sggCode=27140";
-//        RestTemplate restTemplate = new RestTemplate();
-//        String result = restTemplate.getForObject(url, String.class);
-//        return ResponseEntity.ok(result);
-//    }
 
 
 

@@ -17,4 +17,6 @@ public interface AnnounceService {
     void updateAnnounce(AnnounceDto announceDto);
     AnnounceDto deleteAnnounce(AnnounceDto announceNo);
     Page<AnnounceDto>findKeywordByKinderNoList(AnnounceSearchCondition condition, HashMap<String, Object> hashMap);
+
+    List<AnnounceDto> findAllByKinderNoMain(Long kinderNo);
 }

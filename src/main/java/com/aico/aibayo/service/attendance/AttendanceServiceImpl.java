@@ -55,6 +55,11 @@ public class AttendanceServiceImpl implements AttendanceService {
         logger.info("AttendanceEntity updated and saved for kidNo: {}, attendanceDate: {}", kidNo, attendanceDate);
     }
 
+    public void deleteAttendance(Long kidNo, LocalDate attendanceDate) {
+        AttendanceEntity attendanceEntity = getAttendanceByKidNoAndDate(kidNo, attendanceDate);
+        attendanceRepository.delete(attendanceEntity);
+    }
+
 
     @Override
     public Long createAttendance(AttendanceDto dto) {

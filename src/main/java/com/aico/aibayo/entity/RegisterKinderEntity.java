@@ -57,4 +57,6 @@ public class RegisterKinderEntity {
     private String sidoList; //API 시도 리스트
     @Column (name="sgg_list")
     private String sggList; //API 시군구 리스트
+
+
 }

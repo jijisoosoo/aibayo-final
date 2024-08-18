@@ -17,5 +17,5 @@ public interface AttendanceService {
     AttendanceEntity getAttendanceByKidNoAndDate(Long kidNo, LocalDate attendanceDate);
 
     void updateAttendance(Long kidNo, String attendanceStatus, LocalDateTime kidDrop, LocalDateTime kidPickup, String note, LocalDate attendanceDate, Long classNo, MemberDto memberDto);
-
+    void deleteAttendance(Long kidNo, LocalDate attendanceDate);
 }

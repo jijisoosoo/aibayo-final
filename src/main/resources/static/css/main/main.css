@@ -445,13 +445,15 @@
     align-items: flex-start;
     border-radius: 15px;
     border: 1px rgb(195 195 195 / 30%) solid;
-    padding: 30px;
+    padding: 30px 10px;
 }
 
 /* .class_24 { width: 204px; height: 46px; left: 0px; top: 0px; position: absolute } */
 .recent_board_title_box {
     width: 204px;
     height: 60px;
+    display: flex;
+    justify-content: center;
 }
 
 /* .class_19 { left: 0px; top: 0px; position: absolute; opacity: 0.80; color: black; font-size: 40px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
@@ -465,11 +467,16 @@
 
 .recent_board_body {
     display: flex;
-    gap: 18px;
+    width: 100%;
+    gap: 10px;
 }
 
-.ann-list .card {
-    width: 320px;
+.board_empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 420px;
 }
 
 /* 날씨, 미세먼지, 초미세먼지 */

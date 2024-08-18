@@ -14,12 +14,25 @@ $(document).ready(function(){
         timeFormat: 'h:mm p',
         interval: 10,
         minTime: '13:00pm',
-        maxTime: '22:00pm', // Corrected maxTime format
-        defaultTime: '18:00pm', // Corrected defaultTime format
+        maxTime: '22:00pm',
+        defaultTime: '18:00pm',
         dynamic: false,
         dropdown: true,
         scrollbar: true
     });
+
+    // 오픈 시간 선택 후 값 출력
+    $('#open').on('change', function() {
+        var openTime = $(this).val(); // 선택된 시간 값
+        console.log('오픈 시간 : ' + openTime);
+    });
+
+// 클로즈 시간 선택 후 값 출력
+    $('#close').on('change', function() {
+        var closeTime = $(this).val(); // 선택된 시간 값
+        console.log('하원 시간: ' + closeTime);
+    });
+
 
     // 함수를 전역 범위로 이동하여 버튼 클릭 이벤트에서 호출할 수 있도록 설정
     window.sample6_execDaumPostcode = function() {

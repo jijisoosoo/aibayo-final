@@ -48,6 +48,17 @@ public class NotepadServiceImpl implements NotepadService {
     }
 
     @Override
+    public NotepadDto getTop1ByKidNo(Long kidNo) {
+        NotepadSearchCondition condition = new NotepadSearchCondition();
+        condition.setKidNo(kidNo);
+
+        Pageable pageable = PageRequest.of(0, 1);
+        Page<NotepadDto> oneByKidNo = notepadRepository.findAllByKidNo(condition, pageable);
+
+        return oneByKidNo.hasContent() ? oneByKidNo.getContent().get(0) : null;
+    }
+
+    @Override
     public NotepadDto getByNotepadNo(Long notepadNo) {
         return notepadRepository.findByNotepadNo(notepadNo);
     }
