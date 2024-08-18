@@ -69,23 +69,27 @@ public class AttendanceController {
         return null;
     }
 
-    @GetMapping("/admin/main")
+    @GetMapping("/main")
     public String adminMain() {
         return "admin/attendance/main";
     }
 
     @GetMapping("/detailToday")
     public String detailToday(@ModelAttribute("loginInfo") MemberDto memberDto, Model model, @RequestParam("date") String date) {
-
         LocalDate selectedDate = LocalDate.parse(date);
-
         List<ClassEntity> classList = classService.getClassList(memberDto.getKinderNo());
-
 
         model.addAttribute("date", selectedDate);
         model.addAttribute("classList", classList);
         log.info("day : detailToday");
-        return "admin/attendance/detailToday";
+        log.info("detailToday username : {}", memberDto.getUsername());
+        log.info("detailToday role : {}", memberDto.getRole());
+
+        if (memberDto.getRole().equals("ROLE_USER")) {
+            return "admin/attendance/detailTodayUser";
+        } else {
+            return "admin/attendance/detailToday";
+        }
     }
 
     @GetMapping("/detailBefore")
