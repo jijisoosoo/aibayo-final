@@ -123,6 +123,65 @@ $(document).ready(function() {
         });
     });
 
+    $('#deleteAttendance').on('click', function(e) {
+        e.preventDefault();
+
+        // 삭제 확인
+        Swal.fire({
+            title: '정말 삭제하시겠습니까?',
+            text: "이 작업은 되돌릴 수 없습니다!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '삭제',
+            cancelButtonText: '취소'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // 삭제할 kidNo 가져오기
+                var kidNo = $('#kidNo').val();
+
+                // 선택된 날짜와 classNo 가져오기
+                var fullText = $('#selectedDate').text();
+                var selectedDate = fullText.replace('오늘날짜 - ', '').trim();
+
+                // const currentUrl = new URL(window.location.href);
+                // const classNo = currentUrl.searchParams.get('classNo'); // 현재 URL에서 classNo 가져오기
+
+                // 삭제를 위한 데이터 객체 생성
+                var data = {
+                    kidNo: kidNo,
+                    attendanceDate: selectedDate,
+                };
+
+                // Ajax 요청으로 서버에 삭제 요청
+                $.ajax({
+                    type: 'POST',
+                    url: '/attendance/deleteAttendance',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function(response) {
+                        // 성공 시 모달을 숨기고 페이지를 새로고침
+                        var myModal = bootstrap.Modal.getInstance(document.getElementById('updateModal'));
+                        myModal.hide();
+                        location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        // 오류 발생 시 콘솔에 로그 기록 및 경고 표시
+                        console.error(xhr);
+                        console.error(status);
+                        console.error(error);
+                        Swal.fire({
+                            icon: 'warning',
+                            title: '출석부 삭제 실패',
+                            text: '출석부를 삭제하는데 문제가 발생했습니다.',
+                        });
+                    }
+                });
+            }
+        });
+    });
+
     // DataTable 초기화
     new DataTable('#attendanceTable', {
         info: false,
