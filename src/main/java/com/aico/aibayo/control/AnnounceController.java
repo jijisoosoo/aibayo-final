@@ -145,7 +145,7 @@ public class AnnounceController {
             Page<AnnounceDto>announces= announceService.findAllByKinderNoList(condition1,hashMap1);
             Page<AnnounceDto>primaryAnnounces= announceService.findAllByKinderNoList(condition2,hashMap2);
 
-            return getPageInfoAndGoView(model, announces, primaryAnnounces, "/admin/announce/list");
+            return getPageInfoAndGoView(model, announces, primaryAnnounces, "admin/announce/list");
         }
 
     @GetMapping("/admin/write")
@@ -168,7 +168,7 @@ public class AnnounceController {
         model.addAttribute("announceInfo",announceInfo);
         log.info("writeAnnounce : {} ", announceInfo);
 
-        return "/admin/announce/writeForm";
+        return "admin/announce/writeForm";
     }
     @PostMapping("/writeOk")
     @ResponseBody
@@ -189,7 +189,7 @@ public class AnnounceController {
 //        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>commentDto>>>>>{}",commentDto);
 
         model.addAttribute("announce",announceDto);
-        return "/admin/announce/detail";
+        return "admin/announce/detail";
     }
     @GetMapping("/admin/modify/{announceNo}")
     public String modifyForm(@PathVariable Long announceNo,
@@ -207,7 +207,7 @@ public class AnnounceController {
         // 모델에 추가
         model.addAttribute("boardModifyDate", now);
 
-        return "/admin/announce/modifyForm";
+        return "admin/announce/modifyForm";
     }
     @PutMapping("/modifyOk")
     @ResponseBody
@@ -384,7 +384,7 @@ public class AnnounceController {
         model.addAttribute("comment",modifiedComment);
         model.addAttribute("commentModifyDate",LocalDateTime.now());
 
-        return "/user/announce/detail";
+        return "user/announce/detail";
     }
     @PutMapping("/comment/modifyOk")
     @ResponseBody

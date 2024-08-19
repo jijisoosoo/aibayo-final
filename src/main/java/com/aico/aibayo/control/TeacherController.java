@@ -126,7 +126,7 @@ public class TeacherController {
         List<ClassDto> classList = classService.getByKinderNo(loginInfo.getKinderNo());
         model.addAttribute("classList", classList);
 
-        return "/admin/teacher/teacherMain";
+        return "admin/teacher/teacherMain";
     }
 
 
@@ -164,14 +164,14 @@ public class TeacherController {
         List<ClassDto> assignedClassList = classService.getClassByKinderNoAndTeacherId(loginInfo.getKinderNo(), id);
         model.addAttribute("assignedClassList", assignedClassList);
 
-        return "/admin/teacher/teacherProfileAccept";
+        return "admin/teacher/teacherProfileAccept";
     }
 
 
 
     @GetMapping("/admin/teacherProfileWait/{id}")
     public String adminTeacherProfileWait() {
-        return "/admin/teacher/teacherProfileWait";
+        return "admin/teacher/teacherProfileWait";
     }
 
 
