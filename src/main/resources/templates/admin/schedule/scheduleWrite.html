@@ -6,17 +6,17 @@
 <title layout:fragment="title">scheduleWrite</title>
 
 <th:block layout:fragment="css">
-  <link rel="stylesheet" th:href="@{/css/globals.css}" />
-  <link rel="stylesheet" th:href="@{/css/schedule/scheduleWrite.css}" />
-  <link rel="stylesheet" th:href="@{/css/schedule/scheduleModal.css}" />
-  <link rel="stylesheet" th:href="@{/css/CommonContainerPlus.css}" />
-  <link rel="stylesheet" th:href="@{/css/CommonHoverPlus.css}" />
+  <link rel="stylesheet" th:href="@{css/globals.css}" />
+  <link rel="stylesheet" th:href="@{css/schedule/scheduleWrite.css}" />
+  <link rel="stylesheet" th:href="@{css/schedule/scheduleModal.css}" />
+  <link rel="stylesheet" th:href="@{css/CommonContainerPlus.css}" />
+  <link rel="stylesheet" th:href="@{css/CommonHoverPlus.css}" />
 </th:block>
 
 <th:block layout:fragment="javascript">
   <script src="js/schedule/adminPage/scheduleWrite.js"></script>
-  <th:block th:replace="~{/common/datepicker :: js}"/>
-  <th:block th:replace="~{/common/datepicker :: css}"/>
+  <th:block th:replace="~{common/datepicker :: js}"/>
+  <th:block th:replace="~{common/datepicker :: css}"/>
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
@@ -25,7 +25,7 @@
     <div class="title"><div class="text-wrapper-4">일정 추가</div></div>
 
     <div class="buttons">
-      <a class="button-cancel" th:href="@{/schedule/admin/scheduleMain}">
+      <a class="button-cancel" th:href="@{schedule/admin/scheduleMain}">
         <div class="text-cancel">취소</div>
       </a>
       <input type="button" class="button-submit" value="추가하기">

@@ -6,30 +6,30 @@
 <title layout:fragment="title">paymentBillingWrite</title>
 
 <th:block layout:fragment="css">
-    <link rel="stylesheet" th:href="@{/css/CommonContainerPlus.css}" />
-    <link rel="stylesheet" th:href="@{/css/CommonHoverPlus.css}" />
-    <link rel="stylesheet" th:href="@{/css/globals.css}" />
-    <link rel="stylesheet" th:href="@{/css/payment/paymentWrite.css}" />
-    <link rel="stylesheet" th:href="@{/css/payment/paymentWriteModal.css}" />
+    <link rel="stylesheet" th:href="@{css/CommonContainerPlus.css}" />
+    <link rel="stylesheet" th:href="@{css/CommonHoverPlus.css}" />
+    <link rel="stylesheet" th:href="@{css/globals.css}" />
+    <link rel="stylesheet" th:href="@{css/payment/paymentWrite.css}" />
+    <link rel="stylesheet" th:href="@{css/payment/paymentWriteModal.css}" />
 
 </th:block>
 
 <th:block layout:fragment="javascript">
     <script src="js/payment/paymentWrite.js"></script>
-    <th:block th:replace="~{/common/datepicker :: js}"/>
-    <th:block th:replace="~{/common/datepicker :: css}"/>
+    <th:block th:replace="~{common/datepicker :: js}"/>
+    <th:block th:replace="~{common/datepicker :: css}"/>
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
 
     <div class="title">
         <div class="title-flow2">
-            <a class="icon-back" th:href="@{/admin/paymentBillingMain}">
+            <a class="icon-back" th:href="@{admin/paymentBillingMain}">
                 <img src="payment/img/back.png" alt=""/>
             </a>
             <div class="div-wrapper"><div class="text-wrapper-title">청구서 작성하기</div></div>
         </div>
-        <a type="submit" class="button-submit" value="청구서 발송" th:href="@{/admin/paymentBillingConfirm}">청구서 발송</a>
+        <a type="submit" class="button-submit" value="청구서 발송" th:href="@{admin/paymentBillingConfirm}">청구서 발송</a>
     </div>
     <div class="inputbox">
         <div class="div-3">

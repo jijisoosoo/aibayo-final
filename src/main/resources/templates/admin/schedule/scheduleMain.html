@@ -6,11 +6,11 @@
 <title layout:fragment="title">scheduleMain</title>
 
 <th:block layout:fragment="css">
-  <link rel="stylesheet" th:href="@{/css/CommonContainerPlus.css}" />
-  <link rel="stylesheet" th:href="@{/css/CommonHoverPlus.css}" />
-  <link rel="stylesheet" th:href="@{/css/globals.css}" />
-  <link rel="stylesheet" th:href="@{/css/schedule/scheduleMain.css}" />
-  <link rel="stylesheet" th:href="@{/css/schedule/scheduleModal.css}" />
+  <link rel="stylesheet" th:href="@{css/CommonContainerPlus.css}" />
+  <link rel="stylesheet" th:href="@{css/CommonHoverPlus.css}" />
+  <link rel="stylesheet" th:href="@{css/globals.css}" />
+  <link rel="stylesheet" th:href="@{css/schedule/scheduleMain.css}" />
+  <link rel="stylesheet" th:href="@{css/schedule/scheduleModal.css}" />
 
   <!-- FullCalendar and related modules -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
@@ -32,13 +32,13 @@
   <div class="title">
     <div class="text-wrapper-4">일정표</div>
     <div class="buttons">
-      <form class="searchoptions" th:action="@{/schedule/admin/scheduleMain}" method="post">
+      <form class="searchoptions" th:action="@{schedule/admin/scheduleMain}" method="post">
         <select class="dropdown-class">
           <option class="text-wrapper-5" value="">반 선택</option>
           <option class="text-wrapper-5" th:each="class:${classList}" th:object="${class}" th:value="${class.classNo}" th:text="${class.className}">반이름</option>
         </select>
       </form>
-      <a class="button-modify" id="scheduleWrite" th:href="@{/schedule/admin/scheduleWrite}" th:method="get">
+      <a class="button-modify" id="scheduleWrite" th:href="@{schedule/admin/scheduleWrite}" th:method="get">
         <img class="icon-pencil" src="images/common/pencil.png" />
         <div class="text-modify">일정 추가</div>
       </a>

@@ -6,10 +6,10 @@
 <title layout:fragment="title">paymentMain</title>
 
 <th:block layout:fragment="css">
-    <link rel="stylesheet" th:href="@{/css/CommonContainerPlus.css}" />
-    <link rel="stylesheet" th:href="@{/css/CommonHoverPlus.css}" />
-    <link rel="stylesheet" th:href="@{/css/globals.css}" />
-    <link rel="stylesheet" th:href="@{/css/payment/paymentMain.css}" />
+    <link rel="stylesheet" th:href="@{css/CommonContainerPlus.css}" />
+    <link rel="stylesheet" th:href="@{css/CommonHoverPlus.css}" />
+    <link rel="stylesheet" th:href="@{css/globals.css}" />
+    <link rel="stylesheet" th:href="@{css/payment/paymentMain.css}" />
 
     <!--datatable-->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
@@ -19,11 +19,11 @@
 <th:block layout:fragment="javascript">
     <!--datatable-->
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
-    <script th:src="@{/js/payment/paymentMain.js}"></script>
+    <script th:src="@{js/payment/paymentMain.js}"></script>
 
     <!--datepicker-->
-    <th:block th:replace="~{/common/datepicker :: js}"/>
-    <th:block th:replace="~{/common/datepicker :: css}"/>
+    <th:block th:replace="~{common/datepicker :: js}"/>
+    <th:block th:replace="~{common/datepicker :: css}"/>
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
@@ -116,7 +116,7 @@
                     <option class="text-wrapper-5" value="">4반</option>
                 </select>
             </div>
-            <a class="button-submit" th:href="@{/user/paymentPay}">
+            <a class="button-submit" th:href="@{user/paymentPay}">
                 <div class="text-submit">납부하기</div>
             </a>
         </div>

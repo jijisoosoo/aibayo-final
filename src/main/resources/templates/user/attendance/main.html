@@ -6,12 +6,12 @@
 <title layout:fragment="title">Attendance Calendar</title>
 
 <th:block layout:fragment="css">
-  <th:block th:replace="~{/common/fullcalendar :: css}"> </th:block>
-  <link rel="stylesheet" th:href="@{/css/attendance/main.css}">
+  <th:block th:replace="~{common/fullcalendar :: css}"> </th:block>
+  <link rel="stylesheet" th:href="@{css/attendance/main.css}">
 </th:block>
 
 <th:block layout:fragment="javascript">
-  <th:block th:replace="~{/common/fullcalendar :: js}"> </th:block>
+  <th:block th:replace="~{common/fullcalendar :: js}"> </th:block>
   <script src="js/attendance/main.js"></script>
 </th:block>
 
