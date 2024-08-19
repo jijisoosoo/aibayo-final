@@ -142,6 +142,8 @@ public class KidController {
         List<ClassDto> classDtos = classService.getByKinderNo(loginInfo.getKinderNo());
         model.addAttribute("classes", classDtos);
 
-        return "admin/kid/list";
+        model.addAttribute("kinderNo", loginInfo.getKinderNo());
+
+        return "/admin/kid/list";
     }
 }

@@ -1,7 +1,9 @@
 package com.aico.aibayo.control;
 
 import com.aico.aibayo.dto.InviteCodeDto;
+import com.aico.aibayo.dto.RegisterKinderDto;
 import com.aico.aibayo.service.inviteCode.InviteCodeService;
+import com.aico.aibayo.service.registerKinder.RegisterKinderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class InviteCodeController {
     private final InviteCodeService inviteCodeService;
+    private final RegisterKinderService registerKinderService;
 
     @PostMapping("/mail")
     public ResponseEntity<InviteCodeDto> mail(@RequestBody InviteCodeDto inviteCodeDto) {
+        RegisterKinderDto kinderInfo = registerKinderService.getByKinderNo(inviteCodeDto.getKinderNo());
+        inviteCodeDto.setKinderName(kinderInfo.getKinderName());
         InviteCodeDto saved = inviteCodeService.sendAndInsertInviteCode(inviteCodeDto);
         log.info("mail saved: {}", saved);
 
@@ -32,6 +37,8 @@ public class InviteCodeController {
 
     @PutMapping("/resendMail")
     public ResponseEntity<InviteCodeDto> modifyOk(@RequestBody InviteCodeDto inviteCodeDto) {
+        RegisterKinderDto kinderInfo = registerKinderService.getByKinderNo(inviteCodeDto.getKinderNo());
+        inviteCodeDto.setKinderName(kinderInfo.getKinderName());
         log.info("target: {}", inviteCodeDto);
         InviteCodeDto modified = inviteCodeService.sendAndUpdateInviteCode(inviteCodeDto);
         log.info("modified: {}", modified);
