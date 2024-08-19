@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
               </div>
               <table class="table">
                 <tr>
-                  <td colspan="2"><img src="/medication/img/${photo}"></td>
+                  <td colspan="2"><img src="medication/img/${photo}"></td>
                 </tr>
                 <tr>
                   <th>약의 종류</th>
