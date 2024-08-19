@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">teacherMain</title>
 
@@ -12,13 +12,13 @@
 </th:block>
 
 <th:block layout:fragment="javascript">
-    <script th:inline="javascript" src="/js/teacher/teacherMain.js"></script>
+    <script th:inline="javascript" src="js/teacher/teacherMain.js"></script>
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
     <div class="title">
         <div class="text-wrapper-4">교사 관리</div>
-        <a class="btn btn-ab button-invite" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <a class="btn btn-ab button-invite" id="send_invite" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             <btn class="text-wrapper-5">초대하기</btn>
         </a>
 
@@ -33,30 +33,32 @@
                             </div>
                         </div>
                         <button class="button-x" href="" data-bs-dismiss="modal" aria-label="Close">
-                            <img src="/images/common/x.png" alt=""/>
+                            <img src="images/common/x.png" alt=""/>
                         </button>
                     </div>
-                    <form class="modalform" th:action="@{/admin/mainDone}" th:method="post">
+                    <div class="modalform" th:action="@{admin/mainDone}" th:method="post">
                         <div class="row-input">
                             <div class="div">
                                 <div class="div-2">
-                                    <img class="icon" src="/images/common/default-yellow.png" />
+                                    <img class="icon" src="images/common/default-yellow.png" />
                                     <div class="text-wrapper-2">선생님 이름</div>
+                                    <div class="msg">선생님 이름을 입력해 주세요.</div>
                                 </div>
-                                <input type="text" class="form-control" placeholder="초대할 교사의 이름을 입력해주세요.">
+                                <input type="text" class="form-control" id="teacher_name" placeholder="초대할 교사의 이름을 입력해주세요.">
                             </div>
                             <div class="div">
                                 <div class="div-2">
-                                    <img class="icon" src="/images/common/default-yellow.png" />
+                                    <img class="icon" src="images/common/default-yellow.png" />
                                     <div class="text-wrapper-2">선생님 Email</div>
+                                    <div class="msg">선생님 이메일을 입력해 주세요.</div>
                                 </div>
-                                <input type="text" class="form-control" placeholder="초대할 교사의 Email을 입력해주세요.">
+                                <input type="text" class="form-control" id="teacher_email" placeholder="초대할 교사의 Email을 입력해주세요.">
                             </div>
                         </div>
                         <div class="buttonarea">
-                            <input type="submit" class="btn btn-ab button-send" value="인증번호 발송" data-bs-dismiss="modal">
+                            <input type="button" class="btn btn-ab button-send" id="send_email" value="인증번호 발송" data-bs-dismiss="modal">
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -80,7 +82,7 @@
         <div class="text-selected-num">
             <div class="select-textarea">
                 <div class="icon">
-                    <img src="/images/common/default-yellow.png" alt=""/>
+                    <img src="images/common/default-yellow.png" alt=""/>
                 </div>
                 <div class="textarea">
                     <div class="text-wrapper-10" id="ifClassNameExists"></div>
@@ -94,7 +96,8 @@
 
             <select id="selectClass" class="dropdown-class" th:name="className_hidden">
                 <option value="">반 선택</option>
-                <option th:each="class : ${classList}" th:value="${class.classNo}" th:text="${class.className}">반이름</option>
+                <option class="classList" th:each="class : ${classList}" th:value="${class.classNo}" th:text="${class.className}"
+                        th:data-kinder-no="${class.kinderNo}">반이름</option>
             </select>
 
         </div>
@@ -106,21 +109,21 @@
                         <img th:src="*{profilePicture}" alt="">
                     </th:block>
                     <th:block th:unless="${teacher.profilePicture != null}">
-                        <img src="/images/common/default.png" alt="">
+                        <img src="images/common/default.png" alt="">
                     </th:block>
                 </a>
                 <div class="id">
                     <div class="text-wrapper-11" th:title="*{name}" th:text="*{name}">교사명</div>
                 </div>
             </div>
-        </div>
 
-        <div class="ifResultNull">
-            <div class="ifResultNullInner">
-                <div class="icon">
-                    <img src="/images/common/!.jpg" alt=""/>
+            <div class="ifResultNull">
+                <div class="ifResultNullInner">
+                    <div class="icon">
+                        <img src="images/common/!.jpg" alt=""/>
+                    </div>
+                    해당하는 교사가 없습니다.
                 </div>
-                해당하는 교사가 없습니다.
             </div>
         </div>
 
@@ -130,7 +133,7 @@
     <div class="row-selected-teacher kids_list_box" id="teacherStatus0Div">
         <div class="select-textarea">
             <div class="icon">
-                <img src="/images/common/default-yellow.png" alt=""/>
+                <img src="images/common/default-yellow.png" alt=""/>
             </div>
             <div class="textarea">
                 <div class="text-wrapper-10">승인 대기 중인 교사</div>
@@ -140,32 +143,25 @@
                 <div class="text-wrapper-10">명</div>
             </div>
         </div>
-        <div class="carousel">
-            <div class="profile" th:each="teacher:${waitingTeacherList}" th:object="${teacher}">
-                <a class="img-2" th:href="@{|/teacher/*{id}|}">
-                    <th:block th:if="${teacher.profilePicture != null}">
-                        <img th:src="*{profilePicture}" alt="">
-                    </th:block>
-                    <th:block th:unless="${teacher.profilePicture != null}">
-                        <img src="/images/common/default.png" alt="">
-                    </th:block>
-                </a>
-                <div class="id">
-                    <div class="text-wrapper-11" th:title="*{name}" th:text="*{name}">교사명</div>
+        <div class="carousel_waitInvite carousel_wait">
+            <div class="profile_waitInvite profile_wait" th:each="teacher:${waitingTeacherList}" th:object="${teacher}" th:id="${teacher.id}"
+                 th:data-teacher-kinder-accept-no="${teacher.kinderAcceptNo}">
+                <div class="text-wrapper-11" th:title="*{name}" th:text="*{name} + ' (' + *{username} + ')'">교사명</div>
+                <div class="waitInvite_buttons wait_buttons">
+                    <a class="btn btn-ab button-approve" id="waitAccept">승인</a>
+                    <a class="btn button-delete" id="waitReject">삭제</a>
                 </div>
-                <a class="btn btn-ab button-approve">승인</a>
+            </div>
+
+            <div class="ifResultNull">
+                <div class="ifResultNullInner">
+                    <div class="icon">
+                        <img src="images/common/!.jpg" alt=""/>
+                    </div>
+                    해당하는 교사가 없습니다.
+                </div>
             </div>
         </div>
-
-        <div class="ifResultNull">
-            <div class="ifResultNullInner">
-                <div class="icon">
-                    <img src="/images/common/!.jpg" alt=""/>
-                </div>
-                해당하는 교사가 없습니다.
-            </div>
-        </div>
-
     </div>
 
 
@@ -173,7 +169,7 @@
     <div class="row-selected-teacher kids_list_box" id="teacherStatus2Div">
         <div class="select-textarea">
             <div class="icon">
-                <img src="/images/common/default-yellow.png" alt=""/>
+                <img src="images/common/default-yellow.png" alt=""/>
             </div>
             <div class="textarea">
                 <div class="text-wrapper-10">초대 중인 교사</div>
@@ -184,24 +180,23 @@
             </div>
         </div>
         <div class="carousel-container">
-            <div class="carousel">
-                <div class="profile" th:each="teacher:${invitedTeacherList}" th:object="${teacher}">
-                    <div class="img-2">
-                        <img src="/images/common/default.png" alt="">
+            <div class="carousel_waitInvite carousel_invite">
+                <div class="profile_waitInvite profile_invite" th:each="teacher:${invitedTeacherList}" th:object="${teacher}"
+                    th:data-invite-id="${teacher.username}" th:data-invite-code-accept-no="${teacher.kinderAcceptNo}">
+                    <div class="text-wrapper-11" th:title="*{username}" th:text="*{username}">교사명</div>
+                    <div class="waitInvite_buttons invite_buttons">
+                        <a class="btn btn-ab button-resend" id="inviteResend">재전송</a>
+                        <a class="btn button-delete" id="inviteDelete">삭제</a>
                     </div>
-                    <div class="id">
-                        <div class="text-wrapper-11" th:title="*{name}" th:text="*{name}">교사명</div>
-                    </div>
-                    <a class="btn button-cancel-mini">삭제</a>
                 </div>
-            </div>
 
-            <div class="ifResultNull">
-                <div class="ifResultNullInner">
-                    <div class="icon">
-                        <img src="/images/common/!.jpg" alt=""/>
+                <div class="ifResultNull">
+                    <div class="ifResultNullInner">
+                        <div class="icon">
+                            <img src="images/common/!.jpg" alt=""/>
+                        </div>
+                        해당하는 교사가 없습니다.
                     </div>
-                    해당하는 교사가 없습니다.
                 </div>
             </div>
         </div>

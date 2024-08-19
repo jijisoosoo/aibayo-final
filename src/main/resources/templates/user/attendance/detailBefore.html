@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">detailBefore</title>
 
@@ -12,7 +12,7 @@
 
 <th:block layout:fragment="javascript">
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
-    <script th:src="@{/js/attendance/detailBefore.js}" src="/js/attendance/detailToday.js"></script>
+    <script th:src="@{js/attendance/detailBefore.js}" src="js/attendance/detailToday.js"></script>
 </th:block>
 
 
@@ -36,7 +36,7 @@
             </div>
 
             <div>
-                <a th:href="@{/attendance/admin/main}" class="btn btn-warning">홈으로</a>
+                <a th:href="@{attendance/main}" class="btn btn-warning">홈으로</a>
             </div>
         </div>
 

@@ -2,7 +2,6 @@ body {
     margin: 0px !important;
 }
 
-
 .h_class_78 {
     width: 280px;
     height: 150px;
@@ -18,7 +17,6 @@ body {
     word-wrap: break-word;
     text-decoration-line : none;
 }
-
 
 .screen {
     background-color: #fffcf0;
@@ -60,38 +58,6 @@ body {
     box-shadow: 0px 4px 35px #00000014;
 }
 
-.screen .div-wrapper {
-    position: absolute;
-    width: 108px;
-    height: 40px;
-    top: 50px;
-    left: 373px;
-}
-
-.screen .p {
-    top: 0;
-    left: 0;
-    font-family: "Noto Sans KR", Helvetica;
-    font-weight: 400;
-    color: transparent;
-    font-size: 13px;
-    position: absolute;
-    letter-spacing: 0;
-    line-height: normal;
-}
-
-.screen .text-wrapper {
-    color: #8d8d8d;
-}
-
-.screen .span {
-    color: #a5c02a;
-    position: absolute;
-    top: 200px;
-    left: 895px;
-    text-decoration: none;
-}
-
 .screen .text-wrapper-2 {
     top: 77px;
     left: 37px;
@@ -119,7 +85,6 @@ body {
     background-color: #ffd700;
     border-radius: 10px;
     box-shadow: 0px 4px 19px #7793414c;
-
     font-family: "Noto Sans KR", Helvetica;
     font-weight: 500;
     color: #000000;
@@ -127,19 +92,6 @@ body {
     letter-spacing: 0;
     line-height: normal;
     border: none !important;
-}
-
-.screen .text-wrapper-3 {
-    position: absolute;
-    width: 74px;
-    top: 15px;
-    left: 198px;
-    font-family: "Noto Sans KR", Helvetica;
-    font-weight: 500;
-    color: #ffffff;
-    font-size: 16px;
-    letter-spacing: 0;
-    line-height: normal;
 }
 
 .screen .group-2 {
@@ -152,35 +104,22 @@ body {
 
 .screen .group-3 {
     position: absolute;
-    width: 451px;
+    width: 440px;
     height: 70px;
-    top: 76px;
+    /*top: 76px;*/
+    top: 272px;
     left: 2px;
-}
-
-.screen .enter-your-username {
-    position: absolute;
-    top: -3px;
-    left: 0;
-    font-family: "Noto Sans KR", Helvetica;
-    font-weight: 400;
-    color: #000000;
-    font-size: 14px;
-    letter-spacing: 0;
-    line-height: normal;
 }
 
 .screen .overlap-group-3 {
     position: absolute;
-    width: 451px;
+    width: 440px;
     height: 43px;
     top: 27px;
     left: 0;
     background-color: #ffffff;
     border-radius: 9px;
-    border: 1px solid;
-    border-color: #adadad;
-
+    border: 1px solid #adadad;
     font-family: "Noto Sans KR", Helvetica;
     font-weight: 300;
     color: #5f5c5c;
@@ -190,14 +129,34 @@ body {
     white-space: nowrap;
 }
 
-.screen .text-wrapper-4 {
+.screen .overlap-group-4 {
     position: absolute;
-    width: 302px;
-    top: 12px;
-    left: 24px;
+    width: 167px;
+    height: 56px;
+    top: 0;
+    left: 0;
+}
+
+.screen .overlap-group-6 {
+    position: absolute;
+    width: 167px;
+    height: 56px;
+    top: 0;
+    left: 0;
+}
+
+.screen .overlap-group-5 {
+    position: absolute;
+    width: 437px;
+    height: 43px;
+    top: 27px;
+    left: 0;
+    background-color: #ffffff;
+    border-radius: 9px;
+    border: 1px solid #adadad;
     font-family: "Noto Sans KR", Helvetica;
     font-weight: 300;
-    color: #7f7f7f;
+    color: #5f5c5c;
     font-size: 14px;
     letter-spacing: 0;
     line-height: normal;
@@ -206,7 +165,7 @@ body {
 
 .screen .group-4 {
     position: absolute;
-    width: 451px;
+    width: 440px;
     height: 70px;
     top: 174px;
     left: 2px;
@@ -216,23 +175,25 @@ body {
     position: absolute;
     width: 402px;
     height: 56px;
-    top: 269px;
+    /*top: 269px;*/
+    top: -5px;
     left: 0;
 }
 
-.screen .group-6 {
-    position: absolute;
-    width: 402px;
-    height: 56px;
-    top: 0;
-    left: 0;
-}
+/*.screen .group-6 {*/
+/*    position: absolute;*/
+/*    width: 402px;*/
+/*    !*height: 56px;*!*/
+/*    !*top: 0;*!*/
+/*    top: 84px;*/
+/*    left: 0;*/
+/*}*/
 
 .screen .group-7 {
     position: absolute;
     width: 167px;
     height: 56px;
-    top: 0;
+    top: 84px;
     left: 0;
 }
 
@@ -240,7 +201,7 @@ body {
     position: absolute;
     width: 167px;
     height: 56px;
-    top: 0;
+    top: 84px;
     left: 235px;
 }
 
@@ -260,12 +221,7 @@ body {
     left: 235px;
 }
 
-.screen .overlap-group-4 {
-    position: relative;
-    width: 216px;
-    height: 57px;
-    top: -1px;
-}
+
 
 .screen .text-wrapper-5 {
     position: absolute;
@@ -280,25 +236,12 @@ body {
     line-height: normal;
 }
 
-.screen .rectangle {
-    position: absolute;
-    width: 216px;
-    height: 37px;
-    top: 20px;
-    left: 0;
-    background-color: #ffffff;
-    border-radius: 9px;
-    border: 1px solid;
-    border-color: #adadad;
-}
-
-
-
 .screen .text-wrapper-6 {
     position: absolute;
-    width: 216px;
+    width: 199px;
+
     height: 37px;
-    top: 20px;
+    top: 23px;
     left: 0;
     font-family: "Noto Sans KR", Helvetica;
     font-weight: 300;
@@ -306,70 +249,18 @@ body {
     font-size: 14px;
     letter-spacing: 0;
     line-height: normal;
-
     background-color: #ffffff;
     border-radius: 9px;
-    border: 1px solid;
-    border-color: #adadad;
+    border: 1px solid #adadad;
 }
 
-
-
-.screen .text-wrapper-7 {
-    position: absolute;
-    top: 48px;
-    left: 44px;
-    font-family: "Noto Sans KR", Helvetica;
-    font-weight: 500;
-    color: #5d3700;
-    font-size: 20px;
-    letter-spacing: 0;
-    line-height: normal;
-}
-
-.screen .text-wrapper-8 {
-    position: absolute;
-    top: 30px;
-    left: 48px;
-    font-family: "Noto Sans KR", Helvetica;
-    font-weight: 500;
-    color: #ffdb20;
-    font-size: 64px;
-    letter-spacing: -3.2px;
-    line-height: 57.6px;
-    white-space: nowrap;
-}
-
-.screen .text-wrapper-9 {
-    position: absolute;
-    width: 220px;
-    height: 41px;
-    top: 20px;
-    left: 0;
-    font-family: "Noto Sans KR", Helvetica;
-    font-weight: 300;
-    color: #adadad;
-    font-size: 14px;
-    letter-spacing: 0;
-    line-height: normal;
-
-    background-color: #ffffff;
+#kindergarten-input, #class-input, #name-input, #relationship-input {
     border-radius: 9px;
-    border: 1px solid;
-    border-color: #adadad;
-}
-
-
-
-#kindergarten-input, #class-input {
-    border-radius: 9px;
-    border: 1px solid;
-    border-color: #adadad;
+    border: 1px solid #adadad !important;
     position: relative;
-    width: 216px;
+    width: 206px;
     height: 40px;
     top: -1px;
     color: #5f5c5c;
     margin-top: 5px;
-
 }

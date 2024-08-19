@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">공지사항 상세</title>
 
 <th:block layout:fragment="css">
-    <link rel="stylesheet" href="/css/announce/detail.css"/>
+    <link rel="stylesheet" href="css/announce/detail.css"/>
 </th:block>
 
 <th:block layout:fragment="javascript">
-    <script src="/js/announce/detail.js"></script></th:block>
+    <script src="js/announce/detail.js"></script></th:block>
 
 <div class="container main_container" layout:fragment="content">
     <form action="">
@@ -36,7 +36,7 @@
                         <a href="#" class="frame-4">
                             <div class="avatar-wrapper">
                                 <div class="avatar">
-                                    <img class="rectangle" alt="Rectangle" src="/announce/img/image-4.png">
+                                    <img class="rectangle" alt="Rectangle" src="announce/img/image-4.png">
                                 </div>
                             </div>
                             <div class="frame-wrapper">
@@ -54,18 +54,18 @@
                         </a>
                         <div>
 <!--                            <a href="" class="BTN">-->
-                            <a th:href="@{/announce/admin/{announceNo}(announceNo=${announce.announceNo - 1})}" class="BTN">
+                            <a th:href="@{announce/admin/{announceNo}(announceNo=${announce.announceNo - 1})}" class="BTN">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/>
                                 </svg>
                                 이전글
                             </a>
-                            <a th:href="@{/announce/admin/{announceNo}(announceNo=${announce.announceNo + 1})}" class="BTN">
+                            <a th:href="@{announce/admin/{announceNo}(announceNo=${announce.announceNo + 1})}" class="BTN">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
                                 </svg>다음글
                             </a>
-                            <a href="/announce/admin/list" class="listbtn">목록</a>
+                            <a href="announce/admin/list" class="listbtn">목록</a>
                         </div>
                     </div>
                 </div>
@@ -108,7 +108,7 @@
                                 <div class="view">
                                     <div class="frame-16">
                                         <div class="rectangle-wrapper">
-                                            <img class="img" alt="Rectangle" src="/announce/img/image-5.png">
+                                            <img class="img" alt="Rectangle" src="announce/img/image-5.png">
                                         </div>
                                         <div class="frame-17">
                                             <div class="frame-18">
@@ -186,7 +186,7 @@
                                     </div>
                                     <div class="frame-23">
                                         <div class="img-wrapper">
-                                            <img class="img" alt="Rectangle" src="/announce/img/image-6.png">
+                                            <img class="img" alt="Rectangle" src="announce/img/image-6.png">
                                         </div>
                                         <div class="frame-24">
                                             <div class="frame-18">

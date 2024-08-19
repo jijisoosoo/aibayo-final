@@ -2,13 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
-<!--    <link rel="stylesheet" href="/member/signIn.css"/>-->
-<!--    <link rel="stylesheet" href="/member/signInGuide.css"/>-->
     <link rel="stylesheet" th:href="@{/css/member/signIn.css}" />
     <link rel="stylesheet" th:href="@{/css/member/signInGuide.css}" />
 
-
-
+    <link href="vendor/sweetalert2-11.12.3-dist/sweetalert2.min.css" rel="stylesheet">
+    <script src="vendor/sweetalert2-11.12.3-dist/sweetalert2.all.min.js"></script>
 
     <title>LoginPage</title>
 </head>
@@ -20,12 +18,9 @@
             <div class="group">
                 <div class="overlap-group">
                     <div class="group-2">
-<!--                        <div class="group-3">-->
-<!--                            <div class="text-wrapper">Welcome to aibayo</div>-->
-<!--                        </div>-->
                     </div>
 
-                        <form action="/login" method="post">
+                        <form action="login" method="post">
                             <div class="group-4">
 
                                 <div class="text-wrapper-3" >이메일</div>
@@ -46,35 +41,41 @@
                     </div>
                     </form>
 
+                    <div th:if="${param.error}">
+                        <script>
+                            Swal.fire({
+                                icon: 'error',
+                                title: '로그인 실패',
+                                text: '존재하지 않는 아이디입니다.',
+                                confirmButtonText: '확인'
+                            });
+                        </script>
+                    </div>
+
 
                 </div>
             </div>
             <div class="text-wrapper-7">로그인</div>
 
-<!--            <div class="group-wrapper">-->
-<!--                <div class="overlap-group-wrapper">-->
-<!--                    <div class="overlap-group-2"><div class="text-wrapper-8">Sign in with KaKao</div></div>-->
-<!--                </div>-->
-<!--            </div>-->
+
             <div class="group-wrapper">
                 <button class="login-button" id="naver-logo" onclick="location.href='http://localhost:8080/oauth2/authorization/naver'">
-                    <img src="/images/member/logo_naver.png" alt="Naver Login"> 네이버 로그인
+                    <img src="images/member/logo_naver.png" alt="Naver Login"> 네이버 로그인
                 </button>
                 <button class="login-button" id="google-logo" onclick="location.href='http://localhost:8080/oauth2/authorization/google'">
-                    <img src="/images/member/logo_google.png"  alt="Google Login"> 구글 로그인
+                    <img src="images/member/logo_google.png"  alt="Google Login"> 구글 로그인
                 </button>
             </div>
 
 
         </div>
-<!--        <a th:href="@{/main/admin}" class="text-wrapper-10" style="text-decoration: none; color: inherit;">aibayo</a>-->
         <div class="logo h_class_78">
-            <div class="h_class_79"><a th:href="@{/main/admin}" style="text-decoration: none; color: inherit; font-family: 'Noto Sans KR', sans-serif;'">aibayo</a></div>
+            <div class="h_class_79"><a th:href="@{main/admin}" style="text-decoration: none; color: inherit; font-family: 'Noto Sans KR', sans-serif;'">aibayo</a></div>
         </div>
 
 
-        <a th:href="@{/member/signUp}" class="text-wrapper-2">회원가입</a>
-        <a th:href="@{/member/signInFindPw}" class="text-wrapper-5">비밀번호 찾기</a>
+        <a th:href="@{member/signUp}" class="text-wrapper-2">회원가입</a>
+        <a th:href="@{member/signInFindPw}" class="text-wrapper-5">비밀번호 찾기</a>
 
     </div>
 </div>

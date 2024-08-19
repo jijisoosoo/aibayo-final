@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">teacherMain</title>
 
@@ -13,13 +13,13 @@
 </th:block>
 
 <th:block layout:fragment="javascript">
-    <script src="/js/teacher/teacherMain.js"></script>
+    <script src="js/teacher/teacherMain.js"></script>
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
     <div class="title-flow2">
-        <a class="icon-back" th:href="@{/admin/teacherMain}">
-            <img src="/images/common/back.png" alt=""/>
+        <a class="icon-back" th:href="@{admin/teacherMain}">
+            <img src="images/common/back.png" alt=""/>
         </a>
         <div class="div-wrapper"><div class="text-wrapper-title">교사 정보</div></div>
     </div>
@@ -27,7 +27,7 @@
         <div class="blank"></div>
         <div class="div-profile">
             <div class="img-2">
-                <img src="/images/common/teacher.png" alt=""/>
+                <img src="images/common/teacher.png" alt=""/>
             </div>
             <div class="id"><div class="text-wrapper-5">김가나</div></div>
         </div>

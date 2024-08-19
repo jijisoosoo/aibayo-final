@@ -216,3 +216,9 @@ body {
     display: flex;
     gap: 10px;
 }
+
+.msg_box_col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

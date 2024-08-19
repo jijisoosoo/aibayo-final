@@ -938,6 +938,7 @@
     height: 50px;
     position: relative;
     width: 100%;
+    padding: 0px 10px;
 }
 .frame .frame-wrapper-18 {
     align-items: flex-start;
@@ -993,13 +994,13 @@
     width: 359.7px;
     height: 38px;
 }
-#storage {
+#storage , #time{
     display: flex;
     flex-direction: row; /* 가로 방향으로 요소들을 나열합니다 */
     align-items: center; /* 요소들을 세로 방향으로 정렬합니다 */
 }
 
-#storage .form-check {
+#storage .form-check , #time .form-check {
     margin-right: 20px; /* 각 라디오 버튼 사이의 간격을 조절합니다 */
 }
 .pic{

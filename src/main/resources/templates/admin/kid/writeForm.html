@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">원생관리</title>
 
 <th:block layout:fragment="css">
     <th:block th:replace="~{common/datepicker :: css}"/>
-    <link rel="stylesheet" href="/css/kidPage/detail.css" />
+    <link rel="stylesheet" href="css/kidPage/detail.css" />
 </th:block>
 
 <th:block layout:fragment="javascript">
     <th:block th:replace="~{common/datepicker :: js}"/>
-    <script src="/js/modal.js"></script>
-    <script src="/js/kidPage/writeForm.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/kidPage/writeForm.js"></script>
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
@@ -24,7 +24,7 @@
 
 
         <div class="discharge_btn_box">
-            <a class="btn btn-secondary discharge_btn" href="/kid/list">
+            <a class="btn btn-secondary discharge_btn" href="kid/list">
                 <div class="discharge_btn_text">취소</div>
             </a>
 

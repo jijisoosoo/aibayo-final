@@ -2,11 +2,11 @@ package com.aico.aibayo.service.announce;
 
 import com.aico.aibayo.dto.announce.AnnounceDto;
 import com.aico.aibayo.dto.announce.AnnounceSearchCondition;
-import com.aico.aibayo.dto.notepad.NotepadSearchCondition;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public interface AnnounceService {
@@ -15,6 +15,8 @@ public interface AnnounceService {
     AnnounceDto findByAnnounceNo(Long announceNo);
     void insertAnnounce(AnnounceDto announceDto);
     void updateAnnounce(AnnounceDto announceDto);
-    void deleteAnnounce(AnnounceDto announceNo);
+    AnnounceDto deleteAnnounce(AnnounceDto announceNo);
     Page<AnnounceDto>findKeywordByKinderNoList(AnnounceSearchCondition condition, HashMap<String, Object> hashMap);
+
+    List<AnnounceDto> findAllByKinderNoMain(Long kinderNo);
 }

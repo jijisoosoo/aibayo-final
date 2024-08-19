@@ -17,11 +17,13 @@ public class ReturnHomeAgreementParentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rhAgreeParentNo; //귀가 동의 보호자 번호
     @Column(name="rh_agree_no")
-    private Long rhAgreeNo; //귀가 동의 번호 0:주보호자 1:부보호자
-    @Column(name="rh_agree_parent_type")
-    private Integer rhAgreeParentType; //귀가 동의 보호자 분류
-    @Column(name="rh_agree_parent_name")
-    private String rhAgreeParentName; //귀가 동의 보호자명
-    @Column(name="rh_agree_parent_tel")
-    private String rhAgreeParentTel; //귀가 동의 연락처
+    private Long rhAgreeNo; //귀가 동의 번호
+    @Column(name="rh_main_parent_name")
+    private String rhMainParentName; //귀가 동의 주 보호자명
+    @Column(name="rh_main_parent_tel")
+    private String rhMainParentTel; //귀가 동의 주 보호자 연락처
+    @Column(name="rh_minor_parent_name")
+    private String rhMinorParentName; //귀가 동의 부 보호자명
+    @Column(name="rh_minor_parent_tel")
+    private String rhMinorParentTel; //귀가 동의 부 보호자 연락처
 }

@@ -108,11 +108,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 30px;
-  padding: 40px 108px;
+  gap: 50px;
+  padding: 50px 108px;
   position: relative;
   align-self: stretch;
-  /* width: 100%; */
   flex: 0 0 auto;
 }
 
@@ -124,9 +123,8 @@
   align-self: stretch;
   width: 100%;
   flex: 0 0 auto;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  border-color: #d3d4d4;
+  border-bottom: 1px solid;
+  border-color: #d5d5d5;
   padding-bottom: 20px;
 }
 
@@ -142,7 +140,7 @@
 
 .container .div-wrapper-2 {
   display: inline-flex;
-  height: 50px;
+  height: 40px;
   align-items: flex-start;
   gap: 10px;
   position: relative;
@@ -177,16 +175,16 @@
   background-color: #ffffff;
   border-radius: 10px;
   overflow: hidden;
-  padding: 5px 0px 20px;
+  padding: 5px 0px 30px;
 }
 
 .container .text-wrapper-8 {
   position: relative;
   width: fit-content;
   /*font-family: "Inter-Medium", Helvetica;*/
-  font-weight: 500;
+  font-weight: 400;
   color: #000000;
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
   letter-spacing: 0;
   line-height: 28px;
@@ -219,6 +217,12 @@
   flex: 0 0 auto;
   border-radius: 10px;
   overflow: hidden;
+}
+
+.wrapper-notice{
+  padding-left: 12px;
+  font-size: 14px;
+  color: darkgrey;
 }
 
 .container .title-class {
@@ -369,6 +373,17 @@
   letter-spacing: 0;
   line-height: normal;
   white-space: nowrap;
+}
+
+.addableClassList {
+  background-color: #52addb !important;
+  display: none !important;
+  background-color: #ececec;
+}
+
+.assignedClassList {
+  background-color: #ece1be !important;
+  display: none !important;
 }
 
 :root {

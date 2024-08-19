@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">Attendance Calendar</title>
 
 <th:block layout:fragment="css">
-  <th:block th:replace="~{/common/fullcalendar :: css}"> </th:block>
+  <th:block th:replace="~{common/fullcalendar :: css}"> </th:block>
+<<<<<<< HEAD
   <link rel="stylesheet" th:href="@{/css/attendance/main.css}">
+=======
+  <link rel="stylesheet" th:href="@{/css/attendance/main.css}">
+>>>>>>> 4afe8651d3785e2ccde165be2c0a224149a6f4a5
 </th:block>
 
 <th:block layout:fragment="javascript">
-  <th:block th:replace="~{/common/fullcalendar :: js}"> </th:block>
+  <th:block th:replace="~{common/fullcalendar :: js}"> </th:block>
+<<<<<<< HEAD
   <script src="/js/attendance/main.js"></script>
+=======
+  <script src="js/attendance/main.js"></script>
+>>>>>>> 4afe8651d3785e2ccde165be2c0a224149a6f4a5
 </th:block>
 
 <div class="container" layout:fragment="content">

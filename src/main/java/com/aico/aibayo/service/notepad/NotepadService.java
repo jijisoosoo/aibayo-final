@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 public interface NotepadService {
     Page<NotepadDto> getAllByKinderNo(NotepadSearchCondition condition, int page);
     Page<NotepadDto> getAllByKidNo(NotepadSearchCondition condition, int page);
+    NotepadDto getTop1ByKidNo(Long kidNo);
     NotepadDto getByNotepadNo(Long notepadNo);
     void insertNotepad(NotepadDto notepadDto);
     void updateNotepad(NotepadDto notepadDto);

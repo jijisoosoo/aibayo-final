@@ -17,7 +17,7 @@ public class ClassTeacherEntity {
     @Column(name = "class_no")
     private Long classNo;
     @Id
-    @Column(name = "class_teacher_id")
+    @Column(name = "class_teacher_id") // member id랑 동일
     private Long classTeacherId;
     @Id
     @Column(name = "accept_no")

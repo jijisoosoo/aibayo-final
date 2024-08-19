@@ -132,7 +132,7 @@
 
 .setting .div-wrapper {
   align-items: center;
-  background-color: #ffffff;
+  background-color: #f000;;
   display: inline-flex;
   flex: 0 0 auto;
   gap: 10px;
@@ -262,7 +262,7 @@ td{
   height: 50px;
   text-align: center;
   vertical-align: middle;
-  width: 70%;
+  width: 100%;
 
 }
 th{
@@ -271,7 +271,9 @@ th{
   text-align: center;
   vertical-align: middle;
 }
-.kinder{
+.kinder , #sample6_address , #sample6_detailAddress
+
+{
   align-items: center;
   background-color: #ffffff;
   border: 1px solid;
@@ -330,29 +332,45 @@ th{
   border-radius: 8px;
   margin: 0px 10px;
 }
-#sample6_address{
-  width: 380px;
-  height: 50px;
-  text-align: center;
-  align-items: center;
-  background-color: #ffffff;
-  border: 1px solid;
-  border-color: #e0e0e0;
-  border-radius: 8px;
-}
-#sample6_detailAddress{
-  width: 200px;
-  height: 50px;
-  text-align: center;
-  align-items: center;
-  background-color: #ffffff;
-  border: 1px solid;
-  border-color: #e0e0e0;
-  border-radius: 8px;
-  margin: 0px 10px;
-}
+
 tbody, td, tfoot, th, thead, tr {
   border-color: inherit;
   border-style: none;
   border-width: 0;
+}
+.selectBox {
+  display: flex;
+  gap:10px;
+}
+.sido , .sgg  {
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid;
+  border-color: #e0e0e0;
+  border-radius: 8px;
+  display: flex;
+  gap: 16px;
+  height: 50px;
+  padding: 8px 16px;
+  position: relative;
+
+}
+.sido{
+  width: 230px;
+}
+.sgg{
+  width: 320px;
+}
+#sidoSelect , #sggSelect{
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  color: #828282;
+  display: -webkit-box;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  text-overflow: ellipsis;
+  border: none;
+  width: 100%;
+  height: 100%;
 }

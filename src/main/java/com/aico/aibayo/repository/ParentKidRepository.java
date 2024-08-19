@@ -5,4 +5,5 @@ import com.aico.aibayo.entity.ParentKidId;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ParentKidRepository extends JpaRepository<ParentKidEntity, ParentKidId> {
+    ParentKidEntity findById(Long id);
 }

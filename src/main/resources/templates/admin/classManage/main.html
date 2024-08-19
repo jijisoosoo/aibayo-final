@@ -1,82 +1,49 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">classManage</title>
 
 <th:block layout:fragment="css">
-    <link rel="stylesheet" th:href="@{/css/classManage/main.css}" href="globals.css" />
+    <link rel="stylesheet" th:href="@{/css/classManage/main.css}" />
 </th:block>
 
 <th:block layout:fragment="javascript">
-    <script src="/js/classManage/main.js"></script>
+    <script src="js/classManage/main.js" defer></script>
 </th:block>
 
 <div class="container" layout:fragment="content">
     <div class="screen">
+        <input type="hidden" name="kinderNo" id="kinderNo" th:value="${kinderNo}">
+
         <div class="container my-5">
             <div class="text-wrapper-5">반 정보 관리</div>
+
             <div class="list mt-3">
                 <div class="container-2 mb-3">
                     <div class="title">반 목록</div>
+                    <div class="btn btn-outline-ab" id="createClassBtn">반 추가</div>
                 </div>
-
 
                 <div class="class-list border">
-                    <div class="class-item" data-class="2반">
-                        <div class="d-flex align-items-center">
-                            <div class="icon">😊</div>
-                            <div class="title-wrapper ml-3">
-                                <div class="title-2">2반</div>
+                    <th:block th:each="classEntity : ${classList}">
+                        <div class="class-item" th:data-classNo="${classEntity.classNo}">
+                            <input type="hidden" class="hidden-class-no" th:value="${classEntity.classNo}">
+                            <div class="d-flex align-items-center">
+                                <div class="icon">😊</div>
+                                <div class="title-wrapper ml-3">
+                                    <div class="title-2" th:text="${classEntity.className}">x반</div>
+                                </div>
                             </div>
+                            <div class="element-button-secondary delete-btn" id="delete-btn">삭제</div>
                         </div>
-                        <div class="element-button-secondary delete-btn">삭제</div>
-                    </div>
-                    <div class="class-item" data-class="3반">
-                        <div class="d-flex align-items-center">
-                            <div class="icon">🤩</div>
-                            <div class="title-wrapper ml-3">
-                                <div class="title-2">3반</div>
-                            </div>
-                        </div>
-                        <div class="element-button-secondary delete-btn">삭제</div>
-                    </div>
-                    <div class="class-item" data-class="4반">
-                        <div class="d-flex align-items-center">
-                            <div class="icon">😎</div>
-                            <div class="title-wrapper ml-3">
-                                <div class="title-2">4반</div>
-                            </div>
-                        </div>
-                        <div class="element-button-secondary delete-btn">삭제</div>
-                    </div>
-                    <div class="class-item" data-class="5반">
-                        <div class="d-flex align-items-center">
-                            <div class="icon">😎</div>
-                            <div class="title-wrapper ml-3">
-                                <div class="title-2">5반</div>
-                            </div>
-                        </div>
-                        <div class="element-button-secondary delete-btn">삭제</div>
-                    </div>
-                    <div class="class-item" data-class="6반">
-                        <div class="d-flex align-items-center">
-                            <div class="icon">😎</div>
-                            <div class="title-wrapper ml-3">
-                                <div class="title-2">6반</div>
-                            </div>
-                        </div>
-                        <div class="element-button-secondary delete-btn">삭제</div>
-                    </div>
+                    </th:block>
                 </div>
+
             </div>
 
 
-
-            <div class="div-wrapper mt-3">
-                <div class="text-wrapper-8 btn btn-primary" id="addClassBtn">반 추가</div>
-            </div>
         </div>
     </div>
 
@@ -86,14 +53,16 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="classModalLabel">반 정보</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="btn-close"
+                            data-bs-dismiss="modal" aria-label="Close"
+                            id="closeClassModal">
                     </button>
+
                 </div>
                 <div class="modal-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <p><strong>반 이름:</strong> <span id="className"></span></p>
-                        <button class="btn btn-secondary btn-sm" id="editClassNameBtn">반 이름 수정</button>
+                        <button class="btn btn-outline-ab" id="editClassNameBtn">반 이름 수정</button>
                     </div>
                     <div>
                         <p><strong>소속교사:</strong></p>
@@ -103,16 +72,15 @@
                     </div>
                     <div class="mt-3">
                         <p><strong>소속원생:</strong></p>
-                        <ul id="studentsList" class="list-group">
+                        <ul id="kidList" class="list-group">
                             <!-- Students will be populated here -->
                         </ul>
                     </div>
-                    <div class="mt-3">
-                        <a id="noticeLink" href="#" class="btn btn-primary">알림장보러가기</a>
-                    </div>
+<!--                    <div class="mt-3">-->
+<!--                        <a id="noticeLink" href="#" class="btn btn-outline-ab">알림장보러가기</a>-->
+<!--                    </div>-->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
                 </div>
             </div>
         </div>
