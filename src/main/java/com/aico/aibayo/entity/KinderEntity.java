@@ -32,15 +32,26 @@ public class KinderEntity {
     @Column(name = "kinder_post_code")
     private String kinderPostCode; //유치원 우편번호
 
-    @Column(name = "kinder_tel")
-    private String kinderTel; //유치원 전화번호
+    @Column(name = "kinder_loc_no")
+    private String kinderLocNo; //유치원 지역 번호
+
+    @Column(name = "kinder_mid_no")
+    private String kinderMidNo;
+
+    @Column(name = "kinder_end_no")
+    private String kinderEndNo;
 
     @Column(name = "kinder_addr")
     private String kinderAddr; //유치원 주소
 
+    @Column(name = "kinder_addr_detail")
+    private String kinderAddrDetail; //유치원 주소
+
     @Column(name = "principal_name")
     private String principalName; //원장님 이름
 
+    @Column(name = "id")
+    private Long id; //멤버 아이디
 
     @Column(name = "kinder_reg_date")
     private LocalDateTime kinderRegDate; // 유치원 등록일자
@@ -56,4 +67,14 @@ public class KinderEntity {
 
     @Column(name = "sgg_list")
     private String sggList; // API 시군구 리스트
+
+    @Column(name = "map_lat")
+    private Double mapLat;
+
+    @Column(name = "map_lng")
+    private Double mapLng;
+
+    @Column(name = "delete_flag")
+    private String deleteFlag;
+
 }

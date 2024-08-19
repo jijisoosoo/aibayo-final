@@ -23,6 +23,11 @@ public class KinderServiceImpl implements KinderService {
     private final SettingMenuRepository settingMenuRepository;
 
     @Override
+    public Optional<KinderEntity> findByKinderNo(Long kinderNo) {
+        return kinderRepository.findById(kinderNo);
+    }
+
+    @Override
     public List<KinderEntity> getAllKinder() {
         return kinderRepository.findAll();
     }
@@ -36,16 +41,23 @@ public class KinderServiceImpl implements KinderService {
     @Transactional
     public void insertKinder(KinderDto kinderDto) {
         KinderEntity kinderentity = KinderEntity.builder()
+                .id(kinderDto.getId())
                 .kinderOpenTime(kinderDto.getKinderOpenTime())
                 .kinderCloseTime(kinderDto.getKinderCloseTime())
                 .kinderName(kinderDto.getKinderName())
                 .principalName(kinderDto.getPrincipalName())
                 .kinderPostCode(kinderDto.getKinderPostCode())
-                .kinderTel(kinderDto.getKinderTel())
+                .kinderLocNo(kinderDto.getKinderLocNo())
+                .kinderMidNo(kinderDto.getKinderMidNo())
+                .kinderEndNo(kinderDto.getKinderEndNo())
                 .kinderAddr(kinderDto.getKinderAddr())
+                .kinderAddrDetail(kinderDto.getKinderAddrDetail())
                 .kinderRegDate(LocalDateTime.now())
                 .sidoList(kinderDto.getSidoList())
                 .sggList(kinderDto.getSggList())
+                .mapLat(kinderDto.getMapLat())
+                .mapLng(kinderDto.getMapLng())
+                .deleteFlag(BooleanEnum.FALSE.getBool())
                 .build();
         KinderEntity saveKinder = kinderRepository.save(kinderentity);
         SettingMenuEntity settingMenuEntity = SettingMenuEntity.builder()
@@ -65,8 +77,22 @@ public class KinderServiceImpl implements KinderService {
     }
 
     @Override
+    @Transactional
     public void updateKinder(KinderDto kinderDto) {
+        KinderEntity kinderEntity =
+            kinderRepository.findById(kinderDto.getKinderNo()).orElse(null);
+            assert kinderEntity != null;
+            kinderEntity.setKinderPostCode(kinderDto.getKinderPostCode());
+            kinderEntity.setKinderAddr(kinderDto.getKinderAddr());
+            kinderEntity.setKinderAddrDetail(kinderDto.getKinderAddrDetail());
+            kinderEntity.setKinderName(kinderDto.getKinderName());
+            kinderEntity.setKinderLocNo(kinderDto.getKinderLocNo());
+            kinderEntity.setKinderMidNo(kinderDto.getKinderMidNo());
+            kinderEntity.setKinderEndNo(kinderDto.getKinderEndNo());
+            kinderEntity.setKinderOpenTime(kinderDto.getKinderOpenTime());
+            kinderEntity.setKinderCloseTime(kinderDto.getKinderCloseTime());
 
+        kinderRepository.save(kinderEntity);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.aico.aibayo.service.kinder;
 
-import com.aico.aibayo.dto.comment.CommentDto;
 import com.aico.aibayo.dto.kinder.KinderDto;
 import com.aico.aibayo.entity.KinderEntity;
 import org.springframework.stereotype.Service;
@@ -11,6 +10,8 @@ import java.util.Optional;
 
 @Service
 public interface KinderService {
+
+    Optional<KinderEntity> findByKinderNo(Long kinderNo);
 
     List<KinderEntity> getAllKinder();
 

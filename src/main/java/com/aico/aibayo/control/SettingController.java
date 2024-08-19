@@ -1,5 +1,6 @@
 package com.aico.aibayo.control;
 
+import com.aico.aibayo.dto.announce.AnnounceDto;
 import com.aico.aibayo.dto.kinder.KinderDto;
 import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.entity.KinderEntity;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.Optional;
 
 @Slf4j
@@ -22,7 +25,7 @@ public class SettingController {
 
     @GetMapping("/menu")
     public String menu(){
-        return "/admin/setting/menu";
+        return "admin/setting/menu";
     }
 
     @GetMapping("/add")
@@ -31,9 +34,16 @@ public class SettingController {
             @ModelAttribute("kinderDto") KinderDto kinderDto,
             Model model
     ){
-        kinderService.insertKinder(kinderDto);
+        HashMap<String, Object> memberDto = new HashMap<>();
+        memberDto.put("id", loginInfo.getId());
+        return "admin/setting/add";
+    }
 
-        return "/admin/setting/add";
+    @PostMapping("addOk")
+    @ResponseBody
+    public void addOk (@RequestBody KinderDto kinderDto) {
+        log.info("create Kinder: {}", kinderDto);
+        kinderService.insertKinder(kinderDto);
     }
 
 
@@ -43,9 +53,33 @@ public class SettingController {
             @ModelAttribute("loginInfo") MemberDto loginInfo,
             Model model
     ){
-        kinderNo = loginInfo.getKinderNo();
+        HashMap<String, Object> memberDto = new HashMap<>();
+        memberDto.put("id", loginInfo.getId());
 
-        return "/admin/setting/modify";
+        Optional<KinderEntity> kinderOptional = kinderService.findByKinderNo(kinderNo);
+
+        // Optional에서 값을 꺼내서 모델에 추가
+        if (kinderOptional.isPresent()) {
+            KinderEntity kinderDto = kinderOptional.get();
+            model.addAttribute("kinder", kinderDto);
+        } else {
+            return "redirect:/error";  // 에러 페이지로 리다이렉트 예시
+        }
+
+        model.addAttribute("member", memberDto);
+        model.addAttribute("kinderModifyDate", LocalDateTime.now());
+
+        log.info("memberDto{}", memberDto);
+        log.info("kinderDto{}", kinderOptional);
+
+        return "admin/setting/modify";
+    }
+
+    @PutMapping("/modifyOk")
+    @ResponseBody
+    public void modifyOk(@RequestBody KinderDto kinderDto) {
+        log.info("modify kinder: {}", kinderDto);
+        kinderService.updateKinder(kinderDto);
     }
 
 
@@ -56,13 +90,18 @@ public class SettingController {
             Model model
     ){
         kinderNo = loginInfo.getKinderNo();
-        Optional<KinderEntity> kinderDto =
-                kinderService.getKinderById(kinderNo);
+        Optional<KinderEntity> kinderDtoOptional = kinderService.getKinderById(kinderNo);
 
-        model.addAttribute("kinderDto", kinderDto.get());
-        log.info("kinderDto : {}",kinderDto);
-        return "/admin/setting/info";
+        if (kinderDtoOptional.isPresent()) {
+            model.addAttribute("kinderDto", kinderDtoOptional.get());
+        } else {
+            // Optional이 비어 있는 경우에 대한 처리 (예: 에러 페이지로 리디렉션)
+            return "error/404";
+        }
+
+        return "admin/setting/info";
     }
+
 
     @GetMapping("/test")
     public String test(){
