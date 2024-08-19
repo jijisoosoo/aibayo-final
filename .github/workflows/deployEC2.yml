@@ -21,6 +21,7 @@ jobs:
           host: ${{ secrets.EC2_HOST }} # 내가 변수로 저장한 ip
           username: ${{ secrets.EC2_USER }} # 내가 변수로 저장한 User
           script: |
+            pkill -9 -f 'java -jar build/libs/aibayo-0.0.1-SNAPSHOT.jar' # 기존 배포 작업 중지
             cd /home/ubuntu/Github/aibayo-final # 내가 Clone한 폴더 안으로 들어간다.
             git pull # 자동으로 pull해서 주기적 업데이트
             chmod +x gradlew
