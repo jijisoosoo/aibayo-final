@@ -51,7 +51,7 @@ public class KidController {
                          Model model) {
         getConditionAndGoDetail(kidNo, loginInfo, model);
 
-        return "/admin/kid/detail";
+        return "admin/kid/detail";
     }
 
     @GetMapping("/user/{kidNo}")
@@ -67,7 +67,7 @@ public class KidController {
 
         getConditionAndGoDetail(kidNo, loginInfo, model);
 
-        return "/user/kid/detail";
+        return "user/kid/detail";
     }
 
     @PostMapping("/modifyOk")
@@ -81,9 +81,9 @@ public class KidController {
         getConditionAndGoDetail(kidDto.getKidNo(), loginInfo, model);
 
         if (roleNo < 2) {
-            return "/admin/kid/detail";
+            return "admin/kid/detail";
         } else if (roleNo == 2) {
-            return "/user/kid/detail";
+            return "user/kid/detail";
         } else {
             throw new IllegalArgumentException("유효하지 않은 접근입니다.");
         }
@@ -101,7 +101,7 @@ public class KidController {
         model.addAttribute("allClass", classAllDtos);
 
 
-        return "/admin/kid/writeForm";
+        return "admin/kid/writeForm";
     }
 
     private void getConditionAndGoDetail(@PathVariable Long kidNo,
@@ -141,7 +141,8 @@ public class KidController {
 
         List<ClassDto> classDtos = classService.getByKinderNo(loginInfo.getKinderNo());
         model.addAttribute("classes", classDtos);
+        model.addAttribute("kinderNo", loginInfo.getKinderNo());
 
-        return "/admin/kid/list";
+        return "admin/kid/list";
     }
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">원생관리</title>
 
@@ -161,7 +161,8 @@
 
         </div>
 
-        <div class="hidden kids_list_box" id="kidsStatus2Div">
+        <div class="hidden kids_list_box" id="kidsStatus2Div"
+             th:data-kinder-no="${kinderNo}">
 
             <div class="count_box">
 
