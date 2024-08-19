@@ -94,14 +94,14 @@ public class NotepadController {
 //        model.addAttribute("member", memberDto);
         model.addAttribute("notepad", notepadDto);
 
-        return "/admin/notepad/detail";
+        return "admin/notepad/detail";
     }
 
     @GetMapping("/user/{notepadNo}")
     public String userDetail(@PathVariable Long notepadNo, Model model) {
         NotepadDto notepadDto = notepadService.getByNotepadNo(notepadNo);
         model.addAttribute("notepad", notepadDto);
-        return "/user/notepad/detail";
+        return "user/notepad/detail";
     }
 
     @GetMapping("/admin/modify/{notepadNo}")
@@ -116,7 +116,7 @@ public class NotepadController {
 //        model.addAttribute("member", memberDto);
         model.addAttribute("notepad", notepadDto);
 
-        return "/admin/notepad/modifyForm";
+        return "admin/notepad/modifyForm";
     }
 
     @PutMapping("/modifyOk")
@@ -151,7 +151,7 @@ public class NotepadController {
         model.addAttribute("kidDtos", kidDtos);
         model.addAttribute("notepadInfo", notepadInfo);
 
-        return "/admin/notepad/writeForm";
+        return "admin/notepad/writeForm";
     }
 
     @PostMapping("/writeOk")
