@@ -34,32 +34,32 @@ public class MemberController {
     private final HttpSession session;
     private final MemberRepository memberRepository;
 
-//    @ModelAttribute
-//    public void addAttributes(HttpServletRequest request, Model model) {
-//        String token = getTokenFromCookies(request.getCookies());
-//        if (token == null || token.isEmpty()) {
-//            log.error("JWT token is missing");
-//            // 여기서 예외를 던지거나, 적절히 처리합니다.
-//            return;
-//        }
-//
-//        String username = jwtUtil.getUsername(token);
-//        log.info("loginUser: {}", username);
-//        MemberDto memberDto = memberService.findByUsername(username);
-//
-//        model.addAttribute("loginInfo", memberDto);
-//    }
-//
-//    private String getTokenFromCookies(Cookie[] cookies) {
-//        if (cookies != null) {
-//            for (Cookie cookie : cookies) {
-//                if ("jwt".equals(cookie.getName())) {
-//                    return cookie.getValue();
-//                }
-//            }
-//        }
-//        return null;
-//    }
+    @ModelAttribute
+    public void addAttributes(HttpServletRequest request, Model model) {
+        String token = getTokenFromCookies(request.getCookies());
+        if (token == null || token.isEmpty()) {
+            log.error("JWT token is missing");
+            // 여기서 예외를 던지거나, 적절히 처리합니다.
+            return;
+        }
+
+        String username = jwtUtil.getUsername(token);
+        log.info("loginUser: {}", username);
+        MemberDto memberDto = memberService.findByUsername(username);
+
+        model.addAttribute("loginInfo", memberDto);
+    }
+
+    private String getTokenFromCookies(Cookie[] cookies) {
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("jwt".equals(cookie.getName())) {
+                    return cookie.getValue();
+                }
+            }
+        }
+        return null;
+    }
 
 
     @GetMapping("/signIn")

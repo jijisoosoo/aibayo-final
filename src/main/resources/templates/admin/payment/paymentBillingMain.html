@@ -17,7 +17,7 @@
 </th:block>
 
 <th:block layout:fragment="javascript">
-    <script th:src="@{js/payment/paymentMain.js}"></script>
+    <script th:src="@{/js/payment/paymentMain.js}"></script>
 
     <!--datatable-->
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
@@ -31,7 +31,7 @@
 
     <div class="div-2">
         <div class="title"><div class="text-wrapper-4">청구 및 수납</div></div>
-        <a class="button-modify" th:href="@{admin/paymentBillingWrite}" th:method="get">
+        <a class="button-modify" th:href="@{/admin/paymentBillingWrite}" th:method="get">
             <img class="icon-pencil" src="payment/img/pencil.png" />
             <div class="text-modify">청구서 작성</div>
         </a>
@@ -42,12 +42,12 @@
                 <div class="div-3"><div class="text-wrapper-6">기간 선택</div></div>
                 <div class="div-4">
                     <div class="calendar-pick">
-                        <img class="calendar-vector" src="images/common/calendar_gray.png" />
+                        <img class="calendar-vector" src="/images/common/calendar_gray.png" />
                         <input type="text" class="datepickerdiv datepicker" placeholder="날짜 선택" readonly>
                     </div>
                     <div class="text-wrapper-8">-</div>
                     <div class="calendar-pick">
-                        <img class="calendar-vector" src="images/common/calendar_gray.png" />
+                        <img class="calendar-vector" src="/images/common/calendar_gray.png" />
                         <input type="text" class="datepickerdiv datepicker" placeholder="날짜 선택" readonly>
                     </div>
                 </div>

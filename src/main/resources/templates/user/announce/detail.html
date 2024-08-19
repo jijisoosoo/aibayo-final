@@ -6,13 +6,13 @@
 <title layout:fragment="title">공지사항 상세</title>
 
 <th:block layout:fragment="css">
-    <link rel="stylesheet" href="css/announce/detail.css"/>
+    <link rel="stylesheet" href="/css/announce/detail.css"/>
 </th:block>
 
 <th:block layout:fragment="javascript">
-    <script src="js/announce/detail.js"></script>
-    <script src="js/comment/writeForm.js"></script>
-    <script src="js/comment/modifyForm.js"></script>
+    <script src="/js/announce/detail.js"></script>
+    <script src="/js/comment/writeForm.js"></script>
+    <script src="/js/comment/modifyForm.js"></script>
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
@@ -56,18 +56,18 @@
                                 </div>
                             </a>
                             <div>
-                                <a th:href="@{announce/user/{announceNo}(announceNo=${announce.announceNo - 1})}" class="BTN">
+                                <a th:href="@{/announce/user/{announceNo}(announceNo=${announce.announceNo - 1})}" class="BTN">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-up" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708z"/>
                                     </svg>
                                     이전글
                                 </a>
-                                <a th:href="@{announce/user/{announceNo}(announceNo=${announce.announceNo + 1})}" class="BTN">
+                                <a th:href="@{/announce/user/{announceNo}(announceNo=${announce.announceNo + 1})}" class="BTN">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
                                     </svg>다음글
                                 </a>
-                                <a href="announce/user/list" class="listbtn">목록</a>
+                                <a href="/announce/user/list" class="listbtn">목록</a>
                             </div>
                         </div>
                     </div>
