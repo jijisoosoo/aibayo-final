@@ -224,11 +224,10 @@ $(document).ready(function() {
             }
             // console.log(endDate);
 
-            if ($(".map_wrap").css("display") === "none") {
+            if($('.map_wrap').css("display") === "none"){
                 mapLat = null;
                 mapLng = null;
             }
-            console.log('latlng' +  mapLat + mapLng)
 
             var classList = $('.form-check-input:checked').map(function() {
                 if(this.id !== 'checkAll')
@@ -339,37 +338,16 @@ document.addEventListener('DOMContentLoaded', function() {
             'height': '0'
         });
 
-        // $('.iwcontent_div').parent().css({
-        //     'width': '0',
-        //     'height': '0'
-        // });
-
     }).catch((error) => {
         console.error(error);
     });
 
     // 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
     kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-        // searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
-        //     if (status === kakao.maps.services.Status.OK) {
-        //         var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
-        //         detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
-        //
-        //         var content = '<div class="bAddr">' +
-        //             '<span class="title">법정동 주소정보</span>' +
-        //             detailAddr +
-        //             '</div>';
-        //
-                // 마커를 클릭한 위치에 표시합니다
-                marker.setPosition(mouseEvent.latLng);
-                // marker.setMap(map);
-        //
-        //         // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
-        //         infowindow.setContent(content);
-        //         infowindow.open(map, marker);
-        //
-        //     }
-        // });
+
+        // 마커를 클릭한 위치에 표시합니다
+        marker.setPosition(mouseEvent.latLng);
+
         mapLat = mouseEvent.latLng.getLat();
         mapLng = mouseEvent.latLng.getLng();
 
@@ -395,19 +373,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }).catch((error) => {
             console.error(error);
         });
-
-
-
-
-
     });
 
-    // function searchDetailAddrFromCoords(coords, callback) {
-    //     // 좌표로 법정동 상세 주소 정보를 요청합니다
-    //     geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-    //     mapLng = coords.getLng();
-    //     mapLat = coords.getLat();
-    // }
 
     function searchDetailAddrFromCoords(mapLat, mapLng) {
         return new Promise((resolve, reject) => {
