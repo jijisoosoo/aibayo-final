@@ -67,8 +67,8 @@ function hideMap(){
 
 function showMap(){
     $(".set-loc").hide();
-    map.relayout();
     $(".map_wrap").show();
+    map.relayout();
     map.setCenter(new kakao.maps.LatLng(mapLat, mapLng));
 }
 
@@ -77,8 +77,6 @@ function hideOrShowMap(){
     if (ifLatlngExist) {
         mapLat = $(".input-loc").attr('data-map-lat');
         mapLng = $(".input-loc").attr('data-map-lng');
-        $(".set-loc").hide();
-        $(".map_wrap").show();
         showMap();
     } else{
         hideMap();
@@ -226,6 +224,12 @@ $(document).ready(function() {
             }
             // console.log(endDate);
 
+            if ($(".map_wrap").css("display") === "none") {
+                mapLat = null;
+                mapLng = null;
+            }
+            console.log('latlng' +  mapLat + mapLng)
+
             var classList = $('.form-check-input:checked').map(function() {
                 if(this.id !== 'checkAll')
                     return this.id;
@@ -294,7 +298,6 @@ var map = null;
 
 // 카카오지도 api
 document.addEventListener('DOMContentLoaded', function() {
-    hideOrShowMap();
     mapLat = mapLat !== null ? mapLat : 37.566826;
     mapLng = mapLng !== null ? mapLng : 126.9786567;
     console.log('latlng : ' + mapLat + ',' + mapLng);
@@ -305,6 +308,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
     map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+    hideOrShowMap();
 
     // 주소-좌표 변환 객체를 생성합니다
     var geocoder = new kakao.maps.services.Geocoder();
