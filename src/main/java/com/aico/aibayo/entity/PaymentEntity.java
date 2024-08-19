@@ -20,6 +20,8 @@ public class PaymentEntity {
     private Long billNo;
     @Column(name = "kid_no")
     private Long kidNo;
+    @Column(name = "class_no")
+    private Long classNo;
     @Column(name = "kinder_no")
     private Long kinderNo;
     @Column(name = "discount_rate")

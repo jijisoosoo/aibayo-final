@@ -454,6 +454,7 @@
 .set-loc{
   display: flex;
   gap: 10px;
+  cursor: pointer;
 }
 
 /*지도 api*/
