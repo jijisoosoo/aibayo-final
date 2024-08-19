@@ -6,20 +6,20 @@
 <title layout:fragment="title">teacherProfileAccept</title>
 
 <th:block layout:fragment="css">
-    <link rel="stylesheet" th:href="@{/css/teacher/teacherProfile.css}" />
-    <link rel="stylesheet" th:href="@{/css/teacher/teacherModal.css}" />
-    <link rel="stylesheet" th:href="@{/css/CommonContainerPlus.css}" />
-    <link rel="stylesheet" th:href="@{/css/CommonHoverPlus.css}" />
+    <link rel="stylesheet" th:href="@{css/teacher/teacherProfile.css}" />
+    <link rel="stylesheet" th:href="@{css/teacher/teacherModal.css}" />
+    <link rel="stylesheet" th:href="@{css/CommonContainerPlus.css}" />
+    <link rel="stylesheet" th:href="@{css/CommonHoverPlus.css}" />
 </th:block>
 
 <th:block layout:fragment="javascript">
-    <script src="/js/teacher/teacherProfile.js"></script>
+    <script src="js/teacher/teacherProfile.js"></script>
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
     <div class="title-flow2">
-        <a class="icon-back" th:href="@{/teacher/list}">
-            <img src="/images/common/back.png" alt=""/>
+        <a class="icon-back" th:href="@{teacher/list}">
+            <img src="images/common/back.png" alt=""/>
         </a>
         <div class="div-wrapper"><div class="text-wrapper-title">교사 정보</div></div>
     </div>
@@ -31,7 +31,7 @@
                     <img th:src="*{profilePicture}" alt="">
                 </th:block>
                 <th:block th:unless="${teacher.profilePicture != null}">
-                    <img src="/images/common/default.png" alt="">
+                    <img src="images/common/default.png" alt="">
                 </th:block>
             </div>
             <div class="id"><div class="text-wrapper-5" th:text="*{name}">선생님명</div></div>
@@ -88,14 +88,14 @@
                         <div class="text-wrapper">소속 반 수정</div>
                     </div>
                     <button class="button-x" href="" data-bs-dismiss="modal" aria-label="Close">
-                        <img src="/images/common/x.png" alt=""/>
+                        <img src="images/common/x.png" alt=""/>
                     </button>
                 </div>
                 <div class="modalform">
                     <div class="row-input">
                         <div class="text-addable">
                             <div class="div-2">
-                                <img class="icon" src="/images/common/default-yellow.png" />
+                                <img class="icon" src="images/common/default-yellow.png" />
                                 <div class="text-wrapper-2" id="checkboxCount"></div>
                             </div>
                         </div>
