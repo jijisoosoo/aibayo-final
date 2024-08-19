@@ -177,7 +177,7 @@ $(document).ready(function () {
             inviteType : 1,
             inviteEmail : inviteEmail,
             inviteName : inviteName,
-            // kinderNo : $('#kidProfile').data('kinder-no'),
+            kinderNo : $('#kidProfile').data('kinder-no'),
             kidNo : $('#kidProfile').data('kid-no')
         }
         // console.log(`param: ${JSON.stringify(param)}`);
