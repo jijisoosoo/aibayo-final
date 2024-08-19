@@ -195,6 +195,6 @@ function afterSuccess(response) {
 // function confirmDelete() {
 //     if (confirm("계정을 삭제하시겠습니까?")) {
 //         window.location.href = "/member/deleteMember";
-//         // window.location.href = /*[[@{/member/deleteMember}]]*/ '/member/deleteMember';
+//         // window.location.href = /*[[@{member/deleteMember}]]*/ '/member/deleteMember';
 //     }
 // }

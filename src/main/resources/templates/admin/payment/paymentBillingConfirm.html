@@ -6,10 +6,10 @@
 <title layout:fragment="title">paymentBillingConfirm</title>
 
 <th:block layout:fragment="css">
-    <link rel="stylesheet" th:href="@{/css/CommonContainerPlus.css}" />
-    <link rel="stylesheet" th:href="@{/css/CommonHoverPlus.css}" />
-    <link rel="stylesheet" th:href="@{/css/globals.css}" />
-    <link rel="stylesheet" th:href="@{/css/payment/paymentConfirm.css}" />
+    <link rel="stylesheet" th:href="@{css/CommonContainerPlus.css}" />
+    <link rel="stylesheet" th:href="@{css/CommonHoverPlus.css}" />
+    <link rel="stylesheet" th:href="@{css/globals.css}" />
+    <link rel="stylesheet" th:href="@{css/payment/paymentConfirm.css}" />
 
 </th:block>
 
@@ -19,14 +19,14 @@
 <div class="container main_container" layout:fragment="content">
 
     <div class="title">
-        <a class="icon-back" th:href="@{/admin/paymentBillingWrite}">
-            <img src="/payment/img/back.png" alt=""/>
+        <a class="icon-back" th:href="@{admin/paymentBillingWrite}">
+            <img src="payment/img/back.png" alt=""/>
         </a>
         <div class="div-wrapper"><div class="text-wrapper-title">청구서 미리보기</div></div>
     </div>
     <div class="img-2">
         <div class="component-wrapper">
-            <div class="component"><img class="image" src="/images/common/billingConfirm.png" /></div>
+            <div class="component"><img class="image" src="images/common/billingConfirm.png" /></div>
         </div>
         <p class="p">지금까지 작성된 내용을 발송 전 확인해 보세요.</p>
     </div>
@@ -158,14 +158,14 @@
         </div>
         <div class="buttonarea">
             <div class="buttons">
-                <a class="button-cancel" th:href="@{/admin/paymentBillingWrite}">
+                <a class="button-cancel" th:href="@{admin/paymentBillingWrite}">
                     <div class="text-cancel">수정하기</div>
                 </a>
-                <a class="button-submit" th:href="@{/admin/paymentBillingDone}">
+                <a class="button-submit" th:href="@{admin/paymentBillingDone}">
                     <div class="text-submit">3개의 청구서 발송하기</div>
                 </a>
             </div>
-            <a th:href="@{/admin/paymentBillingMain}">
+            <a th:href="@{admin/paymentBillingMain}">
                 <p class="back">작성 취소 후 청구/수납 홈으로 돌아가기</p>
             </a>
         </div>

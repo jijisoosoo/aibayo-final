@@ -7,11 +7,11 @@
     <title layout:fragment="title">MyPage</title>
 
     <th:block layout:fragment="css">
-        <link rel="stylesheet" th:href="@{/css/member/myPage.css}">
+        <link rel="stylesheet" th:href="@{css/member/myPage.css}">
     </th:block>
 
     <th:block layout:fragment="javascript">
-        <script th:src="@{/js/login/myPage.js}" defer></script>
+        <script th:src="@{js/login/myPage.js}" defer></script>
     </th:block>
 </head>
 
@@ -20,7 +20,7 @@
 <div class="container main_container" layout:fragment="content">
     <div class="user-info">
         <h2>내 정보</h2>
-        <form id="myPageForm" th:action="@{/member/myPageUpdate}" method="post">
+        <form id="myPageForm" th:action="@{member/myPageUpdate}" method="post">
             <input type="hidden" name="username" th:value="${username}" id="username">
 
             <div class="form-group">
@@ -47,7 +47,7 @@
             <a href="#" class="btn btn-remove" id="deleteBtn">계정 삭제</a>
 
             <!-- 서명 등록 버튼 -->
-            <a th:href="@{/member/signature}" class="btn btn-ab">서명 등록</a>
+            <a th:href="@{member/signature}" class="btn btn-ab">서명 등록</a>
         </form>
     </div>
 
@@ -59,7 +59,7 @@
                     <h5 class="modal-title" id="passwordModalLabel">비밀번호 수정</h5>
                 </div>
                 <div class="modal-body">
-                    <form id="passwordForm" th:action="@{/member/updatePassword}" method="post">
+                    <form id="passwordForm" th:action="@{member/updatePassword}" method="post">
                         <div class="form-group">
                             <label for="currentPassword">현재 비밀번호</label>
                             <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
