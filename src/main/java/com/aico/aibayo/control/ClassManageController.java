@@ -73,7 +73,7 @@ public class ClassManageController {
         model.addAttribute("classList", classList);
         model.addAttribute("kinderNo", kinderNo);
 
-        return "admin/classManage/main";
+        return "/admin/classManage/main";
     }
 
     @GetMapping("/detail/{classNo}")

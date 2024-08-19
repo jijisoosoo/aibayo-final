@@ -74,7 +74,7 @@ public class MemberController {
 
     @GetMapping("/signUpInviteTeacher")
     public String signUpInviteTeacher() {
-        return "member/signUpInviteTeacher";
+        return "/member/signUpInviteTeacher";
     }
 
 
@@ -114,7 +114,7 @@ public class MemberController {
         System.out.println("signUpTeacher GetMapping");
         MemberDto member = (MemberDto) session.getAttribute("member");
         model.addAttribute("member", member);
-        return "member/signUpTeacher";
+        return "/member/signUpTeacher";
     }
 
     @PostMapping("/signUpTeacher")
@@ -131,7 +131,7 @@ public class MemberController {
     public String finalSignUp(@RequestBody MemberDto member) {
         if (member == null) {
             log.error("MemberDto is null");
-            return "member/signIn"; // 적절한 에러 페이지로 리다이렉트
+            return "/member/signIn"; // 적절한 에러 페이지로 리다이렉트
         }
 
         // 회원가입 처리 로직 (예: 데이터베이스에 저장)
@@ -228,7 +228,7 @@ public class MemberController {
 
         memberService.deleteMember(username, role);
 
-        return "member/signIn";
+        return "/member/signIn";
     }
 
 
@@ -265,9 +265,9 @@ public class MemberController {
         memberService.updatePassword(username, newPassword);
 
         if (memberDto.getRole().equals("ROLE_ADMIN")) {
-            return "admin/main/main";
+            return "/admin/main/main";
         } else {
-            return "user/main/main";
+            return "/user/main/main";
         }
     }
 

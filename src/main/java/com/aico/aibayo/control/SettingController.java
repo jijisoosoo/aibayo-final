@@ -22,7 +22,7 @@ public class SettingController {
 
     @GetMapping("/menu")
     public String menu(){
-        return "admin/setting/menu";
+        return "/admin/setting/menu";
     }
 
     @GetMapping("/add")
@@ -33,7 +33,7 @@ public class SettingController {
     ){
         kinderService.insertKinder(kinderDto);
 
-        return "admin/setting/add";
+        return "/admin/setting/add";
     }
 
 
@@ -45,7 +45,7 @@ public class SettingController {
     ){
         kinderNo = loginInfo.getKinderNo();
 
-        return "admin/setting/modify";
+        return "/admin/setting/modify";
     }
 
 
@@ -61,12 +61,12 @@ public class SettingController {
 
         model.addAttribute("kinderDto", kinderDto.get());
         log.info("kinderDto : {}",kinderDto);
-        return "admin/setting/info";
+        return "/admin/setting/info";
     }
 
     @GetMapping("/test")
     public String test(){
-        return "admin/setting/copy";
+        return "/admin/setting/copy";
     }
 
 
