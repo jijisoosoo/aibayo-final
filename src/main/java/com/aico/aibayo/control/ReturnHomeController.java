@@ -115,7 +115,7 @@ public String admindetail(
     model.addAttribute("home",returnHomeDto);
     model.addAttribute("KinderNo", loginInfo.getKinderNo());
 
-    return "admin/home/detail";
+    return "/admin/home/detail";
 }
 @GetMapping("/user/write")
 public String write(
@@ -148,7 +148,7 @@ public String write(
     log.info("today !!: {} ", today);
     log.info("tomorrow !!: {} ", tomorrow);
 
-    return "user/home/writeForm";
+    return "/user/home/writeForm";
 }
     @PostMapping("/writeOk")
     @ResponseBody
@@ -169,7 +169,7 @@ public String userdetail(
     log.info(">>>returnHomeDto(user)!>>{}", returnHomeDto);
     model.addAttribute("home",returnHomeDto);
 
-    return "user/home/detail";
+    return "/user/home/detail";
 }
 @GetMapping("/user/card")
 public String usercard(@RequestParam(defaultValue = "1") int page,

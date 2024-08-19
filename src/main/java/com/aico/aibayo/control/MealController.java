@@ -28,19 +28,19 @@ public class MealController {
     @GetMapping("/admin/list")
     public String adminList(@ModelAttribute("loginInfo") MemberDto loginInfo) {
 
-        return "admin/meal/list";
+        return "/admin/meal/list";
     }
 
     @GetMapping("/user/list")
     public String userList(@ModelAttribute("loginInfo") MemberDto loginInfo) {
 
-        return "user/meal/list";
+        return "/user/meal/list";
     }
 
     @GetMapping("/admin/write")
     public String writeForm(@ModelAttribute("loginInfo") MemberDto loginInfo) {
 
-        return "admin/meal/writeForm";
+        return "/admin/meal/writeForm";
     }
 
     @GetMapping("/admin/modify/{mealNo}")
@@ -53,6 +53,6 @@ public class MealController {
         model.addAttribute("mealTypes", MealTypeEnum.values());
 //        meal.getMealDetails().get(meal.getMealDetails().indexOf())
 
-        return "admin/meal/modifyForm";
+        return "/admin/meal/modifyForm";
     }
 }

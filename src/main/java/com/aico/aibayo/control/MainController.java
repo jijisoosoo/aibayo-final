@@ -67,7 +67,7 @@ public class MainController {
 
     @GetMapping("/")
     public String mainPage() {
-        return "index";
+        return "/index";
     }
 
     @GetMapping("/admin")
