@@ -12,7 +12,7 @@
 </th:block>
 
 <th:block layout:fragment="javascript">
-    <script th:inline="javascript" src="/js/teacher/teacherMain.js"></script>
+    <script th:inline="javascript" src="js/teacher/teacherMain.js"></script>
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
@@ -33,14 +33,14 @@
                             </div>
                         </div>
                         <button class="button-x" href="" data-bs-dismiss="modal" aria-label="Close">
-                            <img src="/images/common/x.png" alt=""/>
+                            <img src="images/common/x.png" alt=""/>
                         </button>
                     </div>
                     <div class="modalform" th:action="@{/admin/mainDone}" th:method="post">
                         <div class="row-input">
                             <div class="div">
                                 <div class="div-2">
-                                    <img class="icon" src="/images/common/default-yellow.png" />
+                                    <img class="icon" src="images/common/default-yellow.png" />
                                     <div class="text-wrapper-2">선생님 이름</div>
                                     <div class="msg">선생님 이름을 입력해 주세요.</div>
                                 </div>
@@ -48,7 +48,7 @@
                             </div>
                             <div class="div">
                                 <div class="div-2">
-                                    <img class="icon" src="/images/common/default-yellow.png" />
+                                    <img class="icon" src="images/common/default-yellow.png" />
                                     <div class="text-wrapper-2">선생님 Email</div>
                                     <div class="msg">선생님 이메일을 입력해 주세요.</div>
                                 </div>
@@ -82,7 +82,7 @@
         <div class="text-selected-num">
             <div class="select-textarea">
                 <div class="icon">
-                    <img src="/images/common/default-yellow.png" alt=""/>
+                    <img src="images/common/default-yellow.png" alt=""/>
                 </div>
                 <div class="textarea">
                     <div class="text-wrapper-10" id="ifClassNameExists"></div>
@@ -109,7 +109,7 @@
                         <img th:src="*{profilePicture}" alt="">
                     </th:block>
                     <th:block th:unless="${teacher.profilePicture != null}">
-                        <img src="/images/common/default.png" alt="">
+                        <img src="images/common/default.png" alt="">
                     </th:block>
                 </a>
                 <div class="id">
@@ -120,7 +120,7 @@
             <div class="ifResultNull">
                 <div class="ifResultNullInner">
                     <div class="icon">
-                        <img src="/images/common/!.jpg" alt=""/>
+                        <img src="images/common/!.jpg" alt=""/>
                     </div>
                     해당하는 교사가 없습니다.
                 </div>
@@ -133,7 +133,7 @@
     <div class="row-selected-teacher kids_list_box" id="teacherStatus0Div">
         <div class="select-textarea">
             <div class="icon">
-                <img src="/images/common/default-yellow.png" alt=""/>
+                <img src="images/common/default-yellow.png" alt=""/>
             </div>
             <div class="textarea">
                 <div class="text-wrapper-10">승인 대기 중인 교사</div>
@@ -156,7 +156,7 @@
             <div class="ifResultNull">
                 <div class="ifResultNullInner">
                     <div class="icon">
-                        <img src="/images/common/!.jpg" alt=""/>
+                        <img src="images/common/!.jpg" alt=""/>
                     </div>
                     해당하는 교사가 없습니다.
                 </div>
@@ -169,7 +169,7 @@
     <div class="row-selected-teacher kids_list_box" id="teacherStatus2Div">
         <div class="select-textarea">
             <div class="icon">
-                <img src="/images/common/default-yellow.png" alt=""/>
+                <img src="images/common/default-yellow.png" alt=""/>
             </div>
             <div class="textarea">
                 <div class="text-wrapper-10">초대 중인 교사</div>
@@ -193,7 +193,7 @@
                 <div class="ifResultNull">
                     <div class="ifResultNullInner">
                         <div class="icon">
-                            <img src="/images/common/!.jpg" alt=""/>
+                            <img src="images/common/!.jpg" alt=""/>
                         </div>
                         해당하는 교사가 없습니다.
                     </div>

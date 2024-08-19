@@ -6,13 +6,13 @@
 <title layout:fragment="title">공지사항 상세</title>
 
 <th:block layout:fragment="css">
-    <link rel="stylesheet" href="/css/announce/detail.css"/>
+    <link rel="stylesheet" href="css/announce/detail.css"/>
 </th:block>
 
 <th:block layout:fragment="javascript">
-    <script src="/js/announce/detail.js"></script>
-    <script src="/js/comment/writeForm.js"></script>
-    <script src="/js/comment/modifyForm.js"></script>
+    <script src="js/announce/detail.js"></script>
+    <script src="js/comment/writeForm.js"></script>
+    <script src="js/comment/modifyForm.js"></script>
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
@@ -39,7 +39,7 @@
                             <a href="#" class="frame-4">
                                 <div class="avatar-wrapper">
                                     <div class="avatar">
-                                        <img class="rectangle" alt="Rectangle" src="/announce/img/image-4.png">
+                                        <img class="rectangle" alt="Rectangle" src="announce/img/image-4.png">
                                     </div>
                                 </div>
                                 <div class="frame-wrapper">
@@ -67,7 +67,7 @@
                                         <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
                                     </svg>다음글
                                 </a>
-                                <a href="/announce/user/list" class="listbtn">목록</a>
+                                <a href="announce/user/list" class="listbtn">목록</a>
                             </div>
                         </div>
                     </div>
@@ -104,7 +104,7 @@
                                                 </div>
                                                 <div class="COMMENT" th:if="${comment.invisibleFlag == '0'}" >
                                                     <span class="rectangle-wrapper">
-                                                        <img class="img" alt="Rectangle" src="/announce/img/image-5.png">
+                                                        <img class="img" alt="Rectangle" src="announce/img/image-5.png">
                                                     </span>
                                                     <div class="AAA">
                                                         <input type="hidden" th:value="${comment.commentNo}" class="commentNo"/>
