@@ -2,11 +2,13 @@ package com.aico.aibayo.control;
 
 import com.aico.aibayo.common.BooleanEnum;
 import com.aico.aibayo.common.MemberStatusEnum;
+import com.aico.aibayo.dto.InviteCodeDto;
 import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.dto.member.MemberSearchCondition;
 import com.aico.aibayo.entity.MemberEntity;
 import com.aico.aibayo.jwt.JWTUtil;
 import com.aico.aibayo.repository.member.MemberRepository;
+import com.aico.aibayo.service.inviteCode.InviteCodeService;
 import com.aico.aibayo.service.member.MemberService;
 import com.aico.aibayo.service.member.MemberServiceImpl;
 import jakarta.servlet.http.Cookie;
@@ -33,6 +35,7 @@ public class MemberController {
     private final JWTUtil jwtUtil;
     private final HttpSession session;
     private final MemberRepository memberRepository;
+    private final InviteCodeService inviteCodeService;
 
 //    @ModelAttribute
 //    public void addAttributes(HttpServletRequest request, Model model) {
@@ -69,6 +72,20 @@ public class MemberController {
 
     @GetMapping("/signUp")
     public String signUp() {
+        return "member/signUp";
+    }
+
+    @GetMapping({"/signUp/{inviteId}"})
+    public String signUpByInviteId(@PathVariable Long inviteId,
+                                   Model model) {
+        InviteCodeDto inviteCodeDto = inviteCodeService.getByInviteId(inviteId);
+        model.addAttribute("inviteInfo", inviteCodeDto);
+
+        if (inviteCodeDto == null) {
+            model.addAttribute("inviteExpired", true);
+            return "redirect:/login";
+        }
+
         return "member/signUp";
     }
 
