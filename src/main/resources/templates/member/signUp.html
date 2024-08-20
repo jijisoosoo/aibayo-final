@@ -28,10 +28,7 @@
                         console.log("Error:", error);
                     }
                 });
-            } else {
-                // const actionUrl = formData.role === "ROLE_PRINCIPAL" || formData.role === "ROLE_TEACHER"
-                //     ? "/member/signUpKinder"
-                //     : "/member/signUp";
+            } else if (formData.role === "ROLE_TEACHER") {
                 $.ajax({
                     type: "POST",
                     url: "/member/signUpTeacher",
@@ -42,6 +39,19 @@
                     },
                     error: function(error) {
                         console.log("Error:", error);
+                    }
+                });
+            } else if (formData.role === "ROLE_PRINCIPAL") {
+                $.ajax({
+                    type: "POST",
+                    url: "/member/finalSignUp",
+                    contentType: "application/json",
+                    data: JSON.stringify(formData),
+                    success: function(response) {
+                        window.location.href = "/member/signIn";
+                    },
+                    error: function(error) {
+                        console.log("Error during principal sign up:", error);
                     }
                 });
             }

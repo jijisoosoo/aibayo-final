@@ -84,6 +84,13 @@ public class MainController {
         String username = jwtUtil.getUsername(token);
         String role = jwtUtil.getRole(token);
 
+        boolean checkAdmin = memberService.checkAdminKinderNo(username);
+
+        if (!checkAdmin) {
+            System.out.println("admin kinderno nono");
+            return "redirect:/setting/add";
+        }
+
         if (!"ROLE_ADMIN".equals(role) && !"ROLE_PRINCIPAL".equals(role) && !"ROLE_TEACHER".equals(role)) {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             return "redirect:/login";
