@@ -563,6 +563,8 @@
     font-size: 25px;
     font-weight: 500;
     word-wrap: break-word;
+    display: flex;
+    justify-content: center;
 }
 
 .fine_desc {

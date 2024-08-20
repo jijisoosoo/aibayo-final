@@ -39,7 +39,9 @@ public class InviteCodeServiceImpl implements InviteCodeService {
     @Transactional
     public InviteCodeDto sendAndInsertInviteCode(InviteCodeDto inviteCodeDto) {
         InviteCodeDto inserted = insertInviteCode(inviteCodeDto);
-        sendEmail(inviteCodeDto);
+        inserted.setKinderName(inviteCodeDto.getKinderName());
+        inserted.setUrl(inviteCodeDto.getUrl());
+        sendEmail(inserted);
 
         return inserted;
     }
@@ -63,6 +65,7 @@ public class InviteCodeServiceImpl implements InviteCodeService {
 
         InviteCodeDto updatedDto = InviteCodeDto.toDto(updated);
         Objects.requireNonNull(updatedDto).setKinderName(inviteCodeDto.getKinderName());
+        Objects.requireNonNull(updatedDto).setUrl(inviteCodeDto.getUrl());
         sendEmail(updatedDto);
 
         return updatedDto;
@@ -135,6 +138,8 @@ public class InviteCodeServiceImpl implements InviteCodeService {
         context.setVariable("inviteId", inviteCodeDto.getInviteId());
         context.setVariable("inviteEmail", inviteCodeDto.getInviteEmail());
         context.setVariable("kinderName", inviteCodeDto.getKinderName());
+        context.setVariable("url", inviteCodeDto.getUrl());
+      
         return springTemplateEngine.process("admin/inviteCode/email", context);
     }
 
