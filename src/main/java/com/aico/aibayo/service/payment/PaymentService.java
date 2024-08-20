@@ -9,4 +9,5 @@ import java.util.List;
 @Service
 public interface PaymentService {
     List<PaymentDto> getAllByKinderNo(PaymentSearchCondition condition);
+    List<PaymentDto> getAllBySearchCondition(PaymentSearchCondition condition);
 }

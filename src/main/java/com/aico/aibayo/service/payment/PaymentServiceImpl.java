@@ -19,4 +19,9 @@ public class PaymentServiceImpl implements PaymentService {
     public List<PaymentDto> getAllByKinderNo(PaymentSearchCondition condition) {
         return paymentRepository.findAllByKinderNo(condition);
     }
+
+    @Override
+    public List<PaymentDto> getAllBySearchCondition(PaymentSearchCondition condition) {
+        return paymentRepository.findAllBySearchCondition(condition);
+    }
 }

@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface PaymentRepositoryCustom {
     List<PaymentDto> findAllByKinderNo(PaymentSearchCondition condition);
+    List<PaymentDto> findAllBySearchCondition(PaymentSearchCondition condition);
 }
