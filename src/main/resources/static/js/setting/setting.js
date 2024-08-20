@@ -198,6 +198,8 @@ $(document).ready(function() {
             }
         }).open();
     };
+
+
 });
 
 
@@ -233,6 +235,7 @@ function afterSuccess(response) {
                 text: "업데이트에 실패했습니다.",
                 icon: "error"
             });
+
         }
     });
 }

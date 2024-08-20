@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+
+<title layout:fragment="title">유치원 </title>
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" href="/css/member/list.css" /></th:block>
+
+<th:block layout:fragment="javascript">
+    <script src="/js/kinder.js"></script>
+</th:block>
+
+<div class="container main_container" layout:fragment="content">
+
+
+    <div>
+        유치원 선택
+    </div>
+
+
+    <div>
+        <select
+                id="selectkinder">
+            <option value selected>유치원 선택 선택</option>
+<!--            <option th:each="kinders : ${allKinder}"-->
+<!--                    th:object="${kinders}" th:value="*{kinderNo}"-->
+<!--                    th:text="*{kinderName}">유치원 이름</option>-->
+        </select>
+    </div>
+
+
+
+</div>

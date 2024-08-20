@@ -1,5 +1,6 @@
 package com.aico.aibayo.control;
 
+import com.aico.aibayo.dto.RegisterKinderDto;
 import com.aico.aibayo.dto.kinder.KinderDto;
 import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.entity.RegisterKinderEntity;
@@ -10,6 +11,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -49,9 +51,10 @@ public class SettingController {
 
     @PostMapping("addOk")
     @ResponseBody
-    public void addOk (@RequestBody KinderDto kinderDto) {
+    public ResponseEntity<RegisterKinderDto> addOk (@RequestBody KinderDto kinderDto) {
         log.info("create Kinder: {}", kinderDto);
-        kinderService.insertKinder(kinderDto);
+        RegisterKinderDto inserted = kinderService.insertKinder(kinderDto);
+        return ResponseEntity.ok(inserted);
     }
 
 
@@ -110,12 +113,8 @@ public class SettingController {
         return "admin/setting/info";
     }
 
-
     @GetMapping("/test")
     public String test(){
-        return "/admin/setting/copy";
+        return "admin/setting/list";
     }
-
-
-
 }
