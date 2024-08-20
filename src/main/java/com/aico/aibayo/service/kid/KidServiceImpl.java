@@ -3,11 +3,14 @@ package com.aico.aibayo.service.kid;
 import com.aico.aibayo.common.AcceptStatusEnum;
 import com.aico.aibayo.common.AcceptTypeEnum;
 import com.aico.aibayo.common.BooleanEnum;
+import com.aico.aibayo.dto.ParentKidDto;
 import com.aico.aibayo.dto.kid.KidDto;
 import com.aico.aibayo.dto.kid.KidSearchCondition;
 import com.aico.aibayo.entity.AcceptLogEntity;
 import com.aico.aibayo.entity.ClassKidEntity;
 import com.aico.aibayo.entity.KidEntity;
+import com.aico.aibayo.entity.ParentKidId;
+import com.aico.aibayo.repository.parentKid.ParentKidRepository;
 import com.aico.aibayo.repository.AcceptLogRepository;
 import com.aico.aibayo.repository.classKid.ClassKidRepository;
 import com.aico.aibayo.repository.kid.KidRepository;
@@ -26,6 +29,7 @@ public class KidServiceImpl implements KidService {
     private final KidRepository kidRepository;
     private final ClassKidRepository classKidRepository;
     private final AcceptLogRepository acceptLogRepository;
+    private final ParentKidRepository parentKidRepository;
 
     @Override
     public List<KidDto> getByKinderNo(Long kinderNo) {
@@ -140,15 +144,26 @@ public class KidServiceImpl implements KidService {
     }
 
     @Override
+    @Transactional
     public KidDto updateParentKid(KidDto kidDto) {
         if (kidDto.getParentKidAcceptNo() != null) {
-            acceptLogRepository.findById(kidDto.getParentKidAcceptNo()).ifPresent(target -> {
+            acceptLogRepository.findById(kidDto.getParentKidAcceptNo()).map(target -> {
                 target.setAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
                 target.setAcceptModifyDate(LocalDateTime.now());
                 target.setAcceptDate(LocalDateTime.now());
 
-                acceptLogRepository.save(target);
+                return acceptLogRepository.save(target);
             });
+
+            // 해당 원생에 대한 주학부모가 없을 경우, 현재 ParentKid의 isMainParent를 true로 세팅
+            ParentKidDto kidMainParent = parentKidRepository.findByKidMainParent(kidDto.getKidNo());
+
+            if (kidMainParent == null) {
+                parentKidRepository.findByAcceptNo(kidDto.getParentKidAcceptNo()).ifPresent(target -> {
+                    target.setIsMainParent(BooleanEnum.TRUE.getBool());
+                    parentKidRepository.save(target);
+                });
+            }
 
             return kidDto;
         }
