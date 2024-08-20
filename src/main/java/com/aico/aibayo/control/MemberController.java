@@ -12,9 +12,6 @@ import com.aico.aibayo.repository.member.MemberRepository;
 import com.aico.aibayo.service.inviteCode.InviteCodeService;
 import com.aico.aibayo.service.kid.KidService;
 import com.aico.aibayo.service.member.MemberService;
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.InternetAddress;
-import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -26,11 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
-
-import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -42,13 +35,9 @@ import java.util.Map;
 public class MemberController {
     private final MemberService memberService;
     private final JWTUtil jwtUtil;
-    private final HttpSession session;
     private final MemberRepository memberRepository;
     private final InviteCodeService inviteCodeService;
     private final KidService kidService;
-
-    private final JavaMailSender javaMailSender;
-    private final SpringTemplateEngine springTemplateEngine;
 
     @ModelAttribute
     public void addAttributes(HttpServletRequest request, Model model) {
@@ -76,7 +65,6 @@ public class MemberController {
         }
         return null;
     }
-
 
     @GetMapping("/signIn")
     public String signIn() {
@@ -110,21 +98,17 @@ public class MemberController {
         return "member/signUpInviteTeacher";
     }
 
-
     @PostMapping("/signUp")
     @ResponseBody
     public String signUpProcess(MemberDto member) {
         return "ok";
     }
 
-
-
-
     @GetMapping("/signUpKid")
     public String signUpKidForm(HttpSession session, Model model) {
         MemberDto member = (MemberDto) session.getAttribute("member");
         model.addAttribute("member", member);
-        System.out.println("signUpKid GetMapping");
+        log.info("signUpKid GetMapping");
         return "member/signUpKid";
     }
 
@@ -132,14 +116,14 @@ public class MemberController {
     @ResponseBody
     public String signUpKid(@RequestBody MemberDto member, HttpSession session) {
         session.setAttribute("member", member);
-        System.out.println("signUpKid PostMapping");
+        log.info("signUpKid PostMapping");
         return "success";
     }
 
 
     @GetMapping("/signUpTeacher")
     public String signUpTeacher(HttpSession session, Model model) {
-        System.out.println("signUpTeacher GetMapping");
+        log.info("signUpTeacher GetMapping");
         MemberDto member = (MemberDto) session.getAttribute("member");
         model.addAttribute("member", member);
         return "member/signUpTeacher";
@@ -148,33 +132,10 @@ public class MemberController {
     @PostMapping("/signUpTeacher")
     @ResponseBody
     public String signUpTeacher(@RequestBody MemberDto member, HttpSession session) {
-        System.out.println("signUpTeacher PostMapping");
+        log.info("signUpTeacher PostMapping");
         session.setAttribute("member", member);
         return "seccess";
     }
-
-
-
-//    @GetMapping("/signUpPrincipal")
-//    public String signUpPrincipalForm(HttpSession session, Model model) {
-//        // 세션에서 MemberDto를 가져옴
-//        MemberDto member = (MemberDto) session.getAttribute("member");
-//        // Model에 member를 추가하여 뷰에 전달
-//        model.addAttribute("member", member);
-//        System.out.println("signUpPrincipal GetMapping");
-//        // kinderAdd.html로 이동
-//        return "member/kinderAdd";
-//    }
-//
-//    @PostMapping("/signUpPrincipal")
-//    @ResponseBody
-//    public String signUpPrincipal(@RequestBody MemberDto member, HttpSession session) {
-//        // 세션에 MemberDto를 저장
-//        session.setAttribute("member", member);
-//        System.out.println("signUpPrincipal PostMapping");
-//        // 성공 메시지 반환
-//        return "success";
-//    }
 
     @PostMapping("/finalSignUp")
     public String finalSignUp(@RequestBody MemberDto member) {
@@ -182,21 +143,10 @@ public class MemberController {
             log.error("MemberDto is null");
             return "member/signIn"; // 적절한 에러 페이지로 리다이렉트
         }
-
         // 회원가입 처리 로직 (예: 데이터베이스에 저장)
-        log.info("Username: {}", member.getUsername());
-        log.info("Name: {}", member.getName());
-        log.info("Password: {}", member.getPassword());
-        log.info("Phone: {}", member.getPhone());
-        log.info("Role: {}", member.getRole());
-        log.info("KidName: {}", member.getKidName());
-        log.info("Birth: {}", member.getKidBirth());
-        log.info("Gender: {}", member.getKidGender());
-        log.info("KinderNo: {}", member.getKinderNo());
-        log.info("ClassNo: {}", member.getClassNo());
-        log.info("Relationship: {}", member.getRelationship());
+        log.info("finalSignUp MemberDto: {}", member);
 
-        MemberDto memberDto = new MemberDto();
+        MemberDto memberDto = new MemberDto(); // mapper 람다식으로 dto -> entity
         memberDto.setUsername(member.getUsername());
         memberDto.setName(member.getName());
         memberDto.setPassword(member.getPassword());
@@ -225,27 +175,20 @@ public class MemberController {
             memberDto.setStatus(MemberStatusEnum.ACTIVE.getStatus()); // 승인 해줘야 로그인 가능
         }
 
-
         memberService.signUpProcess(memberDto);
-
         return "redirect:member/signIn";
     }
 
     @PostMapping("/finalSignUpInvite")
     public String finalSignUpInvite(@RequestBody MemberDto member) {
-
         Long inviteId = member.getInviteId();
-
         // inviteId가 유효하지 않은 경우 회원가입 로직을 진행하지 않음
         if (inviteId == null || inviteId <= 0) {
             log.error("Invalid inviteId: {}", inviteId);
             return "member/signIn";
         }
-
-        // 로그: inviteId 확인
         log.info("Received inviteId: {}", inviteId);
 
-        // MemberDto에 formData 매핑
         MemberDto memberDto = new MemberDto();
         memberDto.setUsername(member.getUsername());
         memberDto.setPassword(member.getPassword());
@@ -288,7 +231,6 @@ public class MemberController {
     }
 
 
-
     @GetMapping("/myPage")
     public String myPage(@ModelAttribute("loginInfo") MemberDto memberDto, Model model) {
         String name = memberDto.getName();
@@ -308,7 +250,6 @@ public class MemberController {
         String phone = memberDto.getPhone();
         String username = memberDto.getUsername();
         String role = memberDto.getRole();
-
 
         MemberEntity memberEntity = memberRepository.findByUsername(username).orElse(null);
         if (memberEntity != null) {
@@ -343,21 +284,16 @@ public class MemberController {
     public ResponseEntity<Map<String, Boolean>> passwordExist(@RequestBody Map<String, String> request, @ModelAttribute("loginInfo") MemberDto memberDto) {
         String username = memberDto.getUsername(); // 토큰에서 가져온 username
         String password = request.get("password");
-
-        log.info("passwordExist / username : {}", username);
-        log.info("passwordExist / password : {}", password);
+        log.info("passwordExist : username : {} / password : {}", username, password);
 
         boolean passwordExists = memberService.checkPassword(username, password);
-
         if (passwordExists) {
-            System.out.println("passwordExists true");
+            log.error("passwordExists true");
         } else {
-            System.out.println("passwordExists false");
+            log.error("passwordExists false");
         }
-
         Map<String, Boolean> response = new HashMap<>();
         response.put("exists", passwordExists);
-
 
         return ResponseEntity.ok(response);
     }
@@ -365,9 +301,7 @@ public class MemberController {
     @PostMapping("/updatePassword")
     public String updatepassword(@RequestParam("newPassword") String newPassword, @ModelAttribute("loginInfo") MemberDto memberDto) {
         String username = memberDto.getUsername();
-
-        log.info("updatePassword / username : {}", username);
-        log.info("updatePassword / newPassword : {}", newPassword);
+        log.info("updatePassword : username : {} / newPassword : {}", username, newPassword);
 
         memberService.updatePassword(username, newPassword);
 
@@ -377,9 +311,6 @@ public class MemberController {
             return "user/main/main";
         }
     }
-
-
-
 
     // 이메일 유효성 검사
     @PostMapping("/validateEmail")
@@ -426,7 +357,6 @@ public class MemberController {
 
         // 비밀번호 재설정
         boolean resetSuccess = memberService.updatePasswordByEmail(email, newPassword);
-
         if (resetSuccess) {
             log.info("비밀번호 재설정 성공: {}", email);
             return ResponseEntity.ok().body(Map.of("success", true));
@@ -442,17 +372,13 @@ public class MemberController {
             @RequestParam("kinderNo") String kinderNo,
             @ModelAttribute("loginInfo") MemberDto memberDto) {
 
-
         boolean isUpdated = memberService.adminUpdateKinderNo(username, kinderNo);
 
         memberDto.setKinderNo(Long.valueOf(kinderNo));
-
         if (isUpdated) {
             return ResponseEntity.ok("KinderNo updated successfully");
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to update KinderNo");
         }
     }
-
-
 }
