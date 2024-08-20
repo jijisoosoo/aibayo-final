@@ -31,6 +31,7 @@ public class RegisterKinderDto {
     private LocalDateTime kinderDeleteDate; // 유치원 삭제일자
     private String sidoList; // API 시도 리스트
     private String sggList; // API 시군구 리스트
+    private String deleteFlag;
 
 
     public static RegisterKinderDto toDto(RegisterKinderEntity entity) {
@@ -49,7 +50,8 @@ public class RegisterKinderDto {
                 entity.getKinderModifyDate(),
                 entity.getKinderDeleteDate(),
                 entity.getSidoList(),
-                entity.getSggList()
+                entity.getSggList(),
+                entity.getDeleteFlag()
         );
     }
 }

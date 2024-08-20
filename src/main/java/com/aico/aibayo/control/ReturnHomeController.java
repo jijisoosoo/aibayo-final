@@ -2,7 +2,6 @@ package com.aico.aibayo.control;
 
 import com.aico.aibayo.common.OrderTypeEnum;
 import com.aico.aibayo.dto.ClassDto;
-import com.aico.aibayo.dto.announce.AnnounceDto;
 import com.aico.aibayo.dto.kid.KidDto;
 import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.dto.returnHome.ReturnHomeDto;
@@ -149,6 +148,7 @@ public String write(
     log.info("tomorrow !!: {} ", tomorrow);
 
     return "user/home/writeForm";
+//    return "user/home/write";
 }
     @PostMapping("/writeOk")
     @ResponseBody

@@ -198,12 +198,17 @@ $(document).ready(function() {
             }
         }).open();
     };
+
+
 });
 
 
 // afterSuccess 정의 및 호출
 function afterSuccess(response) {
     console.log("유치원 세팅");
+
+
+
     Swal.fire({
         title: "등록 완료",
         text: "창을 닫으면 메인 화면으로 돌아갑니다.",
