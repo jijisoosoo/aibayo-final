@@ -103,14 +103,14 @@ $(document).ready(function() {
         }
 
         // 전화번호 형식 체크
-        if (!/^\d+$/.test(kinderMidNo) || !/^\d+$/.test(kindeEndNo)) {
+        if (!/^\d+$/.test(kinderMidNo) || !/^\d+$/.test(kinderEndNo)) {
             console.log("전화번호 입력 오류");
             alert("전화번호는 숫자만 입력할 수 있습니다.");
             if (!/^\d+$/.test(kinderMidNo)) {
                 $('#midNo').focus();
                 return false;
             }
-            if (!/^\d+$/.test(kindeEndNo)) {
+            if (!/^\d+$/.test(kinderEndNo)) {
                 $('#endNo').focus();
                 return false;
             }
@@ -198,20 +198,47 @@ $(document).ready(function() {
             }
         }).open();
     };
+
+
 });
 
 
 // afterSuccess 정의 및 호출
 function afterSuccess(response) {
     console.log("유치원 세팅");
-    Swal.fire({
-        title: "등록 완료",
-        text: "창을 닫으면 메인 화면으로 돌아갑니다.",
-        icon: "success",
-        customClass: {
-            confirmButton: 'btn-ab btn-ab-swal'
+
+    // hidden 필드에서 username 값을 가져옵니다.
+    const username = $('input[name="username"]').val();
+    const kinderNo = response.kinderNo; // 유치원 등록에 성공한 후 받은 kinderNo 값이라고 가정
+
+    console.log("aftersucess username : " + username);
+    console.log("aftersucess kinderNo : " + kinderNo);
+
+    // 서버에 데이터 전송 (URL에 파라미터를 포함)
+    $.ajax({
+        url: `/member/adminUpdateKinderNo?username=${encodeURIComponent(username)}&kinderNo=${encodeURIComponent(kinderNo)}`,
+        type: 'POST',
+        success: function() {
+            // 성공적으로 업데이트 후 알림 및 페이지 이동
+            Swal.fire({
+                title: "등록 완료",
+                text: "창을 닫으면 메인 화면으로 돌아갑니다.",
+                icon: "success",
+                customClass: {
+                    confirmButton: 'btn-ab btn-ab-swal'
+                }
+            }).then((result) => {
+                window.location.href = '/main/admin'; // 성공 시 이동할 페이지
+            });
+        },
+        error: function() {
+            // 오류 처리
+            Swal.fire({
+                title: "오류 발생",
+                text: "업데이트에 실패했습니다.",
+                icon: "error"
+            });
+
         }
-    }).then((result) => {
-        window.location.href = '/main/admin'; // 성공 시 이동할 페이지
     });
 }

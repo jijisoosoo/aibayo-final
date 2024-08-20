@@ -91,11 +91,14 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         response.addCookie(jwtCookie);
 
-        if (role.equals("ROLE_ADMIN") || role.equals("ROLE_PRINCIPAL") || role.equals("ROLE_TEACHER")) {
+        if (role.equals("ROLE_ADMIN")) {
+            response.sendRedirect("/main/siteAdmin");
+        } else if (role.equals("ROLE_PRINCIPAL") || role.equals("ROLE_TEACHER")) {
             response.sendRedirect("/main/admin");
-        } else {
+        } else if (role.equals("ROLE_USER")) {
             response.sendRedirect("/main/user");
         }
+
     }
 
     @Override

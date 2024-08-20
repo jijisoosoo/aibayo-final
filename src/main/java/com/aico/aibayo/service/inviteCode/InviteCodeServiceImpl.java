@@ -139,7 +139,8 @@ public class InviteCodeServiceImpl implements InviteCodeService {
         context.setVariable("inviteEmail", inviteCodeDto.getInviteEmail());
         context.setVariable("kinderName", inviteCodeDto.getKinderName());
         context.setVariable("url", inviteCodeDto.getUrl());
-        return springTemplateEngine.process("/admin/inviteCode/email", context);
+      
+        return springTemplateEngine.process("admin/inviteCode/email", context);
     }
 
     private InviteCodeDto insertInviteCode(InviteCodeDto inviteCodeDto) {
