@@ -8,4 +8,5 @@ public interface InviteCodeService {
     InviteCodeDto sendAndInsertInviteCode(InviteCodeDto inviteCodeDto);
     InviteCodeDto sendAndUpdateInviteCode(InviteCodeDto inviteCodeDto);
     InviteCodeDto deleteInviteCode(InviteCodeDto inviteCodeDto);
+    InviteCodeDto getByInviteId(Long inviteId);
 }
