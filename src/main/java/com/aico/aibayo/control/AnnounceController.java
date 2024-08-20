@@ -235,7 +235,7 @@ public class AnnounceController {
         hashMap.put("type","card");
         Page<AnnounceDto>announces= announceService.findAllByKinderNoCard(condition,hashMap);
 
-        return getPageInfoAndGoView(model, announces, "/user/announce/card");
+        return getPageInfoAndGoView(model, announces, "user/announce/card");
     }
     @GetMapping("/user/list")
     public String userList(@RequestParam(defaultValue = "1") int page,
@@ -274,7 +274,7 @@ public class AnnounceController {
         condition1.setBoardNo(announceDto.getBoardNo());
         condition2.setBoardNo(announceDto.getBoardNo());
 
-        return getPageInfoAndGoView(model, announces, primaryAnnounces, "/user/announce/list");
+        return getPageInfoAndGoView(model, announces, primaryAnnounces, "user/announce/list");
     }
 
     private String getPageInfoAndGoViewComment(Model model, Page<CommentDto> comments, String view) {
@@ -347,7 +347,7 @@ public class AnnounceController {
         Page<CommentDto> comments = commentService.findAllByBoardNo(condition, hashMap);
         long commentCount = commentService.countByBoardNoAndInvisibleFlag(announceDto.getBoardNo(),"0");
         model.addAttribute("commentCount",commentCount);
-        return getPageInfoAndGoViewComment(model, comments,"/user/announce/detail");
+        return getPageInfoAndGoViewComment(model, comments,"user/announce/detail");
     }
 
 

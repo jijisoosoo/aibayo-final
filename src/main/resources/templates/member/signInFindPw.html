@@ -6,7 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/member/signInFindPw.css}"/>
     <link rel="stylesheet" th:href="@{/css/member/signInGuide.css}"/>
 
-    <script th:src="@{js/login/signInFindPw.js}"></script>
+    <script th:src="@{/js/login/signInFindPw.js}"></script>
 </head>
 <body>
 <div class="login-page">
@@ -44,7 +44,7 @@
 
                         <div class="group-wrapper">
                             <div class="overlap-group-wrapper">
-                                <div class="overlap-group-2"><a th:href="@{member/signInResetPw}" class="text-wrapper-8">인증완료</a></div>
+                                <div class="overlap-group-2"><a th:href="@{/member/signInResetPw}" class="text-wrapper-8">인증완료</a></div>
                             </div>
                         </div>
 
@@ -58,13 +58,13 @@
 
         </div>
         <div class="logo h_class_78">
-            <div class="h_class_79"><a th:href="@{main/admin}"
+            <div class="h_class_79"><a th:href="@{/main/admin}"
                                        style="text-decoration: none; color: inherit; font-family: 'Noto Sans KR', sans-serif;">aibayo</a></div>
         </div>
 
         <!-- <div class="text-wrapper-2">회원가입</div>
         <div class="text-wrapper-5">비밀번호 찾기</div> -->
-        <a th:href="@{member/signIn}" class="span">로그인</a>
+        <a th:href="@{/member/signIn}" class="span">로그인</a>
 
     </div>
 </div>
