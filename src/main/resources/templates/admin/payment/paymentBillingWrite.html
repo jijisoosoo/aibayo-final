@@ -198,8 +198,8 @@
                                     <img src="/images/common/profile.png" alt=""/>
                                 </div>
                                 <div class="textarea">
-<!--                                    <div class="text-wrapper-15" id="discount_kid"-->
-<!--                                         th:data-kid-no="*{kidNo}" th:data-member-id="*{memberId}" th:text="*{kidName}">원아명</div>-->
+                                    <div class="text-wrapper-15" id="discount_kid"
+                                         th:data-kid-no="*{kidNo}" th:data-member-id="*{memberId}" th:text="*{kidName}">원아명</div>
                                 </div>
                             </div>
                             <a class="button-x" href="">
@@ -218,7 +218,7 @@
                             <div class="div-13">
                                 <div class="text-wrapper-17">할인</div>
                                 <div class="div-14">
-                                    <div class="text-wrapper-16" id="discounted_rate" th:text="${discountElement.discountRate} + '%'">할인율</div>
+                                    <div class="text-wrapper-16" id="discounted_rate" th:text="*{discountRate} + '%'">할인율</div>
                                     <div class="text-wrapper-16">원</div>
                                 </div>
                             </div>

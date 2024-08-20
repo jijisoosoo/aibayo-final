@@ -102,10 +102,10 @@ public class PaymentController {
 
     @PostMapping("/admin/showDiscountedKid")
     public String adminPaymentWriteShowDiscountedKid(@ModelAttribute("loginInfo") MemberDto loginInfo, Model model,
-                                         @RequestBody Map<String, Object> discountList){
+                                         @RequestBody Map<String, Object> discountMap){
 
-//        List<Map<String, Object>> discountList = (List<Map<String, Object>>) discountedKid;
-
+        List<Map<String, Object>> discountList = (List<Map<String, Object>>) discountMap.get("discountMap");
+        log.info("discountList {}", discountList);
         model.addAttribute("discountList", discountList);
 
         return "admin/payment/paymentBillingWrite";

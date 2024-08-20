@@ -104,22 +104,6 @@ $(document).ready(function() {
 
     $(document).on('click', '#add_discount', function () {
 
-        // discountList를 받아오기
-        // let existDiscountElement = document.querySelectorAll('#discountElement');
-        // existDiscountElement.forEach(function(element) {
-        //
-        //     let discountKidElement = element.querySelector('#discount_kid');
-        //     let discountedRateElement = element.querySelector('#discounted_rate');
-        //
-        //     let discounted = {
-        //         memberId: discountKidElement.getAttribute('data-member-id'),
-        //         kidNo: discountKidElement.getAttribute('data-kid-no'),
-        //         kidName: discountKidElement.textContent.trim(),
-        //         discountRate: discountedRateElement.textContent.trim().replace('%', '')
-        //     };
-        //     discountList.push(discounted);
-        // });
-
         // 새 할인 항목을 list에 추가
         let newDiscountElement = {
             memberId: $('.discountForSelectedKids option:selected').attr('id'),
