@@ -3,11 +3,14 @@ package com.aico.aibayo.service.kid;
 import com.aico.aibayo.common.AcceptStatusEnum;
 import com.aico.aibayo.common.AcceptTypeEnum;
 import com.aico.aibayo.common.BooleanEnum;
+import com.aico.aibayo.dto.ParentKidDto;
 import com.aico.aibayo.dto.kid.KidDto;
 import com.aico.aibayo.dto.kid.KidSearchCondition;
 import com.aico.aibayo.entity.AcceptLogEntity;
 import com.aico.aibayo.entity.ClassKidEntity;
 import com.aico.aibayo.entity.KidEntity;
+import com.aico.aibayo.entity.ParentKidId;
+import com.aico.aibayo.repository.parentKid.ParentKidRepository;
 import com.aico.aibayo.repository.AcceptLogRepository;
 import com.aico.aibayo.repository.classKid.ClassKidRepository;
 import com.aico.aibayo.repository.kid.KidRepository;
@@ -26,6 +29,7 @@ public class KidServiceImpl implements KidService {
     private final KidRepository kidRepository;
     private final ClassKidRepository classKidRepository;
     private final AcceptLogRepository acceptLogRepository;
+    private final ParentKidRepository parentKidRepository;
 
     @Override
     public List<KidDto> getByKinderNo(Long kinderNo) {
@@ -149,6 +153,17 @@ public class KidServiceImpl implements KidService {
 
                 acceptLogRepository.save(target);
             });
+
+            // 해당 원생에 대한 주학부모가 없을 경우, 현재 ParentKid의 isMainParent를 true로 세팅
+            ParentKidDto kidMainParent = parentKidRepository.findByKidMainParent(kidDto.getKidNo());
+
+            if (kidMainParent == null) {
+                ParentKidId id = new ParentKidId(kidDto.getId(), kidDto.getKidNo(), kidDto.getParentKidAcceptNo());
+                parentKidRepository.findById(id).ifPresent(target -> {
+                    target.setIsMainParent(BooleanEnum.TRUE.getBool());
+                    parentKidRepository.save(target);
+                });
+            }
 
             return kidDto;
         }
