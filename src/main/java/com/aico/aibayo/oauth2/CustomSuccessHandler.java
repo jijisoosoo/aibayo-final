@@ -42,7 +42,6 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
             memberRepository.save(memberEntity);
         }
 
-
         // 사용자 권한을 가져옵니다.
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
@@ -63,7 +62,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
         // 인증 성공 후 리디렉트할 URL로 이동
 //        response.sendRedirect("/main/admin");
-        if (role.equals("ROLE_ADMIN")) {
+        if (role.equals("ROLE_ADMIN") || role.equals("ROLE_TEACHER") || role.equals("ROLE_PRINCIPAL")) {
             response.sendRedirect("/main/admin");
         } else if (role.equals("ROLE_USER")) {
             response.sendRedirect("/main/user");
