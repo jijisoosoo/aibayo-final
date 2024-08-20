@@ -21,7 +21,7 @@
                 <div class="frame">
                     <div class="text-wrapper">원 수정하기</div>
                     <div class="element-secondary-button-wrapper">
-                        <a th:href="@{|/setting/detail/${kinderNo}|}" class="element-secondary-button2">취소</a>
+                        <a th:href="@{|/setting/detail/${kinder.getKinderNo()}|}" class="element-secondary-button2">취소</a>
                         <input type="submit" class="element-secondary-button" id ="saveBtn" value="수정">
                     </div>
                 </div>
@@ -36,7 +36,10 @@
                      th:data-kinder-end-no
                 >
                     <table class="table">
-                        <input type="hidden" id="sample6_sigunguCode" placeholder="시군구 코드" readonly>
+                        <input type="hidden" id="kinderNo" th:value="${kinder.getKinderNo()}">
+                        <input type="hidden" class="sggList" th:value="${kinder.getSggList()}">
+                        <input type="hidden" id="sample6_sigunguCode" class="newSggList" readonly>
+
                         <tr>
                             <th>원 우편번호</th>
                             <td>
@@ -90,7 +93,7 @@
                         <tr>
                             <th>원장님 이름</th>
                             <td>
-                                <span  id="principalName" th:text="${kinder.getPrincipalName()}"></span><br>
+                                <span  id="principalName" th:text="${loginInfo.getName()}"></span><br>
                                 <span class="notice">원장님 이름은 원장님 계정이 실명입니다. 변경을 원하실 경우, 원장님 계정의 '내정보 설정'에서 변경해주세요.</span>
                             </td>
                         </tr>
@@ -99,13 +102,13 @@
                             <th>등원 시간</th>
                             <td>
 <!--                                <input type="text" name=""  id="" th:text="${kinder.getKinderOpenTime()}">-->
-                                <input type="text" id="open" class="kinder" th:value="${kinder.getKinderOpenTime()}+'AM'">
+                                <input type="text" id="open" class="kinder" th:value="${kinder.getKinderOpenTime()}+' AM'">
                             </td>
                         </tr>
                         <tr>
                             <th>하원 시간</th>
                             <td>
-                                <input type="text" id="close" class="kinder" data-time="${kinder.getKinderCloseTime()}">
+                                <input type="text" id="close" class="kinder"th:value="${kinder.getKinderCloseTime()}+' PM'">
                             </td>
                         </tr>
                     </table>

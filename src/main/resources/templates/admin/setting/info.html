@@ -21,9 +21,9 @@
                 <div class="frame">
                     <div class="text-wrapper">원 기본정보</div>
                     <div class="element-secondary-button-wrapper">
-                        <a href="/setting/menu" class="element-secondary-button2">설정</a>
+<!--                        <a href="/setting/menu" class="element-secondary-button2">설정</a>-->
 <!--                        <a href="/setting/modify" class="element-secondary-button">수정</a>-->
-                        <a th:href="@{|setting/modify/${kinderNo}|}" class="element-secondary-button">수정</a>
+                        <a th:href="@{|/setting/modify/${kinderNo}|}" class="element-secondary-button">수정</a>
 
 
 
@@ -49,13 +49,17 @@
                         </tr>
                         <tr>
                             <th>원 전화번호</th>
-                            <td th:text="${kinderDto.kinderTel}">
-                                02-372-0404
+                            <td>
+                                <span th:text="${kinderDto.getKinderLocNo()}"></span>
+                                <span>-</span>
+                                <span th:text="${kinderDto.getKinderMidNo()}"></span>
+                                <span>-</span>
+                                <span th:text="${kinderDto.getKinderEndNo()}"></span>
                             </td>
                         </tr>
                         <tr>
                             <th>원장님 이름</th>
-                            <td th:text="${kinderDto.principalName}">홍길동</td>
+                            <td th:text="${loginInfo.getName()}">홍길동</td>
                         </tr>
 
                         <tr>
