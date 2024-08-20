@@ -4,6 +4,7 @@ import com.aico.aibayo.common.AcceptStatusEnum;
 import com.aico.aibayo.common.AcceptTypeEnum;
 import com.aico.aibayo.common.BooleanEnum;
 import com.aico.aibayo.common.MemberStatusEnum;
+import com.aico.aibayo.dto.classKid.ClassKidDto;
 import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.dto.member.MemberSearchCondition;
 import com.aico.aibayo.entity.*;
@@ -12,19 +13,28 @@ import com.aico.aibayo.repository.AcceptLogRepository;
 import com.aico.aibayo.repository.RegisterKinderRepository;
 import com.aico.aibayo.repository.TeacherKinderRepository;
 import com.aico.aibayo.repository.classKid.ClassKidRepository;
-import com.aico.aibayo.repository.parentKid.ParentKidRepository;
+import com.aico.aibayo.repository.ParentKidRepository;
 import com.aico.aibayo.repository.kid.KidRepository;
 import com.aico.aibayo.repository.member.MemberRepository;
 import groovy.util.logging.Slf4j;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.thymeleaf.spring6.SpringTemplateEngine;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.List;
+import org.thymeleaf.context.Context;
 
 @Slf4j
 @Service
@@ -38,8 +48,8 @@ public class MemberServiceImpl implements MemberService {
     private final ClassKidRepository classKidRepository;
     private final AcceptLogRepository acceptLogRepository;
     private final TeacherKinderRepository teacherKinderRepository;
-    private final RegisterKinderRepository registerKinderRepository;
-
+    private final JavaMailSender javaMailSender;
+    private final SpringTemplateEngine springTemplateEngine;
 
     @Transactional
     public void signUpProcess(MemberDto memberDto) {
@@ -61,6 +71,7 @@ public class MemberServiceImpl implements MemberService {
             processTeacherSignUp(memberDto, newMemberEntity);
         }
     }
+
 
     private MemberEntity createMemberEntity(MemberDto memberDto) {
         MemberEntity memberEntity = new MemberEntity();
@@ -212,6 +223,21 @@ public class MemberServiceImpl implements MemberService {
         }
     }
 
+        @Override
+    public boolean updatePasswordByEmail(String email, String newPassword) {
+        MemberEntity member = memberRepository.findByUsername(email)
+                .orElseThrow(() -> new MemberNotFoundException("username으로 검색한 member 값이 없습니다."));
+        ;
+        if (member != null) {
+            log.info("newPassword : " + newPassword);
+            log.info("hashed newPassword : " + bCryptPasswordEncoder.encode(newPassword));
+            member.setPassword(bCryptPasswordEncoder.encode(newPassword));
+            memberRepository.save(member);
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public MemberDto getByUsernameWithParentKid(String username) {
         return memberRepository.findByUsernameWithParentKid(username).orElse(null);
@@ -262,4 +288,40 @@ public class MemberServiceImpl implements MemberService {
             acceptLogRepository.save(acceptLogEntity);
         }
     }
+
+
+
+    public boolean isEmailRegistered(String email) {
+        MemberDto memberDto = findByUsername(email); // 이미 존재하는 findByEmail 메서드를 사용
+        return memberDto != null;
+    }
+
+    public boolean sendPasswordResetLink(String email, String resetLink) {
+        try {
+            MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+            mimeMessageHelper.setTo(email); // 메일 수신자
+            mimeMessageHelper.setSubject("비밀번호 재설정 링크"); // 메일 제목
+
+            // Thymeleaf를 사용하여 이메일 본문을 렌더링
+            Context context = new Context();
+            context.setVariable("resetLink", resetLink); // 이메일 본문에 포함할 링크를 컨텍스트에 설정
+            String htmlContent = springTemplateEngine.process("member/email", context);
+
+            mimeMessageHelper.setText(htmlContent, true);  // 메일 본문, HTML 형식
+
+            // 메일 발송자의 이메일 주소와 이름 설정
+            mimeMessageHelper.setFrom(new InternetAddress("admin@aico.co.kr", "aibayo"));
+
+            // 메일 발송
+            javaMailSender.send(mimeMessage);
+            log.info("SEND MAIL SUCCESS >>>>>>>>>>>>>>>>>>>>>>>>>> ");
+            return true;
+        } catch (MessagingException | UnsupportedEncodingException e) {
+            log.error("SEND MAIL FAILED", e);
+            return false;
+        }
+    }
+
+
 }

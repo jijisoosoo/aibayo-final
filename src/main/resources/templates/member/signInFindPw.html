@@ -1,12 +1,186 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="utf-8"/>-->
+<!--    <link rel="stylesheet" th:href="@{/css/member/signInFindPw.css}"/>-->
+<!--    <link rel="stylesheet" th:href="@{/css/member/signInGuide.css}"/>-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> &lt;!&ndash; SweetAlert2 추가 &ndash;&gt;-->
+
+<!--    <script>-->
+<!--        document.addEventListener("DOMContentLoaded", function() {-->
+<!--            // 초기 로드 시 인증번호 입력 필드 비활성화-->
+<!--            document.getElementById("certification-number").disabled = true;-->
+
+<!--            // 인증번호 보내기 버튼 클릭 시-->
+<!--            document.getElementById("certification-number-submit").addEventListener("click", function(event) {-->
+<!--                event.preventDefault(); // 폼 제출 방지-->
+<!--                var email = document.getElementById("email-input").value;-->
+
+<!--                fetch('/sendCertificationCode', {-->
+<!--                    method: 'POST',-->
+<!--                    headers: {-->
+<!--                        'Content-Type': 'application/json'-->
+<!--                    },-->
+<!--                    body: JSON.stringify({ email: email })-->
+<!--                })-->
+<!--                    .then(response => response.json())-->
+<!--                    .then(data => {-->
+<!--                        if(data.success) {-->
+<!--                            document.getElementById("certification-number").disabled = false; // 인증번호 입력 필드 활성화-->
+<!--                        } else {-->
+<!--                            Swal.fire({-->
+<!--                                icon: 'error',-->
+<!--                                title: '오류',-->
+<!--                                text: '해당 이메일로 가입된 계정이 없습니다.',-->
+<!--                            }).then(() => {-->
+<!--                                window.location.href = "/member/signIn";-->
+<!--                            });-->
+<!--                        }-->
+<!--                    });-->
+<!--            });-->
+<!--        });-->
+<!--    </script>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="login-page">-->
+<!--    <div class="div">-->
+<!--        <div class="overlap">-->
+<!--            <div class="group">-->
+<!--                <div class="overlap-group">-->
+<!--                    <div class="group-2"></div>-->
+<!--                    <form action="#" method="post" id="certification-form">-->
+<!--                        <div class="group-4">-->
+<!--                            <div class="text-wrapper-3">이메일</div>-->
+<!--                            <input class="username-or-email-wrapper" name="username" id="email-input" type="email" required>-->
+<!--                        </div>-->
+
+<!--                        <div class="group-5">-->
+<!--                            <div class="text-wrapper-3">인증번호</div>-->
+<!--                            <input type="text" class="div-wrapper" name="certificationNumber" id="certification-number">-->
+<!--                        </div>-->
+
+<!--                        <div class="overlap-wrapper">-->
+<!--                            <input id="certification-number-submit" class="overlap-2 text-wrapper-1" type="submit" value="인증번호 보내기">-->
+<!--                        </div>-->
+
+<!--                        <div class="group-wrapper">-->
+<!--                            <div class="overlap-group-wrapper">-->
+<!--                                <div class="overlap-group-2">-->
+<!--                                    <a href="#" class="text-wrapper-8" id="certification-verify">인증완료</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="text-wrapper-7">비밀번호 찾기</div>-->
+<!--        </div>-->
+<!--        <div class="logo h_class_78">-->
+<!--            <div class="h_class_79"><a th:href="@{/main/admin}" style="text-decoration: none; color: inherit; font-family: 'Noto Sans KR', sans-serif;">aibayo</a></div>-->
+<!--        </div>-->
+<!--        <a th:href="@{/member/signIn}" class="span">로그인</a>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<script>-->
+<!--    // 인증완료 버튼 클릭 시 인증번호 검증-->
+<!--    document.getElementById("certification-verify").addEventListener("click", function(event) {-->
+<!--        event.preventDefault();-->
+<!--        var email = document.getElementById("email-input").value;-->
+<!--        var certificationNumber = document.getElementById("certification-number").value;-->
+
+<!--        fetch('/verifyCertificationCode', {-->
+<!--            method: 'POST',-->
+<!--            headers: {-->
+<!--                'Content-Type': 'application/json'-->
+<!--            },-->
+<!--            body: JSON.stringify({ email: email, certificationNumber: certificationNumber })-->
+<!--        })-->
+<!--            .then(response => response.json())-->
+<!--            .then(data => {-->
+<!--                if(data.success) {-->
+<!--                    window.location.href = "/member/signInResetPw";-->
+<!--                } else {-->
+<!--                    Swal.fire({-->
+<!--                        icon: 'error',-->
+<!--                        title: '오류',-->
+<!--                        text: '인증번호가 올바르지 않습니다.',-->
+<!--                    });-->
+<!--                }-->
+<!--            });-->
+<!--    });-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
-
     <link rel="stylesheet" th:href="@{/css/member/signInFindPw.css}"/>
     <link rel="stylesheet" th:href="@{/css/member/signInGuide.css}"/>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert2 추가 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery 추가 -->
 
-    <script th:src="@{/js/login/signInFindPw.js}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#send-reset-link').on('click', function(event) {
+                event.preventDefault(); // 폼 제출 방지
+                var email = $('#email-input').val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/member/validateEmail',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ email: email }),
+                    success: function(data) {
+                        if (data.success) {
+                            $.ajax({
+                                type: 'POST',
+                                url: '/member/sendPasswordResetLink',
+                                contentType: 'application/json',
+                                data: JSON.stringify({ email: email }),
+                                success: function(response) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: '성공',
+                                        text: '비밀번호 재설정 링크가 이메일로 전송되었습니다.',
+                                    }).then(function() {
+                                        window.location.href = "/member/signIn";
+                                    });
+                                },
+                                error: function() {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: '오류',
+                                        text: '비밀번호 재설정 링크를 전송하는 중 문제가 발생했습니다.',
+                                    });
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: '오류',
+                                text: '해당 이메일로 가입된 계정이 없습니다.',
+                            }).then(function() {
+                                window.location.href = "/member/signIn";
+                            });
+                        }
+                    },
+                    error: function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: '오류',
+                            text: '서버와의 통신 중 문제가 발생했습니다.',
+                        });
+                    }
+                });
+            });
+        });
+
+    </script>
 </head>
 <body>
 <div class="login-page">
@@ -14,58 +188,25 @@
         <div class="overlap">
             <div class="group">
                 <div class="overlap-group">
-                    <div class="group-2">
-<!--                        <div class="group-3">-->
-<!--                            <div class="text-wrapper">Welcome to aibayo</div>-->
-<!--                        </div>-->
-                    </div>
-
-
-                    <form action="#" method="post">
+                    <div class="group-2"></div>
+                    <form action="#" method="post" id="reset-form">
                         <div class="group-4">
-
                             <div class="text-wrapper-3">이메일</div>
-                            <!-- <div class="username-or-email-wrapper"><div class="text-wrapper-4">email address</div></div> -->
-                            <input class="username-or-email-wrapper" name="username" id="email-input" type="email"
-                                   required></input>
+                            <input class="username-or-email-wrapper" name="username" id="email-input" type="email" required>
                         </div>
-
-                        <div class="group-5">
-                            <div class="text-wrapper-3">인증번호</div>
-                            <input type="password" class="div-wrapper" name="password" id="certification-number">
-                        </div>
-
 
                         <div class="overlap-wrapper">
-                            <!-- <div class="overlap-2"><div class="text-wrapper-6">Sign in</div></div> -->
-                            <input id="certification-number-submit" class="overlap-2 text-wrapper-1" type="submit" value="인증번호 보내기">
+                            <input id="send-reset-link" class="overlap-2 text-wrapper-1" type="submit" value="재설정 링크 보내기">
                         </div>
-
-
-                        <div class="group-wrapper">
-                            <div class="overlap-group-wrapper">
-                                <div class="overlap-group-2"><a th:href="@{/member/signInResetPw}" class="text-wrapper-8">인증완료</a></div>
-                            </div>
-                        </div>
-
                     </form>
-
-
                 </div>
             </div>
-            <div class="text-wrapper-7">비밀번호 찾기</div>
-
-
+            <div class="text-wrapper-7">비밀번호 초기화</div>
         </div>
         <div class="logo h_class_78">
-            <div class="h_class_79"><a th:href="@{/main/admin}"
-                                       style="text-decoration: none; color: inherit; font-family: 'Noto Sans KR', sans-serif;">aibayo</a></div>
+            <div class="h_class_79"><a th:href="@{/main/admin}" style="text-decoration: none; color: inherit; font-family: 'Noto Sans KR', sans-serif;">aibayo</a></div>
         </div>
-
-        <!-- <div class="text-wrapper-2">회원가입</div>
-        <div class="text-wrapper-5">비밀번호 찾기</div> -->
         <a th:href="@{/member/signIn}" class="span">로그인</a>
-
     </div>
 </div>
 </body>
