@@ -1,7 +1,7 @@
 $(document).ready(function(){
     // Timepicker 초기화
     $('#time').timepicker({
-        timeFormat: 'h:mm p', // 12시간 포맷
+        timeFormat: 'h:mm p',
         interval: 30,
         minTime: '12',
         maxTime: '18',
@@ -18,7 +18,7 @@ $(document).ready(function(){
         // 유효성 검사와 데이터 준비
         const returnHomeData = {
             orderType: 1,
-            // runDate: $('input[name="date"]:checked').val(),
+            runDate: $('input[name="date"]:checked').val(),
             orderSpecific: $('#orderSpecific').val(),
             rhTime: convertTo24HourFormat($('#time').val()),
             rhType: $('#type').val(),
@@ -48,6 +48,8 @@ $(document).ready(function(){
 
         // AJAX 요청 보내기
         console.log("returnHomeData {}", returnHomeData);
+        // console.log(`returnHomeData:${JSON.stringify(returnHomeData)}`);
+
         let url = '/returnhome/writeOk';
         commonAjax(url, 'POST', returnHomeData);
     });
@@ -103,21 +105,6 @@ $(document).ready(function () {
         });
     });
 });
-//
-// function afterSuccess(response) {
-//     console.log("returnHome_afterSuccess");
-//     Swal.fire({
-//         title: "등록 완료",
-//         text: "창을 닫으면 목록 화면으로 돌아갑니다.",
-//         icon: "success",
-//         customClass: {
-//             confirmButton: 'btn-ab btn-ab-swal'
-//         }
-//     }).then((result) => {
-//         window.location.href = '/returnhome/user/card'; // 성공 시 이동할 페이지
-//     });
-// }
-
 
 function afterSuccess(response,method) {
     console.log("returnHome_afterSuccess")

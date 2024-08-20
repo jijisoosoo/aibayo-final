@@ -986,6 +986,7 @@
     padding : 5px 10px;
     text-align: center;
 }
+
 #time{
     text-align: center;
 }
@@ -1069,6 +1070,16 @@
     padding: 6px 12px;
     text-align: center;
     background-color: #f9fafb;
+    margin: 0px 2px;
+}
+.minorName{
+    border-radius: .25rem;
+    border: 1px solid #ced4da;
+    background-color: #FFFFFF;
+    width: 120px;
+    height: 38px;
+    padding: 6px 12px;
+    text-align: center;
     margin: 0px 2px;
 }
 .rs{
