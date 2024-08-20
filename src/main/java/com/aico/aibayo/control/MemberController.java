@@ -19,6 +19,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -117,6 +118,8 @@ public class MemberController {
     }
 
 
+
+
     @GetMapping("/signUpKid")
     public String signUpKidForm(HttpSession session, Model model) {
         MemberDto member = (MemberDto) session.getAttribute("member");
@@ -133,13 +136,6 @@ public class MemberController {
         return "success";
     }
 
-    @PostMapping("/signUpKinder")
-    @ResponseBody
-    public String signUpKinder(@RequestBody MemberDto member, HttpSession session) {
-        session.setAttribute("member", member);
-        // 여기서는 간단하게 모델에 추가하겠습니다.
-        return "success";
-    }
 
     @GetMapping("/signUpTeacher")
     public String signUpTeacher(HttpSession session, Model model) {
@@ -155,9 +151,30 @@ public class MemberController {
         System.out.println("signUpTeacher PostMapping");
         session.setAttribute("member", member);
         return "seccess";
-
     }
 
+
+
+//    @GetMapping("/signUpPrincipal")
+//    public String signUpPrincipalForm(HttpSession session, Model model) {
+//        // 세션에서 MemberDto를 가져옴
+//        MemberDto member = (MemberDto) session.getAttribute("member");
+//        // Model에 member를 추가하여 뷰에 전달
+//        model.addAttribute("member", member);
+//        System.out.println("signUpPrincipal GetMapping");
+//        // kinderAdd.html로 이동
+//        return "member/kinderAdd";
+//    }
+//
+//    @PostMapping("/signUpPrincipal")
+//    @ResponseBody
+//    public String signUpPrincipal(@RequestBody MemberDto member, HttpSession session) {
+//        // 세션에 MemberDto를 저장
+//        session.setAttribute("member", member);
+//        System.out.println("signUpPrincipal PostMapping");
+//        // 성공 메시지 반환
+//        return "success";
+//    }
 
     @PostMapping("/finalSignUp")
     public String finalSignUp(@RequestBody MemberDto member) {
@@ -192,7 +209,6 @@ public class MemberController {
         memberDto.setKinderNo(member.getKinderNo());
         memberDto.setClassNo(member.getClassNo());
         memberDto.setRelationship(member.getRelationship());
-        memberDto.setStatus(MemberStatusEnum.TEMP.getStatus()); // 승인 해줘야 로그인 가능
         memberDto.setRegDate(LocalDateTime.now());
         memberDto.setLatestLogDate(LocalDateTime.now());
         memberDto.setIsMainParent(BooleanEnum.FALSE.getBool());
@@ -200,10 +216,13 @@ public class MemberController {
 
         if (member.getRole().equals("ROLE_USER")) {
             memberDto.setRoleNo(MemberRoleEnum.PARENT.getRole());
+            memberDto.setStatus(MemberStatusEnum.TEMP.getStatus()); // 승인 해줘야 로그인 가능
         } else if (member.getRole().equals("ROLE_TEACHER")){
             memberDto.setRoleNo(MemberRoleEnum.TEACHER.getRole());
+            memberDto.setStatus(MemberStatusEnum.TEMP.getStatus()); // 승인 해줘야 로그인 가능
         } else if (member.getRole().equals("ROLE_PRINCIPAL")) {
             memberDto.setRoleNo(MemberRoleEnum.PRINCIPAL.getRole());
+            memberDto.setStatus(MemberStatusEnum.ACTIVE.getStatus()); // 승인 해줘야 로그인 가능
         }
 
 
@@ -242,14 +261,6 @@ public class MemberController {
         memberDto.setRoleNo(MemberRoleEnum.PARENT.getRole());
         memberDto.setRoleNo(member.getRoleNo());
 
-//        if (member.getRole().equals("ROLE_USER")) {
-//            memberDto.setRoleNo(MemberRoleEnum.PARENT.getRole());
-//        } else if (member.getRole().equals("ROLE_TEACHER")){
-//            memberDto.setRoleNo(MemberRoleEnum.TEACHER.getRole());
-//        } else if (member.getRole().equals("ROLE_PRINCIPAL")) {
-//            memberDto.setRoleNo(MemberRoleEnum.PRINCIPAL.getRole());
-//        }
-
         // 회원가입 처리 로직
         member.setStatus(MemberStatusEnum.ACTIVE.getStatus());
         member.setRegDate(LocalDateTime.now());
@@ -265,10 +276,6 @@ public class MemberController {
 
         return "redirect:/member/signIn";
     }
-
-
-
-
 
     @GetMapping("/signInFindPw")
     public String signInFindPw() {
@@ -429,6 +436,19 @@ public class MemberController {
         }
     }
 
+    @PostMapping("/adminUpdateKinderNo")
+    public ResponseEntity<String> updateKinderNo(
+            @RequestParam("username") String username,
+            @RequestParam("kinderNo") String kinderNo) {
+
+        boolean isUpdated = memberService.adminUpdateKinderNo(username, kinderNo);
+
+        if (isUpdated) {
+            return ResponseEntity.ok("KinderNo updated successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to update KinderNo");
+        }
+    }
 
 
 }

@@ -26,4 +26,8 @@ public interface MemberService {
 
     boolean isEmailRegistered(String email);
     boolean sendPasswordResetLink(String email, String resetLink);
+
+    boolean checkAdminKinderNo(String username);
+
+    boolean adminUpdateKinderNo(String username, String kinderNo);
 }

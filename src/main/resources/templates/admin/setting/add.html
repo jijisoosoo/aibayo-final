@@ -30,6 +30,7 @@
 
                     <table class="table">
                             <input type="hidden" id="sample6_sigunguCode" placeholder="시군구 코드" readonly>
+                            <input type="hidden" name="username" value="${username}">
                         <tr>
                             <th>원 우편번호</th>
                             <td>
@@ -83,7 +84,7 @@
                         <tr>
                             <th>원장님 이름</th>
                             <td>
-                                <span id="principalId" th:data-id="${loginInfo.id}" th:text="${loginInfo.id}">멤버아이디</span>
+<!--                                <span id="principalId" th:data-id="${loginInfo.id}" th:text="${loginInfo.id}">멤버아이디</span>-->
                                 <span id="principalName" th:data-principal-name th:text="${loginInfo.getName()}">홍길동</span><br>
                                 <span class="notice">원장님 이름은 원장님 계정이 실명입니다. 변경을 원하실 경우, 원장님 계정의 '내정보 설정'에서 변경해주세요.</span>
                             </td>

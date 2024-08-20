@@ -34,6 +34,8 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+
 import org.thymeleaf.context.Context;
 
 @Slf4j
@@ -67,11 +69,10 @@ public class MemberServiceImpl implements MemberService {
 
         if (memberDto.getRole().equals("ROLE_USER")) {
             processParentSignUp(memberDto, newMemberEntity);
-        } else {
+        } else if (memberDto.getRole().equals("ROLE_TEACHER")){
             processTeacherSignUp(memberDto, newMemberEntity);
         }
     }
-
 
     private MemberEntity createMemberEntity(MemberDto memberDto) {
         MemberEntity memberEntity = new MemberEntity();
@@ -321,6 +322,33 @@ public class MemberServiceImpl implements MemberService {
             log.error("SEND MAIL FAILED", e);
             return false;
         }
+    }
+
+    @Override
+    public boolean checkAdminKinderNo(String username) {
+        MemberDto memberDto = findByUsername(username);
+        if (memberDto.getKinderNo() != null) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean adminUpdateKinderNo(String username, String kinderNo) {
+        MemberEntity memberEntity = memberRepository.findByUsername(username).orElse(null);
+
+        if (memberEntity == null) {
+            // 해당 유저가 없으면 false 반환
+            return false;
+        }
+
+        memberEntity.setKinderNo(Long.valueOf(kinderNo));
+        memberRepository.save(memberEntity);
+
+        // 업데이트 확인을 위해 데이터베이스에서 다시 조회
+        return memberRepository.findByUsername(username)
+                .map(member -> Long.valueOf(kinderNo).equals(member.getKinderNo()))
+                .orElse(false);
     }
 
 
