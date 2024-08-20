@@ -87,7 +87,7 @@ public class MainController {
         boolean checkAdmin = memberService.checkAdminKinderNo(username);
 
         if (!checkAdmin) {
-            System.out.println("admin kinderno nono");
+            log.info("admin kinderno not exist");
             return "redirect:/setting/add";
         }
 
@@ -101,15 +101,10 @@ public class MainController {
         request.setAttribute("role", role);
 
         setMeal(loginInfo, model);
-
         setKinderInfo(loginInfo, model);
-
         setLoginInfo(loginInfo, model);
-
         getTeacherAcceptStatus(loginInfo, model);
-
         getParentAcceptStatus(loginInfo, model);
-
         getAttendances(loginInfo, model);
 
         return "admin/main/main";
@@ -128,8 +123,7 @@ public class MainController {
         // JWT 토큰에서 사용자 정보 추출
         String username = jwtUtil.getUsername(token);
         String role = jwtUtil.getRole(token);
-
-        System.out.println("user role : " + role);
+        log.info("user role : {}", role);
 
         if (!"ROLE_USER".equals(role)) {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
@@ -141,16 +135,10 @@ public class MainController {
         request.setAttribute("role", role);
 
         setMeal(loginInfo, model);
-
         setKid(loginInfo, model);
-
         setKinderInfo(loginInfo, model);
-
         setLoginInfo(loginInfo, model);
-
         getLatestBoard(loginInfo, model);
-
-
         return "user/main/main";
     }
 
@@ -167,11 +155,8 @@ public class MainController {
         model.addAttribute("loginInfo", loginInfo);
 
         setMeal(loginInfo, model);
-
         setKid(loginInfo, model);
-
         setKinderInfo(loginInfo, model);
-
         setLoginInfo(loginInfo, model);
 
         return "user/main/main";
@@ -191,13 +176,11 @@ public class MainController {
     private void getLatestBoard(MemberDto loginInfo, Model model) {
         // 원생에 대한 개인 혹은 반 최신 알림장 하나 표시
         NotepadDto notepad = notepadService.getTop1ByKidNo(loginInfo.getKidNo());
-//        notepad = null;
         model.addAttribute("notepad", notepad);
         log.info("notepad: {}", notepad);
 
         // 원에 대한 최신 공지 2개 표시
         List<AnnounceDto> announces = announceService.findAllByKinderNoMain(loginInfo.getKinderNo());
-//        announces = new ArrayList<>();
         model.addAttribute("announces", announces);
         log.info("announces: {}", announces);
     }
@@ -312,15 +295,6 @@ public class MainController {
         log.info("today meal: {}", mealDto);
     }
 
-//    private void setKinderInfo(MemberDto loginInfo, Model model) {
-//        // 유치원 정보 세팅
-//        RegisterKinderDto kinderInfo = registerKinderService.getByKinderNo(loginInfo.getKinderNo());
-//        model.addAttribute("kinderInfo", kinderInfo);
-//
-//        String kinderSggCode = kinderInfo.getSggList();
-//        SggInfoEnum sggInfo = SggInfoEnum.findByKinderSggCode(kinderSggCode);
-//        model.addAttribute("sggInfo", sggInfo);
-//    }
     private void setKinderInfo(MemberDto loginInfo, Model model) {
         Long kinderNo = loginInfo.getKinderNo();
 
