@@ -1,5 +1,7 @@
 package com.aico.aibayo.service.kinder;
 
+import com.aico.aibayo.common.BooleanEnum;
+import com.aico.aibayo.dto.RegisterKinderDto;
 import com.aico.aibayo.dto.kinder.KinderDto;
 import com.aico.aibayo.entity.RegisterKinderEntity;
 import com.aico.aibayo.repository.settingKinder.KinderRepository;
@@ -12,13 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class KinderServiceImpl implements KinderService {
     private final KinderRepository kinderRepository;
-    private final SettingMenuRepository settingMenuRepository;
 
     @Override
     public Optional<RegisterKinderEntity> findByKinderNo(Long kinderNo) {
@@ -26,8 +28,10 @@ public class KinderServiceImpl implements KinderService {
     }
 
     @Override
-    public List<RegisterKinderEntity> getAllKinder() {
-        return kinderRepository.findAll();
+    public List<RegisterKinderDto> getAllKinder() {
+        List<RegisterKinderEntity> kinderEntities =
+                kinderRepository.findAllByDeleteFlag(BooleanEnum.FALSE.getBool());
+        return kinderEntities.stream().map(RegisterKinderDto::toDto).collect(Collectors.toList());
     }
 
     @Override
@@ -37,13 +41,11 @@ public class KinderServiceImpl implements KinderService {
 
     @Override
     @Transactional
-    public void insertKinder(KinderDto kinderDto) {
+    public RegisterKinderDto insertKinder(KinderDto kinderDto) {
         RegisterKinderEntity kinderentity = RegisterKinderEntity.builder()
-//                .id(kinderDto.getId())
                 .kinderOpenTime(kinderDto.getKinderOpenTime())
                 .kinderCloseTime(kinderDto.getKinderCloseTime())
                 .kinderName(kinderDto.getKinderName())
-//                .principalName(kinderDto.getPrincipalName())
                 .kinderPostCode(kinderDto.getKinderPostCode())
                 .kinderLocNo(kinderDto.getKinderLocNo())
                 .kinderMidNo(kinderDto.getKinderMidNo())
@@ -53,25 +55,10 @@ public class KinderServiceImpl implements KinderService {
                 .kinderRegDate(LocalDateTime.now())
                 .sidoList(kinderDto.getSidoList())
                 .sggList(kinderDto.getSggList())
-//                .mapLat(kinderDto.getMapLat())
-//                .mapLng(kinderDto.getMapLng())
-//                .deleteFlag(BooleanEnum.FALSE.getBool())
+                .deleteFlag(BooleanEnum.FALSE.getBool())
                 .build();
         RegisterKinderEntity saveKinder = kinderRepository.save(kinderentity);
-//        SettingMenuEntity settingMenuEntity = SettingMenuEntity.builder()
-//                .kinderNo(saveKinder.getKinderNo())
-//                .announceStatus(BooleanEnum.FALSE.getBool())
-//                .notepadStatus(BooleanEnum.TRUE.getBool())
-//                .mealStatus(BooleanEnum.TRUE.getBool())
-//                .medicationStatus(BooleanEnum.TRUE.getBool())
-//                .returnHomeStatus(BooleanEnum.TRUE.getBool())
-//                .attendanceStatus(BooleanEnum.TRUE.getBool())
-//                .scheduleStatus(BooleanEnum.TRUE.getBool())
-//                .pickDropStatus(BooleanEnum.TRUE.getBool())
-//                .lifeRecordStatus(BooleanEnum.TRUE.getBool())
-//                .chatStatus(BooleanEnum.TRUE.getBool())
-//                .build();
-//        SettingMenuEntity saveSettingMenu = settingMenuRepository.save(settingMenuEntity);
+        return RegisterKinderDto.toDto(saveKinder);
     }
 
     @Override

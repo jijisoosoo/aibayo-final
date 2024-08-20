@@ -68,7 +68,7 @@ public class RegisterKinderEntity {
 //    @Column(name = "map_lng")
 //    private Double mapLng;
 //
-//    @Column(name = "delete_flag")
-//    private String deleteFlag;
+    @Column(name = "delete_flag")
+    private String deleteFlag;
 
 }

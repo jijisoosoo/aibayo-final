@@ -38,7 +38,7 @@ $(document).ready(function () {
 
     $('#modifyKidGender').on('click', function () {
         function modifyInfo(result) {
-            console.log("원생성별 변경 함수");
+            // console.log("원생성별 변경 함수");
             let param = {
                 kidNo : $('#kidProfile').data('kid-no'),
                 kidGender : $('input[id^="kidGender"]:checked').val()
@@ -178,7 +178,8 @@ $(document).ready(function () {
             inviteEmail : inviteEmail,
             inviteName : inviteName,
             kinderNo : $('#kidProfile').data('kinder-no'),
-            kidNo : $('#kidProfile').data('kid-no')
+            kidNo : $('#kidProfile').data('kid-no'),
+            url: window.location.origin
         }
         // console.log(`param: ${JSON.stringify(param)}`);
 

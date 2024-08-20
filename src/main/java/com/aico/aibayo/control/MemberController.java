@@ -12,18 +12,25 @@ import com.aico.aibayo.repository.member.MemberRepository;
 import com.aico.aibayo.service.inviteCode.InviteCodeService;
 import com.aico.aibayo.service.kid.KidService;
 import com.aico.aibayo.service.member.MemberService;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring6.SpringTemplateEngine;
 
-
-import java.time.LocalDate;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,6 +46,9 @@ public class MemberController {
     private final MemberRepository memberRepository;
     private final InviteCodeService inviteCodeService;
     private final KidService kidService;
+
+    private final JavaMailSender javaMailSender;
+    private final SpringTemplateEngine springTemplateEngine;
 
     @ModelAttribute
     public void addAttributes(HttpServletRequest request, Model model) {
@@ -108,6 +118,8 @@ public class MemberController {
     }
 
 
+
+
     @GetMapping("/signUpKid")
     public String signUpKidForm(HttpSession session, Model model) {
         MemberDto member = (MemberDto) session.getAttribute("member");
@@ -124,13 +136,6 @@ public class MemberController {
         return "success";
     }
 
-    @PostMapping("/signUpKinder")
-    @ResponseBody
-    public String signUpKinder(@RequestBody MemberDto member, HttpSession session) {
-        session.setAttribute("member", member);
-        // 여기서는 간단하게 모델에 추가하겠습니다.
-        return "success";
-    }
 
     @GetMapping("/signUpTeacher")
     public String signUpTeacher(HttpSession session, Model model) {
@@ -146,9 +151,30 @@ public class MemberController {
         System.out.println("signUpTeacher PostMapping");
         session.setAttribute("member", member);
         return "seccess";
-
     }
 
+
+
+//    @GetMapping("/signUpPrincipal")
+//    public String signUpPrincipalForm(HttpSession session, Model model) {
+//        // 세션에서 MemberDto를 가져옴
+//        MemberDto member = (MemberDto) session.getAttribute("member");
+//        // Model에 member를 추가하여 뷰에 전달
+//        model.addAttribute("member", member);
+//        System.out.println("signUpPrincipal GetMapping");
+//        // kinderAdd.html로 이동
+//        return "member/kinderAdd";
+//    }
+//
+//    @PostMapping("/signUpPrincipal")
+//    @ResponseBody
+//    public String signUpPrincipal(@RequestBody MemberDto member, HttpSession session) {
+//        // 세션에 MemberDto를 저장
+//        session.setAttribute("member", member);
+//        System.out.println("signUpPrincipal PostMapping");
+//        // 성공 메시지 반환
+//        return "success";
+//    }
 
     @PostMapping("/finalSignUp")
     public String finalSignUp(@RequestBody MemberDto member) {
@@ -183,7 +209,6 @@ public class MemberController {
         memberDto.setKinderNo(member.getKinderNo());
         memberDto.setClassNo(member.getClassNo());
         memberDto.setRelationship(member.getRelationship());
-        memberDto.setStatus(MemberStatusEnum.TEMP.getStatus()); // 승인 해줘야 로그인 가능
         memberDto.setRegDate(LocalDateTime.now());
         memberDto.setLatestLogDate(LocalDateTime.now());
         memberDto.setIsMainParent(BooleanEnum.FALSE.getBool());
@@ -191,10 +216,13 @@ public class MemberController {
 
         if (member.getRole().equals("ROLE_USER")) {
             memberDto.setRoleNo(MemberRoleEnum.PARENT.getRole());
+            memberDto.setStatus(MemberStatusEnum.TEMP.getStatus()); // 승인 해줘야 로그인 가능
         } else if (member.getRole().equals("ROLE_TEACHER")){
             memberDto.setRoleNo(MemberRoleEnum.TEACHER.getRole());
+            memberDto.setStatus(MemberStatusEnum.TEMP.getStatus()); // 승인 해줘야 로그인 가능
         } else if (member.getRole().equals("ROLE_PRINCIPAL")) {
             memberDto.setRoleNo(MemberRoleEnum.PRINCIPAL.getRole());
+            memberDto.setStatus(MemberStatusEnum.ACTIVE.getStatus()); // 승인 해줘야 로그인 가능
         }
 
 
@@ -233,14 +261,6 @@ public class MemberController {
         memberDto.setRoleNo(MemberRoleEnum.PARENT.getRole());
         memberDto.setRoleNo(member.getRoleNo());
 
-//        if (member.getRole().equals("ROLE_USER")) {
-//            memberDto.setRoleNo(MemberRoleEnum.PARENT.getRole());
-//        } else if (member.getRole().equals("ROLE_TEACHER")){
-//            memberDto.setRoleNo(MemberRoleEnum.TEACHER.getRole());
-//        } else if (member.getRole().equals("ROLE_PRINCIPAL")) {
-//            memberDto.setRoleNo(MemberRoleEnum.PRINCIPAL.getRole());
-//        }
-
         // 회원가입 처리 로직
         member.setStatus(MemberStatusEnum.ACTIVE.getStatus());
         member.setRegDate(LocalDateTime.now());
@@ -256,11 +276,6 @@ public class MemberController {
 
         return "redirect:/member/signIn";
     }
-
-
-
-
-
 
     @GetMapping("/signInFindPw")
     public String signInFindPw() {
@@ -362,5 +377,82 @@ public class MemberController {
             return "user/main/main";
         }
     }
+
+
+
+
+    // 이메일 유효성 검사
+    @PostMapping("/validateEmail")
+    public ResponseEntity<?> validateEmail(@RequestBody Map<String, String> request) {
+        String email = request.get("email");
+        boolean isRegistered = memberService.isEmailRegistered(email);
+
+        if (isRegistered) {
+            log.info("해당 이메일이 존재합니다: {}", email);
+            return ResponseEntity.ok().body(Map.of("success", true, "username", email));
+        } else {
+            log.warn("해당 이메일이 존재하지 않습니다: {}", email);
+            return ResponseEntity.ok().body(Map.of("success", false, "message", "해당 이메일로 가입된 계정이 없습니다."));
+        }
+    }
+
+    @PostMapping("/sendPasswordResetLink")
+    @ResponseBody
+    public Map<String, String> sendPasswordResetLink(@RequestBody Map<String, String> request) {
+        String email = request.get("email");
+        String resetLink = "http://ec2-3-36-124-157.ap-northeast-2.compute.amazonaws.com:8080/member/resetPassword?email=" + email;
+
+        boolean emailSent = memberService.sendPasswordResetLink(email, resetLink);
+
+        if (emailSent) {
+            return Map.of("status", "success");
+        } else {
+            return Map.of("status", "failure", "message", "메일 전송에 실패했습니다.");
+        }
+    }
+
+    @GetMapping("/resetPassword")
+    public String getResetPassword(@RequestParam("email") String email, Model model) {
+        // 이메일을 모델에 추가하여 Thymeleaf에서 사용 가능하도록 함
+        model.addAttribute("email", email);
+        return "member/signInResetPw";
+    }
+
+    // 비밀번호 재설정
+    @PostMapping("/resetPassword")
+    public ResponseEntity<?> postResetPassword(@RequestBody Map<String, String> request) {
+        String email = request.get("email");
+        String newPassword = request.get("newPassword");
+
+        // 비밀번호 재설정
+        boolean resetSuccess = memberService.updatePasswordByEmail(email, newPassword);
+
+        if (resetSuccess) {
+            log.info("비밀번호 재설정 성공: {}", email);
+            return ResponseEntity.ok().body(Map.of("success", true));
+        } else {
+            log.warn("비밀번호 재설정 실패: {}", email);
+            return ResponseEntity.ok().body(Map.of("success", false, "message", "비밀번호 변경에 실패했습니다."));
+        }
+    }
+
+    @PostMapping("/adminUpdateKinderNo")
+    public ResponseEntity<String> updateKinderNo(
+            @RequestParam("username") String username,
+            @RequestParam("kinderNo") String kinderNo,
+            @ModelAttribute("loginInfo") MemberDto memberDto) {
+
+
+        boolean isUpdated = memberService.adminUpdateKinderNo(username, kinderNo);
+
+        memberDto.setKinderNo(Long.valueOf(kinderNo));
+
+        if (isUpdated) {
+            return ResponseEntity.ok("KinderNo updated successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Failed to update KinderNo");
+        }
+    }
+
 
 }
