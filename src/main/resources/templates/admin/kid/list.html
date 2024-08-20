@@ -6,11 +6,11 @@
 <title layout:fragment="title">원생관리</title>
 
 <th:block layout:fragment="css">
-    <link rel="stylesheet" href="css/kidPage/list.css" />
+    <link rel="stylesheet" href="/css/kidPage/list.css" />
 </th:block>
 
 <th:block layout:fragment="javascript">
-    <script src="js/kidPage/list.js"></script>
+    <script src="/js/kidPage/list.js"></script>
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
@@ -30,7 +30,7 @@
                  th:text="*{className}">반이름</option>
             </select>
 
-            <a class="btn btn-ab invite_box" href="kid/write">
+            <a class="btn btn-ab invite_box" href="/kid/write">
                 <div class="invite_text">원생 등록</div>
             </a>
 

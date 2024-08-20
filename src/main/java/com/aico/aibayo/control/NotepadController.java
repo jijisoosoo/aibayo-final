@@ -43,7 +43,7 @@ public class NotepadController {
         Page<NotepadDto> notepads = notepadService.getAllByKinderNo(condition, page);
 
         // 페이지네이션에 필요한 정보
-        return getPageInfoAndGoView(model, notepads, "/admin/notepad/list");
+        return getPageInfoAndGoView(model, notepads, "admin/notepad/list");
     }
 
     @PostMapping("/admin/searchDate")
@@ -54,7 +54,7 @@ public class NotepadController {
         Page<NotepadDto> notepads = notepadService.getAllByKinderNo(condition, 1);
 
         // 페이지네이션에 필요한 정보
-        return getPageInfoAndGoView(model, notepads, "/admin/notepad/list");
+        return getPageInfoAndGoView(model, notepads, "admin/notepad/list");
     }
 
     @GetMapping("/user/list")
@@ -67,7 +67,7 @@ public class NotepadController {
 
         Page<NotepadDto> notepads = notepadService.getAllByKidNo(condition, page);
 
-        return getPageInfoAndGoView(model, notepads, "/user/notepad/list");
+        return getPageInfoAndGoView(model, notepads, "user/notepad/list");
     }
 
     @PostMapping("/user/searchDate")
@@ -78,7 +78,7 @@ public class NotepadController {
         Page<NotepadDto> notepads = notepadService.getAllByKidNo(condition, 1);
 
         // 페이지네이션에 필요한 정보
-        return getPageInfoAndGoView(model, notepads, "/user/notepad/list");
+        return getPageInfoAndGoView(model, notepads, "user/notepad/list");
     }
 
     // 나중에 detail 대신 notepadNo 대신 가져오기

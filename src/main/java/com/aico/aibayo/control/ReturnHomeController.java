@@ -51,7 +51,7 @@ public String admincard(
     Page<ReturnHomeDto> homeList= returnHomeService.findAllByKinderNo(condition,hashMap);
     log.info("homeCard(admin){}",homeList);
     model.addAttribute("homeList",homeList);
-    return getPageInfoAndGoView(model, homeList, "/admin/home/card");
+    return getPageInfoAndGoView(model, homeList, "admin/home/card");
 }
 private String getPageInfoAndGoView(Model model, Page<ReturnHomeDto> homeList, String view) {
 int totalPages = homeList.getTotalPages();
@@ -99,7 +99,7 @@ public String adminlist(@ModelAttribute("loginInfo") MemberDto loginInfo,
     Page<ReturnHomeDto> homeList= returnHomeService.findAllByKinderNo(condition,hashMap);
     log.info("homeList(admin){}",homeList);
     model.addAttribute("homeList",homeList);
-    return getPageInfoAndGoView(model, homeList, "/admin/home/list");
+    return getPageInfoAndGoView(model, homeList, "admin/home/list");
 }
 @GetMapping("/admin/{rhAgreeNo}")
 public String admindetail(
@@ -188,7 +188,7 @@ public String usercard(@RequestParam(defaultValue = "1") int page,
     hashMap.put("type","card");
     Page<ReturnHomeDto>homeList=returnHomeService.findAllByKidNo(condition,hashMap);
     log.info("homeCard(user){}",homeList);
-    return getPageInfoAndGoViewCard(model, homeList, "/user/home/card");
+    return getPageInfoAndGoViewCard(model, homeList, "user/home/card");
 }
 private String getPageInfoAndGoViewCard(Model model, Page<ReturnHomeDto> homeList, String view) {
 int totalPages = homeList.getTotalPages();
@@ -240,7 +240,7 @@ public String userlist(
     hashMap.put("type","list");
     Page<ReturnHomeDto>homeList=returnHomeService.findAllByKidNo(condition,hashMap);
     log.info("homeList(user){}",homeList);
-    return getPageInfoAndGoViewCard(model, homeList, "/user/home/list");
+    return getPageInfoAndGoViewCard(model, homeList, "user/home/list");
     }
 
     @DeleteMapping("/delete")

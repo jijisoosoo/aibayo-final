@@ -6,18 +6,18 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>헤더 샘플</title>
-    <link href="vendor/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="vendor/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+    <link href="/vendor/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/vendor/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <header th:fragment="header">
-    <link rel="stylesheet" href="inc/header.css" />
+    <link rel="stylesheet" href="/inc/header.css" />
     <div class="container h_class_90">
         <div class="h_class_69 border-bottom">
 
             <div class="logo h_class_78">
 <!--                <div class="h_class_79">aibayo</div>-->
-                <a href="main/user" class="h_class_79" style="text-decoration: none; color: inherit;">aibayo</a>
+                <a href="/main/user" class="h_class_79" style="text-decoration: none; color: inherit;">aibayo</a>
             </div>
 
             <ul class="nav nav-pills h_class_71">
@@ -27,22 +27,22 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item h_class_75" href="../pages/kid/kids_list.html">원생 관리</a></li>
-                        <li><a class="dropdown-item h_class_75" th:href="@{member/myPage}" href="#">내 정보 관리</a></li>
+                        <li><a class="dropdown-item h_class_75" th:href="@{/member/myPage}" href="#">내 정보 관리</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a href="announce/user/list" class="nav-link link-secondary h_class_75">공지사항</a></li>
-                <li class="nav-item"><a href="notepad/user/list" class="nav-link link-secondary h_class_75">알림장</a></li>
-                <li class="nav-item"><a  th:href="@{schedule/user/scheduleMain}" class="nav-link link-secondary h_class_75">일정표</a></li>
-                <li class="nav-item"><a href="meal/user/list" class="nav-link link-secondary h_class_75">식단표</a></li>
-                <li class="nav-item"><a th:href="@{payment/user/paymentMain}" class="nav-link link-secondary h_class_75">청구/수납</a></li>
-                <li class="nav-item"><a th:href="@{attendance/main}" href="attendance/main"  class="nav-link link-secondary h_class_75">출석부</a></li>
+                <li class="nav-item"><a href="/announce/user/list" class="nav-link link-secondary h_class_75">공지사항</a></li>
+                <li class="nav-item"><a href="/notepad/user/list" class="nav-link link-secondary h_class_75">알림장</a></li>
+                <li class="nav-item"><a  th:href="@{/schedule/user/scheduleMain}" class="nav-link link-secondary h_class_75">일정표</a></li>
+                <li class="nav-item"><a href="/meal/user/list" class="nav-link link-secondary h_class_75">식단표</a></li>
+                <li class="nav-item"><a th:href="@{/payment/user/paymentMain}" class="nav-link link-secondary h_class_75">청구/수납</a></li>
+                <li class="nav-item"><a th:href="@{/attendance/main}" href="attendance/main"  class="nav-link link-secondary h_class_75">출석부</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle h_class_75" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         의뢰서
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item h_class_75" href="returnhome/user/card">귀가 동의서</a></li>
-                        <li><a class="dropdown-item h_class_75" href="medication/user/card">투약 의뢰서</a></li>
+                        <li><a class="dropdown-item h_class_75" href="/returnhome/user/card">귀가 동의서</a></li>
+                        <li><a class="dropdown-item h_class_75" href="/medication/user/card">투약 의뢰서</a></li>
                     </ul>
                 </li>
 
