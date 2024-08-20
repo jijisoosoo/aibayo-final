@@ -1,9 +1,8 @@
 package com.aico.aibayo.control;
 
-import com.aico.aibayo.dto.announce.AnnounceDto;
 import com.aico.aibayo.dto.kinder.KinderDto;
 import com.aico.aibayo.dto.member.MemberDto;
-import com.aico.aibayo.entity.KinderEntity;
+import com.aico.aibayo.entity.RegisterKinderEntity;
 import com.aico.aibayo.service.kinder.KinderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -56,11 +55,11 @@ public class SettingController {
         HashMap<String, Object> memberDto = new HashMap<>();
         memberDto.put("id", loginInfo.getId());
 
-        Optional<KinderEntity> kinderOptional = kinderService.findByKinderNo(kinderNo);
+        Optional<RegisterKinderEntity> kinderOptional = kinderService.findByKinderNo(kinderNo);
 
         // Optional에서 값을 꺼내서 모델에 추가
         if (kinderOptional.isPresent()) {
-            KinderEntity kinderDto = kinderOptional.get();
+            RegisterKinderEntity kinderDto = kinderOptional.get();
             model.addAttribute("kinder", kinderDto);
         } else {
             return "redirect:/error";  // 에러 페이지로 리다이렉트 예시
@@ -90,7 +89,7 @@ public class SettingController {
             Model model
     ){
         kinderNo = loginInfo.getKinderNo();
-        Optional<KinderEntity> kinderDtoOptional = kinderService.getKinderById(kinderNo);
+        Optional<RegisterKinderEntity> kinderDtoOptional = kinderService.getKinderById(kinderNo);
 
         if (kinderDtoOptional.isPresent()) {
             model.addAttribute("kinderDto", kinderDtoOptional.get());

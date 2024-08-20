@@ -56,10 +56,12 @@ INSERT INTO member(role_no, status, kinder_no, role, reg_date, username, name, p
 INSERT INTO member(role_no, status, kinder_no, role, reg_date, username, name, password) VALUES(2,1,3,'ROLE_TEACHER','2019-03-02','pdnl@haesung.go.kr','박다니엘','$2a$10$9L1un2Ugj2Bp0Uvi.rhmZer013Eiynd5WhA7pYlsCSiMGJ5Lqn9Tm');
 
 
+# 등록 유치원 추가
+INSERT INTO register_kinder (kinder_close_time, kinder_open_time , kinder_reg_date,  kinder_addr, kinder_addr_detail , kinder_end_no, kinder_loc_no, kinder_mid_no, kinder_name, kinder_post_code, sgg_list, sido_list) VALUES
+    ('16:00', '09:00','2019-03-02', '주소1', '주소2','02','111','1234','호수유치원','01000','27140','27');
 
-#등록 유치원 추가
-INSERT INTO register_kinder (kinder_open_time, kinder_close_time, kinder_reg_date, announce_status, notepad_status, meal_status, medication_status, return_home_status, attendance_status, schedule_status, pick_drop_status, life_record_status, chat_status, sido_list, sgg_list, kinder_name) VALUES('09:00','16:00','2020-01-01',1, 1, 1, 1, 1, 1, 1, 1, 1, 1,27,27140,'호수유치원');
-INSERT INTO register_kinder (kinder_open_time, kinder_close_time, kinder_reg_date, announce_status, notepad_status, meal_status, medication_status, return_home_status, attendance_status, schedule_status, pick_drop_status, life_record_status, chat_status, sido_list, sgg_list, kinder_name) VALUES('10:00','18:00','2021-01-01',1, 1, 1, 1, 1, 1, 1, 1, 1, 1,11,11680,'서울신구유치원');
+INSERT INTO register_kinder (kinder_close_time, kinder_open_time , kinder_reg_date,  kinder_addr, kinder_addr_detail , kinder_end_no, kinder_loc_no, kinder_mid_no, kinder_name, kinder_post_code, sgg_list, sido_list) VALUES
+    ('16:30', '10:00','2020-03-02', '주소a', '주소b','02','121','1236','서울신구유치원','01333','11680','11');
 
 
 # 원생 추가
