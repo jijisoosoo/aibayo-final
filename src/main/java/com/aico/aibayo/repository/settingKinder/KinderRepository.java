@@ -1,8 +1,12 @@
 package com.aico.aibayo.repository.settingKinder;
 
-import com.aico.aibayo.entity.KinderEntity;
+import com.aico.aibayo.dto.RegisterKinderDto;
+import com.aico.aibayo.entity.RegisterKinderEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface KinderRepository extends JpaRepository<KinderEntity,Long> {
+import java.util.List;
 
+public interface KinderRepository extends JpaRepository<RegisterKinderEntity,Long> {
+
+    List<RegisterKinderEntity> findAllByDeleteFlag(String deleteFlag);
 }

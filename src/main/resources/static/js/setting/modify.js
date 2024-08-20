@@ -1,15 +1,53 @@
 $(document).ready(function() {
-    $('#open').timepicker({
+    // 주소 검색 함수 전역 범위로 이동
+    window.sample6_execDaumPostcode = function() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                var addr = '';
+                var extraAddr = '';
+
+                if (data.userSelectedType === 'R') {
+                    addr = data.roadAddress;
+                } else {
+                    addr = data.jibunAddress;
+                }
+
+                if (data.userSelectedType === 'R') {
+                    if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                        extraAddr += data.bname;
+                    }
+                    if (data.buildingName !== '' && data.apartment === 'Y') {
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    if (extraAddr !== '') {
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+
+                } else {
+                    document.getElementById("sample6_extraAddress").value = '';
+                }
+
+                document.getElementById('sample6_postcode').value = data.zonecode;
+                document.getElementById("sample6_address").value = addr;
+                document.getElementById("sample6_detailAddress").focus();
+
+                // sigunguCode를 폼에 추가
+                document.getElementById('sample6_sigunguCode').value = data.sigunguCode || ''; // sigunguCode가 있을 때만 설정
+            }
+        }).open();
+    };
+
+
+$('#open').timepicker({
         timeFormat: 'h:mm p',
         interval: 10,
         minTime: '6',
         maxTime: '10',
-        defaultTime: '9',
         dynamic: false,
         dropdown: true,
         scrollbar: true
     }).on('selectTime', function() {
-        var openTime = $(this).val(); // 선택된 시간 값
+        var openTime = $(this).val();
         console.log('오픈 시간 : ' + openTime);
     });
 
@@ -18,17 +56,51 @@ $(document).ready(function() {
         interval: 10,
         minTime: '13:00pm',
         maxTime: '22:00pm',
-        defaultTime: '18:00pm',
         dynamic: false,
         dropdown: true,
         scrollbar: true
     }).on('selectTime', function() {
-        var closeTime = $(this).val(); // 선택된 시간 값
+        var closeTime = $(this).val();
         console.log('하원 시간: ' + closeTime);
     });
 
-    $('#addBtn').on('click', function(event) {
-        console.log('저장버튼 클릭됨');
+    function convertTo12HourFormat(time24) {
+        var [hours, minutes] = time24.split(':');
+        var period = 'AM';
+
+        hours = parseInt(hours, 10);
+        if (hours >= 12) {
+            period = 'PM';
+            if (hours > 12) {
+                hours -= 12;
+            }
+        } else if (hours === 0) {
+            hours = 12;
+        }
+
+        hours = hours < 10 ? '0' + hours : hours;
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+
+        return `${hours}:${minutes} ${period}`; // 공백 추가
+    }
+
+    // Open time
+    var openTimeFromServer = $('#open').attr('data-time');
+    if (openTimeFromServer) {
+        var formattedOpenTime = convertTo12HourFormat(openTimeFromServer);
+        $('#open').val(formattedOpenTime); // Timepicker의 값을 수동으로 설정
+        $('#open').timepicker('setTime', formattedOpenTime); // Timepicker 업데이트
+    }
+
+    // Close time
+    var closeTimeFromServer = $('#close').attr('data-time');
+    if (closeTimeFromServer) {
+        var formattedCloseTime = convertTo12HourFormat(closeTimeFromServer);
+        $('#close').val(formattedCloseTime); // Timepicker의 값을 수동으로 설정
+        $('#close').timepicker('setTime', formattedCloseTime); // Timepicker 업데이트
+    }
+    $('#saveBtn').on('click', function (event) {
+        console.log("수정 버튼 클릭");
         event.preventDefault(); // 기본 폼 제출 방지
 
         // 시간 문자열에서 AM/PM 제거 및 24시간 형식으로 변환
@@ -54,26 +126,28 @@ $(document).ready(function() {
 
             return `${hours}:${minutes}`;
         }
+        let kinderNo = $('#kinderNo').val();
 
-        const kinderPostCode = $('#sample6_postcode').val();
-        const addr = $('#sample6_address').val();
-        const detailAddrRaw = $('#sample6_detailAddress').val();
-        const detailAddr = detailAddrRaw ? ' ' + detailAddrRaw : ''; // 공백 추가
+        let sggList= $('.newSggList').val();
+        let sidoList=  sggList.substring(0, 2);
+        let kinderPostCode= $('#sample6_postcode').val();
+        let kinderAddr= $('#sample6_address').val();
+        let detailAddr = $('#sample6_detailAddress').val();
+        let kinderName= $('#kinderName').val().trim();
+        let kinderLocNo= $('#locNo').val();
+        let kinderMidNo= $('#midNo').val();
+        let kinderEndNo= $('#endNo').val();
 
-        const kinderName = $('#kinderName').val().trim(); // 공백 제거
+        let openTimeRaw = $('#open').val();
+        let closeTimeRaw = $('#close').val();
 
-        const kinderLocNo = $('#locNo').val();
-        const kinderMidNo = $('#midNo').val();
-        const kinderEndNo = $('#endNo').val();
+        let kinderOpenTime = convertTo24Hour(openTimeRaw); // 24시간 형식으로 변환
+        let kinderCloseTime = convertTo24Hour(closeTimeRaw); // 24시간 형식으로 변환
 
-        const openTimeRaw = $('#open').val();
-        const closeTimeRaw = $('#close').val();
 
-        const kinderOpenTime = convertTo24Hour(openTimeRaw); // 24시간 형식으로 변환
-        const kinderCloseTime = convertTo24Hour(closeTimeRaw); // 24시간 형식으로 변환
 
-        const sggList = $('#sample6_sigunguCode').val();
-        const sidoList = sggList.substring(0, 2);
+
+
 
         // 값 체크
         if (kinderPostCode.length === 0) {
@@ -141,8 +215,9 @@ $(document).ready(function() {
         }
 
         const kinderData = {
+            kinderNo:kinderNo,
             kinderPostCode: kinderPostCode,
-            kinderAddr: addr,
+            kinderAddr: kinderAddr,
             kinderAddrDetail :detailAddr,
             kinderName: kinderName,
             kinderLocNo : kinderLocNo,
@@ -155,90 +230,24 @@ $(document).ready(function() {
         };
 
         console.log('kinderData:', kinderData); // 객체 출력으로 데이터 확인
-        let url = '/setting/addOk';
+        let url = '/setting/modifyOk';
 
         // commonAjax 호출 시 afterSuccess를 인자로 전달
-        commonAjax(url, 'POST', kinderData, afterSuccess);
+        commonAjax(url, 'PUT', kinderData, afterSuccess);
     });
-
-    // 주소 검색 함수 전역 범위로 이동
-    window.sample6_execDaumPostcode = function() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                var addr = '';
-                var extraAddr = '';
-
-                if (data.userSelectedType === 'R') {
-                    addr = data.roadAddress;
-                } else {
-                    addr = data.jibunAddress;
-                }
-
-                if (data.userSelectedType === 'R') {
-                    if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-                        extraAddr += data.bname;
-                    }
-                    if (data.buildingName !== '' && data.apartment === 'Y') {
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    if (extraAddr !== '') {
-                        extraAddr = ' (' + extraAddr + ')';
-                    }
-
-                } else {
-                    document.getElementById("sample6_extraAddress").value = '';
-                }
-
-                document.getElementById('sample6_postcode').value = data.zonecode;
-                document.getElementById("sample6_address").value = addr;
-                document.getElementById("sample6_detailAddress").focus();
-
-                // sigunguCode를 폼에 추가
-                document.getElementById('sample6_sigunguCode').value = data.sigunguCode || ''; // sigunguCode가 있을 때만 설정
-            }
-        }).open();
-    };
-
-
 });
 
-
-// afterSuccess 정의 및 호출
 function afterSuccess(response) {
-    console.log("유치원 세팅");
-
-    // hidden 필드에서 username 값을 가져옵니다.
-    const username = $('input[name="username"]').val();
-    const kinderNo = response.kinderNo; // 유치원 등록에 성공한 후 받은 kinderNo 값이라고 가정
-
-    console.log("aftersucess username : " + username);
-    console.log("aftersucess kinderNo : " + kinderNo);
-
-    // 서버에 데이터 전송 (URL에 파라미터를 포함)
-    $.ajax({
-        url: `/member/adminUpdateKinderNo?username=${encodeURIComponent(username)}&kinderNo=${encodeURIComponent(kinderNo)}`,
-        type: 'POST',
-        success: function() {
-            // 성공적으로 업데이트 후 알림 및 페이지 이동
-            Swal.fire({
-                title: "등록 완료",
-                text: "창을 닫으면 메인 화면으로 돌아갑니다.",
-                icon: "success",
-                customClass: {
-                    confirmButton: 'btn-ab btn-ab-swal'
-                }
-            }).then((result) => {
-                window.location.href = '/main/admin'; // 성공 시 이동할 페이지
-            });
-        },
-        error: function() {
-            // 오류 처리
-            Swal.fire({
-                title: "오류 발생",
-                text: "업데이트에 실패했습니다.",
-                icon: "error"
-            });
-
+    console.log("kinder modify");
+    Swal.fire({
+        title: "수정 완료",
+        text: "창을 닫으면 상세 화면으로 돌아갑니다.",
+        icon: "success",
+        customClass: {
+            confirmButton: 'btn-ab btn-ab-swal'
         }
+    }).then((result) => {
+        let kinderNo = $('#modifyForm').data('kinder-no');
+        window.location.href = window.location.origin + '/setting/info/' + kinderNo;
     });
 }

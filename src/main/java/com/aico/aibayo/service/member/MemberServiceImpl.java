@@ -13,21 +13,30 @@ import com.aico.aibayo.repository.AcceptLogRepository;
 import com.aico.aibayo.repository.RegisterKinderRepository;
 import com.aico.aibayo.repository.TeacherKinderRepository;
 import com.aico.aibayo.repository.classKid.ClassKidRepository;
-import com.aico.aibayo.repository.ParentKidRepository;
 import com.aico.aibayo.repository.kid.KidRepository;
 import com.aico.aibayo.repository.member.MemberRepository;
+import com.aico.aibayo.repository.parentKid.ParentKidRepository;
 import groovy.util.logging.Slf4j;
-import jakarta.persistence.EntityNotFoundException;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
+import org.thymeleaf.spring6.SpringTemplateEngine;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+
+import org.thymeleaf.context.Context;
 
 @Slf4j
 @Service
@@ -41,8 +50,8 @@ public class MemberServiceImpl implements MemberService {
     private final ClassKidRepository classKidRepository;
     private final AcceptLogRepository acceptLogRepository;
     private final TeacherKinderRepository teacherKinderRepository;
-    private final RegisterKinderRepository registerKinderRepository;
-
+    private final JavaMailSender javaMailSender;
+    private final SpringTemplateEngine springTemplateEngine;
 
     @Transactional
     public void signUpProcess(MemberDto memberDto) {
@@ -60,7 +69,7 @@ public class MemberServiceImpl implements MemberService {
 
         if (memberDto.getRole().equals("ROLE_USER")) {
             processParentSignUp(memberDto, newMemberEntity);
-        } else {
+        } else if (memberDto.getRole().equals("ROLE_TEACHER")){
             processTeacherSignUp(memberDto, newMemberEntity);
         }
     }
@@ -70,11 +79,13 @@ public class MemberServiceImpl implements MemberService {
         memberEntity.setUsername(memberDto.getUsername());
         memberEntity.setName(memberDto.getName());
         memberEntity.setRole(memberDto.getRole());
+        memberEntity.setRoleNo(memberDto.getRoleNo());
         memberEntity.setPassword(bCryptPasswordEncoder.encode(memberDto.getPassword()));
         memberEntity.setPhone(memberDto.getPhone());
         memberEntity.setRegDate(LocalDateTime.now());
         memberEntity.setLatestLogDate(LocalDateTime.now());
-        memberEntity.setStatus(MemberStatusEnum.TEMP.getStatus());
+        memberEntity.setStatus(memberDto.getStatus());
+        memberEntity.setKinderNo(memberDto.getKinderNo());
         return memberEntity;
     }
 
@@ -82,14 +93,26 @@ public class MemberServiceImpl implements MemberService {
         KidEntity checkKid = findOrCreateKid(memberDto);
         log.info("아이 정보 확인 완료: kidNo = {}", checkKid.getKidNo());
 
-        if (classKidRepository.findAllByClassNoAndKidNo(memberDto.getClassNo(), checkKid.getKidNo()).isEmpty()) {
-            AcceptLogEntity acceptLogEntity = createAcceptLog(AcceptTypeEnum.CLASS_KID, AcceptStatusEnum.WAIT);
-            ClassKidEntity classKidEntity = new ClassKidEntity();
-            classKidEntity.setClassNo(memberDto.getClassNo());
-            classKidEntity.setKidNo(checkKid.getKidNo());
-            classKidEntity.setAcceptNo(acceptLogEntity.getAcceptNo());
-            classKidRepository.save(classKidEntity);
-            log.info("클래스-아이 정보 저장: classNo = {}, kidNo = {}", memberDto.getClassNo(), checkKid.getKidNo());
+        if (memberDto.getInviteId() == null) {
+            if (classKidRepository.findAllByClassNoAndKidNo(memberDto.getClassNo(), checkKid.getKidNo()).isEmpty()) {
+                AcceptLogEntity acceptLogEntity = createAcceptLog(AcceptTypeEnum.CLASS_KID, AcceptStatusEnum.WAIT);
+                ClassKidEntity classKidEntity = new ClassKidEntity();
+                classKidEntity.setClassNo(memberDto.getClassNo());
+                classKidEntity.setKidNo(checkKid.getKidNo());
+                classKidEntity.setAcceptNo(acceptLogEntity.getAcceptNo());
+                classKidRepository.save(classKidEntity);
+                log.info("classKid 정보 저장: classNo = {}, kidNo = {}", memberDto.getClassNo(), checkKid.getKidNo());
+            }
+
+            Long memberAcceptNo = createAcceptLogForParent(memberDto);
+            ParentKidEntity parentKidEntity = new ParentKidEntity();
+            parentKidEntity.setId(newMemberEntity.getId());
+            parentKidEntity.setKidNo(checkKid.getKidNo());
+            parentKidEntity.setAcceptNo(memberAcceptNo);
+            parentKidEntity.setIsMainParent(BooleanEnum.FALSE.getBool());
+            parentKidEntity.setParentRelationship(memberDto.getRelationship());
+            parentKidRepository.save(parentKidEntity);
+            log.info("parentKid 정보 저장 완료: memberId = {}, kidNo = {}", newMemberEntity.getId(), checkKid.getKidNo());
         }
 
         Long memberAcceptNo = createAcceptLogForParent(memberDto);
@@ -97,10 +120,11 @@ public class MemberServiceImpl implements MemberService {
         parentKidEntity.setId(newMemberEntity.getId());
         parentKidEntity.setKidNo(checkKid.getKidNo());
         parentKidEntity.setAcceptNo(memberAcceptNo);
-        parentKidEntity.setIsMainParent(BooleanEnum.FALSE.getBool());
+        parentKidEntity.setIsMainParent(BooleanEnum.TRUE.getBool());
         parentKidEntity.setParentRelationship(memberDto.getRelationship());
         parentKidRepository.save(parentKidEntity);
-        log.info("부모-아이 정보 저장 완료: memberId = {}, kidNo = {}", newMemberEntity.getId(), checkKid.getKidNo());
+        log.info("parentKid 정보 저장 완료: memberId = {}, kidNo = {}", newMemberEntity.getId(), checkKid.getKidNo());
+
     }
 
     private KidEntity findOrCreateKid(MemberDto memberDto) {
@@ -120,7 +144,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     private Long createAcceptLogForParent(MemberDto memberDto) {
-        AcceptStatusEnum status = memberDto.getInvite() == null ? AcceptStatusEnum.WAIT : AcceptStatusEnum.ACCEPT;
+        AcceptStatusEnum status = memberDto.getInviteId() == null ? AcceptStatusEnum.WAIT : AcceptStatusEnum.ACCEPT;
         AcceptLogEntity acceptLogEntity = createAcceptLog(AcceptTypeEnum.PARENT_KID, status);
         return acceptLogEntity.getAcceptNo();
     }
@@ -200,6 +224,21 @@ public class MemberServiceImpl implements MemberService {
         }
     }
 
+        @Override
+    public boolean updatePasswordByEmail(String email, String newPassword) {
+        MemberEntity member = memberRepository.findByUsername(email)
+                .orElseThrow(() -> new MemberNotFoundException("username으로 검색한 member 값이 없습니다."));
+        ;
+        if (member != null) {
+            log.info("newPassword : " + newPassword);
+            log.info("hashed newPassword : " + bCryptPasswordEncoder.encode(newPassword));
+            member.setPassword(bCryptPasswordEncoder.encode(newPassword));
+            memberRepository.save(member);
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public MemberDto getByUsernameWithParentKid(String username) {
         return memberRepository.findByUsernameWithParentKid(username).orElse(null);
@@ -250,4 +289,67 @@ public class MemberServiceImpl implements MemberService {
             acceptLogRepository.save(acceptLogEntity);
         }
     }
+
+
+
+    public boolean isEmailRegistered(String email) {
+        MemberDto memberDto = findByUsername(email); // 이미 존재하는 findByEmail 메서드를 사용
+        return memberDto != null;
+    }
+
+    public boolean sendPasswordResetLink(String email, String resetLink) {
+        try {
+            MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+            mimeMessageHelper.setTo(email); // 메일 수신자
+            mimeMessageHelper.setSubject("비밀번호 재설정 링크"); // 메일 제목
+
+            // Thymeleaf를 사용하여 이메일 본문을 렌더링
+            Context context = new Context();
+            context.setVariable("resetLink", resetLink); // 이메일 본문에 포함할 링크를 컨텍스트에 설정
+            String htmlContent = springTemplateEngine.process("member/email", context);
+
+            mimeMessageHelper.setText(htmlContent, true);  // 메일 본문, HTML 형식
+
+            // 메일 발송자의 이메일 주소와 이름 설정
+            mimeMessageHelper.setFrom(new InternetAddress("admin@aico.co.kr", "aibayo"));
+
+            // 메일 발송
+            javaMailSender.send(mimeMessage);
+            log.info("SEND MAIL SUCCESS >>>>>>>>>>>>>>>>>>>>>>>>>> ");
+            return true;
+        } catch (MessagingException | UnsupportedEncodingException e) {
+            log.error("SEND MAIL FAILED", e);
+            return false;
+        }
+    }
+
+    @Override
+    public boolean checkAdminKinderNo(String username) {
+        MemberDto memberDto = findByUsername(username);
+        if (memberDto.getKinderNo() != null  || memberDto.getRole().equals("ROLE_ADMIN")) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean adminUpdateKinderNo(String username, String kinderNo) {
+        MemberEntity memberEntity = memberRepository.findByUsername(username).orElse(null);
+
+        if (memberEntity == null) {
+            // 해당 유저가 없으면 false 반환
+            return false;
+        }
+
+        memberEntity.setKinderNo(Long.valueOf(kinderNo));
+        memberRepository.save(memberEntity);
+
+        // 업데이트 확인을 위해 데이터베이스에서 다시 조회
+        return memberRepository.findByUsername(username)
+                .map(member -> Long.valueOf(kinderNo).equals(member.getKinderNo()))
+                .orElse(false);
+    }
+
+
 }

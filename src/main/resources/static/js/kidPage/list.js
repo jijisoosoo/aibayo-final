@@ -36,7 +36,8 @@ $(document).ready(function() {
                 let url = "/kid/modifyOk";
 
                 let param = {
-                    parentKidAcceptNo : target.data('parent-kid-accept-no')
+                    parentKidAcceptNo : target.data('parent-kid-accept-no'),
+                    kidNo : target.data('kid-no')
                 }
                 // console.log(`param : ${JSON.stringify(param)}`);
 

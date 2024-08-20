@@ -39,7 +39,9 @@ public class InviteCodeServiceImpl implements InviteCodeService {
     @Transactional
     public InviteCodeDto sendAndInsertInviteCode(InviteCodeDto inviteCodeDto) {
         InviteCodeDto inserted = insertInviteCode(inviteCodeDto);
-        sendEmail(inviteCodeDto);
+        inserted.setKinderName(inviteCodeDto.getKinderName());
+        inserted.setUrl(inviteCodeDto.getUrl());
+        sendEmail(inserted);
 
         return inserted;
     }
@@ -63,6 +65,7 @@ public class InviteCodeServiceImpl implements InviteCodeService {
 
         InviteCodeDto updatedDto = InviteCodeDto.toDto(updated);
         Objects.requireNonNull(updatedDto).setKinderName(inviteCodeDto.getKinderName());
+        Objects.requireNonNull(updatedDto).setUrl(inviteCodeDto.getUrl());
         sendEmail(updatedDto);
 
         return updatedDto;
@@ -90,6 +93,15 @@ public class InviteCodeServiceImpl implements InviteCodeService {
                         .orElse(null);
 
         return InviteCodeDto.toDto(deleted);
+    }
+
+    @Override
+    public InviteCodeDto getByInviteId(Long inviteId) {
+        InviteCodeEntity target =
+                inviteCodeRepository.findByInviteIdAndInviteExpireFlag(inviteId, BooleanEnum.FALSE.getBool())
+                .orElse(null);
+
+        return InviteCodeDto.toDto(target);
     }
 
     private void sendEmail(InviteCodeDto inviteCodeDto) {
@@ -123,9 +135,12 @@ public class InviteCodeServiceImpl implements InviteCodeService {
     private String setContext(InviteCodeDto inviteCodeDto) {
         Context context = new Context();
         context.setVariable("verifyCode", inviteCodeDto.getVerifyCode());
+        context.setVariable("inviteId", inviteCodeDto.getInviteId());
         context.setVariable("inviteEmail", inviteCodeDto.getInviteEmail());
         context.setVariable("kinderName", inviteCodeDto.getKinderName());
-        return springTemplateEngine.process("/admin/inviteCode/email", context);
+        context.setVariable("url", inviteCodeDto.getUrl());
+      
+        return springTemplateEngine.process("admin/inviteCode/email", context);
     }
 
     private InviteCodeDto insertInviteCode(InviteCodeDto inviteCodeDto) {

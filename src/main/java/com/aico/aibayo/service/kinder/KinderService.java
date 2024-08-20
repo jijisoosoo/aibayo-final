@@ -1,8 +1,8 @@
 package com.aico.aibayo.service.kinder;
 
-import com.aico.aibayo.dto.comment.CommentDto;
+import com.aico.aibayo.dto.RegisterKinderDto;
 import com.aico.aibayo.dto.kinder.KinderDto;
-import com.aico.aibayo.entity.KinderEntity;
+import com.aico.aibayo.entity.RegisterKinderEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,11 +12,15 @@ import java.util.Optional;
 @Service
 public interface KinderService {
 
-    List<KinderEntity> getAllKinder();
+    Optional<RegisterKinderEntity> findByKinderNo(Long kinderNo);
 
-    Optional<KinderEntity> getKinderById(Long kinderNo);
+    List<RegisterKinderDto> getAllKinder();
 
-    void insertKinder(KinderDto kinderDto);
+    Optional<RegisterKinderEntity> getKinderById(Long kinderNo);
+
+    RegisterKinderDto getKinderDtoById(Long kinderNo);
+
+    RegisterKinderDto insertKinder(KinderDto kinderDto);
 
     void updateKinder(KinderDto kinderDto);
 

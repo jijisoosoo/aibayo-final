@@ -13,6 +13,12 @@ $(document).ready(function(){
     queryParams += `&${encodeURIComponent('sidoCode')}=${encodeURIComponent(sidoCode)}`;
     queryParams += `&${encodeURIComponent('sggCode')}=${encodeURIComponent(sggCode)}`;
 
+    let param = {
+        key: apiKey,
+        sidoCode: sidoCode,
+        sggCode: sggCode
+    }
+
     // 전체 URL
     let fullUrl = url + queryParams;
 
@@ -24,8 +30,9 @@ $(document).ready(function(){
         url: fullUrl,
         async: true,
         crossDomain: true,
-        type: "GET", // GET 메서드로 수정
-        dataType: "json",
+        type: "POST", // GET 메서드로 수정
+        // dataType: "json",
+        data:param,
         success: function(result) {
             let resultTable = "<table style='border:1px solid #5b5b5b; padding:1px; margin:1px;'>";
             resultTable += "<tr>";
