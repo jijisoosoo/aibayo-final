@@ -1,16 +1,20 @@
 package com.aico.aibayo.control;
 
 import com.aico.aibayo.common.BooleanEnum;
+import com.aico.aibayo.common.MemberRoleEnum;
 import com.aico.aibayo.common.MemberStatusEnum;
 import com.aico.aibayo.dto.InviteCodeDto;
+import com.aico.aibayo.dto.kid.KidDto;
 import com.aico.aibayo.dto.member.MemberDto;
-import com.aico.aibayo.dto.member.MemberSearchCondition;
 import com.aico.aibayo.entity.MemberEntity;
 import com.aico.aibayo.jwt.JWTUtil;
 import com.aico.aibayo.repository.member.MemberRepository;
 import com.aico.aibayo.service.inviteCode.InviteCodeService;
+import com.aico.aibayo.service.kid.KidService;
 import com.aico.aibayo.service.member.MemberService;
-import com.aico.aibayo.service.member.MemberServiceImpl;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +24,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring6.SpringTemplateEngine;
 
-
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,6 +44,10 @@ public class MemberController {
     private final HttpSession session;
     private final MemberRepository memberRepository;
     private final InviteCodeService inviteCodeService;
+    private final KidService kidService;
+
+    private final JavaMailSender javaMailSender;
+    private final SpringTemplateEngine springTemplateEngine;
 
     @ModelAttribute
     public void addAttributes(HttpServletRequest request, Model model) {
@@ -79,14 +91,17 @@ public class MemberController {
     public String signUpByInviteId(@PathVariable Long inviteId,
                                    Model model) {
         InviteCodeDto inviteCodeDto = inviteCodeService.getByInviteId(inviteId);
-        model.addAttribute("inviteInfo", inviteCodeDto);
+        model.addAttribute("inviteId", inviteCodeDto.getInviteId());
+
+        KidDto kidDto = kidService.getByKidNo(inviteCodeDto.getKidNo());
+        model.addAttribute("kidInfo", kidDto);
 
         if (inviteCodeDto == null) {
             model.addAttribute("inviteExpired", true);
             return "redirect:/login";
         }
 
-        return "member/signUp";
+        return "member/signUpInviteUser";
     }
 
     @GetMapping("/signUpInviteTeacher")
@@ -177,16 +192,82 @@ public class MemberController {
         memberDto.setKinderNo(member.getKinderNo());
         memberDto.setClassNo(member.getClassNo());
         memberDto.setRelationship(member.getRelationship());
-        memberDto.setStatus(MemberStatusEnum.INACTIVE.getStatus()); // 승인 해줘야 로그인 가능
+        memberDto.setStatus(MemberStatusEnum.TEMP.getStatus()); // 승인 해줘야 로그인 가능
         memberDto.setRegDate(LocalDateTime.now());
         memberDto.setLatestLogDate(LocalDateTime.now());
         memberDto.setIsMainParent(BooleanEnum.FALSE.getBool());
-        memberDto.setInvite(member.getInvite());
+        memberDto.setInviteId(member.getInviteId());
+
+        if (member.getRole().equals("ROLE_USER")) {
+            memberDto.setRoleNo(MemberRoleEnum.PARENT.getRole());
+        } else if (member.getRole().equals("ROLE_TEACHER")){
+            memberDto.setRoleNo(MemberRoleEnum.TEACHER.getRole());
+        } else if (member.getRole().equals("ROLE_PRINCIPAL")) {
+            memberDto.setRoleNo(MemberRoleEnum.PRINCIPAL.getRole());
+        }
+
 
         memberService.signUpProcess(memberDto);
 
         return "redirect:member/signIn";
     }
+
+    @PostMapping("/finalSignUpInvite")
+    public String finalSignUpInvite(@RequestBody MemberDto member) {
+
+        Long inviteId = member.getInviteId();
+
+        // inviteId가 유효하지 않은 경우 회원가입 로직을 진행하지 않음
+        if (inviteId == null || inviteId <= 0) {
+            log.error("Invalid inviteId: {}", inviteId);
+            return "member/signIn";
+        }
+
+        // 로그: inviteId 확인
+        log.info("Received inviteId: {}", inviteId);
+
+        // MemberDto에 formData 매핑
+        MemberDto memberDto = new MemberDto();
+        memberDto.setUsername(member.getUsername());
+        memberDto.setPassword(member.getPassword());
+        memberDto.setPhone(member.getPhone());
+        memberDto.setName(member.getName());
+        memberDto.setRole(member.getRole());
+        memberDto.setKidName(member.getKidName());
+        memberDto.setKidBirth(member.getKidBirth());
+        memberDto.setKidGender(member.getKidGender());
+        memberDto.setKinderNo(member.getKinderNo());
+        memberDto.setClassNo(member.getClassNo());
+        memberDto.setRelationship(member.getRelationship());
+        memberDto.setRoleNo(MemberRoleEnum.PARENT.getRole());
+        memberDto.setRoleNo(member.getRoleNo());
+
+//        if (member.getRole().equals("ROLE_USER")) {
+//            memberDto.setRoleNo(MemberRoleEnum.PARENT.getRole());
+//        } else if (member.getRole().equals("ROLE_TEACHER")){
+//            memberDto.setRoleNo(MemberRoleEnum.TEACHER.getRole());
+//        } else if (member.getRole().equals("ROLE_PRINCIPAL")) {
+//            memberDto.setRoleNo(MemberRoleEnum.PRINCIPAL.getRole());
+//        }
+
+        // 회원가입 처리 로직
+        member.setStatus(MemberStatusEnum.ACTIVE.getStatus());
+        member.setRegDate(LocalDateTime.now());
+        member.setLatestLogDate(LocalDateTime.now());
+        member.setIsMainParent(BooleanEnum.TRUE.getBool());
+
+        memberService.signUpProcess(member);
+
+        // inviteId와 관련된 처리
+        log.info("Invite ID: {}", inviteId);
+        InviteCodeDto inviteCodeDto = inviteCodeService.getByInviteId(inviteId);
+        inviteCodeService.deleteInviteCode(inviteCodeDto);
+
+        return "redirect:/member/signIn";
+    }
+
+
+
 
 
     @GetMapping("/signInFindPw")
@@ -198,6 +279,8 @@ public class MemberController {
     public String singInResetPw() {
         return "member/signInResetPw";
     }
+
+
 
     @GetMapping("/myPage")
     public String myPage(@ModelAttribute("loginInfo") MemberDto memberDto, Model model) {
@@ -287,5 +370,65 @@ public class MemberController {
             return "user/main/main";
         }
     }
+
+
+
+
+    // 이메일 유효성 검사
+    @PostMapping("/validateEmail")
+    public ResponseEntity<?> validateEmail(@RequestBody Map<String, String> request) {
+        String email = request.get("email");
+        boolean isRegistered = memberService.isEmailRegistered(email);
+
+        if (isRegistered) {
+            log.info("해당 이메일이 존재합니다: {}", email);
+            return ResponseEntity.ok().body(Map.of("success", true, "username", email));
+        } else {
+            log.warn("해당 이메일이 존재하지 않습니다: {}", email);
+            return ResponseEntity.ok().body(Map.of("success", false, "message", "해당 이메일로 가입된 계정이 없습니다."));
+        }
+    }
+
+    @PostMapping("/sendPasswordResetLink")
+    @ResponseBody
+    public Map<String, String> sendPasswordResetLink(@RequestBody Map<String, String> request) {
+        String email = request.get("email");
+        String resetLink = "http://ec2-3-36-124-157.ap-northeast-2.compute.amazonaws.com:8080/member/resetPassword?email=" + email;
+
+        boolean emailSent = memberService.sendPasswordResetLink(email, resetLink);
+
+        if (emailSent) {
+            return Map.of("status", "success");
+        } else {
+            return Map.of("status", "failure", "message", "메일 전송에 실패했습니다.");
+        }
+    }
+
+    @GetMapping("/resetPassword")
+    public String getResetPassword(@RequestParam("email") String email, Model model) {
+        // 이메일을 모델에 추가하여 Thymeleaf에서 사용 가능하도록 함
+        model.addAttribute("email", email);
+        return "member/signInResetPw";
+    }
+
+    // 비밀번호 재설정
+    @PostMapping("/resetPassword")
+    public ResponseEntity<?> postResetPassword(@RequestBody Map<String, String> request) {
+        String email = request.get("email");
+        String newPassword = request.get("newPassword");
+
+        // 비밀번호 재설정
+        boolean resetSuccess = memberService.updatePasswordByEmail(email, newPassword);
+
+        if (resetSuccess) {
+            log.info("비밀번호 재설정 성공: {}", email);
+            return ResponseEntity.ok().body(Map.of("success", true));
+        } else {
+            log.warn("비밀번호 재설정 실패: {}", email);
+            return ResponseEntity.ok().body(Map.of("success", false, "message", "비밀번호 변경에 실패했습니다."));
+        }
+    }
+
+
 
 }
