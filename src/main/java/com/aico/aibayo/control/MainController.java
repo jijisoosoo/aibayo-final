@@ -70,6 +70,11 @@ public class MainController {
         return "/index";
     }
 
+    @GetMapping("/siteAdmin")
+    public String siteAdmin(){
+        return "admin/setting/list";
+    }
+
     @GetMapping("/admin")
     public String adminMain(HttpServletRequest request, HttpServletResponse response,
                             @ModelAttribute("loginInfo") MemberDto loginInfo, Model model) {

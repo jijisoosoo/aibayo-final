@@ -34,6 +34,7 @@ function afterSuccess(response, method) {
         }
     }
     if(method === 'PUT'){
+        console.log(`kinderNo 세팅 완료`);
         window.location.href="/main/admin";
     }
 
