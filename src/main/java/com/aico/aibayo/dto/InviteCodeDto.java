@@ -25,6 +25,25 @@ public class InviteCodeDto {
     private String inviteName;
     private String kinderName;
 
+    private String url;
+
+    public InviteCodeDto(Long inviteId, Long acceptNo, String verifyCode, Integer inviteType, String inviteEmail,
+                         LocalDate inviteRegDate, LocalDate inviteExpireDate, String inviteExpireFlag, Long kinderNo,
+                         Long kidNo, String inviteName, String kinderName) {
+        this.inviteId = inviteId;
+        this.acceptNo = acceptNo;
+        this.verifyCode = verifyCode;
+        this.inviteType = inviteType;
+        this.inviteEmail = inviteEmail;
+        this.inviteRegDate = inviteRegDate;
+        this.inviteExpireDate = inviteExpireDate;
+        this.inviteExpireFlag = inviteExpireFlag;
+        this.kinderNo = kinderNo;
+        this.kidNo = kidNo;
+        this.inviteName = inviteName;
+        this.kinderName = kinderName;
+    }
+
     public InviteCodeDto(Long inviteId, Long acceptNo, String verifyCode, Integer inviteType, String inviteEmail,
                          LocalDate inviteRegDate, LocalDate inviteExpireDate, String inviteExpireFlag, Long kinderNo,
                          Long kidNo) {

@@ -22,4 +22,8 @@ public interface MemberService {
 
     void signUpProcess(MemberDto memberDto);
 
+    boolean updatePasswordByEmail(String email, String newPassword);
+
+    boolean isEmailRegistered(String email);
+    boolean sendPasswordResetLink(String email, String resetLink);
 }

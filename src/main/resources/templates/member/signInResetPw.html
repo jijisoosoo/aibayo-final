@@ -2,14 +2,62 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
-    <!--    <link rel="stylesheet" href="globals.css" />-->
-    <!--    <link rel="stylesheet" href="/member/signInFindPw.css" />-->
-    <!--    <link rel="stylesheet" href="/member/signInGuide.css"/>-->
-
     <link rel="stylesheet" th:href="@{/css/member/signInFindPw.css}"/>
     <link rel="stylesheet" th:href="@{/css/member/signInGuide.css}"/>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert2 추가 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery 추가 -->
 
-    <script th:src="@{/js/login/signInResetPw.js}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#certification-number-submit').on('click', function(event) {
+                event.preventDefault(); // 폼 제출 방지
+
+                var password1 = $('#password1').val();
+                var password2 = $('#password2').val();
+                var email = $('#email').val(); // Hidden field에서 이메일을 가져옴
+
+                if (password1 !== password2) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '오류',
+                        text: '비밀번호가 일치하지 않습니다.',
+                    });
+                    return;
+                }
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/member/resetPassword',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ email: email, newPassword: password1 }),
+                    success: function(response) {
+                        if(response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: '성공',
+                                text: '비밀번호가 성공적으로 변경되었습니다.',
+                            }).then(function() {
+                                window.location.href = "/member/signIn";
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: '오류',
+                                text: response.message || '비밀번호 변경에 실패했습니다.',
+                            });
+                        }
+                    },
+                    error: function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: '오류',
+                            text: '서버와의 통신 중 문제가 발생했습니다.',
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 
 </head>
 <body>
@@ -18,16 +66,13 @@
         <div class="overlap">
             <div class="group">
                 <div class="overlap-group">
-                    <div class="group-2">
-<!--                        <div class="group-3">-->
-<!--                            <div class="text-wrapper">Welcome to aibayo</div>-->
-<!--                        </div>-->
-                    </div>
-
+                    <div class="group-2"></div>
 
                     <form action="#" method="post">
-                        <div class="group-4">
+                        <!-- 이메일 hidden 필드 -->
+                        <input type="hidden" id="email" name="email" th:value="${email}"/>
 
+                        <div class="group-4">
                             <div class="text-wrapper-3">비밀번호를 입력해주세요</div>
                             <input class="username-or-email-wrapper" name="password1" id="password1" type="password" required>
                         </div>
@@ -37,29 +82,20 @@
                             <input type="password" class="div-wrapper" name="password2" id="password2" required>
                         </div>
 
-
                         <div class="overlap-wrapper">
                             <input id="certification-number-submit" class="overlap-2 text-wrapper-1" type="submit" value="비밀번호 재설정">
                         </div>
-
                     </form>
-
-
                 </div>
             </div>
             <div class="text-wrapper-7">비밀번호 초기화</div>
-
-
         </div>
         <div class="logo h_class_78">
-            <div class="h_class_79"><a th:href="@{/main/admin}"
-                                       style="text-decoration: none; color: inherit; font-family: 'Noto Sans KR', sans-serif;">aibayo</a></div>
+            <div class="h_class_79">
+                <a th:href="@{/main/admin}" style="text-decoration: none; color: inherit; font-family: 'Noto Sans KR', sans-serif;">aibayo</a>
+            </div>
         </div>
-
-        <!-- <div class="text-wrapper-2">회원가입</div>
-        <div class="text-wrapper-5">비밀번호 찾기</div> -->
         <a th:href="@{/member/signIn}" class="span">로그인</a>
-
     </div>
 </div>
 </body>
