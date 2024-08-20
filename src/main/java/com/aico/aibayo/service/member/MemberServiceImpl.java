@@ -4,7 +4,6 @@ import com.aico.aibayo.common.AcceptStatusEnum;
 import com.aico.aibayo.common.AcceptTypeEnum;
 import com.aico.aibayo.common.BooleanEnum;
 import com.aico.aibayo.common.MemberStatusEnum;
-import com.aico.aibayo.dto.classKid.ClassKidDto;
 import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.dto.member.MemberSearchCondition;
 import com.aico.aibayo.entity.*;
@@ -13,11 +12,10 @@ import com.aico.aibayo.repository.AcceptLogRepository;
 import com.aico.aibayo.repository.RegisterKinderRepository;
 import com.aico.aibayo.repository.TeacherKinderRepository;
 import com.aico.aibayo.repository.classKid.ClassKidRepository;
-import com.aico.aibayo.repository.ParentKidRepository;
+import com.aico.aibayo.repository.parentKid.ParentKidRepository;
 import com.aico.aibayo.repository.kid.KidRepository;
 import com.aico.aibayo.repository.member.MemberRepository;
 import groovy.util.logging.Slf4j;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +23,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
