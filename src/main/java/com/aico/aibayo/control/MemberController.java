@@ -439,9 +439,13 @@ public class MemberController {
     @PostMapping("/adminUpdateKinderNo")
     public ResponseEntity<String> updateKinderNo(
             @RequestParam("username") String username,
-            @RequestParam("kinderNo") String kinderNo) {
+            @RequestParam("kinderNo") String kinderNo,
+            @ModelAttribute("loginInfo") MemberDto memberDto) {
+
 
         boolean isUpdated = memberService.adminUpdateKinderNo(username, kinderNo);
+
+        memberDto.setKinderNo(Long.valueOf(kinderNo));
 
         if (isUpdated) {
             return ResponseEntity.ok("KinderNo updated successfully");

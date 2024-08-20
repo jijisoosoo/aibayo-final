@@ -103,14 +103,14 @@ $(document).ready(function() {
         }
 
         // 전화번호 형식 체크
-        if (!/^\d+$/.test(kinderMidNo) || !/^\d+$/.test(kindeEndNo)) {
+        if (!/^\d+$/.test(kinderMidNo) || !/^\d+$/.test(kinderEndNo)) {
             console.log("전화번호 입력 오류");
             alert("전화번호는 숫자만 입력할 수 있습니다.");
             if (!/^\d+$/.test(kinderMidNo)) {
                 $('#midNo').focus();
                 return false;
             }
-            if (!/^\d+$/.test(kindeEndNo)) {
+            if (!/^\d+$/.test(kinderEndNo)) {
                 $('#endNo').focus();
                 return false;
             }
@@ -210,6 +210,9 @@ function afterSuccess(response) {
     // hidden 필드에서 username 값을 가져옵니다.
     const username = $('input[name="username"]').val();
     const kinderNo = response.kinderNo; // 유치원 등록에 성공한 후 받은 kinderNo 값이라고 가정
+
+    console.log("aftersucess username : " + username);
+    console.log("aftersucess kinderNo : " + kinderNo);
 
     // 서버에 데이터 전송 (URL에 파라미터를 포함)
     $.ajax({
