@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">detailToday</title>
 
@@ -22,7 +22,7 @@
         <h4>[[${date}]]</h4>
     </div>
 
-    <form th:action="@{/attendance/write/{classNo}(classNo=${classNo})}" method="post" id="attendanceForm">
+    <form th:action="@{attendance/write/{classNo}(classNo=${classNo})}" method="post" id="attendanceForm">
         <input type="hidden" id="kinderNo" th:value="${kinderNo}" />
         <input type="hidden" id="classNo" th:value="${classNo}" />
 

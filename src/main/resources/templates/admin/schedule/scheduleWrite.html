@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">scheduleWrite</title>
 
@@ -15,8 +15,8 @@
 
 <th:block layout:fragment="javascript">
   <script src="/js/schedule/adminPage/scheduleWrite.js"></script>
-  <th:block th:replace="~{/common/datepicker :: js}"/>
-  <th:block th:replace="~{/common/datepicker :: css}"/>
+  <th:block th:replace="~{common/datepicker :: js}"/>
+  <th:block th:replace="~{common/datepicker :: css}"/>
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
@@ -36,12 +36,12 @@
         <div class="text-date"><div class="text-wrapper-7">날짜</div></div>
         <div class="div-4">
           <div class="calendar-pick">
-            <img class="calendar-vector" src="/images/common/calendar_gray.png" />
+            <img class="calendar-vector" src="images/common/calendar_gray.png" />
             <input type="text" class="datepickerdiv datepicker startDate" placeholder="날짜 선택" readonly>
           </div>
           <div class="text-wrapper-8">-</div>
           <div class="calendar-pick">
-            <img class="calendar-vector" src="/images/common/calendar_gray.png" />
+            <img class="calendar-vector" src="images/common/calendar_gray.png" />
             <input type="text" class="datepickerdiv datepicker endDate" placeholder="날짜 선택" readonly>
           </div>
         </div>
@@ -88,7 +88,7 @@
         <div class="inputarea-3">
           <a class="input-loc" href="">
             <div class="button-x">
-              <img src="/images/common/plus.png"></img>
+              <img src="images/common/plus.png"></img>
             </div>
             <div class="default">위치 첨부하기</div>
           </a>

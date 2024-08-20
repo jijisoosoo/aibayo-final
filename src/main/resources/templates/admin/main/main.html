@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">메인페이지</title>
 
 <th:block layout:fragment="css">
-    <link rel="stylesheet" href="/css/main/main.css" />
+<!--    <link rel="stylesheet" href="/css/main/main.css" />-->
+    <link rel="stylesheet" th:href="@{/css/main/main.css}" />
 </th:block>
 
 <th:block layout:fragment="javascript">

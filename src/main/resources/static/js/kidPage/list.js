@@ -116,6 +116,7 @@ $(document).ready(function() {
                 let url = "/inviteCode/resendMail";
 
                 let param = {
+                    kinderNo: $('#kidsStatus2Div').data('kinder-no'),
                     inviteId: target.data('invite-id'),
                     acceptNo : target.data('invite-code-accept-no')
                 }

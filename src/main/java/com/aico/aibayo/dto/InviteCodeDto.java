@@ -23,6 +23,7 @@ public class InviteCodeDto {
     private Long kidNo;
 
     private String inviteName;
+    private String kinderName;
 
     public InviteCodeDto(Long inviteId, Long acceptNo, String verifyCode, Integer inviteType, String inviteEmail,
                          LocalDate inviteRegDate, LocalDate inviteExpireDate, String inviteExpireFlag, Long kinderNo,
