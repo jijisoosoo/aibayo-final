@@ -51,7 +51,7 @@ public class ScheduleController {
     public String adminscheduleMainByClass(@ModelAttribute("loginInfo") MemberDto loginInfo, Model model,
                                          @RequestBody ScheduleSearchCondition condition){
 
-        System.out.println("condition : " + condition);
+        log.info("condition : {}", condition);
         List<ScheduleDto> classSchedules = scheduleService.getAllByClassNo(condition);
         for(ScheduleDto schedule : classSchedules){
             List<ScheduleClassDto> scheduledClass = scheduleClassService.getClassByScheduleNo(schedule.getScheduleNo());

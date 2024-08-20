@@ -66,7 +66,7 @@ public class TeacherController {
     @PostMapping("/listByClass")
     public String mainByClass(@RequestBody TeacherSearchCondition condition,
                               Model model) {
-        System.out.println("post:mainByClass실행");
+        log.info("post:mainByClass실행");
         log.info("search: {}", condition);
 
         if(condition.getClassNo() == null){
@@ -129,7 +129,6 @@ public class TeacherController {
         return "admin/teacher/teacherMain";
     }
 
-
     @GetMapping ("/teacherProfileAccept/{id}")
     public String TeacherProfile(Model model, @PathVariable Long id) {
         return getAcceptedTeacherProfile(model, id);
@@ -139,13 +138,8 @@ public class TeacherController {
     public String assignClassOk(@RequestBody Map<String, List<Long>> requestBody, Model model, @PathVariable Long id) {
         List<Long> oldClassAcceptNos = requestBody.get("oldClassAcceptNos");
         List<Long> newClassIds = requestBody.get("newClassIds");
-
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>oldClassAcceptNos, newClassIds");
-        System.out.println("oldClassAcceptNos" + oldClassAcceptNos);
-        System.out.println("newClassIds" + newClassIds);
-
+        log.info("oldClassAcceptNos : {} / newClassIds : {}", oldClassAcceptNos, newClassIds);
         teacherService.updateClassTeacher(newClassIds, oldClassAcceptNos, id);
-
         return getAcceptedTeacherProfile(model, id);
     }
 
@@ -167,13 +161,8 @@ public class TeacherController {
         return "admin/teacher/teacherProfileAccept";
     }
 
-
-
     @GetMapping("/admin/teacherProfileWait/{id}")
     public String adminTeacherProfileWait() {
         return "admin/teacher/teacherProfileWait";
     }
-
-
-
 }
