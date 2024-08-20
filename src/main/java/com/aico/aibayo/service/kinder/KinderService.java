@@ -18,6 +18,8 @@ public interface KinderService {
 
     Optional<RegisterKinderEntity> getKinderById(Long kinderNo);
 
+    RegisterKinderDto getKinderDtoById(Long kinderNo);
+
     RegisterKinderDto insertKinder(KinderDto kinderDto);
 
     void updateKinder(KinderDto kinderDto);

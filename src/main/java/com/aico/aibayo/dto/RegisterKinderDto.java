@@ -35,6 +35,8 @@ public class RegisterKinderDto {
 
 
     public static RegisterKinderDto toDto(RegisterKinderEntity entity) {
+        if (entity == null) { return null; }
+
         return new RegisterKinderDto(
                 entity.getKinderNo(),
                 entity.getKinderOpenTime(),

@@ -1,5 +1,6 @@
 package com.aico.aibayo.service.kid;
 
+import com.aico.aibayo.dto.ClassDto;
 import com.aico.aibayo.dto.kid.KidDto;
 import com.aico.aibayo.dto.kid.KidSearchCondition;
 import java.util.List;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface KidService {
     List<KidDto> getByKinderNo(Long kinderNo);
+    List<KidDto> getByKinderNoAndClassNo(Long kinderNo, Long classNo);
     List<KidDto> getByMemberId(Long id);
     List<KidDto> getAllByClassNoAndAcceptStatus(KidSearchCondition condition);
     List<KidDto> getAllWithParentByClassNoAndAcceptStatus(KidSearchCondition condition);
@@ -19,4 +21,6 @@ public interface KidService {
     KidDto updateParentKid(KidDto kidDto);
     KidDto deleteKid(KidDto kidDto);
     List<KidDto> getAllByParent(Long id);
+
+
 }

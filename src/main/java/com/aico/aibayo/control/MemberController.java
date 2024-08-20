@@ -3,14 +3,18 @@ package com.aico.aibayo.control;
 import com.aico.aibayo.common.BooleanEnum;
 import com.aico.aibayo.common.MemberRoleEnum;
 import com.aico.aibayo.common.MemberStatusEnum;
+import com.aico.aibayo.dto.ClassDto;
 import com.aico.aibayo.dto.InviteCodeDto;
+import com.aico.aibayo.dto.RegisterKinderDto;
 import com.aico.aibayo.dto.kid.KidDto;
 import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.entity.MemberEntity;
 import com.aico.aibayo.jwt.JWTUtil;
 import com.aico.aibayo.repository.member.MemberRepository;
+import com.aico.aibayo.service.classManage.ClassService;
 import com.aico.aibayo.service.inviteCode.InviteCodeService;
 import com.aico.aibayo.service.kid.KidService;
+import com.aico.aibayo.service.kinder.KinderService;
 import com.aico.aibayo.service.member.MemberService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,6 +30,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -38,6 +43,9 @@ public class MemberController {
     private final MemberRepository memberRepository;
     private final InviteCodeService inviteCodeService;
     private final KidService kidService;
+    private final KinderService kinderService;
+    private final ClassService classService;
+
 
     @ModelAttribute
     public void addAttributes(HttpServletRequest request, Model model) {
@@ -109,6 +117,11 @@ public class MemberController {
     public String signUpKidForm(HttpSession session, Model model) {
         MemberDto member = (MemberDto) session.getAttribute("member");
         model.addAttribute("member", member);
+        List<RegisterKinderDto> kinders = kinderService.getAllKinder();
+        model.addAttribute("kinders",kinders);
+
+        System.out.println("signUpKid GetMapping");
+
         log.info("signUpKid GetMapping");
         return "member/signUpKid";
     }
@@ -127,6 +140,8 @@ public class MemberController {
         log.info("signUpTeacher GetMapping");
         MemberDto member = (MemberDto) session.getAttribute("member");
         model.addAttribute("member", member);
+        List<RegisterKinderDto> kinders = kinderService.getAllKinder();
+        model.addAttribute("kinders",kinders);
         return "member/signUpTeacher";
     }
 

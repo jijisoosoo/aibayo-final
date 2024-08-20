@@ -40,6 +40,12 @@ public class KinderServiceImpl implements KinderService {
     }
 
     @Override
+    public RegisterKinderDto getKinderDtoById(Long kinderNo) {
+        RegisterKinderEntity target = kinderRepository.findById(kinderNo).orElse(null);
+        return RegisterKinderDto.toDto(target);
+    }
+
+    @Override
     @Transactional
     public RegisterKinderDto insertKinder(KinderDto kinderDto) {
         RegisterKinderEntity kinderentity = RegisterKinderEntity.builder()
