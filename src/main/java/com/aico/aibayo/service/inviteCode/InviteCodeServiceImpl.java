@@ -92,6 +92,15 @@ public class InviteCodeServiceImpl implements InviteCodeService {
         return InviteCodeDto.toDto(deleted);
     }
 
+    @Override
+    public InviteCodeDto getByInviteId(Long inviteId) {
+        InviteCodeEntity target =
+                inviteCodeRepository.findByInviteIdAndInviteExpireFlag(inviteId, BooleanEnum.FALSE.getBool())
+                .orElse(null);
+
+        return InviteCodeDto.toDto(target);
+    }
+
     private void sendEmail(InviteCodeDto inviteCodeDto) {
         if (inviteCodeDto == null) {
             log.warn("InviteCodeDto is null");
@@ -123,6 +132,7 @@ public class InviteCodeServiceImpl implements InviteCodeService {
     private String setContext(InviteCodeDto inviteCodeDto) {
         Context context = new Context();
         context.setVariable("verifyCode", inviteCodeDto.getVerifyCode());
+        context.setVariable("inviteId", inviteCodeDto.getInviteId());
         context.setVariable("inviteEmail", inviteCodeDto.getInviteEmail());
         context.setVariable("kinderName", inviteCodeDto.getKinderName());
         return springTemplateEngine.process("/admin/inviteCode/email", context);
