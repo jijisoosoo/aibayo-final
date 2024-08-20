@@ -64,8 +64,7 @@ $(document).ready(function() {
 
         const kinderLocNo = $('#locNo').val();
         const kinderMidNo = $('#midNo').val();
-        const kindeEndNo = $('#endNo').val();
-        const principalName = $('#principalName').text();
+        const kinderEndNo = $('#endNo').val();
 
         const openTimeRaw = $('#open').val();
         const closeTimeRaw = $('#close').val();
@@ -76,7 +75,6 @@ $(document).ready(function() {
         const sggList = $('#sample6_sigunguCode').val();
         const sidoList = sggList.substring(0, 2);
 
-        const id = $('#principalId').data('id');
         // 값 체크
         if (kinderPostCode.length === 0) {
             console.log("우편번호 입력 누락");
@@ -129,13 +127,13 @@ $(document).ready(function() {
             $('#midNo').focus();
             return false;
         }
-        if (kindeEndNo.length === 0) {
+        if (kinderEndNo.length === 0) {
             console.log("엔드넘버 입력 누락");
             alert("전화번호의 끝 번호를 입력해주세요.");
             $('#endNo').focus();
             return false;
         }
-        if (kindeEndNo.length !== 4) {
+        if (kinderEndNo.length !== 4) {
             console.log("엔드넘버 길이 오류");
             alert("올바른 형식의 번호를 입력해주세요.");
             $('#endNo').focus();
@@ -149,13 +147,11 @@ $(document).ready(function() {
             kinderName: kinderName,
             kinderLocNo : kinderLocNo,
             kinderMidNo : kinderMidNo,
-            kinderEndNo : kindeEndNo,
-            principalName: principalName,
+            kinderEndNo : kinderEndNo,
             kinderOpenTime: kinderOpenTime,
             kinderCloseTime: kinderCloseTime,
             sggList:sggList,
             sidoList:sidoList,
-            id:id
         };
 
         console.log('kinderData:', kinderData); // 객체 출력으로 데이터 확인

@@ -87,8 +87,11 @@ public class KinderServiceImpl implements KinderService {
             registerKinderEntity.setKinderLocNo(kinderDto.getKinderLocNo());
             registerKinderEntity.setKinderMidNo(kinderDto.getKinderMidNo());
             registerKinderEntity.setKinderEndNo(kinderDto.getKinderEndNo());
+            registerKinderEntity.setKinderModifyDate(LocalDateTime.now());
             registerKinderEntity.setKinderOpenTime(kinderDto.getKinderOpenTime());
             registerKinderEntity.setKinderCloseTime(kinderDto.getKinderCloseTime());
+            registerKinderEntity.setSggList(kinderDto.getSggList());
+            registerKinderEntity.setSidoList(kinderDto.getSidoList());
         kinderRepository.save(registerKinderEntity);
     }
 
