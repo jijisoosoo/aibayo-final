@@ -34,21 +34,42 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    gap: 10px;
     position: relative;
     flex: 0 0 auto;
+    width: 100%;
 }
 
-/*.container .text-wrapper-4 {*/
-/*    position: relative;*/
-/*    width: fit-content;*/
-/*    font-weight: var(--font-selected-menu-font-weight);*/
-/*    color: #000000;*/
-/*    font-size: var(--font-selected-menu-font-size);*/
-/*    letter-spacing: var(--font-selected-menu-letter-spacing);*/
-/*    line-height: var(--font-selected-menu-line-height);*/
-/*    font-style: var(--font-selected-menu-font-style);*/
-/*}*/
+.div-classname{
+    display: flex;
+    gap: 5px;
+    /*align-self: center;*/
+    padding: 10px;
+}
+.container .icon {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    border-radius: 70%;
+    background-size: cover;
+    background-position: 50% 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.icon img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(50, 50);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: auto;
+}
+
+.add_discount{
+    cursor: pointer;
+}
 
 .container .button-send {
     display: flex;
@@ -477,7 +498,7 @@
 
 .container .text-wrapper-13 {
     position: relative;
-    width: fit-content;
+    width: 17px;
     font-weight: 400;
     color: #828282;
     font-size: 16px;
@@ -991,4 +1012,21 @@
 
 .form-switch:focus {
     background: white;
+}
+
+.container .defaulttext {
+    width: fit-content;
+    color: #828282;
+    font-size: 16px;
+    text-align: center;
+    line-height: 23.8px;
+    white-space: nowrap;
+    -webkit-line-clamp: 1;
+    position: relative;
+    font-weight: 500;
+    letter-spacing: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
 }

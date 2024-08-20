@@ -1,5 +1,110 @@
 $(document).ready(function() {
 
+    // 테이블 출력 형식
+    formitize();
+
+    // Initialize DataTable
+    dataTableInit();
+
+    checkAll();
+
+
+    $(document).on('click', '.search', function () {
+
+        // 수납상태 리스트로
+        var paymentStatusList = [];
+        var selectedOptions = document.querySelectorAll('.selectedoption .btn-check');
+        selectedOptions.forEach(function(option) {
+            if (option.checked) {
+                paymentStatusList.push(option.value);
+            }
+        });
+
+        var startDate = $('#inputStartDate').val() === "" ? null :
+            $('#inputStartDate').val().replace(/\./g, '-') + 'T00:00:00';
+        var endDate = $('#inputStartDate').val()  === "" ? null :
+            $('#inputEndDate').val().replace(/\./g, '-') + 'T00:00:00';
+        var inputString = $('.keyword').val();
+        var classNo = $('.dropdown-class').val();
+
+
+        let param = {
+            startDate : startDate,
+            endDate : endDate,
+            inputString : inputString === "" ? null : inputString,
+            paymentStatusList : paymentStatusList.length === 0 ? null : paymentStatusList,
+            classNo: classNo === "" ? null : classNo
+        };
+
+        console.log("param:" + JSON.stringify(param));
+
+        let url = "/payment/admin/paymentBillingMainSearch";
+
+        commonAjax(url, 'POST', param);
+    });
+
+    $(document).on('click', '.inputReset', function () {
+        var selectedOptions = document.querySelectorAll('.selectedoption .btn-check');
+        selectedOptions.forEach(function(option) {
+            option.checked = false;
+        });
+
+        $('#inputStartDate').val(null);
+        $('#inputEndDate').val(null);
+        $('.keyword').val(null);
+        $('.dropdown-class').val(null);
+    });
+
+    tupleCnt();
+
+});
+
+// checkbox 전체 선택
+function checkAll() {
+    var total;
+    var checked;
+
+    $("#checkAll").click(function () {
+        if ($("#checkAll").is(":checked")) {
+            $("input[class='form-check-input']").prop("checked", true);
+        } else {
+            $("input[class='form-check-input']").prop("checked", false);
+        }
+    });
+
+    $("input[class='form-check-input']").click(function () {
+        total = $("input[class='form-check-input']").length;
+        console.log("total :" + total);
+        checked = $("input[class='form-check-input']:checked").length;
+        console.log("checked : " + checked);
+
+        if (checked < total) {
+            $("#checkAll").prop("checked", false);
+        } else {
+            $("#checkAll").prop("checked", true);
+        }
+    });
+
+    // 페이지 클릭 시마다 checkAll() 실행
+    var table = $('#datatable-payment').DataTable();
+    $('#datatable-payment').on('page.dt', function () {
+        var info = table.page.info();
+        console.log('Showing page: ' + (info.page) + ' of ' + info.pages);
+
+        total = $("input[class='form-check-input']").length;
+        console.log("total :" + total);
+        checked = $("input[class='form-check-input']:checked").length;
+        console.log("checked : " + checked);
+
+        if (checked < total) {
+            $("#checkAll").prop("checked", false);
+        } else {
+            $("#checkAll").prop("checked", true);
+        }
+    });
+}
+
+function formitize() {
     document.querySelectorAll('.tuple_payment_status').forEach(function (element) {
         var paymentStatus = element.dataset.paymentStatus;
 
@@ -48,10 +153,27 @@ $(document).ready(function() {
             .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         element.innerHTML = formattedAmount + '원';
     });
+}
 
+// 날짜 텍스트 변환
+function formatDateTime(input) {
+    if(input === null){
+        return '-';
+    }else{
+        // 날짜와 시간 분리
+        var dateTimeParts = input.split('T');
+        var datePart = dateTimeParts[0]; // '2024-06-02'
+        var timePart = dateTimeParts[1]; // '06:00:00.000000'
 
+        // 날짜 형식을 'YYYY.MM.DD'로 변경
+        var formattedDate = datePart.replace(/-/g, '.'); // '2024.06.02'
 
-    // Initialize DataTable
+        // 줄바꿈 추가하여 최종 결과 반환
+        return formattedDate + '<br/>' + timePart;
+    }
+}
+
+function dataTableInit(){
     new DataTable('#datatable-payment', {
         info: false,
         ordering: true,
@@ -70,75 +192,22 @@ $(document).ready(function() {
             topStart: null
         }
     });
-
-
-    checkAll();
-});
-
-// checkbox 전체 선택
-function checkAll() {
-    var total;
-    var checked;
-
-    $("#checkAll").click(function () {
-        if ($("#checkAll").is(":checked")) {
-            $("input[class='form-check-input']").prop("checked", true);
-        } else {
-            $("input[class='form-check-input']").prop("checked", false);
-        }
-    });
-
-    $("input[class='form-check-input']").click(function () {
-        total = $("input[class='form-check-input']").length;
-        console.log("total :" + total);
-        checked = $("input[class='form-check-input']:checked").length;
-        console.log("checked : " + checked);
-
-        if (total != checked) {
-            $("#checkAll").prop("checked", false);
-        } else {
-            $("#checkAll").prop("checked", true);
-        }
-    });
-
-    // 페이지 클릭 시마다 checkAll() 실행
-    var table = $('#datatable-payment').DataTable();
-    $('#datatable-payment').on('page.dt', function () {
-        var info = table.page.info();
-        console.log('Showing page: ' + (info.page) + ' of ' + info.pages);
-
-        total = $("input[class='form-check-input']").length;
-        console.log("total :" + total);
-        checked = $("input[class='form-check-input']:checked").length;
-        console.log("checked : " + checked);
-
-        if (total != checked) {
-            $("#checkAll").prop("checked", false);
-        } else {
-            $("#checkAll").prop("checked", true);
-        }
-
-
-    });
 }
 
-// 날짜 텍스트 변환
-function formatDateTime(input) {
-    if(input === null){
-        return '-';
-    }else{
-        // 날짜와 시간 분리
-        var dateTimeParts = input.split('T');
-        var datePart = dateTimeParts[0]; // '2024-06-02'
-        var timePart = dateTimeParts[1]; // '06:00:00.000000'
+function tupleCnt() {
+    var tupleElement = document.querySelector('.tuples');
+    var tupleCount = tupleElement.getAttribute('data-tuple-cnt');
 
-        // 날짜 형식을 'YYYY.MM.DD'로 변경
-        var formattedDate = datePart.replace(/-/g, '.'); // '2024.06.02'
+    $('#tupleCnt').text(tupleCount);
+}
 
-        // // 시간 부분에서 밀리초 제거
-        // var formattedTime = timePart.split('.')[0]; // '06:00:00'
+function afterSuccess(response, method) {
+    $('.tableDiv').replaceWith($(response).find('.tableDiv'));
+    formitize();
+    dataTableInit();
+    tupleCnt();
 
-        // 줄바꿈 추가하여 최종 결과 반환
-        return formattedDate + '<br/>' + timePart;
-    }
+    checkAll();
+
+
 }
