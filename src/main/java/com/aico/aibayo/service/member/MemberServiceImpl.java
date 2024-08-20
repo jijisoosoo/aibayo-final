@@ -327,7 +327,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public boolean checkAdminKinderNo(String username) {
         MemberDto memberDto = findByUsername(username);
-        if (memberDto.getKinderNo() != null) {
+        if (memberDto.getKinderNo() != null  || memberDto.getRole().equals("ROLE_ADMIN")) {
             return true;
         }
         return false;

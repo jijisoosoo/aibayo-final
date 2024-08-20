@@ -7,15 +7,42 @@
 <!--    <script th:src="@{/js/jquery.min.js}"></script> &lt;!&ndash; jQuery 추가 &ndash;&gt;-->
 <!--    <script th:src="@{/js/login/signUpKid.js}"></script>-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/common.js"></script>
     <script>
         function toggleClassField() {
             const kindergartenSelect = document.getElementById('kindergarten-input');
             const classSelect = document.getElementById('class-input');
 
+            $('#class-input').find('.class_append').each(function () {
+                $(this).remove();
+            });
+
             if (kindergartenSelect.value === "") {
                 classSelect.disabled = true;
             } else {
                 classSelect.disabled = false;
+
+                let kinderNo = $('#kindergarten-input').val();
+
+                let url = '/member/classList';
+
+                let param = { kinderNo : kinderNo };
+
+                commonAjax(url,'POST',param)
+            }
+        }
+        function afterSuccess(response){
+            console.log('signUpKid');
+            for(let selectClass of response){
+                console.log(`selectClass : ${JSON.stringify(selectClass)}`)
+                let tag =
+                    `<option value="${selectClass.classNo}" class="class_append">
+                        ${selectClass.className}
+                    </option>`
+                $('#class-input').append(tag);
+
+
+
             }
         }
 
@@ -126,17 +153,15 @@
                                 <div class="group-9">
                                     <label for="kindergarten-input" style="font-size: small">소속 유치원</label>
                                     <select id="kindergarten-input" name="kinderNo">
-                                        <option value="">유치원을 선택하세요</option>
-                                        <option value="1">유치원 1</option>
-                                        <option value="2">유치원 2</option>
+                                        <option value="" >유치원을 선택하세요</option>
+                                        <option th:each="kinder : ${kinders}"
+                                                th:value="${kinder.kinderNo}" th:text="${kinder.kinderName}">유치원 명</option>
                                     </select>
                                 </div>
                                 <div class="group-10">
                                     <label for="class-input" style="font-size: small">소속 반</label>
                                     <select id="class-input" name="classNo">
                                         <option value="">반을 선택하세요</option>
-                                        <option value="1">1반</option>
-                                        <option value="2">2반</option>
                                     </select>
                                 </div>
                             </div>
