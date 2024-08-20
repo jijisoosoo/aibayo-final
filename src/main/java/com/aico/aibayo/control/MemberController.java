@@ -67,7 +67,8 @@ public class MemberController {
     }
 
     @GetMapping("/signIn")
-    public String signIn() {
+    public String signIn(Model model) {
+        model.addAttribute("domain", null);
         return "member/signIn";
     }
 
