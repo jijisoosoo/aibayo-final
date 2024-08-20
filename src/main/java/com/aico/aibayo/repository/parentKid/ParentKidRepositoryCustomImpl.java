@@ -31,7 +31,7 @@ public class ParentKidRepositoryCustomImpl implements ParentKidRepositoryCustom 
                 .where(
                         acceptLog.acceptStatus.eq(AcceptStatusEnum.ACCEPT.getStatus()),
                         parentKid.kidNo.eq(kidNo),
-                        parentKid.isMainParent.eq(BooleanEnum.FALSE.getBool())
+                        parentKid.isMainParent.eq(BooleanEnum.TRUE.getBool())
                 )
                 .fetchOne();
     }

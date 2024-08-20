@@ -144,22 +144,22 @@ public class KidServiceImpl implements KidService {
     }
 
     @Override
+    @Transactional
     public KidDto updateParentKid(KidDto kidDto) {
         if (kidDto.getParentKidAcceptNo() != null) {
-            acceptLogRepository.findById(kidDto.getParentKidAcceptNo()).ifPresent(target -> {
+            acceptLogRepository.findById(kidDto.getParentKidAcceptNo()).map(target -> {
                 target.setAcceptStatus(AcceptStatusEnum.ACCEPT.getStatus());
                 target.setAcceptModifyDate(LocalDateTime.now());
                 target.setAcceptDate(LocalDateTime.now());
 
-                acceptLogRepository.save(target);
+                return acceptLogRepository.save(target);
             });
 
             // 해당 원생에 대한 주학부모가 없을 경우, 현재 ParentKid의 isMainParent를 true로 세팅
             ParentKidDto kidMainParent = parentKidRepository.findByKidMainParent(kidDto.getKidNo());
 
             if (kidMainParent == null) {
-                ParentKidId id = new ParentKidId(kidDto.getId(), kidDto.getKidNo(), kidDto.getParentKidAcceptNo());
-                parentKidRepository.findById(id).ifPresent(target -> {
+                parentKidRepository.findByAcceptNo(kidDto.getParentKidAcceptNo()).ifPresent(target -> {
                     target.setIsMainParent(BooleanEnum.TRUE.getBool());
                     parentKidRepository.save(target);
                 });
