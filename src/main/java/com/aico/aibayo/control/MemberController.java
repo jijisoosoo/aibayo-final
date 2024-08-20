@@ -1,16 +1,17 @@
 package com.aico.aibayo.control;
 
 import com.aico.aibayo.common.BooleanEnum;
+import com.aico.aibayo.common.MemberRoleEnum;
 import com.aico.aibayo.common.MemberStatusEnum;
 import com.aico.aibayo.dto.InviteCodeDto;
+import com.aico.aibayo.dto.kid.KidDto;
 import com.aico.aibayo.dto.member.MemberDto;
-import com.aico.aibayo.dto.member.MemberSearchCondition;
 import com.aico.aibayo.entity.MemberEntity;
 import com.aico.aibayo.jwt.JWTUtil;
 import com.aico.aibayo.repository.member.MemberRepository;
 import com.aico.aibayo.service.inviteCode.InviteCodeService;
+import com.aico.aibayo.service.kid.KidService;
 import com.aico.aibayo.service.member.MemberService;
-import com.aico.aibayo.service.member.MemberServiceImpl;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpSession;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,6 +38,7 @@ public class MemberController {
     private final HttpSession session;
     private final MemberRepository memberRepository;
     private final InviteCodeService inviteCodeService;
+    private final KidService kidService;
 
     @ModelAttribute
     public void addAttributes(HttpServletRequest request, Model model) {
@@ -79,14 +82,17 @@ public class MemberController {
     public String signUpByInviteId(@PathVariable Long inviteId,
                                    Model model) {
         InviteCodeDto inviteCodeDto = inviteCodeService.getByInviteId(inviteId);
-        model.addAttribute("inviteInfo", inviteCodeDto);
+        model.addAttribute("inviteId", inviteCodeDto.getInviteId());
+
+        KidDto kidDto = kidService.getByKidNo(inviteCodeDto.getKidNo());
+        model.addAttribute("kidInfo", kidDto);
 
         if (inviteCodeDto == null) {
             model.addAttribute("inviteExpired", true);
             return "redirect:/login";
         }
 
-        return "member/signUp";
+        return "member/signUpInviteUser";
     }
 
     @GetMapping("/signUpInviteTeacher")
@@ -177,16 +183,83 @@ public class MemberController {
         memberDto.setKinderNo(member.getKinderNo());
         memberDto.setClassNo(member.getClassNo());
         memberDto.setRelationship(member.getRelationship());
-        memberDto.setStatus(MemberStatusEnum.INACTIVE.getStatus()); // 승인 해줘야 로그인 가능
+        memberDto.setStatus(MemberStatusEnum.TEMP.getStatus()); // 승인 해줘야 로그인 가능
         memberDto.setRegDate(LocalDateTime.now());
         memberDto.setLatestLogDate(LocalDateTime.now());
         memberDto.setIsMainParent(BooleanEnum.FALSE.getBool());
-        memberDto.setInvite(member.getInvite());
+        memberDto.setInviteId(member.getInviteId());
+
+        if (member.getRole().equals("ROLE_USER")) {
+            memberDto.setRoleNo(MemberRoleEnum.PARENT.getRole());
+        } else if (member.getRole().equals("ROLE_TEACHER")){
+            memberDto.setRoleNo(MemberRoleEnum.TEACHER.getRole());
+        } else if (member.getRole().equals("ROLE_PRINCIPAL")) {
+            memberDto.setRoleNo(MemberRoleEnum.PRINCIPAL.getRole());
+        }
+
 
         memberService.signUpProcess(memberDto);
 
         return "redirect:member/signIn";
     }
+
+    @PostMapping("/finalSignUpInvite")
+    public String finalSignUpInvite(@RequestBody MemberDto member) {
+
+        Long inviteId = member.getInviteId();
+
+        // inviteId가 유효하지 않은 경우 회원가입 로직을 진행하지 않음
+        if (inviteId == null || inviteId <= 0) {
+            log.error("Invalid inviteId: {}", inviteId);
+            return "member/signIn";
+        }
+
+        // 로그: inviteId 확인
+        log.info("Received inviteId: {}", inviteId);
+
+        // MemberDto에 formData 매핑
+        MemberDto memberDto = new MemberDto();
+        memberDto.setUsername(member.getUsername());
+        memberDto.setPassword(member.getPassword());
+        memberDto.setPhone(member.getPhone());
+        memberDto.setName(member.getName());
+        memberDto.setRole(member.getRole());
+        memberDto.setKidName(member.getKidName());
+        memberDto.setKidBirth(member.getKidBirth());
+        memberDto.setKidGender(member.getKidGender());
+        memberDto.setKinderNo(member.getKinderNo());
+        memberDto.setClassNo(member.getClassNo());
+        memberDto.setRelationship(member.getRelationship());
+        memberDto.setRoleNo(MemberRoleEnum.PARENT.getRole());
+        memberDto.setRoleNo(member.getRoleNo());
+
+//        if (member.getRole().equals("ROLE_USER")) {
+//            memberDto.setRoleNo(MemberRoleEnum.PARENT.getRole());
+//        } else if (member.getRole().equals("ROLE_TEACHER")){
+//            memberDto.setRoleNo(MemberRoleEnum.TEACHER.getRole());
+//        } else if (member.getRole().equals("ROLE_PRINCIPAL")) {
+//            memberDto.setRoleNo(MemberRoleEnum.PRINCIPAL.getRole());
+//        }
+
+        // 회원가입 처리 로직
+        member.setStatus(MemberStatusEnum.ACTIVE.getStatus());
+        member.setRegDate(LocalDateTime.now());
+        member.setLatestLogDate(LocalDateTime.now());
+        member.setIsMainParent(BooleanEnum.TRUE.getBool());
+
+        memberService.signUpProcess(member);
+
+        // inviteId와 관련된 처리
+        log.info("Invite ID: {}", inviteId);
+        InviteCodeDto inviteCodeDto = inviteCodeService.getByInviteId(inviteId);
+        inviteCodeService.deleteInviteCode(inviteCodeDto);
+
+        return "redirect:/member/signIn";
+    }
+
+
+
+
 
 
     @GetMapping("/signInFindPw")
@@ -198,6 +271,8 @@ public class MemberController {
     public String singInResetPw() {
         return "member/signInResetPw";
     }
+
+
 
     @GetMapping("/myPage")
     public String myPage(@ModelAttribute("loginInfo") MemberDto memberDto, Model model) {

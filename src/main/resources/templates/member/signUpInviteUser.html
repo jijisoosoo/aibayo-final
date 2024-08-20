@@ -5,30 +5,62 @@
     <link rel="stylesheet" th:href="@{/css/member/signUp.css}" />
     <link rel="stylesheet" th:href="@{/css/member/signInGuide.css}" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert2 CDN 추가 -->
     <script>
+        $(document).ready(function() {
+            const kidName = $("#kidName").val(); // kidName의 값을 가져옴
+
+            // SweetAlert2를 사용하여 확인 메시지 표시
+            Swal.fire({
+                title: `${kidName}의 보호자가 맞습니까?`,
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: '예',
+                cancelButtonText: '아니요'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // 사용자가 "예"를 선택한 경우: 페이지에 그대로 머무름
+                    console.log("보호자가 맞음.");
+                } else {
+                    // 사용자가 "아니요"를 선택한 경우: /member/signIn으로 리다이렉트
+                    window.location.href = "/member/signIn";
+                }
+            });
+        });
+
         function sendFormData() {
             const formData = {
                 username: $("#email-input").val(),
                 password: $("#password-input").val(),
                 phone: $("#phone-input").val(),
                 name: $("#name-input").val(),
-                role: "ROLE_USER",  // 역할을 고정값으로 설정
-                invite: "yes",
+                role: 'ROLE_USER',
+                roleNo: 3,
+                kidBirth: $("#kidBirth").val(),
+                kidGender: $("#kidGender").val(),
+                kidName: $("#kidName").val(),
+                relationship: $("#relationship-input").val(),
+                kinderNo: $("#kinderNo").val(),
+                classNo: $("#classNo").val(),
+                inviteId: $("#inviteId").val() // Include inviteId in the DTO
             };
 
             $.ajax({
                 type: "POST",
-                url: "/member/signUpKid",
+                url: "/member/finalSignUpInvite",
                 contentType: "application/json",
                 data: JSON.stringify(formData),
                 success: function(response) {
-                    window.location.href = "/member/signUpKid";
+                    console.log("회원가입 성공");
+                    window.location.href = "/member/signIn";
                 },
                 error: function(error) {
-                    console.log("Error:", error);
+                    console.log("회원가입 실패", error);
                 }
             });
         }
+
+
     </script>
 </head>
 <body>
@@ -40,6 +72,14 @@
                     <div class="text-wrapper-2">회원가입</div>
 
                     <form id="sign-up-form" onsubmit="event.preventDefault(); sendFormData();">
+
+                        <input type="hidden" name="kidBirth" th:value="${kidInfo.kidBirth}" id="kidBirth">
+                        <input type="hidden" name="kidGender" th:value="${kidInfo.kidGender}" id="kidGender">
+                        <input type="hidden" name="kidName" th:value="${kidInfo.kidName}" id="kidName">
+                        <input type="hidden" name="kinderNo" th:value="${kidInfo.kinderNo}" id="kinderNo">
+                        <input type="hidden" name="classNo" th:value="${kidInfo.classNo}" id="classNo">
+                        <input type="hidden" name="inviteId" th:value="${inviteId}" id="inviteId">
+
 
                         <div class="group-2">
                             <div class="group-3">
@@ -58,13 +98,20 @@
                                 <div class="group-7">
                                     <div class="overlap-group-4">
                                         <div class="text-wrapper-5" style="font-size: small">이름</div>
-                                        <input class="text-wrapper-6" type="text" name="name" id="name-input" th:value="${name}" readonly>
+                                        <input class="text-wrapper-6" type="text" name="name" id="name-input">
                                     </div>
                                 </div>
                                 <div class="overlap-wrapper">
                                     <div class="overlap-group-4">
-                                        <div class="text-wrapper-5" style="font-size: small">역할</div>
-                                        <input type="text" class="text-wrapper-9" name="role" id="role-input" value="ROLE_USER" readonly>
+                                        <label for="relationship-input" class="text-wrapper-5" style="font-size: small">원아와의 관계</label>
+                                        <select class="text-wrapper-9" name="relationship" id="relationship-input">
+                                            <option value="">관계를 선택하세요</option>
+                                            <option value="father">father</option>
+                                            <option value="mother">mother</option>
+                                            <option value="grandparents">grandparents</option>
+                                            <option value="uncle">uncle</option>
+                                            <option value="aunt">aunt</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -81,8 +128,6 @@
         <div class="logo h_class_78">
             <div class="h_class_79"><a th:href="@{/main/admin}" style="text-decoration: none; color: inherit; font-family: 'Noto Sans KR', sans-serif;">aibayo</a></div>
         </div>
-
-        <a th:href="@{/member/signIn}" class="span">소셜 로그인</a>
 
     </div>
 </div>

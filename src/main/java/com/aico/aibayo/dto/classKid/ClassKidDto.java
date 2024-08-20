@@ -14,4 +14,10 @@ public class ClassKidDto {
 
     private String kidName;
     private Integer acceptStatus;
+
+    public ClassKidDto(Long classNo, Long kidNo, Long acceptNo) {
+        this.classNo = classNo;
+        this.kidNo = kidNo;
+        this.acceptNo = acceptNo;
+    }
 }

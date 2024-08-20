@@ -70,11 +70,13 @@ public class MemberServiceImpl implements MemberService {
         memberEntity.setUsername(memberDto.getUsername());
         memberEntity.setName(memberDto.getName());
         memberEntity.setRole(memberDto.getRole());
+        memberEntity.setRoleNo(memberDto.getRoleNo());
         memberEntity.setPassword(bCryptPasswordEncoder.encode(memberDto.getPassword()));
         memberEntity.setPhone(memberDto.getPhone());
         memberEntity.setRegDate(LocalDateTime.now());
         memberEntity.setLatestLogDate(LocalDateTime.now());
-        memberEntity.setStatus(MemberStatusEnum.TEMP.getStatus());
+        memberEntity.setStatus(memberDto.getStatus());
+        memberEntity.setKinderNo(memberDto.getKinderNo());
         return memberEntity;
     }
 
@@ -82,14 +84,26 @@ public class MemberServiceImpl implements MemberService {
         KidEntity checkKid = findOrCreateKid(memberDto);
         log.info("아이 정보 확인 완료: kidNo = {}", checkKid.getKidNo());
 
-        if (classKidRepository.findAllByClassNoAndKidNo(memberDto.getClassNo(), checkKid.getKidNo()).isEmpty()) {
-            AcceptLogEntity acceptLogEntity = createAcceptLog(AcceptTypeEnum.CLASS_KID, AcceptStatusEnum.WAIT);
-            ClassKidEntity classKidEntity = new ClassKidEntity();
-            classKidEntity.setClassNo(memberDto.getClassNo());
-            classKidEntity.setKidNo(checkKid.getKidNo());
-            classKidEntity.setAcceptNo(acceptLogEntity.getAcceptNo());
-            classKidRepository.save(classKidEntity);
-            log.info("클래스-아이 정보 저장: classNo = {}, kidNo = {}", memberDto.getClassNo(), checkKid.getKidNo());
+        if (memberDto.getInviteId() == null) {
+            if (classKidRepository.findAllByClassNoAndKidNo(memberDto.getClassNo(), checkKid.getKidNo()).isEmpty()) {
+                AcceptLogEntity acceptLogEntity = createAcceptLog(AcceptTypeEnum.CLASS_KID, AcceptStatusEnum.WAIT);
+                ClassKidEntity classKidEntity = new ClassKidEntity();
+                classKidEntity.setClassNo(memberDto.getClassNo());
+                classKidEntity.setKidNo(checkKid.getKidNo());
+                classKidEntity.setAcceptNo(acceptLogEntity.getAcceptNo());
+                classKidRepository.save(classKidEntity);
+                log.info("classKid 정보 저장: classNo = {}, kidNo = {}", memberDto.getClassNo(), checkKid.getKidNo());
+            }
+
+            Long memberAcceptNo = createAcceptLogForParent(memberDto);
+            ParentKidEntity parentKidEntity = new ParentKidEntity();
+            parentKidEntity.setId(newMemberEntity.getId());
+            parentKidEntity.setKidNo(checkKid.getKidNo());
+            parentKidEntity.setAcceptNo(memberAcceptNo);
+            parentKidEntity.setIsMainParent(BooleanEnum.FALSE.getBool());
+            parentKidEntity.setParentRelationship(memberDto.getRelationship());
+            parentKidRepository.save(parentKidEntity);
+            log.info("parentKid 정보 저장 완료: memberId = {}, kidNo = {}", newMemberEntity.getId(), checkKid.getKidNo());
         }
 
         Long memberAcceptNo = createAcceptLogForParent(memberDto);
@@ -97,10 +111,11 @@ public class MemberServiceImpl implements MemberService {
         parentKidEntity.setId(newMemberEntity.getId());
         parentKidEntity.setKidNo(checkKid.getKidNo());
         parentKidEntity.setAcceptNo(memberAcceptNo);
-        parentKidEntity.setIsMainParent(BooleanEnum.FALSE.getBool());
+        parentKidEntity.setIsMainParent(BooleanEnum.TRUE.getBool());
         parentKidEntity.setParentRelationship(memberDto.getRelationship());
         parentKidRepository.save(parentKidEntity);
-        log.info("부모-아이 정보 저장 완료: memberId = {}, kidNo = {}", newMemberEntity.getId(), checkKid.getKidNo());
+        log.info("parentKid 정보 저장 완료: memberId = {}, kidNo = {}", newMemberEntity.getId(), checkKid.getKidNo());
+
     }
 
     private KidEntity findOrCreateKid(MemberDto memberDto) {
@@ -120,7 +135,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     private Long createAcceptLogForParent(MemberDto memberDto) {
-        AcceptStatusEnum status = memberDto.getInvite() == null ? AcceptStatusEnum.WAIT : AcceptStatusEnum.ACCEPT;
+        AcceptStatusEnum status = memberDto.getInviteId() == null ? AcceptStatusEnum.WAIT : AcceptStatusEnum.ACCEPT;
         AcceptLogEntity acceptLogEntity = createAcceptLog(AcceptTypeEnum.PARENT_KID, status);
         return acceptLogEntity.getAcceptNo();
     }
