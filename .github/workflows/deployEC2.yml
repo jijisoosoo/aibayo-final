@@ -1,0 +1,49 @@
+name: Deploy to EC2
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches:
+      - main
+
+
+jobs:
+  SSH:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: SSH and Setup
+        uses: appleboy/ssh-action@master
+        with:
+          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }} # 내가 변수로 저장한 pem key
+          host: ${{ secrets.EC2_HOST }} # 내가 변수로 저장한 ip
+          username: ${{ secrets.EC2_USER }} # 내가 변수로 저장한 User
+          script: |
+            cd /home/ubuntu/Github/aibayo-final # 내가 Clone한 폴더 안으로 들어간다.
+            git pull # 자동으로 pull해서 주기적 업데이트
+            chmod +x gradlew
+
+      - name: Terminate Existing Application
+        uses: appleboy/ssh-action@master
+        with:
+          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          script: |
+            pkill -f 'java -jar build/libs/aibayo-0.0.1-SNAPSHOT.jar'
+        continue-on-error: true # 이 작업에 대한 에러 넘김
+
+      - name: Build and Run Application
+        uses: appleboy/ssh-action@master
+        with:
+          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          script: |
+            cd /home/ubuntu/Github/aibayo-final
+            ./gradlew clean build
+            mkdir -p $HOME/aibayo_log
+            nohup java -jar build/libs/aibayo-0.0.1-SNAPSHOT.jar > "$HOME/aibayo_log/$(date +%Y-%m-%d_%H-%M-%S)_aibayo.log" 2>&1 & # 백그라운드 실행, 로그파일 생성

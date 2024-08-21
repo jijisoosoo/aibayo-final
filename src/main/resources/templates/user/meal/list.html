@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">식단표</title>
 
@@ -10,7 +10,7 @@
 </th:block>
 
 <th:block layout:fragment="javascript">
-    <th:block th:replace="~{/common/fullcalendar :: js}"/>
+    <th:block th:replace="~{common/fullcalendar :: js}"/>
     <script src="/js/meal/meal.js"></script>
     <script src="/js/meal/fullcalendar.js"></script>
 </th:block>

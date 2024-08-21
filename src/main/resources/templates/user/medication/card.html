@@ -1,17 +1,17 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">투약동의서 메인</title>
 
 <th:block layout:fragment="css">
-    <th:block th:replace="~{/common/datepicker :: css}"/>
+    <th:block th:replace="~{common/datepicker :: css}"/>
     <link rel="stylesheet" href="/css/medication/list.css" />
 </th:block>
 
 <th:block layout:fragment="javascript">
-    <th:block th:replace="~{/common/datepicker :: js}"/>
+    <th:block th:replace="~{common/datepicker :: js}"/>
 </th:block>
 
 
@@ -52,7 +52,7 @@
                             </svg>
                         </div>
                         <input type="text" class="form-control datepicker" placeholder="년/월/일" readonly>
-                        <a href="/medication/user/writeform" class="button-new">작성</a>
+                        <a href="/medication/user/write" class="button-new">작성</a>
                     </div>
                 </div>
 

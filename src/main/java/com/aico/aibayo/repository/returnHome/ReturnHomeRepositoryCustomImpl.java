@@ -19,10 +19,9 @@ import java.util.List;
 public class ReturnHomeRepositoryCustomImpl implements ReturnHomeRepositoryCustom{
     private final JPAQueryFactory jpaQueryFactory;
     private final QOrderFormEntity orderForm = QOrderFormEntity.orderFormEntity;
-    private final QKidEntity kid = QKidEntity.kidEntity;
+    private final QKidEntity kid =QKidEntity.kidEntity;
     private final QReturnHomeAgreementEntity returnHomeAgreement = QReturnHomeAgreementEntity.returnHomeAgreementEntity;
     private final QReturnHomeAgreementParentEntity returnHomeAgreementParent = QReturnHomeAgreementParentEntity.returnHomeAgreementParentEntity;
-
     @Override
     public Page<ReturnHomeDto> findAllByKinderNo(ReturnHomeSearchCondition condition, Pageable pageable) {
         List<ReturnHomeDto> Homeorder = jpaQueryFactory
@@ -45,9 +44,10 @@ public class ReturnHomeRepositoryCustomImpl implements ReturnHomeRepositoryCusto
                 .join(returnHomeAgreement).on(orderForm.orderNo.eq(returnHomeAgreement.orderNo))
                 .join(returnHomeAgreementParent).on(returnHomeAgreement.rhAgreeNo.eq(returnHomeAgreementParent.rhAgreeNo))
                 .where(
-                    getDischargeFlagEq(kid),
-                    getOrderTypeEq(condition.getOrderNo(),orderForm),
-                    getKinderNoEq(condition.getKinderNo(), kid)
+                        getOrderDeleteFlagEq(orderForm),
+                        getDischargeFlagEq(kid),
+                        getOrderTypeEq(condition.getOrderNo(),orderForm),
+                        getKinderNoEq(condition.getKinderNo(), kid)
                 )
                 .orderBy(orderForm.runDate.desc())
                 .offset(pageable.getOffset())
@@ -60,6 +60,7 @@ public class ReturnHomeRepositoryCustomImpl implements ReturnHomeRepositoryCusto
                 .join(returnHomeAgreement).on(orderForm.orderNo.eq(returnHomeAgreement.orderNo))
                 .join(returnHomeAgreementParent).on(returnHomeAgreement.rhAgreeNo.eq(returnHomeAgreementParent.rhAgreeNo))
                 .where(
+                        getOrderDeleteFlagEq(orderForm),
                         getDischargeFlagEq(kid),
                         getOrderTypeEq(condition.getOrderNo(), orderForm),
                         getKinderNoEq(condition.getKinderNo(), kid)
@@ -89,6 +90,7 @@ public class ReturnHomeRepositoryCustomImpl implements ReturnHomeRepositoryCusto
                 .join(returnHomeAgreement).on(orderForm.orderNo.eq(returnHomeAgreement.orderNo))
                 .join(returnHomeAgreementParent).on(returnHomeAgreement.rhAgreeNo.eq(returnHomeAgreementParent.rhAgreeNo))
                 .where(
+                        getOrderDeleteFlagEq(orderForm),
                         getDischargeFlagEq(kid),
                         getOrderTypeEq(condition.getOrderNo(),orderForm),
                         getKinderNoEq(condition.getKinderNo(), kid),
@@ -105,6 +107,7 @@ public class ReturnHomeRepositoryCustomImpl implements ReturnHomeRepositoryCusto
                 .join(returnHomeAgreement).on(orderForm.orderNo.eq(returnHomeAgreement.orderNo))
                 .join(returnHomeAgreementParent).on(returnHomeAgreement.rhAgreeNo.eq(returnHomeAgreementParent.rhAgreeNo))
                 .where(
+                        getOrderDeleteFlagEq(orderForm),
                         getDischargeFlagEq(kid),
                         getOrderTypeEq(condition.getOrderNo(), orderForm),
                         getKinderNoEq(condition.getKinderNo(), kid),
@@ -114,8 +117,43 @@ public class ReturnHomeRepositoryCustomImpl implements ReturnHomeRepositoryCusto
     }
     @Override
     public ReturnHomeDto findByRhAgreeNo(Long rhAgreeNo) {
-        return null;
+        return jpaQueryFactory.select(Projections.constructor(ReturnHomeDto.class,
+                        orderForm.orderNo,
+                        orderForm.orderType,
+                        orderForm.kidNo,
+                        orderForm.orderRequestDate,
+                        orderForm.runDate,
+                        orderForm.orderRequester,
+                        orderForm.orderSpecific,
+                        orderForm.orderParentSign,
+                        orderForm.orderDeleteFlag,
+                        returnHomeAgreement.rhAgreeNo,
+                        returnHomeAgreement.rhTime,
+                        returnHomeAgreement.rhType,
+                        returnHomeAgreementParent.rhAgreeParentNo,
+                        returnHomeAgreementParent.rhMainParentName,
+                        returnHomeAgreementParent.rhMainParentTel,
+                        returnHomeAgreementParent.rhMinorParentName,
+                        returnHomeAgreementParent.rhMinorParentTel,
+                        kid.kidName,
+                        kid.dischargeFlag))
+                .from(orderForm)
+                .join(returnHomeAgreement).on(returnHomeAgreement.orderNo.eq(orderForm.orderNo))
+                .join(returnHomeAgreementParent).on(returnHomeAgreementParent.rhAgreeNo.eq(returnHomeAgreement.rhAgreeNo))
+                .join(kid).on(kid.kidNo.eq(orderForm.kidNo))
+                .where(
+                        getOrderDeleteFlagEq(orderForm),
+                        getDischargeFlagEq(kid),
+                        returnHomeAgreement.rhAgreeNo.eq(rhAgreeNo)
+                )
+                .fetchOne();
+
+
     }
+    private BooleanExpression getOrderDeleteFlagEq(QOrderFormEntity orderForm) {
+        return orderForm.orderDeleteFlag.eq(BooleanEnum.FALSE.getBool());
+    }
+
 
     private BooleanExpression getDischargeFlagEq(QKidEntity kid) {
         return kid.dischargeFlag.eq(BooleanEnum.FALSE.getBool());

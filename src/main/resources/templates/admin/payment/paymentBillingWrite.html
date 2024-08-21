@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">paymentBillingWrite</title>
 
@@ -16,8 +16,8 @@
 
 <th:block layout:fragment="javascript">
     <script src="/js/payment/paymentWrite.js"></script>
-    <th:block th:replace="~{/common/datepicker :: js}"/>
-    <th:block th:replace="~{/common/datepicker :: css}"/>
+    <th:block th:replace="~{common/datepicker :: js}"/>
+    <th:block th:replace="~{common/datepicker :: css}"/>
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
@@ -25,7 +25,7 @@
     <div class="title">
         <div class="title-flow2">
             <a class="icon-back" th:href="@{/admin/paymentBillingMain}">
-                <img src="/payment/img/back.png" alt=""/>
+                <img src="payment/img/back.png" alt=""/>
             </a>
             <div class="div-wrapper"><div class="text-wrapper-title">청구서 작성하기</div></div>
         </div>
@@ -36,7 +36,7 @@
             <div class="title-3">
                 <div class="text-wrapper-6">청구 대상</div>
                 <a class="btn button-cancel" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    <img class="img-2" src="/payment/img/pencil-white.png" />
+                    <img class="img-2" src="payment/img/pencil-white.png" />
                     <div class="text-cancel">편집</div>
                 </a>
 
@@ -51,7 +51,7 @@
                                     <div class="text-wrapper">소속 반 수정</div>
                                 </div>
                                 <button class="button-x" href="" data-bs-dismiss="modal" aria-label="Close">
-                                    <img src="/schedule/img/x.png" alt=""/>
+                                    <img src="schedule/img/x.png" alt=""/>
                                 </button>
                             </div>
                             <div class="modalform">
@@ -74,7 +74,7 @@
                                         <label class="modal-child" for="child_1">
                                             <input class="form-check-input" type="checkbox" name="classCheckedCb" value="child_1" id="child_1">
                                             <div class="profile">
-                                                <img src="/payment/img/profile.png" alt=""/>
+                                                <img src="payment/img/profile.png" alt=""/>
                                             </div>
                                             <div class="textarea">
                                                 <div class="text-wrapper-10">김원아</div>
@@ -85,7 +85,7 @@
                                         <label class="modal-child" for="child_2">
                                             <input class="form-check-input" type="checkbox" name="classCheckedCb" value="child_2" id="child_2">
                                             <div class="profile">
-                                                <img src="/payment/img/profile.png" alt=""/>
+                                                <img src="payment/img/profile.png" alt=""/>
                                             </div>
                                             <div class="textarea">
                                                 <div class="text-wrapper-10">김원아</div>
@@ -96,7 +96,7 @@
                                         <label class="modal-child" for="child_3">
                                             <input class="form-check-input" type="checkbox" name="classCheckedCb" value="child_3" id="child_3">
                                             <div class="profile">
-                                                <img src="/payment/img/profile.png" alt=""/>
+                                                <img src="payment/img/profile.png" alt=""/>
                                             </div>
                                             <div class="textarea">
                                                 <div class="text-wrapper-10">김원아</div>
@@ -107,7 +107,7 @@
                                         <label class="modal-child" for="child_4">
                                             <input class="form-check-input" type="checkbox" name="classCheckedCb" value="child_4" id="child_4">
                                             <div class="profile">
-                                                <img src="/payment/img/profile.png" alt=""/>
+                                                <img src="payment/img/profile.png" alt=""/>
                                             </div>
                                             <div class="textarea">
                                                 <div class="text-wrapper-10">김원아</div>
@@ -118,7 +118,7 @@
                                         <label class="modal-child" for="child_5">
                                             <input class="form-check-input" type="checkbox" name="classCheckedCb" value="child_5" id="child_5">
                                             <div class="profile">
-                                                <img src="/payment/img/profile.png" alt=""/>
+                                                <img src="payment/img/profile.png" alt=""/>
                                             </div>
                                             <div class="textarea">
                                                 <div class="text-wrapper-10">김원아</div>
@@ -129,7 +129,7 @@
                                         <label class="modal-child" for="child_6">
                                             <input class="form-check-input" type="checkbox" name="classCheckedCb" value="child_6" id="child_6">
                                             <div class="profile">
-                                                <img src="/payment/img/profile.png" alt=""/>
+                                                <img src="payment/img/profile.png" alt=""/>
                                             </div>
                                             <div class="textarea">
                                                 <div class="text-wrapper-10">김원아</div>
@@ -140,7 +140,7 @@
                                         <label class="modal-child" for="child_7">
                                             <input class="form-check-input" type="checkbox" name="classCheckedCb" value="child_7" id="child_7">
                                             <div class="profile">
-                                                <img src="/payment/img/profile.png" alt=""/>
+                                                <img src="payment/img/profile.png" alt=""/>
                                             </div>
                                             <div class="textarea">
                                                 <div class="text-wrapper-10">김원아</div>
@@ -174,7 +174,7 @@
                     <div class="selectedchild">
                         <div class="child">
                             <div class="profile">
-                                <img src="/payment/img/profile.png" alt=""/>
+                                <img src="payment/img/profile.png" alt=""/>
                             </div>
                             <div class="textarea">
                                 <div class="text-wrapper-10">김원아</div>
@@ -183,7 +183,7 @@
                         </div>
                         <div class="child">
                             <div class="profile">
-                                <img src="/payment/img/profile.png" alt=""/>
+                                <img src="payment/img/profile.png" alt=""/>
                             </div>
                             <div class="textarea">
                                 <div class="text-wrapper-10">박원아</div>
@@ -192,7 +192,7 @@
                         </div>
                         <div class="child">
                             <div class="profile">
-                                <img src="/payment/img/profile.png" alt=""/>
+                                <img src="payment/img/profile.png" alt=""/>
                             </div>
                             <div class="textarea">
                                 <div class="text-wrapper-10">이원아</div>
@@ -256,7 +256,7 @@
                         <div class="title">
                             <div class="div-5">
                                 <div class="profile">
-                                    <img src="/payment/img/profile.png" alt=""/>
+                                    <img src="payment/img/profile.png" alt=""/>
                                 </div>
                                 <div class="textarea">
                                     <div class="text-wrapper-15">김원아</div>
@@ -264,7 +264,7 @@
                                 </div>
                             </div>
                             <a class="button-x" href="">
-                                <img src="/payment/img/x.png" alt=""/>
+                                <img src="payment/img/x.png" alt=""/>
                             </a>
                         </div>
                         <div class="charge">
@@ -275,7 +275,7 @@
                                     <div class="text-wrapper-16">원</div>
                                 </div>
                             </div>
-                            <img class="img-2" src="/payment/img/minus.png" />
+                            <img class="img-2" src="payment/img/minus.png" />
                             <div class="div-13">
                                 <div class="text-wrapper-17">할인</div>
                                 <div class="div-14">
@@ -283,7 +283,7 @@
                                     <div class="text-wrapper-16">원</div>
                                 </div>
                             </div>
-                            <img class="icon-equal" src="/payment/img/equal.png" />
+                            <img class="icon-equal" src="payment/img/equal.png" />
                             <div class="text-finalcharge">
                                 <div class="text-wrapper-18">총 청구 금액</div>
                                 <div class="div-14">
@@ -297,7 +297,7 @@
                         <div class="title">
                             <div class="div-5">
                                 <div class="profile">
-                                    <img src="/payment/img/profile.png" alt=""/>
+                                    <img src="payment/img/profile.png" alt=""/>
                                 </div>
                                 <div class="textarea">
                                     <div class="text-wrapper-15">박원아</div>
@@ -305,7 +305,7 @@
                                 </div>
                             </div>
                             <a class="button-x" href="">
-                                <img src="/payment/img/x.png" alt=""/>
+                                <img src="payment/img/x.png" alt=""/>
                             </a>
                         </div>
                         <div class="charge">
@@ -316,7 +316,7 @@
                                     <div class="text-wrapper-16">원</div>
                                 </div>
                             </div>
-                            <img class="img-2" src="/payment/img/minus.png" />
+                            <img class="img-2" src="payment/img/minus.png" />
                             <div class="div-13">
                                 <div class="text-wrapper-17">할인</div>
                                 <div class="div-14">
@@ -324,7 +324,7 @@
                                     <div class="text-wrapper-16">원</div>
                                 </div>
                             </div>
-                            <img class="icon-equal" src="/payment/img/equal.png" />
+                            <img class="icon-equal" src="payment/img/equal.png" />
                             <div class="text-finalcharge">
                                 <div class="text-wrapper-18">총 청구 금액</div>
                                 <div class="div-14">
@@ -372,11 +372,11 @@
                         <div class="title">
                             <div class="div-5">
                                 <div class="profile">
-                                    <img src="/payment/img/profile.png" alt=""/>
+                                    <img src="payment/img/profile.png" alt=""/>
                                 </div>
                                 <div class="text-wrapper-15">이원아</div>
                             </div>
-                            <img class="button-x" src="/payment/img/x.png" />
+                            <img class="button-x" src="payment/img/x.png" />
                         </div>
                         <p class="memo">
                             안녕하세요, 아이바요유치원입니다.<br />동희의 하반기 등록비 안내드립니다^^ 확인 후 궁금하신 점은
@@ -402,14 +402,14 @@
                     <div class="div-6">
                         <div class="text-wrapper-11">예약일</div>
                         <div class="calendar-pick">
-                            <img class="calendar-vector" src="/images/common/calendar_gray.png" />
+                            <img class="calendar-vector" src="images/common/calendar_gray.png" />
                             <input type="text" class="datepickerdiv datepicker" placeholder="날짜 선택" readonly>
                         </div>
                     </div>
                     <div class="div-6">
                         <div class="text-wrapper-11">예약시간</div>
                         <div class="calendar-pick">
-                            <img class="img-6" src="/images/common/clock.png" />
+                            <img class="img-6" src="images/common/clock.png" />
                             <input type="text" class="datepickerdiv datepicker" placeholder="시간 선택" readonly>
                         </div>
                     </div>
@@ -431,14 +431,14 @@
                 <div class="div-6">
                     <div class="text-wrapper-11">날짜</div>
                     <div class="calendar-pick">
-                        <img class="calendar-vector" src="/images/common/calendar_gray.png" />
+                        <img class="calendar-vector" src="images/common/calendar_gray.png" />
                         <input type="text" class="datepickerdiv datepicker" placeholder="날짜 선택" readonly>
                     </div>
                 </div>
                 <div class="div-6">
                     <div class="text-wrapper-11">시간</div>
                     <div class="calendar-pick">
-                        <img class="img-6" src="/images/common/clock.png" />
+                        <img class="img-6" src="images/common/clock.png" />
                         <input type="text" class="datepickerdiv datepicker" placeholder="시간 선택" readonly>
                     </div>
                 </div>

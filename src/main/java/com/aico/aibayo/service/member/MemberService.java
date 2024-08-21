@@ -16,8 +16,18 @@ public interface MemberService {
     void updatePassword(String username, String newPassword);
 
     MemberDto getByUsernameWithParentKid(String username);
+    MemberDto getByUsernameWithParentKid(MemberSearchCondition condition);
 
     void deleteMember(String username, String role);
 
     void signUpProcess(MemberDto memberDto);
+
+    boolean updatePasswordByEmail(String email, String newPassword);
+
+    boolean isEmailRegistered(String email);
+    boolean sendPasswordResetLink(String email, String resetLink);
+
+    boolean checkAdminKinderNo(String username);
+
+    boolean adminUpdateKinderNo(String username, String kinderNo);
 }

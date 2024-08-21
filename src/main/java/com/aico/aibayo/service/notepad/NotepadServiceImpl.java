@@ -10,7 +10,7 @@ import com.aico.aibayo.entity.NotepadEntity;
 import com.aico.aibayo.entity.NotepadReceiverEntity;
 import com.aico.aibayo.repository.BoardRepository;
 import com.aico.aibayo.repository.LifeRecordRepository;
-import com.aico.aibayo.repository.NotepadReceiverRepository;
+import com.aico.aibayo.repository.notepad.NotepadReceiverRepository;
 import com.aico.aibayo.repository.notepad.NotepadRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +45,17 @@ public class NotepadServiceImpl implements NotepadService {
         Pageable pageable = PageRequest.of(page - 1, PAGE_SIZE);
 
         return notepadRepository.findAllByKidNo(condition, pageable);
+    }
+
+    @Override
+    public NotepadDto getTop1ByKidNo(Long kidNo) {
+        NotepadSearchCondition condition = new NotepadSearchCondition();
+        condition.setKidNo(kidNo);
+
+        Pageable pageable = PageRequest.of(0, 1);
+        Page<NotepadDto> oneByKidNo = notepadRepository.findAllByKidNo(condition, pageable);
+
+        return oneByKidNo.hasContent() ? oneByKidNo.getContent().get(0) : null;
     }
 
     @Override

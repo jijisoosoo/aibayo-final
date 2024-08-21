@@ -50,12 +50,11 @@
     background-color: #ffffff;
     display: flex;
     flex: 0 0 auto;
-    justify-content: space-between;
+    justify-content: flex-end;
     padding: 0px 30px 0px 0px;
     position: relative;
     width: 100%;
     height: fit-content;
-
 }
 
 .list .frame-2 {
@@ -137,7 +136,7 @@
 
 }
 
-.list .button-new {
+.writeBtn {
     background-color: #ffe668;
     border-radius: 8px;
     box-shadow: var(--button-shadow);
@@ -437,16 +436,16 @@
 }
 
 .list .frame-15 {
-        align-items: center;
-        background-color: #ffffff;
-        display: flex;
-        flex: 0 0 auto;
-        justify-content: center;
-        position: relative;
+    align-items: center;
+    background-color: #ffffff00;
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: center;
+    position: relative;
     }
 .list .frame-16 {
     align-items: center;
-    background-color: #ffffff;
+    background-color: #ffffff00;
     display: inline-flex;
     flex: 0 0 auto;
     gap: 10px;

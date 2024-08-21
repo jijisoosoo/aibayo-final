@@ -1,0 +1,62 @@
+name: Deploy to cloudtype
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Connect deploy key
+        uses: cloudtype-github-actions/connect@v1
+        with:
+          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          ghtoken: ${{ secrets.GHP_TOKEN }}
+      - name: Deploy
+        uses: cloudtype-github-actions/deploy@v1
+        with:
+          token: ${{ secrets.CLOUDTYPE_TOKEN }}
+          project: moonjuyoung/aibayo-project
+          stage: main
+          yaml: |
+            name: aibayo-final
+            app: java@17
+            options:
+              ports: "8080"
+              env:
+                - name: MYSQL_USERNAME
+                  secret: MYSQL_USERNAME
+                - name: MYSQL_URL
+                  secret: MYSQL_URL
+                - name: MYSQL_PASSWORD
+                  secret: MYSQL_PASSWORD
+                - name: JWT_SECRET
+                  secret: JWT_SECRET
+                - name: NAVER_CLIENT_ID
+                  secret: NAVER_CLIENT_ID
+                - name: NAVER_CLIENT_SECRET
+                  secret: NAVER_CLIENT_SECRET
+                - name: API_KEY
+                  secret: API_KEY
+                - name: GOOGLE_CLIENT_ID
+                  secret: GOOGLE_CLIENT_ID
+                - name: GOOGLE_CLIENT_SECRET
+                  secret: GOOGLE_CLIENT_SECRET
+                - name: MAIL_USERNAME
+                  secret: MAIL_USERNAME
+                - name: MAIL_PASSWORD
+                  secret: MAIL_PASSWORD
+                - name: AWS_ACCESS_KEY
+                  secret: AWS_ACCESS_KEY
+                - name: AWS_SECRET_KEY
+                  secret: AWS_SECRET_KEY
+                - name: AWS_S3_BUCKET
+                  secret: AWS_S3_BUCKET
+              buildenv: []
+            context:
+              git:
+                url: git@github.com:${{ github.repository }}.git
+                ref: ${{ github.ref }}
+              preset: java-springboot

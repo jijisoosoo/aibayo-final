@@ -271,7 +271,9 @@ th{
   text-align: center;
   vertical-align: middle;
 }
-.kinder{
+.kinder , #sample6_address , #sample6_detailAddress
+
+{
   align-items: center;
   background-color: #ffffff;
   border: 1px solid;
@@ -289,7 +291,7 @@ th{
   text-align: center;
   font-size: 11px;
 }
-.location{
+.locNo{
   width: 90px;
   height: 50px;
   text-align: center;
@@ -330,27 +332,7 @@ th{
   border-radius: 8px;
   margin: 0px 10px;
 }
-#sample6_address{
-  width: 380px;
-  height: 50px;
-  text-align: center;
-  align-items: center;
-  background-color: #ffffff;
-  border: 1px solid;
-  border-color: #e0e0e0;
-  border-radius: 8px;
-}
-#sample6_detailAddress{
-  width: 200px;
-  height: 50px;
-  text-align: center;
-  align-items: center;
-  background-color: #ffffff;
-  border: 1px solid;
-  border-color: #e0e0e0;
-  border-radius: 8px;
-  margin: 0px;
-}
+
 tbody, td, tfoot, th, thead, tr {
   border-color: inherit;
   border-style: none;

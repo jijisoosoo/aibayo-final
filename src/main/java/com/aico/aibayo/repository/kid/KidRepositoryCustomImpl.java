@@ -6,14 +6,7 @@ import com.aico.aibayo.common.BooleanEnum;
 import com.aico.aibayo.common.MemberStatusEnum;
 import com.aico.aibayo.dto.kid.KidDto;
 import com.aico.aibayo.dto.kid.KidSearchCondition;
-import com.aico.aibayo.entity.QAcceptLogEntity;
-import com.aico.aibayo.entity.QClassEntity;
-import com.aico.aibayo.entity.QClassKidEntity;
-import com.aico.aibayo.entity.QClassTeacherEntity;
-import com.aico.aibayo.entity.QInviteCodeEntity;
-import com.aico.aibayo.entity.QKidEntity;
-import com.aico.aibayo.entity.QMemberEntity;
-import com.aico.aibayo.entity.QParentKidEntity;
+import com.aico.aibayo.entity.*;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -215,6 +208,58 @@ public class KidRepositoryCustomImpl implements KidRepositoryCustom {
                 .fetch();
     }
 
+    @Override
+    public List<KidDto> findAllByParent(Long id) {
+        return jpaQueryFactory
+                .select(Projections.constructor(KidDto.class,
+                        kid.kidNo,
+                        kid.kinderNo,
+                        kid.kidName,
+                        kid.kidBirth,
+                        kid.kidGender,
+                        kid.admissionDate,
+                        kid.modifyDate,
+                        kid.dischargeDate,
+                        kid.dischargeFlag
+                ))
+                .from(kid)
+                .join(parentKid).on(kid.kidNo.eq(parentKid.kidNo))
+                .join(member).on(
+                        member.id.eq(parentKid.id)
+                                .and(member.status.eq(MemberStatusEnum.ACTIVE.getStatus()))
+                )
+                .join(acceptLog1).on(
+                        acceptLog1.acceptNo.eq(parentKid.acceptNo)
+                                .and(acceptLog1.acceptStatus.eq(AcceptStatusEnum.ACCEPT.getStatus()))
+                )
+                .where(
+                        kid.dischargeFlag.eq(BooleanEnum.FALSE.getBool()),
+                        member.id.eq(id)
+                )
+                .fetch();
+    }
+
+    public List<KidEntity> findAllKid(Long kinderNo, Long classNo) {
+        return jpaQueryFactory
+                .select(kid)
+                .from(kid)
+                .join(classKid).on(kid.kidNo.eq(classKid.kidNo))
+                .join(clazz).on(
+                        clazz.classNo.eq(classKid.classNo)
+                                .and(clazz.classDeleteFlag.eq(BooleanEnum.FALSE.getBool())) // classDeleteFlag 조건
+                )
+                .join(acceptLog1).on(
+                        acceptLog1.acceptNo.eq(classKid.acceptNo)
+                                .and(acceptLog1.acceptStatus.eq(AcceptStatusEnum.ACCEPT.getStatus())) // acceptStatus 조건
+                )
+                .where(
+                        kid.kinderNo.eq(kinderNo), // kinderNo 조건
+                        classKid.classNo.eq(classNo) // classNo 조건
+                )
+                .fetch();
+    }
+
+
     private BooleanExpression getInviteAcceptTypeEq(Integer inviteAcceptStatus) {
         return inviteAcceptStatus == null ?
                 null : acceptLog3.acceptType.eq(AcceptTypeEnum.INVITE_CODE.getType());
@@ -227,4 +272,6 @@ public class KidRepositoryCustomImpl implements KidRepositoryCustom {
     private BooleanExpression getClassEq(Long classNo) {
         return classNo == null ? null : clazz.classNo.eq(classNo);
     }
+
+
 }

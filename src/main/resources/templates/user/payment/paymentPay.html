@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">paymentPay</title>
 
@@ -19,8 +19,8 @@
 <div class="container main_container" layout:fragment="content">
 
     <div class="title">
-        <a class="icon-back" th:href="@{/user/paymentMain}">
-            <img src="/payment/img/back.png" alt=""/>
+        <a class="icon-back" th:href="@{user/paymentMain}">
+            <img src="payment/img/back.png" alt=""/>
         </a>
         <div class="div-wrapper"><div class="text-wrapper-title">납부하기</div></div>
     </div>
