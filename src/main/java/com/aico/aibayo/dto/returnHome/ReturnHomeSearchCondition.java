@@ -17,7 +17,7 @@ public class ReturnHomeSearchCondition {
     private Long kinderNo;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime orderRequestDate;
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd ")
     private LocalDateTime runDate;
     private String rhType;
     private String dischargeFlag;

@@ -47,6 +47,38 @@ public class MemberDto {
 
     private String invite; // 초대코드 유무
 
+    private Long inviteId;
+
+    public MemberDto(Long id, String username, String name, String password, String phone, Integer roleNo, String role,
+                     Integer status, LocalDateTime regDate, LocalDateTime modifyDate, LocalDateTime inactivateDate,
+                     LocalDateTime latestLogDate, String profilePicture, Long kinderNo, Long classNo, Long kidNo,
+                     Long acceptNo, Integer acceptStatus, String isMainParent, String kidName, LocalDate kidBirth,
+                     String kidGender, String relationship, String invite) {
+        this.id = id;
+        this.username = username;
+        this.name = name;
+        this.password = password;
+        this.phone = phone;
+        this.roleNo = roleNo;
+        this.role = role;
+        this.status = status;
+        this.regDate = regDate;
+        this.modifyDate = modifyDate;
+        this.inactivateDate = inactivateDate;
+        this.latestLogDate = latestLogDate;
+        this.profilePicture = profilePicture;
+        this.kinderNo = kinderNo;
+        this.classNo = classNo;
+        this.kidNo = kidNo;
+        this.acceptNo = acceptNo;
+        this.acceptStatus = acceptStatus;
+        this.isMainParent = isMainParent;
+        this.kidName = kidName;
+        this.kidBirth = kidBirth;
+        this.kidGender = kidGender;
+        this.relationship = relationship;
+        this.invite = invite;
+    }
 
     public MemberDto(Long id, String username, String name, String password, String phone, Integer roleNo, String role,
                      Integer status, LocalDateTime regDate, LocalDateTime modifyDate, LocalDateTime inactivateDate,

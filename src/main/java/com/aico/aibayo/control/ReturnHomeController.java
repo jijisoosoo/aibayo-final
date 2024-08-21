@@ -2,7 +2,6 @@ package com.aico.aibayo.control;
 
 import com.aico.aibayo.common.OrderTypeEnum;
 import com.aico.aibayo.dto.ClassDto;
-import com.aico.aibayo.dto.announce.AnnounceDto;
 import com.aico.aibayo.dto.kid.KidDto;
 import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.dto.returnHome.ReturnHomeDto;
@@ -51,7 +50,7 @@ public String admincard(
     Page<ReturnHomeDto> homeList= returnHomeService.findAllByKinderNo(condition,hashMap);
     log.info("homeCard(admin){}",homeList);
     model.addAttribute("homeList",homeList);
-    return getPageInfoAndGoView(model, homeList, "/admin/home/card");
+    return getPageInfoAndGoView(model, homeList, "admin/home/card");
 }
 private String getPageInfoAndGoView(Model model, Page<ReturnHomeDto> homeList, String view) {
 int totalPages = homeList.getTotalPages();
@@ -99,7 +98,7 @@ public String adminlist(@ModelAttribute("loginInfo") MemberDto loginInfo,
     Page<ReturnHomeDto> homeList= returnHomeService.findAllByKinderNo(condition,hashMap);
     log.info("homeList(admin){}",homeList);
     model.addAttribute("homeList",homeList);
-    return getPageInfoAndGoView(model, homeList, "/admin/home/list");
+    return getPageInfoAndGoView(model, homeList, "admin/home/list");
 }
 @GetMapping("/admin/{rhAgreeNo}")
 public String admindetail(
@@ -115,7 +114,7 @@ public String admindetail(
     model.addAttribute("home",returnHomeDto);
     model.addAttribute("KinderNo", loginInfo.getKinderNo());
 
-    return "/admin/home/detail";
+    return "admin/home/detail";
 }
 @GetMapping("/user/write")
 public String write(
@@ -148,7 +147,8 @@ public String write(
     log.info("today !!: {} ", today);
     log.info("tomorrow !!: {} ", tomorrow);
 
-    return "/user/home/writeForm";
+    return "user/home/writeForm";
+//    return "user/home/write";
 }
     @PostMapping("/writeOk")
     @ResponseBody
@@ -169,7 +169,7 @@ public String userdetail(
     log.info(">>>returnHomeDto(user)!>>{}", returnHomeDto);
     model.addAttribute("home",returnHomeDto);
 
-    return "/user/home/detail";
+    return "user/home/detail";
 }
 @GetMapping("/user/card")
 public String usercard(@RequestParam(defaultValue = "1") int page,
@@ -188,7 +188,7 @@ public String usercard(@RequestParam(defaultValue = "1") int page,
     hashMap.put("type","card");
     Page<ReturnHomeDto>homeList=returnHomeService.findAllByKidNo(condition,hashMap);
     log.info("homeCard(user){}",homeList);
-    return getPageInfoAndGoViewCard(model, homeList, "/user/home/card");
+    return getPageInfoAndGoViewCard(model, homeList, "user/home/card");
 }
 private String getPageInfoAndGoViewCard(Model model, Page<ReturnHomeDto> homeList, String view) {
 int totalPages = homeList.getTotalPages();
@@ -240,7 +240,7 @@ public String userlist(
     hashMap.put("type","list");
     Page<ReturnHomeDto>homeList=returnHomeService.findAllByKidNo(condition,hashMap);
     log.info("homeList(user){}",homeList);
-    return getPageInfoAndGoViewCard(model, homeList, "/user/home/list");
+    return getPageInfoAndGoViewCard(model, homeList, "user/home/list");
     }
 
     @DeleteMapping("/delete")

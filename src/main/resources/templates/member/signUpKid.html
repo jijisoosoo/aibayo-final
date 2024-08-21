@@ -7,62 +7,90 @@
 <!--    <script th:src="@{/js/jquery.min.js}"></script> &lt;!&ndash; jQuery 추가 &ndash;&gt;-->
 <!--    <script th:src="@{/js/login/signUpKid.js}"></script>-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/js/common.js"></script>
     <script>
         function toggleClassField() {
             const kindergartenSelect = document.getElementById('kindergarten-input');
             const classSelect = document.getElementById('class-input');
 
+            $('#class-input').find('.class_append').each(function () {
+                $(this).remove();
+            });
+
             if (kindergartenSelect.value === "") {
                 classSelect.disabled = true;
+                $('#name-input').prop('disabled', true); // 원생 선택 비활성화
             } else {
                 classSelect.disabled = false;
+
+                let kinderNo = $('#kindergarten-input').val();
+
+                let url = '/member/classList';
+
+                let param = { kinderNo: kinderNo };
+
+                commonAjax(url, 'POST', param);
+            }
+        }
+
+        function toggleStudentField() {
+            const classSelect = document.getElementById('class-input');
+            const studentSelect = document.getElementById('name-input');
+
+            $('#name-input').find('.student_append').each(function () {
+                $(this).remove();
+            });
+
+            if (classSelect.value === "") {
+                studentSelect.disabled = true;
+            } else {
+                studentSelect.disabled = false;
+                let kinderNo = $('#kindergarten-input').val();
+
+                let classNo = $('#class-input').val();
+
+                let url = '/member/kidList';
+
+                let param = { classNo: classNo, kinderNo: kinderNo };
+
+                commonAjax(url, 'POST', param);
+            }
+        }
+
+        function afterSuccess(response, type) {
+            if (type === 'classList') {
+                for (let selectClass of response) {
+                    let tag =
+                        `<option value="${selectClass.classNo}" class="class_append">
+                    ${selectClass.className}
+                </option>`;
+                    $('#class-input').append(tag);
+                }
+            } else if (type === 'studentList') {
+                for (let student of response) {
+                    let tag =
+                        `<option value="${student.kidNo}" class="student_append">
+                    ${student.kidName}
+                </option>`;
+                    $('#name-input').append(tag);
+                }
             }
         }
 
         document.addEventListener('DOMContentLoaded', function() {
             const kindergartenSelect = document.getElementById('kindergarten-input');
             const classSelect = document.getElementById('class-input');
+            const studentSelect = document.getElementById('name-input');
 
-            // Initialize the class select as disabled
+            // Initialize selects as disabled
             classSelect.disabled = true;
+            studentSelect.disabled = true;
 
-            // Add event listener to kindergarten select
+            // Add event listeners
             kindergartenSelect.addEventListener('change', toggleClassField);
+            classSelect.addEventListener('change', toggleStudentField);
         });
 
-        function submitForm() {
-            var formData = {
-                username: $("#username").val(),
-                password: $("#password").val(),
-                phone: $("#phone").val(),
-                name: $("#name").val(),
-                role: $("#role").val(),
-                invite: $("#invite").val(),
-                kidBirth: $("#birth-input").val(),
-                kidGender: $("#gender-input").val(),
-                kidName: $("#name-input").val(),
-                relationship: $("#relationship-input").val(),
-                kinderNo: $("#kindergarten-input").val(),
-                classNo: $("#class-input").val()
-            };
-
-            $.ajax({
-                type: "POST",
-                url: "/member/finalSignUp",
-                contentType: "application/json",
-                data: JSON.stringify(formData),
-                success: function(response) {
-                    // 성공 시 처리
-                    console.log("회원가입 성공");
-                    window.location.href = "/member/signIn"; // 성공 페이지로 리다이렉트
-                },
-                error: function(error) {
-                    // 에러 시 처리
-                    console.log("회원가입 실패");
-                    // window.location.href = "/member/signIn"; // 에러 페이지로 리다이렉트
-                }
-            });
-        }
     </script>
 </head>
 <body>
@@ -126,17 +154,15 @@
                                 <div class="group-9">
                                     <label for="kindergarten-input" style="font-size: small">소속 유치원</label>
                                     <select id="kindergarten-input" name="kinderNo">
-                                        <option value="">유치원을 선택하세요</option>
-                                        <option value="1">유치원 1</option>
-                                        <option value="2">유치원 2</option>
+                                        <option value="" >유치원을 선택하세요</option>
+                                        <option th:each="kinder : ${kinders}"
+                                                th:value="${kinder.kinderNo}" th:text="${kinder.kinderName}">유치원 명</option>
                                     </select>
                                 </div>
                                 <div class="group-10">
                                     <label for="class-input" style="font-size: small">소속 반</label>
                                     <select id="class-input" name="classNo">
                                         <option value="">반을 선택하세요</option>
-                                        <option value="1">1반</option>
-                                        <option value="2">2반</option>
                                     </select>
                                 </div>
                             </div>
@@ -151,8 +177,7 @@
         </div>
 
         <div class="logo h_class_78">
-            <div class="h_class_79"><a th:href="@{/main/admin}" style="text-decoration: none; color: inherit;">aibayo</a></div>
-        </div>
+            <div class="h_class_79"><a th:href="@{/main/admin}" style="text-decoration: none; color: inherit; font-family: 'Noto Sans KR', sans-serif;">aibayo</a></div>        </div>
     </div>
 </div>
 </body>

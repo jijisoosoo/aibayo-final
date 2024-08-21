@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">알림장</title>
 
 <th:block layout:fragment="css">
-    <th:block th:replace="~{/common/datepicker :: css}"/>
+    <th:block th:replace="~{common/datepicker :: css}"/>
     <link rel="stylesheet" href="/css/notepad/form.css" />
 </th:block>
 
 <th:block layout:fragment="javascript">
-    <th:block th:replace="~{/common/datepicker :: js}"/>
+    <th:block th:replace="~{common/datepicker :: js}"/>
     <script src="/js/notepad/notepad.js"></script>
     <script src="/js/notepad/writeForm.js"></script>
 </th:block>

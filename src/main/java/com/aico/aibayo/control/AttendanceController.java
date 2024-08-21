@@ -69,23 +69,27 @@ public class AttendanceController {
         return null;
     }
 
-    @GetMapping("/admin/main")
+    @GetMapping("/main")
     public String adminMain() {
         return "admin/attendance/main";
     }
 
     @GetMapping("/detailToday")
     public String detailToday(@ModelAttribute("loginInfo") MemberDto memberDto, Model model, @RequestParam("date") String date) {
-
         LocalDate selectedDate = LocalDate.parse(date);
-
         List<ClassEntity> classList = classService.getClassList(memberDto.getKinderNo());
-
 
         model.addAttribute("date", selectedDate);
         model.addAttribute("classList", classList);
         log.info("day : detailToday");
-        return "admin/attendance/detailToday";
+        log.info("detailToday username : {}", memberDto.getUsername());
+        log.info("detailToday role : {}", memberDto.getRole());
+
+        if (memberDto.getRole().equals("ROLE_USER")) {
+            return "admin/attendance/detailTodayUser";
+        } else {
+            return "admin/attendance/detailToday";
+        }
     }
 
     @GetMapping("/detailBefore")
@@ -127,14 +131,12 @@ public class AttendanceController {
 
     @GetMapping("/write/{classNo}")
     public String writePage(@PathVariable Long classNo, Model model, @ModelAttribute("loginInfo") MemberDto memberDto) {
-        System.out.println("write classNo : " + classNo);
+        log.info("write classNo : {}", classNo);
         model.addAttribute("classNo", classNo);
         model.addAttribute("kinderNo", memberDto.getKinderNo());
 
-
         List<ClassKidDto> classKid = classService.getClassKid(classNo);
         model.addAttribute("classKid", classKid);
-
 
         return "admin/attendance/detailWrite"; // 이 경로는 작성 페이지의 템플릿 경로로 수정해 주세요.
     }
@@ -146,31 +148,23 @@ public class AttendanceController {
 
         for (Map<String, Object> attendance : attendanceList) {
             AttendanceDto attendanceDto = new AttendanceDto();
-
-            // String으로 받은 후 Long으로 변환
             attendanceDto.setKinderNo(Long.valueOf(attendance.get("kinderNo").toString()));
             attendanceDto.setClassNo(Long.valueOf(attendance.get("classNo").toString()));
             attendanceDto.setKidNo(Long.valueOf(attendance.get("kidNo").toString()));
-
             attendanceDto.setKidName((String) attendance.get("kidName"));
 
-            // kidDrop 처리
             String kidDropStr = (String) attendance.get("kidDrop");
             if (kidDropStr != null && !kidDropStr.trim().isEmpty()) {
                 attendanceDto.setKidDrop(LocalDateTime.parse(kidDropStr, formatter));
             }
-
-            // kidPickup 처리
             String kidPickupStr = (String) attendance.get("kidPickup");
             if (kidPickupStr != null && !kidPickupStr.trim().isEmpty()) {
                 attendanceDto.setKidPickup(LocalDateTime.parse(kidPickupStr, formatter));
             }
-
             attendanceDto.setNote((String) attendance.get("note"));
             attendanceDto.setAttendanceStatus((String) attendance.get("attendanceStatus"));
 
             attendanceService.createAttendance(attendanceDto);
-
         }
         return ResponseEntity.ok("Success");
     }
@@ -181,9 +175,7 @@ public class AttendanceController {
     public List<AttendanceDto> getKidAttendance(@ModelAttribute("loginInfo") MemberDto memberDto, @RequestParam("classNo") Long classNo, @RequestParam("date") String date, Model model) {
         Long kinderNo = memberDto.getKinderNo();
         LocalDate selectedDate = LocalDate.parse(date); // String으로 받은 date를 LocalDate로 변환
-
         List<AttendanceDto> attendanceList = attendanceService.getKids(kinderNo, classNo, selectedDate);
-
         return attendanceList;
     }
 
@@ -199,9 +191,7 @@ public class AttendanceController {
             String note = request.getNote();
             LocalDate attendanceDate = request.getAttendanceDate();
             Long classNo = request.getClassNo();
-
-            logger.info("Update request received for kidNo: {}, attendanceDate: {}", kidNo, attendanceDate);
-
+            logger.info("updateAttendance received for kidNo: {}, attendanceDate: {}", kidNo, attendanceDate);
             attendanceService.updateAttendance(kidNo, attendanceStatus, kidDrop, kidPickup, note, attendanceDate, classNo, memberDto);
 
             return ResponseEntity.ok("출석부 수정 성공");
@@ -212,4 +202,23 @@ public class AttendanceController {
         }
     }
 
+    @PostMapping("/deleteAttendance")
+    @ResponseBody
+    public ResponseEntity<String> deleteAttendance(@RequestBody AttendanceDto request,
+                                                   @ModelAttribute("loginInfo") MemberDto memberDto) {
+        try {
+            Long kidNo = request.getKidNo();
+            LocalDate attendanceDate = request.getAttendanceDate();
+
+            logger.info("deleteAttendance request received for kidNo: {}, attendanceDate: {}", kidNo, attendanceDate);
+
+            attendanceService.deleteAttendance(kidNo, attendanceDate);
+
+            return ResponseEntity.ok("출석부 수정 성공");
+        } catch (Exception e) {
+            logger.error("Error deleteAttendance for kidNo: {}, attendanceDate: {}", request.getKidNo(), request.getAttendanceDate(), e);
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("출석부 삭제 실패");
+        }
+    }
 }

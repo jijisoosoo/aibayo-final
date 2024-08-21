@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">메인페이지</title>
 
 <th:block layout:fragment="css">
-    <link rel="stylesheet" href="/css/main/main.css" />
+<!--    <link rel="stylesheet" href="/css/main/main.css" />-->
+    <link rel="stylesheet" th:href="@{/css/main/main.css}" />
 </th:block>
 
 <th:block layout:fragment="javascript">
@@ -73,8 +74,6 @@
 
 
             <div class="login_user_name" th:text="|${loginInfo.name} ${roleName}|">사용자</div>
-
-
             <div class="login_kinder_name text_div text-compact" th:text="${kinderInfo.kinderName}">
                 유치원명
             </div>

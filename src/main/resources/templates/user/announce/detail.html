@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">공지사항 상세</title>
 
@@ -37,11 +37,11 @@
                         </div>
                         <div class="frame-3">
                             <a href="#" class="frame-4">
-                                <div class="avatar-wrapper">
-                                    <div class="avatar">
-                                        <img class="rectangle" alt="Rectangle" src="/announce/img/image-4.png">
-                                    </div>
-                                </div>
+<!--                                <div class="avatar-wrapper">-->
+<!--                                    <div class="avatar">-->
+<!--                                        <img class="rectangle" alt="Rectangle" src="announce/img/image-4.png">-->
+<!--                                    </div>-->
+<!--                                </div>-->
                                 <div class="frame-wrapper">
                                     <div class="frame-5">
                                         <div class="text-wrapper-2">
@@ -104,7 +104,7 @@
                                                 </div>
                                                 <div class="COMMENT" th:if="${comment.invisibleFlag == '0'}" >
                                                     <span class="rectangle-wrapper">
-                                                        <img class="img" alt="Rectangle" src="/announce/img/image-5.png">
+                                                        <img class="img" alt="Rectangle" src="announce/img/image-5.png">
                                                     </span>
                                                     <div class="AAA">
                                                         <input type="hidden" th:value="${comment.commentNo}" class="commentNo"/>

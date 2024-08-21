@@ -36,7 +36,8 @@ $(document).ready(function() {
                 let url = "/kid/modifyOk";
 
                 let param = {
-                    parentKidAcceptNo : target.data('parent-kid-accept-no')
+                    parentKidAcceptNo : target.data('parent-kid-accept-no'),
+                    kidNo : target.data('kid-no')
                 }
                 // console.log(`param : ${JSON.stringify(param)}`);
 
@@ -116,6 +117,7 @@ $(document).ready(function() {
                 let url = "/inviteCode/resendMail";
 
                 let param = {
+                    kinderNo: $('#kidsStatus2Div').data('kinder-no'),
                     inviteId: target.data('invite-id'),
                     acceptNo : target.data('invite-code-accept-no')
                 }

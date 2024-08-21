@@ -12,69 +12,88 @@
 <th:block layout:fragment="javascript">
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script src="/js/setting/setting.js"></script></th:block>
+    <script src="/js/setting/modify.js"></script></th:block>
 
 <div class="container main_container" layout:fragment="content">
     <form action="">
         <div class="setting">
             <div class="menu">
                 <div class="frame">
-                    <div class="text-wrapper">원 정보변경</div>
+                    <div class="text-wrapper">원 수정하기</div>
                     <div class="element-secondary-button-wrapper">
-                        <a href="/main/admin" class="element-secondary-button2">목록</a>
-                        <input type="submit" class="element-secondary-button" value="저장">
+                        <a th:href="@{|/setting/detail/${kinder.getKinderNo()}|}" class="element-secondary-button2">취소</a>
+                        <input type="submit" class="element-secondary-button" id ="saveBtn" value="수정">
                     </div>
                 </div>
-                <div class="frame-a">
+                <div class="frame-a" id="modifyForm"
+                th:object="${kinder}"
+                     th:data-kinder-post-code
+                     th:data-kinder-addr
+                     th:data-kinder-addr-detail
+                     th:data-kinder-name
+                     th:data-kinder-loc-no
+                     th:data-kinder-mid-no
+                     th:data-kinder-end-no
+                >
                     <table class="table">
+                        <input type="hidden" id="kinderNo" th:value="${kinder.getKinderNo()}">
+                        <input type="hidden" class="sggList" th:value="${kinder.getSggList()}">
+                        <input type="hidden" id="sample6_sigunguCode" class="newSggList" readonly>
+
                         <tr>
                             <th>원 우편번호</th>
                             <td>
                                 <input type="button" onclick="sample6_execDaumPostcode()" class="button" value="우편번호 찾기">
-                                <input type="text" id="sample6_postcode" placeholder="우편번호" ><br>
+                                <input type="text" id="sample6_postcode" readonly th:value="${kinder.getKinderPostCode()}">
                             </td>
                         </tr>
                         <tr>
                             <th>원 주소</th>
                             <td>
-                                <input type="text" id="sample6_address" placeholder="주소">
-                                <input type="text" id="sample6_detailAddress" placeholder="상세주소">
+                                <input type="text" id="sample6_address" readonly th:value="${kinder.kinderAddr}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>원 상세 주소</th>
+                            <td>
+                                <input type="text" id="sample6_detailAddress" placeholder="상세주소" th:value="${kinder.getKinderAddrDetail()}">
                             </td>
                         </tr>
                         <tr>
                             <th>원 이름</th>
-                            <td><input type="text" class="kinder" id="kinderName" placeholder="원 이름을 입력해주세요"></td>
+                            <td><input type="text" class="kinder" id="kinderName" th:value="${kinder.getKinderName()}"></td>
                         </tr>
                         <tr>
                             <th>원 전화번호</th>
                             <td>
-                                <select name="phone1" class="location">
-                                    <option value="02">02 </option> <!-- 서울 -->
-                                    <option value="031">031 </option> <!-- 경기 -->
-                                    <option value="032">032 </option> <!-- 인천 -->
-                                    <option value="033">033 </option> <!-- 강원 -->
-                                    <option value="041">041 </option> <!-- 충남 -->
-                                    <option value="042">042 </option> <!-- 대전 -->
-                                    <option value="043">043 </option> <!-- 충북 -->
-                                    <option value="051">051 </option> <!-- 부산 -->
-                                    <option value="052">052 </option> <!-- 울산 -->
-                                    <option value="053">053 </option> <!-- 대구 -->
-                                    <option value="054">054 </option> <!-- 경북 -->
-                                    <option value="055">055 </option> <!-- 경남 -->
-                                    <option value="061">061 </option> <!-- 전남 -->
-                                    <option value="062">062 </option> <!-- 광주 -->
-                                    <option value="063">063 </option> <!-- 전북 -->
-                                    <option value="064">064 </option> <!-- 제주 -->
+                                <select name="locNo" id="locNo" class="locNo">
+                                    <option value="02" th:selected="${kinder.kinderLocNo == '02'}">02</option> <!-- 서울 -->
+                                    <option value="031" th:selected="${kinder.kinderLocNo == '031'}">031</option> <!-- 경기 -->
+                                    <option value="032" th:selected="${kinder.kinderLocNo == '032'}">032</option> <!-- 인천 -->
+                                    <option value="033" th:selected="${kinder.kinderLocNo == '033'}">033</option> <!-- 강원 -->
+                                    <option value="041" th:selected="${kinder.kinderLocNo == '041'}">041</option> <!-- 충남 -->
+                                    <option value="042" th:selected="${kinder.kinderLocNo == '042'}">042</option> <!-- 대전 -->
+                                    <option value="043" th:selected="${kinder.kinderLocNo == '043'}">043</option> <!-- 충북 -->
+                                    <option value="051" th:selected="${kinder.kinderLocNo == '051'}">051</option> <!-- 부산 -->
+                                    <option value="052" th:selected="${kinder.kinderLocNo == '052'}">052</option> <!-- 울산 -->
+                                    <option value="053" th:selected="${kinder.kinderLocNo == '053'}">053</option> <!-- 대구 -->
+                                    <option value="054" th:selected="${kinder.kinderLocNo == '054'}">054</option> <!-- 경북 -->
+                                    <option value="055" th:selected="${kinder.kinderLocNo == '055'}">055</option> <!-- 경남 -->
+                                    <option value="061" th:selected="${kinder.kinderLocNo == '061'}">061</option> <!-- 전남 -->
+                                    <option value="062" th:selected="${kinder.kinderLocNo == '062'}">062</option> <!-- 광주 -->
+                                    <option value="063" th:selected="${kinder.kinderLocNo == '063'}">063</option> <!-- 전북 -->
+                                    <option value="064" th:selected="${kinder.kinderLocNo == '064'}">064</option> <!-- 제주 -->
                                 </select>
                                 <span class="hypen">-</span>
-                                <input type="text" class="no" name="no1" id="no1">
+                                <input type="text" class="no" name="midNo" id="midNo" th:value="${kinder.getKinderMidNo()}">
                                 <span class="hypen">-</span>
-                                <input type="text" class="no" name="no2" id="no2">
+                                <input type="text" class="no" name="endNo" id="endNo" th:value="${kinder.getKinderEndNo()}">
                             </td>
                         </tr>
                         <tr>
                             <th>원장님 이름</th>
-                            <td>홍길동<br>
+                            <td>
+                                <span  id="principalName" th:text="${loginInfo.getName()}"></span><br>
                                 <span class="notice">원장님 이름은 원장님 계정이 실명입니다. 변경을 원하실 경우, 원장님 계정의 '내정보 설정'에서 변경해주세요.</span>
                             </td>
                         </tr>
@@ -82,16 +101,18 @@
                         <tr>
                             <th>등원 시간</th>
                             <td>
-                                <input id="open" type="text" class="kinder">
+<!--                                <input type="text" name=""  id="" th:text="${kinder.getKinderOpenTime()}">-->
+                                <input type="text" id="open" class="kinder" th:value="${kinder.getKinderOpenTime()}+' AM'">
                             </td>
                         </tr>
                         <tr>
                             <th>하원 시간</th>
                             <td>
-                                <input id="close" type="text" class="kinder">
+                                <input type="text" id="close" class="kinder"th:value="${kinder.getKinderCloseTime()}+' PM'">
                             </td>
                         </tr>
                     </table>
+
                 </div>
             </div>
         </div>

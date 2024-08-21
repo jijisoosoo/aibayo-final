@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">detailToday</title>
 
@@ -32,7 +32,7 @@
         <div>
 
             <a id="writeBtn" href="#" class="btn btn-secondary">작성</a>
-            <a th:href="@{/attendance/admin/main}" class="btn btn-warning">홈으로</a>
+            <a th:href="@{/attendance/main}" class="btn btn-warning">홈으로</a>
         </div>
     </div>
 
@@ -94,8 +94,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="applyUpdate">수정</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                    <button type="button" class="btn btn-primary" id="applyUpdate">적용</button>
                 </div>
             </div>
         </div>

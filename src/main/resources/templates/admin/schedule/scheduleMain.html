@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">scheduleMain</title>
 
@@ -32,14 +32,14 @@
   <div class="title">
     <div class="text-wrapper-4">일정표</div>
     <div class="buttons">
-      <form class="searchoptions" th:action="@{/schedule/admin/scheduleMain}" method="post">
+      <form class="searchoptions" th:action="@{schedule/admin/scheduleMain}" method="post">
         <select class="dropdown-class">
           <option class="text-wrapper-5" value="">반 선택</option>
           <option class="text-wrapper-5" th:each="class:${classList}" th:object="${class}" th:value="${class.classNo}" th:text="${class.className}">반이름</option>
         </select>
       </form>
       <a class="button-modify" id="scheduleWrite" th:href="@{/schedule/admin/scheduleWrite}" th:method="get">
-        <img class="icon-pencil" src="/images/common/pencil.png" />
+        <img class="icon-pencil" src="images/common/pencil.png" />
         <div class="text-modify">일정 추가</div>
       </a>
     </div>

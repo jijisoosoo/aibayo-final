@@ -44,14 +44,14 @@ public class ScheduleController {
         List<ClassDto> classList = classService.getByKinderNo(loginInfo.getKinderNo());
         model.addAttribute("classList", classList);
 
-        return "/admin/schedule/scheduleMain";
+        return "admin/schedule/scheduleMain";
     }
 
     @PostMapping("/admin/scheduleMainByClass")
     public String adminscheduleMainByClass(@ModelAttribute("loginInfo") MemberDto loginInfo, Model model,
                                          @RequestBody ScheduleSearchCondition condition){
 
-        System.out.println("condition : " + condition);
+        log.info("condition : {}", condition);
         List<ScheduleDto> classSchedules = scheduleService.getAllByClassNo(condition);
         for(ScheduleDto schedule : classSchedules){
             List<ScheduleClassDto> scheduledClass = scheduleClassService.getClassByScheduleNo(schedule.getScheduleNo());
@@ -59,7 +59,7 @@ public class ScheduleController {
         }
         model.addAttribute("classSchedules", classSchedules);
 
-        return "/admin/schedule/scheduleMain";
+        return "admin/schedule/scheduleMain";
     }
 
     @PostMapping("/admin/scheduleMainByDay")
@@ -71,7 +71,7 @@ public class ScheduleController {
             schedule.setClassList(scheduledClass);
         }
         model.addAttribute("daySchedules", daySchedules);
-        return "/admin/schedule/scheduleMain";
+        return "admin/schedule/scheduleMain";
     }
 
     @GetMapping("/admin/scheduleWrite")
@@ -80,7 +80,7 @@ public class ScheduleController {
         List<ClassDto> classList = classService.getByKinderNo(loginInfo.getKinderNo());
         model.addAttribute("classList", classList);
 
-        return "/admin/schedule/scheduleWrite";
+        return "admin/schedule/scheduleWrite";
     }
 
     @GetMapping("/admin/scheduleModify/{scheduleNo}")
@@ -97,7 +97,7 @@ public class ScheduleController {
 
         List<ClassDto> classList = classService.getByKinderNo(loginInfo.getKinderNo());
         model.addAttribute("classList", classList);
-        return "/admin/schedule/scheduleModify";
+        return "admin/schedule/scheduleModify";
     }
 
 
@@ -143,7 +143,7 @@ public class ScheduleController {
         }
         model.addAttribute("schedules", schedules);
 
-        return "/user/schedule/scheduleMain";
+        return "user/schedule/scheduleMain";
     }
 
     @PostMapping("/user/scheduleMainByDay")
@@ -158,6 +158,6 @@ public class ScheduleController {
             schedule.setClassList(scheduledClass);
         }
         model.addAttribute("daySchedules", daySchedules);
-        return "/admin/schedule/scheduleMain";
+        return "admin/schedule/scheduleMain";
     }
 }

@@ -34,8 +34,6 @@ public class ClassManageController {
     private final JWTUtil jwtUtil;
     private final MemberService memberService;
 
-
-
     @ModelAttribute
     public void addAttributes(HttpServletRequest request, Model model) {
         String token = getTokenFromCookies(request.getCookies());
@@ -44,11 +42,9 @@ public class ClassManageController {
             // 여기서 예외를 던지거나, 적절히 처리합니다.
             return;
         }
-
         String username = jwtUtil.getUsername(token);
         log.info("loginUser: {}", username);
         MemberDto memberDto = memberService.findByUsername(username);
-
         model.addAttribute("loginInfo", memberDto);
     }
 
@@ -63,22 +59,19 @@ public class ClassManageController {
         return null;
     }
 
-
     @GetMapping("/main")
     public String mainPage(@ModelAttribute("loginInfo") MemberDto memberDto, Model model) {
         Long kinderNo = memberDto.getKinderNo();
-
         List<ClassEntity> classList = classService.getClassList(kinderNo);
 
         model.addAttribute("classList", classList);
         model.addAttribute("kinderNo", kinderNo);
 
-        return "/admin/classManage/main";
+        return "admin/classManage/main";
     }
 
     @GetMapping("/detail/{classNo}")
     public ResponseEntity<Map<String, Object>> detailPage(@PathVariable Long classNo) {
-
         List<ClassKidDto> classKid = classService.getClassKid(classNo);
         List<ClassTeacherDto> classTeacher = classService.getClassTeacher(classNo);
 
@@ -94,9 +87,7 @@ public class ClassManageController {
     public ResponseEntity<String> updateClassName(@RequestBody Map<String, Object> request) {
         Long classNo = ((Number) request.get("classNo")).longValue();
         String newClassName = (String) request.get("newClassName");
-
-        System.out.println("updateClassName classNo " + classNo);
-        System.out.println("updateClassName newClassName " + newClassName);
+        log.info("updateClassName / classNo : {}, newClassName : {}", classNo, newClassName);
         try {
             classService.updateClassName(classNo, newClassName);
             return ResponseEntity.ok("반 이름이 성공적으로 수정되었습니다.");
@@ -135,5 +126,4 @@ public class ClassManageController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("반 추가에 실패했습니다.");
         }
     }
-
 }

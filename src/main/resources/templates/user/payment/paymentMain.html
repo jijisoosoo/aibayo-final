@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">paymentMain</title>
 
@@ -22,8 +22,8 @@
     <script th:src="@{/js/payment/paymentMain.js}"></script>
 
     <!--datepicker-->
-    <th:block th:replace="~{/common/datepicker :: js}"/>
-    <th:block th:replace="~{/common/datepicker :: css}"/>
+    <th:block th:replace="~{common/datepicker :: js}"/>
+    <th:block th:replace="~{common/datepicker :: css}"/>
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
@@ -51,13 +51,13 @@
                 <div class="text-class"><div class="text-wrapper-6">검색어</div></div>
                 <div class="keywordarea">
                     <div class="keyword-input">
-                        <img class="vector-1" src="/payment/img/search.png" />
+                        <img class="vector-1" src="payment/img/search.png" />
                         <input type="text" class="keyword" placeholder="검색어 입력">
                     </div>
                 </div>
             </div>
         </div>
-        <form class="frame-3" action="/user/paymentMain">
+        <form class="frame-3" action="user/paymentMain">
             <div class="div-3">
                 <div class="text-class"><div class="text-wrapper-6">수납 상태</div></div>
                 <div class="form-check selectedoption">
@@ -91,7 +91,7 @@
             </div>
             <div class="div-4">
                 <div class="view">
-                    <img class="reset" src="/payment/img/reset.png" />
+                    <img class="reset" src="payment/img/reset.png" />
                     <div class="text-wrapper-10">초기화</div>
                 </div>
                 <input type="submit" class="search" value="조회하기" />
