@@ -179,17 +179,43 @@ public class AnnounceController {
     }
 
     @GetMapping("/admin/{announceNo}")
-    public String admindetail(@PathVariable Long announceNo, Model model){
+    public String admindetail(@PathVariable Long announceNo,
+                              @RequestParam(defaultValue = "1") int page,
+                              @ModelAttribute("loginInfo") MemberDto loginInfo,
+                              Model model){
         AnnounceDto announceDto = announceService.findByAnnounceNo(announceNo);
 
+        HashMap<String, Object> hashMap = new HashMap<>();
         CommentSearchCondition condition = new CommentSearchCondition();
-//        Page<CommentDto> commentDto=commentService.findAllByBoardNo(condition,1);
+        condition.setKinderNo(loginInfo.getKinderNo());
+        condition.setBoardNo(announceDto.getBoardNo());
 
         log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>announceDto>>>>>{}",announceDto);
-//        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>commentDto>>>>>{}",commentDto);
 
         model.addAttribute("announce",announceDto);
-        return "admin/announce/detail";
+        model.addAttribute("KinderNo", loginInfo.getKinderNo());
+        hashMap.put("page", page);
+        hashMap.put("type", "list");
+
+
+        HashMap<String, Object> commentInfo = new HashMap<>();
+        commentInfo.put("boardType", BoardTypeEnum.ANNOUNCE.getNum());
+        commentInfo.put("commentWriter", loginInfo.getId());
+        commentInfo.put("announceNo",announceNo);
+        commentInfo.put("commentRegDate", LocalDateTime.now());
+        commentInfo.put("boardNo",announceDto.getBoardNo());
+        commentInfo.put("commentDeleteFlag",announceDto.getCommentDeleteFlag());;
+        commentInfo.put("invisibleFlag",announceDto.getInvisibleFlag());
+        commentInfo.put("commentNo",announceDto.getCommentNo());
+
+        model.addAttribute("commentInfo",commentInfo);
+        System.out.println("commentInfo!"+commentInfo);
+        log.info("commentInfo(admin)!!!! :",commentInfo);
+
+        Page<CommentDto> comments = commentService.findAllByBoardNo(condition, hashMap);
+        long commentCount = commentService.countByBoardNoAndInvisibleFlag(announceDto.getBoardNo(),"0");
+        model.addAttribute("commentCount",commentCount);
+        return getPageInfoAndGoViewComment(model, comments,"admin/announce/detail");
     }
     @GetMapping("/admin/modify/{announceNo}")
     public String modifyForm(@PathVariable Long announceNo,
@@ -219,7 +245,9 @@ public class AnnounceController {
     @ResponseBody
     public AnnounceDto delete(@RequestBody AnnounceDto announceDto) {
         log.info("delete: {}", announceDto);
-        return announceService.deleteAnnounce(announceDto);
+        AnnounceDto result = announceService.deleteAnnounce(announceDto);
+        result.setAn(true);
+        return result ;
     }
     //    user
     @GetMapping("/user/card")
@@ -343,6 +371,7 @@ public class AnnounceController {
 
         model.addAttribute("commentInfo",commentInfo);
         System.out.println("commentInfo!"+commentInfo);
+        log.info("(user)!!!! :",commentInfo);
 
         Page<CommentDto> comments = commentService.findAllByBoardNo(condition, hashMap);
         long commentCount = commentService.countByBoardNoAndInvisibleFlag(announceDto.getBoardNo(),"0");

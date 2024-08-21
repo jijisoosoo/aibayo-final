@@ -83,7 +83,7 @@
   display: inline-flex;
   flex: 0 0 auto;
   gap: 15px;
-  padding: 10px;
+  padding: 10px 30px;
   position: relative;
   text-decoration-line : none;
 }
@@ -477,7 +477,8 @@
   justify-content: flex-end;
   padding: 17px 4px;
   position: relative;
-  width: 80px;
+  width: 0px;
+  visibility: hidden;
 }
 
 .screen .img {

@@ -37,7 +37,7 @@
           <a href="/user/returnHome/card" class="element-secondary-button">
             <div class="text-wrapper-2">취소</div>
           </a>
-          <input type="submit" id="writeBtn" value="작성" class="element-secondary-button-2">
+            <button id="writeBtn"  class="element-secondary-button-2">작성</button>
         </div>
       </div>
       <div class="div-2">
@@ -65,14 +65,21 @@
                     </div>
                   </div>
                 </div>
+
                 <div class="frame-wrapper-3">
                   <div class="btn-group" id="btn-group" role="group" aria-label="Basic radio toggle button group">
-                    <input type="radio" class="btn-check" name="date" id="today" value="2024-08-17" autocomplete="off" checked>
-                    <label class="btn btn-outline-ab custom-style" for="today" th:text="${#temporals.format(today, 'MM월 dd일')}">7월 1일</label>
-                    <input type="radio" class="btn-check" name="date" id="tomorrow" value="2024-08-18" autocomplete="off">
-                    <label class="btn btn-outline-ab custom-style" for="tomorrow" th:text="${#temporals.format(tomorrow, 'MM월 dd일')}">7월 2일</label>
+                    <input type="radio" class="btn-check" name="date" id="today"  autocomplete="off" checked th:value="${today}">
+                    <label class="btn btn-outline-ab custom-style" for="today" th:value="${today}"  th:text="${#temporals.format(today, 'MM월 dd일')}">
+                      7월 1일
+                    </label>
+
+                    <input type="radio" class="btn-check" name="date" id="tomorrow" th:value="${tomorrow}" autocomplete="off">
+                    <label class="btn btn-outline-ab custom-style" for="tomorrow" th:value="${tomorrow}"  th:text="${#temporals.format(tomorrow, 'MM월 dd일')}">
+                      7월 2일
+                    </label>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
@@ -86,6 +93,7 @@
                 <table class="table" id="home">
                   <tr>
                     <th>이름</th>
+                    <input type="hidden" id="kidNo" th:value="${loginInfo.getKidNo()}">
                     <td th:text="${kidDto.getKidName()}"></td>
                   </tr>
                   <tr>
