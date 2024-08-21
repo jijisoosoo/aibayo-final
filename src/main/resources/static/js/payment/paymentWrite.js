@@ -53,7 +53,6 @@ $(document).ready(function() {
 
     showSelectAll();
     $("#classSelect").on('change', function() {
-        console.log("ClassSelect changed");
         showSelectAll();
     });
 
@@ -220,7 +219,7 @@ $(document).ready(function() {
             let paymentPrice = price;
             let paymentEndDate = ($('.datepicker').val() + 'T' + $('.timepicker').val()).replace(/\./g, '-');
             let paymentMemo = getMemo(kidNo);
-            let kinderNo = null;
+            let kinderNo = $('.title').attr('value');
 
             let paymentDto = {id, kidNo, classNo, paymentTitle, discountRate, paymentPrice, paymentEndDate, paymentMemo, kinderNo};
             billList.push(paymentDto);
@@ -309,7 +308,7 @@ function calDiscount(){
         let discountRate = $(element).data('discount-rate');
         console.log('Discount Rate for element', index, ':', discountRate);
 
-        let discountedPrice = price * (100 - discountRate) / 100;
+        let discountedPrice = price * (100 - discountRate) * 0.01;
 
         $(element).find('.originalPrice').text(formatPrice(price)); // 원래 가격을 설정
         $(element).find('.discountedPrice').text(formatPrice(Math.round(discountedPrice))); // 할인된 가격을 설정

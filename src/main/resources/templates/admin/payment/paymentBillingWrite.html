@@ -24,7 +24,7 @@
 
 <div class="container main_container" layout:fragment="content">
 
-    <div class="title">
+    <div class="title" th:value="${kinderNo}">
         <div class="title-flow2">
             <a class="icon-back" th:href="@{/admin/paymentBillingMain}">
                 <img src="/images/common/back.png" alt=""/>
@@ -61,7 +61,8 @@
                                 <div class="row-input">
                                     <select class="selectoption-child selectClass" id="classSelect">
                                         <option class="text-wrapper-5" value="-1000">반 선택</option>
-                                        <option class="text-wrapper-5" th:each="class:${classList}" th:object="${class}" th:value="${class.classNo}" th:text="${class.className}">반이름</option>
+                                        <option class="text-wrapper-5" th:each="class:${classList}" th:object="${class}"
+                                                th:value="${class.classNo}" th:text="${class.className}">반이름</option>
                                     </select>
 
                                         <div class="noList" id="noClass">

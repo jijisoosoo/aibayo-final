@@ -14,6 +14,7 @@ import com.aico.aibayo.service.payment.PaymentLogService;
 import com.aico.aibayo.service.payment.PaymentService;
 import com.aico.aibayo.service.classManage.ClassService;
 import com.aico.aibayo.service.member.MemberService;
+import com.aico.aibayo.service.payment.PaymentServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,7 @@ public class PaymentController {
     private final PaymentLogService paymentLogService;
     private final ClassService classService;
     private final KidService kidService;
+    private final PaymentServiceImpl paymentServiceImpl;
 
     @GetMapping("/admin/paymentBillingMain")
     public String adminPaymentMain(@ModelAttribute("loginInfo") MemberDto loginInfo, Model model){
@@ -70,6 +72,7 @@ public class PaymentController {
 
         List<ClassDto> classList = classService.getByKinderNo(loginInfo.getKinderNo());
         model.addAttribute("classList", classList);
+        model.addAttribute("kinderNo", loginInfo.getKinderNo());
 
         return "/admin/payment/paymentBillingWrite";
     }
@@ -127,23 +130,43 @@ public class PaymentController {
     @ResponseBody
     public void writeOk(@ModelAttribute("loginInfo") MemberDto loginInfo,
                         @RequestBody Map<String, Object> requestBody) {
-
-        requestBody.put("kinderNo", loginInfo.getKinderNo());
+        log.info("requestBody {}", requestBody);
         paymentService.insertSchedule(requestBody);
-
     }
 
-    @GetMapping("/admin/paymentBillingConfirm")
-    public String adminPaymentBillingConfirm(){ return "/admin/payment/paymentBillingConfirm"; }
-
-    @GetMapping("/admin/paymentBillingDone")
-    public String adminPaymentBillingDone(){ return "/admin/payment/paymentBillingDone"; }
+//    @GetMapping("/admin/paymentBillingConfirm")
+//    public String adminPaymentBillingConfirm(){ return "/admin/payment/paymentBillingConfirm"; }
+//
+//    @GetMapping("/admin/paymentBillingDone")
+//    public String adminPaymentBillingDone(){ return "/admin/payment/paymentBillingDone"; }
 
     @GetMapping("/user/paymentMain")
-    public String userPaymentWrite(){ return "/user/payment/paymentMain"; }
+    public String userPaymentMain(@ModelAttribute("loginInfo") MemberDto loginInfo, Model model) {
+        PaymentSearchCondition condition = new PaymentSearchCondition();
+        condition.setMemberId(loginInfo.getId());
+        List<PaymentDto> paymentDtoList = paymentService.getAllByMemberId(condition);
+        model.addAttribute("paymentDtoList", paymentDtoList);
+
+        List<ClassDto> classList = classService.getByKinderNo(loginInfo.getKinderNo());
+        model.addAttribute("classList", classList);
+
+        return "/user/payment/paymentMain";
+    }
+
 
     @GetMapping("/user/paymentPay")
-    public String userPaymentPay(){ return "/user/payment/paymentPay"; }
+    public String userPaymentPay(@ModelAttribute("loginInfo") MemberDto loginInfo,
+                                 @RequestParam("billNo") Long billNo, Model model){
+        log.info("billNo {}", billNo);
+        PaymentSearchCondition condition = new PaymentSearchCondition();
+        condition.setBillNo(billNo);
+        condition.setMemberId(loginInfo.getId());
+
+        PaymentDto payment = paymentService.getByBillNo(condition);
+        model.addAttribute("payment", payment);
+        log.info("payment {}", payment);
+        return "/user/payment/paymentPay";
+    }
 
     @GetMapping("/user/paymentDone")
     public String userPaymentDone(){ return "/user/payment/paymentDone"; }
