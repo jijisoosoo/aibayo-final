@@ -16,6 +16,28 @@
                 classSelect.disabled = true;
             } else {
                 classSelect.disabled = false;
+
+                let kinderNo = $('#kindergarten-input').val();
+
+                let url = '/member/classList';
+
+                let param = { kinderNo : kinderNo };
+
+                commonAjax(url,'POST',param)
+            }
+        }
+        function afterSuccess(response){
+            console.log('signUpTeacher');
+            for(let selectClass of response){
+                console.log(`selectClass : ${JSON.stringify(selectClass)}`)
+                let tag =
+                    `<option value="${selectClass.classNo}" class="class_append">
+                        ${selectClass.className}
+                    </option>`
+                $('#class-input').append(tag);
+
+
+
             }
         }
 
@@ -91,8 +113,6 @@
                                     <label for="class-input" style="font-size: small">소속 반</label>
                                     <select id="class-input" name="classNo">
                                         <option value="">반을 선택하세요</option>
-                                        <option value="1">1반</option>
-                                        <option value="2">2반</option>
                                     </select>
                                 </div>
                             </div>
