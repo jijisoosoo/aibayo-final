@@ -42,6 +42,15 @@ public class KidServiceImpl implements KidService {
     }
 
     @Override
+    public List<KidDto> getByKinderNoAndClassNo(Long kinderNo, Long classNo) {
+        List<KidEntity> kidEntities
+                = kidRepository.findAllKid(kinderNo, classNo);
+        return kidEntities.stream()
+                .map(KidDto :: toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<KidDto> getByMemberId(Long id) {
         return kidRepository.findAllByMemberId(id);
     }
