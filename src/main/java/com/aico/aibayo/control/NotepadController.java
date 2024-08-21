@@ -83,7 +83,8 @@ public class NotepadController {
 
     // 나중에 detail 대신 notepadNo 대신 가져오기
     @GetMapping("/admin/{notepadNo}")
-    public String adminDetail(@PathVariable Long notepadNo, Model model) {
+    public String adminDetail(@ModelAttribute("loginInfo") MemberDto loginInfo,
+                              @PathVariable Long notepadNo, Model model) {
         // 나중에는 로그인 사용자 MemberDto 정보에서 가져오기
 //        HashMap<String, Object> memberDto = new HashMap<>();
 //        memberDto.put("roleNo", roleNo);
@@ -92,6 +93,7 @@ public class NotepadController {
         NotepadDto notepadDto = notepadService.getByNotepadNo(notepadNo);
 
 //        model.addAttribute("member", memberDto);
+        model.addAttribute("loginInfo", loginInfo);
         model.addAttribute("notepad", notepadDto);
 
         return "admin/notepad/detail";
