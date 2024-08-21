@@ -167,6 +167,9 @@ public class MainController {
 
         setLoginInfo(loginInfo, model);
 
+        getLatestBoard(loginInfo, model);
+
+
         return "user/main/main";
     }
 
