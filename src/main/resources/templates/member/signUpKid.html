@@ -58,7 +58,8 @@
         }
 
         function afterSuccess(response, type) {
-            if (type === 'classList') {
+            // console.log(`response: ${JSON.stringify(response)}`);
+            if ('assignedCntOrAcceptNo' in response[0]) {
                 for (let selectClass of response) {
                     let tag =
                         `<option value="${selectClass.classNo}" class="class_append">
@@ -66,7 +67,7 @@
                 </option>`;
                     $('#class-input').append(tag);
                 }
-            } else if (type === 'studentList') {
+            } else if ('parentKidAcceptNo' in response[0]) {
                 for (let student of response) {
                     let tag =
                         `<option value="${student.kidNo}" class="student_append">
@@ -131,8 +132,8 @@
                                         <label for="name-input" style="font-size: small">원아 이름</label>
                                         <select id="name-input" name="kidName">
                                             <option value="">이름을 선택하세요</option>
-                                            <option value="kim">kim</option>
-                                            <option value="yun">yun</option>
+<!--                                            <option value="kim">kim</option>-->
+<!--                                            <option value="yun">yun</option>-->
                                         </select>
                                     </div>
                                 </div>
