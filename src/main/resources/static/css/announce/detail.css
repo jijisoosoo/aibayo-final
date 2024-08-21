@@ -477,7 +477,8 @@
   justify-content: flex-end;
   padding: 17px 4px;
   position: relative;
-  width: 80px;
+  width: 0px;
+  visibility: hidden;
 }
 
 .screen .img {
