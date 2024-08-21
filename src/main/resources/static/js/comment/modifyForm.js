@@ -122,7 +122,7 @@ function afterSuccess(response, method) {
                 confirmButton: 'btn-ab btn-ab-swal'
             }
         }).then(() => {
-            window.location.href = `${window.location.origin}/announce/user/${announceNo}`;
+            window.location.href = `${window.location.origin}/announce/admin/${announceNo}`;
         });
     }
     if (method === 'DELETE' && response.invisibleFlag === '1') {
@@ -134,7 +134,7 @@ function afterSuccess(response, method) {
                 confirmButton: 'btn-ab btn-ab-swal'
             }
         }).then(() => {
-            window.location.href = `${window.location.origin}/announce/user/${announceNo}`;
+            window.location.href = `${window.location.origin}/announce/admin/list`;
         });
     }
 
