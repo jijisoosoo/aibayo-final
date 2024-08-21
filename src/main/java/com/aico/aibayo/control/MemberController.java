@@ -141,6 +141,7 @@ public class MemberController {
         model.addAttribute("member", member);
         List<RegisterKinderDto> kinders = kinderService.getAllKinder();
         model.addAttribute("kinders",kinders);
+        log.info("signUpKid GetMapping");
         return "member/signUpTeacher";
     }
 
