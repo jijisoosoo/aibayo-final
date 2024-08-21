@@ -31,6 +31,9 @@ public class PaymentDto {
 
     private List<PaymentLogDto> paymentLogs;
 
+    private Long id;
+    private String name;
+
     public PaymentDto(Long billNo, Long kidNo, Long classNo, Long discountRate,
                        String paymentTitle, Long paymentPrice,
                        LocalDateTime paymentStartDate, LocalDateTime paymentEndDate,
@@ -51,5 +54,46 @@ public class PaymentDto {
         this.className = className;
     }
 
+    public PaymentDto(Long kidNo, String kidName, Long id, Long discountRate){
+        this.kidNo = kidNo;
+        this.kidName = kidName;
+        this.id = id;
+        this.discountRate = discountRate;
+    }
+
+    public PaymentDto(Long kidNo, String kidName, Long id, String paymentMemo){
+        this.kidNo = kidNo;
+        this.kidName = kidName;
+        this.id = id;
+        this.paymentMemo = paymentMemo;
+    }
+
+    public PaymentDto(Long id, String name, Long kidNo, String kidName, Long classNo, String className,
+                      String paymentTitle, Long discountRate, Long paymentPrice, LocalDateTime paymentEndDate, String paymentMemo){
+        this.id = id;
+        this.name = name;
+        this.kidNo = kidNo;
+        this.kidName = kidName;
+        this.classNo = classNo;
+        this.className = className;
+        this.paymentTitle = paymentTitle;
+        this.discountRate = discountRate;
+        this.paymentPrice = paymentPrice;
+        this.paymentEndDate = paymentEndDate;
+        this.paymentMemo = paymentMemo;
+    }
+
+    public PaymentDto(Long id, Long kidNo, Long classNo,
+                      String paymentTitle, Long discountRate, Long paymentPrice,
+                      LocalDateTime paymentEndDate, String paymentMemo){
+        this.id = id;
+        this.kidNo = kidNo;
+        this.classNo = classNo;
+        this.paymentTitle = paymentTitle;
+        this.discountRate = discountRate;
+        this.paymentPrice = paymentPrice;
+        this.paymentEndDate = paymentEndDate;
+        this.paymentMemo = paymentMemo;
+    }
 
 }

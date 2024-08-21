@@ -25,6 +25,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -104,14 +105,33 @@ public class PaymentController {
     public String adminPaymentWriteShowDiscountedKid(@ModelAttribute("loginInfo") MemberDto loginInfo, Model model,
                                          @RequestBody Map<String, Object> discountMap){
 
-        List<Map<String, Object>> discountList = (List<Map<String, Object>>) discountMap.get("discountMap");
+        List<PaymentDto> discountList = (List<PaymentDto>)discountMap.get("discountList");
         log.info("discountList {}", discountList);
         model.addAttribute("discountList", discountList);
 
         return "admin/payment/paymentBillingWrite";
     }
 
+    @PostMapping("/admin/showMemo")
+    public String adminPaymentWriteShowMemo(@ModelAttribute("loginInfo") MemberDto loginInfo, Model model,
+                                         @RequestBody Map<String, Object> memoMap){
 
+        List<PaymentDto> memoList = (List<PaymentDto>)memoMap.get("memoList");
+        log.info("memoList {}", memoList);
+        model.addAttribute("memoList", memoList);
+
+        return "admin/payment/paymentBillingWrite";
+    }
+
+    @PostMapping("/admin/sendBill")
+    @ResponseBody
+    public void writeOk(@ModelAttribute("loginInfo") MemberDto loginInfo,
+                        @RequestBody Map<String, Object> requestBody) {
+
+        requestBody.put("kinderNo", loginInfo.getKinderNo());
+        paymentService.insertSchedule(requestBody);
+
+    }
 
     @GetMapping("/admin/paymentBillingConfirm")
     public String adminPaymentBillingConfirm(){ return "/admin/payment/paymentBillingConfirm"; }
