@@ -94,6 +94,7 @@ $(document).on('click', '.saveReple', function (event) {
 
 function afterSuccess(response, method) {
     console.log("comment modify");
+    console.log('response : ' + response);
     // console.log(`response  : ${JSON.stringify(response)}`);
 
 
@@ -122,10 +123,10 @@ function afterSuccess(response, method) {
                 confirmButton: 'btn-ab btn-ab-swal'
             }
         }).then(() => {
-            window.location.href = `${window.location.origin}/announce/admin/${announceNo}`;
+            window.location.href = `${window.location.origin}/announce/user/${announceNo}`;
         });
     }
-    if (method === 'DELETE' && response.invisibleFlag === '1') {
+    if (method === 'DELETE' && response.invisibleFlag === '1' && response.an === false) {
         Swal.fire({
             title: "삭제 완료",
             text: "창을 닫으면 이전 화면으로 돌아갑니다.",
@@ -134,8 +135,25 @@ function afterSuccess(response, method) {
                 confirmButton: 'btn-ab btn-ab-swal'
             }
         }).then(() => {
+            window.location.href = `${window.location.origin}/announce/admin/${announceNo}`;
+        });
+    }
+    if (method === 'DELETE' && response.an === true) {
+        console.log("공지삭제 ㅠ");
+        Swal.fire({
+            title: "삭제 완료",
+            text: "창을 닫으면 이전 화면으로 돌아갑니다.",
+            icon: "success",
+            customClass: {
+                confirmButton: 'btn-ab btn-ab-swal'
+            }
+        }).then(() => {
+            console.log(`${window.location.origin}/announce/admin/list`);
             window.location.href = `${window.location.origin}/announce/admin/list`;
         });
     }
+
+
+
 
 }

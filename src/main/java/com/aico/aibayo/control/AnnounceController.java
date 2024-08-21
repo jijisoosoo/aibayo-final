@@ -245,7 +245,9 @@ public class AnnounceController {
     @ResponseBody
     public AnnounceDto delete(@RequestBody AnnounceDto announceDto) {
         log.info("delete: {}", announceDto);
-        return announceService.deleteAnnounce(announceDto);
+        AnnounceDto result = announceService.deleteAnnounce(announceDto);
+        result.setAn(true);
+        return result ;
     }
     //    user
     @GetMapping("/user/card")
