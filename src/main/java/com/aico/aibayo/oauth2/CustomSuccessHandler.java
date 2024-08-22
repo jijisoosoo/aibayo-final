@@ -9,6 +9,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -18,12 +19,11 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.logging.Logger;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-    private static final Logger LOGGER = Logger.getLogger(CustomSuccessHandler.class.getName());
     private final JWTUtil jwtUtil;
     private final TokenService tokenService;
 
@@ -50,7 +50,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
         // JWT를 생성합니다.
         String token = jwtUtil.createJwt(username, role, 86400000L);
-        LOGGER.info("Generated JWT Token: " + token);
+        log.info("Generated JWT Token: {}", token);
 
         // JWT를 서버에 저장
         tokenService.saveToken(token);
@@ -58,10 +58,9 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         // 생성된 JWT를 쿠키에 담아 응답에 추가
         Cookie jwtCookie = createCookie("jwt", token);
         response.addCookie(jwtCookie);
-        LOGGER.info("JWT Cookie added: " + jwtCookie.getValue());
+        log.info("JWT Cookie added : {}",jwtCookie.getValue());
 
         // 인증 성공 후 리디렉트할 URL로 이동
-//        response.sendRedirect("/main/admin");
         if (role.equals("ROLE_ADMIN") || role.equals("ROLE_TEACHER") || role.equals("ROLE_PRINCIPAL")) {
             response.sendRedirect("/main/admin");
         } else if (role.equals("ROLE_USER")) {
