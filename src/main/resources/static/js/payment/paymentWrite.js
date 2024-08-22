@@ -53,7 +53,6 @@ $(document).ready(function() {
 
     showSelectAll();
     $("#classSelect").on('change', function() {
-        console.log("ClassSelect changed");
         showSelectAll();
     });
 
@@ -220,7 +219,7 @@ $(document).ready(function() {
             let paymentPrice = price;
             let paymentEndDate = ($('.datepicker').val() + 'T' + $('.timepicker').val()).replace(/\./g, '-');
             let paymentMemo = getMemo(kidNo);
-            let kinderNo = null;
+            let kinderNo = $('.title').attr('value');
 
             let paymentDto = {id, kidNo, classNo, paymentTitle, discountRate, paymentPrice, paymentEndDate, paymentMemo, kinderNo};
             billList.push(paymentDto);
@@ -309,7 +308,7 @@ function calDiscount(){
         let discountRate = $(element).data('discount-rate');
         console.log('Discount Rate for element', index, ':', discountRate);
 
-        let discountedPrice = price * (100 - discountRate) / 100;
+        let discountedPrice = price * (100 - discountRate) * 0.01;
 
         $(element).find('.originalPrice').text(formatPrice(price)); // 원래 가격을 설정
         $(element).find('.discountedPrice').text(formatPrice(Math.round(discountedPrice))); // 할인된 가격을 설정
@@ -348,20 +347,6 @@ function getMemo(kidNo) {
         console.log('No matching element found');
         return null;
     }
-}
-
-function convertToISOFormat(datetimeString) {
-    // 날짜와 시간 부분을 분리
-    let datePart = datetimeString.slice(0, 10); // "2024.08.15"
-    let timePart = datetimeString.slice(10); // "04:00"
-
-    // 날짜 부분에서 '.'을 '-'로 바꿔줌
-    datePart = datePart.replace(/\./g, '-');
-
-    // 최종 ISO 8601 형식으로 변환
-    let isoFormat = `${datePart}T${timePart}`;
-
-    return isoFormat;
 }
 
 function afterSuccess(response, method) {

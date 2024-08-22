@@ -1,5 +1,7 @@
 package com.aico.aibayo.repository.payment;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
+import com.aico.aibayo.common.PaymentStatusEnum;
 import com.aico.aibayo.dto.payment.PaymentDto;
 import com.aico.aibayo.dto.payment.PaymentSearchCondition;
 import com.aico.aibayo.entity.*;
@@ -19,6 +21,8 @@ public class PaymentRepositoryCustomImpl implements PaymentRepositoryCustom {
     private final QPaymentLogEntity paymentLog = QPaymentLogEntity.paymentLogEntity;
     private final QKidEntity kid = QKidEntity.kidEntity;
     private final QClassEntity clazz = QClassEntity.classEntity;
+    private final QMemberEntity member = QMemberEntity.memberEntity;
+    private final QParentKidEntity parentKid = QParentKidEntity.parentKidEntity;
 
     @Override
     public List<PaymentDto> findAllByKinderNo(PaymentSearchCondition condition) {
@@ -36,11 +40,12 @@ public class PaymentRepositoryCustomImpl implements PaymentRepositoryCustom {
                         paymentLog.paymentStatus,
                         paymentLog.paymentLogRegDate,
                         kid.kidName,
-                        clazz.className))
+                        clazz.className)).distinct()
                 .from(payment)
                 .join(paymentLog).on(payment.billNo.eq(paymentLog.billNo))
                 .join(kid).on(payment.kidNo.eq(kid.kidNo))
                 .join(clazz).on(payment.classNo.eq(clazz.classNo))
+                .join(parentKid).on(payment.kidNo.eq(parentKid.kidNo))
                 .where(payment.kinderNo.eq(condition.getKinderNo()))
                 .fetch();
 
@@ -77,6 +82,65 @@ public class PaymentRepositoryCustomImpl implements PaymentRepositoryCustom {
                 .fetch();
 
         return paymentDtoList;
+    }
+
+    @Override
+    public List<PaymentDto> findAllByMemberId(PaymentSearchCondition condition) {
+        List<PaymentDto> paymentDtoList = jpaQueryFactory
+                .select(Projections.constructor(PaymentDto.class,
+                        payment.billNo,
+                        payment.kidNo,
+                        payment.classNo,
+                        payment.discountRate,
+                        payment.paymentTitle,
+                        payment.paymentPrice,
+                        payment.paymentStartDate,
+                        payment.paymentEndDate,
+                        payment.paymentMemo,
+                        paymentLog.paymentStatus,
+                        paymentLog.paymentLogRegDate,
+                        kid.kidName,
+                        parentKid.id,
+                        clazz.className))
+                .from(payment)
+                .join(paymentLog).on(payment.billNo.eq(paymentLog.billNo))
+                .join(kid).on(payment.kidNo.eq(kid.kidNo))
+                .join(clazz).on(payment.classNo.eq(clazz.classNo))
+                .join(parentKid).on(payment.kidNo.eq(parentKid.kidNo))
+                .where(parentKid.id.eq(condition.getMemberId()))
+                .fetch();
+
+        return paymentDtoList;
+    }
+
+    @Override
+    public PaymentDto findByBillNo(PaymentSearchCondition condition) {
+        PaymentDto paymentDto = jpaQueryFactory
+                .select(Projections.constructor(PaymentDto.class,
+                        payment.billNo,
+                        payment.kidNo,
+                        payment.classNo,
+                        payment.discountRate,
+                        payment.paymentTitle,
+                        payment.paymentPrice,
+                        payment.paymentStartDate,
+                        payment.paymentEndDate,
+                        payment.paymentMemo,
+                        paymentLog.paymentStatus,
+                        paymentLog.paymentLogRegDate,
+                        kid.kidName,
+                        clazz.className)).distinct()
+                .from(payment)
+                .join(paymentLog).on(payment.billNo.eq(paymentLog.billNo))
+                .join(kid).on(payment.kidNo.eq(kid.kidNo))
+                .join(clazz).on(payment.classNo.eq(clazz.classNo))
+                .join(parentKid).on(payment.kidNo.eq(parentKid.kidNo))
+                .where(payment.billNo.eq(condition.getBillNo()),
+                        paymentLog.paymentStatus.eq(PaymentStatusEnum.BILLED.getStatus()))
+                .fetchOne();
+
+
+        return paymentDto;
     }
 
     private BooleanExpression getPaymentLogRegdateGoe(LocalDateTime startDate) {

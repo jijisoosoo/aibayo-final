@@ -11,5 +11,8 @@ import java.util.Map;
 public interface PaymentService {
     List<PaymentDto> getAllByKinderNo(PaymentSearchCondition condition);
     List<PaymentDto> getAllBySearchCondition(PaymentSearchCondition condition);
-    void insertSchedule(Map<String, Object> requestBody);
+    void insertPayment(Map<String, Object> requestBody);
+    List<PaymentDto> getAllByMemberId(PaymentSearchCondition condition);
+    PaymentDto getByBillNo(PaymentSearchCondition condition);
+    void insertPaymentSuccess(PaymentSearchCondition condition);
 }

@@ -149,7 +149,7 @@ function formitize() {
         var paymentPrice = element.dataset.paymentPrice;
         var discountRate = element.dataset.discountRate;
         // 숫자를 문자열로 변환하고, 천 단위로 콤마를 추가
-        var formattedAmount = (paymentPrice * (100 - discountRate) / 100)
+        var formattedAmount = (paymentPrice * (100 - discountRate) * 0.01)
             .toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         element.innerHTML = formattedAmount + '원';
     });

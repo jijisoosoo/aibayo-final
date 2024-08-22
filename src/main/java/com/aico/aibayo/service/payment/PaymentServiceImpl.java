@@ -2,11 +2,11 @@ package com.aico.aibayo.service.payment;
 
 import com.aico.aibayo.common.BoardTypeEnum;
 import com.aico.aibayo.common.BooleanEnum;
+import com.aico.aibayo.common.PaymentStatusEnum;
 import com.aico.aibayo.dto.payment.PaymentDto;
 import com.aico.aibayo.dto.payment.PaymentSearchCondition;
-import com.aico.aibayo.entity.BoardEntity;
-import com.aico.aibayo.entity.ScheduleClassEntity;
-import com.aico.aibayo.entity.ScheduleEntity;
+import com.aico.aibayo.entity.*;
+import com.aico.aibayo.repository.payment.PaymentLogRepository;
 import com.aico.aibayo.repository.payment.PaymentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +22,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
+    private final PaymentLogRepository paymentLogRepository;
 
     @Override
     public List<PaymentDto> getAllByKinderNo(PaymentSearchCondition condition) {
@@ -35,60 +36,77 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     @Transactional
-    public void insertSchedule(Map<String, Object> requestBody) {
-        let id = $(this).attr('id');
-        let kidNo = $(this).find('.kidNameBox').attr('id');
-        let classNo = $('.selectedClassName').attr('value');
-        let paymentTitle = $('#paymentTitle').val();
-        let discountRate = getDiscount(kidNo);
-        let paymentPrice = price;
-        let paymentEndDate = ($('.datepicker').val() + 'T' + $('.timepicker').val()).replace(/\./g, '-');
-        let paymentMemo = getMemo(kidNo);
-        let kinderNo = null;
+    public void insertPayment(Map<String, Object> requestBody) {
+        List<Map<String, Object>> paymentList = (List<Map<String, Object>>) requestBody.get("billList");
 
+//        for(PaymentDto payment : paymentList) {
+        for (Map<String, Object> paymentMap : paymentList) {
+            PaymentDto payment =
+//                    convertMapToPaymentDto(paymentMap);
 
-
-        Long kinderNo = (Long)requestBody.get("kinderNo");
-
-        List<?> payments = (List<?>) requestBody.get("classList");
-        List<PaymentDto> paymentList = payments.stream()
-                .map(element -> Long.parseLong(element.toString())) // String을 Long으로 변환
-                .toList();
-
-
-
-
-        // board insert
-        BoardEntity boardEntity = BoardEntity.builder()
-                .invisibleFlag(BooleanEnum.FALSE.getBool())
-                .boardType(BoardTypeEnum.SCHEDULE.getNum())
-                .writer(writer)
-                .boardTitle(boardTitle)
-                .boardContents(boardContents)
-                .boardRegDate(LocalDateTime.now())
-                .kinderNo(kinderNo)
-                .build();
-
-        BoardEntity savedBoard = boardRepository.save(boardEntity);
-
-        // schedule insert
-        ScheduleEntity scheduleEntity = ScheduleEntity.builder()
-                .boardNo(savedBoard.getBoardNo())
-                .scheduleStartDate(startDate)
-                .scheduleEndDate(endDate)
-                .mapLat(mapLat)
-                .mapLng(mapLng)
-                .build();
-
-        ScheduleEntity savedSchedule = scheduleRepository.save(scheduleEntity);
-
-        // scheduleClass insert
-        for(Long classNo : classList) {
-            ScheduleClassEntity scheduleClassEntity = ScheduleClassEntity.builder()
-                    .scheduleNo(savedSchedule.getScheduleNo())
-                    .classNo(classNo)
+            PaymentDto.builder()
+                    .id(Long.valueOf(paymentMap.get("id").toString()))
+                    .kidNo(Long.valueOf(paymentMap.get("kidNo").toString()))
+                    .classNo(Long.valueOf(paymentMap.get("classNo").toString()))
+                    .discountRate(Long.valueOf(paymentMap.get("discountRate").toString()))
+                    .kinderNo(Long.valueOf(paymentMap.get("kinderNo").toString()))
+                    .paymentTitle(paymentMap.get("paymentTitle").toString())
+                    .paymentPrice(Long.valueOf(paymentMap.get("paymentPrice").toString()))
+                    .paymentEndDate(LocalDateTime.parse(paymentMap.get("paymentEndDate").toString()))
+                    .paymentMemo(paymentMap.get("paymentMemo").toString())
                     .build();
-            scheduleClassRepository.save(scheduleClassEntity);
+
+
+            // payment insert
+            PaymentEntity paymentEntity= PaymentEntity.builder()
+                    .id(payment.getId())
+                    .kidNo(payment.getKidNo())
+                    .classNo(payment.getClassNo())
+                    .discountRate(payment.getDiscountRate())
+                    .kinderNo(payment.getKinderNo())
+                    .paymentStartDate(LocalDateTime.now())
+                    .paymentEndDate(payment.getPaymentEndDate())
+                    .paymentPrice(payment.getPaymentPrice())
+                    .discountRate(payment.getDiscountRate())
+                    .paymentTitle(payment.getPaymentTitle())
+                    .paymentMemo(payment.getPaymentMemo())
+                    .build();
+
+            PaymentEntity savedPayment = paymentRepository.save(paymentEntity);
+
+            // paymentLog insert
+            PaymentLogEntity paymentLogEntity = PaymentLogEntity.builder()
+                    .billNo(savedPayment.getBillNo())
+                    .paymentStatus(PaymentStatusEnum.BILLED.getStatus())
+                    .paymentLogRegDate(savedPayment.getPaymentStartDate())
+                    .build();
+
+            paymentLogRepository.save(paymentLogEntity);
         }
+    }
+
+    @Override
+    public List<PaymentDto> getAllByMemberId(PaymentSearchCondition condition) {
+        return paymentRepository.findAllByMemberId(condition);
+    }
+
+    @Override
+    public PaymentDto getByBillNo(PaymentSearchCondition condition) {
+        return paymentRepository.findByBillNo(condition);
+    }
+
+    @Override
+    public void insertPaymentSuccess(PaymentSearchCondition condition) {
+
+        PaymentDto payment = paymentRepository.findByBillNo(condition);
+
+        // paymentLog insert
+        PaymentLogEntity paymentLogEntity = PaymentLogEntity.builder()
+                .billNo(payment.getBillNo())
+                .paymentStatus(PaymentStatusEnum.PAID.getStatus())
+                .paymentLogRegDate(LocalDateTime.now())
+                .build();
+
+        paymentLogRepository.save(paymentLogEntity);
     }
 }

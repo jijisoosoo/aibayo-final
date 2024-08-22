@@ -38,6 +38,28 @@ public class PaymentDto {
                        String paymentTitle, Long paymentPrice,
                        LocalDateTime paymentStartDate, LocalDateTime paymentEndDate,
                       String paymentMemo, Integer paymentStatus, LocalDateTime paymentLogRegDate,
+                      String kidName, Long id, String className){
+        this.billNo = billNo;
+        this.kidNo = kidNo;
+        this.classNo = classNo;
+        this.discountRate = discountRate;
+        this.paymentTitle = paymentTitle;
+        this.paymentPrice = paymentPrice;
+        this.paymentStartDate = paymentStartDate;
+        this.paymentEndDate = paymentEndDate;
+        this.paymentMemo = paymentMemo;
+        this.paymentStatus = paymentStatus;
+        this.paymentLogRegDate = paymentLogRegDate;
+        this.kidName = kidName;
+        this.id = id;
+        this.className = className;
+    }
+
+
+    public PaymentDto(Long billNo, Long kidNo, Long classNo, Long discountRate,
+                      String paymentTitle, Long paymentPrice,
+                      LocalDateTime paymentStartDate, LocalDateTime paymentEndDate,
+                      String paymentMemo, Integer paymentStatus, LocalDateTime paymentLogRegDate,
                       String kidName, String className){
         this.billNo = billNo;
         this.kidNo = kidNo;
@@ -69,7 +91,8 @@ public class PaymentDto {
     }
 
     public PaymentDto(Long id, String name, Long kidNo, String kidName, Long classNo, String className,
-                      String paymentTitle, Long discountRate, Long paymentPrice, LocalDateTime paymentEndDate, String paymentMemo){
+                      String paymentTitle, Long discountRate, Long paymentPrice,
+                      LocalDateTime paymentEndDate, String paymentMemo, Long kinderNo){
         this.id = id;
         this.name = name;
         this.kidNo = kidNo;
@@ -81,11 +104,12 @@ public class PaymentDto {
         this.paymentPrice = paymentPrice;
         this.paymentEndDate = paymentEndDate;
         this.paymentMemo = paymentMemo;
+        this.kinderNo = kinderNo;
     }
 
     public PaymentDto(Long id, Long kidNo, Long classNo,
                       String paymentTitle, Long discountRate, Long paymentPrice,
-                      LocalDateTime paymentEndDate, String paymentMemo){
+                      LocalDateTime paymentEndDate, String paymentMemo, Long kinderNo){
         this.id = id;
         this.kidNo = kidNo;
         this.classNo = classNo;
@@ -94,6 +118,7 @@ public class PaymentDto {
         this.paymentPrice = paymentPrice;
         this.paymentEndDate = paymentEndDate;
         this.paymentMemo = paymentMemo;
+        this.kinderNo = kinderNo;
     }
 
 }

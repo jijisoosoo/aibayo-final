@@ -8,9 +8,11 @@ import java.util.List;
 @Data
 public class PaymentSearchCondition {
     private Long kinderNo;
+    private Long MemberId;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private List<Integer> paymentStatusList;
     private String inputString;
     private Long classNo;
+    private Long billNo;
 }
