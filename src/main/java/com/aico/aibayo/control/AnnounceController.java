@@ -386,6 +386,7 @@ public class AnnounceController {
         log.info("Received commentDto: {}", commentDto); // 추가된 로그
 
         CommentDto commentDto1 = commentService.insertComment(commentDto);
+        commentDto1.setComment(true);
 
         log.info("Inserted commentDto: {}", commentDto1); // 추가된 로그
         return commentDto1;
@@ -396,7 +397,9 @@ public class AnnounceController {
     @ResponseBody
     public CommentDto deleteComment(@RequestBody CommentDto commentDto) {
         log.info("delete Comment: {}", commentDto);
-        return commentService.deleteComment(commentDto);
+        CommentDto result = commentService.deleteComment(commentDto);
+        result.setComment(true);
+        return result;
     }
 
 
