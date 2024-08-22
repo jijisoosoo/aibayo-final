@@ -92,6 +92,44 @@
             classSelect.addEventListener('change', toggleStudentField);
         });
 
+
+        function submitForm() {
+            var formData = {
+                username: $("#username").val(),
+                password: $("#password").val(),
+                phone: $("#phone").val(),
+                name: $("#name").val(),
+                role: $("#role").val(),
+                invite: $("#invite").val(),
+                // kidBirth: $("#birth-input").val(),     // 원생 생일
+                // kidGender: $("#gender-input").val(),   // 원생 성별
+                // kidName: $("#name-input").val(),       // 원생 이름
+                kidNo: $("#name-input").val(),       // 원생 번호
+                relationship: $("#relationship-input").val(), // 원생과의 관계
+                kinderNo: $("#kindergarten-input").val(),  // 유치원 번호
+                classNo: $("#class-input").val()       // 반 번호
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/member/finalSignUp",
+                contentType: "application/json",
+                data: JSON.stringify(formData),
+                success: function(response) {
+                    // 성공 시 처리
+                    console.log("회원가입 성공");
+                    alert('회원가입이 성공적으로 완료되었습니다.');
+                    window.location.href = "/member/signIn"; // 성공 페이지로 리다이렉트
+                },
+                error: function(error) {
+                    // 에러 시 처리
+                    console.log("회원가입 실패");
+                    alert('회원가입 중 오류가 발생했습니다.');
+                }
+            });
+        }
+
+
     </script>
 </head>
 <body>
@@ -111,21 +149,21 @@
                         <input type="hidden" name="invite" th:value="${member.invite}" id="invite">
 
                         <div class="group-2">
-                            <div class="group-3">
-                                <label for="birth-input" style="font-size: small">원아 생일
-                                    <input type="date" class="overlap-group-5" name="kidBirth" id="birth-input" max="2024-12-31" min="2000-01-01" value="2024-01-01">
-                                </label>
-                            </div>
+<!--                            <div class="group-3">-->
+<!--                                <label for="birth-input" style="font-size: small">원아 생일-->
+<!--                                    <input type="date" class="overlap-group-5" name="kidBirth" id="birth-input" max="2024-12-31" min="2000-01-01" value="2024-01-01">-->
+<!--                                </label>-->
+<!--                            </div>-->
 
-                            <div class="group-4">
-                                <label for="gender-input" style="font-size: small">원아 성별</label>
-                                <select class="overlap-group-3" name="kidGender" id="gender-input">
-                                    <option value="">성별을 선택하세요</option>
-                                    <option value="1">Male</option>
-                                    <option value="2">Female</option>
-                                    <option value="3">Non-Binary</option>
-                                </select>
-                            </div>
+<!--                            <div class="group-4">-->
+<!--                                <label for="gender-input" style="font-size: small">원아 성별</label>-->
+<!--                                <select class="overlap-group-3" name="kidGender" id="gender-input">-->
+<!--                                    <option value="">성별을 선택하세요</option>-->
+<!--                                    <option value="1">Male</option>-->
+<!--                                    <option value="2">Female</option>-->
+<!--                                    <option value="3">Non-Binary</option>-->
+<!--                                </select>-->
+<!--                            </div>-->
                             <div class="group-6">
                                 <div class="group-7">
                                     <div class="overlap-group-4">

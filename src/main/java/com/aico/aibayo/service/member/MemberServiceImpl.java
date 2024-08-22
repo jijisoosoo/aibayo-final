@@ -67,6 +67,8 @@ public class MemberServiceImpl implements MemberService {
         MemberEntity newMemberEntity = memberRepository.save(memberEntity);
         log.info("회원 정보 저장 완료: username = {}", username);
 
+
+
         if (memberDto.getRole().equals("ROLE_USER")) {
             processParentSignUp(memberDto, newMemberEntity);
         } else if (memberDto.getRole().equals("ROLE_TEACHER")){
@@ -113,27 +115,28 @@ public class MemberServiceImpl implements MemberService {
             parentKidEntity.setParentRelationship(memberDto.getRelationship());
             parentKidRepository.save(parentKidEntity);
             log.info("parentKid 정보 저장 완료: memberId = {}, kidNo = {}", newMemberEntity.getId(), checkKid.getKidNo());
+        } else {
+            Long memberAcceptNo = createAcceptLogForParent(memberDto);
+            ParentKidEntity parentKidEntity = new ParentKidEntity();
+            parentKidEntity.setId(newMemberEntity.getId());
+            parentKidEntity.setKidNo(checkKid.getKidNo());
+            parentKidEntity.setAcceptNo(memberAcceptNo);
+            parentKidEntity.setIsMainParent(BooleanEnum.TRUE.getBool());
+            parentKidEntity.setParentRelationship(memberDto.getRelationship());
+            parentKidRepository.save(parentKidEntity);
+            log.info("parentKid 정보 저장 완료: memberId = {}, kidNo = {}", newMemberEntity.getId(), checkKid.getKidNo());
         }
 
-        Long memberAcceptNo = createAcceptLogForParent(memberDto);
-        ParentKidEntity parentKidEntity = new ParentKidEntity();
-        parentKidEntity.setId(newMemberEntity.getId());
-        parentKidEntity.setKidNo(checkKid.getKidNo());
-        parentKidEntity.setAcceptNo(memberAcceptNo);
-        parentKidEntity.setIsMainParent(BooleanEnum.TRUE.getBool());
-        parentKidEntity.setParentRelationship(memberDto.getRelationship());
-        parentKidRepository.save(parentKidEntity);
-        log.info("parentKid 정보 저장 완료: memberId = {}, kidNo = {}", newMemberEntity.getId(), checkKid.getKidNo());
 
     }
 
     private KidEntity findOrCreateKid(MemberDto memberDto) {
-        return kidRepository.findByKinderNoAndKidNameAndKidBirthAndKidGenderAndDischargeFlag(
-                memberDto.getKinderNo(), memberDto.getKidName(), memberDto.getKidBirth(),
-                Integer.valueOf(memberDto.getKidGender()), BooleanEnum.FALSE.getBool()
+        return kidRepository.findByKinderNoAndKidNoAndDischargeFlag(
+                memberDto.getKinderNo(), memberDto.getKidNo(), BooleanEnum.FALSE.getBool()
         ).orElseGet(() -> {
             KidEntity kidEntity = new KidEntity();
             kidEntity.setKinderNo(memberDto.getKinderNo());
+            kidEntity.setKidNo(memberDto.getKidNo());
             kidEntity.setKidName(memberDto.getKidName());
             kidEntity.setKidBirth(memberDto.getKidBirth());
             kidEntity.setKidGender(Integer.valueOf(memberDto.getKidGender()));
