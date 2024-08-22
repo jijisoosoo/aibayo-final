@@ -20,8 +20,8 @@
                 <div class="div">
                     <div class="div-wrapper">
 
-                        <div  class="element-dropdown">
-                            <select class="category">
+                        <div  class="element-dropdown" style=" visibility : hidden ">
+                            <select class="category" >
                                 <option selected>말머리</option>
                                 <option value="1">선생님만</option>
                                 <option value="2">원 공지</option>
@@ -35,14 +35,14 @@
                         </div>
                     </div>
                     <div class="div-wrapper">
-                        <div class="search">
-                            <input type="text" class="text-wrapper-2" name="" id="" placeholder="검색어를 입력해주세요">
-                            <a href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                                </svg>
-                            </a>
-                        </div>
+<!--                        <div class="search">-->
+<!--                            <input type="text" class="text-wrapper-2" name="" id="" placeholder="검색어를 입력해주세요">-->
+<!--                            <a href="#">-->
+<!--                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">-->
+<!--                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>-->
+<!--                                </svg>-->
+<!--                            </a>-->
+<!--                        </div>-->
                         <div class="element-secondary-button-wrapper">
                             <a href="/announce/admin/write" class="element-secondary-button-2">작성</a>
                         </div>
@@ -75,7 +75,7 @@
                             <th>제목</th>
                             <th>작성자</th>
                             <th>작성일</th>
-                            <th>댓글</th>
+<!--                            <th>댓글</th>-->
                         </tr>
                         <tr class="announce" th:each="announce : ${primaryAnnounces}" th:object="${announce}" th:onclick="|location.href='/announce/admin/${announce.announceNo}'|">
                             <td th:text="*{announceNo}"></td>
@@ -96,7 +96,7 @@
                             </td>
 
                             <td th:text="*{#temporals.format(boardRegDate, 'yyyy년 MM월 dd일')}">2024.07.11.</td>
-                            <td>0</td>
+<!--                            <td>0</td>-->
                         </tr>
 
                         <tr class="announce" th:each="announce : ${announces}" th:object="${announce}" th:onclick="|location.href='/announce/admin/${announce.announceNo}'|">
@@ -116,7 +116,6 @@
                                 <span th:if="*{roleNo == 2}" th:text="' 선생님'">[Teacher]</span>
                             </td>
                             <td th:text="*{#temporals.format(boardRegDate, 'yyyy년 MM월 dd일')}">2024.07.11.</td>
-                            <td>0</td>
                         </tr>
 
                     </table>

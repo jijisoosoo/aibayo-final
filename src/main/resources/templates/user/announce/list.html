@@ -20,28 +20,28 @@
                 <div class="div">
                     <div class="div-wrapper">
 
-                        <div  class="element-dropdown">
-                            <select class="category">
-                                <option selected>말머리</option>
-                                <option value="2">원 공지</option>
-                                <option value="3">일정/행사</option>
-                                <option value="4">교육</option>
-                                <option value="5">보육료</option>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
-                                </svg>
-                            </select>
-                        </div>
+<!--                        <div  class="element-dropdown">-->
+<!--                            <select class="category">-->
+<!--                                <option selected>말머리</option>-->
+<!--                                <option value="2">원 공지</option>-->
+<!--                                <option value="3">일정/행사</option>-->
+<!--                                <option value="4">교육</option>-->
+<!--                                <option value="5">보육료</option>-->
+<!--                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">-->
+<!--                                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>-->
+<!--                                </svg>-->
+<!--                            </select>-->
+<!--                        </div>-->
                     </div>
                     <div class="div-wrapper">
-                        <div class="search">
-                            <input type="text" class="text-wrapper-2" name="" id="" placeholder="검색어를 입력해주세요">
-                            <a href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                                </svg>
-                            </a>
-                        </div>
+<!--                        <div class="search">-->
+<!--                            <input type="text" class="text-wrapper-2" name="" id="" placeholder="검색어를 입력해주세요">-->
+<!--                            <a href="#">-->
+<!--                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">-->
+<!--                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>-->
+<!--                                </svg>-->
+<!--                            </a>-->
+<!--                        </div>-->
                         <div class="element-secondary-button-wrapper">
                             <a href="/announce/user/write" class="element-secondary-button-2" th:if="${roleNo>2}">작성</a>
                         </div>
@@ -74,7 +74,7 @@
                             <th>제목</th>
                             <th>작성자</th>
                             <th>작성일</th>
-                            <th>댓글</th>
+<!--                            <th>댓글</th>-->
                         </tr>
                         <tr class="announce"
                             th:if="${announce.announceType > 1}"
@@ -96,7 +96,6 @@
                             </td>
 
                             <td th:text="*{#temporals.format(boardRegDate, 'yyyy년 MM월 dd일')}">2024.07.11.</td>
-                            <td>0</td>
                             <td th:text="${commentCount}">0</td>
                         </tr>
 
@@ -117,7 +116,7 @@
                                 <span th:if="*{roleNo == 2}" th:text="' 선생님'">[Teacher]</span>
                             </td>
                             <td th:text="*{#temporals.format(boardRegDate, 'yyyy년 MM월 dd일')}">2024.07.11.</td>
-                            <td>0</td>
+<!--                            <td>0</td>-->
                         </tr>
 
                     </table>

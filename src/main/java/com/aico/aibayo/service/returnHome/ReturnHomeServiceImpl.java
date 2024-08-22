@@ -75,7 +75,7 @@ public class ReturnHomeServiceImpl implements ReturnHomeService{
                 .orderSpecific(returnHomeDto.getOrderSpecific())
                 .orderParentSign(returnHomeDto.getOrderParentSign())
                 .orderDeleteDate(returnHomeDto.getOrderDeleteDate())
-                .orderDeleteFlag(returnHomeDto.getOrderDeleteFlag())
+                .orderDeleteFlag(BooleanEnum.FALSE.getBool())
                 .build();
         OrderFormEntity savedOrder= orderFormRepository.save(order);
 

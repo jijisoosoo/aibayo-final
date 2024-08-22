@@ -32,7 +32,7 @@
         </div>
 
         <div class="notepad_detail_top_btn_box"
-             th:if="${member.get('roleNo') < 2 || member.get('id') == notepad.writer}">
+             th:if="${loginInfo.roleNo < 2 || loginInfo.id == notepad.writer}">
 
             <div class="notepad_detail_top_btn">
                 <a th:href="@{|/notepad/admin/modify/${notepadNo}|}"

@@ -25,55 +25,12 @@
           <a href="/returnhome/user/card" class="element-secondary-button">
             목록
           </a>
+<!--          <input type="hidden" id="" th:value="${home.getRunDate()}">-->
+          <input type="hidden" id="runDate" th:value="${home.getRunDate()}">
           <input type="button" value="삭제" class="deleteBtn"
-                 th:data-order-no="${home.getOrderNo()}">
+                 th:data-order-no="${home.getOrderNo()}" th:data-run-date="${home.getRunDate()}">
         </div>
       </div>
-<!--        <div class="frame-wrapper">-->
-<!--          <div class="div-3">-->
-<!--            <div class="div-4">-->
-<!--              <div class="div-wrapper-2">-->
-<!--                <div class="text-wrapper-4" th:text="${home.getKidName()}">원아 이름</div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="frame-wrapper-2">-->
-<!--              <div class="div-wrapper-2">-->
-<!--                <div class="text-wrapper-4">원아의 귀가동의서</div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="frame-wrapper-3">-->
-<!--          <div class="div-4">-->
-<!--            <div class="frame-wrapper-4">-->
-<!--              <div class="frame-wrapper-5">-->
-<!--                <div class="avatar-wrapper">-->
-<!--                  <img class="avatar" alt="Avatar" src="returnHome/img/1.png" />-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            <div class="div-5">-->
-<!--              <div class="div-6" style="background-color:#ffffff;">-->
-<!--                <div class="div-wrapper-2">-->
-<!--                  <div class="text-wrapper-5" th:text="${home.getKidName()}">흰둥이</div>-->
-<!--                </div>-->
-<!--                <div class="div-wrapper-2">-->
-<!--                  <div class="text-wrapper-5">원아</div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="frame-wrapper-6">-->
-<!--                <div class="div-6" style="background-color:#ffffff;">-->
-<!--                  <div class="text-wrapper-6">해바라기반</div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="frame-wrapper-10">-->
-<!--          <div class="div-3">-->
-<!--            <p class="text-wrapper-5">금일 자녀의 귀가를 선생님께 의뢰 합니다.</p>-->
-<!--          </div>-->
-<!--        </div>-->
       <table class="table">
         <tr>
           <th>귀가 방법</th>
@@ -95,19 +52,27 @@
           <th>연락망</th>
           <td>
             <span th:text="${home.getRhMainParentName()}"></span>
+            ☎️
             <span th:text="${home.getRhMainParentTel()}"></span>
+
           </td>
         </tr>
         <tr>
           <th>비상 연락망</th>
           <td>
             <span th:text="${home.getRhMinorParentName()}"></span>
+            ☎️
             <span th:text="${home.getRhMinorParentTel()}"></span>
+
           </td>
         </tr>
         <tr>
           <th>의뢰자</th>
           <td th:text="${home.getOrderRequester()}">김엄마</td>
+        </tr>
+        <tr>
+          <th>특이사항</th>
+          <td th:text="${home.getOrderSpecific()}">특이사항</td>
         </tr>
       </table>
     </div>
