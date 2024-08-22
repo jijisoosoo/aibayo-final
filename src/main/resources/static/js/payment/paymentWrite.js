@@ -349,20 +349,6 @@ function getMemo(kidNo) {
     }
 }
 
-function convertToISOFormat(datetimeString) {
-    // 날짜와 시간 부분을 분리
-    let datePart = datetimeString.slice(0, 10); // "2024.08.15"
-    let timePart = datetimeString.slice(10); // "04:00"
-
-    // 날짜 부분에서 '.'을 '-'로 바꿔줌
-    datePart = datePart.replace(/\./g, '-');
-
-    // 최종 ISO 8601 형식으로 변환
-    let isoFormat = `${datePart}T${timePart}`;
-
-    return isoFormat;
-}
-
 function afterSuccess(response, method) {
 
     if(afterSuccessType === 'getKid'){

@@ -36,7 +36,7 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     @Transactional
-    public void insertSchedule(Map<String, Object> requestBody) {
+    public void insertPayment(Map<String, Object> requestBody) {
         List<Map<String, Object>> paymentList = (List<Map<String, Object>>) requestBody.get("billList");
 
 //        for(PaymentDto payment : paymentList) {
@@ -57,24 +57,24 @@ public class PaymentServiceImpl implements PaymentService {
                     .build();
 
 
-        // payment insert
-         PaymentEntity paymentEntity= PaymentEntity.builder()
-                .id(payment.getId())
-                .kidNo(payment.getKidNo())
-                .classNo(payment.getClassNo())
-                .discountRate(payment.getDiscountRate())
-                .kinderNo(payment.getKinderNo())
-                .paymentStartDate(LocalDateTime.now())
-                .paymentEndDate(payment.getPaymentEndDate())
-                .paymentPrice(payment.getPaymentPrice())
-                .discountRate(payment.getDiscountRate())
-                .paymentTitle(payment.getPaymentTitle())
-                .paymentMemo(payment.getPaymentMemo())
-                .build();
+            // payment insert
+            PaymentEntity paymentEntity= PaymentEntity.builder()
+                    .id(payment.getId())
+                    .kidNo(payment.getKidNo())
+                    .classNo(payment.getClassNo())
+                    .discountRate(payment.getDiscountRate())
+                    .kinderNo(payment.getKinderNo())
+                    .paymentStartDate(LocalDateTime.now())
+                    .paymentEndDate(payment.getPaymentEndDate())
+                    .paymentPrice(payment.getPaymentPrice())
+                    .discountRate(payment.getDiscountRate())
+                    .paymentTitle(payment.getPaymentTitle())
+                    .paymentMemo(payment.getPaymentMemo())
+                    .build();
 
             PaymentEntity savedPayment = paymentRepository.save(paymentEntity);
 
-            // schedule insert
+            // paymentLog insert
             PaymentLogEntity paymentLogEntity = PaymentLogEntity.builder()
                     .billNo(savedPayment.getBillNo())
                     .paymentStatus(PaymentStatusEnum.BILLED.getStatus())
@@ -93,5 +93,20 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public PaymentDto getByBillNo(PaymentSearchCondition condition) {
         return paymentRepository.findByBillNo(condition);
+    }
+
+    @Override
+    public void insertPaymentSuccess(PaymentSearchCondition condition) {
+
+        PaymentDto payment = paymentRepository.findByBillNo(condition);
+
+        // paymentLog insert
+        PaymentLogEntity paymentLogEntity = PaymentLogEntity.builder()
+                .billNo(payment.getBillNo())
+                .paymentStatus(PaymentStatusEnum.PAID.getStatus())
+                .paymentLogRegDate(LocalDateTime.now())
+                .build();
+
+        paymentLogRepository.save(paymentLogEntity);
     }
 }

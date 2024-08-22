@@ -1,44 +1,33 @@
 package com.aico.aibayo.control;
 
 import com.aico.aibayo.common.AcceptStatusEnum;
-import com.aico.aibayo.common.PaymentStatusEnum;
 import com.aico.aibayo.dto.ClassDto;
 import com.aico.aibayo.dto.kid.KidDto;
 import com.aico.aibayo.dto.kid.KidSearchCondition;
 import com.aico.aibayo.dto.member.MemberDto;
 import com.aico.aibayo.dto.payment.PaymentDto;
 import com.aico.aibayo.dto.payment.PaymentSearchCondition;
-import com.aico.aibayo.dto.schedule.ScheduleSearchCondition;
 import com.aico.aibayo.service.kid.KidService;
-import com.aico.aibayo.service.payment.PaymentLogService;
 import com.aico.aibayo.service.payment.PaymentService;
 import com.aico.aibayo.service.classManage.ClassService;
-import com.aico.aibayo.service.member.MemberService;
-import com.aico.aibayo.service.payment.PaymentServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
+
 
 @Slf4j
 @Controller
 @RequestMapping("/payment")
 @RequiredArgsConstructor
 public class PaymentController {
-    private final MemberService memberService;
     private final PaymentService paymentService;
-    private final PaymentLogService paymentLogService;
     private final ClassService classService;
     private final KidService kidService;
-    private final PaymentServiceImpl paymentServiceImpl;
 
     @GetMapping("/admin/paymentBillingMain")
     public String adminPaymentMain(@ModelAttribute("loginInfo") MemberDto loginInfo, Model model){
@@ -131,7 +120,7 @@ public class PaymentController {
     public void writeOk(@ModelAttribute("loginInfo") MemberDto loginInfo,
                         @RequestBody Map<String, Object> requestBody) {
         log.info("requestBody {}", requestBody);
-        paymentService.insertSchedule(requestBody);
+        paymentService.insertPayment(requestBody);
     }
 
 //    @GetMapping("/admin/paymentBillingConfirm")
@@ -168,6 +157,14 @@ public class PaymentController {
         return "/user/payment/paymentPay";
     }
 
-    @GetMapping("/user/paymentDone")
-    public String userPaymentDone(){ return "/user/payment/paymentDone"; }
+    @GetMapping("/user/success")
+    public void paySuccess(@ModelAttribute("loginInfo") MemberDto loginInfo,
+                                  @RequestParam("billNo") Long billNo, Model model){
+        log.info("billNo {}", billNo);
+        PaymentSearchCondition condition = new PaymentSearchCondition();
+        condition.setBillNo(billNo);
+        condition.setMemberId(loginInfo.getId());
+
+        paymentService.insertPaymentSuccess(condition);
+    }
 }
