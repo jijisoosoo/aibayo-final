@@ -15,7 +15,12 @@
 <form id="announceForm">
 
     <div class="container main_container" layout:fragment="content">
-        <div class="ann-write">
+        <div class="ann-write"
+             th:data-login-id="${loginInfo.getId()}"
+             th:data-kinder-no="${loginInfo.getKinderNo()}"
+        >
+<!--            <p th:text="${loginInfo.getId()}"> 로그인 인포</p>-->
+<!--            <p th:text="${loginInfo.getKinderNo()}"> 유치원 넘버</p>-->
             <div class="frame">
                 <div class="c">
                     <div class="b">

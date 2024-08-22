@@ -27,8 +27,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 @Slf4j
 @Controller
@@ -40,7 +39,6 @@ public class AttendanceController {
     private final ClassService classService;
     private final AttendanceService attendanceService;
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @ModelAttribute
     public void addAttributes(HttpServletRequest request, Model model) {
@@ -191,12 +189,12 @@ public class AttendanceController {
             String note = request.getNote();
             LocalDate attendanceDate = request.getAttendanceDate();
             Long classNo = request.getClassNo();
-            logger.info("updateAttendance received for kidNo: {}, attendanceDate: {}", kidNo, attendanceDate);
+            log.info("updateAttendance received for kidNo: {}, attendanceDate: {}", kidNo, attendanceDate);
             attendanceService.updateAttendance(kidNo, attendanceStatus, kidDrop, kidPickup, note, attendanceDate, classNo, memberDto);
 
             return ResponseEntity.ok("출석부 수정 성공");
         } catch (Exception e) {
-            logger.error("Error updating attendance for kidNo: {}, attendanceDate: {}", request.getKidNo(), request.getAttendanceDate(), e);
+            log.error("Error updating attendance for kidNo: {}, attendanceDate: {}", request.getKidNo(), request.getAttendanceDate(), e);
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("출석부 수정 실패");
         }
@@ -210,13 +208,13 @@ public class AttendanceController {
             Long kidNo = request.getKidNo();
             LocalDate attendanceDate = request.getAttendanceDate();
 
-            logger.info("deleteAttendance request received for kidNo: {}, attendanceDate: {}", kidNo, attendanceDate);
+            log.info("deleteAttendance request received for kidNo: {}, attendanceDate: {}", kidNo, attendanceDate);
 
             attendanceService.deleteAttendance(kidNo, attendanceDate);
 
             return ResponseEntity.ok("출석부 수정 성공");
         } catch (Exception e) {
-            logger.error("Error deleteAttendance for kidNo: {}, attendanceDate: {}", request.getKidNo(), request.getAttendanceDate(), e);
+            log.error("Error deleteAttendance for kidNo: {}, attendanceDate: {}", request.getKidNo(), request.getAttendanceDate(), e);
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("출석부 삭제 실패");
         }

@@ -6,8 +6,6 @@ import com.aico.aibayo.entity.AttendanceEntity;
 import com.aico.aibayo.repository.attendance.AttendanceRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -20,7 +18,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AttendanceServiceImpl implements AttendanceService {
     private final AttendanceRepository attendanceRepository;
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public List<AttendanceDto> getKids(Long kinderNo, Long classNo, LocalDate selectedDate) {
@@ -34,7 +31,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     // kidNo와 attendanceDate를 기준으로 AttendanceEntity를 가져오는 메서드
     public AttendanceEntity getAttendanceByKidNoAndDate(Long kidNo, LocalDate attendanceDate) {
-        logger.info("Fetching AttendanceEntity for kidNo: {}, attendanceDate: {}", kidNo, attendanceDate);
+        log.info("Fetching AttendanceEntity for kidNo: {}, attendanceDate: {}", kidNo, attendanceDate);
         Optional<AttendanceEntity> optionalAttendance = attendanceRepository.findByKidNoAndAttendanceDate(kidNo, attendanceDate);
         return optionalAttendance.orElseThrow(() -> new RuntimeException("Attendance not found"));
     }
@@ -44,7 +41,7 @@ public class AttendanceServiceImpl implements AttendanceService {
         AttendanceEntity attendanceEntity = getAttendanceByKidNoAndDate(kidNo, attendanceDate);
 
         // 2. 필요한 필드 업데이트
-        logger.info("Updating AttendanceEntity for kidNo: {}, attendanceDate: {}", kidNo, attendanceDate);
+        log.info("Updating AttendanceEntity for kidNo: {}, attendanceDate: {}", kidNo, attendanceDate);
         attendanceEntity.setAttendanceStatus(attendanceStatus);
         attendanceEntity.setKidDrop(kidDrop);
         attendanceEntity.setKidPickup(kidPickup);
@@ -52,7 +49,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 
         // 3. 업데이트된 엔티티 저장
         attendanceRepository.save(attendanceEntity);
-        logger.info("AttendanceEntity updated and saved for kidNo: {}, attendanceDate: {}", kidNo, attendanceDate);
+        log.info("AttendanceEntity updated and saved for kidNo: {}, attendanceDate: {}", kidNo, attendanceDate);
     }
 
     public void deleteAttendance(Long kidNo, LocalDate attendanceDate) {

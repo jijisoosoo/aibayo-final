@@ -1,25 +1,22 @@
 package com.aico.aibayo.jwt;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtParserBuilder;
 import io.jsonwebtoken.Jwts;
 import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
+@Slf4j
 @Component
 public class JWTUtil {
-    private static final Logger logger = LoggerFactory.getLogger(JWTUtil.class);
-
     private SecretKey secretKey;
 
     public JWTUtil(@Value("${spring.jwt.secret}") String secret) {
@@ -58,10 +55,10 @@ public class JWTUtil {
             Date expiration = claims.getExpiration();
             boolean isExpired = expiration.before(new Date());
 
-            logger.info("Token details: issuedAt={}, expiration={}", issuedAt, expiration);
+            log.info("Token details: issuedAt={}, expiration={}", issuedAt, expiration);
             return isExpired;
         } catch (Exception e) {
-            logger.error("Error checking if JWT is expired: {}", e.getMessage());
+            log.error("Error checking if JWT is expired: {}", e.getMessage());
             return true;
         }
     }
@@ -74,7 +71,7 @@ public class JWTUtil {
     // jwt 생성
     public String createJwt(String username, String role, Long expiredMs) {
         Date expirationDate = new Date(System.currentTimeMillis() + expiredMs);
-        logger.info("Creating JWT: username={}, role={}, issuedAt={}, expiration={}", username, role, new Date(), expirationDate);
+        log.info("Creating JWT: username={}, role={}, issuedAt={}, expiration={}", username, role, new Date(), expirationDate);
 
         return Jwts.builder()
                 .claim("username", username)
