@@ -26,7 +26,8 @@ $(document).ready(function () {
                 let boardNo = $(this).data('boardNo'); // 삭제할 항목의 boardNo를 가져옵니다.
 
                 let param = {
-                    boardNo: boardNo
+                    boardNo: boardNo,
+                    isAn:true
                 };
 
                 console.log(`param: ${JSON.stringify(param)}`);
@@ -65,6 +66,7 @@ function afterSuccess(response,method) {
             window.location.href = window.location.origin + '/announce/admin/list';
         });
     }
+
 
 }
 
