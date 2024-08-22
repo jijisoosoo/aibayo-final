@@ -30,8 +30,8 @@ $(document).ready(function () {
         const isPrimary = $('#primary').is(':checked');
         console.log("isPrimary: " + isPrimary);
         const boardType = 1;
-        const writer = 2; // 나중에 실제값으로 받아와야 함
-        const kinderNo = 1; // 나중에 실제값으로 받아와야 함
+        const writer = $('.ann-write').data('login-id');
+        const kinderNo =  $('.ann-write').data('kinder-no');
 
 
 

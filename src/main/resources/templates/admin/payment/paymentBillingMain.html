@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">paymentBillingMain</title>
 
@@ -23,16 +23,21 @@
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
 
     <!--datepicker-->
-    <th:block th:replace="~{/common/datepicker :: js}"/>
-    <th:block th:replace="~{/common/datepicker :: css}"/>
+    <th:block th:replace="~{common/datepicker :: js}"/>
+    <th:block th:replace="~{common/datepicker :: css}"/>
 </th:block>
 
 <div class="container main_container" layout:fragment="content">
 
     <div class="div-2">
         <div class="title"><div class="text-wrapper-4">청구 및 수납</div></div>
+<<<<<<< HEAD
         <a class="button-modify" href="/payment/admin/paymentBillingWrite" th:method="get">
             <img class="icon-pencil" src="/images/common/pencil.png" />
+=======
+        <a class="button-modify" th:href="@{/admin/paymentBillingWrite}" th:method="get">
+            <img class="icon-pencil" src="payment/img/pencil.png" />
+>>>>>>> de385060f4265df8402f6b8c932726c175f67da6
             <div class="text-modify">청구서 작성</div>
         </a>
     </div>

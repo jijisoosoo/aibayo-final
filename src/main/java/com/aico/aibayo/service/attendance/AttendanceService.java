@@ -12,9 +12,10 @@ import java.util.List;
 @Service
 public interface AttendanceService {
     List<AttendanceDto> getKids(Long kinderNo, Long classNo, LocalDate selectedDate);
+    List<AttendanceDto> getKidsByKinderNo(Long kinderNo, LocalDate selectedDate);
     Long createAttendance(AttendanceDto dto);
     AttendanceEntity getAttendanceByKidNoAndDate(Long kidNo, LocalDate attendanceDate);
 
     void updateAttendance(Long kidNo, String attendanceStatus, LocalDateTime kidDrop, LocalDateTime kidPickup, String note, LocalDate attendanceDate, Long classNo, MemberDto memberDto);
-
+    void deleteAttendance(Long kidNo, LocalDate attendanceDate);
 }

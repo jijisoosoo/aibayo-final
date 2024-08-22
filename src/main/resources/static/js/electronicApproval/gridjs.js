@@ -67,31 +67,31 @@ $(document).ready(function() {
             {
                 name: "구분",
                 formatter: (cell, row) => {
-                    return gridjs.html(`<a href="/approval/detail" class="text-decoration-none text-reset">${cell}</a>`);
+                    return gridjs.html(`<a href="approval/detail" class="text-decoration-none text-reset">${cell}</a>`);
                 }
             },
             {
                 name: "상태",
                 formatter: (cell, row) => {
-                    return gridjs.html(`<a href="/approval/detail" class="text-decoration-none text-reset">${cell}</a>`);
+                    return gridjs.html(`<a href="approval/detail" class="text-decoration-none text-reset">${cell}</a>`);
                 }
             },
             {
                 name: "등록일자",
                 formatter: (cell, row) => {
-                    return gridjs.html(`<a href="/approval/detail" class="text-decoration-none text-reset">${cell}</a>`);
+                    return gridjs.html(`<a href="approval/detail" class="text-decoration-none text-reset">${cell}</a>`);
                 }
             },
             {
                 name: "갱신일자",
                 formatter: (cell, row) => {
-                    return gridjs.html(`<a href="/approval/detail" class="text-decoration-none text-reset">${cell}</a>`);
+                    return gridjs.html(`<a href="approval/detail" class="text-decoration-none text-reset">${cell}</a>`);
                 }
             },
             {
                 name: "작성자",
                 formatter: (cell, row) => {
-                    return gridjs.html(`<a href="/approval/detail" class="text-decoration-none text-reset">${cell}</a>`);
+                    return gridjs.html(`<a href="approval/detail" class="text-decoration-none text-reset">${cell}</a>`);
                 }
             }
         ],

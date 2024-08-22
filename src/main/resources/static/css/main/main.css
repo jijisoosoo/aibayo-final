@@ -19,6 +19,11 @@
     align-items: center;
     gap: 10px;
     display: inline-flex;
+    position: relative;
+}
+
+.data_table_attendance {
+    position: relative;
 }
 
 /* .class_3 { opacity: 0.80; color: black; font-size: 32px; font-family: Noto Sans; font-weight: 600; word-wrap: break-word } */
@@ -44,6 +49,21 @@
     overflow-y: auto;
     overflow-x: hidden;
     padding: 10px 0;
+}
+
+.scroll-icon {
+    position: absolute;
+    bottom: 5px; /* 하단에서 10px 위로 배치 */
+    left: 50%; /* 왼쪽 기준 50% */
+    transform: translateX(-50%); /* 아이콘을 정확히 중앙에 맞추기 위해 사용 */
+    font-size: 20px;
+    opacity: 0.5;
+    pointer-events: none; /* 아이콘이 클릭되지 않도록 설정 */
+    transition: opacity 0.3s ease;
+}
+
+.scroll-icon.hidden {
+    opacity: 0; /* 스크롤 가능한 상태가 아닐 때 아이콘을 숨김 */
 }
 
 .meal_empty {
@@ -378,10 +398,13 @@
     justify-content: flex-start;
     align-items: flex-start;
     gap: 6px;
-    display: inline-flex
+    display: inline-flex;
+    flex: 1;
 }
 
 .data_attendance_content_row_box {
+    width: 100%;
+    height: 60px;
     border-bottom: 1px rgb(195 195 195 / 30%) solid;
 }
 
@@ -391,6 +414,10 @@
     justify-content: space-around;
     align-items: center;
     text-align: center;
+}
+
+.attendance_empty {
+    flex: 1;
 }
 
 .data_attendance_content_header {
@@ -418,13 +445,15 @@
     align-items: flex-start;
     border-radius: 15px;
     border: 1px rgb(195 195 195 / 30%) solid;
-    padding: 30px;
+    padding: 30px 10px;
 }
 
 /* .class_24 { width: 204px; height: 46px; left: 0px; top: 0px; position: absolute } */
 .recent_board_title_box {
     width: 204px;
     height: 60px;
+    display: flex;
+    justify-content: center;
 }
 
 /* .class_19 { left: 0px; top: 0px; position: absolute; opacity: 0.80; color: black; font-size: 40px; font-family: Noto Sans; font-weight: 500; word-wrap: break-word } */
@@ -438,11 +467,16 @@
 
 .recent_board_body {
     display: flex;
-    gap: 18px;
+    width: 100%;
+    gap: 10px;
 }
 
-.ann-list .card {
-    width: 320px;
+.board_empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 420px;
 }
 
 /* 날씨, 미세먼지, 초미세먼지 */
@@ -529,6 +563,8 @@
     font-size: 25px;
     font-weight: 500;
     word-wrap: break-word;
+    display: flex;
+    justify-content: center;
 }
 
 .fine_desc {

@@ -39,7 +39,7 @@ public class PaymentController {
         List<ClassDto> classList = classService.getByKinderNo(loginInfo.getKinderNo());
         model.addAttribute("classList", classList);
 
-        return "/admin/payment/paymentBillingMain";
+        return "admin/payment/paymentBillingMain";
     }
 
     @PostMapping("/admin/paymentBillingMainSearch")
@@ -50,7 +50,7 @@ public class PaymentController {
         List<PaymentDto> paymentDtoList = paymentService.getAllBySearchCondition(condition);
         model.addAttribute("paymentDtoList", paymentDtoList);
 
-        return "/admin/payment/paymentBillingMain";
+        return "admin/payment/paymentBillingMain";
     }
 
     @GetMapping("/admin/paymentBillingWrite")
@@ -63,7 +63,7 @@ public class PaymentController {
         model.addAttribute("classList", classList);
         model.addAttribute("kinderNo", loginInfo.getKinderNo());
 
-        return "/admin/payment/paymentBillingWrite";
+        return "admin/payment/paymentBillingWrite";
     }
 
     @PostMapping("/admin/paymentBillingWriteGetKid")
@@ -75,7 +75,7 @@ public class PaymentController {
         List<KidDto> kidDtoList = kidService.getAllWithParentByClassNoAndAcceptStatus(condition);
         model.addAttribute("kidDtoList", kidDtoList);
 
-        return "/admin/payment/paymentBillingWrite";
+        return "admin/payment/paymentBillingWrite";
     }
 
     @PostMapping("/admin/ShowSelectedKid")
@@ -90,7 +90,7 @@ public class PaymentController {
         model.addAttribute("selectedClassName", className);
         model.addAttribute("selectedKidList", selectedKidList);
 
-        return "/admin/payment/paymentBillingWrite";
+        return "admin/payment/paymentBillingWrite";
     }
 
     @PostMapping("/admin/showDiscountedKid")
@@ -139,7 +139,7 @@ public class PaymentController {
         List<ClassDto> classList = classService.getByKinderNo(loginInfo.getKinderNo());
         model.addAttribute("classList", classList);
 
-        return "/user/payment/paymentMain";
+        return "user/payment/paymentMain";
     }
 
 
@@ -154,7 +154,7 @@ public class PaymentController {
         PaymentDto payment = paymentService.getByBillNo(condition);
         model.addAttribute("payment", payment);
         log.info("payment {}", payment);
-        return "/user/payment/paymentPay";
+        return "user/payment/paymentPay";
     }
 
     @GetMapping("/user/success")

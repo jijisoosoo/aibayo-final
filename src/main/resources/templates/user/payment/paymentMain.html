@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">paymentBillingMain</title>
 
@@ -24,8 +24,8 @@
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
 
     <!--datepicker-->
-    <th:block th:replace="~{/common/datepicker :: js}"/>
-    <th:block th:replace="~{/common/datepicker :: css}"/>
+    <th:block th:replace="~{common/datepicker :: js}"/>
+    <th:block th:replace="~{common/datepicker :: css}"/>
 </th:block>
 
 <div class="container main_container" layout:fragment="content">

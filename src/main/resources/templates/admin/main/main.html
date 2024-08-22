@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">메인페이지</title>
 
 <th:block layout:fragment="css">
-    <link rel="stylesheet" href="/css/main/main.css" />
+<!--    <link rel="stylesheet" href="/css/main/main.css" />-->
+    <link rel="stylesheet" th:href="@{/css/main/main.css}" />
 </th:block>
 
 <th:block layout:fragment="javascript">
@@ -18,7 +19,7 @@
 
     <div class="main_top_box">
 
-        <div class="meal_today">
+        <div class="meal_today scroll-parent">
 
             <div class="meal_today_title">오늘의 식단</div>
 
@@ -50,6 +51,13 @@
 
             </div>
 
+
+            <div class="scroll-icon hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 1024 1024">
+                    <path fill="#8c8c8c" d="M104.704 338.752a64 64 0 0 1 90.496 0l316.8 316.8l316.8-316.8a64 64 0 0 1 90.496 90.496L557.248 791.296a64 64 0 0 1-90.496 0L104.704 429.248a64 64 0 0 1 0-90.496" />
+                </svg>
+            </div>
+
         </div>
 
 
@@ -66,8 +74,6 @@
 
 
             <div class="login_user_name" th:text="|${loginInfo.name} ${roleName}|">사용자</div>
-
-
             <div class="login_kinder_name text_div text-compact" th:text="${kinderInfo.kinderName}">
                 유치원명
             </div>
@@ -106,12 +112,18 @@
 
                             <div class="data_teacher_kid_waiting_box">
                                 <div class="data_teacher_kid_body_title">승인대기중</div>
-                                <div class="data_teacher_kid_body_count">0명</div>
+                                <div class="data_teacher_kid_body_count"
+                                     th:text="|${waitingTeachersCount}명|">
+                                    0명
+                                </div>
                             </div>
 
                             <div class="data_teacher_kid_invite_box">
                                 <div class="data_teacher_kid_body_title">초대중</div>
-                                <div class="data_teacher_kid_body_count">0명</div>
+                                <div class="data_teacher_kid_body_count"
+                                     th:text="|${invitedTeachersCount}명|">
+                                    0명
+                                </div>
                             </div>
 
                         </div>
@@ -134,12 +146,18 @@
 
                             <div class="data_teacher_kid_waiting_box">
                                 <div class="data_teacher_kid_body_title">승인대기중</div>
-                                <div class="data_teacher_kid_body_count">0명</div>
+                                <div class="data_teacher_kid_body_count"
+                                     th:text="|${waitedKidsCount}명|">
+                                    0명
+                                </div>
                             </div>
 
                             <div class="data_teacher_kid_invite_box">
                                 <div class="data_teacher_kid_body_title">초대중</div>
-                                <div class="data_teacher_kid_body_count">0명</div>
+                                <div class="data_teacher_kid_body_count"
+                                     th:text="|${invitedKidsCount}명|">
+                                    0명
+                                </div>
                             </div>
 
                         </div>
@@ -153,7 +171,7 @@
         </div>
 
 
-        <div class="data_table_content_box">
+        <div class="data_table_content_box data_table_attendance scroll-parent">
 
             <div class="data_table_content">
 
@@ -163,7 +181,8 @@
                     <div class="data_table_content_title">출석 현황</div>
 
                     <a class="text-decoration-none data_table_attendance_link_box"
-                       href="/attendance/admin/detailToday">
+                       th:with="date=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
+                       th:href="@{|/attendance/detailToday?date=${date}|}">
                         <div class="data_table_attendance_link_text">출석부</div>
                         <div class="data_table_attendance_link_svg">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25"
@@ -177,7 +196,7 @@
                 </div>
 
 
-                <div class="data_attendance_content">
+                <div class="data_attendance_content scrollable">
 
                     <div class="data_attendance_content_row_box">
                         <div class="data_attendance_content_row">
@@ -189,37 +208,55 @@
                         </div>
                     </div>
 
-                    <div class="data_attendance_content_row_box">
-                        <div class="data_attendance_content_row">
-                            <div class="data_attendance_content_text text-compact">병아리반</div>
-                            <div class="data_attendance_content_text text-compact">5명</div>
-                            <div class="data_attendance_content_text text-compact">0명</div>
-                            <div class="data_attendance_content_text text-compact">0/0명</div>
-                            <div class="data_attendance_content_text text-compact">0명</div>
+                    <div class="data_attendance_content_row_box attendance_info"
+                         th:each="attendace : ${attendances}" th:object="${attendace}">
+
+                        <div class="data_attendance_content_row" th:if="*{exist}">
+                            <div class="data_attendance_content_text text-compact"
+                                 th:text="*{className}">
+                                반이름
+                            </div>
+                            <div class="data_attendance_content_text text-compact"
+                                 th:text="|*{totalCount}명|">
+                                0명
+                            </div>
+                            <div class="data_attendance_content_text text-compact"
+                                 th:text="|*{presentCount}명|">
+                                0명
+                            </div>
+                            <div class="data_attendance_content_text text-compact"
+                                 th:text="|*{kidDropCount}/*{kidPickupCount}명|">
+                                0/0명
+                            </div>
+                            <div class="data_attendance_content_text text-compact"
+                                 th:text="|*{absentCount}명|">
+                                0명
+                            </div>
                         </div>
+
+                        <div class="data_attendance_content_row" th:if="*{!exist}">
+                            <div class="data_attendance_content_text text-compact"
+                                 th:text="*{className}">
+                                반이름
+                            </div>
+                            <div class="data_attendance_content_text text-compact attendance_empty">
+                                출석부 미등록
+                            </div>
+                        </div>
+
                     </div>
 
-                    <div class="data_attendance_content_row_box">
-                        <div class="data_attendance_content_row">
-                            <div class="data_attendance_content_text text-compact">1반</div>
-                            <div class="data_attendance_content_text text-compact">5명</div>
-                            <div class="data_attendance_content_text text-compact">0명</div>
-                            <div class="data_attendance_content_text text-compact">0/0명</div>
-                            <div class="data_attendance_content_text text-compact">0명</div>
-                        </div>
-                    </div>
 
-                    <div class="data_attendance_content_row_box">
-                        <div class="data_attendance_content_row">
-                            <div class="data_attendance_content_text text-compact">2반</div>
-                            <div class="data_attendance_content_text text-compact">5명</div>
-                            <div class="data_attendance_content_text text-compact">0명</div>
-                            <div class="data_attendance_content_text text-compact">0/0명</div>
-                            <div class="data_attendance_content_text text-compact">0명</div>
-                        </div>
-                    </div>
+
                 </div>
 
+            </div>
+
+
+            <div class="scroll-icon hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 1024 1024">
+                    <path fill="#8c8c8c" d="M104.704 338.752a64 64 0 0 1 90.496 0l316.8 316.8l316.8-316.8a64 64 0 0 1 90.496 90.496L557.248 791.296a64 64 0 0 1-90.496 0L104.704 429.248a64 64 0 0 1 0-90.496" />
+                </svg>
             </div>
 
         </div>

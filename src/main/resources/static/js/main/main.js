@@ -4,13 +4,16 @@ $(document).ready(function () {
         'pointer-events': 'none'
     });
 
-    // 초기 로딩 시 너비 설정
+    // 초기 로딩 시  식단표 너비 설정
     setMealItemEqualWidth();
 
     // 윈도우 리사이즈 시에도 재설정
     $(window).resize(function () {
         setMealItemEqualWidth();
     });
+
+    // 스크롤 있을 경우 화살표 표시
+    setScrollable();
 
     setWeather();
     setDust();
@@ -20,11 +23,52 @@ $(document).ready(function () {
         let param = {
             kidNo: $(this).data('kid-no')
         }
-        console.log(`param: ${JSON.stringify(param)}`);
+        // console.log(`param: ${JSON.stringify(param)}`);
 
         commonAjax(url, 'POST', param);
     });
 });
+
+function setScrollable() {
+    $('.scrollable').each(function() {
+        bindScrollEvent($(this));
+    });
+}
+
+// 스크롤 이벤트 바인딩 함수
+function bindScrollEvent($scrollable) {
+    let $scrollIcon = $scrollable.closest('.scroll-parent').find('.scroll-icon');
+    let scrollTimeout;
+
+    // 스크롤 이벤트 바인딩
+    $scrollable.on('scroll', function() {
+        $scrollIcon.addClass('hidden'); // 사용자가 스크롤을 시작하면 아이콘 숨김
+
+        // 스크롤이 끝난 후 아이콘을 다시 표시
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(function() {
+            $scrollIcon.removeClass('hidden');
+        }, 100); // 1초 후에 아이콘 다시 표시
+    });
+
+    // 초기 상태 체크
+    checkScroll($scrollable, $scrollIcon);
+
+    // 윈도우 리사이즈 시 다시 체크
+    $(window).on('resize', function() {
+        checkScroll($scrollable, $scrollIcon);
+    });
+}
+
+function checkScroll($scrollable, $scrollIcon) {
+    // console.log(`scrollHeight: ${$scrollable[0].scrollHeight}`);
+    // console.log(`offsetHeight: ${$scrollable[0].offsetHeight}`);
+    if ($scrollable[0].scrollHeight > $scrollable[0].offsetHeight) {
+        $scrollIcon.removeClass('hidden'); // 스크롤 가능할 때 아이콘 표시
+    } else {
+        $scrollIcon.addClass('hidden'); // 스크롤 불가능할 때 아이콘 숨김
+    }
+}
 
 function afterSuccess(response) {
     // console.log(`response: ${response}`);
@@ -45,6 +89,9 @@ function afterSuccess(response) {
     $(window).resize(function () {
         setMealItemEqualWidth();
     });
+
+    // 스크롤 있을 경우 화살표 표시
+    setScrollable();
 
     setWeather();
     setDust();

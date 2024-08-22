@@ -1,52 +1,120 @@
 package com.aico.aibayo.control;
 
-import com.aico.aibayo.config.SSLUtilities;
+import com.aico.aibayo.dto.RegisterKinderDto;
+import com.aico.aibayo.dto.kinder.KinderDto;
+import com.aico.aibayo.dto.member.MemberDto;
+import com.aico.aibayo.entity.RegisterKinderEntity;
+import com.aico.aibayo.jwt.JWTUtil;
+import com.aico.aibayo.service.kinder.KinderService;
+import com.aico.aibayo.service.member.MemberService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Optional;
+
+@Slf4j
 @Controller
 @RequestMapping("/setting")
+@RequiredArgsConstructor
 public class SettingController {
+
+    private final KinderService kinderService;
+
+
+
+
     @GetMapping("/menu")
     public String menu(){
-        return "/admin/setting/menu";
+        return "admin/setting/menu";
     }
-//    @GetMapping("/function")
-//    public String function(){
-//        return "/setting/function";
-//    }
-    //펑션은 안하기로 했음요 !
+
     @GetMapping("/add")
-    public String add(){
-        return "/admin/setting/add";
+    public String add(
+            @ModelAttribute("loginInfo") MemberDto loginInfo,
+            @ModelAttribute("kinderDto") KinderDto kinderDto,
+            Model model
+    ){
+        HashMap<String, Object> memberDto = new HashMap<>();
+        memberDto.put("id", loginInfo.getId());
+
+        model.addAttribute("username", loginInfo.getUsername());
+        return "admin/setting/add";
     }
-    @GetMapping("/modify")
-    public String modify(){
-        return "/admin/setting/modify";
+
+    @PostMapping("addOk")
+    @ResponseBody
+    public ResponseEntity<RegisterKinderDto> addOk (@RequestBody KinderDto kinderDto) {
+        log.info("create Kinder: {}", kinderDto);
+        RegisterKinderDto inserted = kinderService.insertKinder(kinderDto);
+        return ResponseEntity.ok(inserted);
     }
-    @GetMapping("/info")
-    public String info(){
-        return "/admin/setting/info";
+
+
+    @GetMapping("/modify/{kinderNo}")
+    public String modify(
+            @PathVariable Long kinderNo,
+            @ModelAttribute("loginInfo") MemberDto loginInfo,
+            Model model
+    ){
+        HashMap<String, Object> memberDto = new HashMap<>();
+        memberDto.put("id", loginInfo.getId());
+
+        Optional<RegisterKinderEntity> kinderOptional = kinderService.findByKinderNo(kinderNo);
+
+        // Optional에서 값을 꺼내서 모델에 추가
+        if (kinderOptional.isPresent()) {
+            RegisterKinderEntity kinderDto = kinderOptional.get();
+            model.addAttribute("kinder", kinderDto);
+        } else {
+            return "redirect:/error";  // 에러 페이지로 리다이렉트 예시
+        }
+
+        model.addAttribute("member", memberDto);
+        model.addAttribute("kinderModifyDate", LocalDateTime.now());
+
+        log.info("memberDto{}", memberDto);
+        log.info("kinderDto{}", kinderOptional);
+
+        return "admin/setting/modify";
     }
-    @CrossOrigin(origins = "http://localhost:8080")
+
+    @PutMapping("/modifyOk")
+    @ResponseBody
+    public void modifyOk(@RequestBody KinderDto kinderDto) {
+        log.info("modify kinder: {}", kinderDto);
+        kinderService.updateKinder(kinderDto);
+    }
+
+
+    @GetMapping("/info/{kinderNo}")
+    public String info(
+            @PathVariable Long kinderNo,
+            @ModelAttribute("loginInfo") MemberDto loginInfo,
+            Model model
+    ){
+        kinderNo = loginInfo.getKinderNo();
+        Optional<RegisterKinderEntity> kinderDtoOptional = kinderService.getKinderById(kinderNo);
+
+        if (kinderDtoOptional.isPresent()) {
+            model.addAttribute("kinderDto", kinderDtoOptional.get());
+        } else {
+            // Optional이 비어 있는 경우에 대한 처리 (예: 에러 페이지로 리디렉션)
+            return "error/404";
+        }
+
+        return "admin/setting/info";
+    }
+
     @GetMapping("/test")
     public String test(){
-        return "/admin/setting/copy";
+        return "admin/setting/list";
     }
-
-//    @GetMapping("/api/proxy")
-//    public ResponseEntity<String> proxyApiCall() {
-//        SSLUtilities.disableSSLCertificateChecking();
-//        String url = "https://e-childschoolinfo.moe.go.kr/api/notice/basicInfo2.do?key=77e6a98ff03a4fa687221a817ce91948&sidoCode=27&sggCode=27140";
-//        RestTemplate restTemplate = new RestTemplate();
-//        String result = restTemplate.getForObject(url, String.class);
-//        return ResponseEntity.ok(result);
-//    }
-
-
-
 }

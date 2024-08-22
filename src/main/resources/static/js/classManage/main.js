@@ -40,23 +40,16 @@ document.addEventListener('DOMContentLoaded', function () {
             // Show the modal
             $('#classModal').modal('show');
         } else {
-            alert('해당 반의 데이터를 찾을 수 없습니다.');
+            Swal.fire('데이터 없음', '해당 반의 데이터를 찾을 수 없습니다.', 'error');
         }
     });
 
-    // Event listener for the delete button
-    // $('.delete-btn').on('click', function (event) {
-    //     event.stopPropagation();  // Prevent triggering the click event on the class-item
-    //     console.log('Delete button clicked');
-    //     $(this).closest('.class-item').remove();
-    // });
-    // Event listener for the delete button
-    // Event listener for the delete button
+
     $('.delete-btn').on('click', function (event) {
         event.stopPropagation();  // Prevent triggering the click event on the class-item
         console.log('Delete button clicked');
 
-    // 'delete-btn' 버튼이 속한 'class-item' 요소에서 'hidden' input 값을 가져오기
+        // 'delete-btn' 버튼이 속한 'class-item' 요소에서 'hidden' input 값을 가져오기
         const classItem = $(this).closest('.class-item'); // 해당 class-item 요소를 찾음
         const classNo = classItem.find('.hidden-class-no').val(); // hidden input에서 classNo 값을 가져옴
         console.log('Class No to delete:', classNo); // classNo 값을 콘솔에 출력
@@ -223,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             error: function (error) {
                 console.log("Error:", error);
-                alert('반 정보를 가져오는데 문제가 발생했습니다.');
+                Swal.fire('오류', '반 정보를 가져오는데 문제가 발생했습니다.', 'error');
             }
 
         })

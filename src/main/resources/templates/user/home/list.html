@@ -1,17 +1,17 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">귀가 동의서 메인</title>
 
 <th:block layout:fragment="css">
-    <th:block th:replace="~{/common/datepicker :: css}"/>
+    <th:block th:replace="~{common/datepicker :: css}"/>
     <link rel="stylesheet" href="/css/returnHome/list.css" />
 </th:block>
 
 <th:block layout:fragment="javascript">
-    <th:block th:replace="~{/common/datepicker :: js}"/>
+    <th:block th:replace="~{common/datepicker :: js}"/>
 </th:block>
 
 
@@ -38,7 +38,7 @@
                             </svg>
                         </div>
                         <input type="text" class="form-control datepicker" placeholder="년/월/일" readonly>
-                        <a href="/returnhome/user/writeform" class="button-new">작성</a>
+                        <a href="/returnhome/user/write" class="button-new">작성</a>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                         <th>의뢰자</th>
                         <th>귀가 요청일</th>
                     </tr>
-                    <tr class="returnHome"  th:each="home : ${homeList}" onclick="location.href='/returnhome/user/detail';">
+                    <tr class="returnHome"  th:each="home : ${homeList}" th:onclick="|location.href='/returnhome/user/${home.rhAgreeNo}'|">
                         <td th:text="${home.kidName}">자녀이름</td>
                         <td th:switch="${home.rhType}">
                             <span th:case="'0'">도보</span>

@@ -1,14 +1,14 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">메인페이지</title>
 
 <th:block layout:fragment="css">
     <link rel="stylesheet" href="/css/notepad/list.css" />
     <link rel="stylesheet" href="/css/main/main.css" />
-    <link rel="stylesheet" href="/css/announce/list.css" />
+    <link rel="stylesheet" href="/css/announce/card.css" />
 </th:block>
 
 <th:block layout:fragment="javascript">
@@ -19,7 +19,7 @@
 
     <div class="main_top_box">
 
-        <div class="meal_today">
+        <div class="meal_today scroll-parent">
 
             <div class="meal_today_title">오늘의 식단</div>
 
@@ -49,6 +49,13 @@
                     식단이 등록되지 않았습니다.
                 </div>
 
+            </div>
+
+
+            <div class="scroll-icon hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 1024 1024">
+                    <path fill="#8c8c8c" d="M104.704 338.752a64 64 0 0 1 90.496 0l316.8 316.8l316.8-316.8a64 64 0 0 1 90.496 90.496L557.248 791.296a64 64 0 0 1-90.496 0L104.704 429.248a64 64 0 0 1 0-90.496" />
+                </svg>
             </div>
 
         </div>
@@ -152,23 +159,29 @@
 
         <div class="recent_board_body">
 
-            <a class="text-reset text-decoration-none" href="/notepad/admin/detail">
+            <div th:if="${notepad == null && announces.size() == 0}" class="board_empty">
+                글이 아직 등록되지 않았습니다.
+            </div>
+
+            <a th:if="${notepad != null}"
+               class="text-reset text-decoration-none recent_board_content"
+               th:object="${notepad}" th:href="@{|/notepad/user/*{notepadNo}|}">
                 <div class="card class_18">
 
                     <div class="class_19">
                         <svg xmlns="http://www.w3.org/2000/svg" width="212" height="212" viewBox="0 0 212 212" fill="none">
                             <path d="M88.3333 88.3332C88.3333 86.5861 87.8153 84.8783 86.8446 83.4256C85.874 81.973 84.4944 80.8408 82.8804 80.1722C81.2663 79.5037 79.4902 79.3287 77.7767 79.6696C76.0632 80.0104 74.4893 80.8517 73.2539 82.0871C72.0185 83.3224 71.1772 84.8964 70.8364 86.6099C70.4956 88.3234 70.6705 90.0995 71.3391 91.7135C72.0076 93.3276 73.1398 94.7072 74.5925 95.6778C76.0451 96.6484 77.7529 97.1665 79.5 97.1665C81.8427 97.1665 84.0895 96.2358 85.7461 94.5793C87.4027 92.9227 88.3333 90.6759 88.3333 88.3332ZM128.083 124.197C127.08 123.609 125.971 123.225 124.82 123.067C123.668 122.908 122.497 122.979 121.372 123.274C120.248 123.57 119.193 124.084 118.268 124.788C117.343 125.492 116.566 126.372 115.982 127.377C114.979 129.14 113.527 130.606 111.774 131.625C110.02 132.645 108.028 133.182 106 133.182C103.972 133.182 101.98 132.645 100.226 131.625C98.473 130.606 97.0211 129.14 96.0183 127.377C95.4339 126.372 94.6569 125.492 93.7318 124.788C92.8068 124.084 91.7519 123.57 90.6276 123.274C89.5034 122.979 88.3318 122.908 87.1802 123.067C86.0286 123.225 84.9196 123.609 83.9167 124.197C81.8962 125.362 80.4186 127.279 79.8063 129.53C79.194 131.78 79.4967 134.182 80.6483 136.21C83.2104 140.669 86.9033 144.373 91.3544 146.949C95.8054 149.526 100.857 150.882 106 150.882C111.143 150.882 116.195 149.526 120.646 146.949C125.097 144.373 128.79 140.669 131.352 136.21C132.503 134.182 132.806 131.78 132.194 129.53C131.581 127.279 130.104 125.362 128.083 124.197ZM132.5 79.4998C130.753 79.4998 129.045 80.0179 127.592 80.9885C126.14 81.9591 125.008 83.3387 124.339 84.9528C123.67 86.5669 123.496 88.343 123.836 90.0565C124.177 91.77 125.019 93.3439 126.254 94.5793C127.489 95.8146 129.063 96.6559 130.777 96.9968C132.49 97.3376 134.266 97.1627 135.88 96.4941C137.494 95.8255 138.874 94.6933 139.845 93.2407C140.815 91.7881 141.333 90.0802 141.333 88.3332C141.333 85.9904 140.403 83.7436 138.746 82.0871C137.09 80.4305 134.843 79.4998 132.5 79.4998ZM106 17.6665C88.5293 17.6665 71.451 22.8472 56.9246 32.5534C42.3983 42.2595 31.0764 56.0553 24.3906 72.1961C17.7049 88.3369 15.9556 106.098 19.364 123.233C22.7723 140.368 31.1853 156.107 43.5389 168.461C55.8925 180.815 71.632 189.228 88.767 192.636C105.902 196.044 123.663 194.295 139.804 187.609C155.945 180.923 169.74 169.602 179.446 155.075C189.153 140.549 194.333 123.471 194.333 106C194.333 94.3997 192.049 82.9132 187.609 72.1961C183.17 61.479 176.664 51.7412 168.461 43.5387C160.259 35.3362 150.521 28.8296 139.804 24.3905C129.087 19.9513 117.6 17.6665 106 17.6665ZM106 176.666C89.5463 176.738 73.5835 171.065 60.8644 160.627C48.1454 150.188 39.4675 135.639 36.3272 119.487C33.187 103.336 35.7812 86.595 43.6625 72.1514C51.5439 57.7079 64.2183 46.4674 79.5 40.3682C79.4091 41.6327 79.4091 42.902 79.5 44.1665C79.5 51.1947 82.2919 57.9351 87.2617 62.9048C92.2314 67.8745 98.9718 70.6665 106 70.6665C108.343 70.6665 110.59 69.7358 112.246 68.0793C113.903 66.4227 114.833 64.1759 114.833 61.8332C114.833 59.4904 113.903 57.2436 112.246 55.5871C110.59 53.9305 108.343 52.9998 106 52.9998C103.657 52.9998 101.41 52.0692 99.7539 50.4126C98.0973 48.756 97.1667 46.5092 97.1667 44.1665C97.1667 41.8238 98.0973 39.577 99.7539 37.9204C101.41 36.2638 103.657 35.3332 106 35.3332C124.742 35.3332 142.716 42.7784 155.969 56.031C169.221 69.2835 176.667 87.2579 176.667 106C176.667 124.742 169.221 142.716 155.969 155.969C142.716 169.221 124.742 176.666 106 176.666Z" fill="#FFDB21"/>
                         </svg>
-                        <!--                        <img src="https://cdn.britannica.com/51/141451-050-E76A9D3B/Kindergarten-classroom.jpg"-->
-                        <!--                             class="card-img-top class_99">-->
                     </div>
 
                     <div class="card-body class_91">
                         <div class="class_20">
 
-                            <div class="class_22">2024년 05월 30일</div>
+                            <div class="class_22" th:text="*{#temporals.format(notepadDate, 'yyyy년 MM월 dd일')}">
+                                2024년 05월 30일
+                            </div>
 
-                            <div class="class_21 text-compact">
+                            <div class="class_21 text-compact" th:text="*{boardTitle}">
                                 이 공간에 알림장 제목을 표시합니다.
                             </div>
 
@@ -179,68 +192,46 @@
             </a>
 
 
-            <a href="/announce/admin/detail" class="card">
-                <div class="frame-3">
-                    <p class="p">[보육료] 2024년 2분기 보육료 안내</p>
+            <a class="card recent_board_content"
+               th:each="announce : ${announces}" th:object="${announce}" th:href="@{|/announce/admin/*{announceNo}|}">
+                <div class="frame-3 text_div">
+                    <span style="font-weight:bold;">[</span>
+                    <span class="teacher" th:if="${announce.announceType == 1}">선생님만</span>
+                    <span class="notice" th:if="${announce.announceType == 2}">원 공지</span>
+                    <span class="schedule" th:if="${announce.announceType == 3}">일정 / 행사</span>
+                    <span class="edu" th:if="${announce.announceType == 4}">교육</span>
+                    <span class="pay" th:if="${announce.announceType == 5}">보육료</span>
+                    <span style="font-weight:bold;">]</span>
+                    <p class="p text-compact" th:title="*{boardTitle}" th:text="*{boardTitle}"></p>
                 </div>
                 <div class="frame-wrapper">
                     <div class="frame-4">
                         <div class="frame-5">
                             <div class="frame-6">
                                 <div class="frame-7">
-                                    <div class="avatar-wrapper">
-                                        <div class="avatar">
-                                            <img class="rectangle" alt="Rectangle" src="rectangle-1.png" />
-                                        </div>
-                                    </div>
+<!--                                    <div class="avatar-wrapper">-->
+<!--                                        <div class="avatar">-->
+<!--                                            <img class="rectangle" alt="Rectangle" src="rectangle-1.png" />-->
+<!--                                        </div>-->
+<!--                                    </div>-->
                                 </div>
                             </div>
                         </div>
                         <div class="frame-8">
-                            <div class="text-wrapper-4">김원장 원장선생님</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="frame-9">
-                    <div class="text-wrapper-5">2024년 06월 22일</div>
-                </div>
-                <div class="frame-10">
-                    <p class="text-wrapper-6">
-                        내용 미리보기 출력
-                    </p>
-                </div>
-            </a>
+                            <div class="text-wrapper-4">
+                                <span th:text="*{name}">[Name]</span>
+                                <span th:if="*{roleNo == 1}" th:text="' 원장 선생님'">[Principal Teacher]</span>
+                                <span th:if="*{roleNo == 2}" th:text="' 선생님'">[Teacher]</span>
 
-
-            <a href="/announce/admin/detail" class="card">
-                <div class="frame-3">
-                    <p class="p">[보육료] 2024년 2분기 보육료 안내</p>
-                </div>
-                <div class="frame-wrapper">
-                    <div class="frame-4">
-                        <div class="frame-5">
-                            <div class="frame-6">
-                                <div class="frame-7">
-                                    <div class="avatar-wrapper">
-                                        <div class="avatar">
-                                            <img class="rectangle" alt="Rectangle" src="rectangle-1.png" />
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                        <div class="frame-8">
-                            <div class="text-wrapper-4">김원장 원장선생님</div>
-                        </div>
                     </div>
                 </div>
                 <div class="frame-9">
-                    <div class="text-wrapper-5">2024년 06월 22일</div>
+                    <div class="text-wrapper-5" th:text="*{#temporals.format(boardRegDate, 'yyyy년 MM월 dd일')}"></div>
                 </div>
                 <div class="frame-10">
-                    <p class="text-wrapper-6">
-                        내용 미리보기 출력
-                    </p>
+                    <p class="text-wrapper-6" th:text="*{boardContents}"></p>
                 </div>
             </a>
 

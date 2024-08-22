@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/layout/layout}">
+      layout:decorate="~{layout/layout}">
 
 <title layout:fragment="title">원 상세</title>
 
 <th:block layout:fragment="css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <link rel="stylesheet" href="/cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
     <link rel="stylesheet" href="/css/setting/info.css" /></th:block>
 
 <th:block layout:fragment="javascript">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="/cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+    <script src="/t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="/js/setting/setting.js"></script></th:block>
 
 <div class="container main_container" layout:fragment="content">
@@ -21,48 +21,56 @@
                 <div class="frame">
                     <div class="text-wrapper">원 기본정보</div>
                     <div class="element-secondary-button-wrapper">
-                        <a href="/setting/menu" class="element-secondary-button2">설정</a>
-                        <a href="/setting/modify" class="element-secondary-button">수정</a>
+<!--                        <a href="/setting/menu" class="element-secondary-button2">설정</a>-->
+<!--                        <a href="/setting/modify" class="element-secondary-button">수정</a>-->
+                        <a th:href="@{|/setting/modify/${kinderNo}|}" class="element-secondary-button">수정</a>
+
+
+
                     </div>
                 </div>
                 <div class="frame-a">
                     <table class="table">
                         <tr>
                             <th>원 우편번호</th>
-                            <td>
+                            <td th:text="${kinderDto.kinderPostCode}">
                                 03690
                             </td>
                         </tr>
                         <tr>
                             <th>원 주소</th>
-                            <td>
+                            <td th:text="${kinderDto.kinderAddr}">
                                 서울특별시 서대문구 거북골로16길 36
                             </td>
                         </tr>
                         <tr>
                             <th>원 이름</th>
-                            <td>세종 유치원</td>
+                            <td th:text="${kinderDto.kinderName}">세종 유치원</td>
                         </tr>
                         <tr>
                             <th>원 전화번호</th>
                             <td>
-                                02-372-0404
+                                <span th:text="${kinderDto.getKinderLocNo()}"></span>
+                                <span>-</span>
+                                <span th:text="${kinderDto.getKinderMidNo()}"></span>
+                                <span>-</span>
+                                <span th:text="${kinderDto.getKinderEndNo()}"></span>
                             </td>
                         </tr>
                         <tr>
                             <th>원장님 이름</th>
-                            <td>홍길동</td>
+                            <td th:text="${loginInfo.getName()}">홍길동</td>
                         </tr>
 
                         <tr>
                             <th>등원 시간</th>
-                            <td>
+                            <td th:text="${kinderDto.kinderOpenTime}">
                                 AM 08:00
                             </td>
                         </tr>
                         <tr>
                             <th>하원 시간</th>
-                            <td>
+                            <td th:text="${kinderDto.kinderCloseTime}">
                                 PM 18:30
                             </td>
                         </tr>
