@@ -711,6 +711,7 @@ flex: 0 0 auto;
 .control-wrapper{
   font-size: 14px;
   color: gray;
+  cursor: pointer;
 }
 
 #map{

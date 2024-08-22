@@ -18,8 +18,12 @@ public class PaymentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bill_no")
     private Long billNo;
+    @Column(name = "id")
+    private Long id;
     @Column(name = "kid_no")
     private Long kidNo;
+    @Column(name = "class_no")
+    private Long classNo;
     @Column(name = "kinder_no")
     private Long kinderNo;
     @Column(name = "discount_rate")

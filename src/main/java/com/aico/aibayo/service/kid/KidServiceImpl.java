@@ -204,4 +204,5 @@ public class KidServiceImpl implements KidService {
     public List<KidDto> getAllByParent(Long id) {
         return kidRepository.findAllByParent(id);
     }
+
 }

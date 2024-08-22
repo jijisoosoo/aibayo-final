@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class paymentLogDto {
+public class PaymentLogDto {
     private Long paymentLogNo;
     private Long billNo;
     private Integer paymentStatus;
